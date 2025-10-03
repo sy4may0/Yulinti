@@ -21,6 +21,7 @@ namespace Yulinti.Logging
         public const string LOG_FILE_FORMAT = "{datetime}_{session}_{version}_{platform}.log";
         public const long LOG_FILE_SIZE_LIMIT = 1024L * 1024L * 100L; // 100 MB
         public const int LOG_FILE_COUNT_LIMIT = 3;
+        public const int LOG_FILE_BUFFER_SIZE = 4096;
 
         private sealed class LogFile : IDisposable
         {
@@ -45,7 +46,7 @@ namespace Yulinti.Logging
             {
                 Close(); // 冪等
                 _fs = new FileStream(_path, FileMode.Append, FileAccess.Write, FileShare.Read);
-                _sw = new StreamWriter(_fs, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false))
+                _sw = new StreamWriter(_fs, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false), bufferSize: LOG_FILE_BUFFER_SIZE)
                 {
                     AutoFlush = false
                 };
