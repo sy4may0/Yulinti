@@ -21,8 +21,8 @@ namespace Yulinti.CharactorControlUtils {
     /// 
     /// "characterController": キャラクターコントローラー
     /// "MainCamera": カメラ / Stateでnullチェックしない。必ずAwake()で代入してnullチェックしておくこと。
-    /// "MoveInput": 移動入力 / Stateでnullチェックしない。必ずAwake()で代入してnullチェックしておくこと。
-    /// "SprintInput": スプリント入力 / Stateでnullチェックしない。必ずAwake()で代入してnullチェックしておくこと。
+    /// "MoveInput": 移動入力 / Stateでnullチェックしない。Update()で更新すること。
+    /// "SprintInput": スプリント入力 / Stateでnullチェックしない。Update()で更新すること。
     /// "CurrentSpeed": 現在の速度 / コントローラーに適用するタイミングで更新すること。
     /// "CurrentYaw": 現在のYaw / コントローラーに適用するタイミングで更新すること。
     /// "SpeedVelRef": 速度のSmoothDampの参照用変数 / これはSmoothDampの参照用で、変更禁止。
@@ -35,8 +35,8 @@ namespace Yulinti.CharactorControlUtils {
     public class MoveContext {
         public CharacterController CharacterController;
         public Camera MainCamera;
-        public InputActionReference MoveInput;
-        public InputActionReference SprintInput;
+        public Vector2 MoveAction;
+        public bool SprintAction;
         public float CurrentSpeed;
         public float CurrentYaw;
         public float SpeedVelRef;

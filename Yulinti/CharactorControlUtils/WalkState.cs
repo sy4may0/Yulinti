@@ -12,9 +12,8 @@ namespace Yulinti.CharactorControlUtils {
         public void Enter(MoveContext context) {}
         public void Exit(MoveContext context) {}
         public MoveOutput Tick(MoveContext context, float deltaTime) {
-            Vector2 moveAction = context.MoveInput.action.ReadValue<Vector2>();
             return context.CharactorControlUtils.CalculateGeneralMoveOutput(
-                moveAction, _baseSpeed, context.CurrentSpeed,
+                context.MoveAction, _baseSpeed, context.CurrentSpeed,
                 _accelerationToTargetSpeed, _decelerationToTargetSpeed,
                 context.MaxSmoothTime, context.MinSmoothTime,
                 context.MoveInputDeadZoneSq,
@@ -23,14 +22,11 @@ namespace Yulinti.CharactorControlUtils {
             );
         }
         public IMoveState TryTransition(MoveContext context) {
-            Vector2 moveAction = context.MoveInput.action.ReadValue<Vector2>();
-            bool sprintAction = context.SprintInput.action.ReadValue<bool>();
-
-            if (moveAction.sqrMagnitude <= context.MoveInputDeadZoneSq) {
+            if (context.MoveAction.sqrMagnitude <= context.MoveInputDeadZoneSq) {
                 return new IdleState();
             }
             // Sprintキーが押されたらRunStateに遷移
-            if (sprintAction) {
+            if (context.SprintAction) {
                 return new RunState();
             }
 
