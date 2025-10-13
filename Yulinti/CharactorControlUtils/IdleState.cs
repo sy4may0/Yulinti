@@ -16,7 +16,8 @@ namespace Yulinti.CharactorControlUtils {
         }
 
         public IMoveState TryTransition(MoveContext context) {
-            if (context.MoveAction.sqrMagnitude > context.MoveInputDeadZoneSq) {
+            Vector2 moveAction = context.MoveInput.action.ReadValue<Vector2>();
+            if (moveAction.sqrMagnitude > context.MoveInputDeadZoneSq) {
                 return new WalkState();
             }
             return null;

@@ -35,8 +35,8 @@ namespace Yulinti.CharactorControlUtils {
     public class MoveContext {
         public CharacterController CharacterController;
         public Camera MainCamera;
-        public Vector2 MoveAction;
-        public bool SprintAction;
+        public InputActionReference MoveInput;
+        public InputActionReference SprintInput;
         public float CurrentSpeed;
         public float CurrentYaw;
         public float SpeedVelRef;
