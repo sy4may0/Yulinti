@@ -18,31 +18,34 @@ namespace Yulinti.CharactorControlUtils {
     /// <summary>
     /// キャラクター駆動統合コンテキスト
     /// キャラクター駆動の各種データを管理する
-    /// <param name="characterController">キャラクターコントローラー</param>
-    /// <param name="MainCamera">カメラ</param>
-    /// <param name="CurrentSpeed">現在の速度 / コントローラーに適用するタイミングで更新すること。</param>
-    /// <param name="CurrentYaw">現在のYaw / コントローラーに適用するタイミングで更新すること。</param>
-    /// <param name="SpeedVelRef">速度のSmoothDampの参照用変数 / これはSmoothDampの参照用で、変更禁止。</param>
-    /// <param name="RotationVelRef">回転のSmoothDampの参照用変数 / これはSmoothDampの参照用で、変更禁止。</param>
-    /// <param name="RotationSmoothTime">回転の固定スムージング時間</param>
-    /// <param name="MoveInputDeadZoneSq">移動入力デッドゾーンの二乗 / Start()とかAwake()とかでMoveConfigのMoveInputDeadZoneを二乗して代入しておくこと。</param>
-    /// <param name="IsGlounded">接地判定 / コントローラーに適用するタイミングで更新すること。</param>
-    /// <param name="Config">移動設定</param>
-    /// <param name="CharactorControlUtils">キャラクター駆動統合ユーティリティ</param>
+    /// 
+    /// "characterController": キャラクターコントローラー
+    /// "MainCamera": カメラ / Stateでnullチェックしない。必ずAwake()で代入してnullチェックしておくこと。
+    /// "MoveInput": 移動入力 / Stateでnullチェックしない。必ずAwake()で代入してnullチェックしておくこと。
+    /// "SprintInput": スプリント入力 / Stateでnullチェックしない。必ずAwake()で代入してnullチェックしておくこと。
+    /// "CurrentSpeed": 現在の速度 / コントローラーに適用するタイミングで更新すること。
+    /// "CurrentYaw": 現在のYaw / コントローラーに適用するタイミングで更新すること。
+    /// "SpeedVelRef": 速度のSmoothDampの参照用変数 / これはSmoothDampの参照用で、変更禁止。
+    /// "RotationVelRef": 回転のSmoothDampの参照用変数 / これはSmoothDampの参照用で、変更禁止。
+    /// "RotationSmoothTime": 回転の固定スムージング時間
+    /// "MoveInputDeadZoneSq": 移動入力デッドゾーンの二乗 / Start()とかAwake()とかでMoveConfigのMoveInputDeadZoneを二乗して代入しておくこと。
+    /// "IsGrounded": 接地判定 / コントローラーに適用するタイミングで更新すること。
+    /// "CharactorControlUtils": キャラクター駆動統合ユーティリティ
     /// </summary>
     public class MoveContext {
         public CharacterController CharacterController;
         public Camera MainCamera;
+        public Vector2 MoveAction;
+        public bool SprintAction;
         public float CurrentSpeed;
         public float CurrentYaw;
         public float SpeedVelRef;
         public float RotationVelRef;
         public float RotationSmoothTime;
-        public float IsGlounded;
+        public bool IsGrounded;
         public float MaxSmoothTime;
         public float MinSmoothTime;
         public float MoveInputDeadZoneSq;
-        public MoveConfig Config;
         public CharactorControlUtils CharactorControlUtils;
     }
 
