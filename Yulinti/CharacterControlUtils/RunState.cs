@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Yulinti.CharacterControlUtils;
 
-namespace Yulinti.CharactorControlUtils {
+namespace Yulinti.CharacterControlUtils {
     [System.Serializable]
     public class RunState : IMoveState {
         [Header("RunState移動制御")]
@@ -12,7 +13,7 @@ namespace Yulinti.CharactorControlUtils {
         public void Enter(MoveContext context) {}
         public void Exit(MoveContext context) {}
         public MoveOutput Tick(MoveContext context, float deltaTime) {
-            return context.CharactorControlUtils.CalculateGeneralMoveOutput(
+            return context.CharacterControlUtil.CalculateGeneralMoveOutput(
                 context.MoveAction, _baseSpeed, context.CurrentSpeed,
                 _accelerationToTargetSpeed, _decelerationToTargetSpeed,
                 context.MaxSmoothTime, context.MinSmoothTime,
@@ -26,7 +27,7 @@ namespace Yulinti.CharactorControlUtils {
                 context.MoveAction.sqrMagnitude <= context.MoveInputDeadZoneSq ||
                 !context.SprintAction
             ) {
-                return new WalkState();
+                return context.WalkState;
             }
 
             return null;

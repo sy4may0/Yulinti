@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Yulinti.CharacterControlUtils;
 
-namespace Yulinti.CharactorControlUtils {
+namespace Yulinti.CharacterControlUtils {
     [System.Serializable]
     public class WalkState : IMoveState {
         [Header("WalkState移動制御")]
@@ -12,7 +13,7 @@ namespace Yulinti.CharactorControlUtils {
         public void Enter(MoveContext context) {}
         public void Exit(MoveContext context) {}
         public MoveOutput Tick(MoveContext context, float deltaTime) {
-            return context.CharactorControlUtils.CalculateGeneralMoveOutput(
+            return context.CharacterControlUtil.CalculateGeneralMoveOutput(
                 context.MoveAction, _baseSpeed, context.CurrentSpeed,
                 _accelerationToTargetSpeed, _decelerationToTargetSpeed,
                 context.MaxSmoothTime, context.MinSmoothTime,
@@ -23,11 +24,11 @@ namespace Yulinti.CharactorControlUtils {
         }
         public IMoveState TryTransition(MoveContext context) {
             if (context.MoveAction.sqrMagnitude <= context.MoveInputDeadZoneSq) {
-                return new IdleState();
+                return context.IdleState;
             }
             // Sprintキーが押されたらRunStateに遷移
             if (context.SprintAction) {
-                return new RunState();
+                return context.RunState;
             }
 
             return null;

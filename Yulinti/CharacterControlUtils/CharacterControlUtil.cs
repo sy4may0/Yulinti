@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Yulinti.CharacterControlUtils;
 
 namespace Yulinti.CharacterControlUtils{
-    public class CharacterControlUtils {
+    public class CharacterControlUtil {
         /// <summary>
         /// 移動体の速度を計算する。現在の速度から目標速度に向かって加減速する。
         /// </summary>
@@ -130,6 +131,8 @@ namespace Yulinti.CharacterControlUtils{
                 SpeedSmoothTime = speedSmoothTime
             };
         }
+
+            
 
     }
 

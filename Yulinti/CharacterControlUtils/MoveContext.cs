@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Yulinti.CharacterControlUtils;
 
-namespace Yulinti.CharactorControlUtils {
+namespace Yulinti.CharacterControlUtils {
     public struct MoveOutput {
         public float DesiredSpeed;
         public Quaternion DesiredDirection;
@@ -30,7 +31,7 @@ namespace Yulinti.CharactorControlUtils {
     /// "RotationSmoothTime": 回転の固定スムージング時間
     /// "MoveInputDeadZoneSq": 移動入力デッドゾーンの二乗 / Start()とかAwake()とかでMoveConfigのMoveInputDeadZoneを二乗して代入しておくこと。
     /// "IsGrounded": 接地判定 / コントローラーに適用するタイミングで更新すること。
-    /// "CharactorControlUtils": キャラクター駆動統合ユーティリティ
+    /// "CharacterControlUtil": キャラクター駆動統合ユーティリティ
     /// </summary>
     public class MoveContext {
         public CharacterController CharacterController;
@@ -46,7 +47,12 @@ namespace Yulinti.CharactorControlUtils {
         public float MaxSmoothTime;
         public float MinSmoothTime;
         public float MoveInputDeadZoneSq;
-        public CharactorControlUtils CharactorControlUtils;
+        public float Gravity;
+        public CharacterControlUtil CharacterControlUtil;
+
+        public IdleState IdleState;
+        public WalkState WalkState;
+        public RunState RunState;
     }
 
     [System.Serializable]
@@ -74,6 +80,18 @@ namespace Yulinti.CharactorControlUtils {
         [Tooltip("移動入力デッドゾーン")]
         [SerializeField]
         public float MoveInputDeadZone = 0.1f;
+        [Tooltip("回転スムージング時間")]
+        [SerializeField]
+        public float RotationSmoothTime = 0.1f;
+        [Tooltip("最大スムージング時間")]
+        [SerializeField]
+        public float MaxSmoothTime = 0.1f;
+        [Tooltip("最小スムージング時間")]
+        [SerializeField]
+        public float MinSmoothTime = 0.1f;
+        [Tooltip("重力(Grounder想定)")]
+        [SerializeField]
+        public float Gravity = -20f;
  
     }
 }
