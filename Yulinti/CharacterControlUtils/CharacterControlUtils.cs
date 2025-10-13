@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Yulinti.CharactorControlUtils{
-    public class CharactorControlUtils {
+namespace Yulinti.CharacterControlUtils{
+    public class CharacterControlUtils {
         /// <summary>
         /// 移動体の速度を計算する。現在の速度から目標速度に向かって加減速する。
         /// </summary>
