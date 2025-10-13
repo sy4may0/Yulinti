@@ -19,7 +19,7 @@ namespace Yulinti.CharactorControlUtils {
     /// キャラクター駆動統合コンテキスト
     /// キャラクター駆動の各種データを管理する
     /// <param name="characterController">キャラクターコントローラー</param>
-    /// <param name="Camera">カメラ</param>
+    /// <param name="MainCamera">カメラ</param>
     /// <param name="CurrentSpeed">現在の速度 / コントローラーに適用するタイミングで更新すること。</param>
     /// <param name="CurrentYaw">現在のYaw / コントローラーに適用するタイミングで更新すること。</param>
     /// <param name="SpeedVelRef">速度のSmoothDampの参照用変数 / これはSmoothDampの参照用で、変更禁止。</param>
@@ -31,8 +31,8 @@ namespace Yulinti.CharactorControlUtils {
     /// <param name="CharactorControlUtils">キャラクター駆動統合ユーティリティ</param>
     /// </summary>
     public class MoveContext {
-        public CharacterController characterController;
-        public Camera Camera;
+        public CharacterController CharacterController;
+        public Camera MainCamera;
         public float CurrentSpeed;
         public float CurrentYaw;
         public float SpeedVelRef;
@@ -48,14 +48,29 @@ namespace Yulinti.CharactorControlUtils {
 
     [System.Serializable]
     public class MoveConfig {
+        [Header("ターゲット")]
+
+        [Tooltip("キャラクターコントローラー")]
         [SerializeField]
-        public float MoveInputDeadZone = 0.0001f;
+        public CharacterController CharacterController;
+        [Tooltip("カメラ")]
+        [SerializeField]
+        public Camera MainCamera;
 
         [Header("入力設定")]
-        [SerializeField]
+
         [Tooltip("移動入力(Vector2)")]
+        [SerializeField]
         public InputActionReference MoveInput;
+
         [Tooltip("スプリント入力(Bool)")]
+        [SerializeField]
         public InputActionReference SprintInput;
+
+        [Header("一般パラメータ")]
+        [Tooltip("移動入力デッドゾーン")]
+        [SerializeField]
+        public float MoveInputDeadZone = 0.1f;
+ 
     }
 }

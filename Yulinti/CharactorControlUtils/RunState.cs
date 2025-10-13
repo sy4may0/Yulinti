@@ -18,7 +18,7 @@ namespace Yulinti.CharactorControlUtils {
                 _accelerationToTargetSpeed, _decelerationToTargetSpeed,
                 context.MaxSmoothTime, context.MinSmoothTime,
                 context.Config.MoveInputDeadZone,
-                context.Config.Camera, context.CurrentYaw, ref context.RotationVelRef,
+                context.MainCamera, context.CurrentYaw, ref context.RotationVelRef,
                 context.RotationSmoothTime
             );
         }

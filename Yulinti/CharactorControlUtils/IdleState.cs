@@ -7,7 +7,7 @@ namespace Yulinti.CharactorControlUtils {
         public void Enter(MoveContext context) {}
         public void Exit(MoveContext context) {}
         public MoveOutput Tick(MoveContext context, float deltaTime) {
-            Vector3 desiredDirection = Vector3.zero;
+            Quaternion desiredDirection = Quaternion.identity;
             return new MoveOutput {
                 DesiredSpeed = 0f,
                 DesiredDirection = desiredDirection,
