@@ -1,11 +1,13 @@
 using UnityEngine;
 
 namespace Yulinti.CharacterController {
-    public class RunState : IMoveState {
+    public sealed class RunState : IMoveState {
         private MoveTuning _moveTuning;
         private RunStateConfig _runStateConfig;
         private InputProvider _inputProvider;
         private CameraProvider _cameraProvider;
+
+        public readonly int LayerIndex = 0;
 
         public RunState(
             MoveTuning moveTuning,
@@ -64,6 +66,10 @@ namespace Yulinti.CharacterController {
                 return runtime.WalkState;
             }
 
+            return null;
+        }
+        // Layer0ミキサーを使うステート。アニメーション遷移無し。
+        public IAnimationPlan GetAnimationPlan() {
             return null;
         }
     }

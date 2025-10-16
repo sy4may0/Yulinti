@@ -6,5 +6,6 @@ namespace Yulinti.CharacterController {
         void Exit(MoveRuntime runtime);
         MovePlan Tick(MoveRuntime runtime, float deltaTime);
         IMoveState TryTransition(MoveRuntime runtime);
+        IAnimationPlan GetAnimationPlan();
     }
 }

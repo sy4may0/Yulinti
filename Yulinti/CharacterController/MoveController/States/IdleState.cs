@@ -1,15 +1,17 @@
 using UnityEngine;
 
 namespace Yulinti.CharacterController {
-    public class IdleState : IMoveState {
+    public sealed class IdleState : IMoveState {
         private MoveTuning _moveTuning;
         private IdleStateConfig _idleStateConfig;
         private InputProvider _inputProvider;
 
+        public readonly int LayerIndex = 0;
+
         public IdleState(
             MoveTuning moveTuning,
             IdleStateConfig idleStateConfig,
-            InputProvider inputProvider,
+            InputProvider inputProvider
         ) {
             _moveTuning = moveTuning;
             _idleStateConfig = idleStateConfig;
@@ -49,6 +51,11 @@ namespace Yulinti.CharacterController {
             if (_inputProvider.Move.sqrMagnitude > _moveTuning.MoveInputDeadZoneSq) {
                 return runtime.WalkState;
             }
+            return null;
+        }
+
+        // Layer0ミキサーを使うステート。アニメーション遷移無し。
+        public IAnimationPlan GetAnimationPlan() {
             return null;
         }
     }

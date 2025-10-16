@@ -10,5 +10,6 @@ namespace Yulinti.CharacterController {
         public float CurrentSpeedVertical;
         public float SpeedVelRefVertical;
         public bool IsGrounded;
+        public IMoveState CurrentState;
     }
 }

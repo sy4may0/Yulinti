@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 namespace Yulinti.CharacterController
 {
     [System.Serializable]
-    public class InputProvider
+    public sealed class InputProvider
     {
         [SerializeField] private InputActionReference _moveInput;
         [SerializeField] private InputActionReference _sprintInput;
@@ -16,7 +16,7 @@ namespace Yulinti.CharacterController
     }
 
     [System.Serializable]
-    public class CameraProvider
+    public sealed class CameraProvider
     {
         [SerializeField] private Camera _camera;
         public Camera Camera => _camera;
