@@ -1,16 +1,17 @@
 using Animancer;
 using UnityEngine;
+using Yulinti.CharacterControllSuite;
 
-namespace Yulinti.CharacterController {
+namespace Yulinti.CharacterControllSuite {
     public static class AnimationUtils {
-        public static AnimationState PlayWithSineEase(
+        public static AnimancerState PlayWithSineEase(
             AnimancerLayer layer,
-            AnimationClip clip,
+            ITransition clip,
             float fadeTime
         )
         {
-            AnimationState state = layer.Play(clip, fadeTime);
-            state.FadeGroup.SetEasing(Easing.Sine.InOut);
+            AnimancerState state = layer.Play(clip, fadeTime);
+            layer.FadeGroup.SetEasing(Easing.Cubic.InOut);
             return state;
         }
 
@@ -19,8 +20,8 @@ namespace Yulinti.CharacterController {
             float fadeTime
         )
         {
-            // [TODO] Easingできるなら設定しよう。
             layer.StartFade(0f, fadeTime);
+            layer.FadeGroup.SetEasing(Easing.Cubic.InOut);
         }
     }
 }

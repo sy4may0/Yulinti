@@ -1,24 +1,25 @@
 using UnityEngine;
+using Yulinti.CharacterControllSuite;
 
-namespace Yulinti.CharacterController {
-    public sealed class WalkState : IMoveState {
+namespace Yulinti.CharacterControllSuite {
+    public sealed class IdleState : IMoveState {
         private MoveTuning _moveTuning;
-        private WalkStateConfig _walkStateConfig;
+        private IdleStateConfig _idleStateConfig;
         private InputProvider _inputProvider;
-        private CameraProvider _cameraProvider;
+        private BaseStateLibrary _stateLibrary;
 
-        public readonly int LayerIndex = 0;
+        public int LayerIndex { get; } = 0;
 
-        public WalkState(
+        public IdleState(
             MoveTuning moveTuning,
-            WalkStateConfig walkStateConfig,
+            IdleStateConfig idleStateConfig,
             InputProvider inputProvider,
-            CameraProvider cameraProvider
+            BaseStateLibrary stateLibrary
         ) {
             _moveTuning = moveTuning;
-            _walkStateConfig = walkStateConfig;
+            _idleStateConfig = idleStateConfig;
             _inputProvider = inputProvider;
-            _cameraProvider = cameraProvider;
+            _stateLibrary = stateLibrary;
         }
 
         public void Enter(MoveRuntime runtime) {}
@@ -26,47 +27,42 @@ namespace Yulinti.CharacterController {
         public MovePlan Tick(MoveRuntime runtime, float deltaTime) {
             float targetSpeed = MoveMotionPlanner.PlanHorizontalSpeed(
                 _inputProvider.Move,
-                _walkStateConfig.BaseSpeed,
+                0f,
                 runtime.CurrentSpeedHorizontal,
                 ref runtime.SpeedVelRefHorizontal,
                 true,
-                _walkStateConfig.AccelerationToTargetSpeed,
-                _walkStateConfig.DecelerationToTargetSpeed,
+                _idleStateConfig.AccelerationToTargetSpeed,
+                _idleStateConfig.DecelerationToTargetSpeed,
                 _moveTuning.MinSmoothTime,
                 _moveTuning.MaxSmoothTime,
-                _moveTuning.MoveInputDeadZoneSq,
+                _moveTuning.MoveInputDeadZoneSq
             );
-            float targetYaw = MoveMotionPlanner.PlanYawFollowCamera(
-                _cameraProvider,
-                _inputProvider.Move,
-                runtime.CurrentYaw,
-                ref runtime.YawVelRef,
-                true,
-                _moveTuning.RotationSmoothTime,
-                _moveTuning.MoveInputDeadZoneSq,
-            );
+            float targetYaw = runtime.CurrentYaw;
             float targetVerticalSpeed = MoveMotionPlanner.PlanVerticalSpeed(
                 runtime.IsGrounded,
                 runtime.CurrentSpeedVertical,
                 _moveTuning.Gravity,
-                deltaTime,
+                deltaTime
             );
+
             return new MovePlan {
                 PlannedHorizontalSpeed = targetSpeed,
                 PlannedYaw = targetYaw,
                 PlannedVerticalSpeed = targetVerticalSpeed,
             };
         }
-
         public IMoveState TryTransition(MoveRuntime runtime) {
-            if (_inputProvider.Move.sqrMagnitude <= _moveTuning.MoveInputDeadZoneSq) {
-                return runtime.IdleState;
+            if (_inputProvider.Move.sqrMagnitude > _moveTuning.MoveInputDeadZoneSq) {
+                return _stateLibrary.WalkState;
             }
-            if (_inputProvider.Sprint) {
-                return runtime.RunState;
+
+            if (_inputProvider.Crouch) {
+                return _stateLibrary.CrouchIdleState ?? null;
             }
+
             return null;
         }
+
         // Layer0ミキサーを使うステート。アニメーション遷移無し。
         public IAnimationPlan GetAnimationPlan() {
             return null;

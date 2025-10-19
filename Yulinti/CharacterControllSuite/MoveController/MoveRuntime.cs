@@ -1,7 +1,7 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using Yulinti.CharacterControllSuite;
 
-namespace Yulinti.CharacterController {
+namespace Yulinti.CharacterControllSuite {
     public class MoveRuntime {
         public float CurrentSpeedHorizontal;
         public float SpeedVelRefHorizontal;

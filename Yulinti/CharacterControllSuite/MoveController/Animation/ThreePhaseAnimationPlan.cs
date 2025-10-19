@@ -1,15 +1,18 @@
 using Animancer;
 using UnityEngine;
 using System;
+using Yulinti.CharacterControllSuite;
 
-namespace Yulinti.CharacterController
+// TIPS
+// _start, _loop, _stopの中身はPlay()再生されるまでnull。気をつけろ。
+namespace Yulinti.CharacterControllSuite
 {
     public sealed class ThreePhaseAnimationPlan : IAnimationPlan
     {
         private readonly AnimancerComponent _animancer;
         private readonly int _layerIndex;
 
-        private AnimationClip _start, _loop, _stop;
+        private ITransition _start, _loop, _stop;
         private float _fadeStart, _fadeLoop, _fadeStop;
 
         // ブロック方針（外から設定可能）
@@ -32,9 +35,9 @@ namespace Yulinti.CharacterController
         public ThreePhaseAnimationPlan(
             AnimancerComponent animancer,
             int layerIndex,
-            AnimationClip startClip,
-            AnimationClip loopClip,
-            AnimationClip stopClip,
+            ITransition startClip,
+            ITransition loopClip,
+            ITransition stopClip,
             float fadeStart,
             float fadeLoop,
             float fadeStop)
@@ -43,12 +46,14 @@ namespace Yulinti.CharacterController
             _layerIndex = layerIndex;
             _start = startClip; _loop = loopClip; _stop = stopClip;
             _fadeStart = fadeStart; _fadeLoop = fadeLoop; _fadeStop = fadeStop;
+            _blockInStart = false;
+            _blockInStop = false;
             IsBlocking = false;
 
             _sharedOnEnd = OnEndShared; // ここで1回だけ作る
         }
 
-        public void UpdateClips(AnimationClip start, AnimationClip loop, AnimationClip stop)
+        public void UpdateClips(ITransition start, ITransition loop, ITransition stop)
         { _start = start; _loop = loop; _stop = stop; }
 
         public void UpdateFades(float fadeStart, float fadeLoop, float fadeStop)
@@ -58,7 +63,7 @@ namespace Yulinti.CharacterController
         public void Play()
         {
             if (_animancer == null) return;
-            if (_layerIndex < 0 || _layerIndex >= _animancer.Layers.Count) return;
+            if (_layerIndex < 0) return;
 
             int my = ++_seq;
             var layer = _animancer.Layers[_layerIndex];
@@ -74,13 +79,16 @@ namespace Yulinti.CharacterController
             IsBlocking = _blockInStart;
 
             var state = AnimationUtils.PlayWithSineEase(layer, _start, _fadeStart);
-            state.IsLooping = false;
 
             // Start終了で Loop へ
             _pendingSeq = my;
             _pendingKind = PendingKind.ToLoop;
             _pendingCallback = null;
-            state.Events.OnEnd = _sharedOnEnd;
+            if (state.Events(this, out AnimancerEvent.Sequence events))
+            {
+                events.OnEnd = _sharedOnEnd;
+
+            }
         }
 
         private void PlayLoop(int my)
@@ -90,8 +98,6 @@ namespace Yulinti.CharacterController
 
             var layer = _animancer.Layers[_layerIndex];
             var state = AnimationUtils.PlayWithSineEase(layer, _loop, _fadeLoop);
-            state.IsLooping = true; // ループ継続
-            // OnEndは設定しない（無限ループ想定）
         }
 
         // === Stop: Stop再生→完了でコールバック。無ければ即コールバック ===
@@ -113,12 +119,14 @@ namespace Yulinti.CharacterController
 
             var layer = _animancer.Layers[_layerIndex];
             var state = AnimationUtils.PlayWithSineEase(layer, _stop, _fadeStop);
-            state.IsLooping = false;
 
             _pendingSeq = my;
             _pendingKind = PendingKind.ToCallback;
             _pendingCallback = onCompleted;
-            state.Events.OnEnd = _sharedOnEnd;
+            if (state.Events(this, out AnimancerEvent.Sequence events))
+            {
+                events.OnEnd = _sharedOnEnd;
+            }
         }
 
         public void StopLayer(float? fadeOverride = null) {
@@ -151,6 +159,16 @@ namespace Yulinti.CharacterController
             }
 
             _pendingKind = PendingKind.None;
+        }
+
+        public void InjectSpeed(float speed) {
+            // LinearMixerの_loopがあれば速度を注入する。
+            if (_loop != null && _loop is LinearMixerTransition mixer) {
+                if (mixer.State == null) {
+                    return;
+                }
+                mixer.State.Parameter = speed;
+            }
         }
     }
 }

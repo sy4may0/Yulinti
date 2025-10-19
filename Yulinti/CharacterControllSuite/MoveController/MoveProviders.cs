@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Yulinti.CharacterControllSuite;
 
-namespace Yulinti.CharacterController
+namespace Yulinti.CharacterControllSuite
 {
     [System.Serializable]
     public sealed class InputProvider

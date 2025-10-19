@@ -1,24 +1,28 @@
 using UnityEngine;
+using Yulinti.CharacterControllSuite;
 
-namespace Yulinti.CharacterController {
-    public sealed class RunState : IMoveState {
+namespace Yulinti.CharacterControllSuite {
+    public sealed class CrouchIdleState : IMoveState {
         private MoveTuning _moveTuning;
-        private RunStateConfig _runStateConfig;
+        private CrouchIdleStateConfig _crouchIdleStateConfig;
         private InputProvider _inputProvider;
-        private CameraProvider _cameraProvider;
+        private BaseStateLibrary _stateLibrary;
+        private ThreePhaseAnimationPlan _crouchAnimationPlan;
 
-        public readonly int LayerIndex = 0;
+        public int LayerIndex { get; } = 1;
 
-        public RunState(
+        public CrouchIdleState(
             MoveTuning moveTuning,
-            RunStateConfig runStateConfig,
+            CrouchIdleStateConfig crouchIdleStateConfig,
             InputProvider inputProvider,
-            CameraProvider cameraProvider
+            BaseStateLibrary stateLibrary,
+            ThreePhaseAnimationPlan crouchAnimationPlan
         ) {
             _moveTuning = moveTuning;
-            _runStateConfig = runStateConfig;
+            _crouchIdleStateConfig = crouchIdleStateConfig;
             _inputProvider = inputProvider;
-            _cameraProvider = cameraProvider;
+            _stateLibrary = stateLibrary;
+            _crouchAnimationPlan = crouchAnimationPlan;
         }
 
         public void Enter(MoveRuntime runtime) {}
@@ -26,30 +30,22 @@ namespace Yulinti.CharacterController {
         public MovePlan Tick(MoveRuntime runtime, float deltaTime) {
             float targetSpeed = MoveMotionPlanner.PlanHorizontalSpeed(
                 _inputProvider.Move,
-                _runStateConfig.BaseSpeed,
+                0f,
                 runtime.CurrentSpeedHorizontal,
                 ref runtime.SpeedVelRefHorizontal,
                 true,
-                _runStateConfig.AccelerationToTargetSpeed,
-                _runStateConfig.DecelerationToTargetSpeed,
+                _crouchIdleStateConfig.AccelerationToTargetSpeed,
+                _crouchIdleStateConfig.DecelerationToTargetSpeed,
                 _moveTuning.MinSmoothTime,
                 _moveTuning.MaxSmoothTime,
-                _moveTuning.MoveInputDeadZoneSq,
+                _moveTuning.MoveInputDeadZoneSq
             );
-            float targetYaw = MoveMotionPlanner.PlanYawFollowCamera(
-                _cameraProvider,
-                _inputProvider.Move,
-                runtime.CurrentYaw,
-                ref runtime.YawVelRef,
-                true,
-                _moveTuning.RotationSmoothTime,
-                _moveTuning.MoveInputDeadZoneSq,
-            );
+            float targetYaw = runtime.CurrentYaw;
             float targetVerticalSpeed = MoveMotionPlanner.PlanVerticalSpeed(
                 runtime.IsGrounded,
                 runtime.CurrentSpeedVertical,
                 _moveTuning.Gravity,
-                deltaTime,
+                deltaTime
             );
 
             return new MovePlan {
@@ -58,19 +54,20 @@ namespace Yulinti.CharacterController {
                 PlannedVerticalSpeed = targetVerticalSpeed,
             };
         }
+
         public IMoveState TryTransition(MoveRuntime runtime) {
-            if (
-                _inputProvider.Move.sqrMagnitude <= _moveTuning.MoveInputDeadZoneSq ||
-                !_inputProvider.Sprint
-            ) {
-                return runtime.WalkState;
+            if (_inputProvider.Move.sqrMagnitude > _moveTuning.MoveInputDeadZoneSq) {
+                return _stateLibrary.WalkState;
             }
 
+            if (!_inputProvider.Crouch) {
+                return _stateLibrary.IdleState;
+            }
             return null;
         }
-        // Layer0ミキサーを使うステート。アニメーション遷移無し。
+
         public IAnimationPlan GetAnimationPlan() {
-            return null;
+            return _crouchAnimationPlan;
         }
     }
 }
