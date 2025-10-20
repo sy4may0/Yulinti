@@ -6,10 +6,14 @@ namespace Yulinti.CharacterControllSuite {
     public class RunStateConfig {
         [Header("RunState移動制御")]
         [Tooltip("基本速度")]
-        [SerializeField] public float BaseSpeed = 3.3f;
+        [SerializeField] private float _baseSpeed = 3.3f;
         [Tooltip("加速速度")]
-        [SerializeField] public float AccelerationToTargetSpeed = 20f;
+        [SerializeField] private float _accelerationToTargetSpeed = 15;
         [Tooltip("減速速度")]
-        [SerializeField] public float DecelerationToTargetSpeed = 15f;
+        [SerializeField] private float _decelerationToTargetSpeed = 15f;
+
+        public float BaseSpeed => _baseSpeed;
+        public float AccelerationToTargetSpeed => _accelerationToTargetSpeed;
+        public float DecelerationToTargetSpeed => _decelerationToTargetSpeed;
     }
 }

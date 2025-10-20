@@ -7,8 +7,11 @@ namespace Yulinti.CharacterControllSuite {
     public class CrouchAnimationConfig {
         [Header("CrouchAnimation/Crouchアニメーション")]
         [Tooltip("Crouchアニメーションミキサー")]
-        [SerializeField] public LinearMixerTransition CrouchAnimationMixer;
+        [SerializeField] private LinearMixerTransition _crouchAnimationMixer;
         [Tooltip("フェード時間")]
-        [SerializeField] public float FadeTime = 0.4f;
+        [SerializeField] private float _fadeTime = 0.4f;
+
+        public LinearMixerTransition CrouchAnimationMixer => _crouchAnimationMixer;
+        public float FadeTime => _fadeTime;
     }
 }

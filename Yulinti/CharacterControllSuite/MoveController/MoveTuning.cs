@@ -8,18 +8,20 @@ namespace Yulinti.CharacterControllSuite
     {
         [Header("Move パラメータ")]
         [Tooltip("移動入力デッドゾーン（二乗値）")]
-        public float MoveInputDeadZoneSq = 0.001f;
-    
+        [SerializeField] private float _moveInputDeadZoneSq = 0.001f;
         [Tooltip("速度スムージング時間の上限")]
-        public float MaxSmoothTime = 1.0f;
-    
+        [SerializeField] private float _maxSmoothTime = 1.0f;
         [Tooltip("速度スムージング時間の下限")]
-        public float MinSmoothTime = 0.05f;
-    
+        [SerializeField] private float _minSmoothTime = 0.05f;
         [Tooltip("回転スムージング時間")]
-        public float RotationSmoothTime = 0.2f;
-    
+        [SerializeField] private float _rotationSmoothTime = 0.2f;
         [Tooltip("重力加速度(Grounder想定)")]
-        public float Gravity = -20f;
+        [SerializeField] private float _gravity = -20f;
+
+        public float MoveInputDeadZoneSq => _moveInputDeadZoneSq;
+        public float MaxSmoothTime => _maxSmoothTime;
+        public float MinSmoothTime => _minSmoothTime;
+        public float RotationSmoothTime => _rotationSmoothTime;
+        public float Gravity => _gravity;
     }
 }

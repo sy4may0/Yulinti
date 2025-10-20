@@ -6,8 +6,11 @@ namespace Yulinti.CharacterControllSuite {
     public class CrouchIdleStateConfig {
         [Header("CrouchIdleState移動制御")]
         [Tooltip("加速速度")]
-        [SerializeField] public float AccelerationToTargetSpeed = 10f;
+        [SerializeField] private float _accelerationToTargetSpeed = 10f;
         [Tooltip("減速速度")]
-        [SerializeField] public float DecelerationToTargetSpeed = 10f;
+        [SerializeField] private float _decelerationToTargetSpeed = 10f;
+
+        public float AccelerationToTargetSpeed => _accelerationToTargetSpeed;
+        public float DecelerationToTargetSpeed => _decelerationToTargetSpeed;
     }
 }
