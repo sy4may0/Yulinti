@@ -27,17 +27,15 @@ namespace Yulinti.CharacterControllSuite {
             MoveTuning moveTuning,
             InputProvider inputProvider,
             CameraProvider cameraProvider,
-            CrouchIdleStateConfig crouchIdleStateConfig,
-            CrouchWalkStateConfig crouchWalkStateConfig,
-            CrouchAnimationConfig crouchAnimationConfig,
+            CrouchStateConfig crouchStateConfig,
             AnimancerComponent animancer
         ) {
             _moveTuning = moveTuning;
             _inputProvider = inputProvider;
             _cameraProvider = cameraProvider;
-            _crouchIdleStateConfig = crouchIdleStateConfig;
-            _crouchWalkStateConfig = crouchWalkStateConfig;
-            _crouchAnimationConfig = crouchAnimationConfig;
+            _crouchIdleStateConfig = crouchStateConfig.CrouchIdleStateConfig;
+            _crouchWalkStateConfig = crouchStateConfig.CrouchWalkStateConfig;
+            _crouchAnimationConfig = crouchStateConfig.CrouchAnimationConfig;
             _animancer = animancer;
         }
 
@@ -45,8 +43,8 @@ namespace Yulinti.CharacterControllSuite {
             IMoveState crouchIdleState = BuildCrouchIdleState();
             IMoveState crouchWalkState = BuildCrouchWalkState();
             IAnimationPlan crouchAnimation = BuildCrouchAnimation();
-            stateMachine.AddState(_Map[LocalStateID.Idle], crouchIdleState, crouchAnimation);
-            stateMachine.AddState(_Map[LocalStateID.Walk], crouchWalkState, crouchAnimation);
+            stateMachine.AddState(_Map[LocalStateID.Idle], new StateContainer { State = crouchIdleState, AnimationPlan = crouchAnimation });
+            stateMachine.AddState(_Map[LocalStateID.Walk], new StateContainer { State = crouchWalkState, AnimationPlan = crouchAnimation });
         }
 
         private CrouchIdleState BuildCrouchIdleState() {
@@ -67,13 +65,13 @@ namespace Yulinti.CharacterControllSuite {
             return crouchWalkState;
         }
         private SpeedInjectableTPAnimationPlan BuildCrouchAnimation() {
-            SpeedInjectableTPAnimationPlan crouchAnimation = new SpeedInjectableTPAnimationPlan(
+            IAnimationFacade crouchMixer = new AnimationPlayerSpeedInjectable(
                 _animancer,
-                1,
-                null, _crouchAnimationConfig.CrouchAnimationMixer, null,
-                _crouchAnimationConfig.FadeTime,
-                _crouchAnimationConfig.FadeTime,
-                _crouchAnimationConfig.FadeTime
+                _crouchAnimationConfig.CrouchAnimationMixer,
+                _crouchAnimationConfig.FadeTime, Easing.Cubic.InOut
+            );
+            SpeedInjectableTPAnimationPlan crouchAnimation = new SpeedInjectableTPAnimationPlan(
+                null, crouchMixer, null, 1
             );
             return crouchAnimation;
         }

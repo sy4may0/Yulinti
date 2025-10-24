@@ -20,8 +20,8 @@ namespace Yulinti.CharacterControllSuite {
     }
 
     public class StateContainer {
-        public IMoveState State;
-        public IAnimationPlan AnimationPlan;
+        public readonly IMoveState State;
+        public readonly IAnimationPlan AnimationPlan;
     }
 
     public class StateMachine {
@@ -32,13 +32,10 @@ namespace Yulinti.CharacterControllSuite {
             _stateContainers = new Dictionary<StateID, StateContainer>();
         }
 
-        public void AddState(StateID stateID, IMoveState state, IAnimationPlan animationPlan) {
-            _stateContainers[stateID] = new StateContainer {
-                State = state,
-                AnimationPlan = animationPlan
-            };
+        public void AddState(StateID stateID, StateContainer stateContainer) {
+            _stateContainers[stateID] = stateContainer;
         }
-        public void Awake(StateRuntimePayload payload) {
+        public void Initialize(StateRuntimePayload payload) {
             if (_stateContainers.TryGetValue(StateID.Idle, out StateContainer idleState)) {
                 _currentState = idleState;
                 _currentState.State.Enter(payload);
@@ -52,7 +49,7 @@ namespace Yulinti.CharacterControllSuite {
             return _currentState.State.Tick(payload);
         }
 
-        public void AfterMove(StateRuntimePayload payload) {
+        public void PostMove(StateRuntimePayload payload) {
             injectSpeed(payload);
         }
 

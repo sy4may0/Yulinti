@@ -20,7 +20,6 @@ namespace Yulinti.CharacterControllSuite
     public sealed class CameraProvider
     {
         [SerializeField] private Camera _camera;
-        public Camera Camera => _camera;
         public Quaternion YawRotation
         {
             get

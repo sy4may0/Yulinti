@@ -10,15 +10,4 @@ namespace Yulinti.CharacterControllSuite {
         MovePlan Tick(StateRuntimePayload payload);
         IMoveState TryTransition(StateRuntimePayload payload);
     }
-
-    public interface IAnimationPlan {
-        void Play();
-        void Stop(Action onCompleted = null);
-        void StopLayer(float? fadeOverride = null);
-        bool IsBlocking { get; }
-    }
-
-    public interface IAnimationSpeedInjectable {
-        void InjectSpeed(float speed);
-    }
 }

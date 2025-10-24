@@ -5,19 +5,18 @@ using Yulinti.CharacterControllSuite;
 
 namespace Yulinti.CharacterControllSuite {
     public sealed class LayerZeroAnimationPlan : IAnimationPlan, IAnimationSpeedInjectable {
-        private readonly AnimancerComponent _animancer;
-        private LinearMixerTransition _baseTransition;
+        private readonly IAnimationFacade _animationPlayer;
+        private readonly int _layerIndex;
 
         public LayerZeroAnimationPlan(
-            AnimancerComponent animancer,
-            LinearMixerTransition baseTransition
+            IAnimationFacade animationPlayer
         ) {
-            _animancer = animancer;
-            _baseTransition = baseTransition;
+            _animationPlayer = animationPlayer;
+            _layerIndex = 0;
         }
 
         public void Play() {
-            _animancer.Layers[0].Play(_baseTransition);
+            _animationPlayer.Play();
         }
 
         public void Stop(Action onCompleted = null) {
@@ -35,7 +34,7 @@ namespace Yulinti.CharacterControllSuite {
         public bool IsBlocking { get => false; }
 
         public void InjectSpeed(float speed) {
-            _baseTransition?.State?.Parameter = speed;
+            _animationPlayer.InjectSpeed(speed);
         }
     }
 }

@@ -18,19 +18,16 @@ namespace Yulinti.CharacterControllSuite {
             MoveTuning moveTuning,
             InputProvider inputProvider,
             CameraProvider cameraProvider,
-            IdleStateConfig idleStateConfig,
-            WalkStateConfig walkStateConfig,
-            RunStateConfig runStateConfig,
-            BaseAnimationConfig baseAnimationConfig,
+            BaseStateConfig baseStateConfig,
             AnimancerComponent animancer
         ) {
             _moveTuning = moveTuning;
             _inputProvider = inputProvider;
             _cameraProvider = cameraProvider;
-            _idleStateConfig = idleStateConfig;
-            _walkStateConfig = walkStateConfig;
-            _runStateConfig = runStateConfig;
-            _baseAnimationConfig = baseAnimationConfig;
+            _idleStateConfig = baseStateConfig.IdleStateConfig;
+            _walkStateConfig = baseStateConfig.WalkStateConfig;
+            _runStateConfig = baseStateConfig.RunStateConfig;
+            _baseAnimationConfig = baseStateConfig.BaseAnimationConfig;
             _animancer = animancer;
         }
 
@@ -49,9 +46,9 @@ namespace Yulinti.CharacterControllSuite {
             IMoveState walkState = BuildWalkState();
             IMoveState runState = BuildRunState();
             IAnimationPlan baseAnimation = BuildBaseAnimation();
-            stateMachine.AddState(_Map[LocalStateID.Idle], idleState, baseAnimation);
-            stateMachine.AddState(_Map[LocalStateID.Walk], walkState, baseAnimation);
-            stateMachine.AddState(_Map[LocalStateID.Run], runState, baseAnimation);
+            stateMachine.AddState(_Map[LocalStateID.Idle], new StateContainer { State = idleState, AnimationPlan = baseAnimation });
+            stateMachine.AddState(_Map[LocalStateID.Walk], new StateContainer { State = walkState, AnimationPlan = baseAnimation });
+            stateMachine.AddState(_Map[LocalStateID.Run], new StateContainer { State = runState, AnimationPlan = baseAnimation });
         }
 
         private IdleState BuildIdleState() {
@@ -81,12 +78,15 @@ namespace Yulinti.CharacterControllSuite {
             return runState;
         }
         private LayerZeroAnimationPlan BuildBaseAnimation() {
-            LayerZeroAnimationPlan baseAnimation = new LayerZeroAnimationPlan(
+            IAnimationFacade baseMixer = new AnimationPlayerSpeedInjectable(
                 _animancer,
-                _baseAnimationConfig.BaseAnimationMixer
+                _baseAnimationConfig.BaseAnimationMixer,
+                0, Easing.Linear.InOut
+            );
+            LayerZeroAnimationPlan baseAnimation = new LayerZeroAnimationPlan(
+                baseMixer,
             );
             return baseAnimation;
         }
-
     }
 }

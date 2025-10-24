@@ -9,11 +9,8 @@ namespace Yulinti.CharacterControllSuite
 {
     public class ThreePhaseAnimationPlan : IAnimationPlan
     {
-        private readonly AnimancerComponent _animancer;
+        private readonly IAnimationFacade _start, _loop, _stop;
         private readonly int _layerIndex;
-
-        private ITransition _start, _loop, _stop;
-        private float _fadeStart, _fadeLoop, _fadeStop;
 
         // ブロック方針（外から設定可能）
         public bool BlockInStart { get => _blockInStart; set => _blockInStart = value; }
@@ -33,19 +30,16 @@ namespace Yulinti.CharacterControllSuite
         public bool IsBlocking { get; private set; }
 
         public ThreePhaseAnimationPlan(
-            AnimancerComponent animancer,
-            int layerIndex,
-            ITransition startClip,
-            ITransition loopClip,
-            ITransition stopClip,
-            float fadeStart,
-            float fadeLoop,
-            float fadeStop)
-        {
-            _animancer = animancer;
+            IAnimationFacade start,
+            IAnimationFacade loop,
+            IAnimationFacade stop,
+            int layerIndex
+        ){
+            _start = start;
+            _loop = loop;
+            _stop = stop;
             _layerIndex = layerIndex;
-            _start = startClip; _loop = loopClip; _stop = stopClip;
-            _fadeStart = fadeStart; _fadeLoop = fadeLoop; _fadeStop = fadeStop;
+
             _blockInStart = false;
             _blockInStop = false;
             IsBlocking = false;
@@ -53,21 +47,11 @@ namespace Yulinti.CharacterControllSuite
             _sharedOnEnd = OnEndShared; // ここで1回だけ作る
         }
 
-        public void UpdateClips(ITransition start, ITransition loop, ITransition stop)
-        { _start = start; _loop = loop; _stop = stop; }
-
-        public void UpdateFades(float fadeStart, float fadeLoop, float fadeStop)
-        { _fadeStart = fadeStart; _fadeLoop = fadeLoop; _fadeStop = fadeStop; }
-
         // === Play: Start→(OnEnd)→Loop ===
         public void Play()
         {
-            if (_animancer == null) return;
             if (_layerIndex < 0) return;
-
             int my = ++_seq;
-            var layer = _animancer.Layers[_layerIndex];
-
             if (_start == null)
             {
                 // Startなし：即Loopへ（1フェーズ対応）
@@ -78,17 +62,13 @@ namespace Yulinti.CharacterControllSuite
 
             IsBlocking = _blockInStart;
 
-            var state = AnimationUtils.PlayWithSineEase(layer, _start, _fadeStart);
+            _start.Play(_layerIndex);
 
             // Start終了で Loop へ
             _pendingSeq = my;
             _pendingKind = PendingKind.ToLoop;
             _pendingCallback = null;
-            if (state.Events(this, out AnimancerEvent.Sequence events))
-            {
-                events.OnEnd = _sharedOnEnd;
-
-            }
+            _start.SetOnEndCallback(_layerIndex, _sharedOnEnd);
         }
 
         private void PlayLoop(int my)
@@ -96,18 +76,14 @@ namespace Yulinti.CharacterControllSuite
             if (my != _seq) return;
             if (_loop == null) { /* ワンショット終端 */ return; }
 
-            var layer = _animancer.Layers[_layerIndex];
-            var state = AnimationUtils.PlayWithSineEase(layer, _loop, _fadeLoop);
+            _loop.Play(_layerIndex);
         }
 
         // === Stop: Stop再生→完了でコールバック。無ければ即コールバック ===
         public void Stop(Action onCompleted = null)
         {
-            if (_animancer == null) { onCompleted?.Invoke(); return; }
-            if (_layerIndex < 0 || _layerIndex >= _animancer.Layers.Count) { onCompleted?.Invoke(); return; }
-
+            if (_layerIndex < 0 _layerIndex >= _animancer.Layers.Count) { onCompleted?.Invoke(); return; }
             int my = ++_seq;
-
             if (_stop == null)
             {
                 IsBlocking = false; // Stopなし：即完了
@@ -116,26 +92,21 @@ namespace Yulinti.CharacterControllSuite
             }
 
             IsBlocking = _blockInStop;
-
-            var layer = _animancer.Layers[_layerIndex];
-            var state = AnimationUtils.PlayWithSineEase(layer, _stop, _fadeStop);
+            
+            _stop.Play(_layerIndex);
 
             _pendingSeq = my;
             _pendingKind = PendingKind.ToCallback;
             _pendingCallback = onCompleted;
-            if (state.Events(this, out AnimancerEvent.Sequence events))
-            {
-                events.OnEnd = _sharedOnEnd;
-            }
+            _stop.SetOnEndCallback(_layerIndex, _sharedOnEnd);
         }
 
-        public void StopLayer(float? fadeOverride = null) {
-            if (_animancer == null || _layerIndex <= 0) return;
-
-            float fadeTime = fadeOverride ?? _fadeStop;
-
-            var layer = _animancer.Layers[_layerIndex];
-            AnimationUtils.StopLayer(layer, fadeTime);
+        public void StopLayer() {
+            if (_layerIndex <= 0) return;
+            // ここわかりずらいから注釈
+            // IAnimancerFacadeが持つAnimancerComponentは、すべて同じインスタンスを期待する。
+            // そのため、_stop/_start/_loopどれでStopLayer()しても
+            _stop.StopLayer(_layerIndex);
         }
 
         // 共通OnEnd（クロージャなし・割当1回）
