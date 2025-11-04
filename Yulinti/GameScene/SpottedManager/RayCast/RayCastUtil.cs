@@ -1,7 +1,6 @@
 using UnityEngine;
-using Yulinti.RayCastSuite;
 
-namespace Yulinti.RayCastSuite {
+namespace Yulinti.SpottedManagerSuite {
     public enum RayCastDirection {
         Center,
         Dir0,
@@ -21,11 +20,12 @@ namespace Yulinti.RayCastSuite {
         public static bool IsHitInFront(
             Transform target,
             Vector3 hitPoint
+            Vector3 rayOrigin
         ) {
-            Vector3 dirToHit = (hitPoint - target.position).normalized;
-            float dot = Vector3.Dot(target.forward, dirToHit);
+            Vector3 rayDir = (hitPoint - rayOrigin).normalized;
+            float dot = Vector3.Dot(rayDir, target.forward);
 
-            return dot >= 0;
+            return dot < 0f;
         }
     }
 
