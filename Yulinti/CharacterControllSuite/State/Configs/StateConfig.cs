@@ -1,4 +1,5 @@
 using UnityEngine;
+using Animancer;
 using Yulinti.CharacterControllSuite;
 
 namespace Yulinti.CharacterControllSuite {
@@ -10,6 +11,14 @@ namespace Yulinti.CharacterControllSuite {
 
         public BaseStateConfig BaseStateConfig => _baseStateConfig;
         public CrouchStateConfig CrouchStateConfig => _crouchStateConfig;
+    }
+
+    [System.Serializable]
+    public class AnimationConfigCommon {
+        [Header("AnimationConfigCommon/アニメーション全体設定")]
+        [serializefield] private AnimancerComponent _animancer;
+
+        public AnimancerComponent Animancer => _animancer;
     }
 
     [System.Serializable]

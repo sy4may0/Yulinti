@@ -2,11 +2,12 @@ using UnityEngine;
 using Animancer;
 using System.Collections.Generic;
 using Yulinti.CharacterControllSuite;
+using Yulinti.ServiceSuite;
 
 namespace Yulinti.CharacterControllSuite {
     public sealed class BaseStatePack : IStatePack {
         private readonly StateConfigCommon _stateConfigCommon;
-        private readonly InputProvider _inputProvider;
+        private readonly MoveInputProvider _inputProvider;
         private readonly CameraProvider _cameraProvider;
         private readonly IdleStateConfig _idleStateConfig;
         private readonly WalkStateConfig _walkStateConfig;
@@ -17,7 +18,7 @@ namespace Yulinti.CharacterControllSuite {
 
         public BaseStatePack(
             StateConfigCommon stateConfigCommon,
-            InputProvider inputProvider,
+            MoveInputProvider inputProvider,
             CameraProvider cameraProvider,
             BaseStateConfig baseStateConfig,
             AnimancerComponent animancer

@@ -1,11 +1,12 @@
 using UnityEngine;
 using Yulinti.CharacterControllSuite;
+using Yulinti.ServiceSuite;
 
 namespace Yulinti.CharacterControllSuite {
     public sealed class CrouchWalkState : IMoveState {
         private CrouchWalkStateConfig _crouchWalkStateConfig;
         private StateConfigCommon _stateConfigCommon;
-        private InputProvider _inputProvider;
+        private MoveInputProvider _inputProvider;
         private CameraProvider _cameraProvider;
 
         public int LayerIndex { get; } = 1;
@@ -13,7 +14,7 @@ namespace Yulinti.CharacterControllSuite {
         public CrouchWalkState(
             CrouchWalkStateConfig crouchWalkStateConfig,
             StateConfigCommon stateConfigCommon,
-            InputProvider inputProvider,
+            MoveInputProvider inputProvider,
             CameraProvider cameraProvider
         ) {
             _crouchWalkStateConfig = crouchWalkStateConfig;
@@ -22,13 +23,13 @@ namespace Yulinti.CharacterControllSuite {
             _cameraProvider = cameraProvider;
         }
 
-        public void Enter(StateRuntimePayload payload) {}
-        public void Exit(StateRuntimePayload payload) {}
-        public MovePlan Tick(StateRuntimePayload payload) {
+        public void Enter(MoveRuntimeReadOnly moveRuntimeRO) {}
+        public void Exit(MoveRuntimeReadOnly moveRuntimeRO) {}
+        public MovePlan Tick(MoveRuntimeReadOnly moveRuntimeRO) {
             HorizontalSpeedPlan targetSpeed = MovePlanner.PlanHorizontalSpeed(
                 _inputProvider.Move,
                 _crouchWalkStateConfig.BaseSpeed,
-                payload.CurrentSpeedHorizontal,
+                moveRuntimeRO.CurrentSpeedHorizontal,
                 true,
                 _crouchWalkStateConfig.AccelerationToTargetSpeed,
                 _crouchWalkStateConfig.DecelerationToTargetSpeed,
@@ -39,21 +40,21 @@ namespace Yulinti.CharacterControllSuite {
             YawPlan targetYaw = MovePlanner.PlanYawFollowCamera(
                 _cameraProvider,
                 _inputProvider.Move,
-                payload.CurrentYaw,
+                moveRuntimeRO.CurrentYaw,
                 true,
                 _stateConfigCommon.RotationSmoothTime,
                 _stateConfigCommon.MoveInputDeadZoneSq
             );
             VerticalSpeedPlan targetVerticalSpeed = MovePlanner.PlanVerticalSpeed(
-                payload.IsGrounded,
-                payload.CurrentSpeedVertical,
+                moveRuntimeRO.IsGrounded,
+                moveRuntimeRO.CurrentSpeedVertical,
                 _stateConfigCommon.Gravity,
-                payload.DeltaTime
+                moveRuntimeRO.DeltaTime
             );
             return new MovePlan(targetSpeed, targetYaw, targetVerticalSpeed);
         }
 
-        public StateID TryTransition(StateRuntimePayload payload) {
+        public StateID TryTransition(MoveRuntimeReadOnly moveRuntimeRO) {
             if (_inputProvider.Move.sqrMagnitude <= _stateConfigCommon.MoveInputDeadZoneSq) {
                 return StateID.CrouchIdle;
             }

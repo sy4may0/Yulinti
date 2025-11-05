@@ -2,90 +2,39 @@ using UnityEngine;
 using Yulinti.CharacterControllSuite;
 
 namespace Yulinti.CharacterControllSuite {
-
-    public struct MoveResult {
-        public readonly float CurrentSpeedHorizontal;
-        public readonly float CurrentSpeedVertical;
-        public readonly float CurrentYaw;
-
-        public MoveResult(float currentSpeedHorizontal, float currentSpeedVertical, float currentYaw) {
-            CurrentSpeedHorizontal = currentSpeedHorizontal;
-            CurrentSpeedVertical = currentSpeedVertical;
-            CurrentYaw = currentYaw;
-        }
-    }
-
-    public class MoveRuntime {
-        public float CurrentSpeedHorizontal;
-        public float SpeedVelRefHorizontal;
-        public float CurrentYaw;
-        public float YawVelRef;
-        public float CurrentSpeedVertical;
-        public float SpeedVelRefVertical;
-        public float DeltaTime;
-        public bool IsGrounded;
-
-        public MoveRuntime(
-            float deltaTime,
-            float currentSpeedHorizontal,
-            float currentSpeedVertical,
-            float currentYaw,
-            bool isGrounded
-        ) {
-            DeltaTime = deltaTime;
-            CurrentSpeedHorizontal = currentSpeedHorizontal;
-            CurrentSpeedVertical = currentSpeedVertical;
-            CurrentYaw = currentYaw;
-            IsGrounded = isGrounded;
-            SpeedVelRefHorizontal = 0f;
-            SpeedVelRefVertical = 0f;
-            YawVelRef = 0f;
-        }
-
-        public StateRuntimePayload BuildStateRuntimePayload() {
-            return new StateRuntimePayload(
-                DeltaTime,
-                CurrentSpeedHorizontal,
-                CurrentSpeedVertical,
-                CurrentYaw,
-                IsGrounded
-            );
-        }
-
-        public void PostMove(
-            MoveResult moveResult
-        ) {
-            CurrentSpeedHorizontal = moveResult.CurrentSpeedHorizontal;
-            CurrentSpeedVertical = moveResult.CurrentSpeedVertical;
-            CurrentYaw = moveResult.CurrentYaw;
-        }
-    }
-
     [System.Serializable]
     public class CharacterMover {
-        [Header("CharacterMover/CharacterMover設定")]
-        [Tooltip("CharacterControllerコンポーネント")]
-        [SerializeField] private CharacterController _characterController;
+        private readonly CharacterController _characterController;
 
-        public void ApplyMove(MovePlan movePlan, MoveRuntime moveRuntime) {
+        public CharacterMover(CharacterController characterController) {
+            if (characterController == null) {
+                Debug.LogError("CharacterController is null");
+                return;
+            }
+            _characterController = characterController;
+        }
+
+        public void ApplyMove(
+            MovePlan movePlan,
+            MoveRuntimeCommands moveRuntimeWO,
+            MoveRuntimeReadOnly moveRuntimeRO
+        ) {
             float currentYaw = ApplyYaw(
                 movePlan.YawPlan,
-                moveRuntime
+                moveRuntimeRO
             );
  
             float currentSpeedHorizontal = ApplyHorizontalMove(
                 movePlan.HorizontalSpeedPlan,
-                moveRuntime,
-                moveRuntime.DeltaTime
+                moveRuntimeRO
             );
 
             float currentSpeedVertical = ApplyVerticalMove(
                 movePlan.VerticalSpeedPlan,
-                moveRuntime,
-                moveRuntime.DeltaTime
+                moveRuntimeRO
             );
 
-            moveRuntime.PostMove(new MoveResult(currentSpeedHorizontal, currentSpeedVertical, currentYaw));
+            moveRuntimeWO.PostMove(new MoveResult(currentSpeedHorizontal, currentSpeedVertical, currentYaw));
        }
 
         private float ApplyYaw(YawPlan yawPlan, MoveRuntime moveRuntime) {
@@ -104,41 +53,41 @@ namespace Yulinti.CharacterControllSuite {
             return yaw;
         }
 
-        private float ApplyHorizontalMove(HorizontalSpeedPlan horizontalSpeedPlan, MoveRuntime moveRuntime, float deltaTime) {
+        private float ApplyHorizontalMove(HorizontalSpeedPlan horizontalSpeedPlan, MoveRuntimeReadOnly moveRuntimeRO) {
             float horizontalSpeed = Mathf.SmoothDamp(
-                moveRuntime.CurrentSpeedHorizontal,
+                moveRuntimeRO.CurrentSpeedHorizontal,
                 horizontalSpeedPlan.TargetSpeed,
-                ref moveRuntime.SpeedVelRefHorizontal,
+                ref moveRuntimeRO.SpeedVelRefHorizontal,
                 horizontalSpeedPlan.SmoothTime,
                 Mathf.Infinity,
-                moveRuntime.DeltaTime
+                moveRuntimeRO.DeltaTime
             );
 
             if (_characterController != null) {
-                Vector3 move = _characterController.transform.forward * horizontalSpeed * deltaTime;
+                Vector3 move = _characterController.transform.forward * horizontalSpeed * moveRuntimeRO.DeltaTime;
                 _characterController.Move(move);
             }
 
             return horizontalSpeed;
         }
 
-        private float ApplyVerticalMove(VerticalSpeedPlan verticalSpeedPlan, MoveRuntime moveRuntime, float deltaTime) {
+        private float ApplyVerticalMove(VerticalSpeedPlan verticalSpeedPlan, MoveRuntimeReadOnly moveRuntimeRO) {
             float verticalSpeed = 0f;
             if (verticalSpeedPlan.SmoothTime != 0f) {
                 verticalSpeed = Mathf.SmoothDamp(
-                    moveRuntime.CurrentSpeedVertical,
+                    moveRuntimeRO.CurrentSpeedVertical,
                     verticalSpeedPlan.TargetSpeed,
-                    ref moveRuntime.SpeedVelRefVertical,
+                    ref moveRuntimeRO.SpeedVelRefVertical,
                     verticalSpeedPlan.SmoothTime,
                     Mathf.Infinity,
-                    moveRuntime.DeltaTime
+                    moveRuntimeRO.DeltaTime
                 );
             } else {
                 verticalSpeed = verticalSpeedPlan.TargetSpeed;
             }
 
             if (_characterController != null) {
-                Vector3 move = Vector3.up * verticalSpeed * deltaTime;
+                Vector3 move = Vector3.up * verticalSpeed * moveRuntimeRO.DeltaTime;
                 _characterController.Move(move);
             }
 

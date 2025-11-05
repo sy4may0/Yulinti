@@ -2,12 +2,13 @@ using UnityEngine;
 using Animancer;
 using System.Collections.Generic;
 using Yulinti.CharacterControllSuite;
+using Yulinti.ServiceSuite;
 
 namespace Yulinti.CharacterControllSuite {
     
     public sealed class CrouchStatePack : IStatePack {
         private readonly StateConfigCommon _stateConfigCommon;
-        private readonly InputProvider _inputProvider;
+        private readonly MoveInputProvider _inputProvider;
         private readonly CameraProvider _cameraProvider;
         private readonly CrouchIdleStateConfig _crouchIdleStateConfig;
         private readonly CrouchWalkStateConfig _crouchWalkStateConfig;
@@ -26,7 +27,7 @@ namespace Yulinti.CharacterControllSuite {
 
         public CrouchStatePack(
             StateConfigCommon stateConfigCommon,
-            InputProvider inputProvider,
+            MoveInputProvider inputProvider,
             CameraProvider cameraProvider,
             CrouchStateConfig crouchStateConfig,
             AnimancerComponent animancer
