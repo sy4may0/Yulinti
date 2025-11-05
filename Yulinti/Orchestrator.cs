@@ -3,10 +3,11 @@ using Yulinti.CharacterControllSuite;
 using Yulinti.ServiceSuite;
 
 public class Orchestrator : MonoBehaviour {
-    [SerializeField] private PlayerController _playerController;
+    [SerializeField] private PlayerConfig _playerConfig;
     [SerializeField] private InputConfig _inputConfig;
     [SerializeField] private CameraConfig _cameraConfig;
 
+    private PlayerController _playerController;
     private MoveInputProvider _moveInputProvider;
     private CameraProvider _cameraProvider;
 
