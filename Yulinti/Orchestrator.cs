@@ -7,6 +7,7 @@ public class Orchestrator : MonoBehaviour {
     [SerializeField] private InputConfig _inputConfig;
     [SerializeField] private CameraConfig _cameraConfig;
 
+    private FrameContext _frameContext;
     private PlayerController _playerController;
     private MoveInputProvider _moveInputProvider;
     private CameraProvider _cameraProvider;
@@ -16,17 +17,19 @@ public class Orchestrator : MonoBehaviour {
     private PlayerRuntimeCommands _playerRuntimeWO;
 
     private void Awake() {
+        _frameContext = new FrameContext();
         _moveInputProvider = new MoveInputProvider(_inputConfig);
         _cameraProvider = new CameraProvider(_cameraConfig);
 
-        _playerRuntime = new PlayerRuntime(Time.fixedDeltaTime);
+        _playerRuntime = new PlayerRuntime(_frameContext);
         _playerRuntimeRO = new PlayerRuntimeReadOnly(_playerRuntime);
         _playerRuntimeWO = new PlayerRuntimeCommands(_playerRuntime);
 
         _playerController = new PlayerController(
             _playerConfig,
             _moveInputProvider,
-            _cameraProvider
+            _cameraProvider,
+            _frameContext
         );
     }
 
@@ -36,9 +39,13 @@ public class Orchestrator : MonoBehaviour {
 
     private void Update() {
         // DeltaTimeを更新
-        _playerRuntime.DeltaTime = Time.deltaTime;
+        _frameContext.Tick();
 
         _playerController.Tick(_playerRuntimeRO, _playerRuntimeWO);
+    }
+
+    private void FixedUpdate() {
+        _frameContext.FixedTick();
     }
 
     private void LateUpdate() {

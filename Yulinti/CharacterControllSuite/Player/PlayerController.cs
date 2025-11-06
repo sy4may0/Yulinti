@@ -18,20 +18,22 @@ namespace Yulinti.CharacterControllSuite {
         public PlayerController(
             PlayerConfig playerConfig,
             MoveInputProvider inputProvider,
-            CameraProvider cameraProvider
+            CameraProvider cameraProvider,
+            FrameContext frameContext
         ) {
             _playerConfig = playerConfig;
             _moveInputProvider = moveInputProvider;
             _cameraProvider = cameraProvider;
 
             BuildStateMachine();
-            BuildMoveRuntime();
+            BuildMoveRuntime(frameContext);
             BuildMover();
         }
 
-        private void BuildMoveRuntime() {
+        private void BuildMoveRuntime(FrameContext frameContext) {
             _moveRuntime = new MoveRuntime(
-                0f, 0f, 0f, 0f, true
+                frameContext,
+                0f, 0f, 0f, true
             );
             _moveRuntimeRO = new MoveRuntimeReadOnly(_moveRuntime);
             _moveRuntimeRW = new MoveRuntimeWriteable(_moveRuntime);

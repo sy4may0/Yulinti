@@ -21,17 +21,17 @@ namespace Yulinti.CharacterControllSuite {
         public float YawVelRef;
         public float CurrentSpeedVertical;
         public float SpeedVelRefVertical;
-        public float DeltaTime;
+        public FrameContext FrameContext;
         public bool IsGrounded;
 
         public MoveRuntime(
-            float deltaTime,
+            FrameContext frameContext,
             float currentSpeedHorizontal,
             float currentSpeedVertical,
             float currentYaw,
             bool isGrounded
         ) {
-            DeltaTime = deltaTime;
+            FrameContext = frameContext;
             CurrentSpeedHorizontal = currentSpeedHorizontal;
             CurrentSpeedVertical = currentSpeedVertical;
             CurrentYaw = currentYaw;
@@ -80,7 +80,7 @@ namespace Yulinti.CharacterControllSuite {
         public float CurrentSpeedVertical => _moveRuntime.CurrentSpeedVertical;
         public float CurrentYaw => _moveRuntime.CurrentYaw;
         public bool IsGrounded => _moveRuntime.IsGrounded;
-        public float DeltaTime => _moveRuntime.DeltaTime;
+        public float DeltaTime => _moveRuntime.FrameContext.DeltaTime;
         public float SpeedVelRefHorizontal => _moveRuntime.SpeedVelRefHorizontal;
         public float SpeedVelRefVertical => _moveRuntime.SpeedVelRefVertical;
         public float YawVelRef => _moveRuntime.YawVelRef;

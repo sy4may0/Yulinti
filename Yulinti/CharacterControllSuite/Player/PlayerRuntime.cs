@@ -10,20 +10,16 @@ namespace Yulinti.CharacterControllSuite {
         public float CurrentSpeedVertical;
         public float CurrentYaw;
         public bool IsGrounded;
-        public float DeltaTime;
+        public FrameContext FrameContext;
         public StateID CurrentStateID;
 
-        public PlayerRuntime(float deltaTime) {
+        public PlayerRuntime(FrameContext frameContext) {
             CurrentSpeedHorizontal = 0;
             CurrentSpeedVertical = 0;
             CurrentYaw = 0;
             IsGrounded = true;
             CurrentStateID = StateID.None;
-            DeltaTime = deltaTime;
-        }
-
-        public void SetDeltaTime(float deltaTime) {
-            DeltaTime = deltaTime;
+            FrameContext = frameContext;
         }
     }
 
@@ -56,6 +52,6 @@ namespace Yulinti.CharacterControllSuite {
         public float CurrentYaw => _playerRuntime.CurrentYaw;
         public bool IsGrounded => _playerRuntime.IsGrounded;
         public StateID CurrentStateID => _playerRuntime.CurrentStateID;
-        public float DeltaTime => _playerRuntime.DeltaTime;
+        public float DeltaTime => _playerRuntime.FrameContext.DeltaTime;
     }
 }
