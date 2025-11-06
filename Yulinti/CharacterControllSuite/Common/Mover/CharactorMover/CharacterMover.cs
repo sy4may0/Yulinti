@@ -16,7 +16,7 @@ namespace Yulinti.CharacterControllSuite {
 
         public void ApplyMove(
             MovePlan movePlan,
-            MoveRuntimeCommands moveRuntimeWO,
+            MoveRuntimeCommands moveRuntimeCmds,
             MoveRuntimeReadOnly moveRuntimeRO
         ) {
             float currentYaw = ApplyYaw(
@@ -34,17 +34,17 @@ namespace Yulinti.CharacterControllSuite {
                 moveRuntimeRO
             );
 
-            moveRuntimeWO.PostMove(new MoveResult(currentSpeedHorizontal, currentSpeedVertical, currentYaw));
+            moveRuntimeCmds.PostMove(new MoveResult(currentSpeedHorizontal, currentSpeedVertical, currentYaw));
        }
 
-        private float ApplyYaw(YawPlan yawPlan, MoveRuntime moveRuntime) {
+        private float ApplyYaw(YawPlan yawPlan, MoveRuntimeReadOnly moveRuntimeRO) {
             float yaw = Mathf.SmoothDampAngle(
-                moveRuntime.CurrentYaw,
+                moveRuntimeRO.CurrentYaw,
                 yawPlan.TargetYawDeg,
-                ref moveRuntime.YawVelRef,
+                ref moveRuntimeRO.YawVelRef,
                 yawPlan.SmoothTime,
                 Mathf.Infinity,
-                moveRuntime.DeltaTime
+                moveRuntimeRO.DeltaTime
             );
             if (_characterController.transform != null) {
                 _characterController.transform.rotation = Quaternion.Euler(0, yaw, 0);
