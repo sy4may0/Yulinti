@@ -61,8 +61,9 @@ namespace Yulinti.CharacterControllSuite {
         }
 
         private void BuildMover() {
-            _mover = new Mover(
-                _playerConfig.MoverConfig
+            _mover = new PlayerMover(
+                _playerConfig.MoverConfig,
+                _playerConfig.GrounderConfig
             );
         }
 

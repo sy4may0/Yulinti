@@ -3,11 +3,7 @@ using Yulinti.CharacterControllSuite;
 
 namespace Yulinti.CharacterControllSuite {
     [System.Serializable]
-    public class MoverConfig {
-        [Header("MoverConfig/Mover設定")]
-        [Tooltip("CharacterControllerコンポーネント")]
-        [SerializeField] private CharacterController _characterController;
-
+    public class GrounderConfig {
         [Header("MoverConfig/Grounder設定")]
         [Tooltip("FullBodyBipedIKコンポーネント")]
         [SerializeField] private FullBodyBipedIK _fullBodyIK;
@@ -41,7 +37,6 @@ namespace Yulinti.CharacterControllSuite {
         [Tooltip("FootのY軸方向の補正量")]
         [SerializeField] private float _footYCorrection = 0.113f;
 
-        public CharacterController CharacterController => _characterController;
         public FullBodyBipedIK FullBodyIK => _fullBodyIK;
         public GrounderFBBIK Grounder => _grounder;
         public Transform LeftFoot => _leftFoot;
@@ -55,5 +50,6 @@ namespace Yulinti.CharacterControllSuite {
         public float Epsilon => _epsilon;
         public float ToeYCorrection => _toeYCorrection;
         public float FootYCorrection => _footYCorrection;
+
     }
 }

@@ -4,9 +4,9 @@ using Yulinti.CharacterControllSuite;
 
 namespace Yulinti.CharacterControllSuite {
     public sealed class GrounderController {
-        private readonly MoverConfig _config;
+        private readonly GrounderConfig _config;
 
-        public GrounderController(MoverConfig config) {
+        public GrounderController(GrounderConfig config) {
             _config = config;
         }
 
