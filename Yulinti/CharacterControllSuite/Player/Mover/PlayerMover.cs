@@ -17,10 +17,10 @@ namespace Yulinti.CharacterControllSuite {
 
         public void Tick(
             MovePlan movePlan,
-            MoveRuntimeWriteable moveRuntimeWO,
+            MoveRuntimeCommands moveRuntimeCmds,
             MoveRuntimeReadOnly moveRuntimeRO
         ) {
-            _characterMover.ApplyMove(movePlan, moveRuntimeWO, moveRuntimeRO);
+            _characterMover.ApplyMove(movePlan, moveRuntimeCmds, moveRuntimeRO);
         }
 
         public void LateTick() {

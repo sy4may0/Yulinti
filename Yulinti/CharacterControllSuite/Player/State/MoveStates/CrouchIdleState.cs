@@ -4,15 +4,15 @@ using Yulinti.ServiceSuite;
 
 namespace Yulinti.CharacterControllSuite {
     public sealed class CrouchIdleState : IMoveState {
-        private CrouchIdleStateConfig _crouchIdleStateConfig;
-        private StateConfigCommon _stateConfigCommon;
+        private PlayerCrouchIdleStateConfig _crouchIdleStateConfig;
+        private PlayerStateConfigCommon _stateConfigCommon;
         private MoveInputProvider _inputProvider;
 
         public int LayerIndex { get; } = 1;
 
         public CrouchIdleState(
-            CrouchIdleStateConfig crouchIdleStateConfig,
-            StateConfigCommon stateConfigCommon,
+            PlayerCrouchIdleStateConfig crouchIdleStateConfig,
+            PlayerStateConfigCommon stateConfigCommon,
             MoveInputProvider inputProvider
         ) {
             _crouchIdleStateConfig = crouchIdleStateConfig;

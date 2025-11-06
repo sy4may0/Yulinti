@@ -8,15 +8,15 @@ public sealed class FrameContext {
     public float FixedDeltaTime => _fixedDeltaTime;
 
     public FrameContext() {
-        DeltaTime = 0f;
-        FixedDeltaTime = 0f;
+        _deltaTime = 0f;
+        _fixedDeltaTime = 0f;
     }
 
     public void Tick() {
-        DeltaTime = Time.deltaTime;
+        _deltaTime = Time.deltaTime;
     }
 
     public void FixedTick() {
-        FixedDeltaTime = Time.fixedDeltaTime;
+        _fixedDeltaTime = Time.fixedDeltaTime;
     }
 }

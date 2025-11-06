@@ -3,7 +3,7 @@ using Yulinti.CharacterControllSuite;
 
 namespace Yulinti.CharacterControllSuite {
     [System.Serializable]
-    public class RunStateConfig {
+    public class PlayerRunStateConfig {
         [Header("RunState移動制御")]
         [Tooltip("基本速度")]
         [SerializeField] private float _baseSpeed = 3.3f;

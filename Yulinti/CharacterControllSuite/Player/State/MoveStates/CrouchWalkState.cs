@@ -4,16 +4,16 @@ using Yulinti.ServiceSuite;
 
 namespace Yulinti.CharacterControllSuite {
     public sealed class CrouchWalkState : IMoveState {
-        private CrouchWalkStateConfig _crouchWalkStateConfig;
-        private StateConfigCommon _stateConfigCommon;
+        private PlayerCrouchWalkStateConfig _crouchWalkStateConfig;
+        private PlayerStateConfigCommon _stateConfigCommon;
         private MoveInputProvider _inputProvider;
         private CameraProvider _cameraProvider;
 
         public int LayerIndex { get; } = 1;
 
         public CrouchWalkState(
-            CrouchWalkStateConfig crouchWalkStateConfig,
-            StateConfigCommon stateConfigCommon,
+            PlayerCrouchWalkStateConfig crouchWalkStateConfig,
+            PlayerStateConfigCommon stateConfigCommon,
             MoveInputProvider inputProvider,
             CameraProvider cameraProvider
         ) {

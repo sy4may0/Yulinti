@@ -4,16 +4,16 @@ using Yulinti.ServiceSuite;
 
 namespace Yulinti.CharacterControllSuite {
     public sealed class RunState : IMoveState {
-        private RunStateConfig _runStateConfig;
-        private StateConfigCommon _stateConfigCommon;
+        private PlayerRunStateConfig _runStateConfig;
+        private PlayerStateConfigCommon _stateConfigCommon;
         private MoveInputProvider _inputProvider;
         private CameraProvider _cameraProvider;
 
         public int LayerIndex { get; } = 0;
 
         public RunState(
-            RunStateConfig runStateConfig,
-            StateConfigCommon stateConfigCommon,
+            PlayerRunStateConfig runStateConfig,
+            PlayerStateConfigCommon stateConfigCommon,
             MoveInputProvider inputProvider,
             CameraProvider cameraProvider
         ) {

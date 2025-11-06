@@ -6,21 +6,21 @@ using Yulinti.ServiceSuite;
 
 namespace Yulinti.CharacterControllSuite {
     public sealed class BaseStatePack : IStatePack {
-        private readonly StateConfigCommon _stateConfigCommon;
+        private readonly PlayerStateConfigCommon _stateConfigCommon;
         private readonly MoveInputProvider _inputProvider;
         private readonly CameraProvider _cameraProvider;
-        private readonly IdleStateConfig _idleStateConfig;
-        private readonly WalkStateConfig _walkStateConfig;
-        private readonly RunStateConfig _runStateConfig;
-        private readonly BaseAnimationConfig _baseAnimationConfig;
+        private readonly PlayerIdleStateConfig _idleStateConfig;
+        private readonly PlayerWalkStateConfig _walkStateConfig;
+        private readonly PlayerRunStateConfig _runStateConfig;
+        private readonly PlayerBaseAnimationConfig _baseAnimationConfig;
         private readonly AnimancerComponent _animancer;
         private readonly int _baseLayerIndex = 0;
 
         public BaseStatePack(
-            StateConfigCommon stateConfigCommon,
+            PlayerStateConfigCommon stateConfigCommon,
             MoveInputProvider inputProvider,
             CameraProvider cameraProvider,
-            BaseStateConfig baseStateConfig,
+            PlayerBaseStateConfig baseStateConfig,
             AnimancerComponent animancer
         ) {
             _stateConfigCommon = stateConfigCommon;

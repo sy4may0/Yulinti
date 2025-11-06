@@ -14,7 +14,7 @@ public class Orchestrator : MonoBehaviour {
 
     private PlayerRuntime _playerRuntime;
     private PlayerRuntimeReadOnly _playerRuntimeRO;
-    private PlayerRuntimeCommands _playerRuntimeWO;
+    private PlayerRuntimeCommands _playerRuntimeCmds;
 
     private void Awake() {
         _frameContext = new FrameContext();
@@ -23,7 +23,7 @@ public class Orchestrator : MonoBehaviour {
 
         _playerRuntime = new PlayerRuntime(_frameContext);
         _playerRuntimeRO = new PlayerRuntimeReadOnly(_playerRuntime);
-        _playerRuntimeWO = new PlayerRuntimeCommands(_playerRuntime);
+        _playerRuntimeCmds = new PlayerRuntimeCommands(_playerRuntime);
 
         _playerController = new PlayerController(
             _playerConfig,
@@ -41,7 +41,7 @@ public class Orchestrator : MonoBehaviour {
         // DeltaTimeを更新
         _frameContext.Tick();
 
-        _playerController.Tick(_playerRuntimeRO, _playerRuntimeWO);
+        _playerController.Tick(_playerRuntimeRO, _playerRuntimeCmds);
     }
 
     private void FixedUpdate() {

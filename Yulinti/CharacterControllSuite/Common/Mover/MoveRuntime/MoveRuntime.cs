@@ -81,9 +81,9 @@ namespace Yulinti.CharacterControllSuite {
         public float CurrentYaw => _moveRuntime.CurrentYaw;
         public bool IsGrounded => _moveRuntime.IsGrounded;
         public float DeltaTime => _moveRuntime.FrameContext.DeltaTime;
-        public float SpeedVelRefHorizontal => _moveRuntime.SpeedVelRefHorizontal;
-        public float SpeedVelRefVertical => _moveRuntime.SpeedVelRefVertical;
-        public float YawVelRef => _moveRuntime.YawVelRef;
+        public ref float SpeedVelRefHorizontal => ref _moveRuntime.SpeedVelRefHorizontal;
+        public ref float SpeedVelRefVertical => ref _moveRuntime.SpeedVelRefVertical;
+        public ref float YawVelRef => ref _moveRuntime.YawVelRef;
     }
 
 }

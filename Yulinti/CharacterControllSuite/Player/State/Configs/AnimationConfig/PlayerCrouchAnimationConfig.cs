@@ -4,7 +4,7 @@ using Yulinti.CharacterControllSuite;
 
 namespace Yulinti.CharacterControllSuite {
     [System.Serializable]
-    public class CrouchAnimationConfig {
+    public class PlayerCrouchAnimationConfig {
         [Header("CrouchAnimation/Crouchアニメーション")]
         [Tooltip("Crouchアニメーションミキサー")]
         [SerializeField] private LinearMixerTransition _crouchAnimationMixer;

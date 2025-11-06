@@ -3,7 +3,7 @@ using Yulinti.CharacterControllSuite;
 
 namespace Yulinti.CharacterControllSuite {
     [System.Serializable]
-    public class CrouchIdleStateConfig {
+    public class PlayerCrouchIdleStateConfig {
         [Header("CrouchIdleState移動制御")]
         [Tooltip("加速速度")]
         [SerializeField] private float _accelerationToTargetSpeed = 10f;

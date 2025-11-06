@@ -7,12 +7,12 @@ using Yulinti.ServiceSuite;
 namespace Yulinti.CharacterControllSuite {
     
     public sealed class CrouchStatePack : IStatePack {
-        private readonly StateConfigCommon _stateConfigCommon;
+        private readonly PlayerStateConfigCommon _stateConfigCommon;
         private readonly MoveInputProvider _inputProvider;
         private readonly CameraProvider _cameraProvider;
-        private readonly CrouchIdleStateConfig _crouchIdleStateConfig;
-        private readonly CrouchWalkStateConfig _crouchWalkStateConfig;
-        private readonly CrouchAnimationConfig _crouchAnimationConfig;
+        private readonly PlayerCrouchIdleStateConfig _crouchIdleStateConfig;
+        private readonly PlayerCrouchWalkStateConfig _crouchWalkStateConfig;
+        private readonly PlayerCrouchAnimationConfig _crouchAnimationConfig;
         private readonly AnimancerComponent _animancer;
         private readonly int _crouchLayerIndex = 1;
 
@@ -26,10 +26,10 @@ namespace Yulinti.CharacterControllSuite {
         };
 
         public CrouchStatePack(
-            StateConfigCommon stateConfigCommon,
+            PlayerStateConfigCommon stateConfigCommon,
             MoveInputProvider inputProvider,
             CameraProvider cameraProvider,
-            CrouchStateConfig crouchStateConfig,
+            PlayerCrouchStateConfig crouchStateConfig,
             AnimancerComponent animancer
         ) {
             _stateConfigCommon = stateConfigCommon;

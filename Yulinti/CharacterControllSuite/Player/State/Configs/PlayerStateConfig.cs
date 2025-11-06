@@ -4,17 +4,17 @@ using Yulinti.CharacterControllSuite;
 
 namespace Yulinti.CharacterControllSuite {
     [System.Serializable]
-    public class StateConfig {
+    public class PlayerStateConfig {
         [Header("StateConfig/State設定")]
-        [SerializeField] private BaseStateConfig _baseStateConfig;
-        [SerializeField] private CrouchStateConfig _crouchStateConfig;
+        [SerializeField] private PlayerBaseStateConfig _baseStateConfig;
+        [SerializeField] private PlayerCrouchStateConfig _crouchStateConfig;
 
-        public BaseStateConfig BaseStateConfig => _baseStateConfig;
-        public CrouchStateConfig CrouchStateConfig => _crouchStateConfig;
+        public PlayerBaseStateConfig BaseStateConfig => _baseStateConfig;
+        public PlayerCrouchStateConfig CrouchStateConfig => _crouchStateConfig;
     }
 
     [System.Serializable]
-    public class AnimationConfigCommon {
+    public class PlayerAnimationConfigCommon {
         [Header("AnimationConfigCommon/アニメーション全体設定")]
         [serializefield] private AnimancerComponent _animancer;
 
@@ -22,7 +22,7 @@ namespace Yulinti.CharacterControllSuite {
     }
 
     [System.Serializable]
-    public class StateConfigCommon {
+    public class PlayerStateConfigCommon {
         [Header("StateConfigCommon/全体設定")]
         [Tooltip("移動入力デッドゾーン（二乗値）")]
         [SerializeField] private float _moveInputDeadZoneSq = 0.001f;

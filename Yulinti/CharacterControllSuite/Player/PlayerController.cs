@@ -6,14 +6,14 @@ namespace Yulinti.CharacterControllSuite {
     public sealed class PlayerController {
         private readonly PlayerConfig _playerConfig;
         private readonly StateMachine _stateMachine;
-        private readonly Mover _mover;
+        private readonly PlayerMover _mover;
 
         private readonly MoveInputProvider _moveInputProvider;
         private readonly CameraProvider _cameraProvider;
 
         private MoveRuntime _moveRuntime;
         private MoveRuntimeReadOnly _moveRuntimeRO;
-        private MoveRuntimeWriteable _moveRuntimeRW;
+        private MoveRuntimeCommands _moveRuntimeCmds;
 
         public PlayerController(
             PlayerConfig playerConfig,
@@ -21,13 +21,18 @@ namespace Yulinti.CharacterControllSuite {
             CameraProvider cameraProvider,
             FrameContext frameContext
         ) {
+            if (playerConfig == null || inputProvider == null || cameraProvider == null) {
+                Debug.LogError("PlayerConfig or InputProvider or CameraProvider is null");
+                return;
+            }
             _playerConfig = playerConfig;
-            _moveInputProvider = moveInputProvider;
+            _moveInputProvider = inputProvider;
             _cameraProvider = cameraProvider;
 
-            BuildStateMachine();
+            _stateMachine = BuildStateMachine();
+            _mover = BuildMover();
+
             BuildMoveRuntime(frameContext);
-            BuildMover();
         }
 
         private void BuildMoveRuntime(FrameContext frameContext) {
@@ -36,10 +41,10 @@ namespace Yulinti.CharacterControllSuite {
                 0f, 0f, 0f, true
             );
             _moveRuntimeRO = new MoveRuntimeReadOnly(_moveRuntime);
-            _moveRuntimeRW = new MoveRuntimeWriteable(_moveRuntime);
+            _moveRuntimeCmds = new MoveRuntimeCommands(_moveRuntime);
         }
 
-        private void BuildStateMachine() {
+        private StateMachine BuildStateMachine() {
             StateMachine stateMachine = new StateMachine();
 
             IStatePack baseStatePack = new BaseStatePack(
@@ -60,13 +65,17 @@ namespace Yulinti.CharacterControllSuite {
 
             baseStatePack.Apply(stateMachine);
             crouchStatePack.Apply(stateMachine);
+
+            return stateMachine;
         }
 
-        private void BuildMover() {
-            _mover = new PlayerMover(
+        private PlayerMover BuildMover() {
+            PlayerMover mover = new PlayerMover(
                 _playerConfig.MoverConfig,
                 _playerConfig.GrounderConfig
             );
+
+            return mover;
         }
 
         public void Initialize() {
@@ -75,19 +84,16 @@ namespace Yulinti.CharacterControllSuite {
 
         public void Tick(
             PlayerRuntimeReadOnly playerRuntimeRO,
-            PlayerRuntimeCommands playerRuntimeWO
+            PlayerRuntimeCommands playerRuntimeCmds
         ) {
-            // DeltaTimeを更新
-            _moveRuntime.DeltaTime = playerRuntimeRO.DeltaTime;
-            
             MovePlan movePlan = _stateMachine.PlanMove(_moveRuntimeRO);
-            _mover.Tick(movePlan, _moveRuntimeRW, _moveRuntimeRO);
+            _mover.Tick(movePlan, _moveRuntimeCmds, _moveRuntimeRO);
             _stateMachine.PostMove(_moveRuntimeRO);
             _stateMachine.TryTransition(_moveRuntimeRO);
 
             // PlayerRuntimeを更新
-            playerRuntimeWO.ApplyMoveRuntime(_moveRuntimeRO);
-            playerRuntimeWO.ApplyStateID(_stateMachine.CurrentStateID);
+            playerRuntimeCmds.ApplyMoveRuntime(_moveRuntimeRO);
+            playerRuntimeCmds.ApplyStateID(_stateMachine.CurrentStateID);
         }
 
         public void LateTick() {
