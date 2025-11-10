@@ -12,6 +12,8 @@ namespace Yulinti {
         [SerializeField] private ServiceRootConfig _serviceConfig;
 
         private ServiceRoot _serviceRoot;
+        private float _deltaTime;
+        private float _fixedDeltaTime;
 
         private void Awake() {
             _serviceRoot = new ServiceRoot(_serviceConfig);
@@ -19,18 +21,20 @@ namespace Yulinti {
         private void Start() {
         }
         private void Update() {
-            float deltaTime = Time.deltaTime;
+            _deltaTime = Time.deltaTime;
 
             // Tick Services
-            _serviceRoot.Tick(deltaTime);
+            _serviceRoot.Tick(_deltaTime);
         }
         private void FixedUpdate() {
-            float fixedDeltaTime = Time.fixedDeltaTime;
+            _fixedDeltaTime = Time.fixedDeltaTime;
 
             // FixedTick Services
-            _serviceRoot.FixedTick(fixedDeltaTime);
+            _serviceRoot.FixedTick(_fixedDeltaTime);
         }
         private void LateUpdate() {
+            // LateTick Services
+            _serviceRoot.LateTick(_deltaTime);
         }
     }
 }

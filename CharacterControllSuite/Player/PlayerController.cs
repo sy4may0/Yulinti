@@ -110,7 +110,6 @@ namespace Yulinti.CharacterControllSuite {
 
         public void LateTick() {
             _fukaSkinConstraint.ApplyAll();
-            _mover.LateTick();
         }
     }
 }

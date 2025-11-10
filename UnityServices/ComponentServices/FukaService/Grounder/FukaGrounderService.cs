@@ -1,4 +1,5 @@
 using UnityEngine;
+using Yulinti.UnityServices.CoreServices;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.UnityServices.Internal.LifeCycle;
 
@@ -6,6 +7,18 @@ namespace Yulinti.UnityServices.ComponentServices {
     public sealed class FukaGrounderService : IServiceLateTickable {
         private readonly IFukaGrounderConfig _config;
         public FukaGrounderService(IFukaGrounderConfig config) {
+            if (config == null) {
+                ErrorHandleService.Fatal("FukaGrounderServiceのconfigがnullです。");
+            }
+            if (
+                config.LeftFoot == null ||
+                config.RightFoot == null ||
+                config.LeftToe == null ||
+                config.RightToe == null ||
+                config.Root == null
+            ) {
+                ErrorHandleService.Fatal("FukaGrounderServiceのconfigが不完全です。");
+            }
             _config = config;
         }
 
