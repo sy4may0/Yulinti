@@ -3,13 +3,15 @@ using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.UnityServices.Internal.LifeCycle;
 
 namespace Yulinti.UnityServices.ComponentServices {
-    public sealed class FukaServiceRoot : IServiceTickable {
+    public sealed class FukaServiceRoot : IServiceTickable, IServiceLateTickable {
         private readonly FukaBoneService _fukaBoneService;
         private readonly FukaCharacterControllerService _fukaCharacterControllerService;
         private readonly FukaAnimationService _fukaAnimationService;
         private readonly FukaHipsSkinnedMeshRendererService _fukaHipsSkinnedMeshRendererService;
         private readonly FukaKneeSkinnedMeshRendererService _fukaRightKneeSkinnedMeshRendererService;
         private readonly FukaKneeSkinnedMeshRendererService _fukaLeftKneeSkinnedMeshRendererService;
+        // RO/RW外部アクセス無し。現状LateTickでのみアクセスする。
+        private readonly FukaGrounderService _fukaGrounderService;
 
         private readonly FukaBoneRO _fukaBoneRO;
         private readonly FukaBoneRW _fukaBoneRW;
@@ -34,7 +36,7 @@ namespace Yulinti.UnityServices.ComponentServices {
             _fukaHipsSkinnedMeshRendererService = new FukaHipsSkinnedMeshRendererService(fukaConfig.FukaCorrectiveShapeConfig.HipsCorrectiveShapeConfig);
             _fukaRightKneeSkinnedMeshRendererService = new FukaKneeSkinnedMeshRendererService(fukaConfig.FukaCorrectiveShapeConfig.RightKneeCorrectiveShapeConfig);
             _fukaLeftKneeSkinnedMeshRendererService = new FukaKneeSkinnedMeshRendererService(fukaConfig.FukaCorrectiveShapeConfig.LeftKneeCorrectiveShapeConfig);
-
+            _fukaGrounderService = new FukaGrounderService(fukaConfig.FukaGrounderConfig);
             _fukaBoneRO = new FukaBoneRO(_fukaBoneService);
             _fukaBoneRW = new FukaBoneRW(_fukaBoneService);
             _fukaCharacterControllerRO = new FukaCharacterControllerRO(_fukaCharacterControllerService);
@@ -47,13 +49,6 @@ namespace Yulinti.UnityServices.ComponentServices {
             _fukaLeftKneeSkinnedMeshRendererRO = new FukaKneeSkinnedMeshRendererRO(_fukaLeftKneeSkinnedMeshRendererService);
             _fukaLeftKneeSkinnedMeshRendererRW = new FukaKneeSkinnedMeshRendererRW(_fukaLeftKneeSkinnedMeshRendererService);
         }
-
-        public FukaBoneService Bone => _fukaBoneService;
-        public FukaCharacterControllerService CharacterController => _fukaCharacterControllerService;
-        public FukaAnimationService Animation => _fukaAnimationService;
-        public FukaHipsSkinnedMeshRendererService HipsSMR => _fukaHipsSkinnedMeshRendererService;
-        public FukaKneeSkinnedMeshRendererService RightKneeSMR => _fukaRightKneeSkinnedMeshRendererService;
-        public FukaKneeSkinnedMeshRendererService LeftKneeSMR => _fukaLeftKneeSkinnedMeshRendererService;
 
         public FukaBoneRO BoneRO => _fukaBoneRO;
         public FukaBoneRW BoneRW => _fukaBoneRW;
@@ -69,6 +64,10 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public void Tick(float deltaTime) {
             _fukaAnimationService.Tick(deltaTime);
+        }
+
+        public void LateTick(float deltaTime) {
+            _fukaGrounderService.LateTick(deltaTime);
         }
     }
 }

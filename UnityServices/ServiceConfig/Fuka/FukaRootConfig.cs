@@ -7,10 +7,12 @@ namespace Yulinti.UnityServices.ServiceConfig {
         [SerializeField] private FukaCharacterControllerConfig _fukaCharacterControllerConfig;
         [SerializeField] private FukaAnimationConfig _fukaAnimationConfig;
         [SerializeField] private FukaCorrectiveShapeConfig _fukaCorrectiveShapeConfig;
+        [SerializeField] private FukaGrounderConfig _fukaGrounderConfig;
 
         public FukaBoneConfig FukaBoneConfig => _fukaBoneConfig;
         public FukaCharacterControllerConfig FukaCharacterControllerConfig => _fukaCharacterControllerConfig;
         public FukaAnimationConfig FukaAnimationConfig => _fukaAnimationConfig;
         public FukaCorrectiveShapeConfig FukaCorrectiveShapeConfig => _fukaCorrectiveShapeConfig;
+        public FukaGrounderConfig FukaGrounderConfig => _fukaGrounderConfig;
     }
 }

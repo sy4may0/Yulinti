@@ -16,7 +16,6 @@ namespace Yulinti.UnityServices.ComponentServices {
             _moveInputRO = new MoveInputRO(_moveInputService);
         }
 
-        public MoveInputService Move => _moveInputService;
         public MoveInputRO MoveRO => _moveInputRO;
     }
 }

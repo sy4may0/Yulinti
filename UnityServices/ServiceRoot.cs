@@ -56,6 +56,10 @@ namespace Yulinti.UnityServices {
         public void FixedTick(float fixedDeltaTime) {
             _frameService.FixedTick(fixedDeltaTime);
         }
+
+        public void LateTick(float deltaTime) {
+            _fukaServiceRoot.LateTick(deltaTime);
+        }
     }
 
 
