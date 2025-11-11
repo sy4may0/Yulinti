@@ -5,8 +5,8 @@ using UVec3 = UnityEngine.Vector3;
 using UVec2 = UnityEngine.Vector2;
 using UQuat = UnityEngine.Quaternion;
 
-namespace Yulinti.UnityServices.TranslateUtils {
-    public static class NumericsTranslate {
+namespace Yulinti.InstrumentaMinisterii {
+    public static class InterpressNumericus {
         public static NVec3 ToNumerics(UVec3 vector) {
             return new NVec3(vector.x, vector.y, vector.z);
         }

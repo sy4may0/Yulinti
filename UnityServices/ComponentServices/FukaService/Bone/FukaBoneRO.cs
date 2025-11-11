@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaNuclei.ModeratorErrorum;
-using Yulinti.UnityServices.TranslateUtils;
+using Yulinti.InstrumentaMinisterii;
 using Yulinti.UnityServices.ServiceContracts;
 
 namespace Yulinti.UnityServices.ComponentServices {
@@ -13,8 +13,8 @@ namespace Yulinti.UnityServices.ComponentServices {
             _fukaBoneService = fukaBoneService;
         }
 
-        public System.Numerics.Vector3 GetBonePosition(BoneID boneID) => NumericsTranslate.ToNumerics(_fukaBoneService.GetBonePosition(boneID));
-        public System.Numerics.Quaternion GetBoneRotation(BoneID boneID) => NumericsTranslate.ToNumerics(_fukaBoneService.GetBoneRotation(boneID));
-        public System.Numerics.Vector3 GetBoneScale(BoneID boneID) => NumericsTranslate.ToNumerics(_fukaBoneService.GetBoneScale(boneID));
+        public System.Numerics.Vector3 GetBonePosition(BoneID boneID) => InterpressNumericus.ToNumerics(_fukaBoneService.GetBonePosition(boneID));
+        public System.Numerics.Quaternion GetBoneRotation(BoneID boneID) => InterpressNumericus.ToNumerics(_fukaBoneService.GetBoneRotation(boneID));
+        public System.Numerics.Vector3 GetBoneScale(BoneID boneID) => InterpressNumericus.ToNumerics(_fukaBoneService.GetBoneScale(boneID));
     }
 }

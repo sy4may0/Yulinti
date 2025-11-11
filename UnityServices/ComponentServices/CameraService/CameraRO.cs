@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaNuclei.ModeratorErrorum;
-using Yulinti.UnityServices.TranslateUtils;
+using Yulinti.InstrumentaMinisterii;
 
 namespace Yulinti.UnityServices.ComponentServices {
     public sealed class CameraRO : ICameraQuery {
@@ -12,8 +12,8 @@ namespace Yulinti.UnityServices.ComponentServices {
             _cameraService = cameraService;
         }
 
-        public System.Numerics.Quaternion YawRotation => NumericsTranslate.ToNumerics(_cameraService.YawRotation);
-        public System.Numerics.Vector3 RightXZ => NumericsTranslate.ToNumerics(_cameraService.RightXZ);
-        public System.Numerics.Vector3 ForwardXZ => NumericsTranslate.ToNumerics(_cameraService.ForwardXZ);
+        public System.Numerics.Quaternion YawRotation => InterpressNumericus.ToNumerics(_cameraService.YawRotation);
+        public System.Numerics.Vector3 RightXZ => InterpressNumericus.ToNumerics(_cameraService.RightXZ);
+        public System.Numerics.Vector3 ForwardXZ => InterpressNumericus.ToNumerics(_cameraService.ForwardXZ);
     }
 }

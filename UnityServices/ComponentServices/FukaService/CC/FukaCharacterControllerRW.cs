@@ -1,6 +1,6 @@
 using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceContracts;
-using Yulinti.UnityServices.TranslateUtils;
+using Yulinti.InstrumentaMinisterii;
 
 namespace Yulinti.UnityServices.ComponentServices {
     public sealed class FukaCharacterControllerRW : IFukaCharacterControllerCommand, IFukaCharacterControllerQuery {
@@ -15,14 +15,14 @@ namespace Yulinti.UnityServices.ComponentServices {
         public float CurrentSpeedHorizontal => _fukaCharacterControllerService.CurrentSpeedHorizontal;
         public float CurrentSpeedVertical => _fukaCharacterControllerService.CurrentSpeedVertical;
         public float CurrentYaw => _fukaCharacterControllerService.CurrentYaw;
-        public System.Numerics.Vector3 CurrentPosition => NumericsTranslate.ToNumerics(_fukaCharacterControllerService.CurrentPosition);
-        public System.Numerics.Quaternion CurrentRotation => NumericsTranslate.ToNumerics(_fukaCharacterControllerService.CurrentRotation);
+        public System.Numerics.Vector3 CurrentPosition => InterpressNumericus.ToNumerics(_fukaCharacterControllerService.CurrentPosition);
+        public System.Numerics.Quaternion CurrentRotation => InterpressNumericus.ToNumerics(_fukaCharacterControllerService.CurrentRotation);
 
         public void ForceSetPosition(System.Numerics.Vector3 position) {
-            _fukaCharacterControllerService.ForceSetPosition(NumericsTranslate.ToUnity(position));
+            _fukaCharacterControllerService.ForceSetPosition(InterpressNumericus.ToUnity(position));
         }
         public void ForceSetRotation(System.Numerics.Quaternion rotation) {
-            _fukaCharacterControllerService.ForceSetRotation(NumericsTranslate.ToUnity(rotation));
+            _fukaCharacterControllerService.ForceSetRotation(InterpressNumericus.ToUnity(rotation));
         }
         public void SmoothMoveHorizontalBySpeed(float targetSpeed, float smoothTime, float deltaTime) {
             _fukaCharacterControllerService.SmoothMoveHorizontalBySpeed(targetSpeed, smoothTime, deltaTime);

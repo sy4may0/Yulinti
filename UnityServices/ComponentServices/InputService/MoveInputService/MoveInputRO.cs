@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaNuclei.ModeratorErrorum;
-using Yulinti.UnityServices.TranslateUtils;
+using Yulinti.InstrumentaMinisterii;
 
 namespace Yulinti.UnityServices.ComponentServices {
     public sealed class MoveInputRO : IMoveInputQuery {
@@ -12,7 +12,7 @@ namespace Yulinti.UnityServices.ComponentServices {
             _moveInputService = moveInputService;
         }
 
-        public System.Numerics.Vector2 Move => NumericsTranslate.ToNumerics(_moveInputService.Move);
+        public System.Numerics.Vector2 Move => InterpressNumericus.ToNumerics(_moveInputService.Move);
         public bool Sprint => _moveInputService.Sprint;
         public bool Crouch => _moveInputService.Crouch;
     }

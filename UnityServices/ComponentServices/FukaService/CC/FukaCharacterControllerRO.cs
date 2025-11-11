@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaNuclei.ModeratorErrorum;
-using Yulinti.UnityServices.TranslateUtils;
+using Yulinti.InstrumentaMinisterii;
 
 namespace Yulinti.UnityServices.ComponentServices {
     public sealed class FukaCharacterControllerRO : IFukaCharacterControllerQuery {
@@ -13,7 +13,7 @@ namespace Yulinti.UnityServices.ComponentServices {
         public float CurrentSpeedHorizontal => _fukaCharacterControllerService.CurrentSpeedHorizontal;
         public float CurrentSpeedVertical => _fukaCharacterControllerService.CurrentSpeedVertical;
         public float CurrentYaw => _fukaCharacterControllerService.CurrentYaw;
-        public System.Numerics.Vector3 CurrentPosition => NumericsTranslate.ToNumerics(_fukaCharacterControllerService.CurrentPosition);
-        public System.Numerics.Quaternion CurrentRotation => NumericsTranslate.ToNumerics(_fukaCharacterControllerService.CurrentRotation);
+        public System.Numerics.Vector3 CurrentPosition => InterpressNumericus.ToNumerics(_fukaCharacterControllerService.CurrentPosition);
+        public System.Numerics.Quaternion CurrentRotation => InterpressNumericus.ToNumerics(_fukaCharacterControllerService.CurrentRotation);
     }
 }
