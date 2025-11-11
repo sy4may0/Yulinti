@@ -1,4 +1,4 @@
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.TranslateUtils;
 
 namespace Yulinti.UnityServices.ComponentServices {
@@ -7,7 +7,7 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public MoveInputRO(MoveInputService moveInputService) {
             if (moveInputService == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(MoveInputRO)のMoveInputServiceがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(MoveInputRO)のMoveInputServiceがnullです。");
             }
             _moveInputService = moveInputService;
         }

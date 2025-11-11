@@ -1,6 +1,6 @@
 using UnityEngine;
 using Yulinti.UnityServices.ServiceConfig;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ComponentServices.FukaService.CC.Internal;
 
 namespace Yulinti.UnityServices.ComponentServices {
@@ -20,7 +20,7 @@ namespace Yulinti.UnityServices.ComponentServices {
         public FukaCharacterControllerService(IFukaCharacterControllerConfig characterControllerConfig) {
             _characterController = characterControllerConfig.CharacterController;
             if (_characterController == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(FukaCharacterControllerService)のCharacterControllerがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(FukaCharacterControllerService)のCharacterControllerがnullです。");
             }
             _moveInstruction = new MoveInstruction();
             _horizontalSpeedVelRef = 0f;

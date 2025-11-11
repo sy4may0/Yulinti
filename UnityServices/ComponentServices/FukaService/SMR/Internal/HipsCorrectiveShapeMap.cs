@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.UnityServices.ServiceContracts;
 
@@ -20,7 +20,7 @@ namespace Yulinti.UnityServices.ComponentServices.FukaService.SMR.Internal {
 
             for (int i = 0; i < (int)FukaHipsCorrectiveShapeID.Count; i++) {
                 if (_hipsCorrectiveShapeIndexes[i] <= 0) {
-                    ErrorHandleService.Fatal($"FukaHipsCorrectiveShapeID {(FukaHipsCorrectiveShapeID)i} が見つかりません。IFukaHipsCorrectiveShapeConfigのブレンドシェイプ名を確認してください。");
+                    ModeratorErrorum.Fatal($"FukaHipsCorrectiveShapeID {(FukaHipsCorrectiveShapeID)i} が見つかりません。IFukaHipsCorrectiveShapeConfigのブレンドシェイプ名を確認してください。");
                 }
             }
         }

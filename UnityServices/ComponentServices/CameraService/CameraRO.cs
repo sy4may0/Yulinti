@@ -1,4 +1,4 @@
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.TranslateUtils;
 
 namespace Yulinti.UnityServices.ComponentServices {
@@ -7,7 +7,7 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public CameraRO(CameraService cameraService) {
             if (cameraService == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(CameraService)のCameraServiceがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(CameraService)のCameraServiceがnullです。");
             }
             _cameraService = cameraService;
         }

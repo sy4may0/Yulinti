@@ -1,4 +1,4 @@
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceConfig;
 
 namespace Yulinti.UnityServices.ComponentServices {
@@ -10,7 +10,7 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public CameraServiceRoot(CameraRootConfig cameraRootConfig) {
             if (cameraRootConfig == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(CameraServiceRoot)のCameraRootConfigがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(CameraServiceRoot)のCameraRootConfigがnullです。");
             }
 
             _mainCameraService = new CameraService(cameraRootConfig.MainCameraConfig);

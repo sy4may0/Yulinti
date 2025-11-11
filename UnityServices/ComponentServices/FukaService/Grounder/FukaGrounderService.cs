@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.UnityServices.Internal.LifeCycle;
 
@@ -8,7 +8,7 @@ namespace Yulinti.UnityServices.ComponentServices {
         private readonly IFukaGrounderConfig _config;
         public FukaGrounderService(IFukaGrounderConfig config) {
             if (config == null) {
-                ErrorHandleService.Fatal("FukaGrounderServiceのconfigがnullです。");
+                ModeratorErrorum.Fatal("FukaGrounderServiceのconfigがnullです。");
             }
             if (
                 config.LeftFoot == null ||
@@ -17,7 +17,7 @@ namespace Yulinti.UnityServices.ComponentServices {
                 config.RightToe == null ||
                 config.Root == null
             ) {
-                ErrorHandleService.Fatal("FukaGrounderServiceのconfigが不完全です。");
+                ModeratorErrorum.Fatal("FukaGrounderServiceのconfigが不完全です。");
             }
             _config = config;
         }

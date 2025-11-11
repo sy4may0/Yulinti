@@ -1,6 +1,6 @@
 using UnityEngine;
 using Yulinti.UnityServices.ServiceConfig;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceContracts;
 using Yulinti.UnityServices.ComponentServices.FukaService.Bone.Internal;
 
@@ -10,7 +10,7 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public FukaBoneService(IFukaBoneConfig boneConfig) {
             if (boneConfig == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(FukaBoneService)のBoneConfigがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(FukaBoneService)のBoneConfigがnullです。");
             }
             _boneMap = new FukaBoneMap(boneConfig);
         }

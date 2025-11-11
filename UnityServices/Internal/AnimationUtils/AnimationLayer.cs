@@ -1,7 +1,7 @@
 using UnityEngine;
 using Animancer;
 using System;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 
 namespace Yulinti.UnityServices.Internal.AnimationUtils {
     public class AnimationLayer : IAnimationLayer {
@@ -21,7 +21,7 @@ namespace Yulinti.UnityServices.Internal.AnimationUtils {
         public AnimationLayer(AnimancerComponent animancer, int layerIndex) {
             _animancerLayer = animancer.Layers[layerIndex];
             if (_animancerLayer == null) {
-                ErrorHandleService.Fatal($"アニメーションレイヤー{layerIndex}が見つかりません。");
+                ModeratorErrorum.Fatal($"アニメーションレイヤー{layerIndex}が見つかりません。");
             }
             _layerIndex = layerIndex;
             _currentAnimationPlan = null;

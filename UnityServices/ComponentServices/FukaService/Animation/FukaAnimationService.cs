@@ -1,6 +1,6 @@
 using System;
 using Yulinti.UnityServices.ServiceConfig;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceContracts;
 using Yulinti.UnityServices.ComponentServices.FukaService.Animation.Internal;
 using Yulinti.UnityServices.Internal.AnimationUtils;
@@ -16,10 +16,10 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public FukaAnimationService(FukaAnimationConfig animationConfig) {
             if (animationConfig == null) {
-                ErrorHandleService.Fatal("FukaAnimationServiceのアニメーション設定がnullです。");
+                ModeratorErrorum.Fatal("FukaAnimationServiceのアニメーション設定がnullです。");
             }
             if (animationConfig.Animancer == null) {
-                ErrorHandleService.Fatal("FukaAnimationServiceのAnimancerがnullです。");
+                ModeratorErrorum.Fatal("FukaAnimationServiceのAnimancerがnullです。");
             }
 
             _baseLayerMap = new FukaBaseLayerMap(animationConfig.BaseLayerConfig);

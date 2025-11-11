@@ -1,4 +1,5 @@
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
+using Yulinti.MinisteriaNuclei.MinisteriumTemporis;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.UnityServices.ComponentServices;
 using Yulinti.UnityServices.Internal.LifeCycle;
@@ -6,30 +7,30 @@ using Yulinti.UnityServices.Internal.LifeCycle;
 
 namespace Yulinti.UnityServices {
     public sealed class ServiceRoot : IServiceTickable, IServiceFixedTickable {
-        private readonly FrameService _frameService;
+        private readonly MinisteriumTemporis _frameService;
         private readonly CameraServiceRoot _cameraServiceRoot;
         private readonly InputServiceRoot _inputServiceRoot;
         private readonly FukaServiceRoot _fukaServiceRoot;
 
-        private readonly FrameRO _frameRO;
-        private readonly FrameRW _frameRW;
+        private readonly OstiumTemporisLegibile _frameRO;
+        private readonly OstiumTemporisMutabile _frameRW;
 
         public ServiceRoot(ServiceRootConfig serviceConfig) {
             if (serviceConfig == null) {
-                ErrorHandleService.Fatal("サービス(Service)のServiceConfigがnullです。");
+                ModeratorErrorum.Fatal("サービス(Service)のServiceConfigがnullです。");
             }
 
-            _frameService = new FrameService();
+            _frameService = new MinisteriumTemporis();
             _cameraServiceRoot = new CameraServiceRoot(serviceConfig.CameraConfig);
             _inputServiceRoot = new InputServiceRoot(serviceConfig.InputConfig);
             _fukaServiceRoot = new FukaServiceRoot(serviceConfig.FukaConfig);
 
-            _frameRO = new FrameRO(_frameService);
-            _frameRW = new FrameRW(_frameService);
+            _frameRO = new OstiumTemporisLegibile(_frameService);
+            _frameRW = new OstiumTemporisMutabile(_frameService);
         }
 
-        public FrameRO FrameRO => _frameRO;
-        public FrameRW FrameRW => _frameRW;
+        public OstiumTemporisLegibile FrameRO => _frameRO;
+        public OstiumTemporisMutabile FrameRW => _frameRW;
 
         public CameraRO MainCameraRO => _cameraServiceRoot.MainCameraRO;
         public CameraRW MainCameraRW => _cameraServiceRoot.MainCameraRW;

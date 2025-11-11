@@ -1,4 +1,4 @@
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.UnityServices.Internal.LifeCycle;
 
@@ -27,7 +27,7 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public FukaServiceRoot(FukaRootConfig fukaConfig) {
             if (fukaConfig == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(FukaService)のFukaConfigがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(FukaService)のFukaConfigがnullです。");
             }
 
             _fukaBoneService = new FukaBoneService(fukaConfig.FukaBoneConfig);

@@ -1,6 +1,6 @@
 using UnityEngine;
 using Yulinti.UnityServices.ServiceConfig;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceContracts;
 using Yulinti.UnityServices.ComponentServices.FukaService.SMR.Internal;
 
@@ -13,7 +13,7 @@ namespace Yulinti.UnityServices.ComponentServices {
             IFukaHipsCorrectiveShapeConfig hipsCorrectiveShapeConfig
         ) {
             if (hipsCorrectiveShapeConfig.Mesh == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(FukaHipsSkinnedMeshRendererService)のHipsCorrectiveShapeConfigのMeshがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(FukaHipsSkinnedMeshRendererService)のHipsCorrectiveShapeConfigのMeshがnullです。");
             }
             _hipsMesh = hipsCorrectiveShapeConfig.Mesh;
             _hipsCorrectiveShapeMap = new FukaHipsCorrectiveShapeMap(hipsCorrectiveShapeConfig);

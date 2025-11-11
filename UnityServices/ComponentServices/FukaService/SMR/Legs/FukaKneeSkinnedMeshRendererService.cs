@@ -1,6 +1,6 @@
 using UnityEngine;
 using Yulinti.UnityServices.ServiceConfig;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceContracts;
 using Yulinti.UnityServices.ComponentServices.FukaService.SMR.Internal;
 
@@ -13,7 +13,7 @@ namespace Yulinti.UnityServices.ComponentServices {
             IFukaKneeCorrectiveShapeConfig kneeCorrectiveShapeConfig
         ) {
             if (kneeCorrectiveShapeConfig.Mesh == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(FukaKneeSkinnedMeshRendererService)のKneeCorrectiveShapeConfigのMeshがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(FukaKneeSkinnedMeshRendererService)のKneeCorrectiveShapeConfigのMeshがnullです。");
             }
             _kneeMesh = kneeCorrectiveShapeConfig.Mesh;
             _kneeCorrectiveShapeMap = new FukaKneeCorrectiveShapeMap(kneeCorrectiveShapeConfig);

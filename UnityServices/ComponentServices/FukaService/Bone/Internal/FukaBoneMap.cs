@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.UnityServices.ServiceContracts;
 
@@ -27,7 +27,7 @@ namespace Yulinti.UnityServices.ComponentServices.FukaService.Bone.Internal {
 
             for (int i = 0; i < length; i++) {
                 if (_bones[i] == null) {
-                    ErrorHandleService.Fatal($"BoneID {(BoneID)i} が見つかりません。IFukaBoneConfigのパス設定を確認してください。");
+                    ModeratorErrorum.Fatal($"BoneID {(BoneID)i} が見つかりません。IFukaBoneConfigのパス設定を確認してください。");
                 }
             }
         }

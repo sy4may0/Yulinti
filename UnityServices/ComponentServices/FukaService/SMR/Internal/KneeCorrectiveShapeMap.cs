@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.UnityServices.ServiceContracts;
 
@@ -16,7 +16,7 @@ namespace Yulinti.UnityServices.ComponentServices.FukaService.SMR.Internal {
 
             for (int i = 0; i < (int)FukaKneeCorrectiveShapeID.Count; i++) {
                 if (_kneeCorrectiveShapeIndexes[i] <= 0) {
-                    ErrorHandleService.Fatal($"FukaKneeCorrectiveShapeID {(FukaKneeCorrectiveShapeID)i} が見つかりません。IFukaKneeCorrectiveShapeConfigのブレンドシェイプ名を確認してください。");
+                    ModeratorErrorum.Fatal($"FukaKneeCorrectiveShapeID {(FukaKneeCorrectiveShapeID)i} が見つかりません。IFukaKneeCorrectiveShapeConfigのブレンドシェイプ名を確認してください。");
                 }
             }
         }

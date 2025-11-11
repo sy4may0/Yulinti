@@ -1,4 +1,4 @@
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceContracts;
 using Yulinti.UnityServices.TranslateUtils;
 
@@ -7,7 +7,7 @@ namespace Yulinti.UnityServices.ComponentServices {
         private readonly FukaCharacterControllerService _fukaCharacterControllerService;
         public FukaCharacterControllerRW(FukaCharacterControllerService fukaCharacterControllerService) {
             if (fukaCharacterControllerService == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(FukaCharacterControllerRW)のFukaCharacterControllerServiceがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(FukaCharacterControllerRW)のFukaCharacterControllerServiceがnullです。");
             }
             _fukaCharacterControllerService = fukaCharacterControllerService;
         }

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.UnityServices.ServiceContracts;
 using Yulinti.UnityServices.ComponentServices.FukaService.Animation.Internal;
@@ -17,7 +17,7 @@ namespace Yulinti.UnityServices.ComponentServices.FukaService.Animation.Internal
 
             for (int i = 1; i < length; i++) {
                 if (_animationPlans[i] == null) {
-                    ErrorHandleService.Fatal($"FukaBaseLayerAnimationID {(FukaBaseLayerAnimationID)i} のアニメーションプランが見つかりません。FukaBaseLayerConfigの設定を確認してください。");
+                    ModeratorErrorum.Fatal($"FukaBaseLayerAnimationID {(FukaBaseLayerAnimationID)i} のアニメーションプランが見つかりません。FukaBaseLayerConfigの設定を確認してください。");
                 }
             }
         }

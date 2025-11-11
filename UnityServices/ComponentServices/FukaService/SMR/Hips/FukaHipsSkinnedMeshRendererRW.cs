@@ -1,4 +1,4 @@
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceContracts;
 
 namespace Yulinti.UnityServices.ComponentServices {
@@ -7,7 +7,7 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public FukaHipsSkinnedMeshRendererRW(FukaHipsSkinnedMeshRendererService fukaHipsSkinnedMeshRendererService) {
             if (fukaHipsSkinnedMeshRendererService == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(FukaHipsSkinnedMeshRendererRW)のFukaHipsSkinnedMeshRendererServiceがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(FukaHipsSkinnedMeshRendererRW)のFukaHipsSkinnedMeshRendererServiceがnullです。");
             }
             _fukaHipsSkinnedMeshRendererService = fukaHipsSkinnedMeshRendererService;
         }

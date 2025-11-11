@@ -1,13 +1,13 @@
 using UnityEngine;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.Internal.LifeCycle;
 
-namespace Yulinti.UnityServices.ComponentServices {
-    public sealed class FrameService : IServiceTickable, IServiceFixedTickable {
+namespace Yulinti.MinisteriaNuclei.MinisteriumTemporis {
+    public sealed class MinisteriumTemporis : IServiceTickable, IServiceFixedTickable {
         public float DeltaTime { get; private set; }
         public float FixedDeltaTime { get; private set; }
 
-        public FrameService() {
+        public MinisteriumTemporis() {
             DeltaTime = 0f;
             FixedDeltaTime = 0f;
         }

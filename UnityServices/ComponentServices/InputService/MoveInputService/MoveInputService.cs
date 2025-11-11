@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yulinti.UnityServices.TranslateUtils;
 using Yulinti.UnityServices.ServiceConfig;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 
 namespace Yulinti.UnityServices.ComponentServices {
     public sealed class MoveInputService {
@@ -9,7 +9,7 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public MoveInputService(IMoveInputConfig moveInputConfig) {
             if (moveInputConfig == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(MoveInputService)のMoveInputConfigがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(MoveInputService)のMoveInputConfigがnullです。");
             }
             _moveInputConfig = moveInputConfig;
         }

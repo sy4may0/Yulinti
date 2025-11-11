@@ -3,7 +3,7 @@
 using UnityEngine;
 using Yulinti.UnityServices;
 using Yulinti.UnityServices.ServiceConfig;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 
 
 namespace Yulinti {

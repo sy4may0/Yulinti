@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceConfig;
 
 namespace Yulinti.UnityServices.ComponentServices {
@@ -8,7 +8,7 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public CameraService(ICameraConfig cameraConfig) {
             if (cameraConfig == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(CameraService)のCameraConfigがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(CameraService)のCameraConfigがnullです。");
             }
             _cameraConfig = cameraConfig;
         }

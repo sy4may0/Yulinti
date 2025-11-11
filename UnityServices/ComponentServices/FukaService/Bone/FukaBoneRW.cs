@@ -1,4 +1,4 @@
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.TranslateUtils;
 using Yulinti.UnityServices.ServiceContracts;
 
@@ -7,7 +7,7 @@ namespace Yulinti.UnityServices.ComponentServices {
         private readonly FukaBoneService _fukaBoneService;
         public FukaBoneRW(FukaBoneService fukaBoneService) {
             if (fukaBoneService == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(FukaBoneRW)のFukaBoneServiceがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(FukaBoneRW)のFukaBoneServiceがnullです。");
             }
             _fukaBoneService = fukaBoneService;
         }

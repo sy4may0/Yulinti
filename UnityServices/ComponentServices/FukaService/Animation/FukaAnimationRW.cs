@@ -1,5 +1,5 @@
 using System;
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceContracts;
 
 namespace Yulinti.UnityServices.ComponentServices {
@@ -7,7 +7,7 @@ namespace Yulinti.UnityServices.ComponentServices {
         private readonly FukaAnimationService _fukaAnimationService;
         public FukaAnimationRW(FukaAnimationService fukaAnimationService) {
             if (fukaAnimationService == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(FukaAnimationRW)のFukaAnimationServiceがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(FukaAnimationRW)のFukaAnimationServiceがnullです。");
             }
             _fukaAnimationService = fukaAnimationService;
         }

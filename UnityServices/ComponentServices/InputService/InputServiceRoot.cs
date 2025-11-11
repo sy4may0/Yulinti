@@ -1,4 +1,4 @@
-using Yulinti.UnityServices.CoreServices;
+using Yulinti.MinisteriaNuclei.ModeratorErrorum;
 using Yulinti.UnityServices.ServiceConfig;
 
 namespace Yulinti.UnityServices.ComponentServices {
@@ -9,7 +9,7 @@ namespace Yulinti.UnityServices.ComponentServices {
 
         public InputServiceRoot(InputConfig inputConfig) {
             if (inputConfig == null) {
-                ErrorHandleService.Fatal("コンポーネントサービス(InputService)のInputConfigがnullです。");
+                ModeratorErrorum.Fatal("コンポーネントサービス(InputService)のInputConfigがnullです。");
             }
 
             _moveInputService = new MoveInputService(inputConfig.MoveInputConfig);
