@@ -2,9 +2,12 @@ using Yulinti.MinisteriaUnity.MinisteriaNuclei;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.Nucleus.Interfacies;
 
+// 消す
+using Yulinti.UnityServices.ComponentServices;
+
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MinisteriumPuellae : IPulsabilis, IPulsabilisFixus, IPulsabilisTardus {
+    public sealed class FasciculusOstiorumPuellae : IPulsabilis, IPulsabilisTardus {
         private readonly FukaBoneService _fukaBoneService;
         private readonly FukaCharacterControllerService _fukaCharacterControllerService;
         private readonly MinisteriumPuellaeAnimationes _miPuellaeAnimationes;

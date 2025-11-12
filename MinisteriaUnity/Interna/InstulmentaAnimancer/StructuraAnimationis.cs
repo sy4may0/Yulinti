@@ -27,7 +27,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
         public bool EstImpeditivus => _estImpeditivus;
     }
 
-    public class StructuraAnimationisVelInjectibile : IStructuraAnimationisVelInjectibile {
+    public class StructuraAnimationisVelInjectibile : IStructuraAnimationis, IVelocitasInjectibile {
         private readonly LinearMixerTransition _animatio;
         private readonly float _tempusEvanescentiae;
         private readonly Easing.Function _lenitio;

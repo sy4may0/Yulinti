@@ -73,9 +73,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         // 内部時間のみ同期し、Animancerの時間は同期しない。
         // Animancer同期は、Play()が実行されたときだけ。
-        private void TemporareLuditores() {
+        public void TemporareLuditores() {
             float tempusFun = _luditorFundamenti.LegoTempusSimultaneum();
-            _luditorCorporisToti.PonoTempusSimultaneum(tempusFundamenti);
+            _luditorCorporisToti.PonoTempusSimultaneum(tempusFun);
         }
 
         public void Pulsus() {

@@ -1,10 +1,7 @@
-using UnityEngine;
-using Animancer;
 using System;
 
-
 namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
-    public interface ILuditorAnimationis : IPulsabilis {
+    public interface ILuditorAnimationis {
         int IndexusLuditoris { get; }
         IStructuraAnimationis AnimatioCurrens { get; }
         void Postulare(
@@ -18,9 +15,8 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
             bool obsignare
         );
         void CogereDesinentiam();
-        void InjectaVelocitatem(float speed);
-        void Pulsus(float deltaTime);
-        float LegoTempusSimultaneum { get; }
+        void InjicereVelocitatem(float vel);
+        float LegoTempusSimultaneum();
         void PonoTempusSimultaneum(float tempus);
         bool EstImpeditivus { get; }
     }

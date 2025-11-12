@@ -2,9 +2,10 @@ using UnityEngine;
 using Animancer;
 using System;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
+using Yulinti.Nucleus.Interfacies;
 
 namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
-    public class LuditorAnimationis : ILuditorAnimationis {
+    public class LuditorAnimationis : IPulsabilis, ILuditorAnimationis {
         private readonly AnimancerLayer _animancerLayer;
         private readonly int _indexusLuditoris;
         private IStructuraAnimationis _animatioCurrens;
@@ -13,7 +14,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
         private bool _estPostulans;
         private bool _estCogens;
         private bool _estDesinens;
-        private bool _estObsignatus;
+        private bool _estObsignatus; 
         private float _tempusSimultaneum;
 
         private readonly Action _fInvocanda;
@@ -32,6 +33,11 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
         public IStructuraAnimationis AnimatioCurrens => _animatioCurrens;
         public bool EstImpeditivus => AnimatioCurrens?.EstImpeditivus ?? false;
 
+        // EstPostulans: 要求中。
+        // EstImpeditivus: 再生Block - 要求はのむが、コールバックを置いてCurrent終了を待つ。
+        // EstObsignatus: 要求Block - 要求を拒否する。コールバック設置後にコールバックをロック。
+        // EstCogens: 強制、Impeditivus/Obsignatusを無視する。
+
         private void ExpedirePetitionem(
             IStructuraAnimationis animatio, 
             Action fInvocanda, 
@@ -42,8 +48,8 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
                 return;
             }
             _estObsignatus = estObsignatus;
-            _animatioCurrens = animatio;
-            _fInvocanda = fInvocanda;
+            _animatioPostulata = animatio;
+            _fInvocandaPostulata = fInvocanda;
             _estPostulans = true;
             _estCogens = estCogens;
         }
@@ -53,7 +59,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
             Action fInvocanda,
             bool estObsignatus=false
         ) {
-            TractarePetitionem(animatio, fInvocanda, false, estObsignatus);
+            ExpedirePetitionem(animatio, fInvocanda, false, estObsignatus);
         }
 
         public void Cogere(
@@ -61,7 +67,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
             Action fInvocanda,
             bool estObsignatus=false
         ) {
-            TractarePetitionem(animatio, fInvocanda, true, estObsignatus);
+            ExpedirePetitionem(animatio, fInvocanda, true, estObsignatus);
         }
 
         public void CogereDesinentiam() {
@@ -75,28 +81,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
         }
 
         public void Pulsus() {
-            if (_estDesinens) {
-                StopLayer();
-                return;
-            }
-            if (_estCogens) {
-                TractarePetitionem();
-                return;
-            }
-
-            if (EstImpeditivus) {
-                AnimancerState currentState = _animancerLayer.CurrentState;
-                if (currentState == null) {
-                    TractarePetitionem();
-                    return;
-                }
-                if (currentState.Events(this, out AnimancerEvent.Sequence events)) {
-                    events.OnEnd = _fInvocanda;
-                }
-                return;
-            }
-
-            TractarePetitionem();
+            AdministrarePetitionem();
         }
 
         public float LegoTempusSimultaneum() {
@@ -123,6 +108,62 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
             }
         }
 
+        private void Temporare(AnimancerState state) {
+            if (_animatioCurrens?.EstSimultaneum ?? false) {
+                state.NormalizedTime = _tempusSimultaneum;
+            }
+        }
+
+        private void AdministrarePetitionem() {
+            // Requestが無ければ何もしない。
+            if (!_estPostulans) {
+                return;
+            }
+
+            // 強制Stop要求
+            if (_estDesinens) {
+                Desinere();
+                return;
+            }
+
+            // 強制Play要求
+            if (_estCogens) {
+                TractarePetitionem();
+                return;
+            }
+
+            // 非強制Play要求かつCurrentがBlocking(Impeditivus)
+            if (EstImpeditivus) {
+                AnimancerState currentState = _animancerLayer.CurrentState;
+                if (currentState == null) {
+                    TractarePetitionem();
+                    return;
+                }
+                if (currentState.Events(this, out AnimancerEvent.Sequence events)) {
+                    events.OnEnd = _fInvocanda;
+                }
+                return;
+            }
+
+            // 非強制PlayかつBlockingでない
+            TractarePetitionem();
+        }
+
+        private void TractarePetitionem() {
+            PurgareInvocandamCurrens();
+            // RequestAnimatioが存在しない場合、停止。
+            if (_animatioPostulata == null) {
+                Desinere();
+                return; 
+            }
+            _animatioCurrens = _animatioPostulata;
+            AnimancerState state = _animancerLayer.Play(_animatioCurrens.Animatio, _animatioCurrens.TempusEvanescentiae);
+            _animancerLayer.FadeGroup.SetEasing(_animatioCurrens.Lenitio);
+            _fInvocandaPostulata?.Invoke();
+            Temporare(state);
+            PurgarePetitionem();
+        }
+
         private void Desinere() {
             PurgareInvocandamCurrens();
             if (_animatioCurrens == null) {
@@ -136,38 +177,8 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
             PurgarePetitionem();
         }
 
-        private void Temporare(AnimancerState state) {
-            if (_animatioCurrens?.EstSimultaneum ?? false) {
-                state.NormalizedTime = _tempusSimultaneum;
-            }
-        }
-
-        private void TractarePetitionem() {
-            PurgareInvocandamCurrens();
-            _animatioCurrens = _animatioPostulata;
-            AnimancerState state = _animancerLayer.Play(_animatioCurrens.Animatio, _animatioCurrens.TempusEvanescentiae);
-            _animancerLayer.FadeGroup.SetEasing(_animatioCurrens.Lenitio);
-            _fInvocandaPostulata?.Invoke();
-            Temporare(state);
-            PurgarePetitionem();
-        }
-
-        private void AdministrarePetitionem() {
-            if (!_estPostulans) {
-                return;
-            }
-            if (_animatioPostulata == null) {
-                Desinere();
-                return; 
-            }
-            TractarePetitionem();
-        }
         private void Invocanda() {
-            if (_estPostulans) {
-                AdministrarePetitionem();
-            } else {
-                Desinere();
-            }
+            AdministrarePetitionem();
         }
     }
 }

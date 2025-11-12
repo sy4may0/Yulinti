@@ -1,3 +1,5 @@
+using Animancer;
+
 namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
     public static class FabricaStructuraeAnimationis {
         public static IStructuraAnimationis Create(
@@ -17,7 +19,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
                     animatio, tempusEvanescentiae, lenitio, 
                     estSimultaneum, estImpeditivus
                 )
-            }
+            };
         }
     }
 }
