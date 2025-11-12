@@ -117,14 +117,14 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
             _estObsignatus = false;
         }
 
-        private void PurgereInvocandamCurrens() {
+        private void PurgareInvocandamCurrens() {
             if (_animancerLayer.CurrentState?.Events(this, out AnimancerEvent.Sequence events) ?? false) {
                 events.OnEnd = null;
             }
         }
 
         private void Desinere() {
-            PurgereInvocandamCurrens();
+            PurgareInvocandamCurrens();
             if (_animatioCurrens == null) {
                 PurgarePetitionem();
                 return;
@@ -143,7 +143,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
         }
 
         private void TractarePetitionem() {
-            PurgereInvocandamCurrens();
+            PurgareInvocandamCurrens();
             _animatioCurrens = _animatioPostulata;
             AnimancerState state = _animancerLayer.Play(_animatioCurrens.Animatio, _animatioCurrens.TempusEvanescentiae);
             _animancerLayer.FadeGroup.SetEasing(_animatioCurrens.Lenitio);
