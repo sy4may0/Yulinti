@@ -152,7 +152,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
             PurgarePetitionem();
         }
 
-        private void HandlePlayRequest() {
+        private void AdministrarePetitionem() {
             if (!_estPostulans) {
                 return;
             }
@@ -164,7 +164,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
         }
         private void Invocanda() {
             if (_estPostulans) {
-                HandlePlayRequest();
+                AdministrarePetitionem();
             } else {
                 Desinere();
             }
