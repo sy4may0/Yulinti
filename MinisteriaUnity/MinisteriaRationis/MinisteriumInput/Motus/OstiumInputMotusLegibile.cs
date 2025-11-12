@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.InstrumentaMinisterii;
+using Yulinti.Nucleus.InstrumentaMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class OstiumInputMotusLegibile : IOstiumInputMotusLegibile {

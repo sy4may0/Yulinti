@@ -1,12 +1,13 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
 using Yulinti.UnityServices.ServiceConfig;
-using Yulinti.UnityServices.Internal.LifeCycle;
+using Yulinti.Nucleus.Interfacies;
 
-namespace Yulinti.UnityServices.ComponentServices {
-    public sealed class FukaServiceRoot : IServiceTickable, IServiceLateTickable {
+
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    public sealed class MinisteriumPuellae : IPulsabilis, IPulsabilisFixus, IPulsabilisTardus {
         private readonly FukaBoneService _fukaBoneService;
         private readonly FukaCharacterControllerService _fukaCharacterControllerService;
-        private readonly FukaAnimationService _fukaAnimationService;
+        private readonly MinisteriumPuellaeAnimationes _miPuellaeAnimationes;
         private readonly FukaHipsSkinnedMeshRendererService _fukaHipsSkinnedMeshRendererService;
         private readonly FukaKneeSkinnedMeshRendererService _fukaRightKneeSkinnedMeshRendererService;
         private readonly FukaKneeSkinnedMeshRendererService _fukaLeftKneeSkinnedMeshRendererService;
@@ -17,7 +18,7 @@ namespace Yulinti.UnityServices.ComponentServices {
         private readonly FukaBoneRW _fukaBoneRW;
         private readonly FukaCharacterControllerRO _fukaCharacterControllerRO;
         private readonly FukaCharacterControllerRW _fukaCharacterControllerRW;
-        private readonly FukaAnimationRW _fukaAnimationRW;
+        private readonly OstiumPuellaeAnimationesMutabile _osPuellaeAnimationesM;
         private readonly FukaHipsSkinnedMeshRendererRO _fukaHipsSkinnedMeshRendererRO;
         private readonly FukaHipsSkinnedMeshRendererRW _fukaHipsSkinnedMeshRendererRW;
         private readonly FukaKneeSkinnedMeshRendererRO _fukaRightKneeSkinnedMeshRendererRO;
@@ -25,14 +26,14 @@ namespace Yulinti.UnityServices.ComponentServices {
         private readonly FukaKneeSkinnedMeshRendererRO _fukaLeftKneeSkinnedMeshRendererRO;
         private readonly FukaKneeSkinnedMeshRendererRW _fukaLeftKneeSkinnedMeshRendererRW;
 
-        public FukaServiceRoot(FukaRootConfig fukaConfig) {
+        public FasciculusOstiorumPuellae(FukaRootConfig fukaConfig) {
             if (fukaConfig == null) {
-                ModeratorErrorum.Fatal("コンポーネントサービス(FukaService)のFukaConfigがnullです。");
+                ModeratorErrorum.Fatal("FasciculusOstiorumPuellaeのPuellaeConfigがnullです。");
             }
 
             _fukaBoneService = new FukaBoneService(fukaConfig.FukaBoneConfig);
             _fukaCharacterControllerService = new FukaCharacterControllerService(fukaConfig.FukaCharacterControllerConfig);
-            _fukaAnimationService = new FukaAnimationService(fukaConfig.FukaAnimationConfig);
+            _miPuellaeAnimationes = new MinisteriumPuellaeAnimationes(fukaConfig.FukaAnimationConfig);
             _fukaHipsSkinnedMeshRendererService = new FukaHipsSkinnedMeshRendererService(fukaConfig.FukaCorrectiveShapeConfig.HipsCorrectiveShapeConfig);
             _fukaRightKneeSkinnedMeshRendererService = new FukaKneeSkinnedMeshRendererService(fukaConfig.FukaCorrectiveShapeConfig.RightKneeCorrectiveShapeConfig);
             _fukaLeftKneeSkinnedMeshRendererService = new FukaKneeSkinnedMeshRendererService(fukaConfig.FukaCorrectiveShapeConfig.LeftKneeCorrectiveShapeConfig);
@@ -41,7 +42,7 @@ namespace Yulinti.UnityServices.ComponentServices {
             _fukaBoneRW = new FukaBoneRW(_fukaBoneService);
             _fukaCharacterControllerRO = new FukaCharacterControllerRO(_fukaCharacterControllerService);
             _fukaCharacterControllerRW = new FukaCharacterControllerRW(_fukaCharacterControllerService);
-            _fukaAnimationRW = new FukaAnimationRW(_fukaAnimationService);
+            _osPuellaeAnimationesM = new OstiumPuellaeAnimationesMutabile(_miPuellaeAnimationes);
             _fukaHipsSkinnedMeshRendererRO = new FukaHipsSkinnedMeshRendererRO(_fukaHipsSkinnedMeshRendererService);
             _fukaHipsSkinnedMeshRendererRW = new FukaHipsSkinnedMeshRendererRW(_fukaHipsSkinnedMeshRendererService);
             _fukaRightKneeSkinnedMeshRendererRO = new FukaKneeSkinnedMeshRendererRO(_fukaRightKneeSkinnedMeshRendererService);
@@ -54,7 +55,7 @@ namespace Yulinti.UnityServices.ComponentServices {
         public FukaBoneRW BoneRW => _fukaBoneRW;
         public FukaCharacterControllerRO CharacterControllerRO => _fukaCharacterControllerRO;
         public FukaCharacterControllerRW CharacterControllerRW => _fukaCharacterControllerRW;
-        public FukaAnimationRW AnimationRW => _fukaAnimationRW;
+        public OstiumPuellaeAnimationesMutabile AnimationesMut => _osPuellaeAnimationesM;
         public FukaHipsSkinnedMeshRendererRO HipsSMRRO => _fukaHipsSkinnedMeshRendererRO;
         public FukaHipsSkinnedMeshRendererRW HipsSMRRW => _fukaHipsSkinnedMeshRendererRW;
         public FukaKneeSkinnedMeshRendererRO RightKneeSMRRO => _fukaRightKneeSkinnedMeshRendererRO;
@@ -62,12 +63,12 @@ namespace Yulinti.UnityServices.ComponentServices {
         public FukaKneeSkinnedMeshRendererRO LeftKneeSMRRO => _fukaLeftKneeSkinnedMeshRendererRO;
         public FukaKneeSkinnedMeshRendererRW LeftKneeSMRRW => _fukaLeftKneeSkinnedMeshRendererRW;
 
-        public void Tick(float deltaTime) {
-            _fukaAnimationService.Tick(deltaTime);
+        public void Pulsus() {
+            _miPuellaeAnimationes.Pulsus();
         }
 
-        public void LateTick(float deltaTime) {
-            _fukaGrounderService.LateTick(deltaTime);
+        public void PulsusTardus() {
+            // Grounder更新
         }
     }
 }

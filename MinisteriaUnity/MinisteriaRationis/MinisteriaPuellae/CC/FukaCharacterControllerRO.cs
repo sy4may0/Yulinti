@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.InstrumentaMinisterii;
+using Yulinti.Nucleus.InstrumentaMinisterii;
 
 namespace Yulinti.UnityServices.ComponentServices {
     public sealed class FukaCharacterControllerRO : IFukaCharacterControllerQuery {

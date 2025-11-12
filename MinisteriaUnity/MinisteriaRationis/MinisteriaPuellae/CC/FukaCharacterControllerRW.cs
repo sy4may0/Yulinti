@@ -1,6 +1,6 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
 using Yulinti.UnityServices.ServiceContracts;
-using Yulinti.InstrumentaMinisterii;
+using Yulinti.Nucleus.InstrumentaMinisterii;
 
 namespace Yulinti.UnityServices.ComponentServices {
     public sealed class FukaCharacterControllerRW : IFukaCharacterControllerCommand, IFukaCharacterControllerQuery {
