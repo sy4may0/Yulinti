@@ -35,17 +35,14 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             float distantia, LayerMask stratum
         ) {
             if (Physics.Raycast(rayOriginis, rayDirectionis, out var hit, distantia, stratum)) {
-                return hit.point.y + _config.Epsilon;
+                return hit.point.y + Mathf.Epsilon;
             }
             return float.NegativeInfinity;
         }
         private float ComputareTerramPositionemY(
             Transform pes, Transform digitusPedis
+            float altitudo, float distantia, LayerMask stratum
         ) {
-            float altitudo = _config.CastHeight;
-            float distantia = _config.CastDistance;
-            float stratum = _config.CastLayer;
-
             if (digitusPedis == null) {
                 Vector3 rayOriginis = pes.position + Vector3.up * altitudo;
                 return LegoTerramPositionemY(rayOriginis, -Vector3.up, altitudo + distantia, stratum);
@@ -58,10 +55,18 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             }
         }
 
-        public float AltitudoTerrae() {
-            float altitudoTerrae = ComputareTerramPositionemY(_pesDexter, _digitusPedisDexter);
+        public float AltitudoTerrae(
+            float rayCastAltitudo, float rayCastDistantia, LayerMask rayCastStratum
+        ) {
+            float altitudoTerrae = ComputareTerramPositionemY(
+                _pesDexter, _digitusPedisDexter,
+                rayCastAltitudo, rayCastDistantia, rayCastStratum
+            );
             if (float.IsNegativeInfinity(altitudoTerrae)) {
-                altitudoTerrae = ComputareTerramPositionemY(_pesSinister, _digitusPedisSinister);
+                altitudoTerrae = ComputareTerramPositionemY(
+                    _pesSinister, _digitusPedisSinister,
+                    rayCastAltitudo, rayCastDistantia, rayCastStratum
+                );
             }
             return altitudoTerrae;
         }
