@@ -42,28 +42,28 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private float ComputareTerramPositionemY(
             Transform pes, Transform digitusPedis
         ) {
-            float altitude = _config.CastHeight;
+            float altitudo = _config.CastHeight;
             float distantia = _config.CastDistance;
             float stratum = _config.CastLayer;
 
             if (digitusPedis == null) {
-                Vector3 rayOriginis = pes.position + Vector3.up * altitude;
-                return LegoTerramPositionemY(rayOriginis, -Vector3.up, altitude + distantia, stratum);
+                Vector3 rayOriginis = pes.position + Vector3.up * altitudo;
+                return LegoTerramPositionemY(rayOriginis, -Vector3.up, altitudo + distantia, stratum);
             } else {
                 float dy = Vector3.Dot(pes.position - digitusPedis.position, Vector3.up);
                 Vector3 rayOriginis = (dy < 0f) 
-                    ? pes.position + Vector3.up * altitude
-                    : digitusPedis.position + Vector3.up * altitude;
-                return LegoTerramPositionemY(rayOriginis, -Vector3.up, altitude + distantia, stratum);
+                    ? pes.position + Vector3.up * altitudo
+                    : digitusPedis.position + Vector3.up * altitudo;
+                return LegoTerramPositionemY(rayOriginis, -Vector3.up, altitudo + distantia, stratum);
             }
         }
 
-        public float AltitudeTerrae() {
-            float altitude = ComputareTerramPositionemY(_pesDexter, _digitusPedisDexter);
-            if (float.IsNegativeInfinity(altitude)) {
-                altitude = ComputareTerramPositionemY(_pesSinister, _digitusPedisSinister);
+        public float AltitudoTerrae() {
+            float altitudoTerrae = ComputareTerramPositionemY(_pesDexter, _digitusPedisDexter);
+            if (float.IsNegativeInfinity(altitudoTerrae)) {
+                altitudoTerrae = ComputareTerramPositionemY(_pesSinister, _digitusPedisSinister);
             }
-            return altitude;
+            return altitudoTerrae;
         }
     }
 }

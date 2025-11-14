@@ -10,6 +10,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeRelationisTerrae = miPuellaeRelationisTerrae;
         }
 
-        public float AltitudeTerrae => _miPuellaeRelationisTerrae.AltitudeTerrae();
+        public float AltitudoTerrae => _miPuellaeRelationisTerrae.AltitudoTerrae();
     }
 }
