@@ -11,9 +11,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly MinisteriumPuellaeOssis _miPuellaeOssis;
         private readonly MiniateriumPuellaeLoci _miPuellaeLoci;
         private readonly MinisteriumPuellaeAnimationes _miPuellaeAnimationes;
-        private readonly FukaHipsSkinnedMeshRendererService _fukaHipsSkinnedMeshRendererService;
-        private readonly FukaKneeSkinnedMeshRendererService _fukaRightKneeSkinnedMeshRendererService;
-        private readonly FukaKneeSkinnedMeshRendererService _fukaLeftKneeSkinnedMeshRendererService;
+        private readonly MinisteriumPuellaeFiguraePelvis _miPuellaeFiguraePelvis;
+        // Left
+        private readonly MinisteriumPuellaeFiguraeGenus _miPuellaeFiguraeGenusSin;
+        // Right
+        private readonly MinisteriumPuellaeFiguraeGenus _miPuellaeFiguraeGenusDex;
+
         // RO/RW外部アクセス無し。現状LateTickでのみアクセスする。
         private readonly FukaGrounderService _fukaGrounderService;
 
@@ -22,12 +25,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly OstiumPuellaeLociLegibile _osPuellaeLociLeg;
         private readonly OstiumPuellaeLociMutabile _osPuellaeLociMut;
         private readonly OstiumPuellaeAnimationesMutabile _osPuellaeAnimationesM;
-        private readonly FukaHipsSkinnedMeshRendererRO _fukaHipsSkinnedMeshRendererRO;
-        private readonly FukaHipsSkinnedMeshRendererRW _fukaHipsSkinnedMeshRendererRW;
-        private readonly FukaKneeSkinnedMeshRendererRO _fukaRightKneeSkinnedMeshRendererRO;
-        private readonly FukaKneeSkinnedMeshRendererRW _fukaRightKneeSkinnedMeshRendererRW;
-        private readonly FukaKneeSkinnedMeshRendererRO _fukaLeftKneeSkinnedMeshRendererRO;
-        private readonly FukaKneeSkinnedMeshRendererRW _fukaLeftKneeSkinnedMeshRendererRW;
+        private readonly OstiumPuellaeFiguraePelvisLegibile _osPuellaeFiguraePelvisLeg;
+        private readonly OstiumPuellaeFiguraePelvisMutabile _osPuellaeFiguraePelvisMut;
+        private readonly OstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusSinLeg;
+        private readonly OstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusSinMut;
+        private readonly OstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusDexLeg;
+        private readonly OstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusDexMut;
 
         public FasciculusOstiorumPuellae(FukaRootConfig fukaConfig) {
             if (fukaConfig == null) {
@@ -37,21 +40,21 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeOssis = new MinisteriumPuellaeOssis(fukaConfig.FukaBoneConfig);
             _miPuellaeLoci = new MiniateriumPuellaeLoci(fukaConfig.FukaCharacterControllerConfig);
             _miPuellaeAnimationes = new MinisteriumPuellaeAnimationes(fukaConfig.FukaAnimationConfig);
-            _fukaHipsSkinnedMeshRendererService = new FukaHipsSkinnedMeshRendererService(fukaConfig.FukaCorrectiveShapeConfig.HipsCorrectiveShapeConfig);
-            _fukaRightKneeSkinnedMeshRendererService = new FukaKneeSkinnedMeshRendererService(fukaConfig.FukaCorrectiveShapeConfig.RightKneeCorrectiveShapeConfig);
-            _fukaLeftKneeSkinnedMeshRendererService = new FukaKneeSkinnedMeshRendererService(fukaConfig.FukaCorrectiveShapeConfig.LeftKneeCorrectiveShapeConfig);
+            _miPuellaeFiguraePelvis = new MinisteriumPuellaeFiguraePelvis(fukaConfig.FukaCorrectiveShapeConfig.HipsCorrectiveShapeConfig);
+            _miPuellaeFiguraeGenusSin = new MinisteriumPuellaeFiguraeGenus(fukaConfig.FukaCorrectiveShapeConfig.RightKneeCorrectiveShapeConfig);
+            _miPuellaeFiguraeGenusDex = new MinisteriumPuellaeFiguraeGenus(fukaConfig.FukaCorrectiveShapeConfig.LeftKneeCorrectiveShapeConfig);
             _fukaGrounderService = new FukaGrounderService(fukaConfig.FukaGrounderConfig);
             _osPuellaeOssisLeg = new OstiumPuellaeOssisLegibile(_miPuellaeOssis);
             _osPuellaeOssisMut = new OstiumPuellaeOssisMutabile(_miPuellaeOssis);
             _osPuellaeLociLeg = new OstiumPuellaeLociLegibile(_miPuellaeLoci);
             _osPuellaeLociMut = new OstiumPuellaeLociMutabile(_miPuellaeLoci);
             _osPuellaeAnimationesM = new OstiumPuellaeAnimationesMutabile(_miPuellaeAnimationes);
-            _fukaHipsSkinnedMeshRendererRO = new FukaHipsSkinnedMeshRendererRO(_fukaHipsSkinnedMeshRendererService);
-            _fukaHipsSkinnedMeshRendererRW = new FukaHipsSkinnedMeshRendererRW(_fukaHipsSkinnedMeshRendererService);
-            _fukaRightKneeSkinnedMeshRendererRO = new FukaKneeSkinnedMeshRendererRO(_fukaRightKneeSkinnedMeshRendererService);
-            _fukaRightKneeSkinnedMeshRendererRW = new FukaKneeSkinnedMeshRendererRW(_fukaRightKneeSkinnedMeshRendererService);
-            _fukaLeftKneeSkinnedMeshRendererRO = new FukaKneeSkinnedMeshRendererRO(_fukaLeftKneeSkinnedMeshRendererService);
-            _fukaLeftKneeSkinnedMeshRendererRW = new FukaKneeSkinnedMeshRendererRW(_fukaLeftKneeSkinnedMeshRendererService);
+            _osPuellaeFiguraePelvisLeg = new OstiumPuellaeFiguraePelvisLegibile(_miPuellaeFiguraePelvis);
+            _osPuellaeFiguraePelvisMut = new OstiumPuellaeFiguraePelvisMutabile(_miPuellaeFiguraePelvis);
+            _osPuellaeFiguraeGenusSinLeg = new OstiumPuellaeFiguraeGenusLegibile(_miPuellaeFiguraeGenusSin);
+            _osPuellaeFiguraeGenusSinMut = new OstiumPuellaeFiguraeGenusMutabile(_miPuellaeFiguraeGenusSin);
+            _osPuellaeFiguraeGenusDexLeg = new OstiumPuellaeFiguraeGenusLegibile(_miPuellaeFiguraeGenusDex);
+            _osPuellaeFiguraeGenusDexMut = new OstiumPuellaeFiguraeGenusMutabile(_miPuellaeFiguraeGenusDex);
         }
 
         public OstiumPuellaeOssisLegibile OssisLeg => _osPuellaeOssisLeg;
@@ -59,12 +62,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public OstiumPuellaeLociLegibile LociLeg => _osPuellaeLociLeg;
         public OstiumPuellaeLociMutabile LociMut => _osPuellaeLociMut;
         public OstiumPuellaeAnimationesMutabile AnimationesMut => _osPuellaeAnimationesM;
-        public FukaHipsSkinnedMeshRendererRO HipsSMRRO => _fukaHipsSkinnedMeshRendererRO;
-        public FukaHipsSkinnedMeshRendererRW HipsSMRRW => _fukaHipsSkinnedMeshRendererRW;
-        public FukaKneeSkinnedMeshRendererRO RightKneeSMRRO => _fukaRightKneeSkinnedMeshRendererRO;
-        public FukaKneeSkinnedMeshRendererRW RightKneeSMRRW => _fukaRightKneeSkinnedMeshRendererRW;
-        public FukaKneeSkinnedMeshRendererRO LeftKneeSMRRO => _fukaLeftKneeSkinnedMeshRendererRO;
-        public FukaKneeSkinnedMeshRendererRW LeftKneeSMRRW => _fukaLeftKneeSkinnedMeshRendererRW;
+        public OstiumPuellaeFiguraePelvisLegibile FiguraePelvisLeg => _osPuellaeFiguraePelvisLeg;
+        public OstiumPuellaeFiguraePelvisMutabile FiguraePelvisMut => _osPuellaeFiguraePelvisMut;
+        public OstiumPuellaeFiguraeGenusLegibile FiguraeGenusSinLeg => _osPuellaeFiguraeGenusSinLeg;
+        public OstiumPuellaeFiguraeGenusMutabile FiguraeGenusSinMut => _osPuellaeFiguraeGenusSinMut;
+        public OstiumPuellaeFiguraeGenusLegibile FiguraeGenusDexLeg => _osPuellaeFiguraeGenusDexLeg;
+        public OstiumPuellaeFiguraeGenusMutabile FiguraeGenusDexMut => _osPuellaeFiguraeGenusDexMut;
 
         public void Pulsus() {
             _miPuellaeAnimationes.Pulsus();
