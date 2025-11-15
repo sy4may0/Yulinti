@@ -1,6 +1,6 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
 using Yulinti.Nucleus.InstrumentaMinisterii;
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class OstiumPuellaeOssisLegibile : IOstiumPuellaeOssisLegibile {
@@ -13,11 +13,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeOssis = miPuellaeOssis;
         }
 
-        public System.Numerics.Vector3 LegoPositionem(BoneID boneID) => 
-            InterpressNumericus.ToNumerics(_miPuellaeOssis.LegoPositionem(boneID));
-        public System.Numerics.Quaternion LegoRotationem(BoneID boneID) =>
-            InterpressNumericus.ToNumerics(_miPuellaeOssis.LegoRotationem(boneID));
-        public System.Numerics.Vector3 LegoScalam(BoneID boneID) =>
-            InterpressNumericus.ToNumerics(_miPuellaeOssis.LegoScalam(boneID));
+        public System.Numerics.Vector3 LegoPositionem(IDPuellaeOssis idOssis) => 
+            InterpressNumericus.ToNumerics(_miPuellaeOssis.LegoPositionem(idOssis));
+        public System.Numerics.Quaternion LegoRotationem(IDPuellaeOssis idOssis) =>
+            InterpressNumericus.ToNumerics(_miPuellaeOssis.LegoRotationem(idOssis));
+        public System.Numerics.Vector3 LegoScalam(IDPuellaeOssis idOssis) =>
+            InterpressNumericus.ToNumerics(_miPuellaeOssis.LegoScalam(idOssis));
     }
 }

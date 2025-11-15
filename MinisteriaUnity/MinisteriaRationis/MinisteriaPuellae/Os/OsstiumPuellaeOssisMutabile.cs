@@ -1,6 +1,6 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
 using Yulinti.Nucleus.InstrumentaMinisterii;
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class OstiumPuellaeOssisMutabile : IOstiumPuellaeOssisMutabile {
@@ -12,14 +12,14 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeOssis = miPuellaeOssis;
         }
 
-        public void PonoPositionem(BoneID boneID, System.Numerics.Vector3 positio) {
-            _miPuellaeOssis.PonoPositionem(boneID, InterpressNumericus.ToUnity(positio));
+        public void PonoPositionem(IDPuellaeOssis idOssis, System.Numerics.Vector3 positio) {
+            _miPuellaeOssis.PonoPositionem(idOssis, InterpressNumericus.ToUnity(positio));
         }
-        public void PonoRotationem(BoneID boneID, System.Numerics.Quaternion rotatio) {
-            _miPuellaeOssis.PonoRotationem(boneID, InterpressNumericus.ToUnity(rotatio));
+        public void PonoRotationem(IDPuellaeOssis idOssis, System.Numerics.Quaternion rotatio) {
+            _miPuellaeOssis.PonoRotationem(idOssis, InterpressNumericus.ToUnity(rotatio));
         }
-        public void PonoScalam(BoneID boneID, System.Numerics.Vector3 scala) {
-            _miPuellaeOssis.PonoScalam(boneID, InterpressNumericus.ToUnity(scala));
+        public void PonoScalam(IDPuellaeOssis idOssis, System.Numerics.Vector3 scala) {
+            _miPuellaeOssis.PonoScalam(idOssis, InterpressNumericus.ToUnity(scala));
         }
     }
 }

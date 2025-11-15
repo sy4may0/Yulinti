@@ -1,8 +1,9 @@
-using UnityEngine
+using UnityEngine;
+using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MinisteriumPuellaeRerationisTerrae {
+    public sealed class MinisteriumPuellaeRelationisTerrae {
         private readonly IFukaGrounderConfig _config;
 
         private readonly Transform _pesDexter;
@@ -12,7 +13,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public MinisteriumPuellaeRelationisTerrae(IFukaGrounderConfig config) {
             if (config == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeRerationisTerraeのFukaGrounderConfigがnullです。");
+                ModeratorErrorum.Fatal("MinisteriumPuellaeRelationisTerraeのFukaGrounderConfigがnullです。");
             }
             if (
                 config.LeftFoot == null ||
@@ -20,7 +21,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 config.LeftToe == null ||
                 config.RightToe == null
             ) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeRerationisTerraeのFukaGrounderConfigが不完全です。");
+                ModeratorErrorum.Fatal("MinisteriumPuellaeRelationisTerraeのFukaGrounderConfigが不完全です。");
             }
             _config = config;
 
@@ -40,7 +41,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             return float.NegativeInfinity;
         }
         private float ComputareTerramPositionemY(
-            Transform pes, Transform digitusPedis
+            Transform pes, Transform digitusPedis,
             float altitudo, float distantia, LayerMask stratum
         ) {
             if (digitusPedis == null) {

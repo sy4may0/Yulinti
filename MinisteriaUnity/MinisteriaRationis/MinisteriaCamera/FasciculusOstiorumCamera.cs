@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceConfig;
+using Yulinti.ConfiguratioMinisterii;
 
 // ラテン語note
 // Main => Camera Princeps
@@ -16,12 +16,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly OstiumCameraLegibile _osCameraPriLeg;
         private readonly OstiumCameraMutabile _osCameraPriMut;
 
-        public FasciculusOstiorumCamera(CameraRootConfig cameraRootConfig) {
-            if (cameraRootConfig == null) {
-                ModeratorErrorum.Fatal("FasciculusOstiorumCameraのCameraRootConfigがnullです。");
+        public FasciculusOstiorumCamera(FasciculusConfigurationumCamera configurationes) {
+            if (configurationes == null) {
+                ModeratorErrorum.Fatal("FasciculusOstiorumCameraのConfigurationesがnullです。");
             }
 
-            _miCameraPri = new MinisteriumCamera(cameraRootConfig.MainCameraConfig);
+            _miCameraPri = new MinisteriumCamera(configurationes.ConfiguratioCameraPrincips);
             _osCameraPriLeg = new OstiumCameraLegibile(_miCameraPri);
             _osCameraPriMut = new OstiumCameraMutabile(_miCameraPri);
         }

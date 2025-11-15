@@ -1,8 +1,8 @@
 using UnityEngine;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceContracts;
-using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Figura.Interna
+using Yulinti.ContractusMinisterii.Puellae;
+using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Figura.Interna;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class MinisteriumPuellaeFiguraePelvis {
@@ -19,13 +19,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _tabula = new TabulaFiguraePelvis(hipsCorrectiveShapeConfig);
         }
 
-        public float LegoPondus(FukaHipsCorrectiveShapeID hipsCorrectiveShapeID) {
-            int index = _tabula.Lego(hipsCorrectiveShapeID);
+        public float LegoPondus(IDPuellaeFiguraePelvis idFiguraePelvis) {
+            int index = _tabula.Lego(idFiguraePelvis);
             return _hipsMesh.GetBlendShapeWeight(index);
         }
 
-        public void PonoPondus(FukaHipsCorrectiveShapeID hipsCorrectiveShapeID, float pondus) {
-            int index = _tabula.Lego(hipsCorrectiveShapeID);
+        public void PonoPondus(IDPuellaeFiguraePelvis idFiguraePelvis, float pondus) {
+            int index = _tabula.Lego(idFiguraePelvis);
             _hipsMesh.SetBlendShapeWeight(index, pondus);
         }
     }

@@ -1,9 +1,9 @@
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public interface IOstiumPuellaeOssisLegibile {
-        System.Numerics.Vector3 LegoPositionem(BoneID boneID);
-        System.Numerics.Quaternion LegoRotationem(BoneID boneID);
-        System.Numerics.Vector3 LegoScalam(BoneID boneID);
+        System.Numerics.Vector3 LegoPositionem(IDPuellaeOssis idOssis);
+        System.Numerics.Quaternion LegoRotationem(IDPuellaeOssis idOssis);
+        System.Numerics.Vector3 LegoScalam(IDPuellaeOssis idOssis);
     }
 }

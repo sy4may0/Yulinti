@@ -1,5 +1,5 @@
-namespace Yulinti.UnityServices.ServiceContracts {
-    public enum BoneID {
+namespace Yulinti.ContractusMinisterii.Puellae {
+    public enum IDPuellaeOssis {
         Root,
         Hips,
         RightUpperLeg,

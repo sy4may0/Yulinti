@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class OstiumPuellaeFiguraePelvisMutabile : IOstiumPuellaeFiguraePelvisMutabile {
@@ -11,8 +11,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeFiguraePel = miPuellaeFiguraePel;
         }
 
-        public void PonoPondus(FukaHipsCorrectiveShapeID hipsCorrectiveShapeID, float pondus) {
-            _miPuellaeFiguraePel.PonoPondus(hipsCorrectiveShapeID, pondus);
+        public void PonoPondus(IDPuellaeFiguraePelvis idFiguraePelvis, float pondus) {
+            _miPuellaeFiguraePel.PonoPondus(idFiguraePelvis, pondus);
         }
     }
 }

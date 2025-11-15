@@ -1,6 +1,6 @@
 using System;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class OstiumPuellaeAnimationesMutabile : IOstiumPuellaeAnimationesMutabile {
@@ -12,17 +12,17 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeAnimationes = miPuellaeAnimationes;
         }
 
-        public void PostulareFundamenti(FukaBaseLayerAnimationID baseLayerAnimationID, Action fInvocanda, bool estObsignatus = false) {
-            _miPuellaeAnimationes.PostulareFundamenti(baseLayerAnimationID, fInvocanda, estObsignatus);
+        public void PostulareFundamenti(IDPuellaeAnimationisBasis idBasis, Action fInvocanda, bool estObsignatus = false) {
+            _miPuellaeAnimationes.PostulareFundamenti(idBasis, fInvocanda, estObsignatus);
         }
-        public void CogereFundamenti(FukaBaseLayerAnimationID baseLayerAnimationID, Action fInvocanda, bool estObsignatus = false) {
-            _miPuellaeAnimationes.CogereFundamenti(baseLayerAnimationID, fInvocanda, estObsignatus);
+        public void CogereFundamenti(IDPuellaeAnimationisBasis idBasis, Action fInvocanda, bool estObsignatus = false) {
+            _miPuellaeAnimationes.CogereFundamenti(idBasis, fInvocanda, estObsignatus);
         }
-        public void PostulareCorporisToti(FukaActionLayerAnimationID actionLayerAnimationID, Action fInvocanda, bool estObsignatus = false) {
-            _miPuellaeAnimationes.PostulareCorporisToti(actionLayerAnimationID, fInvocanda, estObsignatus);
+        public void PostulareCorporisToti(IDPuellaeAnimationisActionis idActionis, Action fInvocanda, bool estObsignatus = false) {
+            _miPuellaeAnimationes.PostulareCorporisToti(idActionis, fInvocanda, estObsignatus);
         }
-        public void CogereCorporisToti(FukaActionLayerAnimationID actionLayerAnimationID, Action fInvocanda, bool estObsignatus = false) {
-            _miPuellaeAnimationes.CogereCorporisToti(actionLayerAnimationID, fInvocanda, estObsignatus);
+        public void CogereCorporisToti(IDPuellaeAnimationisActionis idActionis, Action fInvocanda, bool estObsignatus = false) {
+            _miPuellaeAnimationes.CogereCorporisToti(idActionis, fInvocanda, estObsignatus);
         }
         public void CogereDesinentiamFundamenti() {
             _miPuellaeAnimationes.CogereDesinentiamFundamenti();

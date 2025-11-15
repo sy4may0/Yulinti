@@ -1,10 +1,10 @@
 using UnityEngine;
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Terrae;
 
 namespace Yulinti.Nucleus.InstrumentaMinisterii {
     public static class InterpresStratum {
-        public static LayerMask ToStratum(LayerID layerID) {
-            return 1 << (int)layerID;
+        public static LayerMask ToStratum(IDStrati idStrati) {
+            return 1 << (int)idStrati;
         }
     }
 }

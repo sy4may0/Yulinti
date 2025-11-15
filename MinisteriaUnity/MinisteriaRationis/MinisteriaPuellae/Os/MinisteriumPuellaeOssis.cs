@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Puellae;
 using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Os.Interna;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
@@ -15,12 +15,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _tabulaOssium = new TabulaOssium(boneConfig);
         }
 
-        public Vector3 LegoPositionem(BoneID boneID) => _tabulaOssium.Lego(boneID).position;
-        public Quaternion LegoRotationem(BoneID boneID) => _tabulaOssium.Lego(boneID).rotation;
-        public Vector3 LegoScalam(BoneID boneID) => _tabulaOssium.Lego(boneID).localScale;
+        public Vector3 LegoPositionem(IDPuellaeOssis idOssis) => _tabulaOssium.Lego(idOssis).position;
+        public Quaternion LegoRotationem(IDPuellaeOssis idOssis) => _tabulaOssium.Lego(idOssis).rotation;
+        public Vector3 LegoScalam(IDPuellaeOssis idOssis) => _tabulaOssium.Lego(idOssis).localScale;
 
-        public void PonoPositionem(BoneID boneID, Vector3 positio) => _tabulaOssium.PonoPositionem(boneID, positio);
-        public void PonoRotationem(BoneID boneID, Quaternion rotatio) => _tabulaOssium.PonoRotationem(boneID, rotatio);
-        public void PonoScalam(BoneID boneID, Vector3 scala) => _tabulaOssium.PonoScalam(boneID, scala);
+        public void PonoPositionem(IDPuellaeOssis idOssis, Vector3 positio) => _tabulaOssium.PonoPositionem(idOssis, positio);
+        public void PonoRotationem(IDPuellaeOssis idOssis, Quaternion rotatio) => _tabulaOssium.PonoRotationem(idOssis, rotatio);
+        public void PonoScalam(IDPuellaeOssis idOssis, Vector3 scala) => _tabulaOssium.PonoScalam(idOssis, scala);
     }
 }

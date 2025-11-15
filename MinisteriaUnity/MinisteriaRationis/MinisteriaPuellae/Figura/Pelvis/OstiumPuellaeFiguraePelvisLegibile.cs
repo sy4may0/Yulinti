@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class OstiumPuellaeFiguraePelvisLegibile : IOstiumPuellaeFiguraePelvisLegibile {
@@ -10,8 +10,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             }
             _miPuellaeFiguraePel = miPuellaeFiguraePel;
         }
-        public float LegoPondus(FukaHipsCorrectiveShapeID hipsCorrectiveShapeID) {
-            return _miPuellaeFiguraePel.LegoPondus(hipsCorrectiveShapeID);
+        public float LegoPondus(IDPuellaeFiguraePelvis idFiguraePelvis) {
+            return _miPuellaeFiguraePel.LegoPondus(idFiguraePelvis);
         }
     }
 }

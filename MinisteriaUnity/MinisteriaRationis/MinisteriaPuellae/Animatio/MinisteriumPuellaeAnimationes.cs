@@ -1,7 +1,7 @@
 using System;
 using Yulinti.UnityServices.ServiceConfig;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Puellae;
 using Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer;
 using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Animatio.Interna;
 using Yulinti.Nucleus.Interfacies;
@@ -30,31 +30,31 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         public void PostulareFundamenti(
-            FukaBaseLayerAnimationID baseLayerAnimationID, 
+            IDPuellaeAnimationisBasis idBasis, 
             Action fInvocanda, bool estObsignatus = false
         ) {
-            _luditorFundamenti.Postulare(_tabulaFundamenti.Lego(baseLayerAnimationID), fInvocanda, estObsignatus);
+            _luditorFundamenti.Postulare(_tabulaFundamenti.Lego(idBasis), fInvocanda, estObsignatus);
         }
 
         public void CogereFundamenti(
-            FukaBaseLayerAnimationID baseLayerAnimationID, 
+            IDPuellaeAnimationisBasis idBasis, 
             Action fInvocanda, bool estObsignatus = false
         ) {
-            _luditorFundamenti.Cogere(_tabulaFundamenti.Lego(baseLayerAnimationID), fInvocanda, estObsignatus);
+            _luditorFundamenti.Cogere(_tabulaFundamenti.Lego(idBasis), fInvocanda, estObsignatus);
         }
 
         public void PostulareCorporisToti(
-            FukaActionLayerAnimationID actionLayerAnimationID, 
+            IDPuellaeAnimationisActionis idActionis, 
             Action fInvocanda, bool estObsignatus = false
         ) {
-            _luditorCorporisToti.Postulare(_tabulaCorporisToti.Lego(actionLayerAnimationID), fInvocanda, estObsignatus);
+            _luditorCorporisToti.Postulare(_tabulaCorporisToti.Lego(idActionis), fInvocanda, estObsignatus);
         }
 
         public void CogereCorporisToti(
-            FukaActionLayerAnimationID actionLayerAnimationID, 
+            IDPuellaeAnimationisActionis idActionis, 
             Action fInvocanda, bool estObsignatus = false
         ) {
-            _luditorCorporisToti.Cogere(_tabulaCorporisToti.Lego(actionLayerAnimationID), fInvocanda, estObsignatus);
+            _luditorCorporisToti.Cogere(_tabulaCorporisToti.Lego(idActionis), fInvocanda, estObsignatus);
         }
 
         public void CogereDesinentiamFundamenti() {

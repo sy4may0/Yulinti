@@ -1,8 +1,8 @@
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public interface IOstiumPuellaeFiguraeGenusMutabile {
-        void PonoPondus(FukaKneeCorrectiveShapeID kneeCorrectiveShapeID, float pondus);
+        void PonoPondus(IDPuellaeFiguraeGenus idFiguraeGenus, float pondus);
     }
 }
 

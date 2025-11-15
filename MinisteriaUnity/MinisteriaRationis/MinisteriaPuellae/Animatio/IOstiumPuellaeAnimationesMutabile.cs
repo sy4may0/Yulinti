@@ -1,12 +1,12 @@
 using System;
-using Yulinti.UnityServices.ServiceContracts;
+using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public interface IOstiumPuellaeAnimationesMutabile {
-        void PostulareFundamenti(FukaBaseLayerAnimationID baseLayerAnimationID, Action fInvocanda, bool estObsignatus = false);
-        void CogereFundamenti(FukaBaseLayerAnimationID baseLayerAnimationID, Action fInvocanda, bool estObsignatus = false);
-        void PostulareCorporisToti(FukaActionLayerAnimationID actionLayerAnimationID, Action fInvocanda, bool estObsignatus = false);
-        void CogereCorporisToti(FukaActionLayerAnimationID actionLayerAnimationID, Action fInvocanda, bool estObsignatus = false);
+        void PostulareFundamenti(IDPuellaeAnimationisBasis idBasis, Action fInvocanda, bool estObsignatus = false);
+        void CogereFundamenti(IDPuellaeAnimationisBasis idBasis, Action fInvocanda, bool estObsignatus = false);
+        void PostulareCorporisToti(IDPuellaeAnimationisActionis idActionis, Action fInvocanda, bool estObsignatus = false);
+        void CogereCorporisToti(IDPuellaeAnimationisActionis idActionis, Action fInvocanda, bool estObsignatus = false);
         void CogereDesinentiamFundamenti();
         void CogereDesinentiamCorporisToti();
         void TemporareLuditores();

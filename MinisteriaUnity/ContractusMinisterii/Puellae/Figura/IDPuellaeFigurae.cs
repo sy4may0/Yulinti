@@ -1,5 +1,5 @@
-namespace Yulinti.UnityServices.ServiceContracts {
-    public enum FukaHipsCorrectiveShapeID {
+namespace Yulinti.ContractusMinisterii.Puellae {
+    public enum IDPuellaeFiguraePelvis {
         csLHipX90,
         csLHipX150,
         csLHipY90,
@@ -9,7 +9,7 @@ namespace Yulinti.UnityServices.ServiceContracts {
         csAnusX150,
         Count
     }
-    public enum FukaKneeCorrectiveShapeID {
+    public enum IDPuellaeFiguraeGenus {
         csknee90,
         csknee150,
         csknee120Offset,
