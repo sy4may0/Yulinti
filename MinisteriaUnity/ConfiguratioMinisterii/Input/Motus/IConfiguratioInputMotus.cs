@@ -1,7 +1,7 @@
 using UnityEngine.InputSystem;
 
-namespace Yulinti.UnityServices.ServiceConfig {
-    public interface IMoveInputConfig {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
+    public interface IConfiguratioInputMotus {
         InputActionReference MoveInput { get; }
         InputActionReference SprintInput { get; }
         InputActionReference CrouchInput { get; }

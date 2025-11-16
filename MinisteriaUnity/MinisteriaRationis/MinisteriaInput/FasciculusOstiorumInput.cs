@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceConfig;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class FasciculusOstiorumInput {
@@ -7,12 +7,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         private readonly OstiumInputMotusLegibile _osInputMotusLeg;
 
-        public FasciculusOstiorumInput(InputConfig inputConfig) {
-            if (inputConfig == null) {
-                ModeratorErrorum.Fatal("FasciculusOstiorumInputのInputConfigがnullです。");
+        public FasciculusOstiorumInput(FasciculusConfigurationumInput configurationum) {
+            if (configurationum == null) {
+                ModeratorErrorum.Fatal("FasciculusOstiorumInputのConfigurationumInputがnullです。");
             }
 
-            _miInputMotus = new MinisteriumInputMotus(inputConfig.MoveInputConfig);
+            _miInputMotus = new MinisteriumInputMotus(configurationum.Motus);
             _osInputMotusLeg = new OstiumInputMotusLegibile(_miInputMotus);
         }
 

@@ -1,18 +1,19 @@
 using UnityEngine;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.UnityServices.ServiceConfig {
     [System.Serializable]
     public sealed class FukaRootConfig {
-        [SerializeField] private FukaBoneConfig _fukaBoneConfig;
-        [SerializeField] private FukaCharacterControllerConfig _fukaCharacterControllerConfig;
+        [SerializeField] private ConfiguratioPuellaeOssis _configuratioPuellaeOssis;
+        [SerializeField] private ConfiguratioPuellaeLoci _configuratioPuellaeLoci;
         [SerializeField] private FukaAnimationConfig _fukaAnimationConfig;
-        [SerializeField] private FukaCorrectiveShapeConfig _fukaCorrectiveShapeConfig;
-        [SerializeField] private FukaGrounderConfig _fukaGrounderConfig;
+        [SerializeField] private FasciculusConfigurationumPuellaeFigurae _fasciculusConfigurationumPuellaeFigurae;
+        [SerializeField] private ConfiguratioPuellaeRelationisTerrae _configuratioPuellaeRelationisTerrae;
 
-        public FukaBoneConfig FukaBoneConfig => _fukaBoneConfig;
-        public FukaCharacterControllerConfig FukaCharacterControllerConfig => _fukaCharacterControllerConfig;
+        public ConfiguratioPuellaeOssis Ossis => _configuratioPuellaeOssis;
+        public ConfiguratioPuellaeLoci Locus => _configuratioPuellaeLoci;
         public FukaAnimationConfig FukaAnimationConfig => _fukaAnimationConfig;
-        public FukaCorrectiveShapeConfig FukaCorrectiveShapeConfig => _fukaCorrectiveShapeConfig;
-        public FukaGrounderConfig FukaGrounderConfig => _fukaGrounderConfig;
+        public FasciculusConfigurationumPuellaeFigurae Figura => _fasciculusConfigurationumPuellaeFigurae;
+        public ConfiguratioPuellaeRelationisTerrae RelatioTerrae => _configuratioPuellaeRelationisTerrae;
     }
 }

@@ -1,11 +1,11 @@
 using UnityEngine;
 
-namespace Yulinti.UnityServices.ServiceConfig {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
-    public sealed class FukaLeftKneeCorrectiveShapeConfig : IFukaKneeCorrectiveShapeConfig {
-        [Header("FukaLeftKneeCorrectiveShapeConfig/メッシュ")]
+    public sealed class ConfiguratioPuellaeFiguraeGenusSin : IConfiguratioPuellaeFiguraeGenus {
+        [Header("ConfiguratioPuellaeFiguraeGenusSin/メッシュ")]
         [SerializeField] private SkinnedMeshRenderer _mesh;
-        [Header("FukaLeftKneeCorrectiveShapeConfig/ブレンドシェイプ名")]
+        [Header("ConfiguratioPuellaeFiguraeGenusSin/ブレンドシェイプ名")]
         [SerializeField] private string _x90BlendShapeName = "fuka.act.cs.kneefix90.l";
         [SerializeField] private string _x150BlendShapeName = "fuka.act.cs.kneefix160.l";
         [SerializeField] private string _x120OffsetBlendShapeName = "fuka.act.cs.kneefx120sub.l";

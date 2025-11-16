@@ -1,29 +1,29 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceConfig;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Os.Interna {
     public sealed class TabulaOssium {
         private readonly Transform[] _ossa;
 
-        public TabulaOssium(IFukaBoneConfig boneConfig) {
+        public TabulaOssium(IConfiguratioPuellaeOssis config) {
             int longitudo = (int)IDPuellaeOssis.Count;
             _ossa = new Transform[longitudo];
-            Transform rigRoot = boneConfig.RigRoot;
+            Transform rigRoot = config.RigRoot;
 
-            _ossa[(int)IDPuellaeOssis.Root] = rigRoot.Find(boneConfig.RootPath);
-            _ossa[(int)IDPuellaeOssis.Hips] = rigRoot.Find(boneConfig.HipsPath);
-            _ossa[(int)IDPuellaeOssis.RightUpperLeg] = rigRoot.Find(boneConfig.RightUpperLegPath);
-            _ossa[(int)IDPuellaeOssis.RightLowerLeg] = rigRoot.Find(boneConfig.RightLowerLegPath);
-            _ossa[(int)IDPuellaeOssis.RightFoot] = rigRoot.Find(boneConfig.RightFootPath);
-            _ossa[(int)IDPuellaeOssis.LeftUpperLeg] = rigRoot.Find(boneConfig.LeftUpperLegPath);
-            _ossa[(int)IDPuellaeOssis.LeftLowerLeg] = rigRoot.Find(boneConfig.LeftLowerLegPath);
-            _ossa[(int)IDPuellaeOssis.LeftFoot] = rigRoot.Find(boneConfig.LeftFootPath);
-            _ossa[(int)IDPuellaeOssis.RightX150pin] = rigRoot.Find(boneConfig.RightX150pinPath);
-            _ossa[(int)IDPuellaeOssis.RightY90pin] = rigRoot.Find(boneConfig.RightY90pinPath);
-            _ossa[(int)IDPuellaeOssis.LeftX150pin] = rigRoot.Find(boneConfig.LeftX150pinPath);
-            _ossa[(int)IDPuellaeOssis.LeftY90pin] = rigRoot.Find(boneConfig.LeftY90pinPath);
+            _ossa[(int)IDPuellaeOssis.Root] = rigRoot.Find(config.RootPath);
+            _ossa[(int)IDPuellaeOssis.Hips] = rigRoot.Find(config.HipsPath);
+            _ossa[(int)IDPuellaeOssis.RightUpperLeg] = rigRoot.Find(config.RightUpperLegPath);
+            _ossa[(int)IDPuellaeOssis.RightLowerLeg] = rigRoot.Find(config.RightLowerLegPath);
+            _ossa[(int)IDPuellaeOssis.RightFoot] = rigRoot.Find(config.RightFootPath);
+            _ossa[(int)IDPuellaeOssis.LeftUpperLeg] = rigRoot.Find(config.LeftUpperLegPath);
+            _ossa[(int)IDPuellaeOssis.LeftLowerLeg] = rigRoot.Find(config.LeftLowerLegPath);
+            _ossa[(int)IDPuellaeOssis.LeftFoot] = rigRoot.Find(config.LeftFootPath);
+            _ossa[(int)IDPuellaeOssis.RightX150pin] = rigRoot.Find(config.RightX150pinPath);
+            _ossa[(int)IDPuellaeOssis.RightY90pin] = rigRoot.Find(config.RightY90pinPath);
+            _ossa[(int)IDPuellaeOssis.LeftX150pin] = rigRoot.Find(config.LeftX150pinPath);
+            _ossa[(int)IDPuellaeOssis.LeftY90pin] = rigRoot.Find(config.LeftY90pinPath);
 
             for (int i = 0; i < longitudo; i++) {
                 if (_ossa[i] == null) {

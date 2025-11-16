@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.ConfiguratioMinisterii;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 // ラテン語note
 // Main => Camera Princeps

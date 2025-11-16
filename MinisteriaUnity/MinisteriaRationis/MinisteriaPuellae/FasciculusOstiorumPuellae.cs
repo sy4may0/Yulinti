@@ -34,13 +34,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 ModeratorErrorum.Fatal("FasciculusOstiorumPuellaeのPuellaeConfigがnullです。");
             }
 
-            _miPuellaeOssis = new MinisteriumPuellaeOssis(fukaConfig.FukaBoneConfig);
-            _miPuellaeLoci = new MiniateriumPuellaeLoci(fukaConfig.FukaCharacterControllerConfig);
+            _miPuellaeOssis = new MinisteriumPuellaeOssis(fukaConfig.Ossis);
+            _miPuellaeLoci = new MiniateriumPuellaeLoci(fukaConfig.Locus);
             _miPuellaeAnimationes = new MinisteriumPuellaeAnimationes(fukaConfig.FukaAnimationConfig);
-            _miPuellaeFiguraePelvis = new MinisteriumPuellaeFiguraePelvis(fukaConfig.FukaCorrectiveShapeConfig.HipsCorrectiveShapeConfig);
-            _miPuellaeFiguraeGenusSin = new MinisteriumPuellaeFiguraeGenus(fukaConfig.FukaCorrectiveShapeConfig.RightKneeCorrectiveShapeConfig);
-            _miPuellaeFiguraeGenusDex = new MinisteriumPuellaeFiguraeGenus(fukaConfig.FukaCorrectiveShapeConfig.LeftKneeCorrectiveShapeConfig);
-            _miPuellaeRelationisTerrae = new MinisteriumPuellaeRelationisTerrae(fukaConfig.FukaGrounderConfig);
+            _miPuellaeFiguraePelvis = new MinisteriumPuellaeFiguraePelvis(fukaConfig.Figura.Pelvis);
+            _miPuellaeFiguraeGenusSin = new MinisteriumPuellaeFiguraeGenus(fukaConfig.Figura.GenusSin);
+            _miPuellaeFiguraeGenusDex = new MinisteriumPuellaeFiguraeGenus(fukaConfig.Figura.GenusDex);
+            _miPuellaeRelationisTerrae = new MinisteriumPuellaeRelationisTerrae(fukaConfig.RelatioTerrae);
             _osPuellaeOssisLeg = new OstiumPuellaeOssisLegibile(_miPuellaeOssis);
             _osPuellaeOssisMut = new OstiumPuellaeOssisMutabile(_miPuellaeOssis);
             _osPuellaeLociLeg = new OstiumPuellaeLociLegibile(_miPuellaeLoci);

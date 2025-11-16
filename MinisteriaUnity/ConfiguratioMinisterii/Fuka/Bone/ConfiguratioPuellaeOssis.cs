@@ -1,12 +1,12 @@
 using UnityEngine;
 
-namespace Yulinti.UnityServices.ServiceConfig {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
-    public sealed class FukaBoneConfig : IFukaBoneConfig {
-        [Header("FukaBoneConfig/RigRootボーン設定")]
+    public sealed class ConfiguratioPuellaeOssis : IConfiguratioPuellaeOssis {
+        [Header("ConfiguratioPuellaeOssis/RigRootボーン設定")]
         [SerializeField] private Transform _rigRoot;
 
-        [Header("FukaBoneConfig/ボーンパス設定")]
+        [Header("ConfiguratioPuellaeOssis/ボーンパス設定")]
         [SerializeField] private string _rootPath = "root";
         [SerializeField] private string _hipsPath = "root/Hips";
         [SerializeField] private string _rightUpperLegPath = "root/Hips/RightUpperLeg";

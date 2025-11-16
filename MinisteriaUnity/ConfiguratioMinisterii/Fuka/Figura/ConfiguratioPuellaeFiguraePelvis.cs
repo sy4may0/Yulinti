@@ -1,12 +1,11 @@
 using UnityEngine;
 
-namespace Yulinti.UnityServices.ServiceConfig {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
-    public sealed class FukaHipsCorrectiveShapeConfig : IFukaHipsCorrectiveShapeConfig {
-        [Header("FukaHipsCorrectiveShapeConfig/メッシュ")]
+    public sealed class ConfiguratioPuellaeFiguraePelvis : IConfiguratioPuellaeFiguraePelvis {
+        [Header("ConfiguratioPuellaeFiguraePelvis/メッシュ")]
         [SerializeField] private SkinnedMeshRenderer _mesh;
-
-        [Header("FukaHipsCorrectiveShapeConfig/ブレンドシェイプ名")]
+        [Header("ConfiguratioPuellaeFiguraePelvis/ブレンドシェイプ名")]
         [SerializeField] private string _leftX90BlendShapeName = "fuka.act.cs.legjointX90.l";
         [SerializeField] private string _leftX150BlendShapeName = "fuka.act.cs.legjointX150.l";
         [SerializeField] private string _leftY90BlendShapeName = "fuka.act.cs.legjointY90.l";

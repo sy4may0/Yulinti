@@ -1,20 +1,20 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceConfig;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class MinisteriumInputMotus {
-        private readonly IMoveInputConfig _moveInputConfig;
+        private readonly IConfiguratioInputMotus _configuratioInputMotus;
 
-        public MinisteriumInputMotus(IMoveInputConfig moveInputConfig) {
-            if (moveInputConfig == null) {
-                ModeratorErrorum.Fatal("MinisteriumInputMotusのMoveInputConfigがnullです。");
+        public MinisteriumInputMotus(IConfiguratioInputMotus configuratioInputMotus) {
+            if (configuratioInputMotus == null) {
+                ModeratorErrorum.Fatal("MinisteriumInputMotusのConfiguratioInputMotusがnullです。");
             }
-            _moveInputConfig = moveInputConfig;
+            _configuratioInputMotus = configuratioInputMotus;
         }
 
-        public Vector2 LegoMotus => _moveInputConfig.MoveInput?.action?.enabled == true ? _moveInputConfig.MoveInput.action.ReadValue<Vector2>() : Vector2.zero;
-        public bool LegoCursus => _moveInputConfig.SprintInput?.action?.enabled == true && _moveInputConfig.SprintInput.action.IsPressed();
-        public bool LegoIncumbo => _moveInputConfig.CrouchInput?.action?.enabled == true && _moveInputConfig.CrouchInput.action.IsPressed();
+        public Vector2 LegoMotus => _configuratioInputMotus.MoveInput?.action?.enabled == true ? _configuratioInputMotus.MoveInput.action.ReadValue<Vector2>() : Vector2.zero;
+        public bool LegoCursus => _configuratioInputMotus.SprintInput?.action?.enabled == true && _configuratioInputMotus.SprintInput.action.IsPressed();
+        public bool LegoIncumbo => _configuratioInputMotus.CrouchInput?.action?.enabled == true && _configuratioInputMotus.CrouchInput.action.IsPressed();
     }
 }

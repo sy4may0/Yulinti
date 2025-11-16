@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.UnityServices.ServiceConfig;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
 using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Locus.Interna;
 
@@ -17,10 +17,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private float _velocitasVerticalisPre;
         private float _rotationisYPre;
 
-        public MiniateriumPuellaeLoci(IFukaCharacterControllerConfig characterControllerConfig) {
-            _characterController = characterControllerConfig.CharacterController;
+        public MiniateriumPuellaeLoci(IConfiguratioPuellaeLoci config) {
+            _characterController = config.CharacterController;
             if (_characterController == null) {
-                ModeratorErrorum.Fatal("コンポーネントサービス(FukaCharacterControllerService)のCharacterControllerがnullです。");
+                ModeratorErrorum.Fatal("MiniateriumPuellaeLociのConfiguratioPuellaeLociのCharacterControllerがnullです。");
             }
             _thesaurus = new Thesaurus();
             _refVelocitisHorizontalis = 0f;

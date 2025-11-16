@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.UnityServices.ServiceConfig;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
 using Yulinti.ContractusMinisterii.Puellae;
 using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Figura.Interna;
@@ -10,13 +10,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly TabulaFiguraePelvis _tabula;
 
         public MinisteriumPuellaeFiguraePelvis(
-            IFukaHipsCorrectiveShapeConfig hipsCorrectiveShapeConfig
+            IConfiguratioPuellaeFiguraePelvis config
         ) {
-            if (hipsCorrectiveShapeConfig.Mesh == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeFiguraePelvisのHipsCorrectiveShapeConfigのMeshがnullです。");
+            if (config.Mesh == null) {
+                ModeratorErrorum.Fatal("MinisteriumPuellaeFiguraePelvisのConfiguratioPuellaeFiguraePelvisのMeshがnullです。");
             }
-            _hipsMesh = hipsCorrectiveShapeConfig.Mesh;
-            _tabula = new TabulaFiguraePelvis(hipsCorrectiveShapeConfig);
+            _hipsMesh = config.Mesh;
+            _tabula = new TabulaFiguraePelvis(config);
         }
 
         public float LegoPondus(IDPuellaeFiguraePelvis idFiguraePelvis) {

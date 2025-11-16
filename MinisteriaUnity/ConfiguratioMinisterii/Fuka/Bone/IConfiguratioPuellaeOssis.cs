@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace Yulinti.UnityServices.ServiceConfig {
-    public interface IFukaBoneConfig {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
+    public interface IConfiguratioPuellaeOssis {
         Transform RigRoot { get; }
 
         string RootPath { get; }

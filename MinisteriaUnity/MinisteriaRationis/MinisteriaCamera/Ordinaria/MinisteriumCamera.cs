@@ -1,6 +1,6 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.ConfiguratioMinisterii;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class MinisteriumCamera  {

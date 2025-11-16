@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Yulinti.ConfiguratioMinisterii {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
     public class ConfiguratioCameraPrincips : IConfiguratioCamera {
         [Header("ConfiguratioCameraPrincips/MainCamera設定")]

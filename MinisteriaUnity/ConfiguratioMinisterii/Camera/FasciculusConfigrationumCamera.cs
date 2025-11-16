@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Yulinti.ConfiguratioMinisterii {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
     public sealed class FasciculusConfigurationumCamera {
         [SerializeField] private ConfiguratioCameraPrincips _configuratioCameraPrincips;

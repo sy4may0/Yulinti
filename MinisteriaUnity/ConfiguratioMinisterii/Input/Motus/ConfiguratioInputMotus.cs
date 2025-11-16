@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Yulinti.UnityServices.ServiceConfig {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
-    public class MoveInputConfig : IMoveInputConfig {
-        [Header("MoveInputConfig/MoveInput設定")]
+    public sealed class ConfiguratioInputMotus : IConfiguratioInputMotus {
+        [Header("ConfiguratioInputMotus/ConfiguratioInputMotus設定")]
         [SerializeField] private InputActionReference _moveInput;
         [SerializeField] private InputActionReference _sprintInput;
         [SerializeField] private InputActionReference _crouchInput;

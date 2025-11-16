@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Yulinti.ConfiguratioMinisterii {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     public interface IConfiguratioCamera {
         Camera Camera { get; }
     }

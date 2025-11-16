@@ -1,19 +1,19 @@
 using UnityEngine;
-using Yulinti.UnityServices.ServiceConfig;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaNuclei;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class MinisteriumPuellaeRelationisTerrae {
-        private readonly IFukaGrounderConfig _config;
+        private readonly IConfiguratioPuellaeRelationisTerrae _config;
 
-        private readonly Transform _pesDexter;
-        private readonly Transform _pesSinister;
-        private readonly Transform _digitusPedisDexter;
-        private readonly Transform _digitusPedisSinister;
+        private readonly Transform _rightFoot;
+        private readonly Transform _leftFoot;
+        private readonly Transform _rightToe;
+        private readonly Transform _leftToe;
 
-        public MinisteriumPuellaeRelationisTerrae(IFukaGrounderConfig config) {
+        public MinisteriumPuellaeRelationisTerrae(IConfiguratioPuellaeRelationisTerrae config) {
             if (config == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeRelationisTerraeのFukaGrounderConfigがnullです。");
+                ModeratorErrorum.Fatal("MinisteriumPuellaeRelationisTerraeのConfiguratioPuellaeRelationisTerraeがnullです。");
             }
             if (
                 config.LeftFoot == null ||
@@ -21,14 +21,14 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 config.LeftToe == null ||
                 config.RightToe == null
             ) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeRelationisTerraeのFukaGrounderConfigが不完全です。");
+                ModeratorErrorum.Fatal("MinisteriumPuellaeRelationisTerraeのConfiguratioPuellaeRelationisTerraeが不完全です。");
             }
             _config = config;
 
-        _pesDexter = config.RightFoot;
-        _pesSinister = config.LeftFoot;
-        _digitusPedisDexter = config.RightToe;
-        _digitusPedisSinister = config.LeftToe;
+        _rightFoot = config.RightFoot;
+        _leftFoot = config.LeftFoot;
+        _rightToe = config.RightToe;
+        _leftToe = config.LeftToe;
         }
 
         private float LegoTerramPositionemY(
@@ -60,12 +60,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             float rayCastAltitudo, float rayCastDistantia, LayerMask rayCastStratum
         ) {
             float altitudoTerrae = ComputareTerramPositionemY(
-                _pesDexter, _digitusPedisDexter,
+                _rightFoot, _rightToe,
                 rayCastAltitudo, rayCastDistantia, rayCastStratum
             );
             if (float.IsNegativeInfinity(altitudoTerrae)) {
                 altitudoTerrae = ComputareTerramPositionemY(
-                    _pesSinister, _digitusPedisSinister,
+                    _leftFoot, _leftToe,
                     rayCastAltitudo, rayCastDistantia, rayCastStratum
                 );
             }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace Yulinti.UnityServices.ServiceConfig {
-    public interface IFukaKneeCorrectiveShapeConfig {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
+    public interface IConfiguratioPuellaeFiguraeGenus {
         SkinnedMeshRenderer Mesh { get; }
         string X90BlendShapeName { get; }
         string X150BlendShapeName { get; }

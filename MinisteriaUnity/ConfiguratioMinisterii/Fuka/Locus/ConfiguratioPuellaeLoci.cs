@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace Yulinti.UnityServices.ServiceConfig {
+namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
-    public sealed class FukaCharacterControllerConfig : IFukaCharacterControllerConfig {
-        [Header("FukaCharacterControllerConfig/CharacterController")]
+    public sealed class ConfiguratioPuellaeLoci : IConfiguratioPuellaeLoci {
+        [Header("ConfiguratioPuellaeLoci/CharacterController")]
         [SerializeField] private CharacterController _characterController;
 
         public CharacterController CharacterController => _characterController;
