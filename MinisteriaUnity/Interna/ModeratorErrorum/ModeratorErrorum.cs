@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Yulinti.MinisteriaUnity.MinisteriaNuclei {
+namespace Yulinti.MinisteriaUnity.Interna {
     public static class ModeratorErrorum {
         public static void Fatal(string message, Exception ex = null) {
             Exception exception = ex ?? new Exception(message);

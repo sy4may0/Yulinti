@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
-    [System.Serializable]
-    public sealed class ConfiguratioInputMotus : IConfiguratioInputMotus {
+    [CreateAssetMenu(menuName = "Ministeria/ConfiguratioInputMotus")]
+    public sealed class ConfiguratioInputMotus : ScriptableObject, IConfiguratioInputMotus {
         [Header("ConfiguratioInputMotus/ConfiguratioInputMotus設定")]
         [SerializeField] private InputActionReference _moveInput;
         [SerializeField] private InputActionReference _sprintInput;

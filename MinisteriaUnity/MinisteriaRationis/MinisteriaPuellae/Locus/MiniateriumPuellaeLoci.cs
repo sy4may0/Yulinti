@@ -1,11 +1,13 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.MinisteriaNuclei;
+using Yulinti.MinisteriaUnity.Interna;
 using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Locus.Interna;
+using Yulinti.Nucleus.Interfacies;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MiniateriumPuellaeLoci {
+    public sealed class MiniateriumPuellaeLoci : IPulsabilis {
         private readonly CharacterController _characterController;
+        private readonly ITemporis _temporis;
 
         private Thesaurus _thesaurus;
 
@@ -17,11 +19,21 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private float _velocitasVerticalisPre;
         private float _rotationisYPre;
 
-        public MiniateriumPuellaeLoci(IConfiguratioPuellaeLoci config) {
+        public MiniateriumPuellaeLoci(
+            IConfiguratioPuellaeLoci config,
+            ITemporis temporis
+        ) {
+            if (config == null) {
+                ModeratorErrorum.Fatal("MiniateriumPuellaeLociのConfiguratioPuellaeLociがnullです。");
+            }
+            if (temporis == null) {
+                ModeratorErrorum.Fatal("MiniateriumPuellaeLociのTemporisがnullです。");
+            }
             _characterController = config.CharacterController;
             if (_characterController == null) {
                 ModeratorErrorum.Fatal("MiniateriumPuellaeLociのConfiguratioPuellaeLociのCharacterControllerがnullです。");
             }
+            _temporis = temporis;
             _thesaurus = new Thesaurus();
             _refVelocitisHorizontalis = 0f;
             _refVelocitisVerticalis = 0f;
@@ -125,7 +137,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _thesaurus.PonoRotationisY(Mathf.DeltaAngle(_rotationisYPre, rotatioY));
         }
 
-        public void ApplicareMotum(float intervallum) {
+        public void Pulsus() {
+            float intervallum = _temporis.Intervalum;
+
             // 蓄積加算された速度を反映
             _characterController.transform.rotation = 
                 _thesaurus.Rotatio(_rotationisYPre);

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.MinisteriaNuclei;
+using Yulinti.MinisteriaUnity.Interna;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {

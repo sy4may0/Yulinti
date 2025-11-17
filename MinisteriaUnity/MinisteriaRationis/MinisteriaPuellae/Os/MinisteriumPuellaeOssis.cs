@@ -1,6 +1,6 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.MinisteriaNuclei;
+using Yulinti.MinisteriaUnity.Interna;
 using Yulinti.ContractusMinisterii.Puellae;
 using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Os.Interna;
 

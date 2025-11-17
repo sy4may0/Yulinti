@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.MinisteriaNuclei;
+using Yulinti.MinisteriaUnity.Interna;
 using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {

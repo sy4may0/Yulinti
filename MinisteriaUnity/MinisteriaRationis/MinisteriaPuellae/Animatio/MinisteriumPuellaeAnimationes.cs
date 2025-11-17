@@ -1,6 +1,6 @@
 using System;
-using Yulinti.UnityServices.ServiceConfig;
-using Yulinti.MinisteriaUnity.MinisteriaNuclei;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
+using Yulinti.MinisteriaUnity.Interna;
 using Yulinti.ContractusMinisterii.Puellae;
 using Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer;
 using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Animatio.Interna;
@@ -9,24 +9,22 @@ using Yulinti.Nucleus.Interfacies;
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class MinisteriumPuellaeAnimationes : IPulsabilis {
         private readonly TabulaAnimationumFundamenti _tabulaFundamenti;
-        private readonly TabulaAnimationumCorporisToti _tabulaCorporisToti;
+        private readonly TabulaAnimationumCorporis _tabulaCorporis;
 
         private readonly LuditorAnimationis _luditorFundamenti;
-        private readonly LuditorAnimationis _luditorCorporisToti;
+        private readonly LuditorAnimationis _luditorCorporis;
 
-        public MinisteriumPuellaeAnimationes(FukaAnimationConfig animationConfig) {
-            if (animationConfig == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeAnimationesのアニメーション設定がnullです。");
+        public MinisteriumPuellaeAnimationes(ConfiguratioPuellaeAnimationis config) {
+            if (config == null) {
+                ModeratorErrorum.Fatal("MinisteriumPuellaeAnimationesのConfiguratioPuellaeAnimationisがnullです。");
             }
-            if (animationConfig.Animancer == null) {
+            if (config.Animancer == null) {
                 ModeratorErrorum.Fatal("MinisteriumPuellaeAnimationesのAnimancerがnullです。");
             }
-
-            _tabulaFundamenti = new TabulaAnimationumFundamenti(animationConfig.BaseLayerConfig);
-            _tabulaCorporisToti = new TabulaAnimationumCorporisToti(animationConfig.ActionLayerConfig);
-
-            _luditorFundamenti = new LuditorAnimationis(animationConfig.Animancer, 0);
-            _luditorCorporisToti = new LuditorAnimationis(animationConfig.Animancer, 1);
+            _tabulaFundamenti = new TabulaAnimationumFundamenti(config.LuditorisFundamenti);
+            _tabulaCorporis = new TabulaAnimationumCorporis(config.LuditorisCorporis);
+            _luditorFundamenti = new LuditorAnimationis(config.Animancer, 0);
+            _luditorCorporis = new LuditorAnimationis(config.Animancer, 1);
         }
 
         public void PostulareFundamenti(
@@ -43,31 +41,31 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _luditorFundamenti.Cogere(_tabulaFundamenti.Lego(idBasis), fInvocanda, estObsignatus);
         }
 
-        public void PostulareCorporisToti(
+        public void PostulareCorporis(
             IDPuellaeAnimationisActionis idActionis, 
             Action fInvocanda, bool estObsignatus = false
         ) {
-            _luditorCorporisToti.Postulare(_tabulaCorporisToti.Lego(idActionis), fInvocanda, estObsignatus);
+            _luditorCorporis.Postulare(_tabulaCorporis.Lego(idActionis), fInvocanda, estObsignatus);
         }
 
-        public void CogereCorporisToti(
+        public void CogereCorporis(
             IDPuellaeAnimationisActionis idActionis, 
             Action fInvocanda, bool estObsignatus = false
         ) {
-            _luditorCorporisToti.Cogere(_tabulaCorporisToti.Lego(idActionis), fInvocanda, estObsignatus);
+            _luditorCorporis.Cogere(_tabulaCorporis.Lego(idActionis), fInvocanda, estObsignatus);
         }
 
         public void CogereDesinentiamFundamenti() {
             _luditorFundamenti.CogereDesinentiam();
         }
 
-        public void CogereDesinentiamCorporisToti() {
-            _luditorCorporisToti.CogereDesinentiam();
+        public void CogereDesinentiamCorporis() {
+            _luditorCorporis.CogereDesinentiam();
         }
 
         public void InjicereVelocitatem(float vel) {
             _luditorFundamenti.InjicereVelocitatem(vel);
-            _luditorCorporisToti.InjicereVelocitatem(vel);
+            _luditorCorporis.InjicereVelocitatem(vel);
             // TODO: 実装
         }
 
@@ -75,12 +73,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         // Animancer同期は、Play()が実行されたときだけ。
         public void TemporareLuditores() {
             float tempusFun = _luditorFundamenti.LegoTempusSimultaneum();
-            _luditorCorporisToti.PonoTempusSimultaneum(tempusFun);
+            _luditorCorporis.PonoTempusSimultaneum(tempusFun);
         }
 
         public void Pulsus() {
             _luditorFundamenti.Pulsus();
-            _luditorCorporisToti.Pulsus();
+            _luditorCorporis.Pulsus();
             TemporareLuditores();
         }
     }

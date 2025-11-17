@@ -1,7 +1,7 @@
 using UnityEngine;
 using Animancer;
 using System;
-using Yulinti.MinisteriaUnity.MinisteriaNuclei;
+using Yulinti.MinisteriaUnity.Interna;
 using Yulinti.Nucleus.Interfacies;
 
 namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
@@ -75,7 +75,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
         }
 
         public void InjicereVelocitatem(float vel) {
-            if (AnimatioCurrens is IStructuraAnimationisVelInjectibile velInjectable) {
+            if (AnimatioCurrens is IVelocitasInjectibile velInjectable) {
                 velInjectable.InjicereVelocitatem(vel);
             }
         }
@@ -120,6 +120,11 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
                 return;
             }
 
+            // RequestがCurrentと同じ場合、何もしない。
+            if (ReferenceEquals(_animatioPostulata, _animatioCurrens)) {
+                return;
+            }
+
             // 強制Stop要求
             if (_estDesinens) {
                 Desinere();
@@ -140,7 +145,12 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
                     return;
                 }
                 if (currentState.Events(this, out AnimancerEvent.Sequence events)) {
-                    events.OnEnd = _fInvocanda;
+                    // ループかつBlockingは無いはずだが、念のため。
+                    if (!_animatioCurrens.EstCircularis) {
+                        events.OnEnd = _fInvocanda;
+                    } else {
+                        Memorator.MemorareLuditorAnimationisCircularisImpeditivus(_animatioCurrens);
+                    }
                 }
                 return;
             }

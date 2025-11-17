@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.MinisteriaNuclei;
+using Yulinti.MinisteriaUnity.Interna;
 using Yulinti.Nucleus.InstrumentaMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
@@ -25,9 +25,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
         public void PonoRotationisYLate(float rotatioYMeta, float tempusLevis, float intervallum) {
             _miPuellaeLoci.PonoRotationisYLate(rotatioYMeta, tempusLevis, intervallum);
-        }
-        public void ApplicareMotum(float intervallum) {
-            _miPuellaeLoci.ApplicareMotum(intervallum);
         }
     }
 }

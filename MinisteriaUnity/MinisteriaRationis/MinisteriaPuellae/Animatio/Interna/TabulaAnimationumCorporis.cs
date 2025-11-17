@@ -1,24 +1,24 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.MinisteriaNuclei;
-using Yulinti.UnityServices.ServiceConfig;
+using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer;
 using Yulinti.ContractusMinisterii.Puellae;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Animatio.Interna {
-    public sealed class TabulaAnimationumCorporisToti {
+    public sealed class TabulaAnimationumCorporis {
         private readonly IStructuraAnimationis[] _animationes;
 
-        public TabulaAnimationumCorporisToti(FukaActionLayerConfig actionLayerConfig) {
+        public TabulaAnimationumCorporis(ConfiguratioPuellaeLuditorisCorporis luditorisCorporis) {
             int length = (int)IDPuellaeAnimationisActionis.Count;
             _animationes = new IStructuraAnimationis[length];
 
             _animationes[(int)IDPuellaeAnimationisActionis.None] = null;
             _animationes[(int)IDPuellaeAnimationisActionis.Crouch] = FabricaStructuraeAnimationis.Create(
-                actionLayerConfig.CrouchAnimationConfig.Animation,
-                actionLayerConfig.CrouchAnimationConfig.FadeTime,
-                actionLayerConfig.CrouchAnimationConfig.Easing,
-                actionLayerConfig.CrouchAnimationConfig.Sync,
-                actionLayerConfig.CrouchAnimationConfig.IsBlocking
+                luditorisCorporis.Incubitus.Animatio,
+                luditorisCorporis.Incubitus.TempusEvanescentiae,
+                luditorisCorporis.Incubitus.Lenitio,
+                luditorisCorporis.Incubitus.EstSimultaneum,
+                luditorisCorporis.Incubitus.EstImpeditivus
             );
 
             for (int i = 1; i < length; i++) {

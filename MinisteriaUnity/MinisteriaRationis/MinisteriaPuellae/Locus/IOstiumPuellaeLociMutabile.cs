@@ -5,6 +5,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         void AddoVelocitatemHorizontalisLate(float velocitasMeta, float tempusLevis, float intervallum);
         void AddoVelocitatemVerticalisLate(float velocitasMeta, float tempusLevis, float intervallum);
         void PonoRotationisYLate(float rotatioYMeta, float tempusLevis, float intervallum);
-        void ApplicareMotum(float intervallum);
     }
 }

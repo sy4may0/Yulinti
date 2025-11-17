@@ -7,9 +7,6 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
         Easing.Function Lenitio { get; }
         bool EstSimultaneum { get; }
         bool EstImpeditivus { get; }
-    }
-
-    public interface IStructuraAnimationisVelInjectibile {
-        void InjicereVelocitatem(float vel);
+        bool EstCircularis { get; }
     }
 }

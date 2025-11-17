@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.MinisteriaNuclei;
+using Yulinti.MinisteriaUnity.Interna;
 using Yulinti.Nucleus.InstrumentaMinisterii;
 using Yulinti.ContractusMinisterii.Puellae;
 
