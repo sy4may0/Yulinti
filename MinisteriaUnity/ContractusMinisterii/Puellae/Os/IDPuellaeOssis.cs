@@ -1,4 +1,4 @@
-namespace Yulinti.ContractusMinisterii.Puellae {
+namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
     public enum IDPuellaeOssis {
         Root,
         Hips,

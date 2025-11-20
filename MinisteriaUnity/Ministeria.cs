@@ -19,6 +19,7 @@ namespace Yulinti.MinisteriaUnity {
             _ostiorumRationis = new FasciculusOstiorumRationis(configurationum, _temporis);
         }
 
+        public FasciculusOstiorumRationis OstiorumRationis => _ostiorumRationis;
         public FasciculusOstiorumPuellae Puellae => _ostiorumRationis.Puellae;
         public FasciculusOstiorumNuclei Nuclei => _ostiorumRationis.Nuclei;
         public FasciculusOstiorumInput Input => _ostiorumRationis.Input;

@@ -1,0 +1,34 @@
+using Yulinti.Dux.ConfiguratioDucis;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Dux;
+
+namespace Yulinti.Rex.Interna {
+    public sealed class PraefectusDucum {
+        private readonly DuxPuellae _duxPuellae;
+        private readonly Yulinti.Dux.Miles.Puellae.Interna.FasciculusOstiorum _ostiorumPuellae;
+
+        public PraefectusDucum(
+            FasciculusConfigurationumDucis configurationumDucis,
+            FasciculusOstiorumRationis ostiorumRationis
+        ) {
+            _ostiorumPuellae = new Yulinti.Dux.Miles.Puellae.Interna.FasciculusOstiorum(ostiorumRationis);
+            _duxPuellae = new DuxPuellae(configurationumDucis.Puellae, _ostiorumPuellae);
+        }
+
+        public void Pulsus() {
+            _duxPuellae.Pulsus();
+        }
+
+        public void PulsusPostRationem() {
+            _duxPuellae.PulsusPostRationem();
+        }
+
+        public void PulsusFixus() {
+            _duxPuellae.PulsusFixus();
+        }
+
+        public void PulsusTardus() {
+            _duxPuellae.PulsusTardus();
+        }
+    }
+}

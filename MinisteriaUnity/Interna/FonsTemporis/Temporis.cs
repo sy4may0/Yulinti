@@ -10,7 +10,7 @@ namespace Yulinti.MinisteriaUnity.Interna {
             _fonsTemporis = fonsTemporis;
         }
 
-        public float Intervalum => _fonsTemporis.Intervalum;
-        public float IntervalumFixus => _fonsTemporis.IntervalumFixus;
+        public float Intervallum => _fonsTemporis.Intervallum;
+        public float IntervallumFixus => _fonsTemporis.IntervallumFixus;
     }
 }

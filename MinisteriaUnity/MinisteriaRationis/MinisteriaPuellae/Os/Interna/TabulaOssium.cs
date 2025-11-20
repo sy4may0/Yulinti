@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.Interna;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.ContractusMinisterii.Puellae;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Os.Interna {
     public sealed class TabulaOssium {

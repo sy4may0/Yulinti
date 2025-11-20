@@ -4,11 +4,11 @@ using Yulinti.Nucleus.Interfacies;
 namespace Yulinti.MinisteriaUnity.Interna {
     public sealed class FonsTemporis : IPulsabilis, IPulsabilisFixus {
         private float _intervallum;
-        private float _intervalumFixus;
+        private float _intervallumFixus;
 
         public FonsTemporis() {
             _intervallum = 0f;
-            _intervalumFixus = 0f;
+            _intervallumFixus = 0f;
         }
 
         public void Pulsus() {
@@ -16,10 +16,10 @@ namespace Yulinti.MinisteriaUnity.Interna {
         }
 
         public void PulsusFixus() {
-            _intervalumFixus = Time.fixedDeltaTime;
+            _intervallumFixus = Time.fixedDeltaTime;
         }
 
-        public float Intervalum => _intervallum;
-        public float IntervalumFixus => _intervalumFixus;
+        public float Intervallum => _intervallum;
+        public float IntervallumFixus => _intervallumFixus;
     }
 }

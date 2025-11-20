@@ -1,11 +1,11 @@
-namespace Yulinti.ContractusMinisterii.Puellae {
-    public enum IDPuellaeAnimationisBasis {
+namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
+    public enum IDPuellaeAnimationisFundamenti {
         None,
         StandardBase,
         Count
     }
 
-    public enum IDPuellaeAnimationisActionis {
+    public enum IDPuellaeAnimationisCorporis {
         None,
         Crouch,
         Count

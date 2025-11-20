@@ -1,4 +1,4 @@
-using Yulinti.ContractusMinisterii.Puellae;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public interface IOstiumPuellaeOssisLegibile {

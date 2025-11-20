@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.Interna;
-using Yulinti.ContractusMinisterii.Puellae;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Figura.Interna;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {

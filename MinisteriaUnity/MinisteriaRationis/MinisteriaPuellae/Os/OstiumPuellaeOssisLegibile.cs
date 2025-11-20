@@ -1,6 +1,6 @@
 using Yulinti.MinisteriaUnity.Interna;
 using Yulinti.Nucleus.InstrumentaMinisterii;
-using Yulinti.ContractusMinisterii.Puellae;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class OstiumPuellaeOssisLegibile : IOstiumPuellaeOssisLegibile {

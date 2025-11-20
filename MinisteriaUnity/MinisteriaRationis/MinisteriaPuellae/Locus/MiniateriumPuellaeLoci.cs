@@ -138,7 +138,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         public void Pulsus() {
-            float intervallum = _temporis.Intervalum;
+            float intervallum = _temporis.Intervallum;
 
             // 蓄積加算された速度を反映
             _characterController.transform.rotation = 

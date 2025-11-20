@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.Interna;
-using Yulinti.ContractusMinisterii.Puellae;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Figura.Interna {
     public sealed class TabulaFiguraePelvis {
