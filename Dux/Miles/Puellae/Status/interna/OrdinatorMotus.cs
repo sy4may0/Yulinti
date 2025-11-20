@@ -2,7 +2,7 @@ using System;
 using System.Numerics;
 using Yulinti.Nucleus.Constans;
 
-namespace Yulinti.Dux.DuxRationis.Puellae.Interna {
+namespace Yulinti.Dux.Miles.Puellae.Interna {
     public static class OrdinatorMotus {
         public static OrdinatioMotusHorizontalis OrdinareMotusHorizontalis(
             Vector2 inputMotus,
@@ -92,5 +92,12 @@ namespace Yulinti.Dux.DuxRationis.Puellae.Interna {
                 rotatioYDesiderata, rotatioYActualis, tempusLevigatum, estLevigatum
             );
         }
+
+        public static OrdinatioMotusRotationisY OrdinareMotusSineRotationisY(
+            float rotatioYActualis
+        ) {
+            return new OrdinatioMotusRotationisY(rotatioYActualis, 0f);
+        }
+
     }
 }
