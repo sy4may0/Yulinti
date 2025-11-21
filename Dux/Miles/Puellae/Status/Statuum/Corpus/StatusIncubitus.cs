@@ -1,9 +1,9 @@
-using Yulinti.Dux.ConfiguratioDucis;
-using Yulinti.Dux.ContructusDucis;
-using Yulinti.Dux.Miles.Puellae.Interna;
+using Yulinti.Dux.ConfigratioDucis;
+using Yulinti.Dux.ContractusDucis;
+using Yulinti.Dux.Miles;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
-namespace Yulinti.Dux.Miles.Puellae.Status {
+namespace Yulinti.Dux.Miles {
     public sealed class StatusIncubitus : IStatusCorporis {
 
         private IDPuellaeAnimationisCorporis _idAnimationis;

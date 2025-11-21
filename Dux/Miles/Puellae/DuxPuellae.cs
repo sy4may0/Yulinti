@@ -1,9 +1,8 @@
 using Yulinti.Nucleus.Interfacies;
-using Yulinti.Dux.ConfiguratioDucis;
-using Yulinti.Dux.Miles.Puellae.Status;
-using Yulinti.Dux.Miles.Puellae.Interna;
+using Yulinti.Dux.ConfigratioDucis;
+using Yulinti.Dux.Miles;
 
-namespace Yulinti.Dux {
+namespace Yulinti.Dux.Miles {
     public sealed class DuxPuellae : IPulsabilis, IPulsabilisFixus, IPulsabilisTardus, IPulsabilisPostRationem {
         private readonly MachinaStatuumPuellae _machinaStatuumPuellae;
 

@@ -1,15 +1,14 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.Interna;
-using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Locus.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus.Interfacies;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MiniateriumPuellaeLoci : IPulsabilis {
+    internal sealed class MiniateriumPuellaeLoci : IPulsabilis {
         private readonly CharacterController _characterController;
         private readonly ITemporis _temporis;
 
-        private Thesaurus _thesaurus;
+        private ThesaurusPuellaeLoci _thesaurus;
 
         private float _refVelocitisHorizontalis;
         private float _refVelocitisVerticalis;
@@ -34,7 +33,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 ModeratorErrorum.Fatal("MiniateriumPuellaeLociのConfiguratioPuellaeLociのCharacterControllerがnullです。");
             }
             _temporis = temporis;
-            _thesaurus = new Thesaurus();
+            _thesaurus = new ThesaurusPuellaeLoci();
             _refVelocitisHorizontalis = 0f;
             _refVelocitisVerticalis = 0f;
             _refRotationisY = 0f;

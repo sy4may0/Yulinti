@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace Yulinti.MinisteriaUnity.Interna {
-    public sealed class Temporis : ITemporis {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal sealed class Temporis : ITemporis {
         private readonly FonsTemporis _fonsTemporis;
         public Temporis(FonsTemporis fonsTemporis) {
             if (fonsTemporis == null) {

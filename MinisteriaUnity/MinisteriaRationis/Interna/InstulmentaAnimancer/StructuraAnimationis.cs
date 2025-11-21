@@ -1,7 +1,7 @@
 using Animancer;
 
-namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
-    public class StructuraAnimationis : IStructuraAnimationis {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal class StructuraAnimationis : IStructuraAnimationis {
         private readonly ITransition _animatio;
         private readonly float _tempusEvanescentiae;
         private readonly Easing.Function _lenitio;
@@ -31,7 +31,7 @@ namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
         public bool EstCircularis => _estCircularis;
     }
 
-    public class StructuraAnimationisVelInjectibile : IStructuraAnimationis, IVelocitasInjectibile {
+    internal class StructuraAnimationisVelInjectibile : IStructuraAnimationis, IVelocitasInjectibile {
         private readonly LinearMixerTransition _animatio;
         private readonly float _tempusEvanescentiae;
         private readonly Easing.Function _lenitio;

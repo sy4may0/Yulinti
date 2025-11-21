@@ -1,7 +1,7 @@
-using Yulinti.Dux.ContructusDucis;
-using Yulinti.Dux.Miles.Puellae.Interna;
+using Yulinti.Dux.ContractusDucis;
+using Yulinti.Dux.Miles;
 
-namespace Yulinti.Dux.Miles.Puellae.Status {
+namespace Yulinti.Dux.Miles {
     public interface IStatusCorporis {
         public IDStatus Id { get; }
         public IDPuellaeAnimationisCorporis IdAnimationis { get; }

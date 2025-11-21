@@ -1,13 +1,13 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
-namespace Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Figura.Interna {
-    public sealed class TabulaFiguraePelvis {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal sealed class TabulaPuellaeFiguraePelvis {
         private readonly int[] _figuraeIndexes;
 
-        public TabulaFiguraePelvis(IConfiguratioPuellaeFiguraePelvis config) {
+        public TabulaPuellaeFiguraePelvis(IConfiguratioPuellaeFiguraePelvis config) {
             _figuraeIndexes = new int[(int)IDPuellaeFiguraePelvis.Count];
             SkinnedMeshRenderer mesh = config.Mesh;
             _figuraeIndexes[(int)IDPuellaeFiguraePelvis.csLHipX90] = mesh.sharedMesh.GetBlendShapeIndex(config.LeftX90BlendShapeName);

@@ -1,7 +1,7 @@
 using System;
 
-namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
-    public interface ILuditorAnimationis {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal interface ILuditorAnimationis {
         int IndexusLuditoris { get; }
         IStructuraAnimationis AnimatioCurrens { get; }
         void Postulare(

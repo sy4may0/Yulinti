@@ -1,9 +1,9 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MinisteriumPuellaeRelationisTerrae {
+    internal sealed class MinisteriumPuellaeRelationisTerrae {
         private readonly IConfiguratioPuellaeRelationisTerrae _config;
 
         private readonly Transform _rightFoot;

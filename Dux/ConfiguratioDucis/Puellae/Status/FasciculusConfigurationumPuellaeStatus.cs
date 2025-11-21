@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Yulinti.Dux.ConfiguratioDucis {
+namespace Yulinti.Dux.ConfigratioDucis {
     [System.Serializable]
     public sealed class FasciculusConfigurationumPuellaeStatus {
         [SerializeField] private ConfiguratioPuellaeStatuumGlobalis _configuratioGlobalis;

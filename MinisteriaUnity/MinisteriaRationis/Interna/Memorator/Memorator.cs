@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Diagnostics;
-using Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
-namespace Yulinti.MinisteriaUnity.Interna {
-    public static class Memorator {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal static class Memorator {
 
         [Conditional("UNITY_EDITOR")]
         public static void MemorareErrorum(string msg) {

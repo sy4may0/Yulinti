@@ -1,8 +1,7 @@
-using Yulinti.MinisteriaUnity.Interna;
-using Yulinti.Nucleus.InstrumentaMinisterii;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class OstiumInputMotusLegibile : IOstiumInputMotusLegibile {
+    internal sealed class OstiumInputMotusLegibile : IOstiumInputMotusLegibile {
         private readonly MinisteriumInputMotus _miInputMotus;
 
         public OstiumInputMotusLegibile(MinisteriumInputMotus miInputMotus) {

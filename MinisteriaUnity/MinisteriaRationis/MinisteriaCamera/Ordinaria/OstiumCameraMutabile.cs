@@ -1,8 +1,7 @@
-using Yulinti.MinisteriaUnity.Interna;
-using Yulinti.Nucleus.InstrumentaMinisterii;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class OstiumCameraMutabile : IOstiumCameraMutabile {
+    internal sealed class OstiumCameraMutabile : IOstiumCameraMutabile {
         private readonly MinisteriumCamera _miCamera;
 
         public OstiumCameraMutabile(MinisteriumCamera miCamera) {

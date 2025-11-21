@@ -1,9 +1,9 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MinisteriumCamera  {
+    internal sealed class MinisteriumCamera  {
         private readonly IConfiguratioCamera _configuratio;
 
         public MinisteriumCamera(IConfiguratioCamera configuratio) {

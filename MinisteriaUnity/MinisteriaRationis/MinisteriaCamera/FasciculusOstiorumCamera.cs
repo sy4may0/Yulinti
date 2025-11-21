@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 // ラテン語note
@@ -10,7 +10,7 @@ using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 // 補助 => Camera Auxiliaria
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class FasciculusOstiorumCamera {
+    internal sealed class FasciculusOstiorumCamera {
         private readonly MinisteriumCamera _miCameraPri;
 
         private readonly OstiumCameraLegibile _osCameraPriLeg;

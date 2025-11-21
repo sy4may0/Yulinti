@@ -1,7 +1,7 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
-namespace Yulinti.Dux.Miles.Puellae.Interna {
-    public sealed class FasciculusOstiorum {
+namespace Yulinti.Dux.Miles {
+    internal sealed class FasciculusOstiorum {
         // Ministeria Nuclei
         private readonly IOstiumErrorumLegibile _osErrorumLeg;
         private readonly IOstiumTemporisLegibile _osTemporisLeg;

@@ -1,7 +1,7 @@
 using Animancer;
 
-namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
-    public static class FabricaStructuraeAnimationis {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal static class FabricaStructuraeAnimationis {
         public static IStructuraAnimationis Create(
             ITransition animatio, 
             float tempusEvanescentiae, 

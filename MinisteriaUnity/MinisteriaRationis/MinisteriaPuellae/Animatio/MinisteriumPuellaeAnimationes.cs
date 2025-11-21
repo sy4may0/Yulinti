@@ -1,15 +1,14 @@
 using System;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer;
-using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Animatio.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus.Interfacies;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MinisteriumPuellaeAnimationes : IPulsabilis {
-        private readonly TabulaAnimationumFundamenti _tabulaFundamenti;
-        private readonly TabulaAnimationumCorporis _tabulaCorporis;
+    internal sealed class MinisteriumPuellaeAnimationes : IPulsabilis {
+        private readonly TabulaPuellaeAnimationumFundamenti _tabulaFundamenti;
+        private readonly TabulaPuellaeAnimationumCorporis _tabulaCorporis;
 
         private readonly LuditorAnimationis _luditorFundamenti;
         private readonly LuditorAnimationis _luditorCorporis;
@@ -21,8 +20,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (config.Animancer == null) {
                 ModeratorErrorum.Fatal("MinisteriumPuellaeAnimationesのAnimancerがnullです。");
             }
-            _tabulaFundamenti = new TabulaAnimationumFundamenti(config.LuditorisFundamenti);
-            _tabulaCorporis = new TabulaAnimationumCorporis(config.LuditorisCorporis);
+            _tabulaFundamenti = new TabulaPuellaeAnimationumFundamenti(config.LuditorisFundamenti);
+            _tabulaCorporis = new TabulaPuellaeAnimationumCorporis(config.LuditorisCorporis);
             _luditorFundamenti = new LuditorAnimationis(config.Animancer, 0);
             _luditorCorporis = new LuditorAnimationis(config.Animancer, 1);
         }

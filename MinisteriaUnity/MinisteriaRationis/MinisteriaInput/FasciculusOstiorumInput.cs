@@ -1,8 +1,8 @@
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class FasciculusOstiorumInput {
+    internal sealed class FasciculusOstiorumInput {
         private readonly MinisteriumInputMotus _miInputMotus;
 
         private readonly OstiumInputMotusLegibile _osInputMotusLeg;

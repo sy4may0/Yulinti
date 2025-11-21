@@ -1,4 +1,4 @@
-namespace Yulinti.Dux.ContructusDucis {
+namespace Yulinti.Dux.ContractusDucis {
     public enum IDStatus {
         Quies,                // Idle
         Ambulatio,            // Walk

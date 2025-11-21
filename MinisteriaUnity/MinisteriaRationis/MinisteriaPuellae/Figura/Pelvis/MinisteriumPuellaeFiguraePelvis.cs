@@ -1,13 +1,11 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Figura.Interna;
-
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MinisteriumPuellaeFiguraePelvis {
+    internal sealed class MinisteriumPuellaeFiguraePelvis {
         private readonly SkinnedMeshRenderer _hipsMesh;
-        private readonly TabulaFiguraePelvis _tabula;
+        private readonly TabulaPuellaeFiguraePelvis _tabula;
 
         public MinisteriumPuellaeFiguraePelvis(
             IConfiguratioPuellaeFiguraePelvis config
@@ -16,7 +14,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 ModeratorErrorum.Fatal("MinisteriumPuellaeFiguraePelvisのConfiguratioPuellaeFiguraePelvisのMeshがnullです。");
             }
             _hipsMesh = config.Mesh;
-            _tabula = new TabulaFiguraePelvis(config);
+            _tabula = new TabulaPuellaeFiguraePelvis(config);
         }
 
         public float LegoPondus(IDPuellaeFiguraePelvis idFiguraePelvis) {

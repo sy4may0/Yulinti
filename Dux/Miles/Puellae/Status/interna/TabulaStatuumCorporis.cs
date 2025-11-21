@@ -1,11 +1,11 @@
-using Yulinti.Dux.ConfiguratioDucis;
-using Yulinti.Dux.ContructusDucis;
-using Yulinti.Dux.Miles.Puellae.Status;
+using Yulinti.Dux.ConfigratioDucis;
+using Yulinti.Dux.ContractusDucis;
+using Yulinti.Dux.Miles;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
-namespace Yulinti.Dux.Miles.Puellae.Interna {
-    public sealed class TabulaStatuumCorporis {
+namespace Yulinti.Dux.Miles {
+    internal sealed class TabulaStatuumCorporis {
         private readonly IStatusCorporis[] _status;
         private readonly IOstiumErrorumLegibile _osErrorumLeg;
 

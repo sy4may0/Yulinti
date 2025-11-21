@@ -1,9 +1,9 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MinisteriumInputMotus {
+    internal sealed class MinisteriumInputMotus {
         private readonly IConfiguratioInputMotus _configuratioInputMotus;
 
         public MinisteriumInputMotus(IConfiguratioInputMotus configuratioInputMotus) {

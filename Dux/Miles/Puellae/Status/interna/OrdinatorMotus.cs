@@ -2,8 +2,8 @@ using System;
 using System.Numerics;
 using Yulinti.Nucleus.Constans;
 
-namespace Yulinti.Dux.Miles.Puellae.Interna {
-    public static class OrdinatorMotus {
+namespace Yulinti.Dux.Miles {
+    internal static class OrdinatorMotus {
         public static OrdinatioMotusHorizontalis OrdinareMotusHorizontalis(
             Vector2 inputMotus,
             float velocitasDesiderata,

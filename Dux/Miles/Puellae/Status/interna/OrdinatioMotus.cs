@@ -1,5 +1,5 @@
-namespace Yulinti.Dux.Miles.Puellae.Interna {
-    public struct OrdinatioMotusHorizontalis {
+namespace Yulinti.Dux.Miles {
+    internal struct OrdinatioMotusHorizontalis {
         public float velocitas;
         public float tempusLevigatum;
 
@@ -9,7 +9,7 @@ namespace Yulinti.Dux.Miles.Puellae.Interna {
         }
     }
 
-    public struct OrdinatioMotusVerticalis {
+    internal struct OrdinatioMotusVerticalis {
         public float velocitas;
         public float tempusLevigatum;
 
@@ -19,7 +19,7 @@ namespace Yulinti.Dux.Miles.Puellae.Interna {
         }
     }
 
-    public struct OrdinatioMotusRotationisY {
+    internal struct OrdinatioMotusRotationisY {
         public float rotatioY;
         public float tempusLevigatum;
 
@@ -29,7 +29,7 @@ namespace Yulinti.Dux.Miles.Puellae.Interna {
         }
     }
 
-    public struct OrdinatioMotus {
+    internal struct OrdinatioMotus {
         public OrdinatioMotusHorizontalis horizontalis;
         public OrdinatioMotusVerticalis verticalis;
         public OrdinatioMotusRotationisY rotationisY;

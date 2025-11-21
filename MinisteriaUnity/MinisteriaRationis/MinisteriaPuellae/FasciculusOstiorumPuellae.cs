@@ -1,9 +1,9 @@
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.Nucleus.Interfacies;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class FasciculusOstiorumPuellae : IPulsabilis, IPulsabilisTardus {
+    internal sealed class FasciculusOstiorumPuellae : IPulsabilis, IPulsabilisTardus {
         private readonly MinisteriumPuellaeOssis _miPuellaeOssis;
         private readonly MiniateriumPuellaeLoci _miPuellaeLoci;
         private readonly MinisteriumPuellaeAnimationes _miPuellaeAnimationes;

@@ -1,7 +1,7 @@
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class OstiumErrorumLegibile : IOstiumErrorumLegibile {
+    internal sealed class OstiumErrorumLegibile : IOstiumErrorumLegibile {
         public void Fatal(string message) {
             ModeratorErrorum.Fatal(message);
         }

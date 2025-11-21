@@ -1,8 +1,8 @@
 using UnityEngine;
 using Yulinti.Nucleus.Interfacies;
 
-namespace Yulinti.MinisteriaUnity.Interna {
-    public sealed class FonsTemporis : IPulsabilis, IPulsabilisFixus {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal sealed class FonsTemporis : IPulsabilis, IPulsabilisFixus {
         private float _intervallum;
         private float _intervallumFixus;
 

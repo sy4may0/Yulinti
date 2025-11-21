@@ -1,14 +1,14 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
-namespace Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Animatio.Interna {
-    public sealed class TabulaAnimationumCorporis {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal sealed class TabulaPuellaeAnimationumCorporis {
         private readonly IStructuraAnimationis[] _animationes;
 
-        public TabulaAnimationumCorporis(ConfiguratioPuellaeLuditorisCorporis luditorisCorporis) {
+        public TabulaPuellaeAnimationumCorporis(ConfiguratioPuellaeLuditorisCorporis luditorisCorporis) {
             int length = (int)IDPuellaeAnimationisCorporis.Count;
             _animationes = new IStructuraAnimationis[length];
 

@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-namespace Yulinti.MinisteriaUnity.Interna {
-    public static class ModeratorErrorum {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal static class ModeratorErrorum {
         public static void Fatal(string message, Exception ex = null) {
             Exception exception = ex ?? new Exception(message);
             #if UNITY_EDITOR

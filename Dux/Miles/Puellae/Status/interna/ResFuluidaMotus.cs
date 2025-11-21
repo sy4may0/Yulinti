@@ -1,5 +1,5 @@
-namespace Yulinti.Dux.Miles.Puellae.Interna {
-    public sealed class ResFuluidaMotus{
+namespace Yulinti.Dux.Miles {
+    internal sealed class ResFuluidaMotus{
         public float _velocitasActualisHorizontal;
         public float _velocitasActualisVertical;
         public float _rotatioYActualis;
@@ -30,14 +30,14 @@ namespace Yulinti.Dux.Miles.Puellae.Interna {
         }
     }
 
-    public interface IResFuluidaMotusLegibile {
+    internal interface IResFuluidaMotusLegibile {
         float VelocitasActualisHorizontal { get; }
         float VelocitasActualisVertical { get; }
         float RotatioYActualis { get; }
         bool EstInTerra { get; }
     }
 
-    public sealed class ResFuluidaMotusLegibile : IResFuluidaMotusLegibile {
+    internal sealed class ResFuluidaMotusLegibile : IResFuluidaMotusLegibile {
         private readonly ResFuluidaMotus _resFuluidaMotus;
 
         public ResFuluidaMotusLegibile(ResFuluidaMotus resFuluidaMotus) {

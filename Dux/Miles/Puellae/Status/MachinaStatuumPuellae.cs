@@ -1,11 +1,11 @@
-using Yulinti.Dux.Miles.Puellae.Interna;
-using Yulinti.Dux.ConfiguratioDucis;
-using Yulinti.Dux.ContructusDucis;
+using Yulinti.Dux.Miles;
+using Yulinti.Dux.ConfigratioDucis;
+using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus.Interfacies;
 using System;
 
-namespace Yulinti.Dux.Miles.Puellae.Status {
+namespace Yulinti.Dux.Miles {
     public sealed class MachinaStatuumPuellae {
         private readonly TabulaStatuumCorporis _tabulaStatuumCorporis;
         private readonly ResFuluidaMotus _resFuluidaMotus;

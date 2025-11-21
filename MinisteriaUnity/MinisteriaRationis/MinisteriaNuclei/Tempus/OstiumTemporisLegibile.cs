@@ -1,7 +1,7 @@
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class OstiumTemporisLegibile : IOstiumTemporisLegibile {
+    internal sealed class OstiumTemporisLegibile : IOstiumTemporisLegibile {
 
         private readonly ITemporis _temporis;
         public OstiumTemporisLegibile(ITemporis temporis) {

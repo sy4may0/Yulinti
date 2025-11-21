@@ -1,13 +1,13 @@
 using UnityEngine;
 
-namespace Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Locus.Interna {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     // 速度と回転を蓄積して、後で反映する。
-    public sealed class Thesaurus {
+    internal sealed class ThesaurusPuellaeLoci {
         private float _thesaurusVelocitisHorizontalis;
         private float _thesaurusVelocitisVerticalis;
         private float _thesaurusRotationisY;
 
-        public Thesaurus() {
+        public ThesaurusPuellaeLoci() {
             _thesaurusVelocitisHorizontalis = 0f;
             _thesaurusVelocitisVerticalis = 0f;
             _thesaurusRotationisY = 0f;

@@ -1,8 +1,7 @@
-using Yulinti.MinisteriaUnity.Interna;
-using Yulinti.Nucleus.InstrumentaMinisterii;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class OstiumPuellaeLociMutabile : IOstiumPuellaeLociMutabile {
+    internal sealed class OstiumPuellaeLociMutabile : IOstiumPuellaeLociMutabile {
         private readonly MiniateriumPuellaeLoci _miPuellaeLoci;
         public OstiumPuellaeLociMutabile(MiniateriumPuellaeLoci miPuellaeLoci) {
             if (miPuellaeLoci == null) {

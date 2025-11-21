@@ -1,14 +1,14 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
-namespace Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Animatio.Interna {
-    public sealed class TabulaAnimationumFundamenti {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal sealed class TabulaPuellaeAnimationumFundamenti {
         private readonly IStructuraAnimationis[] _animationes;
 
-        public TabulaAnimationumFundamenti(ConfiguratioPuellaeLuditorisFundamenti luditorisFundamenti) {
+        public TabulaPuellaeAnimationumFundamenti(ConfiguratioPuellaeLuditorisFundamenti luditorisFundamenti) {
             int length = (int)IDPuellaeAnimationisFundamenti.Count;
             _animationes = new IStructuraAnimationis[length];
 
@@ -31,4 +31,3 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Animatio.
         public IStructuraAnimationis Lego(IDPuellaeAnimationisFundamenti idFundamenti) => _animationes[(int)idFundamenti];
     }
 }
-

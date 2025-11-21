@@ -1,7 +1,7 @@
 using Animancer;
 
-namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
-    public interface IStructuraAnimationis {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal interface IStructuraAnimationis {
         ITransition Animatio { get; }
         float TempusEvanescentiae { get; }
         Easing.Function Lenitio { get; }

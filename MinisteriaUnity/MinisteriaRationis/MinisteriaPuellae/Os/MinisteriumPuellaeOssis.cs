@@ -1,18 +1,17 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Os.Interna;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MinisteriumPuellaeOssis {
-        private readonly TabulaOssium _tabulaOssium;
+    internal sealed class MinisteriumPuellaeOssis {
+        private readonly TabulaPuellaeOssium _tabulaOssium;
 
         public MinisteriumPuellaeOssis(IConfiguratioPuellaeOssis config) {
             if (config == null) {
                 ModeratorErrorum.Fatal("MinisteriumPuellaeOssisのConfiguratioPuellaeOssisがnullです。");
             }
-            _tabulaOssium = new TabulaOssium(config);
+            _tabulaOssium = new TabulaPuellaeOssium(config);
         }
 
         public Vector3 LegoPositionem(IDPuellaeOssis idOssis) => _tabulaOssium.Lego(idOssis).position;

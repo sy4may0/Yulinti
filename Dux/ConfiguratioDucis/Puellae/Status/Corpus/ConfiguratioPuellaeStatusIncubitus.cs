@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
-namespace Yulinti.Dux.ConfiguratioDucis {
+namespace Yulinti.Dux.ConfigratioDucis {
     [System.Serializable]
     public sealed class ConfiguratioPuellaeStatusIncubitus {
         [Header("ConfiguratioPuellaeStatusIncumbo/Incumbo状態の設定")]

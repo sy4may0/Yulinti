@@ -1,17 +1,17 @@
-using Yulinti.Dux.ConfiguratioDucis;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.Dux;
+using Yulinti.Dux.ConfigratioDucis;
+using Yulinti.Dux.Miles;
 
 namespace Yulinti.Rex.Interna {
     public sealed class PraefectusDucum {
         private readonly DuxPuellae _duxPuellae;
-        private readonly Yulinti.Dux.Miles.Puellae.Interna.FasciculusOstiorum _ostiorumPuellae;
+        private readonly FasciculusOstiorum _ostiorumPuellae;
 
         public PraefectusDucum(
             FasciculusConfigurationumDucis configurationumDucis,
             FasciculusOstiorumRationis ostiorumRationis
         ) {
-            _ostiorumPuellae = new Yulinti.Dux.Miles.Puellae.Interna.FasciculusOstiorum(ostiorumRationis);
+            _ostiorumPuellae = new FasciculusOstiorum(ostiorumRationis);
             _duxPuellae = new DuxPuellae(configurationumDucis.Puellae, _ostiorumPuellae);
         }
 

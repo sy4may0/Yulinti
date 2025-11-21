@@ -1,11 +1,11 @@
 using UnityEngine;
 using Animancer;
 using System;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus.Interfacies;
 
-namespace Yulinti.MinisteriaUnity.Interna.InstulmentaAnimancer {
-    public class LuditorAnimationis : IPulsabilis, ILuditorAnimationis {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal class LuditorAnimationis : IPulsabilis, ILuditorAnimationis {
         private readonly AnimancerLayer _animancerLayer;
         private readonly int _indexusLuditoris;
         private IStructuraAnimationis _animatioCurrens;

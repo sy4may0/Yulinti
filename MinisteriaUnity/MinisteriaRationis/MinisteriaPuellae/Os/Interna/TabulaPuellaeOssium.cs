@@ -1,13 +1,13 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.Interna;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
-namespace Yulinti.MinisteriaUnity.MinisteriaRationis.MinisteriaPuellae.Os.Interna {
-    public sealed class TabulaOssium {
+namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    internal sealed class TabulaPuellaeOssium {
         private readonly Transform[] _ossa;
 
-        public TabulaOssium(IConfiguratioPuellaeOssis config) {
+        public TabulaPuellaeOssium(IConfiguratioPuellaeOssis config) {
             int longitudo = (int)IDPuellaeOssis.Count;
             _ossa = new Transform[longitudo];
             Transform rigRoot = config.RigRoot;
