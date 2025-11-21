@@ -3,8 +3,8 @@ namespace Yulinti.Dux.ContructusDucis {
         Quies,                // Idle
         Ambulatio,            // Walk
         Cursus,               // Run
-//        Incumbo,              // Crouch
-//        IncumboAmbulationem,  // CrouchWalk
+        Incumbo,              // Crouch
+        IncumboAmbulationem,  // CrouchWalk
         Count
     }
 }

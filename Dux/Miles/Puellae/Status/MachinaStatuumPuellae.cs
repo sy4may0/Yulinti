@@ -3,6 +3,7 @@ using Yulinti.Dux.ConfiguratioDucis;
 using Yulinti.Dux.ContructusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus.Interfacies;
+using System;
 
 namespace Yulinti.Dux.Miles.Puellae.Status {
     public sealed class MachinaStatuumPuellae {
@@ -14,6 +15,8 @@ namespace Yulinti.Dux.Miles.Puellae.Status {
         private IStatusCorporis _statusCorporisActualis;
         private IDStatus _statusProximus;
 
+        private Action _fInvocanda; // LuditorAnimationisに渡すコールバック
+
         public MachinaStatuumPuellae(
             FasciculusConfigurationumPuellaeStatus configuratioPuellaeStatus,
             FasciculusOstiorum ostia
@@ -23,6 +26,7 @@ namespace Yulinti.Dux.Miles.Puellae.Status {
             _resFuluidaMotus = new ResFuluidaMotus();
             _resFuluidaMotusLeg = new ResFuluidaMotusLegibile(_resFuluidaMotus);
             _statusCorporisActualis = _tabulaStatuumCorporis.Lego(IDStatus.Quies);
+            _fInvocanda = ApplicareMutationis;
 
             InitareAnimationem(configuratioPuellaeStatus.Globalis.IdAnimationisFun);
         }
@@ -42,8 +46,10 @@ namespace Yulinti.Dux.Miles.Puellae.Status {
             // 状態更新を検証
             MutareStatumCorporis();
 
-            // 状態更新を適用
-            ApplicareMutationis();
+            // アニメーションを更新
+            // 状態更新適用(ApplicareMutationis)は
+            // PostulareCorporisによってコールバックとして実行される。
+            MutareAnimationisCorporis();
         }
 
         public void OperoRelatum() {
@@ -91,15 +97,27 @@ namespace Yulinti.Dux.Miles.Puellae.Status {
             IDStatus prox = _statusCorporisActualis.MutareStatum(_resFuluidaMotusLeg);
             if (_statusCorporisActualis.Id != prox) {
                 _statusProximus = prox;
+            } else {
+                _statusProximus = IDStatus.None;
             }
         }
 
+        private void MutareAnimationisCorporis() {
+            if (_statusProximus == IDStatus.None) {
+                return;
+            }
+            _ostia.PuellaeAnimationesMut.PostulareCorporis(
+                _statusCorporisActualis.IdAnimationis, _fInvocanda, false
+            );
+        }
+
         private void ApplicareMutationis() {
+            if (_statusProximus == IDStatus.None) {
+                return;
+            }
             _statusCorporisActualis.Exire(_resFuluidaMotusLeg);
             _statusCorporisActualis = _tabulaStatuumCorporis.Lego(_statusProximus);
             _statusCorporisActualis.Intrare(_resFuluidaMotusLeg);
         }
-
-
     }
 }

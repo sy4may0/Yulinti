@@ -5,6 +5,8 @@ using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.Dux.Miles.Puellae.Status {
     public sealed class StatusAmbulationis : IStatusCorporis {
+
+        private IDPuellaeAnimationisCorporis _idAnimationis;
         private float _velocitasDesiderata;
         private float _acceleratio;
         private float _deceleratio;
@@ -25,6 +27,7 @@ namespace Yulinti.Dux.Miles.Puellae.Status {
             IOstiumCameraLegibile osCameraLeg
         ) {
             _configuratioGlobalis = configuratioGlobalis;
+            _idAnimationis = configuratioPuellaeStatusAmbulationis.IdAnimationis;
             _velocitasDesiderata = configuratioPuellaeStatusAmbulationis.VelocitasDesiderata;
             _acceleratio = configuratioPuellaeStatusAmbulationis.Acceleratio;
             _deceleratio = configuratioPuellaeStatusAmbulationis.Deceleratio;
@@ -35,6 +38,7 @@ namespace Yulinti.Dux.Miles.Puellae.Status {
         }
 
         public IDStatus Id => IDStatus.Ambulatio;
+        public IDPuellaeAnimationisCorporis IdAnimationis => _idAnimationis;
 
         public void Intrare(IResFuluidaMotusLegibile resFuluidaMotus) {
         }
@@ -79,6 +83,10 @@ namespace Yulinti.Dux.Miles.Puellae.Status {
 
             if (_osInputMotusLeg.LegoCursus) {
                 return IDStatus.Cursus;
+            }
+
+            if (_osInputMotusLeg.LegoIncumbo) {
+                return IDStatus.IncumboAmbulationem;
             }
 
             return this.Id;

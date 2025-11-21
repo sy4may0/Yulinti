@@ -4,7 +4,8 @@ using Yulinti.Dux.Miles.Puellae.Interna;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.Dux.Miles.Puellae.Status {
-    public sealed class StatusQuietes : IStatusCorporis {
+    public sealed class StatusIncubitus : IStatusCorporis {
+
         private IDPuellaeAnimationisCorporis _idAnimationis;
         private float _acceleratio;
         private float _deceleratio;
@@ -16,17 +17,17 @@ namespace Yulinti.Dux.Miles.Puellae.Status {
         private readonly IOstiumInputMotusLegibile _osInputMotusLeg;
         private readonly IOstiumTemporisLegibile _osTemporisLeg;
 
-        public StatusQuietes(
+        public StatusIncubitus(
             ConfiguratioPuellaeStatuumGlobalis configuratioGlobalis,
-            ConfiguratioPuellaeStatusQuietes configuratioPuellaeStatusQuietes,
+            ConfiguratioPuellaeStatusIncubitus configuratioPuellaeStatusIncubitus,
             IOstiumInputMotusLegibile osInputMotusLeg,
             IOstiumTemporisLegibile osTemporisLeg
         ) {
             _configuratioGlobalis = configuratioGlobalis;
-            _idAnimationis = configuratioPuellaeStatusQuietes.IdAnimationis;
-            _acceleratio = configuratioPuellaeStatusQuietes.Acceleratio;
-            _deceleratio = configuratioPuellaeStatusQuietes.Deceleratio;
-            _estLevigatum = configuratioPuellaeStatusQuietes.EstLevigatum;
+            _idAnimationis = configuratioPuellaeStatusIncubitus.IdAnimationis;
+            _acceleratio = configuratioPuellaeStatusIncubitus.Acceleratio;
+            _deceleratio = configuratioPuellaeStatusIncubitus.Deceleratio;
+            _estLevigatum = configuratioPuellaeStatusIncubitus.EstLevigatum;
             _osInputMotusLeg = osInputMotusLeg;
             _osTemporisLeg = osTemporisLeg;
         }
@@ -63,12 +64,15 @@ namespace Yulinti.Dux.Miles.Puellae.Status {
             return new OrdinatioMotus(oh, ov, or);
         }
         public IDStatus MutareStatum(IResFuluidaMotusLegibile resFuluidaMotus) {
-            if (_osInputMotusLeg.LegoMotus.LengthSquared() > _configuratioGlobalis.LimenInputQuadratum) {
-                return IDStatus.Ambulatio;
+            if (
+                _osInputMotusLeg.LegoMotus.LengthSquared() > 
+                _configuratioGlobalis.LimenInputQuadratum
+            ) {
+                return IDStatus.IncumboAmbulationem;
             }
 
-            if (_osInputMotusLeg.LegoIncumbo) {
-                return IDStatus.Incumbo;
+            if (!_osInputMotusLeg.LegoIncumbo) {
+                return IDStatus.Quies;
             }
 
             return this.Id;
