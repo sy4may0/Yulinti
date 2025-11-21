@@ -1,0 +1,16 @@
+{
+  "name": "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
+  "rootNamespace": "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
+  "references": [
+    "Yulinti.MinisteriaUnity.ContractusMinisterii"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

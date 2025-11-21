@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.Nucleus.Interfacies;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class Ministeria : IPulsabilis, IPulsabilisPrimum, IPulsabilisFixus, IPulsabilisFixusPrimum, IPulsabilisTardus {

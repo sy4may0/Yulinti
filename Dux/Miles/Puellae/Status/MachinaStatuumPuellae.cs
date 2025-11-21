@@ -2,7 +2,7 @@ using Yulinti.Dux.Miles;
 using Yulinti.Dux.ConfigratioDucis;
 using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.Nucleus.Interfacies;
+using Yulinti.Nucleus;
 using System;
 
 namespace Yulinti.Dux.Miles {

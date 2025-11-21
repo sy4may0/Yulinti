@@ -1,9 +1,9 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Dux.ConfigratioDucis;
-using Yulinti.Dux.Miles;
+using Yulinti.Nucleus;
 
-namespace Yulinti.Rex.Interna {
-    public sealed class PraefectusDucum {
+namespace Yulinti.Dux.Miles {
+    public sealed class PraefectusDucum : IPulsabilis, IPulsabilisPostRationem, IPulsabilisFixus, IPulsabilisTardus {
         private readonly DuxPuellae _duxPuellae;
         private readonly FasciculusOstiorum _ostiorumPuellae;
 

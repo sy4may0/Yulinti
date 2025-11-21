@@ -2,7 +2,7 @@ using UnityEngine;
 using Animancer;
 using System;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.Nucleus.Interfacies;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal class LuditorAnimationis : IPulsabilis, ILuditorAnimationis {

@@ -1,4 +1,4 @@
-namespace Yulinti.Nucleus.Interfacies {
+namespace Yulinti.Nucleus {
     public interface IPulsabilis {
         void Pulsus();
     }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.Nucleus.Interfacies;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MiniateriumPuellaeLoci : IPulsabilis {

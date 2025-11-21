@@ -1,0 +1,23 @@
+{
+  "name": "Yulinti.Rex",
+  "rootNamespace": "Yulinti.Rex",
+  "references": [
+    "Assembly-CSharp",
+    "Yulinti.Nucleus",
+    "Yulinti.Dux.ContractusDucis",
+    "Yulinti.Dux.ConfigratioDucis",
+    "Yulinti.Dux.Miles",
+    "Yulinti.MinisteriaUnity.ContractusMinisterii",
+    "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
+    "Yulinti.MinisteriaUnity.MinisteriaRationis"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

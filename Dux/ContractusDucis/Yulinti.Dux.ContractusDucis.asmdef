@@ -1,0 +1,14 @@
+{
+  "name": "Yulinti.Dux.ContractusDucis",
+  "rootNamespace": "Yulinti.Dux.ContractusDucis",
+  "references": [],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,6 +1,6 @@
 using System;
 using System.Numerics;
-using Yulinti.Nucleus.Constans;
+using Yulinti.Nucleus;
 
 namespace Yulinti.Dux.Miles {
     internal static class OrdinatorMotus {

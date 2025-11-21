@@ -3,6 +3,7 @@ using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Dux.ConfigratioDucis;
+using Yulinti.Dux.Miles;
 using Yulinti.Rex.Interna;
 
 namespace Yulinti.Rex {

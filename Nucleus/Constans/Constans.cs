@@ -1,5 +1,5 @@
 using System;
-namespace Yulinti.Nucleus.Constans {
+namespace Yulinti.Nucleus {
     public static class Numerus {
         public const float Epsilon = 1e-6f;
         public const float EpsilonSq = 1e-12f;
