@@ -44,6 +44,23 @@ namespace Yulinti.Dux.Miles.Puellae.Interna {
                 ostia.CameraPriLeg
             );
 
+            // Incumbo
+            _status[(int)IDStatus.Incumbo] = new StatusIncubitus(
+                configuratioPuellaeStatus.Globalis,
+                configuratioPuellaeStatus.Incubitus,
+                ostia.InputMotusLeg,
+                ostia.TemporisLeg
+            );
+
+            // IncumboAmbulationem
+            _status[(int)IDStatus.IncumboAmbulationem] = new StatusIncubitusAmbulationis(
+                configuratioPuellaeStatus.Globalis,
+                configuratioPuellaeStatus.IncubitusAmbulationem,
+                ostia.InputMotusLeg,
+                ostia.TemporisLeg,
+                ostia.CameraPriLeg
+            );
+
             for (int i = 0; i < longitudo; i++) {
                 if (_status[i] == null) {
                     _osErrorumLeg.Fatal($"IDStatus {(IDStatus)i} の状態が見つかりません。FasciculusConfiguratioPuellaeStatusの設定を確認してください。");
