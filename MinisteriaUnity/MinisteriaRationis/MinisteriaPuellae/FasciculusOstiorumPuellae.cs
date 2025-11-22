@@ -3,7 +3,7 @@ using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class FasciculusOstiorumPuellae : IPulsabilis, IPulsabilisTardus {
+    public sealed class FasciculusOstiorumPuellae : IPulsabilis, IPulsabilisTardus {
         private readonly MinisteriumPuellaeOssis _miPuellaeOssis;
         private readonly MiniateriumPuellaeLoci _miPuellaeLoci;
         private readonly MinisteriumPuellaeAnimationes _miPuellaeAnimationes;
@@ -12,22 +12,22 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly MinisteriumPuellaeFiguraeGenus _miPuellaeFiguraeGenusDex;
         private readonly MinisteriumPuellaeRelationisTerrae _miPuellaeRelationisTerrae;
 
-        private readonly OstiumPuellaeOssisLegibile _osPuellaeOssisLeg;
-        private readonly OstiumPuellaeOssisMutabile _osPuellaeOssisMut;
+        private readonly IOstiumPuellaeOssisLegibile _osPuellaeOssisLeg;
+        private readonly IOstiumPuellaeOssisMutabile _osPuellaeOssisMut;
 
-        private readonly OstiumPuellaeLociLegibile _osPuellaeLociLeg;
-        private readonly OstiumPuellaeLociMutabile _osPuellaeLociMut;
+        private readonly IOstiumPuellaeLociLegibile _osPuellaeLociLeg;
+        private readonly IOstiumPuellaeLociMutabile _osPuellaeLociMut;
 
-        private readonly OstiumPuellaeAnimationesMutabile _osPuellaeAnimationesM;
+        private readonly IOstiumPuellaeAnimationesMutabile _osPuellaeAnimationesM;
 
-        private readonly OstiumPuellaeFiguraePelvisLegibile _osPuellaeFiguraePelvisLeg;
-        private readonly OstiumPuellaeFiguraePelvisMutabile _osPuellaeFiguraePelvisMut;
-        private readonly OstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusSinLeg;
-        private readonly OstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusSinMut;
-        private readonly OstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusDexLeg;
-        private readonly OstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusDexMut;
+        private readonly IOstiumPuellaeFiguraePelvisLegibile _osPuellaeFiguraePelvisLeg;
+        private readonly IOstiumPuellaeFiguraePelvisMutabile _osPuellaeFiguraePelvisMut;
+        private readonly IOstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusSinLeg;
+        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusSinMut;
+        private readonly IOstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusDexLeg;
+        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusDexMut;
 
-        private readonly OstiumPuellaeRelationisTerraeLegibile _osPuellaeRelationisTerraeLeg;
+        private readonly IOstiumPuellaeRelationisTerraeLegibile _osPuellaeRelationisTerraeLeg;
 
         private readonly ITemporis _temporis;
 
@@ -56,24 +56,24 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _osPuellaeFiguraeGenusSinMut = new OstiumPuellaeFiguraeGenusMutabile(_miPuellaeFiguraeGenusSin);
             _osPuellaeFiguraeGenusDexLeg = new OstiumPuellaeFiguraeGenusLegibile(_miPuellaeFiguraeGenusDex);
             _osPuellaeFiguraeGenusDexMut = new OstiumPuellaeFiguraeGenusMutabile(_miPuellaeFiguraeGenusDex);
+            _osPuellaeRelationisTerraeLeg = new OstiumPuellaeRelationisTerraeLegibile(_miPuellaeRelationisTerrae);
         }
 
-        public OstiumPuellaeOssisLegibile OsLeg => _osPuellaeOssisLeg;
-        public OstiumPuellaeOssisMutabile OsMut => _osPuellaeOssisMut;
-        public OstiumPuellaeLociLegibile LocusLeg => _osPuellaeLociLeg;
-        public OstiumPuellaeLociMutabile LocusMut => _osPuellaeLociMut;
-        public OstiumPuellaeAnimationesMutabile AnimatioMut => _osPuellaeAnimationesM;
-        public OstiumPuellaeFiguraePelvisLegibile FiguraPelvisLeg => _osPuellaeFiguraePelvisLeg;
-        public OstiumPuellaeFiguraePelvisMutabile FiguraPelvisMut => _osPuellaeFiguraePelvisMut;
-        public OstiumPuellaeFiguraeGenusLegibile FiguraGenusSinLeg => _osPuellaeFiguraeGenusSinLeg;
-        public OstiumPuellaeFiguraeGenusMutabile FiguraGenusSinMut => _osPuellaeFiguraeGenusSinMut;
-        public OstiumPuellaeFiguraeGenusLegibile FiguraGenusDexLeg => _osPuellaeFiguraeGenusDexLeg;
-        public OstiumPuellaeFiguraeGenusMutabile FiguraGenusDexMut => _osPuellaeFiguraeGenusDexMut;
-        public OstiumPuellaeRelationisTerraeLegibile RelatioTerraeLeg => _osPuellaeRelationisTerraeLeg;
+        public IOstiumPuellaeOssisLegibile OsLeg => _osPuellaeOssisLeg;
+        public IOstiumPuellaeOssisMutabile OsMut => _osPuellaeOssisMut;
+        public IOstiumPuellaeLociLegibile LocusLeg => _osPuellaeLociLeg;
+        public IOstiumPuellaeLociMutabile LocusMut => _osPuellaeLociMut;
+        public IOstiumPuellaeAnimationesMutabile AnimatioMut => _osPuellaeAnimationesM;
+        public IOstiumPuellaeFiguraePelvisLegibile FiguraPelvisLeg => _osPuellaeFiguraePelvisLeg;
+        public IOstiumPuellaeFiguraePelvisMutabile FiguraPelvisMut => _osPuellaeFiguraePelvisMut;
+        public IOstiumPuellaeFiguraeGenusLegibile FiguraGenusSinLeg => _osPuellaeFiguraeGenusSinLeg;
+        public IOstiumPuellaeFiguraeGenusMutabile FiguraGenusSinMut => _osPuellaeFiguraeGenusSinMut;
+        public IOstiumPuellaeFiguraeGenusLegibile FiguraGenusDexLeg => _osPuellaeFiguraeGenusDexLeg;
+        public IOstiumPuellaeFiguraeGenusMutabile FiguraGenusDexMut => _osPuellaeFiguraeGenusDexMut;
+        public IOstiumPuellaeRelationisTerraeLegibile RelatioTerraeLeg => _osPuellaeRelationisTerraeLeg;
 
         public void Pulsus() {
             _miPuellaeAnimationes.Pulsus();
-            _miPuellaeLoci.Pulsus();
         }
 
         public void PulsusTardus() {

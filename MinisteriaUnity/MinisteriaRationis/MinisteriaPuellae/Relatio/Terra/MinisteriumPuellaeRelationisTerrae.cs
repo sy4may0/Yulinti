@@ -33,40 +33,41 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         private float LegoTerramPositionemY(
             Vector3 rayOriginis, Vector3 rayDirectionis,
-            float distantia, LayerMask stratum
+            float distantia
         ) {
-            if (Physics.Raycast(rayOriginis, rayDirectionis, out var hit, distantia, stratum)) {
+            if (Physics.Raycast(rayOriginis, rayDirectionis, out var hit, distantia, _config.RaycastStratum)) {
                 return hit.point.y + Mathf.Epsilon;
             }
             return float.NegativeInfinity;
         }
+
         private float ComputareTerramPositionemY(
             Transform pes, Transform digitusPedis,
-            float altitudo, float distantia, LayerMask stratum
+            float altitudo, float distantia
         ) {
             if (digitusPedis == null) {
                 Vector3 rayOriginis = pes.position + Vector3.up * altitudo;
-                return LegoTerramPositionemY(rayOriginis, -Vector3.up, altitudo + distantia, stratum);
+                return LegoTerramPositionemY(rayOriginis, -Vector3.up, altitudo + distantia);
             } else {
                 float dy = Vector3.Dot(pes.position - digitusPedis.position, Vector3.up);
                 Vector3 rayOriginis = (dy < 0f) 
                     ? pes.position + Vector3.up * altitudo
                     : digitusPedis.position + Vector3.up * altitudo;
-                return LegoTerramPositionemY(rayOriginis, -Vector3.up, altitudo + distantia, stratum);
+                return LegoTerramPositionemY(rayOriginis, -Vector3.up, altitudo + distantia);
             }
         }
 
         public float AltitudoTerrae(
-            float rayCastAltitudo, float rayCastDistantia, LayerMask rayCastStratum
+            float rayCastAltitudo, float rayCastDistantia
         ) {
             float altitudoTerrae = ComputareTerramPositionemY(
                 _rightFoot, _rightToe,
-                rayCastAltitudo, rayCastDistantia, rayCastStratum
+                rayCastAltitudo, rayCastDistantia
             );
             if (float.IsNegativeInfinity(altitudoTerrae)) {
                 altitudoTerrae = ComputareTerramPositionemY(
                     _leftFoot, _leftToe,
-                    rayCastAltitudo, rayCastDistantia, rayCastStratum
+                    rayCastAltitudo, rayCastDistantia
                 );
             }
             return altitudoTerrae;

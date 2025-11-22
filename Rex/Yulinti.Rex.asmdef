@@ -2,12 +2,12 @@
   "name": "Yulinti.Rex",
   "rootNamespace": "Yulinti.Rex",
   "references": [
-    "Assembly-CSharp",
     "Yulinti.Nucleus",
     "Yulinti.Dux.ContractusDucis",
-    "Yulinti.Dux.ConfigratioDucis",
     "Yulinti.Dux.Miles",
+    "Yulinti.Dux.Thesaurus",
     "Yulinti.MinisteriaUnity.ContractusMinisterii",
+    "Yulinti.MinisteriaUnity.ConfiguratioDucis",
     "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
     "Yulinti.MinisteriaUnity.MinisteriaRationis"
   ],

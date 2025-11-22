@@ -1,8 +1,7 @@
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class FasciculusOstiorumNuclei {
+    public sealed class FasciculusOstiorumNuclei {
         private readonly OstiumErrorumLegibile _osErrorumLeg;
         private readonly OstiumTemporisLegibile _osTemporisLeg;
 

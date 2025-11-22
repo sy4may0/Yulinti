@@ -1,5 +1,5 @@
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal interface ITemporis {
+    public interface ITemporis {
         float Intervallum { get; }
         float IntervallumFixus { get; }
     }

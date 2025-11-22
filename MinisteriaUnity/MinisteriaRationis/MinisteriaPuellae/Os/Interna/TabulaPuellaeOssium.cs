@@ -17,9 +17,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _ossa[(int)IDPuellaeOssis.RightUpperLeg] = rigRoot.Find(config.RightUpperLegPath);
             _ossa[(int)IDPuellaeOssis.RightLowerLeg] = rigRoot.Find(config.RightLowerLegPath);
             _ossa[(int)IDPuellaeOssis.RightFoot] = rigRoot.Find(config.RightFootPath);
+            _ossa[(int)IDPuellaeOssis.RightToe] = rigRoot.Find(config.RightToePath);
             _ossa[(int)IDPuellaeOssis.LeftUpperLeg] = rigRoot.Find(config.LeftUpperLegPath);
             _ossa[(int)IDPuellaeOssis.LeftLowerLeg] = rigRoot.Find(config.LeftLowerLegPath);
             _ossa[(int)IDPuellaeOssis.LeftFoot] = rigRoot.Find(config.LeftFootPath);
+            _ossa[(int)IDPuellaeOssis.LeftToe] = rigRoot.Find(config.LeftToePath);
             _ossa[(int)IDPuellaeOssis.RightX150pin] = rigRoot.Find(config.RightX150pinPath);
             _ossa[(int)IDPuellaeOssis.RightY90pin] = rigRoot.Find(config.RightY90pinPath);
             _ossa[(int)IDPuellaeOssis.LeftX150pin] = rigRoot.Find(config.LeftX150pinPath);

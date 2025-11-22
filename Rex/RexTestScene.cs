@@ -2,9 +2,9 @@ using UnityEngine;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.Dux.ConfigratioDucis;
+using Yulinti.MinisteriaUnity.ConfiguratioDucis;
+using Yulinti.Dux.Thesaurus;
 using Yulinti.Dux.Miles;
-using Yulinti.Rex.Interna;
 
 namespace Yulinti.Rex {
     public sealed class RexTestScene : MonoBehaviour {
@@ -15,7 +15,8 @@ namespace Yulinti.Rex {
 
         private void Awake() {
             _ministeria = new Ministeria(_configurationum);
-            _praefectusDucum = new PraefectusDucum(_configurationumDucis, _ministeria.OstiorumRationis);
+            FasciculusThesaurorum thesaurorum = new FasciculusThesaurorum(_configurationumDucis);
+            _praefectusDucum = new PraefectusDucum(thesaurorum, _ministeria.OstiorumRationis);
         }
 
         private void Start() {
@@ -36,6 +37,7 @@ namespace Yulinti.Rex {
         }
 
         private void LateUpdate() {
+            _praefectusDucum.PulsusTardus();
             _ministeria.PulsusTardus();
         }
     }

@@ -1,16 +1,20 @@
 using Yulinti.Dux.Miles;
-using Yulinti.Dux.ConfigratioDucis;
+using Yulinti.Dux.Thesaurus;
 using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus;
 using System;
 
 namespace Yulinti.Dux.Miles {
-    public sealed class MachinaStatuumPuellae {
+    internal sealed class MachinaStatuumPuellae {
         private readonly TabulaStatuumCorporis _tabulaStatuumCorporis;
         private readonly ResFuluidaMotus _resFuluidaMotus;
         private readonly IResFuluidaMotusLegibile _resFuluidaMotusLeg;
-        private readonly FasciculusOstiorum _ostia;
+        private readonly Motor _motor;
+        private readonly IOstiumPuellaeAnimationesMutabile _osAnimationesMut;
+        private readonly IOstiumPuellaeLociLegibile _osPuellaeLociLeg;
+        private readonly IOstiumPuellaeLociMutabile _osPuellaeLociMut;
 
         private IStatusCorporis _statusCorporisActualis;
         private IDStatus _statusProximus;
@@ -18,31 +22,34 @@ namespace Yulinti.Dux.Miles {
         private Action _fInvocanda; // LuditorAnimationisに渡すコールバック
 
         public MachinaStatuumPuellae(
-            FasciculusConfigurationumPuellaeStatus configuratioPuellaeStatus,
-            FasciculusOstiorum ostia
+            FasciculusThesaurorumPuellaeStatus thesauriPuellaeStatus,
+            FasciculusOstiorumPuellae ostia
         ) {
-            _ostia = ostia;
-            _tabulaStatuumCorporis = new TabulaStatuumCorporis(configuratioPuellaeStatus, ostia);
+            _osAnimationesMut = ostia.PuellaeAnimationesMut;
+            _osPuellaeLociLeg = ostia.PuellaeLociLeg;
+            _osPuellaeLociMut = ostia.PuellaeLociMut;
+            _tabulaStatuumCorporis = new TabulaStatuumCorporis(
+                thesauriPuellaeStatus,
+                ostia.InputMotusLeg,
+                ostia.TemporisLeg,
+                ostia.CameraPriLeg,
+                ostia.ErrorumLeg
+            );
             _resFuluidaMotus = new ResFuluidaMotus();
             _resFuluidaMotusLeg = new ResFuluidaMotusLegibile(_resFuluidaMotus);
             _statusCorporisActualis = _tabulaStatuumCorporis.Lego(IDStatus.Quies);
             _fInvocanda = ApplicareMutationis;
 
-            InitareAnimationem(configuratioPuellaeStatus.Globalis.IdAnimationisFun);
+            InitareAnimationem(thesauriPuellaeStatus.Globalis.IdAnimationisFun);
+            _motor = new Motor(ostia.PuellaeLociMut, ostia.PuellaeLociLeg, ostia.TemporisLeg);
         }
 
         private void InitareAnimationem(IDPuellaeAnimationisFundamenti idFundamenti) {
-            _ostia.PuellaeAnimationesMut.CogereFundamenti(idFundamenti, null, false);
-            _ostia.PuellaeAnimationesMut.CogereDesinentiamCorporis();
+            _osAnimationesMut.CogereFundamenti(idFundamenti, null, false);
+            _osAnimationesMut.CogereDesinentiamCorporis();
         }
 
         public void Opero() {
-            // 移動計画を作成
-            OrdinatioMotus ordinatio = OrdinareMotum();
-
-            // 移動計画を適用
-            ApplicareOrdinationem(ordinatio);
-
             // 状態更新を検証
             MutareStatumCorporis();
 
@@ -50,47 +57,30 @@ namespace Yulinti.Dux.Miles {
             // 状態更新適用(ApplicareMutationis)は
             // PostulareCorporisによってコールバックとして実行される。
             MutareAnimationisCorporis();
-        }
 
-        public void OperoRelatum() {
-            // FuluidMotusを最新化
+            // 移動計画を作成
+            OrdinatioMotus ordinatio = OrdinareMotum();
+
+            _motor.ApplicareMotus(ordinatio);
+
             RenovareFuluidaMotus();
 
-            // アニメーションに速度を反映
-            _ostia.PuellaeAnimationesMut.InjicereVelocitatem(
+            _osAnimationesMut.InjicereVelocitatem(
                 _resFuluidaMotus.VelocitasActualisHorizontal
             );
         }
 
         private void RenovareFuluidaMotus() {
             _resFuluidaMotus.Renovare(
-                _ostia.PuellaeLociLeg.VelHorizontalisPre,
-                _ostia.PuellaeLociLeg.VelVerticalisPre,
-                _ostia.PuellaeLociLeg.RotatioYPre,
+                _osPuellaeLociLeg.VelHorizontalisActualis,
+                _osPuellaeLociLeg.VelVerticalisActualis,
+                _osPuellaeLociLeg.RotatioYActualis,
                 true // TODO: 現状、ジャンプ無。EstInTerraは常にtrue。
             );
         }
 
         private OrdinatioMotus OrdinareMotum() {
             return _statusCorporisActualis.Ordinare(_resFuluidaMotusLeg);
-        }
-
-        private void ApplicareOrdinationem(OrdinatioMotus ordinatio) {
-            _ostia.PuellaeLociMut.AddoVelocitatemHorizontalisLate(
-                ordinatio.horizontalis.velocitas,
-                ordinatio.horizontalis.tempusLevigatum,
-                _ostia.TemporisLeg.Intervallum
-            );
-            _ostia.PuellaeLociMut.AddoVelocitatemVerticalisLate(
-                ordinatio.verticalis.velocitas,
-                ordinatio.verticalis.tempusLevigatum,
-                _ostia.TemporisLeg.Intervallum
-            );
-            _ostia.PuellaeLociMut.PonoRotationisYLate(
-                ordinatio.rotationisY.rotatioY,
-                ordinatio.rotationisY.tempusLevigatum,
-                _ostia.TemporisLeg.Intervallum
-            );
         }
 
         private void MutareStatumCorporis() {
@@ -106,8 +96,10 @@ namespace Yulinti.Dux.Miles {
             if (_statusProximus == IDStatus.None) {
                 return;
             }
-            _ostia.PuellaeAnimationesMut.PostulareCorporis(
-                _statusCorporisActualis.IdAnimationis, _fInvocanda, false
+            IDPuellaeAnimationisCorporis idAnimationisProximus = 
+                _tabulaStatuumCorporis.Lego(_statusProximus).IdAnimationis;
+            _osAnimationesMut.PostulareCorporis(
+                idAnimationisProximus, _fInvocanda, false
             );
         }
 

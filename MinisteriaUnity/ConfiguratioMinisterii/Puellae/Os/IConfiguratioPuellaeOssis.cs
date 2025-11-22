@@ -9,9 +9,11 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         string RightUpperLegPath { get; }
         string RightLowerLegPath { get; }
         string RightFootPath { get; }
+        string RightToePath { get; }
         string LeftUpperLegPath { get; }
         string LeftLowerLegPath { get; }
         string LeftFootPath { get; }
+        string LeftToePath { get; }
         string RightX150pinPath { get; }
         string RightY90pinPath { get; }
         string LeftX150pinPath { get; }

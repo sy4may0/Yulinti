@@ -10,11 +10,11 @@ using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 // 補助 => Camera Auxiliaria
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class FasciculusOstiorumCamera {
+    public sealed class FasciculusOstiorumCamera {
         private readonly MinisteriumCamera _miCameraPri;
 
-        private readonly OstiumCameraLegibile _osCameraPriLeg;
-        private readonly OstiumCameraMutabile _osCameraPriMut;
+        private readonly IOstiumCameraLegibile _osCameraPriLeg;
+        private readonly IOstiumCameraMutabile _osCameraPriMut;
 
         public FasciculusOstiorumCamera(FasciculusConfigurationumCamera configurationes) {
             if (configurationes == null) {
@@ -26,7 +26,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _osCameraPriMut = new OstiumCameraMutabile(_miCameraPri);
         }
 
-        public OstiumCameraLegibile PrincepsLeg => _osCameraPriLeg;
-        public OstiumCameraMutabile PrincepsMut => _osCameraPriMut;
+        public IOstiumCameraLegibile PrincepsLeg => _osCameraPriLeg;
+        public IOstiumCameraMutabile PrincepsMut => _osCameraPriMut;
     }
 }

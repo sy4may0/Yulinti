@@ -4,19 +4,17 @@ using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class MiniateriumPuellaeLoci : IPulsabilis {
+    internal sealed class MiniateriumPuellaeLoci {
         private readonly CharacterController _characterController;
         private readonly ITemporis _temporis;
-
-        private ThesaurusPuellaeLoci _thesaurus;
 
         private float _refVelocitisHorizontalis;
         private float _refVelocitisVerticalis;
         private float _refRotationisY;
 
-        private float _velocitasHorizontalisPre;
-        private float _velocitasVerticalisPre;
-        private float _rotationisYPre;
+        private float _velocitasHorizontalisActualis;
+        private float _velocitasVerticalisActualis;
+        private float _rotationisYActualis;
 
         public MiniateriumPuellaeLoci(
             IConfiguratioPuellaeLoci config,
@@ -33,31 +31,30 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 ModeratorErrorum.Fatal("MiniateriumPuellaeLociのConfiguratioPuellaeLociのCharacterControllerがnullです。");
             }
             _temporis = temporis;
-            _thesaurus = new ThesaurusPuellaeLoci();
             _refVelocitisHorizontalis = 0f;
             _refVelocitisVerticalis = 0f;
             _refRotationisY = 0f;
-            _velocitasHorizontalisPre = 0f;
-            _velocitasVerticalisPre = 0f;
-            _rotationisYPre = _characterController.transform.rotation.eulerAngles.y;
+            _velocitasHorizontalisActualis = 0f;
+            _velocitasVerticalisActualis = 0f;
+            _rotationisYActualis = _characterController.transform.rotation.eulerAngles.y;
         }
 
-        public float VelHorizontalisPre => _velocitasHorizontalisPre;
-        public float VelVerticalisPre => _velocitasVerticalisPre;
-        public float RotatioYPre => _rotationisYPre;
+        public float VelHorizontalisActualis => _velocitasHorizontalisActualis;
+        public float VelVerticalisActualis => _velocitasVerticalisActualis;
+        public float RotatioYActualis => _rotationisYActualis;
         public Vector3 Positio => _characterController.transform.position;
         public Quaternion Rotatio => _characterController.transform.rotation;
 
         private void PurgareVelocitates() {
             _refVelocitisHorizontalis = 0f;
             _refVelocitisVerticalis = 0f;
-            _velocitasHorizontalisPre = 0f;
-            _velocitasVerticalisPre = 0f;
+            _velocitasHorizontalisActualis = 0f;
+            _velocitasVerticalisActualis = 0f;
         }
 
         private void PurgareRotationes() {
             _refRotationisY = 0f;
-            _rotationisYPre = _characterController.transform.rotation.eulerAngles.y;
+            _rotationisYActualis = _characterController.transform.rotation.eulerAngles.y;
         }
 
         public void PonoPositionemCoacte(Vector3 positio) {
@@ -70,88 +67,105 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             PurgareRotationes();
         }
 
-        public void AddoVelocitatemHorizontalisLate(
-            float velocitasMeta,
-            float tempusLevis,
+        public void Moto(
+            float velocitasHorizontalisDesiderata,
+            float tempusLevigatumHorizontalis,
+            float velocitasVerticalisDesiderata,
+            float tempusLevigatumVerticalis,
+            float rotatioYDesiderata,
+            float tempusLevigatumRotatioY,
+            float intervallum
+        ) {
+            _velocitasHorizontalisActualis = ComputareVelocitasHorizontalis(
+                velocitasHorizontalisDesiderata,
+                tempusLevigatumHorizontalis,
+                intervallum
+            );
+            _velocitasVerticalisActualis = ComputareVelocitasVerticalis(
+                velocitasVerticalisDesiderata,
+                tempusLevigatumVerticalis,
+                intervallum
+            );
+            _rotationisYActualis = ComputareRotationisY(
+                rotatioYDesiderata,
+                tempusLevigatumRotatioY,
+                intervallum
+            );
+
+            Vector3 motusHorizontalis = 
+                _characterController.transform.forward * _velocitasHorizontalisActualis * intervallum;
+            Vector3 motusVerticalis = 
+                Vector3.up * _velocitasVerticalisActualis * intervallum;
+            Quaternion rotatio = Quaternion.Euler(0f, _rotationisYActualis, 0f);
+
+            _characterController.transform.rotation = rotatio;
+            _characterController.Move(motusHorizontalis + motusVerticalis);
+        }
+
+        private float ComputareVelocitasHorizontalis(
+            float velocitasDesiderata,
+            float tempusLevigatum,
             float intervallum
         ) {
             float velocitas = 0f;
-            if (tempusLevis <= 0.000001f) {
-                velocitas = velocitasMeta;
+            if (tempusLevigatum <= 0.000001f) {
+                velocitas = velocitasDesiderata;
             } else {
                 velocitas = Mathf.SmoothDamp(
-                    _velocitasHorizontalisPre,
-                    velocitasMeta,
+                    _velocitasHorizontalisActualis,
+                    velocitasDesiderata,
                     ref _refVelocitisHorizontalis,
-                    tempusLevis,
+                    tempusLevigatum,
                     Mathf.Infinity,
                     intervallum
                 );
             }
 
-            _thesaurus.AddoVelHorizontalis(velocitas);
+            return velocitas;
         }
 
-        public void AddoVelocitatemVerticalisLate(
-            float velocitasMeta,
-            float tempusLevis,
+        private float ComputareVelocitasVerticalis(
+            float velocitasVerticalisDesiderata,
+            float tempusLevigatumVerticalis,
             float intervallum
         ) {
             float velocitas = 0f;
-            if (tempusLevis <= 0.000001f) {
-                velocitas = velocitasMeta;
+            if (tempusLevigatumVerticalis <= 0.000001f) {
+                velocitas = velocitasVerticalisDesiderata;
             } else {
                 velocitas = Mathf.SmoothDamp(
-                    _velocitasVerticalisPre,
-                    velocitasMeta,
+                    _velocitasVerticalisActualis,
+                    velocitasVerticalisDesiderata,
                     ref _refVelocitisVerticalis,
-                    tempusLevis,
+                    tempusLevigatumVerticalis,
                     Mathf.Infinity,
                     intervallum
                 );
             }
-
-            _thesaurus.AddoVelVerticalis(velocitas);
+            return velocitas;
         }
 
-        public void PonoRotationisYLate(
-            float rotatioYMeta,
-            float tempusLevis,
+        private float ComputareRotationisY(
+            float rotatioYDesiderata,
+            float tempusLevigatum,
             float intervallum
         ) {
             float rotatioY = 0f;
-            if (tempusLevis <= 0.000001f) {
-                rotatioY = rotatioYMeta;
+            if (tempusLevigatum <= 0.000001f) {
+                rotatioY = rotatioYDesiderata;
             } else {
                 rotatioY = Mathf.SmoothDampAngle(
-                    _rotationisYPre,
-                    rotatioYMeta,
+                    _rotationisYActualis,
+                    rotatioYDesiderata,
                     ref _refRotationisY,
-                    tempusLevis,
+                    tempusLevigatum,
                     Mathf.Infinity,
                     intervallum
                 );
             }
 
-            _thesaurus.PonoRotationisY(Mathf.DeltaAngle(_rotationisYPre, rotatioY));
-        }
+            return rotatioY;
 
-        public void Pulsus() {
-            float intervallum = _temporis.Intervallum;
-
-            // 蓄積加算された速度を反映
-            _characterController.transform.rotation = 
-                _thesaurus.Rotatio(_rotationisYPre);
-            _characterController.Move(
-                _thesaurus.Motus(_characterController.transform.forward, intervallum));
-            
-            // 現在の速度と回転を保存
-            _rotationisYPre = _characterController.transform.rotation.eulerAngles.y;
-            _velocitasHorizontalisPre = _thesaurus.VelocitasHorizontalis;
-            _velocitasVerticalisPre = _thesaurus.VelocitasVerticalis;
-            
-            // 蓄積値をリセット。
-            _thesaurus.Purgare();
         }
     }
 }

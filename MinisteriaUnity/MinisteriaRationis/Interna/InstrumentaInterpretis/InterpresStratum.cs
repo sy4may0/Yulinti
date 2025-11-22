@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.ContractusMinisterii.Terrae;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal static class InterpresStratum {

@@ -88,8 +88,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             return _animancerLayer.CurrentState?.NormalizedTime ?? 0f;
         }
 
-        public void PonoTempusSimultaneum(float time) {
-            _tempusSimultaneum = time;
+        public void PonoTempusSimultaneum(float tempus) {
+            _tempusSimultaneum = tempus;
         }
 
         // ======= INTERNAL METHODS =======
@@ -120,8 +120,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 return;
             }
 
-            // RequestがCurrentと同じ場合、何もしない。
+            // RequestがCurrentと同じ場合、コールバックを実行してリクエスト処理。
             if (ReferenceEquals(_animatioPostulata, _animatioCurrens)) {
+                _fInvocandaPostulata?.Invoke();
+                PurgarePetitionem();
                 return;
             }
 
@@ -130,6 +132,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 Desinere();
                 return;
             }
+
 
             // 強制Play要求
             if (_estCogens) {

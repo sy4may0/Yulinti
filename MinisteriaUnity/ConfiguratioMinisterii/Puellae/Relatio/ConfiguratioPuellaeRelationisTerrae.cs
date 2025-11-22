@@ -8,10 +8,12 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         [SerializeField] private Transform _leftToe;
         [SerializeField] private Transform _rightFoot;
         [SerializeField] private Transform _rightToe;
+        [SerializeField] private LayerMask _raycastStratum;
 
         public Transform LeftFoot => _leftFoot;
         public Transform LeftToe => _leftToe;
         public Transform RightFoot => _rightFoot;
         public Transform RightToe => _rightToe;
+        public LayerMask RaycastStratum => _raycastStratum;
    }
 }

@@ -16,14 +16,24 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public void PonoRotationemCoacte(System.Numerics.Quaternion rotatio) {
             _miPuellaeLoci.PonoRotationemCoacte(InterpressNumericus.ToUnity(rotatio));
         }
-        public void AddoVelocitatemHorizontalisLate(float velocitasMeta, float tempusLevis, float intervallum) {
-            _miPuellaeLoci.AddoVelocitatemHorizontalisLate(velocitasMeta, tempusLevis, intervallum);
-        }
-        public void AddoVelocitatemVerticalisLate(float velocitasMeta, float tempusLevis, float intervallum) {
-            _miPuellaeLoci.AddoVelocitatemVerticalisLate(velocitasMeta, tempusLevis, intervallum);
-        }
-        public void PonoRotationisYLate(float rotatioYMeta, float tempusLevis, float intervallum) {
-            _miPuellaeLoci.PonoRotationisYLate(rotatioYMeta, tempusLevis, intervallum);
+        public void Moto(
+            float velocitasHorizontalisDesiderata,
+            float tempusLevigatumHorizontalis,
+            float velocitasVerticalisDesiderata,
+            float tempusLevigatumVerticalis,
+            float rotatioYDesiderata,
+            float tempusLevigatumRotatioY,
+            float intervallum
+        ) {
+            _miPuellaeLoci.Moto(
+                velocitasHorizontalisDesiderata,
+                tempusLevigatumHorizontalis,
+                velocitasVerticalisDesiderata,
+                tempusLevigatumVerticalis,
+                rotatioYDesiderata,
+                tempusLevigatumRotatioY,
+                intervallum
+            );
         }
     }
 }

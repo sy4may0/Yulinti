@@ -6,5 +6,6 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         Transform LeftToe { get; }
         Transform RightFoot { get; }
         Transform RightToe { get; }
+        LayerMask RaycastStratum { get; }
     }
 }

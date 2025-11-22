@@ -1,9 +1,9 @@
-using Yulinti.ContractusMinisterii.Terrae;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public interface IOstiumPuellaeRelationisTerraeLegibile {
         float AltitudoTerrae(
-            float rayCastAltitudo, float rayCastDistantia, IDStrati rayCastStratum
+            float rayCastAltitudo, float rayCastDistantia
         );
     }
 }

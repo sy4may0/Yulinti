@@ -1,8 +1,9 @@
 using Yulinti.Dux.ContractusDucis;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Dux.Miles;
 
 namespace Yulinti.Dux.Miles {
-    public interface IStatusCorporis {
+    internal interface IStatusCorporis {
         public IDStatus Id { get; }
         public IDPuellaeAnimationisCorporis IdAnimationis { get; }
         public void Intrare(IResFuluidaMotusLegibile resFuluidaMotus);

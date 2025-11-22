@@ -1,5 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.ContractusMinisterii.Terrae;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumPuellaeRelationisTerraeLegibile : IOstiumPuellaeRelationisTerraeLegibile {
@@ -12,11 +12,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         public float AltitudoTerrae(
-            float rayCastAltitudo, float rayCastDistantia, IDStrati rayCastStratum
+            float rayCastAltitudo, float rayCastDistantia
         ) { 
             return _miPuellaeRelationisTerrae.AltitudoTerrae(
-            rayCastAltitudo, rayCastDistantia, 
-            InterpresStratum.ToStratum(rayCastStratum)
+            rayCastAltitudo, rayCastDistantia
             );
         }
     }

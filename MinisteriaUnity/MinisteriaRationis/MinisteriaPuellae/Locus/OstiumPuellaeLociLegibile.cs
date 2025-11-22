@@ -9,9 +9,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             }
             _miPuellaeLoci = miPuellaeLoci;
         }
-        public float VelHorizontalisPre => _miPuellaeLoci.VelHorizontalisPre;
-        public float VelVerticalisPre => _miPuellaeLoci.VelVerticalisPre;
-        public float RotatioYPre => _miPuellaeLoci.RotatioYPre;
+        public float VelHorizontalisActualis => _miPuellaeLoci.VelHorizontalisActualis;
+        public float VelVerticalisActualis => _miPuellaeLoci.VelVerticalisActualis;
+        public float RotatioYActualis => _miPuellaeLoci.RotatioYActualis;
         public System.Numerics.Vector3 Positio => 
             InterpressNumericus.ToNumerics(_miPuellaeLoci.Positio);
         public System.Numerics.Quaternion Rotatio => 

@@ -1,29 +1,45 @@
 using Yulinti.Nucleus;
-using Yulinti.Dux.ConfigratioDucis;
+using Yulinti.Dux.Thesaurus;
 using Yulinti.Dux.Miles;
 
 namespace Yulinti.Dux.Miles {
     public sealed class DuxPuellae : IPulsabilis, IPulsabilisFixus, IPulsabilisTardus, IPulsabilisPostRationem {
         private readonly MachinaStatuumPuellae _machinaStatuumPuellae;
+        private readonly InTerrae _inTerrae;
+        private readonly Figura _figura;
+        private readonly Crinis _crinis;
 
-        public DuxPuellae(
-            FasciculusConfigurationumDucisPuellae configuratioDucisPuellae,
-            FasciculusOstiorum ostia
+        internal DuxPuellae(
+            FasciculusThesaurorumPuellae thesaurorumPuellae,
+            FasciculusOstiorumPuellae ostia
         ) {
-            _machinaStatuumPuellae = new MachinaStatuumPuellae(configuratioDucisPuellae.Status, ostia);
+            _machinaStatuumPuellae = new MachinaStatuumPuellae(thesaurorumPuellae.Status, ostia);
+            _inTerrae = new InTerrae(
+                ostia.PuellaeRelationisTerraeLeg, 
+                ostia.PuellaeOssisMut, ostia.PuellaeOssisLeg, 
+                thesaurorumPuellae.InTerrae
+            );
+            _figura = new Figura(
+                ostia.PuellaeOssisLeg,
+                ostia.PuellaeFiguraePelvisMut,
+                ostia.PuellaeFiguraeGenusDexMut,
+                ostia.PuellaeFiguraeGenusSinMut
+            );
+            _crinis = new Crinis(ostia.PuellaeCrinisAdiunctionisMut);
         }
 
         public void Pulsus() {
             _machinaStatuumPuellae.Opero();
         }
         public void PulsusPostRationem() {
-            _machinaStatuumPuellae.OperoRelatum();
         }
 
         public void PulsusFixus() {
         }
 
         public void PulsusTardus() {
+            _inTerrae.ElevoPelvis();
+            _figura.ApplicareFiguram();
         }
     }
 }
