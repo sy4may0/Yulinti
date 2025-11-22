@@ -1,0 +1,20 @@
+{
+    "name": "Yulinti.Dux.Miles",
+    "rootNamespace": "Yulinti.Dux.Miles",
+    "references": [
+        "Yulinti.Nucleus",
+        "Yulinti.Dux.Thesaurus",
+        "Yulinti.Dux.ContractusDucis",
+        "Yulinti.MinisteriaUnity.ContractusMinisterii",
+        "Yulinti.MinisteriaUnity.MinisteriaRationis"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

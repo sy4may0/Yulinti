@@ -1,0 +1,18 @@
+{
+    "name": "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
+    "rootNamespace": "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
+    "references": [
+        "Unity.InputSystem",
+        "Yulinti.MinisteriaUnity.ContractusMinisterii",
+        "Kybernetik.Animancer"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

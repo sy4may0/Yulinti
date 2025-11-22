@@ -1,0 +1,17 @@
+{
+  "name": "Yulinti.MinisteriaUnity.ConfiguratioDucis",
+  "rootNamespace": "Yulinti.MinisteriaUnity.ConfiguratioDucis",
+  "references": [
+    "Yulinti.MinisteriaUnity.ContractusMinisterii",
+    "Yulinti.Dux.ContractusDucis"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,22 @@
+{
+    "name": "Yulinti.MinisteriaUnity.MinisteriaRationis",
+    "rootNamespace": "Yulinti.MinisteriaUnity.MinisteriaRationis",
+    "references": [
+        "Kybernetik.Animancer",
+        "Unity.InputSystem",
+        "Yulinti.Nucleus",
+        "Yulinti.MinisteriaUnity.ContractusMinisterii",
+        "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
+        "Unity.Addressables",
+        "Unity.ResourceManager"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

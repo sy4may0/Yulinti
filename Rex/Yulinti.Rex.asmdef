@@ -1,0 +1,23 @@
+{
+  "name": "Yulinti.Rex",
+  "rootNamespace": "Yulinti.Rex",
+  "references": [
+    "Yulinti.Nucleus",
+    "Yulinti.Dux.ContractusDucis",
+    "Yulinti.Dux.Miles",
+    "Yulinti.Dux.Thesaurus",
+    "Yulinti.MinisteriaUnity.ContractusMinisterii",
+    "Yulinti.MinisteriaUnity.ConfiguratioDucis",
+    "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
+    "Yulinti.MinisteriaUnity.MinisteriaRationis"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
