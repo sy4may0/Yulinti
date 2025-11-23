@@ -7,6 +7,7 @@ namespace Yulinti.Dux.Thesaurus {
         public float RaycastDistantia { get; set; } = 1.0f;
         public float PesYCorrectivus { get; set; } = 0.113f;
         public float DigitusPedisYCorrectivus { get; set; } = 0.034f;
+        public float MaxElevatio { get; set; } = 0.45f;
 
         public ThesaurusPuellaeInTerrae() {
         }
@@ -20,6 +21,7 @@ namespace Yulinti.Dux.Thesaurus {
             RaycastDistantia = configuratio.RaycastDistantia;
             PesYCorrectivus = configuratio.PesYCorrectivus;
             DigitusPedisYCorrectivus = configuratio.DigitusPedisYCorrectivus;
+            MaxElevatio = configuratio.MaxElevatio;
         }
     }
 }

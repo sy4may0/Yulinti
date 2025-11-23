@@ -11,11 +11,18 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeRelationisTerrae = miPuellaeRelationisTerrae;
         }
 
-        public float AltitudoTerrae(
+        public float AltitudoTerraeDextra(
             float rayCastAltitudo, float rayCastDistantia
         ) { 
-            return _miPuellaeRelationisTerrae.AltitudoTerrae(
+            return _miPuellaeRelationisTerrae.AltitudoTerraeDextra(
             rayCastAltitudo, rayCastDistantia
+            );
+        }
+        public float AltitudoTerraeSinistra(
+            float rayCastAltitudo, float rayCastDistantia
+        ) {
+            return _miPuellaeRelationisTerrae.AltitudoTerraeSinistra(
+                rayCastAltitudo, rayCastDistantia
             );
         }
     }

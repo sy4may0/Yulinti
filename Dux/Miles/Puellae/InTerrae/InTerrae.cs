@@ -11,6 +11,8 @@ namespace Yulinti.Dux.Miles {
         private readonly IOstiumPuellaeOssisLegibile _osPuellaeOssisLeg;
         private readonly ThesaurusPuellaeInTerrae _thesaurusPuellaeInTerrae;
 
+        private float _elevatioActualis = 0f;
+
         public InTerrae(
             IOstiumPuellaeRelationisTerraeLegibile osPuellaeRelationisTerraeLeg,
             IOstiumPuellaeOssisMutabile osPuellaeOssisMut,
@@ -26,49 +28,75 @@ namespace Yulinti.Dux.Miles {
         public void ElevoPelvis() {
             float differentia = ComputareDifferentiam();
 
+            if (differentia < -_thesaurusPuellaeInTerrae.MaxElevatio) {
+                _elevatioActualis = 0f;
+                return;
+            }
+
             if (differentia >= 0f) {
+                _elevatioActualis = 0f;
+                return;
+            }
+
+            // 急に動くケースは無視。
+            if (MathF.Abs(MathF.Abs(differentia) - MathF.Abs(_elevatioActualis)) > 0.05f) {
                 return;
             }
 
             Vector3 pelvisPositionis = _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.Hips);
             pelvisPositionis.Y -= differentia;
             _osPuellaeOssisMut.PonoPositionem(IDPuellaeOssis.Hips, pelvisPositionis);
+
+            _elevatioActualis = differentia;
         }
 
         private float ComputareDifferentiam() {
-            float altitudoTerrae = AltitudoTerrae();
-            float altitudoPedisMin = AltitudoPedisMin();
-            float altitudoDigitusPedisMin = AltitudoDigitusPedisMin();
+            float altitudoTerraeDex = AltitudoTerraeDextra();
+            float altitudoTerraeSin = AltitudoTerraeSinistra();
+
+            float altitudoPedisDex = AltitudoPedis(IDPuellaeOssis.RightFoot);
+            float altitudoPedisSin = AltitudoPedis(IDPuellaeOssis.LeftFoot);
+            float altitudoDigitusPedisDex = AltitudoDigitusPedis(IDPuellaeOssis.RightToe);
+            float altitudoDigitusPedisSin = AltitudoDigitusPedis(IDPuellaeOssis.LeftToe);
 
             // 足補正高度適用 
             // PedisMinが下 -> PedisMin-Terrae差 + PedisYCorrectivus
             // PedisMinが上(DigitusPedisMinが下) -> DigitusPedisMin-Terrae差 + DigitusPedisYCorrectivus
-            float differentiaTerrae = (altitudoPedisMin < altitudoDigitusPedisMin) ?
-                altitudoPedisMin - (altitudoTerrae + _thesaurusPuellaeInTerrae.PesYCorrectivus)
-                : altitudoDigitusPedisMin - (altitudoTerrae + _thesaurusPuellaeInTerrae.DigitusPedisYCorrectivus);
+            float differentiaTerraeDex = (altitudoPedisDex < altitudoDigitusPedisDex) ?
+                altitudoPedisDex - (altitudoTerraeDex + _thesaurusPuellaeInTerrae.PesYCorrectivus)
+                : altitudoDigitusPedisDex - (altitudoTerraeDex + _thesaurusPuellaeInTerrae.DigitusPedisYCorrectivus);
 
-            return differentiaTerrae;
+            float differentiaTerraeSin = (altitudoPedisSin < altitudoDigitusPedisSin) ?
+                altitudoPedisSin - (altitudoTerraeSin + _thesaurusPuellaeInTerrae.PesYCorrectivus)
+                : altitudoDigitusPedisSin - (altitudoTerraeSin + _thesaurusPuellaeInTerrae.DigitusPedisYCorrectivus);
+
+            return MathF.Min(differentiaTerraeDex, differentiaTerraeSin);
         }
 
-        private float AltitudoTerrae() {
-            return _osPuellaeRelationisTerraeLeg.AltitudoTerrae(
+        private float AltitudoTerraeDextra() {
+            return _osPuellaeRelationisTerraeLeg.AltitudoTerraeDextra(
                 _thesaurusPuellaeInTerrae.RaycastAltitudo,
                 _thesaurusPuellaeInTerrae.RaycastDistantia
             );
         }
 
-        private float AltitudoPedisMin() {
-            Vector3 pesPositionisDex = _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightFoot);
-            Vector3 pesPositionisSin = _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.LeftFoot);
-
-            return MathF.Min(pesPositionisDex.Y, pesPositionisSin.Y);
+        private float AltitudoTerraeSinistra() {
+            return _osPuellaeRelationisTerraeLeg.AltitudoTerraeSinistra(
+                _thesaurusPuellaeInTerrae.RaycastAltitudo,
+                _thesaurusPuellaeInTerrae.RaycastDistantia
+            );
         }
 
-        private float AltitudoDigitusPedisMin() {
-            Vector3 digitusPedisPositionisDex = _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightToe);
-            Vector3 digitusPedisPositionisSin = _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.LeftToe);
+        private float AltitudoPedis(IDPuellaeOssis idPedisOssis) {
+            Vector3 pesPositionisDex = _osPuellaeOssisLeg.LegoPositionem(idPedisOssis);
 
-            return MathF.Min(digitusPedisPositionisDex.Y, digitusPedisPositionisSin.Y);
+            return pesPositionisDex.Y;
+        }
+
+        private float AltitudoDigitusPedis(IDPuellaeOssis idDigitusPedisOssis) {
+            Vector3 digitusPedisPositionis = _osPuellaeOssisLeg.LegoPositionem(idDigitusPedisOssis);
+
+            return digitusPedisPositionis.Y;
         }
     }
 }

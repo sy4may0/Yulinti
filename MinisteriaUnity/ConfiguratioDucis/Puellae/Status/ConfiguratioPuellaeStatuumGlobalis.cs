@@ -18,7 +18,7 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioDucis {
         [Tooltip("垂直速度最大値(Grounder想定)")]
         [SerializeField] private float _velocitasVerticalisMax = -50f;
         [Tooltip("接地時既定垂直速度")]
-        [SerializeField] private float _velocitasContactus = -2f;
+        [SerializeField] private float _velocitasContactus = -9.8f;
 
         [Header("ConfiguratioPuellaeStatus/基礎アニメーション設定")]
         [SerializeField] private IDPuellaeAnimationisFundamenti _idAnimationisFun = IDPuellaeAnimationisFundamenti.StandardBase;

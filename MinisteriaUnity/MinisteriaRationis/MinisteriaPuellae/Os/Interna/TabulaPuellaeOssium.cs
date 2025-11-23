@@ -35,14 +35,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         public Transform Lego(IDPuellaeOssis idOssis) => _ossa[(int)idOssis];
-        public void PonoPositionem(
-            IDPuellaeOssis idOssis, Vector3 positio
-        ) => _ossa[(int)idOssis].position = positio;
-        public void PonoRotationem(
-            IDPuellaeOssis idOssis, Quaternion rotatio
-        ) => _ossa[(int)idOssis].rotation = rotatio;
-        public void PonoScalam(
-            IDPuellaeOssis idOssis, Vector3 scala
-        ) => _ossa[(int)idOssis].localScale = scala;
     }
 }

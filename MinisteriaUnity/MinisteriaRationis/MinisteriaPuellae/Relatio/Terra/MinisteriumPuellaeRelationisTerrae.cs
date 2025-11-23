@@ -57,19 +57,23 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             }
         }
 
-        public float AltitudoTerrae(
+        public float AltitudoTerraeDextra(
             float rayCastAltitudo, float rayCastDistantia
         ) {
             float altitudoTerrae = ComputareTerramPositionemY(
                 _rightFoot, _rightToe,
                 rayCastAltitudo, rayCastDistantia
             );
-            if (float.IsNegativeInfinity(altitudoTerrae)) {
-                altitudoTerrae = ComputareTerramPositionemY(
-                    _leftFoot, _leftToe,
-                    rayCastAltitudo, rayCastDistantia
-                );
-            }
+            return altitudoTerrae;
+        }
+
+        public float AltitudoTerraeSinistra(
+            float rayCastAltitudo, float rayCastDistantia
+        ) {
+            float altitudoTerrae = ComputareTerramPositionemY(
+                _leftFoot, _leftToe,
+                rayCastAltitudo, rayCastDistantia
+            );
             return altitudoTerrae;
         }
     }

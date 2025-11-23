@@ -63,33 +63,34 @@ namespace Yulinti.Dux.Miles {
         }
 
         private void FiguroPelvim() {
-            float angulusX150Dex = 150 - InstrumentaFigurae.AngulusTriumPunctorum(
+            // Kneeと違ってReverse角度になっていない。AngulusAdをよく見ろ。
+            float angulusX150Dex = InstrumentaFigurae.AngulusTriumPunctorum(
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightUpperLeg),
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightX150pin),
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightLowerLeg)
             );
-            float angulusY90Dex = 90 - InstrumentaFigurae.AngulusTriumPunctorum(
+            float angulusY90Dex = InstrumentaFigurae.AngulusTriumPunctorum(
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightUpperLeg),
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightY90pin),
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightLowerLeg)
             );
-            float angulusX150Sin = 150 - InstrumentaFigurae.AngulusTriumPunctorum(
+            float angulusX150Sin = InstrumentaFigurae.AngulusTriumPunctorum(
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.LeftUpperLeg),
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.LeftX150pin),
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.LeftLowerLeg)
             );
-            float angulusY90Sin = 90 - InstrumentaFigurae.AngulusTriumPunctorum(
+            float angulusY90Sin = InstrumentaFigurae.AngulusTriumPunctorum(
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.LeftUpperLeg),
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.LeftY90pin),
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.LeftLowerLeg)
             );
 
-            float pondusX90Dex = InstrumentaFigurae.AngulusAdTriPondus(angulusX150Dex, 0f, 90f, 150f);
-            float pondusX150Dex = InstrumentaFigurae.AngulusAdPondus(angulusX150Dex, 90f, 150f);
-            float pondusY90Dex = InstrumentaFigurae.AngulusAdPondus(angulusY90Dex, 0f, 90f);
-            float pondusX90Sin = InstrumentaFigurae.AngulusAdTriPondus(angulusX150Sin, 0f, 90f, 150f);
-            float pondusX150Sin = InstrumentaFigurae.AngulusAdPondus(angulusX150Sin, 90f, 150f);
-            float pondusY90Sin = InstrumentaFigurae.AngulusAdPondus(angulusY90Sin, 0f, 90f);
+            float pondusX90Dex = InstrumentaFigurae.AngulusAdTriPondus(angulusX150Dex, 0f, 40f, 130f);
+            float pondusX150Dex = InstrumentaFigurae.AngulusAdPondusInversum(angulusX150Dex, 0f, 40f);
+            float pondusY90Dex = InstrumentaFigurae.AngulusAdPondusInversum(angulusY90Dex, 0f, 90f);
+            float pondusX90Sin = InstrumentaFigurae.AngulusAdTriPondus(angulusX150Sin, 0f, 50f, 130f);
+            float pondusX150Sin = InstrumentaFigurae.AngulusAdPondusInversum(angulusX150Sin, 0f, 40f);
+            float pondusY90Sin = InstrumentaFigurae.AngulusAdPondusInversum(angulusY90Sin, 0f, 90f);
             float pondusAni = (pondusX150Dex + pondusX150Sin) / 2f;
 
             // (X90 + X150) + Y90が100になるように調整する。
