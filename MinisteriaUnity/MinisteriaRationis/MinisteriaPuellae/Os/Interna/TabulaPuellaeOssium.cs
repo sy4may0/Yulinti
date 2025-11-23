@@ -2,6 +2,7 @@ using UnityEngine;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class TabulaPuellaeOssium {
@@ -10,7 +11,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public TabulaPuellaeOssium(IConfiguratioPuellaeOssis config) {
             int longitudo = (int)IDPuellaeOssis.Count;
             _ossa = new Transform[longitudo];
-            Transform rigRoot = config.RigRoot;
+            Transform rigRoot = config.RigRoot.EvolvareNuncium("TabulaPuellaeOssium rig root is null.");
 
             _ossa[(int)IDPuellaeOssis.Root] = rigRoot.Find(config.RootPath);
             _ossa[(int)IDPuellaeOssis.Hips] = rigRoot.Find(config.HipsPath);

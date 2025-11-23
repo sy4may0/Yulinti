@@ -1,4 +1,5 @@
 using UnityEngine;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
@@ -10,10 +11,10 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         [SerializeField] private Transform _rightToe;
         [SerializeField] private LayerMask _raycastStratum;
 
-        public Transform LeftFoot => _leftFoot;
-        public Transform LeftToe => _leftToe;
-        public Transform RightFoot => _rightFoot;
-        public Transform RightToe => _rightToe;
-        public LayerMask RaycastStratum => _raycastStratum;
-   }
+        public NihilAut<Transform> LeftFoot => new NihilAut<Transform>(_leftFoot);
+        public NihilAut<Transform> LeftToe => new NihilAut<Transform>(_leftToe);
+        public NihilAut<Transform> RightFoot => new NihilAut<Transform>(_rightFoot);
+        public NihilAut<Transform> RightToe => new NihilAut<Transform>(_rightToe);
+        public NihilAut<LayerMask> RaycastStratum => new NihilAut<LayerMask>(_raycastStratum);
+    }
 }

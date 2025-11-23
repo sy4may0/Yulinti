@@ -1,6 +1,7 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class TabulaPuellaeAnimationumCorporis {
@@ -12,7 +13,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
             _animationes[(int)IDPuellaeAnimationisCorporis.None] = null;
             _animationes[(int)IDPuellaeAnimationisCorporis.Crouch] = FabricaStructuraeAnimationis.Create(
-                luditorisCorporis.Incubitus.Animatio,
+                luditorisCorporis.Incubitus.Animatio.EvolvareNuncium("TabulaPuellaeAnimationumCorporis Crouch animation is null."),
                 luditorisCorporis.Incubitus.TempusEvanescentiae,
                 luditorisCorporis.Incubitus.Lenitio,
                 luditorisCorporis.Incubitus.EstSimultaneum,

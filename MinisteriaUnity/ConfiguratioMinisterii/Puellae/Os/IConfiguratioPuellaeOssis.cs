@@ -1,8 +1,9 @@
 using UnityEngine;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     public interface IConfiguratioPuellaeOssis {
-        Transform RigRoot { get; }
+        NihilAut<Transform> RigRoot { get; }
 
         string RootPath { get; }
         string HipsPath { get; }

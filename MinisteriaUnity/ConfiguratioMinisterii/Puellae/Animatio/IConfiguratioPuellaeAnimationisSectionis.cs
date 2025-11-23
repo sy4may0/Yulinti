@@ -1,8 +1,9 @@
 using Animancer;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     public interface IConfiguratioPuellaeAnimationisSectionis {
-        ITransition Animatio { get; }
+        NihilAut<ITransition> Animatio { get; }
         float TempusEvanescentiae { get; }
         Easing.Function Lenitio { get; }
         bool EstSimultaneum { get; }

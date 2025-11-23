@@ -1,7 +1,9 @@
 using UnityEngine;
+using Yulinti.Nucleus;
+
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     public interface IConfiguratioPuellaeFiguraePelvis {
-        SkinnedMeshRenderer Mesh { get; }
+        NihilAut<SkinnedMeshRenderer> Mesh { get; }
         string LeftX90BlendShapeName { get; }
         string LeftX150BlendShapeName { get; }
         string LeftY90BlendShapeName { get; }

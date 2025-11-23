@@ -1,9 +1,10 @@
 using UnityEngine.InputSystem;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     public interface IConfiguratioInputMotus {
-        InputActionReference MoveInput { get; }
-        InputActionReference SprintInput { get; }
-        InputActionReference CrouchInput { get; }
+        NihilAut<InputActionReference> MoveInput { get; }
+        NihilAut<InputActionReference> SprintInput { get; }
+        NihilAut<InputActionReference> CrouchInput { get; }
     }
 }

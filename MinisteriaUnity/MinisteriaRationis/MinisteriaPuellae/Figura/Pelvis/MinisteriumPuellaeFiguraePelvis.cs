@@ -2,6 +2,8 @@ using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Nucleus;
+
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumPuellaeFiguraePelvis {
         private readonly SkinnedMeshRenderer _hipsMesh;
@@ -10,10 +12,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public MinisteriumPuellaeFiguraePelvis(
             IConfiguratioPuellaeFiguraePelvis config
         ) {
-            if (config.Mesh == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeFiguraePelvisのConfiguratioPuellaeFiguraePelvisのMeshがnullです。");
-            }
-            _hipsMesh = config.Mesh;
+            _hipsMesh = config.Mesh.EvolvareNuncium("MinisteriumPuellaeFiguraePelvis mesh is null.");
             _tabula = new TabulaPuellaeFiguraePelvis(config);
         }
 

@@ -1,7 +1,8 @@
 using UnityEngine;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     public interface IConfiguratioCamera {
-        Camera Camera { get; }
+        NihilAut<Camera> Camera { get; }
     }
 }

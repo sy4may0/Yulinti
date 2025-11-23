@@ -1,5 +1,6 @@
 using UnityEngine;
 using Animancer;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [CreateAssetMenu(menuName = "Ministeria/ConfiguratioPuellaeAnimationisBasisOrdinariae")]
@@ -12,7 +13,7 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         [SerializeField] private bool _estImpeditivus = true;
         [SerializeField] private bool _estCircularis = true;
 
-        public ITransition Animatio => _animatio;
+        public NihilAut<ITransition> Animatio => new NihilAut<ITransition>(_animatio);
         public float TempusEvanescentiae => _tempusEvanescentiae;
         public Easing.Function Lenitio => _lenitio;
         public bool EstSimultaneum => _estSimultaneum;

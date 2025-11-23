@@ -21,15 +21,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             ITemporis temporis
         ) {
             if (config == null) {
-                ModeratorErrorum.Fatal("MiniateriumPuellaeLociのConfiguratioPuellaeLociがnullです。");
+                ModeratorErrorum.Fatal("MiniateriumPuellaeLoci ConfiguratioPuellaeLoci is null.");
             }
             if (temporis == null) {
-                ModeratorErrorum.Fatal("MiniateriumPuellaeLociのTemporisがnullです。");
+                ModeratorErrorum.Fatal("MiniateriumPuellaeLoci Temporis is null.");
             }
-            _characterController = config.CharacterController;
-            if (_characterController == null) {
-                ModeratorErrorum.Fatal("MiniateriumPuellaeLociのConfiguratioPuellaeLociのCharacterControllerがnullです。");
-            }
+
+            _characterController = config.CharacterController.EvolvareNuncium("MiniateriumPuellaeLoci CharacterController is null.");
             _temporis = temporis;
             _refVelocitisHorizontalis = 0f;
             _refVelocitisVerticalis = 0f;
@@ -92,9 +90,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 intervallum
             );
 
-            Vector3 motusHorizontalis = 
+            Vector3 motusHorizontalis =
                 _characterController.transform.forward * _velocitasHorizontalisActualis * intervallum;
-            Vector3 motusVerticalis = 
+            Vector3 motusVerticalis =
                 Vector3.up * _velocitasVerticalisActualis * intervallum;
             Quaternion rotatio = Quaternion.Euler(0f, _rotationisYActualis, 0f);
 

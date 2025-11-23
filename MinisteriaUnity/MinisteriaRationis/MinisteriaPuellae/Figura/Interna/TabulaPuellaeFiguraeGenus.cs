@@ -2,6 +2,7 @@ using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class TabulaPuellaeFiguraeGenus {
@@ -9,7 +10,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public TabulaPuellaeFiguraeGenus(IConfiguratioPuellaeFiguraeGenus config) {
             _figuraeIndexes = new int[(int)IDPuellaeFiguraeGenus.Count];
-            SkinnedMeshRenderer mesh = config.Mesh;
+            SkinnedMeshRenderer mesh = config.Mesh.EvolvareNuncium("TabulaPuellaeFiguraeGenus mesh is null.");
             _figuraeIndexes[(int)IDPuellaeFiguraeGenus.csknee90] = mesh.sharedMesh.GetBlendShapeIndex(config.X90BlendShapeName);
             _figuraeIndexes[(int)IDPuellaeFiguraeGenus.csknee150] = mesh.sharedMesh.GetBlendShapeIndex(config.X150BlendShapeName);
             _figuraeIndexes[(int)IDPuellaeFiguraeGenus.csknee120Offset] = mesh.sharedMesh.GetBlendShapeIndex(config.X120OffsetBlendShapeName);

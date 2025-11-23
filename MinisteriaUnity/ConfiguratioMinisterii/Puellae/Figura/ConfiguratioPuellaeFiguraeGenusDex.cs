@@ -1,4 +1,5 @@
 using UnityEngine;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
@@ -10,7 +11,7 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         [SerializeField] private string _x150BlendShapeName = "fuka.act.cs.kneefix160.r";
         [SerializeField] private string _x120OffsetBlendShapeName = "fuka.act.cs.kneefx120sub.r";
 
-        public SkinnedMeshRenderer Mesh => _mesh;
+        public NihilAut<SkinnedMeshRenderer> Mesh => new NihilAut<SkinnedMeshRenderer>(_mesh);
         public string X90BlendShapeName => _x90BlendShapeName;
         public string X150BlendShapeName => _x150BlendShapeName;
         public string X120OffsetBlendShapeName => _x120OffsetBlendShapeName;

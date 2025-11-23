@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [CreateAssetMenu(menuName = "Ministeria/ConfiguratioInputMotus")]
@@ -9,8 +10,8 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         [SerializeField] private InputActionReference _sprintInput;
         [SerializeField] private InputActionReference _crouchInput;
 
-        public InputActionReference MoveInput => _moveInput;
-        public InputActionReference SprintInput => _sprintInput;
-        public InputActionReference CrouchInput => _crouchInput;
+        public NihilAut<InputActionReference> MoveInput => new NihilAut<InputActionReference>(_moveInput);
+        public NihilAut<InputActionReference> SprintInput => new NihilAut<InputActionReference>(_sprintInput);
+        public NihilAut<InputActionReference> CrouchInput => new NihilAut<InputActionReference>(_crouchInput);
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
@@ -22,7 +23,7 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         [SerializeField] private string _leftX150pinPath = "root/Hips/LegJointX150.l";
         [SerializeField] private string _leftY90pinPath = "root/Hips/LegJointY90.l";
 
-        public Transform RigRoot => _rigRoot;
+        public NihilAut<Transform> RigRoot => new NihilAut<Transform>(_rigRoot);
         public string RootPath => _rootPath;
         public string HipsPath => _hipsPath;
         public string RightUpperLegPath => _rightUpperLegPath;

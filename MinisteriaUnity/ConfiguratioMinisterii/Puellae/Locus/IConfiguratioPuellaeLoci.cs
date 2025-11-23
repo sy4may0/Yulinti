@@ -1,7 +1,8 @@
 using UnityEngine;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     public interface IConfiguratioPuellaeLoci {
-        CharacterController CharacterController { get; }
+        NihilAut<CharacterController> CharacterController { get; }
     }
 }

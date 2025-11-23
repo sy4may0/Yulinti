@@ -1,7 +1,9 @@
 using Animancer;
+using Yulinti.Nucleus;
+
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     public interface IConfiguratioPuellaeAnimationis {
-        AnimancerComponent Animancer { get; }
+        NihilAut<AnimancerComponent> Animancer { get; }
         ConfiguratioPuellaeLuditorisFundamenti LuditorisFundamenti { get; }
         ConfiguratioPuellaeLuditorisCorporis LuditorisCorporis { get; }
     }

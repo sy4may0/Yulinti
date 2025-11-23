@@ -1,4 +1,5 @@
 using UnityEngine;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
@@ -14,7 +15,7 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         [SerializeField] private string _rightY90BlendShapeName = "fuka.act.cs.legjointY90.r";
         [SerializeField] private string _x150AnusBlendShapeName = "fuka.act.cs.legjointfixAnal";
 
-        public SkinnedMeshRenderer Mesh => _mesh;
+        public NihilAut<SkinnedMeshRenderer> Mesh => new NihilAut<SkinnedMeshRenderer>(_mesh);
         public string LeftX90BlendShapeName => _leftX90BlendShapeName;
         public string LeftX150BlendShapeName => _leftX150BlendShapeName;
         public string LeftY90BlendShapeName => _leftY90BlendShapeName;

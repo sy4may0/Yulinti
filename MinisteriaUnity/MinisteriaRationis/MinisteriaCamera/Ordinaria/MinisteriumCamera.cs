@@ -4,21 +4,17 @@ using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCamera  {
-        private readonly IConfiguratioCamera _configuratio;
+        private readonly Camera _camera;
 
         public MinisteriumCamera(IConfiguratioCamera configuratio) {
-            if (configuratio == null) {
-                ModeratorErrorum.Fatal("MinisteriumCameraのConfiguratioがnullです。");
-            }
-            _configuratio = configuratio;
+            _camera = configuratio.Camera.EvolvareNuncium("MinisteriumCamera Camera is null.");
         }
 
         public Quaternion RotatioVerticalis
         {
             get
             {
-                if (!_configuratio.Camera) return Quaternion.identity;
-                var e = _configuratio.Camera.transform.eulerAngles;
+                var e = _camera.transform.eulerAngles;
                 return Quaternion.Euler(0f, e.y, 0f);
             }
         }
@@ -26,10 +22,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public Vector3 AnteriorXZ => (RotatioVerticalis * Vector3.forward).normalized;
 
         public void PonoPositionem(Vector3 pos) {
-            _configuratio.Camera.transform.position = pos;
+            _camera.transform.position = pos;
         }
         public void PonoRotationem(Quaternion rot) {
-            _configuratio.Camera.transform.rotation = rot;
+            _camera.transform.rotation = rot;
         }
     }
 }

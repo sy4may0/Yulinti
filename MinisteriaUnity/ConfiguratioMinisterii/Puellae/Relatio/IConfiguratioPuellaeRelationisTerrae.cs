@@ -1,11 +1,12 @@
 using UnityEngine;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     public interface IConfiguratioPuellaeRelationisTerrae {
-        Transform LeftFoot { get; }
-        Transform LeftToe { get; }
-        Transform RightFoot { get; }
-        Transform RightToe { get; }
-        LayerMask RaycastStratum { get; }
+        NihilAut<Transform> LeftFoot { get; }
+        NihilAut<Transform> LeftToe { get; }
+        NihilAut<Transform> RightFoot { get; }
+        NihilAut<Transform> RightToe { get; }
+        NihilAut<LayerMask> RaycastStratum { get; }
     }
 }

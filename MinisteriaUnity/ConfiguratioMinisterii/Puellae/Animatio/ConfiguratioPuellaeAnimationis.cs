@@ -1,5 +1,6 @@
 using UnityEngine;
 using Animancer;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
     [System.Serializable]
@@ -9,7 +10,7 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         [SerializeField] private ConfiguratioPuellaeLuditorisFundamenti _luditorisFundamenti;
         [SerializeField] private ConfiguratioPuellaeLuditorisCorporis _luditorisCorporis;
 
-        public AnimancerComponent Animancer => _animancer;
+        public NihilAut<AnimancerComponent> Animancer => new NihilAut<AnimancerComponent>(_animancer);
         public ConfiguratioPuellaeLuditorisFundamenti LuditorisFundamenti => _luditorisFundamenti;
         public ConfiguratioPuellaeLuditorisCorporis LuditorisCorporis => _luditorisCorporis;
     }

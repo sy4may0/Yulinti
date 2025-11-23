@@ -1,6 +1,7 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class TabulaPuellaeAnimationumFundamenti {
@@ -12,7 +13,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
             _animationes[(int)IDPuellaeAnimationisFundamenti.None] = null;
             _animationes[(int)IDPuellaeAnimationisFundamenti.StandardBase] = FabricaStructuraeAnimationis.Create(
-                luditorisFundamenti.BasisOrdinariae.Animatio,
+                luditorisFundamenti.BasisOrdinariae.Animatio.EvolvareNuncium("TabulaPuellaeAnimationumFundamenti StandardBase animation is null."),
                 luditorisFundamenti.BasisOrdinariae.TempusEvanescentiae,
                 luditorisFundamenti.BasisOrdinariae.Lenitio,
                 luditorisFundamenti.BasisOrdinariae.EstSimultaneum,

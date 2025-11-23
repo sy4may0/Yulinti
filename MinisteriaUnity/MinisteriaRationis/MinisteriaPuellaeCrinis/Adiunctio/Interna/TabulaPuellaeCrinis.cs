@@ -10,7 +10,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             int longitudo = (int)IDPuellaeCrinis.Count;
             _crinis = new CrinisPuellae[longitudo];
 
-            _crinis[(int)IDPuellaeCrinis.Resiliens] = new CrinisPuellae(configuratio.Resiliens.Crinis, configuratio.Resiliens.IterAdRadicem);
+            ConfiguratioPuellaeCrinis resiliens = configuratio.Resiliens;
+
+            _crinis[(int)IDPuellaeCrinis.Resiliens] = new CrinisPuellae(
+                resiliens.Crinis.EvolvareNuncium("TabulaPuellaeCrinis Resiliens Crinis is null."), resiliens.IterAdRadicem
+            );
 
             for (int i = 0; i < longitudo; i++) {
                 if (_crinis[i] == null) {
