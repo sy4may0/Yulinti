@@ -7,10 +7,12 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioMinisterii {
         [SerializeField] private FasciculusConfigurationumCamera _camera;
         [SerializeField] private FasciculusConfigurationumPuellae _puellae;
         [SerializeField] private FasciculusConfigurationumPuellaeCrinis _puellaeCrinis;
+        [SerializeField] private FasciculusConfiguratioCivis _civis;
 
         public FasciculusConfigurationumInput Input => _input;
         public FasciculusConfigurationumCamera Camera => _camera;
         public FasciculusConfigurationumPuellae Puellae => _puellae;
         public FasciculusConfigurationumPuellaeCrinis PuellaeCrinis => _puellaeCrinis;
+        public FasciculusConfiguratioCivis Civis => _civis;
     }
 }

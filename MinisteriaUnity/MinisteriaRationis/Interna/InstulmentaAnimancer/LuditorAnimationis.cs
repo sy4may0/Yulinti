@@ -152,7 +152,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                     if (!_animatioCurrens.EstCircularis) {
                         events.OnEnd = _fInvocanda;
                     } else {
-                        Memorator.MemorareLuditorAnimationisCircularisImpeditivus(_animatioCurrens);
+                        Memorator.MemorareErrorum(IDErrorum.PUELLAE_ANIMATION_FOUND_BLOCKING_AND_LOOPING);
                     }
                 }
                 return;

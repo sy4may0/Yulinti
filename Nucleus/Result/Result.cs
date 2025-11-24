@@ -15,7 +15,7 @@ namespace Yulinti.Nucleus {
             return _valor == null;
         }
 
-        public T Evolvere() {
+        public T Evolvare() {
             if (_valor != null) {
                 return _valor;
             } else {
@@ -33,7 +33,7 @@ namespace Yulinti.Nucleus {
             }
         }
 
-        public T EvolvereAut(T defalta) {
+        public T EvolvareAut(T defalta) {
             if (_valor != null) {
                 return _valor;
             } else {
@@ -42,15 +42,15 @@ namespace Yulinti.Nucleus {
         }
     }
 
-    public readonly struct ErrorAut<T, E> {
+    public readonly struct ErrorAut<T> {
         private readonly T _valor;
-        private readonly E _error;
+        private readonly IDErrorum _error;
         private readonly bool _estSuccessus;
 
-        public static ErrorAut<T, E> Successus(T v) => new ErrorAut<T, E>(v, default(E), true);
-        public static ErrorAut<T, E> Error(E e) => new ErrorAut<T, E>(default(T), e, false);
+        public static ErrorAut<T> Successus(T v) => new ErrorAut<T>(v, default(IDErrorum), true);
+        public static ErrorAut<T> Error(IDErrorum e) => new ErrorAut<T>(default(T), e, false);
 
-        private ErrorAut(T valor, E error, bool estSuccessus) {
+        private ErrorAut(T valor, IDErrorum error, bool estSuccessus) {
             _valor = valor;
             _error = error;
             _estSuccessus = estSuccessus;
@@ -64,7 +64,11 @@ namespace Yulinti.Nucleus {
             return !_estSuccessus;
         }
 
-        public T Evolvere() {
+        public IDErrorum ID() {
+            return _error;
+        }
+
+        public T Evolvare() {
             if (Successus()) {
                 return _valor;
             } else {
@@ -82,7 +86,7 @@ namespace Yulinti.Nucleus {
             }
         }
 
-        public T EvolvereAut(T defalta) {
+        public T EvolvareAut(T defalta) {
             if (Successus()) {
                 return _valor;
             } else {
