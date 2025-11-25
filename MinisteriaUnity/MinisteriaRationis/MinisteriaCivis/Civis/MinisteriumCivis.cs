@@ -61,7 +61,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public Vector3 DirectioAspectus() => _osCaputis.forward;
 
         public void Dispose() {
-            _fabrica.DeletioCivis(new NihilAut<GameObject>(_civis));
+            _fabrica.DeletioCivis(_civis);
         }
     }
 }

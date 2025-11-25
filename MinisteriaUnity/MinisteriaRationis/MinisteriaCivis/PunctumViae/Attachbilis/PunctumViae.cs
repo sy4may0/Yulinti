@@ -1,10 +1,14 @@
 using UnityEngine;
+using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
+
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class PunctumViae : MonoBehaviour {
+    internal sealed class PunctumViae : MonoBehaviour, IPunctumViae {
         [Header("PunctumViae/PunctumViaeTypi: WayPointのタイプ。これによりリゾルバを変える。")]
         [SerializeField] private readonly IDPunctumViaeTypi _idPunctumViaeTypi;
         [Header("PunctumViae/PunctumViaeConsequens: このWayPointに続くWayPoint。最大21に制限する。")]
-        [SerializeField] private readonly MonoBehaviour[] _punctaViaeConsequens;
+        [SerializeField] private readonly MonoBehaviour[] _mbs;
+        private IPunctumViae[] _punctaViaeConsequens;
         private bool _estActivum;
         private IResolvorPunctumViae _resolvorPunctumViae;
 
@@ -31,6 +35,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private void Awake() {
             if (_punctaViaeConsequens.Length > 21) {
                 Memorator.MemorareErrorum(IDErrorum.PUNCTUMVIAE_LENGTH_OF_P_CONSEQUENS_IS_GREATER_THAN_21);
+
+                _punctaViaeConsequens = new IPunctumViae[21];
+                for (int i = 0; i < 21; i++) {
+                    _punctaViaeConsequens[i] = (IPunctumViae)_mbs[i];
+                }
             }
         }
     }

@@ -4,6 +4,6 @@ using Yulinti.Nucleus;
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal interface IFabricaCivis {
         public ErrorAut<GameObject> ManifestatioCivis();
-        public void DeletioCivis(civis);
+        public void DeletioCivis(GameObject civis);
     }
 }

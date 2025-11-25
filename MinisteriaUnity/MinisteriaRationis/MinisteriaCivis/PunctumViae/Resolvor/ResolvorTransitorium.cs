@@ -1,3 +1,8 @@
+using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using System;
+using UnityEngine;
+
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class ResolvorTransitorium : IResolvorPunctumViae {
         // 中継地点はIpunctumViaeからランダムに選ぶ。
@@ -31,7 +36,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 return ErrorAut<IPunctumViae>.Error(IDErrorum.PUNCTUMVIAE_ACTIVE_WAYPOINT_NOT_FOUND);
             }
 
-            int r = Random.Shared.Next(count);
+            int r = UnityEngine.Random.Range(0, count);
             return ErrorAut<IPunctumViae>.Successus(pConsequens[indexus[r]]);
         }
     }
