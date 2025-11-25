@@ -31,11 +31,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             return ErrorAut<GameObject>.Successus(civisInstance);
         }
 
-        public void DeletioCivis(NihilAut<GameObject> civis) {
-            if (civis.Nihil()) {
+        public void DeletioCivis(GameObject civis) {
+            if (civis == null) {
                 return;
             }
-            UnityEngine.Object.Destroy(civis.Evolvare());
+            UnityEngine.Object.Destroy(civis);
         }
 
         public bool GenerareNavMeshAgent(GameObject civisInstance) {
