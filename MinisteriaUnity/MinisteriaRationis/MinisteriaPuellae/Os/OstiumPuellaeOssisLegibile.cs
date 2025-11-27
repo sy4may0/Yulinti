@@ -1,5 +1,6 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumPuellaeOssisLegibile : IOstiumPuellaeOssisLegibile {
@@ -7,7 +8,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public OstiumPuellaeOssisLegibile(MinisteriumPuellaeOssis miPuellaeOssis) {
             if (miPuellaeOssis == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeOssisのインスタンスがnullです。");
+                Errorum.Fatal(IDErrorum.OSTIUMPUELLAEOSSISLEGIBILE_INSTANCE_NULL);
             }
             _miPuellaeOssis = miPuellaeOssis;
         }

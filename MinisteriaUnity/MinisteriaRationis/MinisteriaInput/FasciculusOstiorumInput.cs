@@ -1,5 +1,6 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class FasciculusOstiorumInput {
@@ -9,7 +10,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public FasciculusOstiorumInput(FasciculusConfigurationumInput configurationum) {
             if (configurationum == null) {
-                ModeratorErrorum.Fatal("FasciculusOstiorumInputのConfigurationumInputがnullです。");
+                Errorum.Fatal(IDErrorum.FASCICULUSOSTIORUMINPUT_CONFIG_NULL);
             }
 
             _miInputMotus = new MinisteriumInputMotus(configurationum.Motus);

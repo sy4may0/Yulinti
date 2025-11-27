@@ -11,7 +11,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public TabulaPuellaeOssium(IConfiguratioPuellaeOssis config) {
             int longitudo = (int)IDPuellaeOssis.Count;
             _ossa = new Transform[longitudo];
-            Transform rigRoot = config.RigRoot.EvolvareNuncium("TabulaPuellaeOssium rig root is null.");
+            Transform rigRoot = config.RigRoot.Evolvo(IDErrorum.TABULAPUELLAEOSSIUM_RIG_ROOT_NULL);
 
             _ossa[(int)IDPuellaeOssis.Root] = rigRoot.Find(config.RootPath);
             _ossa[(int)IDPuellaeOssis.Hips] = rigRoot.Find(config.HipsPath);
@@ -30,7 +30,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
             for (int i = 0; i < longitudo; i++) {
                 if (_ossa[i] == null) {
-                    ModeratorErrorum.Fatal($"IDPuellaeOssis {(IDPuellaeOssis)i} が見つかりません。IFukaBoneConfigのパス設定を確認してください。");
+                    Errorum.Fatal(IDErrorum.TABULAPUELLAEOSSIUM_BONE_NOT_FOUND);
                 }
             }
         }

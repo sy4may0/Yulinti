@@ -1,4 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumTemporisLegibile : IOstiumTemporisLegibile {
@@ -6,7 +7,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly ITemporis _temporis;
         public OstiumTemporisLegibile(ITemporis temporis) {
             if (temporis == null) {
-                ModeratorErrorum.Fatal("OstiumTemporisLegibileのTemporisがnullです。");
+                Errorum.Fatal(IDErrorum.OSTIUMTEMPORISLEGIBILE_TEMPORIS_NULL);
             }
             _temporis = temporis;
         }

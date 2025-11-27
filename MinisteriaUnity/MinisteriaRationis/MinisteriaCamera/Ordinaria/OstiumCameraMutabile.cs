@@ -1,4 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumCameraMutabile : IOstiumCameraMutabile {
@@ -6,7 +7,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public OstiumCameraMutabile(MinisteriumCamera miCamera) {
             if (miCamera == null) {
-                ModeratorErrorum.Fatal("MinisteriumCameraのインスタンスがnullです。");
+                Errorum.Fatal(IDErrorum.OSTIUMCAMERAMUTABILE_INSTANCE_NULL);
             }
             _miCamera = miCamera;
         }

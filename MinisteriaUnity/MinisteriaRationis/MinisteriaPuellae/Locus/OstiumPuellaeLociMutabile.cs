@@ -1,11 +1,12 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumPuellaeLociMutabile : IOstiumPuellaeLociMutabile {
         private readonly MiniateriumPuellaeLoci _miPuellaeLoci;
         public OstiumPuellaeLociMutabile(MiniateriumPuellaeLoci miPuellaeLoci) {
             if (miPuellaeLoci == null) {
-                ModeratorErrorum.Fatal("MiniateriumPuellaeLociのインスタンスがnullです。");
+                Errorum.Fatal(IDErrorum.OSTIUMPUELLAELOCIMUTABILE_INSTANCE_NULL);
             }
             _miPuellaeLoci = miPuellaeLoci;
         }

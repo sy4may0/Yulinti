@@ -1,5 +1,7 @@
+using Yulinti.Nucleus;
+
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public interface IOstiumErrorumLegibile {
-        void Fatal(string message);
+        void Fatal(IDErrorum error);
     }
 }

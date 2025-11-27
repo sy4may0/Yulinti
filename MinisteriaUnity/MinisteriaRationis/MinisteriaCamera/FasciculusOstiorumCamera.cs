@@ -1,5 +1,6 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
+using Yulinti.Nucleus;
 
 // ラテン語note
 // Main => Camera Princeps
@@ -18,7 +19,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public FasciculusOstiorumCamera(FasciculusConfigurationumCamera configurationes) {
             if (configurationes == null) {
-                ModeratorErrorum.Fatal("FasciculusOstiorumCameraのConfigurationesがnullです。");
+                Errorum.Fatal(IDErrorum.FASCICULUSOSTIORUMCAMERA_CONFIG_NULL);
             }
 
             _miCameraPri = new MinisteriumCamera(configurationes.ConfiguratioCameraPrincips);

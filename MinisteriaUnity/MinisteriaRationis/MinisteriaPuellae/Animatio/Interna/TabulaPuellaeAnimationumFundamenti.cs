@@ -13,7 +13,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
             _animationes[(int)IDPuellaeAnimationisFundamenti.None] = null;
             _animationes[(int)IDPuellaeAnimationisFundamenti.StandardBase] = FabricaStructuraeAnimationis.Create(
-                luditorisFundamenti.BasisOrdinariae.Animatio.EvolvareNuncium("TabulaPuellaeAnimationumFundamenti StandardBase animation is null."),
+                luditorisFundamenti.BasisOrdinariae.Animatio.Evolvo(IDErrorum.TABULAPUELLAEANIMATIONUMFUNDAMENTI_STANDARD_BASE_NULL),
                 luditorisFundamenti.BasisOrdinariae.TempusEvanescentiae,
                 luditorisFundamenti.BasisOrdinariae.Lenitio,
                 luditorisFundamenti.BasisOrdinariae.EstSimultaneum,
@@ -22,7 +22,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
             for (int i = 1; i < length; i++) {
                 if (_animationes[i] == null) {
-                    ModeratorErrorum.Fatal($"IDPuellaeAnimationisFundamenti {(IDPuellaeAnimationisFundamenti)i} のアニメーションプランが見つかりません。ConfiguratioPuellaeLuditorisFundamentiの設定を確認してください。");
+                    Errorum.Fatal(IDErrorum.TABULAPUELLAEANIMATIONUMFUNDAMENTI_PLAN_NOT_FOUND);
                 }
             }
         }

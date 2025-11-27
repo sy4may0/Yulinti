@@ -1,13 +1,14 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCamera  {
         private readonly Camera _camera;
 
         public MinisteriumCamera(IConfiguratioCamera configuratio) {
-            _camera = configuratio.Camera.EvolvareNuncium("MinisteriumCamera Camera is null.");
+            _camera = configuratio.Camera.Evolvo(IDErrorum.MINISTERIUMCAMERA_CAMERA_NULL);
         }
 
         public Quaternion RotatioVerticalis

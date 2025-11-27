@@ -10,7 +10,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public TabulaPuellaeFiguraePelvis(IConfiguratioPuellaeFiguraePelvis config) {
             _figuraeIndexes = new int[(int)IDPuellaeFiguraePelvis.Count];
-            SkinnedMeshRenderer mesh = config.Mesh.EvolvareNuncium("TabulaPuellaeFiguraePelvis mesh is null.");
+            SkinnedMeshRenderer mesh = config.Mesh.Evolvo(IDErrorum.TABULAPUELLAEFIGURAEPELVIS_MESH_NULL);
             _figuraeIndexes[(int)IDPuellaeFiguraePelvis.csLHipX90] = mesh.sharedMesh.GetBlendShapeIndex(config.LeftX90BlendShapeName);
             _figuraeIndexes[(int)IDPuellaeFiguraePelvis.csLHipX150] = mesh.sharedMesh.GetBlendShapeIndex(config.LeftX150BlendShapeName);
             _figuraeIndexes[(int)IDPuellaeFiguraePelvis.csLHipY90] = mesh.sharedMesh.GetBlendShapeIndex(config.LeftY90BlendShapeName);
@@ -21,7 +21,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
             for (int i = 0; i < (int)IDPuellaeFiguraePelvis.Count; i++) {
                 if (_figuraeIndexes[i] <= 0) {
-                    ModeratorErrorum.Fatal($"IDPuellaeFiguraePelvis {(IDPuellaeFiguraePelvis)i} が見つかりません。IConfiguratioPuellaeFiguraePelvisのブレンドシェイプ名を確認してください。");
+                    Errorum.Fatal(IDErrorum.TABULAPUELLAEFIGURAEPELVIS_BLEND_SHAPE_NOT_FOUND);
                 }
             }
         }

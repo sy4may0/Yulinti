@@ -14,20 +14,23 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public Ministeria(FasciculusConfigurationum configurationum) {
             if (configurationum == null) {
-                ModeratorErrorum.Fatal("MinisteriaのConfigurationumがnullです。");
+                Errorum.Fatal(IDErrorum.MINISTERIA_CONFIGURATION_NULL);
             }
             _fonsTemporis = new FonsTemporis();
             _temporis = new Temporis(_fonsTemporis);
             _ostiorumRationis = new FasciculusOstiorumRationis(configurationum, _temporis);
 
             // Civisテスト　後で消すこと。 ----
-            IConfiguratioCivisOrdinatae config = configurationum.Civis.ConfiguratioCivisSimplicis.Evolvare();
+            IConfiguratioCivisOrdinatae config = configurationum.Civis.ConfiguratioCivisSimplicis.Evolvo();
             IFabricaCivis _fabricaCivis = new FabricaCivisOrdinatae(config);
-            _ministeriumCivis = MinisteriumCivis.CreareInstantia(_fabricaCivis).Evolvare();
+            _ministeriumCivis = new MinisteriumCivis(_fabricaCivis);
+            _ministeriumCivis.Activare();
 
             Debug.Log("MinisteriumCivis生成成功");
             Debug.Log("tCivis: " + _ministeriumCivis.LegoPositionem());
             Debug.Log("osCaputis: " + _ministeriumCivis.DirectioAspectus());
+
+            _ministeriumCivis.Deactivare();
 
             // ----------------------------
         }

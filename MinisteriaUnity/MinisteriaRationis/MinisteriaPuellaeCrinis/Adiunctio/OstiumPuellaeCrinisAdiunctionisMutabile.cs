@@ -1,4 +1,5 @@
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumPuellaeCrinisAdiunctionisMutabile : IOstiumPuellaeCrinisAdiunctionisMutabile {
@@ -6,7 +7,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public OstiumPuellaeCrinisAdiunctionisMutabile(MinisteriumPuellaeCrinisAdiunctionis miPuellaeCrinisAdiunctionis) {
             if (miPuellaeCrinisAdiunctionis == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeCrinisAdiunctionisのインスタンスがnullです。");
+                Errorum.Fatal(IDErrorum.OSTIUMPUELLAECRINISADIUNCTIONISMUTABILE_INSTANCE_NULL);
             }
             _miPuellaeCrinisAdiunctionis = miPuellaeCrinisAdiunctionis;
         }

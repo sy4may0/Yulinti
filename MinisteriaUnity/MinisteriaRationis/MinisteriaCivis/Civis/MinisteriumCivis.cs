@@ -3,65 +3,53 @@ using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using System;
 
-// 注意 MinisteriumCivisはUpdate()内で生成される。エラーで落としたり重い処理をコンストラクタに入れるな。
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCivis : IDisposable {
-        private readonly GameObject _civis;
-        private readonly Transform _tCivis;
-        private readonly Transform _osCaputis;
         private readonly IFabricaCivis _fabrica;
+        private readonly ICivisAtomi _civisAtomi;
 
-        private MinisteriumCivis(
-            GameObject civis,
-            Transform tCivis,
-            Transform osCaputis,
-            IFabricaCivis fabrica
-        ) {
-            _civis = civis;
-            _tCivis = tCivis;
-            _osCaputis = osCaputis;
+        // Non Null Members
+        private readonly GameObject _radixCivis;
+        private readonly Transform _osCaputis;
+
+        public MinisteriumCivis(IFabricaCivis fabrica) {
             _fabrica = fabrica;
+            // てっぺんのEmptyObject。
+            _civisAtomi = _fabrica.ManifestatioCivis().Evolvo();
+
+            // Non Null Members 
+            _radixCivis = _civisAtomi.RadixCivis();
+            _osCaputis = _civisAtomi.Animator.Evolvo(
+               IDErrorum.MINISTERIUMCIVIS_ANIMATOR_NULL 
+            ).LegoOs(HumanBodyBones.Head).Evolvo(
+               IDErrorum.MINISTERIUMCIVIS_HEAD_BONE_NULL 
+            );
+
+            _civisAtomi.Deactivare();
         }
 
-        public static ErrorAut<MinisteriumCivis> CreareInstantia(IFabricaCivis fabrica) {
-            ErrorAut<GameObject> t = fabrica.ManifestatioCivis();
-            if (t.Error()) {
-                return ErrorAut<MinisteriumCivis>.Error(t.ID());
-            }
-
-            GameObject civis = t.Evolvare();
-
-            if (civis.transform == null) {
-                return ErrorAut<MinisteriumCivis>.Error(IDErrorum.MINISTERIUMCIVIS_CIVIS_TRANSFORM_NULL);
-            }
-            Transform tCivis = civis.transform;
-
-            Animator animator = civis.GetComponent<Animator>();
-            if (animator == null) {
-                return ErrorAut<MinisteriumCivis>.Error(IDErrorum.MINISTERIUMCIVIS_ANIMATOR_NULL);
-            }
-
-            Transform osCaputis = animator.GetBoneTransform(HumanBodyBones.Head);
-
-            if (osCaputis == null) {
-                return ErrorAut<MinisteriumCivis>.Error(IDErrorum.MINISTERIUMCIVIS_HEAD_BONE_NULL);
-            }
-
-            return ErrorAut<MinisteriumCivis>.Successus(new MinisteriumCivis(civis, tCivis, osCaputis, fabrica));
+        public void Activare() {
+            _civisAtomi.Activare();
         }
 
-        public Vector3 LegoPositionem() => _tCivis.position;
-        public Quaternion LegoRotationem() => _tCivis.rotation;
-        public Vector3 LegoScalam() => _tCivis.localScale;
+        public void Deactivare() {
+            _civisAtomi.Deactivare();
+        }
 
-        public void PonoPositionem(Vector3 pos) => _tCivis.position = pos;
-        public void PonoRotationem(Quaternion rot) => _tCivis.rotation = rot;
-        public void PonoScalam(Vector3 scala) => _tCivis.localScale = scala;
+        public Vector3 LegoPositionem() => _radixCivis.transform.position;
+        public Quaternion LegoRotationem() => _radixCivis.transform.rotation;
+        public Vector3 LegoScalam() => _radixCivis.transform.localScale;
+
+        public bool EstActivum() => _civisAtomi.EstActivum();
+
+        public void PonoPositionem(Vector3 pos) => _radixCivis.transform.position = pos;
+        public void PonoRotationem(Quaternion rot) => _radixCivis.transform.rotation = rot;
+        public void PonoScalam(Vector3 scala) => _radixCivis.transform.localScale = scala;
 
         public Vector3 DirectioAspectus() => _osCaputis.forward;
 
         public void Dispose() {
-            _fabrica.DeletioCivis(_civis);
+            _fabrica.DeletioCivis(_civisAtomi);
         }
     }
 }

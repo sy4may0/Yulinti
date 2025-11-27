@@ -1,11 +1,12 @@
 using UnityEngine;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class Temporis : ITemporis {
         private readonly FonsTemporis _fonsTemporis;
         public Temporis(FonsTemporis fonsTemporis) {
             if (fonsTemporis == null) {
-                ModeratorErrorum.Fatal("FonsTemporisのインスタンスがnullです。");
+                Errorum.Fatal(IDErrorum.TEMPORIS_INSTANCE_NULL);
             }
             _fonsTemporis = fonsTemporis;
         }

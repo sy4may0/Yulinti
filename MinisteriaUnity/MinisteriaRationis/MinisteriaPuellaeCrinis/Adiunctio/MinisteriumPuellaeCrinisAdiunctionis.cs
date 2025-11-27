@@ -1,6 +1,7 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class MinisteriumPuellaeCrinisAdiunctionis {
@@ -12,7 +13,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public MinisteriumPuellaeCrinisAdiunctionis(FasciculusConfigurationumPuellaeCrinis configurationum) {
             if (configurationum == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeCrinisAdiunctionisのConfigurationumがnullです。");
+                Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAECRINISADIUNCTIONIS_CONFIG_NULL);
             }
             _configurationum = configurationum;
             _tabulaCrinis = new TabulaPuellaeCrinis(_configurationum);

@@ -3,6 +3,7 @@ using Yulinti.Dux.ContractusDucis;
 using Yulinti.Dux.Miles;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Nucleus;
 
 
 
@@ -62,11 +63,11 @@ namespace Yulinti.Dux.Miles {
 
             for (int i = 1; i < longitudo; i++) {
                 if (_status[i] == null) {
-                    _osErrorumLeg.Fatal($"IDStatus {(IDStatus)i} is missing. Check FasciculusThesaurorumPuellaeStatus.");
+                    _osErrorumLeg.Fatal(IDErrorum.TABULASTATUUMCORPORIS_STATUS_MISSING);
                 }
 
                 if (_status[i].Id != (IDStatus)i) {
-                    _osErrorumLeg.Fatal($"IDStatus {(IDStatus)i} mismatch. Check FasciculusThesaurorumPuellaeStatus.");
+                    _osErrorumLeg.Fatal(IDErrorum.TABULASTATUUMCORPORIS_STATUS_MISMATCH);
                 }
             }
         }

@@ -12,7 +12,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public MinisteriumPuellaeFiguraeGenus(
             IConfiguratioPuellaeFiguraeGenus config
         ) {
-            _kneeMesh = config.Mesh.EvolvareNuncium("MinisteriumPuellaeFiguraeGenus mesh is null.");
+            _kneeMesh = config.Mesh.Evolvo(IDErrorum.MINISTERIUMPUELLAEFIGURAEGENUS_MESH_NULL);
             _tabula = new TabulaPuellaeFiguraeGenus(config);
         }
 

@@ -1,4 +1,5 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumInputMotusLegibile : IOstiumInputMotusLegibile {
@@ -6,7 +7,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public OstiumInputMotusLegibile(MinisteriumInputMotus miInputMotus) {
             if (miInputMotus == null) {
-                ModeratorErrorum.Fatal("MinisteriumInputMotusのインスタンスがnullです。");
+                Errorum.Fatal(IDErrorum.OSTIUMINPUTMOTUSLEGIBILE_INSTANCE_NULL);
             }
             _miInputMotus = miInputMotus;
         }

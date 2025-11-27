@@ -2,6 +2,7 @@ using UnityEngine;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumPuellaeOssis {
@@ -9,7 +10,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public MinisteriumPuellaeOssis(IConfiguratioPuellaeOssis config) {
             if (config == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeOssisのConfiguratioPuellaeOssisがnullです。");
+                Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAEOSSIS_CONFIG_NULL);
             }
             _tabulaOssium = new TabulaPuellaeOssium(config);
         }

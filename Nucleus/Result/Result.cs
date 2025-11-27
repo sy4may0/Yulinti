@@ -15,7 +15,7 @@ namespace Yulinti.Nucleus {
             return _valor == null;
         }
 
-        public T Evolvare() {
+        public T Evolvo() {
             if (_valor != null) {
                 return _valor;
             } else {
@@ -23,17 +23,16 @@ namespace Yulinti.Nucleus {
                 return default(T); // コンパイル用。Fatalで落ちる。
             }
         }
-
-        public T EvolvareNuncium(string nuncium) {
+        public T Evolvo(IDErrorum error) {
             if (_valor != null) {
                 return _valor;
             } else {
-                Errorum.Fatal("Unwrap(Evolvere) Failed. " + nuncium);
+                Errorum.Fatal(error);
                 return default(T); // コンパイル用。Fatalで落ちる。
             }
         }
 
-        public T EvolvareAut(T defalta) {
+        public T EvolvoAut(T defalta) {
             if (_valor != null) {
                 return _valor;
             } else {
@@ -68,7 +67,7 @@ namespace Yulinti.Nucleus {
             return _error;
         }
 
-        public T Evolvare() {
+        public T Evolvo() {
             if (Successus()) {
                 return _valor;
             } else {
@@ -77,16 +76,16 @@ namespace Yulinti.Nucleus {
             }
         }
 
-        public T EvolvareNuncium(string nuncium) {
+        public T Evolvo(IDErrorum error) {
             if (Successus()) {
                 return _valor;
             } else {
-                Errorum.Fatal("Unwrap(Evolvere) Failed. " + nuncium + " Error: " + _error);
+                Errorum.Fatal(error, _error);
                 return default(T); // コンパイル用。Fatalで落ちる。
             }
         }
 
-        public T EvolvareAut(T defalta) {
+        public T EvolvoAut(T defalta) {
             if (Successus()) {
                 return _valor;
             } else {
@@ -95,7 +94,5 @@ namespace Yulinti.Nucleus {
         }
     }
 }
-
-
 
 

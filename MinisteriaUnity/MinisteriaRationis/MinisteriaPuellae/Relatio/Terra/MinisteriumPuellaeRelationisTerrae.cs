@@ -13,14 +13,14 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public MinisteriumPuellaeRelationisTerrae(IConfiguratioPuellaeRelationisTerrae config) {
             if (config == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeRelationisTerrae ConfiguratioPuellaeRelationisTerrae is null.");
+                Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_CONFIG_NULL);
             }
 
-            _rightFoot = config.RightFoot.EvolvareNuncium("MinisteriumPuellaeRelationisTerrae RightFoot is null.");
-            _leftFoot = config.LeftFoot.EvolvareNuncium("MinisteriumPuellaeRelationisTerrae LeftFoot is null.");
-            _rightToe = config.RightToe.EvolvareNuncium("MinisteriumPuellaeRelationisTerrae RightToe is null.");
-            _leftToe = config.LeftToe.EvolvareNuncium("MinisteriumPuellaeRelationisTerrae LeftToe is null.");
-            _raycastStratum = config.RaycastStratum.EvolvareNuncium("MinisteriumPuellaeRelationisTerrae RaycastStratum is null.");
+            _rightFoot = config.RightFoot.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_RIGHT_FOOT_NULL);
+            _leftFoot = config.LeftFoot.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_LEFT_FOOT_NULL);
+            _rightToe = config.RightToe.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_RIGHT_TOE_NULL);
+            _leftToe = config.LeftToe.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_LEFT_TOE_NULL);
+            _raycastStratum = config.RaycastStratum.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_RAYCAST_STRATUM_NULL);
         }
 
         private float LegoTerramPositionemY(

@@ -15,7 +15,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public CrinisPuellae(GameObject crinisPrefab, string iterAdRadicem) {
             if (crinisPrefab == null) {
-                ModeratorErrorum.Fatal("CrinisPuellaeのCrinisがnullです。");
+                Errorum.Fatal(IDErrorum.CRINISPUELLAE_CRINIS_NULL);
             }
             _crinisPrefab = crinisPrefab;
             _iterAdRadicem = iterAdRadicem;
@@ -35,11 +35,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 _crinisInstance = UnityEngine.Object.Instantiate(pf);
 
                 if (_crinisInstance == null) {
-                    ModeratorErrorum.Fatal($"CrinisPuellaeのCrinisInstanceが見つかりません。{_nomenAddressables}");
+                    Errorum.Fatal(IDErrorum.CRINISPUELLAE_INSTANCE_NOT_FOUND);
                 }
                 _radix = _crinisInstance.transform.Find(_iterAdRadicem);
                 if (_radix == null) {
-                    ModeratorErrorum.Fatal($"CrinisPuellaeのRadixが見つかりません。{_iterAdRadicem}");
+                    Errorum.Fatal(IDErrorum.CRINISPUELLAE_RADIX_NOT_FOUND);
                 }
 
                 _radix.SetParent(parent);

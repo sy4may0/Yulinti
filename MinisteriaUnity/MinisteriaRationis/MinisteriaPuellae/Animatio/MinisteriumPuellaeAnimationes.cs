@@ -13,10 +13,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public MinisteriumPuellaeAnimationes(ConfiguratioPuellaeAnimationis config) {
             if (config == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeAnimationes ConfiguratioPuellaeAnimationis is null.");
+                Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAEANIMATIONES_CONFIG_NULL);
             }
 
-            var animancer = config.Animancer.EvolvareNuncium("MinisteriumPuellaeAnimationes Animancer is null.");
+            var animancer = config.Animancer.Evolvo(IDErrorum.MINISTERIUMPUELLAEANIMATIONES_ANIMANCER_NULL);
             _tabulaFundamenti = new TabulaPuellaeAnimationumFundamenti(config.LuditorisFundamenti);
             _tabulaCorporis = new TabulaPuellaeAnimationumCorporis(config.LuditorisCorporis);
             _luditorFundamenti = new LuditorAnimationis(animancer, 0);

@@ -14,5 +14,13 @@ namespace Yulinti.Nucleus {
             UnityEngine.Application.Quit();
             #endif
         }
+
+        public static void Fatal(IDErrorum error) {
+            Fatal(error.ToString());
+        }
+
+        public static void Fatal(IDErrorum error, IDErrorum from) {
+            Fatal("Error: " + error.ToString() + "\nFrom: " + from.ToString());
+        }
     }
 }

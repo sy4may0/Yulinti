@@ -22,7 +22,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public LuditorAnimationis(AnimancerComponent animancer, int indexusLuditoris) {
             _animancerLayer = animancer.Layers[indexusLuditoris];
             if (_animancerLayer == null) {
-                ModeratorErrorum.Fatal($"アニメーションレイヤー{indexusLuditoris}が見つかりません。");
+                Errorum.Fatal(IDErrorum.LUDITORANIMATIONIS_LAYER_NOT_FOUND);
             }
             _indexusLuditoris = indexusLuditoris;
             _animatioCurrens = null;
@@ -152,7 +152,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                     if (!_animatioCurrens.EstCircularis) {
                         events.OnEnd = _fInvocanda;
                     } else {
-                        Memorator.MemorareErrorum(IDErrorum.PUELLAE_ANIMATION_FOUND_BLOCKING_AND_LOOPING);
+                        Memorator.MemorareErrorum(IDErrorum.LUDITORANIMATIONIS_FOUND_BLOCKING_AND_LOOPING);
                     }
                 }
                 return;

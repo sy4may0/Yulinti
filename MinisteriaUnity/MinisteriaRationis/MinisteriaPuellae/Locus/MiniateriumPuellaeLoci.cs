@@ -21,13 +21,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             ITemporis temporis
         ) {
             if (config == null) {
-                ModeratorErrorum.Fatal("MiniateriumPuellaeLoci ConfiguratioPuellaeLoci is null.");
+                Errorum.Fatal(IDErrorum.MINIATERIUMPUELLAELOCI_CONFIG_NULL);
             }
             if (temporis == null) {
-                ModeratorErrorum.Fatal("MiniateriumPuellaeLoci Temporis is null.");
+                Errorum.Fatal(IDErrorum.MINIATERIUMPUELLAELOCI_TEMPORIS_NULL);
             }
 
-            _characterController = config.CharacterController.EvolvareNuncium("MiniateriumPuellaeLoci CharacterController is null.");
+            _characterController = config.CharacterController.Evolvo(IDErrorum.MINIATERIUMPUELLAELOCI_CHARACTERCONTROLLER_NULL);
             _temporis = temporis;
             _refVelocitisHorizontalis = 0f;
             _refVelocitisVerticalis = 0f;

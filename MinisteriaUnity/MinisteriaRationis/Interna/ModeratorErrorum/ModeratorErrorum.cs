@@ -7,5 +7,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public static void Fatal(string message, Exception ex = null) {
             Errorum.Fatal(message, ex);
         }
+
+        public static void Fatal(IDErrorum error) {
+            Errorum.Fatal(error);
+        }
     }
 }

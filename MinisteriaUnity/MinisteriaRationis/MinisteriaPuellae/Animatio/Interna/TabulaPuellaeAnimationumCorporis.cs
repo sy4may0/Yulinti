@@ -13,7 +13,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
             _animationes[(int)IDPuellaeAnimationisCorporis.None] = null;
             _animationes[(int)IDPuellaeAnimationisCorporis.Crouch] = FabricaStructuraeAnimationis.Create(
-                luditorisCorporis.Incubitus.Animatio.EvolvareNuncium("TabulaPuellaeAnimationumCorporis Crouch animation is null."),
+                luditorisCorporis.Incubitus.Animatio.Evolvo(IDErrorum.TABULAPUELLAEANIMATIONUMCORPORIS_CROUCH_NULL),
                 luditorisCorporis.Incubitus.TempusEvanescentiae,
                 luditorisCorporis.Incubitus.Lenitio,
                 luditorisCorporis.Incubitus.EstSimultaneum,
@@ -22,7 +22,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
             for (int i = 1; i < length; i++) {
                 if (_animationes[i] == null) {
-                    ModeratorErrorum.Fatal($"IDPuellaeAnimationisCorporis {(IDPuellaeAnimationisCorporis)i} のアニメーションが見つかりません。ConfiguratioPuellaeLuditorisCorporisの設定を確認してください。");
+                    Errorum.Fatal(IDErrorum.TABULAPUELLAEANIMATIONUMCORPORIS_ANIMATION_NOT_FOUND);
                 }
             }
         }

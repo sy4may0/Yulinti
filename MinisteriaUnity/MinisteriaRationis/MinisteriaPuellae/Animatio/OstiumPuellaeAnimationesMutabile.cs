@@ -1,13 +1,14 @@
 using System;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumPuellaeAnimationesMutabile : IOstiumPuellaeAnimationesMutabile {
         private readonly MinisteriumPuellaeAnimationes _miPuellaeAnimationes;
         public OstiumPuellaeAnimationesMutabile(MinisteriumPuellaeAnimationes miPuellaeAnimationes) {
             if (miPuellaeAnimationes == null) {
-                ModeratorErrorum.Fatal("MinisteriumPuellaeAnimationesのインスタンスがnullです。");
+                Errorum.Fatal(IDErrorum.OSTIUMPUELLAEANIMATIONESMUTABILE_INSTANCE_NULL);
             }
             _miPuellaeAnimationes = miPuellaeAnimationes;
         }

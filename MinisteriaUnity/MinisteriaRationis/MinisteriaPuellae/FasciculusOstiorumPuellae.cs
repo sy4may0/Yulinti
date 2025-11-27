@@ -35,7 +35,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             FasciculusConfigurationumPuellae config, ITemporis temporis
         ) {
             if (config == null) {
-                ModeratorErrorum.Fatal("FasciculusOstiorumPuellaeのFasciculusConfigurationumPuellaeがnullです。");
+                Errorum.Fatal(IDErrorum.FASCICULUSOSTIORUMPUELLAE_CONFIG_NULL);
             }
 
             _miPuellaeOssis = new MinisteriumPuellaeOssis(config.Ossis);
