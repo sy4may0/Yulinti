@@ -1,5 +1,6 @@
 using UnityEngine.AI;
 using UnityEngine;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal interface ICivisAtomi {

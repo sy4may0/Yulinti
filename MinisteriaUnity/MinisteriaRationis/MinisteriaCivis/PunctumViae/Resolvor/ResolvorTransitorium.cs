@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class ResolvorTransitorium : IResolvorPunctumViae {
+    public sealed class ResolvorTransitorium : IResolvorPunctumViae {
         // 中継地点はIpunctumViaeからランダムに選ぶ。
         public ErrorAut<IPunctumViae> Resolvo(IPunctumViae pAntecedens, IPunctumViae[] pConsequens) {
             int length = pConsequens.Length;

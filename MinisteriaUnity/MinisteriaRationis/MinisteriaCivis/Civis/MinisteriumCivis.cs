@@ -18,12 +18,14 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _civisAtomi = _fabrica.ManifestatioCivis().Evolvo();
 
             // Non Null Members 
-            _radixCivis = _civisAtomi.RadixCivis();
+            _radixCivis = _civisAtomi.RadixCivis;
             _osCaputis = _civisAtomi.Animator.Evolvo(
-               IDErrorum.MINISTERIUMCIVIS_ANIMATOR_NULL 
-            ).LegoOs(HumanBodyBones.Head).Evolvo(
-               IDErrorum.MINISTERIUMCIVIS_HEAD_BONE_NULL 
-            );
+                IDErrorum.MINISTERIUMCIVIS_ANIMATOR_NULL 
+            ).GetBoneTransform(HumanBodyBones.Head);
+
+            if (_osCaputis == null) {
+                Errorum.Fatal(IDErrorum.MINISTERIUMCIVIS_HEAD_BONE_NULL);
+            }
 
             _civisAtomi.Deactivare();
         }

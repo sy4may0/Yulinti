@@ -1,5 +1,7 @@
 using UnityEngine.AI;
 using UnityEngine;
+using System;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class CivisAtomi : ICivisAtomi, IDisposable {

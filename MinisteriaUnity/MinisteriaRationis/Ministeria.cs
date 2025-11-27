@@ -30,7 +30,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             Debug.Log("tCivis: " + _ministeriumCivis.LegoPositionem());
             Debug.Log("osCaputis: " + _ministeriumCivis.DirectioAspectus());
 
-            _ministeriumCivis.Deactivare();
+            //_ministeriumCivis.Deactivare();
 
             // ----------------------------
         }
