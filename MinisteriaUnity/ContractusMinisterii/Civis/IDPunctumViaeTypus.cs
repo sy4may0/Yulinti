@@ -7,7 +7,6 @@ namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
         Crematorium,
     
         // 生成場: NPCスポーン地点
-        Natorium,
-        Count
+        Natorium
     }
 }
