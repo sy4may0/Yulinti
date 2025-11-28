@@ -4,8 +4,8 @@ using System;
 using UnityEngine;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class ResolvorTransitorium : IResolvorPunctumViae {
-        // 中継地点はPunctumViaeからランダムに選ぶ。
+    internal sealed class ResolvorNatorium : IResolvorPunctumViae {
+        // 起点。pAntecedensがnullである前提でランダムに選ぶ。
         public ErrorAut<PunctumViae> Resolvo(PunctumViae pAntecedens, PunctumViae[] pConsequens) {
             int length = pConsequens.Length;
             if (length == 0) {
@@ -26,8 +26,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 PunctumViae pv = pConsequens[i];
 
                 if (!pv.EstActivum) continue;
-                // 前に戻らないようにする。(pAntecedensは、どこから出発してこのWayPointに来たか。)
-                if (pAntecedens != null && pAntecedens.Positio == pv.Positio) continue;
 
                 indexus[count++] = i;
             }

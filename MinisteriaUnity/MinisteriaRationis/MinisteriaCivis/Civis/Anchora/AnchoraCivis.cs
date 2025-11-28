@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class AnchoraCivis : MonoBehaviour {
+    public sealed class AnchoraCivis : MonoBehaviour {
         [SerializeField] private GameObject _prefabInstance;
         [SerializeField] private Animator _animator;
         [SerializeField] private SkinnedMeshRenderer _figura;
