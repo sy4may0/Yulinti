@@ -8,31 +8,22 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly FonsTemporis _fonsTemporis;
         private readonly ITemporis _temporis;
 
-        // Civisテスト　後で消すこと。 ----
-        private readonly MinisteriumCivis _ministeriumCivis;
-        // ----------------------------
+        // Civis Test
+        private readonly LuditorPunctumViae _luditorPunctumViae;
+        private readonly Civis _civis;
 
-        public Ministeria(FasciculusConfigurationum configurationum) {
-            if (configurationum == null) {
-                Errorum.Fatal(IDErrorum.MINISTERIA_CONFIGURATION_NULL);
-            }
+        public Ministeria(
+            IVasculumMinisterii vasculumMinisterii
+        ) {
             _fonsTemporis = new FonsTemporis();
             _temporis = new Temporis(_fonsTemporis);
-            _ostiorumRationis = new FasciculusOstiorumRationis(configurationum, _temporis);
+            _ostiorumRationis = new FasciculusOstiorumRationis(vasculumMinisterii, _temporis);
 
-            // Civisテスト　後で消すこと。 ----
-            IConfiguratioCivisOrdinatae config = configurationum.Civis.ConfiguratioCivisSimplicis.Evolvo();
-            IFabricaCivis _fabricaCivis = new FabricaCivisOrdinatae(config);
-            _ministeriumCivis = new MinisteriumCivis(_fabricaCivis);
-            _ministeriumCivis.Activare();
+            // Civis Test
+            _luditorPunctumViae = new LuditorPunctumViae(vasculumMinisterii.Civis.AnchoraPunctumViae);
+            _civis = new Civis(vasculumMinisterii.Civis.AnchoraCivis[0], _luditorPunctumViae);
+            _civis.Oriri();
 
-            Debug.Log("MinisteriumCivis生成成功");
-            Debug.Log("tCivis: " + _ministeriumCivis.LegoPositionem());
-            Debug.Log("osCaputis: " + _ministeriumCivis.DirectioAspectus());
-
-            //_ministeriumCivis.Deactivare();
-
-            // ----------------------------
         }
 
         public FasciculusOstiorumRationis OstiorumRationis => _ostiorumRationis;
@@ -48,6 +39,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
         public void Pulsus() {
             _ostiorumRationis.Pulsus();
+
+            // Civis Test
+            _civis.Migrare();
         }
 
         public void PulsusFixusPrimum() {

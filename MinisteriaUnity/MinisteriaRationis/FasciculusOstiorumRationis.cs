@@ -1,3 +1,4 @@
+using Yulinti.MinisteriaUnity.Anchora;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.Nucleus;
 
@@ -9,12 +10,39 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly FasciculusOstiorumPuellae _puellae;
         private readonly FasciculusOstiorumPuellaeCrinis _puellaeCrinis;
 
-        public FasciculusOstiorumRationis(FasciculusConfigurationum configurationum, ITemporis temporis) {
+        public FasciculusOstiorumRationis(IVasculumMinisterii vasculumMinisterii, ITemporis temporis) {
             _nuclei = new FasciculusOstiorumNuclei(temporis);
-            _input = new FasciculusOstiorumInput(configurationum.Input);
-            _camera = new FasciculusOstiorumCamera(configurationum.Camera);
-            _puellae = new FasciculusOstiorumPuellae(configurationum.Puellae, temporis);
-            _puellaeCrinis = new FasciculusOstiorumPuellaeCrinis(configurationum.PuellaeCrinis);
+
+            // Input
+            if (vasculumMinisterii.Input != null && vasculumMinisterii.Input.EstActivum) {
+                _input = new FasciculusOstiorumInput(vasculumMinisterii.Input);
+            } else {
+                _input = null;
+            }
+
+            // Camera
+            if (vasculumMinisterii.Camera != null && vasculumMinisterii.Camera.EstActivum) {
+                _camera = new FasciculusOstiorumCamera(vasculumMinisterii.Camera.AnchoraCamera);
+            } else {
+                _camera = null;
+            }
+
+            // Puellae (uses config + anchora via Vasculum)
+            if (vasculumMinisterii.Puellae != null && vasculumMinisterii.Puellae.EstActivum) {
+                _puellae = new FasciculusOstiorumPuellae(vasculumMinisterii.Puellae.Config, temporis);
+            } else {
+                _puellae = null;
+            }
+
+            // PuellaeCrinis (uses anchora array + puellae anchora)
+            if (vasculumMinisterii.PuellaeCrinis != null && vasculumMinisterii.PuellaeCrinis.EstActivum) {
+                _puellaeCrinis = new FasciculusOstiorumPuellaeCrinis(
+                    vasculumMinisterii.PuellaeCrinis.AnchoraPuellaeCrinum,
+                    vasculumMinisterii.PuellaeCrinis.AnchoraPuellae
+                );
+            } else {
+                _puellaeCrinis = null;
+            }
         }
 
         public FasciculusOstiorumNuclei Nuclei => _nuclei;
@@ -24,7 +52,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public FasciculusOstiorumPuellaeCrinis PuellaeCrinis => _puellaeCrinis;
 
         public void Pulsus() {
-            _puellae.Pulsus();
+            _puellae?.Pulsus();
         }
 
         public void PulsusFixus() {

@@ -12,11 +12,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeCrinisAdiunctionis = miPuellaeCrinisAdiunctionis;
         }
 
-        public void Manifestatio(IDPuellaeCrinis idCrinis) {
-            _miPuellaeCrinisAdiunctionis.Manifestatio(idCrinis);
+        public void Muto(IDPuellaeCrinis idCrinis) {
+            _miPuellaeCrinisAdiunctionis.Muto(idCrinis);
         }
-        public void Deletio() {
-            _miPuellaeCrinisAdiunctionis.Deletio();
+        public void Deleto() {
+            _miPuellaeCrinisAdiunctionis.Deleto();
         }
     }
 }

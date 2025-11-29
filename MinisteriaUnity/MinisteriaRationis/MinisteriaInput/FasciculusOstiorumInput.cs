@@ -1,3 +1,4 @@
+using Yulinti.MinisteriaUnity.Anchora;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.Nucleus;
@@ -8,12 +9,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         private readonly IOstiumInputMotusLegibile _osInputMotusLeg;
 
-        public FasciculusOstiorumInput(FasciculusConfigurationumInput configurationum) {
-            if (configurationum == null) {
-                Errorum.Fatal(IDErrorum.FASCICULUSOSTIORUMINPUT_CONFIG_NULL);
-            }
-
-            _miInputMotus = new MinisteriumInputMotus(configurationum.Motus);
+        public FasciculusOstiorumInput(IVasculumMinisteriumInput vasculumInput) {
+            _miInputMotus = new MinisteriumInputMotus(vasculumInput.AnchoraInput);
             _osInputMotusLeg = new OstiumInputMotusLegibile(_miInputMotus);
         }
 

@@ -9,7 +9,8 @@
     "Yulinti.MinisteriaUnity.ContractusMinisterii",
     "Yulinti.MinisteriaUnity.ConfiguratioDucis",
     "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
-    "Yulinti.MinisteriaUnity.MinisteriaRationis"
+    "Yulinti.MinisteriaUnity.MinisteriaRationis",
+    "Yulinti.MinisteriaUnity.Anchora"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

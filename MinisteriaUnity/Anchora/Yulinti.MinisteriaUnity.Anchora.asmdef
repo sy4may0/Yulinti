@@ -1,13 +1,12 @@
 {
-    "name": "Yulinti.MinisteriaUnity.MinisteriaRationis",
-    "rootNamespace": "Yulinti.MinisteriaUnity.MinisteriaRationis",
+    "name": "Yulinti.MinisteriaUnity.Anchora",
+    "rootNamespace": "Yulinti.MinisteriaUnity.Anchora",
     "references": [
         "Kybernetik.Animancer",
         "Unity.InputSystem",
         "Yulinti.Nucleus",
         "Yulinti.MinisteriaUnity.ContractusMinisterii",
         "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
-        "Yulinti.MinisteriaUnity.Anchora",
         "Unity.Addressables",
         "Unity.ResourceManager",
         "UniTask"

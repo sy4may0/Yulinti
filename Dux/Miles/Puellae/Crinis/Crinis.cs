@@ -10,7 +10,7 @@ namespace Yulinti.Dux.Miles {
             IOstiumPuellaeCrinisAdiunctionisMutabile osPuellaeCrinisAdiunctionisMut
         ) {
             _osPuellaeCrinisAdiunctionisMut = osPuellaeCrinisAdiunctionisMut;
-            _osPuellaeCrinisAdiunctionisMut.Manifestatio(IDPuellaeCrinis.Resiliens);
+            _osPuellaeCrinisAdiunctionisMut.Muto(IDPuellaeCrinis.Resiliens);
         }
     }
 }

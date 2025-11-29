@@ -1,3 +1,4 @@
+using Yulinti.MinisteriaUnity.Anchora;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.Nucleus;
@@ -17,12 +18,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly IOstiumCameraLegibile _osCameraPriLeg;
         private readonly IOstiumCameraMutabile _osCameraPriMut;
 
-        public FasciculusOstiorumCamera(FasciculusConfigurationumCamera configurationes) {
-            if (configurationes == null) {
-                Errorum.Fatal(IDErrorum.FASCICULUSOSTIORUMCAMERA_CONFIG_NULL);
-            }
-
-            _miCameraPri = new MinisteriumCamera(configurationes.ConfiguratioCameraPrincips);
+        public FasciculusOstiorumCamera(AnchoraCamera anchoraCamera) {
+            _miCameraPri = new MinisteriumCamera(anchoraCamera);
             _osCameraPriLeg = new OstiumCameraLegibile(_miCameraPri);
             _osCameraPriMut = new OstiumCameraMutabile(_miCameraPri);
         }

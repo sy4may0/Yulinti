@@ -1,29 +1,30 @@
 using UnityEngine;
+using Yulinti.MinisteriaUnity.Anchora;
 using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
+using System;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class TabulaPuellaeCrinis {
-        private readonly CrinisPuellae[] _crinis;
+        private readonly AnchoraPuellaeCrinis[] _crines;
 
-        public TabulaPuellaeCrinis(FasciculusConfigurationumPuellaeCrinis configuratio) {
-            int longitudo = (int)IDPuellaeCrinis.Count;
-            _crinis = new CrinisPuellae[longitudo];
+        public TabulaPuellaeCrinis(AnchoraPuellaeCrinis[] anchora) {
+            int longitudo = Enum.GetValues(typeof(IDPuellaeCrinis)).Length;
+            _crines = new AnchoraPuellaeCrinis[longitudo];
 
-            ConfiguratioPuellaeCrinis resiliens = configuratio.Resiliens;
-
-            _crinis[(int)IDPuellaeCrinis.Resiliens] = new CrinisPuellae(
-                resiliens.Crinis.Evolvo(IDErrorum.TABULAPUELLAECRINIS_RESILIENS_CRINIS_NULL), resiliens.IterAdRadicem
-            );
+            for (int i = 0; i < anchora.Length; i++) {
+                AnchoraPuellaeCrinis a = anchora[i];
+                _crines[(int)a.Typus] = a;
+            }
 
             for (int i = 0; i < longitudo; i++) {
-                if (_crinis[i] == null) {
+                if (_crines[i] == null) {
                     Errorum.Fatal(IDErrorum.TABULAPUELLAECRINIS_ID_NOT_FOUND);
                 }
             }
         }
 
-        public CrinisPuellae Lego(IDPuellaeCrinis idCrinis) => _crinis[(int)idCrinis];
+        public AnchoraPuellaeCrinis Lego(IDPuellaeCrinis idCrinis) => _crines[(int)idCrinis];
     }
 }
