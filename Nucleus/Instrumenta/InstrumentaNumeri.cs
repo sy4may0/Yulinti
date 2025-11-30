@@ -1,9 +1,9 @@
-using System.Numerics;
+﻿using System.Numerics;
 using System;
 
 namespace Yulinti.Nucleus {
 
-    // UnityEngineにあるAngleとかをSystem.Numericsで実装する。
+    // UnityEngine縺ｫ縺ゅｋAngle縺ｨ縺九ｒSystem.Numerics縺ｧ螳溯｣・☆繧九・
     public static class InstrumentaNumeri {
         public static float Angulus(Vector3 v1, Vector3 v2) {
             float dot = Vector3.Dot(v1, v2);

@@ -1,4 +1,4 @@
-
+﻿
 namespace Yulinti.Nucleus {
     public readonly struct NihilAut<T> {
         private readonly T _valor;
@@ -20,7 +20,7 @@ namespace Yulinti.Nucleus {
                 return _valor;
             } else {
                 Errorum.Fatal("Unwrap(Evolvere) Failed. Unwrap nihil result. Result type: " + typeof(T).Name);
-                return default(T); // コンパイル用。Fatalで落ちる。
+                return default(T); // 繧ｳ繝ｳ繝代う繝ｫ逕ｨ縲・atal縺ｧ關ｽ縺｡繧九・
             }
         }
         public T Evolvo(IDErrorum error) {
@@ -28,7 +28,7 @@ namespace Yulinti.Nucleus {
                 return _valor;
             } else {
                 Errorum.Fatal(error);
-                return default(T); // コンパイル用。Fatalで落ちる。
+                return default(T); // 繧ｳ繝ｳ繝代う繝ｫ逕ｨ縲・atal縺ｧ關ｽ縺｡繧九・
             }
         }
 
@@ -55,11 +55,11 @@ namespace Yulinti.Nucleus {
             _estSuccessus = estSuccessus;
         }
 
-        public bool Successus() {
+        public bool EstSuccessus() {
             return _estSuccessus;
         }
 
-        public bool Error() {
+        public bool EstError() {
             return !_estSuccessus;
         }
 
@@ -68,25 +68,25 @@ namespace Yulinti.Nucleus {
         }
 
         public T Evolvo() {
-            if (Successus()) {
+            if (EstSuccessus()) {
                 return _valor;
             } else {
                 Errorum.Fatal("Unwrap(Evolvere) Failed. Error: " + _error);
-                return default(T); // コンパイル用。Fatalで落ちる。
+                return default(T); // 繧ｳ繝ｳ繝代う繝ｫ逕ｨ縲・atal縺ｧ關ｽ縺｡繧九・
             }
         }
 
         public T Evolvo(IDErrorum error) {
-            if (Successus()) {
+            if (EstSuccessus()) {
                 return _valor;
             } else {
                 Errorum.Fatal(error, _error);
-                return default(T); // コンパイル用。Fatalで落ちる。
+                return default(T); // 繧ｳ繝ｳ繝代う繝ｫ逕ｨ縲・atal縺ｧ關ｽ縺｡繧九・
             }
         }
 
         public T EvolvoAut(T defalta) {
-            if (Successus()) {
+            if (EstSuccessus()) {
                 return _valor;
             } else {
                 return defalta;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 namespace Yulinti.Nucleus {
     public static class Numerus {
         public const float Epsilon = 1e-6f;

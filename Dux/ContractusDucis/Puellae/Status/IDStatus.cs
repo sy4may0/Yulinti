@@ -1,4 +1,4 @@
-namespace Yulinti.Dux.ContractusDucis {
+﻿namespace Yulinti.Dux.ContractusDucis {
     public enum IDStatus {
         None,
         Quies,                // Idle

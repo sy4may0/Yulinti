@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+﻿using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus;
 using System;
@@ -23,7 +23,7 @@ namespace Yulinti.Dux.Miles {
         }
 
         private void FiguroGenu() {
-            // 180 -> 0度に近づくにつれウェイトを上げる。(足が伸びてれば180度だろ。)
+            // 180 -> 0蠎ｦ縺ｫ霑代▼縺上↓縺､繧後え繧ｧ繧､繝医ｒ荳翫￡繧九・雜ｳ縺御ｼｸ縺ｳ縺ｦ繧後・180蠎ｦ縺繧阪・
             float angulusGenusDexteri = 180f - InstrumentaFigurae.AngulusTriumPunctorum(
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightLowerLeg),
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightUpperLeg),
@@ -63,7 +63,7 @@ namespace Yulinti.Dux.Miles {
         }
 
         private void FiguroPelvim() {
-            // Kneeと違ってReverse角度になっていない。AngulusAdをよく見ろ。
+            // Knee縺ｨ驕輔▲縺ｦReverse隗貞ｺｦ縺ｫ縺ｪ縺｣縺ｦ縺・↑縺・・ngulusAd繧偵ｈ縺剰ｦ九ｍ縲・
             float angulusX150Dex = InstrumentaFigurae.AngulusTriumPunctorum(
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightUpperLeg),
                 _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.RightX150pin),
@@ -93,7 +93,7 @@ namespace Yulinti.Dux.Miles {
             float pondusY90Sin = InstrumentaFigurae.AngulusAdPondusInversum(angulusY90Sin, 0f, 90f);
             float pondusAni = (pondusX150Dex + pondusX150Sin) / 2f;
 
-            // (X90 + X150) + Y90が100になるように調整する。
+            // (X90 + X150) + Y90縺・00縺ｫ縺ｪ繧九ｈ縺・↓隱ｿ謨ｴ縺吶ｋ縲・
             float squamaeDex = CalculateXCapacitatemSquamae(pondusX90Dex, pondusX150Dex, pondusY90Dex);
             float squamaeSin = CalculateXCapacitatemSquamae(pondusX90Sin, pondusX150Sin, pondusY90Sin);
             pondusX90Dex *= squamaeDex;

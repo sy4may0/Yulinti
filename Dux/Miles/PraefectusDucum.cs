@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
+﻿using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Dux.Thesaurus;
 using Yulinti.Nucleus;
 

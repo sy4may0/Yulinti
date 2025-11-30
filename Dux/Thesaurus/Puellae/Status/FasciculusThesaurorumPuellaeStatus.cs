@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.ConfiguratioDucis;
+﻿using Yulinti.MinisteriaUnity.ConfiguratioDucis;
 
 namespace Yulinti.Dux.Thesaurus {
     public sealed class FasciculusThesaurorumPuellaeStatus {

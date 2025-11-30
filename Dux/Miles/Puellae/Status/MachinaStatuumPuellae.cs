@@ -1,4 +1,4 @@
-using Yulinti.Dux.Miles;
+﻿using Yulinti.Dux.Miles;
 using Yulinti.Dux.Thesaurus;
 using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
@@ -19,7 +19,7 @@ namespace Yulinti.Dux.Miles {
         private IStatusCorporis _statusCorporisActualis;
         private IDStatus _statusProximus;
 
-        private Action _fInvocanda; // LuditorAnimationisに渡すコールバック
+        private Action _fInvocanda; // LuditorAnimationis縺ｫ貂｡縺吶さ繝ｼ繝ｫ繝舌ャ繧ｯ
 
         public MachinaStatuumPuellae(
             FasciculusThesaurorumPuellaeStatus thesauriPuellaeStatus,
@@ -50,15 +50,15 @@ namespace Yulinti.Dux.Miles {
         }
 
         public void Opero() {
-            // 状態更新を検証
+            // 迥ｶ諷区峩譁ｰ繧呈､懆ｨｼ
             MutareStatumCorporis();
 
-            // アニメーションを更新
-            // 状態更新適用(ApplicareMutationis)は
-            // PostulareCorporisによってコールバックとして実行される。
+            // 繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ繧呈峩譁ｰ
+            // 迥ｶ諷区峩譁ｰ驕ｩ逕ｨ(ApplicareMutationis)縺ｯ
+            // PostulareCorporis縺ｫ繧医▲縺ｦ繧ｳ繝ｼ繝ｫ繝舌ャ繧ｯ縺ｨ縺励※螳溯｡後＆繧後ｋ縲・
             MutareAnimationisCorporis();
 
-            // 移動計画を作成
+            // 遘ｻ蜍戊ｨ育判繧剃ｽ懈・
             OrdinatioMotus ordinatio = OrdinareMotum();
 
             _motor.ApplicareMotus(ordinatio);
@@ -75,7 +75,7 @@ namespace Yulinti.Dux.Miles {
                 _osPuellaeLociLeg.VelHorizontalisActualis,
                 _osPuellaeLociLeg.VelVerticalisActualis,
                 _osPuellaeLociLeg.RotatioYActualis,
-                true // TODO: 現状、ジャンプ無。EstInTerraは常にtrue。
+                true // TODO: 迴ｾ迥ｶ縲√ず繝｣繝ｳ繝礼┌縲・stInTerra縺ｯ蟶ｸ縺ｫtrue縲・
             );
         }
 

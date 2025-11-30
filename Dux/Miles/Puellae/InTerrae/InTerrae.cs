@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
+﻿using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Dux.Thesaurus;
 using System.Numerics;
@@ -38,13 +38,13 @@ namespace Yulinti.Dux.Miles {
                 return;
             }
 
-            // 急に動くケースは無視。
-            if (MathF.Abs(MathF.Abs(differentia) - MathF.Abs(_elevatioActualis)) > 0.05f) {
+            if (MathF.Abs(MathF.Abs(differentia) - MathF.Abs(_elevatioActualis)) > 0.1f) {
                 return;
             }
 
             Vector3 pelvisPositionis = _osPuellaeOssisLeg.LegoPositionem(IDPuellaeOssis.Hips);
             pelvisPositionis.Y -= differentia;
+
             _osPuellaeOssisMut.PonoPositionem(IDPuellaeOssis.Hips, pelvisPositionis);
 
             _elevatioActualis = differentia;
@@ -58,10 +58,8 @@ namespace Yulinti.Dux.Miles {
             float altitudoPedisSin = AltitudoPedis(IDPuellaeOssis.LeftFoot);
             float altitudoDigitusPedisDex = AltitudoDigitusPedis(IDPuellaeOssis.RightToe);
             float altitudoDigitusPedisSin = AltitudoDigitusPedis(IDPuellaeOssis.LeftToe);
+            // ヒールとかの調整をやる場合、ここDebugして出たaltitudeをCorrectivusに入れるとちょうどぴったりになるよ。
 
-            // 足補正高度適用 
-            // PedisMinが下 -> PedisMin-Terrae差 + PedisYCorrectivus
-            // PedisMinが上(DigitusPedisMinが下) -> DigitusPedisMin-Terrae差 + DigitusPedisYCorrectivus
             float differentiaTerraeDex = (altitudoPedisDex < altitudoDigitusPedisDex) ?
                 altitudoPedisDex - (altitudoTerraeDex + _thesaurusPuellaeInTerrae.PesYCorrectivus)
                 : altitudoDigitusPedisDex - (altitudoTerraeDex + _thesaurusPuellaeInTerrae.DigitusPedisYCorrectivus);

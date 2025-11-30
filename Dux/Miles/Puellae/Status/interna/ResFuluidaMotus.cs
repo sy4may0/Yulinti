@@ -1,4 +1,4 @@
-namespace Yulinti.Dux.Miles {
+﻿namespace Yulinti.Dux.Miles {
     internal sealed class ResFuluidaMotus{
         public float _velocitasActualisHorizontal;
         public float _velocitasActualisVertical;

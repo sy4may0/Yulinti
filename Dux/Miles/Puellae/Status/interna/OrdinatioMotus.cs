@@ -1,4 +1,4 @@
-namespace Yulinti.Dux.Miles {
+﻿namespace Yulinti.Dux.Miles {
     internal struct OrdinatioMotusHorizontalis {
         public float velocitas;
         public float tempusLevigatum;

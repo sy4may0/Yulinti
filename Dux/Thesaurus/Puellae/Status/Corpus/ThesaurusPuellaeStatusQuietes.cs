@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.ConfiguratioDucis;
+﻿using Yulinti.MinisteriaUnity.ConfiguratioDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Thesaurus {

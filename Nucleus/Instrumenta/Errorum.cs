@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Yulinti.Nucleus {
@@ -10,7 +10,7 @@ namespace Yulinti.Nucleus {
             throw exception;
             #else
             UnityEngine.Debug.LogException(exception);
-            // [TODO] UI表示してQUITに変更する。
+            // [TODO] UI陦ｨ遉ｺ縺励※QUIT縺ｫ螟画峩縺吶ｋ縲・
             UnityEngine.Application.Quit();
             #endif
         }

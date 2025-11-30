@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Numerics;
 using Yulinti.Nucleus;
 
@@ -40,7 +40,7 @@ namespace Yulinti.Dux.Miles {
             float velocitasMax,
             float intervallum
         ) {
-            // TODO: ここも速度に対するSmoothTimeを入れるか? 物理的には9.8固定だからこれで良いんじゃない?
+            // TODO: 縺薙％繧る溷ｺｦ縺ｫ蟇ｾ縺吶ｋSmoothTime繧貞・繧後ｋ縺・ 迚ｩ逅・噪縺ｫ縺ｯ9.8蝗ｺ螳壹□縺九ｉ縺薙ｌ縺ｧ濶ｯ縺・ｓ縺倥ｃ縺ｪ縺・
 
             if (estInTerra) {
                 return new OrdinatioMotusVerticalis(velocitasContactus, 0f);

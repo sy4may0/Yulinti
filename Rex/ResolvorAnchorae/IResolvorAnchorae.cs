@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.Anchora;
+﻿using Yulinti.MinisteriaUnity.Anchora;
 
 namespace Yulinti.Rex {
     internal interface IResolvorAnchorae {

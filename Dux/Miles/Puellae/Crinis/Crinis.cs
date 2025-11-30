@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 

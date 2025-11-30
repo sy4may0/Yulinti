@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
+﻿using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.Dux.Miles {
     internal sealed class FasciculusOstiorumPuellae {

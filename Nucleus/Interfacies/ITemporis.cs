@@ -1,14 +1,14 @@
-namespace Yulinti.Nucleus {
+﻿namespace Yulinti.Nucleus {
     public interface IPulsabilis {
         void Pulsus();
     }
 
-    // Ministeria専用 / DeltaTime更新とか。
+    // Ministeria蟆ら畑 / DeltaTime譖ｴ譁ｰ縺ｨ縺九・
     public interface IPulsabilisPrimum {
         void PulsusPrimum();
     }
 
-    // Dux専用
+    // Dux蟆ら畑
     public interface IPulsabilisPostRationem {
         void PulsusPostRationem();
     }
@@ -17,7 +17,7 @@ namespace Yulinti.Nucleus {
         void PulsusFixus();
     }
 
-    // Ministeria専用 / FixedDeltaTime更新とか。
+    // Ministeria蟆ら畑 / FixedDeltaTime譖ｴ譁ｰ縺ｨ縺九・
     public interface IPulsabilisFixusPrimum {
         void PulsusFixusPrimum();
     }

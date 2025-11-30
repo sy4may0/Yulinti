@@ -2,6 +2,7 @@
   "name": "Yulinti.Rex",
   "rootNamespace": "Yulinti.Rex",
   "references": [
+    "Kybernetik.Animancer",
     "Yulinti.Nucleus",
     "Yulinti.Dux.ContractusDucis",
     "Yulinti.Dux.Miles",

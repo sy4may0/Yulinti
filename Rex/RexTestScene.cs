@@ -1,6 +1,5 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.MinisteriaUnity.ConfiguratioDucis;
 using Yulinti.Dux.Thesaurus;
@@ -8,35 +7,38 @@ using Yulinti.Dux.Miles;
 
 namespace Yulinti.Rex {
     public sealed class RexTestScene : MonoBehaviour {
-        [SerializeField] private FasciculusConfigurationum _configurationum;
         [SerializeField] private FasciculusConfigurationumDucis _configurationumDucis;
         [SerializeField] private ResolvorAnchoraeTestScene _resolvorAnchorae;
+
+        [SerializeField] private ConfiguratioCivis _configuratioCivis;
+        [SerializeField] private ConfiguratioPuellae _configuratioPuellae;
 
         private Ministeria _ministeria;
         private PraefectusDucum _praefectusDucum;
 
         private void Awake() {
-            // アンカーを解決
+            // 繧｢繝ｳ繧ｫ繝ｼ繧定ｧ｣豎ｺ
             _resolvorAnchorae.Resolvo();
             _resolvorAnchorae.Validare();
 
             VasculumMinisteriiTestScene vasculumMinisteriiTestScene = new VasculumMinisteriiTestScene(
-                _configurationum,
                 _resolvorAnchorae.AnchoraPuellae,
                 _resolvorAnchorae.AnchoraCamera,
                 _resolvorAnchorae.AnchoraInput,
                 _resolvorAnchorae.AnchoraPuellaeCrinis,
                 _resolvorAnchorae.AnchoraCivis,
-                _resolvorAnchorae.AnchoraPunctumViae
+                _resolvorAnchorae.AnchoraPunctumViae,
+                _configuratioCivis,
+                _configuratioPuellae
             );
 
-            // Ministeriaを初期化
+            // Ministeria繧貞・譛溷喧
             _ministeria = new Ministeria(vasculumMinisteriiTestScene);
 
-            // Runtimeを初期化。
+            // Runtime繧貞・譛溷喧縲・
             FasciculusThesaurorum thesaurorum = new FasciculusThesaurorum(_configurationumDucis);
 
-            // Duxを初期化
+            // Dux繧貞・譛溷喧
             _praefectusDucum = new PraefectusDucum(thesaurorum, _ministeria.OstiorumRationis);
         }
 

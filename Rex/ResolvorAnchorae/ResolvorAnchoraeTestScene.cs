@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Yulinti.MinisteriaUnity.Anchora;
 using Yulinti.Nucleus;
 
@@ -19,8 +19,8 @@ namespace Yulinti.Rex {
         public AnchoraPunctumViae[] AnchoraPunctumViae => _anchoraPunctumViae;
         public AnchoraCivis[] AnchoraCivis => _anchoraCivis;
 
-        // Resolvo : null/emptyを確認しnullがあればFindObjectOfType<T>() / FindObjectsOfType<T>()で取得。
-        // Findした場合はMemoratorにIDErrorum.REX_ANCHORA_NOT_SETで警告を発行。
+        // Resolvo : null/empty繧堤｢ｺ隱阪＠null縺後≠繧後・FindObjectOfType<T>() / FindObjectsOfType<T>()縺ｧ蜿門ｾ励・
+        // Find縺励◆蝣ｴ蜷医・Memorator縺ｫIDErrorum.REX_ANCHORA_NOT_SET縺ｧ隴ｦ蜻翫ｒ逋ｺ陦後・
         public void Resolvo() {
             if (_anchoraCamera == null) {
                 var found = UnityEngine.Object.FindFirstObjectByType<AnchoraCamera>();
@@ -72,7 +72,7 @@ namespace Yulinti.Rex {
         }
 
         public void Validare() {
-            // Resolvo 後も解決できていないアンカーがあれば即 Fatal
+            // Resolvo 蠕後ｂ隗｣豎ｺ縺ｧ縺阪※縺・↑縺・い繝ｳ繧ｫ繝ｼ縺後≠繧後・蜊ｳ Fatal
             if (_anchoraCamera == null ||
                 _anchoraInput == null ||
                 _anchoraPuellae == null ||
