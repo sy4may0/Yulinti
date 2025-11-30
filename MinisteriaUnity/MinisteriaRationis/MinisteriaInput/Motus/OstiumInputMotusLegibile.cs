@@ -17,3 +17,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public bool LegoIncumbo => _miInputMotus.LegoIncumbo;
     }
 }
+
+

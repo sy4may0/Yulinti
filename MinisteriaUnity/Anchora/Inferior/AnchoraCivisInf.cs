@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Yulinti.MinisteriaUnity.Anchora {
     public sealed class AnchoraCivisInf : MonoBehaviour {

@@ -4,3 +4,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         float IntervallumFixus { get; }
     }
 }
+
+

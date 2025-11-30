@@ -21,3 +21,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         bool EstImpeditivus { get; }
     }
 }
+
+

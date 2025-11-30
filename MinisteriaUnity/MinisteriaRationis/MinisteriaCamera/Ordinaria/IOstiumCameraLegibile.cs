@@ -5,3 +5,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         System.Numerics.Vector3 AnteriorXZ { get; }
     }
 }
+
+

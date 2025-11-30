@@ -1,5 +1,4 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
@@ -8,11 +7,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumPuellaeOssis {
         private readonly TabulaPuellaeOssium _tabulaOssium;
 
-        public MinisteriumPuellaeOssis(IConfiguratioPuellaeOssis config) {
-            if (config == null) {
-                Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAEOSSIS_CONFIG_NULL);
-            }
-            _tabulaOssium = new TabulaPuellaeOssium(config);
+        public MinisteriumPuellaeOssis(IAnchoraPuellae anchoraPuellae) {
+            _tabulaOssium = new TabulaPuellaeOssium(anchoraPuellae);
         }
 
         public Vector3 LegoPositionem(IDPuellaeOssis idOssis) => _tabulaOssium.Lego(idOssis).position;
@@ -33,3 +29,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
     }
 }
+
+
+

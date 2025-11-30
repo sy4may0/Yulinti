@@ -16,3 +16,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public float IntervallumFixus => _temporis.IntervallumFixus;
     }
 }
+
+

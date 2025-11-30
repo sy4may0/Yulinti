@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 using UnityEngine;
 
@@ -34,18 +34,26 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
 
         public void PulsusPrimum() {
-            // ここでDeltaTime更新。　-> 以降全てITemporis/OstiumTemporisLegibileにアクセスする。
+            // ここでDeltaTime更新。　-> 以降�EてITemporis/OstiumTemporisLegibileにアクセスする、E
             _fonsTemporis.Pulsus();
         }
         public void Pulsus() {
             _ostiorumRationis.Pulsus();
 
             // Civis Test
-            _civis.Migrare();
+            if (_civis.EstActivum && _civis.NavMesh.EstAdPerveni(0.5f)) {
+                EventusCivisLociNavMesh result = _civis.NavMesh.Migrare();
+                if(result.estEvanescere) {
+                    if (result.ev.EstError()) {
+                        Memorator.MemorareErrorum(result.ev.ID());
+                    }
+                    _civis.Evanescere();
+                }
+            }
         }
 
         public void PulsusFixusPrimum() {
-            // ここでFixedDeltaTime更新。　-> 以降全てITemporis/OstiumTemporisLegibileにアクセスする。
+            // ここでFixedDeltaTime更新。　-> 以降�EてITemporis/OstiumTemporisLegibileにアクセスする、E
             _fonsTemporis.PulsusFixus();
         }
 
@@ -59,3 +67,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     }
 }
         
+
+
+

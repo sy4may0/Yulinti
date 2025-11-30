@@ -64,3 +64,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
     }
 }
+
+

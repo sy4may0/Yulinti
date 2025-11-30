@@ -1,6 +1,4 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 
@@ -10,10 +8,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly TabulaPuellaeFiguraePelvis _tabula;
 
         public MinisteriumPuellaeFiguraePelvis(
-            IConfiguratioPuellaeFiguraePelvis config
+            IConfiguratioPuellaeFiguraePelvis config,
+            SkinnedMeshRenderer hipsMesh
         ) {
-            _hipsMesh = config.Mesh.Evolvo(IDErrorum.MINISTERIUMPUELLAEFIGURAEPELVIS_MESH_NULL);
-            _tabula = new TabulaPuellaeFiguraePelvis(config);
+            _hipsMesh = hipsMesh;
+            _tabula = new TabulaPuellaeFiguraePelvis(config, hipsMesh);
         }
 
         public float LegoPondus(IDPuellaeFiguraePelvis idFiguraePelvis) {
@@ -27,3 +26,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
     }
 }
+
+

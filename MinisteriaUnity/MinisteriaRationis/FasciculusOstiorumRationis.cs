@@ -1,5 +1,4 @@
-using Yulinti.MinisteriaUnity.Anchora;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
@@ -29,7 +28,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
             // Puellae (uses config + anchora via Vasculum)
             if (vasculumMinisterii.Puellae != null && vasculumMinisterii.Puellae.EstActivum) {
-                _puellae = new FasciculusOstiorumPuellae(vasculumMinisterii.Puellae.Config, temporis);
+                _puellae = new FasciculusOstiorumPuellae(temporis, vasculumMinisterii.Puellae);
             } else {
                 _puellae = null;
             }
@@ -63,3 +62,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     }
 }
         
+
+
+

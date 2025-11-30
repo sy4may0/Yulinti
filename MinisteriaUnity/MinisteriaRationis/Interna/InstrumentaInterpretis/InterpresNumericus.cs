@@ -27,3 +27,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
     }
 }
+
+

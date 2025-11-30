@@ -1,17 +1,15 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.Anchora;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class MinisteriumPuellaeCrinisAdiunctionis {
         private readonly TabulaPuellaeCrinis _tabulaCrinis;
-        private AnchoraPuellaeCrinis _crinisActualis;
+        private IAnchoraPuellaeCrinis _crinisActualis;
         private Transform _osCaputis;
 
-        public MinisteriumPuellaeCrinisAdiunctionis(AnchoraPuellaeCrinis[] anchora, AnchoraPuellae anchoraPuellae) {
+        public MinisteriumPuellaeCrinisAdiunctionis(IAnchoraPuellaeCrinis[] anchora, IAnchoraPuellae anchoraPuellae) {
             _tabulaCrinis = new TabulaPuellaeCrinis(anchora);
             _crinisActualis = null;
             _osCaputis = anchoraPuellae.OsHead;
@@ -26,7 +24,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 return;
             }
  
-            AnchoraPuellaeCrinis neo = _tabulaCrinis.Lego(idCrinis);
+            IAnchoraPuellaeCrinis neo = _tabulaCrinis.Lego(idCrinis);
             await neo.Manifestatio();
             bool result = neo.ValidareManifestatio();
 
@@ -54,3 +52,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
     }
 }
+
+
+

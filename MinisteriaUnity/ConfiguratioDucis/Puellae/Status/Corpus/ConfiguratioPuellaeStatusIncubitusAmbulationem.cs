@@ -1,10 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioDucis {
     [System.Serializable]
     public sealed class ConfiguratioPuellaeStatusIncubitusAmbulationem {
-        [Header("ConfiguratioPuellaeStatusIncubitusAmbulationem/IncubitusAmbulationem状態の設定")]
         [SerializeField] private IDPuellaeAnimationisCorporis _idAnimationis = IDPuellaeAnimationisCorporis.Crouch;
         [SerializeField] private float _velocitasDesiderata = 0.9f;
         [SerializeField] private float _acceleratio = 10f;

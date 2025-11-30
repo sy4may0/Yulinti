@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus;
 
@@ -16,18 +16,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private float _velocitasVerticalisActualis;
         private float _rotationisYActualis;
 
-        public MiniateriumPuellaeLoci(
-            IConfiguratioPuellaeLoci config,
-            ITemporis temporis
-        ) {
-            if (config == null) {
-                Errorum.Fatal(IDErrorum.MINIATERIUMPUELLAELOCI_CONFIG_NULL);
-            }
+        public MiniateriumPuellaeLoci(IAnchoraPuellae anchoraPuellae, ITemporis temporis) {
             if (temporis == null) {
                 Errorum.Fatal(IDErrorum.MINIATERIUMPUELLAELOCI_TEMPORIS_NULL);
             }
 
-            _characterController = config.CharacterController.Evolvo(IDErrorum.MINIATERIUMPUELLAELOCI_CHARACTERCONTROLLER_NULL);
+            _characterController = anchoraPuellae.CharacterController;
             _temporis = temporis;
             _refVelocitisHorizontalis = 0f;
             _refVelocitisVerticalis = 0f;
@@ -167,3 +161,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
     }
 }
+
+
+
+
+

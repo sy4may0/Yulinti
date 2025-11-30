@@ -1,4 +1,3 @@
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class FasciculusOstiorumNuclei {
@@ -14,3 +13,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public IOstiumTemporisLegibile TempusLeg => _osTemporisLeg;
     }
 }
+
+

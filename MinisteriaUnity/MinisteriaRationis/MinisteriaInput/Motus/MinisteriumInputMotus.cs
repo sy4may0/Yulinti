@@ -1,8 +1,7 @@
 using UnityEngine;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using UnityEngine.InputSystem;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
-using Yulinti.MinisteriaUnity.Anchora;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
@@ -11,7 +10,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly InputActionReference _sprintInput;
         private readonly InputActionReference _crouchInput;
 
-        public MinisteriumInputMotus(AnchoraInput anchoraInput) {
+        public MinisteriumInputMotus(IAnchoraInput anchoraInput) {
             _moveInput = anchoraInput.MoveInput;
             _sprintInput = anchoraInput.SprintInput;
             _crouchInput = anchoraInput.CrouchInput;
@@ -22,3 +21,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public bool LegoIncumbo => _crouchInput?.action?.enabled == true && _crouchInput.action.IsPressed();
     }
 }
+
+
+

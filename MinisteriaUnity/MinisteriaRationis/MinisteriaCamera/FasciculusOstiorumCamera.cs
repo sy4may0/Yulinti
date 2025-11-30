@@ -1,14 +1,13 @@
-using Yulinti.MinisteriaUnity.Anchora;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 
-// ラテン語note
+// ラチE��語note
 // Main => Camera Princeps
 // Secondary => Camera Secundaria
 // Third => Camera Tertia
 // Forth => Camera Quarta
-// 追従 => Camera Subordinata
+// 追征E=> Camera Subordinata
 // 補助 => Camera Auxiliaria
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
@@ -18,7 +17,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly IOstiumCameraLegibile _osCameraPriLeg;
         private readonly IOstiumCameraMutabile _osCameraPriMut;
 
-        public FasciculusOstiorumCamera(AnchoraCamera anchoraCamera) {
+        public FasciculusOstiorumCamera(IAnchoraCamera anchoraCamera) {
             _miCameraPri = new MinisteriumCamera(anchoraCamera);
             _osCameraPriLeg = new OstiumCameraLegibile(_miCameraPri);
             _osCameraPriMut = new OstiumCameraMutabile(_miCameraPri);
@@ -28,3 +27,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public IOstiumCameraMutabile PrincepsMut => _osCameraPriMut;
     }
 }
+
+
+

@@ -10,3 +10,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         bool EstCircularis { get; }
     }
 }
+
+

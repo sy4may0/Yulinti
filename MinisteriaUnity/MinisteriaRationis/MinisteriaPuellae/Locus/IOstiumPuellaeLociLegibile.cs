@@ -7,3 +7,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         System.Numerics.Quaternion Rotatio { get; }
     }
 }
+
+

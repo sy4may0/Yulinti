@@ -1,7 +1,15 @@
 {
   "name": "Yulinti.MinisteriaUnity.ContractusMinisterii",
   "rootNamespace": "Yulinti.MinisteriaUnity.ContractusMinisterii",
-  "references": [],
+  "references": [
+    "Yulinti.Nucleus",
+    "Unity.InputSystem",
+    "Kybernetik.Animancer",
+    "Unity.Addressables",
+    "Unity.ResourceManager",
+    "UniTask"
+ 
+  ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

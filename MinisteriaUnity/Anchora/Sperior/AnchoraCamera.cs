@@ -1,9 +1,9 @@
-using UnityEngine;
-using Yulinti.MinisteriaUnity.Anchora;
+﻿using UnityEngine;
 using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.Anchora {
-    public sealed class AnchoraCamera : MonoBehaviour, IAnchora {
+    public sealed class AnchoraCamera : MonoBehaviour, IAnchora, IAnchoraCamera {
         [SerializeField] private Camera _camera;
 
         public Camera Camera => _camera;

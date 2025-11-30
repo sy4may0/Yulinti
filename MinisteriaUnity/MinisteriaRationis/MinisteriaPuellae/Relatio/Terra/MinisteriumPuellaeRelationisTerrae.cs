@@ -1,6 +1,6 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
@@ -11,15 +11,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly Transform _leftToe;
         private readonly LayerMask _raycastStratum;
 
-        public MinisteriumPuellaeRelationisTerrae(IConfiguratioPuellaeRelationisTerrae config) {
-            if (config == null) {
-                Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_CONFIG_NULL);
-            }
-
-            _rightFoot = config.RightFoot.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_RIGHT_FOOT_NULL);
-            _leftFoot = config.LeftFoot.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_LEFT_FOOT_NULL);
-            _rightToe = config.RightToe.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_RIGHT_TOE_NULL);
-            _leftToe = config.LeftToe.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_LEFT_TOE_NULL);
+        public MinisteriumPuellaeRelationisTerrae(IConfiguratioPuellaeRelationisTerrae config, IAnchoraPuellae anchoraPuellae) {
+            _rightFoot = anchoraPuellae.OsRightFoot;
+            _leftFoot = anchoraPuellae.OsLeftFoot;
+            _rightToe = anchoraPuellae.OsRightToe;
+            _leftToe = anchoraPuellae.OsLeftToe;
             _raycastStratum = config.RaycastStratum.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_RAYCAST_STRATUM_NULL);
         }
 
@@ -65,3 +61,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
     }
 }
+
+
+

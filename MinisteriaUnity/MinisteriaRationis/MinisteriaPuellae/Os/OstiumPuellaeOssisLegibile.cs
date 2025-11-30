@@ -21,3 +21,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             InterpressNumericus.ToNumerics(_miPuellaeOssis.LegoScalam(idOssis));
     }
 }
+
+

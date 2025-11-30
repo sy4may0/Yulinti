@@ -1,9 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.Anchora {
-    public sealed class AnchoraInput : MonoBehaviour, IAnchora {
+    public sealed class AnchoraInput : MonoBehaviour, IAnchora, IAnchoraInput {
         [SerializeField] private InputActionReference _moveInput;
         [SerializeField] private InputActionReference _sprintInput;
         [SerializeField] private InputActionReference _crouchInput;

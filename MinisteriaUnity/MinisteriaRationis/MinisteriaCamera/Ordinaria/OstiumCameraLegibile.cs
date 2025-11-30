@@ -17,3 +17,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public System.Numerics.Vector3 AnteriorXZ => InterpressNumericus.ToNumerics(_miCamera.AnteriorXZ);
     }
 }
+
+

@@ -5,3 +5,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         void Fatal(IDErrorum error);
     }
 }
+
+

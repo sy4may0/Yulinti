@@ -19,3 +19,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             InterpressNumericus.ToNumerics(_miPuellaeLoci.Rotatio);
     }
 }
+
+

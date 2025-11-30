@@ -5,3 +5,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         float LegoPondus(IDPuellaeFiguraePelvis idFiguraePelvis);
     }
 }
+
+

@@ -4,3 +4,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public void PonoRotationem(System.Numerics.Quaternion rot);
     }
 }
+
+

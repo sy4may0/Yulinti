@@ -5,3 +5,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         void PonoPondus(IDPuellaeFiguraePelvis idFiguraePelvis, float pondus);
     }
 }
+
+

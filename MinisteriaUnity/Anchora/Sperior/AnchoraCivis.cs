@@ -1,12 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Cysharp.Threading.Tasks;
 using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.Anchora {
-    public sealed class AnchoraCivis : MonoBehaviour, IAnchora, IPhantasma     {
+    public sealed class AnchoraCivis : MonoBehaviour, IAnchora, IPhantasma, IAnchoraCivis {
         [SerializeField] private AssetReferenceGameObject _prefab;
 
         private GameObject _ens;

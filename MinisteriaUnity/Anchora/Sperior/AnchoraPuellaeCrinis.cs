@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Cysharp.Threading.Tasks;
@@ -6,7 +6,7 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.Anchora {
-    public sealed class AnchoraPuellaeCrinis : MonoBehaviour, IAnchora, IPhantasma {
+    public sealed class AnchoraPuellaeCrinis : MonoBehaviour, IAnchora, IPhantasma, IAnchoraPuellaeCrinis {
         [SerializeField] private AssetReferenceGameObject _prefab;
         [SerializeField] private IDPuellaeCrinis _idCrinis;
 

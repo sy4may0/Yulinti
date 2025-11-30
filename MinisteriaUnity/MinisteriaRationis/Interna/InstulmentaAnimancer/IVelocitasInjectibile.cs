@@ -3,3 +3,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         void InjicereVelocitatem(float vel);
     }
 }
+
+

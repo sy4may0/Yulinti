@@ -1,28 +1,30 @@
-using UnityEngine;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
+using System;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class TabulaPuellaeAnimationumFundamenti {
         private readonly IStructuraAnimationis[] _animationes;
 
-        public TabulaPuellaeAnimationumFundamenti(ConfiguratioPuellaeLuditorisFundamenti luditorisFundamenti) {
-            int length = (int)IDPuellaeAnimationisFundamenti.Count;
-            _animationes = new IStructuraAnimationis[length];
+        public TabulaPuellaeAnimationumFundamenti(IConfiguratioPuellaeAnimationisFundamenti[] config) {
+            int longitudo = Enum.GetValues(typeof(IDPuellaeAnimationisFundamenti)).Length;
+            _animationes = new IStructuraAnimationis[longitudo];
 
             _animationes[(int)IDPuellaeAnimationisFundamenti.None] = null;
-            _animationes[(int)IDPuellaeAnimationisFundamenti.StandardBase] = FabricaStructuraeAnimationis.Create(
-                luditorisFundamenti.BasisOrdinariae.Animatio.Evolvo(IDErrorum.TABULAPUELLAEANIMATIONUMFUNDAMENTI_STANDARD_BASE_NULL),
-                luditorisFundamenti.BasisOrdinariae.TempusEvanescentiae,
-                luditorisFundamenti.BasisOrdinariae.Lenitio,
-                luditorisFundamenti.BasisOrdinariae.EstSimultaneum,
-                luditorisFundamenti.BasisOrdinariae.EstImpeditivus
-            );
 
-            for (int i = 1; i < length; i++) {
+            foreach (IConfiguratioPuellaeAnimationisFundamenti c in config) {
+                _animationes[(int)c.ID] = FabricaStructuraeAnimationis.Create(
+                    c.Animatio.Evolvo(IDErrorum.TABULAPUELLAEANIMATIONUMFUNDAMENTI_ANIMATION_NULL),
+                    c.TempusEvanescentiae,
+                    c.Lenitio,
+                    c.EstSimultaneum,
+                    c.EstImpeditivus
+                );
+            }
+
+            for (int i = 1; i < longitudo; i++) {
                 if (_animationes[i] == null) {
-                    Errorum.Fatal(IDErrorum.TABULAPUELLAEANIMATIONUMFUNDAMENTI_PLAN_NOT_FOUND);
+                    Errorum.Fatal(IDErrorum.TABULAPUELLAEANIMATIONUMFUNDAMENTI_CONFIG_NOT_FOUND);
                 }
             }
         }
@@ -30,3 +32,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public IStructuraAnimationis Lego(IDPuellaeAnimationisFundamenti idFundamenti) => _animationes[(int)idFundamenti];
     }
 }
+
+

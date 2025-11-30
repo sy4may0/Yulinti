@@ -7,3 +7,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         void PonoScalam(IDPuellaeOssis idOssis, System.Numerics.Vector3 scala);
     }
 }
+
+

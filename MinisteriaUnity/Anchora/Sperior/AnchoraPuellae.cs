@@ -1,9 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Animancer;
 using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.Anchora {
-    public sealed class AnchoraPuellae : MonoBehaviour, IAnchora {
+    public sealed class AnchoraPuellae : MonoBehaviour, IAnchora, IAnchoraPuellae {
         [SerializeField] private CharacterController _characterController;
 
         [SerializeField] private Animator _animator;
@@ -19,7 +20,7 @@ namespace Yulinti.MinisteriaUnity.Anchora {
 
         [SerializeField] private Transform _osRadix;
 
-        // 全ボーン
+        // 蜈ｨ繝懊・繝ｳ
         [SerializeField] private Transform _osHips;
         [SerializeField] private Transform _osSpine;
         [SerializeField] private Transform _osSpine1;
@@ -43,7 +44,7 @@ namespace Yulinti.MinisteriaUnity.Anchora {
         [SerializeField] private Transform _osRightFoot;
         [SerializeField] private Transform _osRightToe;
 
-        // 計算用ボーン
+        // 險育ｮ礼畑繝懊・繝ｳ
         [SerializeField] private Transform _osHipsRightX150Pin;
         [SerializeField] private Transform _osHipsRightY90Pin;
         [SerializeField] private Transform _osHipsLeftX150Pin;
@@ -55,7 +56,7 @@ namespace Yulinti.MinisteriaUnity.Anchora {
         public AnimancerComponent Animancer => _animancer;
 
         public SkinnedMeshRenderer FiguraCapitis => _figuraCapitis;
-        public SkinnedMeshRenderer FigruaPelvis => _figruaPelvis;
+        public SkinnedMeshRenderer FiguraPelvis => _figruaPelvis;
         public SkinnedMeshRenderer FiguraCorporis => _figuraCorporis;
         public SkinnedMeshRenderer FiguraBrachiiDexter => _figuraBrachiiDexter;
         public SkinnedMeshRenderer FiguraBrachiiSinister => _figuraBrachiiSinister;

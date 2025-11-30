@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Yulinti.MinisteriaUnity.ConfiguratioDucis {
     [System.Serializable]

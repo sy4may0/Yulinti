@@ -1,14 +1,13 @@
 using UnityEngine;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.MinisteriaUnity.Anchora;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCamera  {
         private readonly Camera _camera;
 
-        public MinisteriumCamera(AnchoraCamera anchoraCamera) {
+        public MinisteriumCamera(IAnchoraCamera anchoraCamera) {
             _camera = anchoraCamera.Camera;
         }
 
@@ -31,3 +30,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
     }
 }
+
+
+

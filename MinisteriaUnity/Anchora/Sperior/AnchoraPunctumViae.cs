@@ -1,21 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.Anchora {
-    public sealed class AnchoraPunctumViae : MonoBehaviour, IAnchora {
-        [Header("PunctumViae/PunctumViaeTypi: WayPointのタイプ。これによりリゾルバを変える。")]
+    public sealed class AnchoraPunctumViae : MonoBehaviour, IAnchora, IAnchoraPunctumViae {
         [SerializeField] private IDPunctumViaeTypi _idPunctumViaeTypi;
-        [Header("PunctumViae/PunctumViaeConsequens: このWayPointに続くWayPoint。最大21に制限する。")]
         [SerializeField] private GameObject[] _punctaViaeConsequens;
 
         public IDPunctumViaeTypi Typus => _idPunctumViaeTypi;
         public GameObject[] PunctaViaeConsequens => _punctaViaeConsequens;
-        // 自身の位置取得
         public Vector3 Positio => transform.position;
-        // 自身の回転取得
         public Quaternion Rotatio => transform.rotation;
-        // 自身のスケール取得
         public Vector3 Scala => transform.localScale;
 
         public bool Validare() {

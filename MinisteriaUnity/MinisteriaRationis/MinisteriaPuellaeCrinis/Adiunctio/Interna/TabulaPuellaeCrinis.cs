@@ -1,20 +1,18 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.Anchora;
-using Yulinti.MinisteriaUnity.ConfiguratioMinisterii;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 using System;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class TabulaPuellaeCrinis {
-        private readonly AnchoraPuellaeCrinis[] _crines;
+        private readonly IAnchoraPuellaeCrinis[] _crines;
 
-        public TabulaPuellaeCrinis(AnchoraPuellaeCrinis[] anchora) {
+        public TabulaPuellaeCrinis(IAnchoraPuellaeCrinis[] anchora) {
             int longitudo = Enum.GetValues(typeof(IDPuellaeCrinis)).Length;
-            _crines = new AnchoraPuellaeCrinis[longitudo];
+            _crines = new IAnchoraPuellaeCrinis[longitudo];
 
             for (int i = 0; i < anchora.Length; i++) {
-                AnchoraPuellaeCrinis a = anchora[i];
+                IAnchoraPuellaeCrinis a = anchora[i];
                 _crines[(int)a.Typus] = a;
             }
 
@@ -25,6 +23,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             }
         }
 
-        public AnchoraPuellaeCrinis Lego(IDPuellaeCrinis idCrinis) => _crines[(int)idCrinis];
+        public IAnchoraPuellaeCrinis Lego(IDPuellaeCrinis idCrinis) => _crines[(int)idCrinis];
     }
 }
+
+

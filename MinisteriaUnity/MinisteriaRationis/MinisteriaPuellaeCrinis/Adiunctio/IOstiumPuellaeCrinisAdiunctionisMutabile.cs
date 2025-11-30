@@ -6,3 +6,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         void Deleto();
     }
 }
+
+

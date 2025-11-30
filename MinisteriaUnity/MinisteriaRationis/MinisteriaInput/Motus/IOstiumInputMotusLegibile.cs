@@ -5,3 +5,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         bool LegoIncumbo { get; }
     }
 }
+
+

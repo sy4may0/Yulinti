@@ -33,10 +33,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public IStructuraAnimationis AnimatioCurrens => _animatioCurrens;
         public bool EstImpeditivus => AnimatioCurrens?.EstImpeditivus ?? false;
 
-        // EstPostulans: 要求中。
-        // EstImpeditivus: 再生Block - 要求はのむが、コールバックを置いてCurrent終了を待つ。
-        // EstObsignatus: 要求Block - 要求を拒否する。コールバック設置後にコールバックをロック。
-        // EstCogens: 強制、Impeditivus/Obsignatusを無視する。
+        // EstPostulans: 要求中、E
+        // EstImpeditivus: 再生Block - 要求�Eのむが、コールバックを置ぁE��Current終亁E��征E��、E
+        // EstObsignatus: 要汁Elock - 要求を拒否する。コールバック設置後にコールバックをロチE��、E
+        // EstCogens: 強制、Impeditivus/Obsignatusを無視する、E
 
         private void ExpedirePetitionem(
             IStructuraAnimationis animatio, 
@@ -115,26 +115,26 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         private void AdministrarePetitionem() {
-            // Requestが無ければ何もしない。
+            // Requestが無ければ何もしなぁE��E
             if (!_estPostulans) {
                 return;
             }
 
-            // RequestがCurrentと同じ場合、コールバックを実行してリクエスト処理。
+            // RequestがCurrentと同じ場合、コールバックを実行してリクエスト�E琁E��E
             if (ReferenceEquals(_animatioPostulata, _animatioCurrens)) {
                 _fInvocandaPostulata?.Invoke();
                 PurgarePetitionem();
                 return;
             }
 
-            // 強制Stop要求
+            // 強制Stop要汁E
             if (_estDesinens) {
                 Desinere();
                 return;
             }
 
 
-            // 強制Play要求
+            // 強制Play要汁E
             if (_estCogens) {
                 TractarePetitionem();
                 return;
@@ -148,7 +148,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                     return;
                 }
                 if (currentState.Events(this, out AnimancerEvent.Sequence events)) {
-                    // ループかつBlockingは無いはずだが、念のため。
+                    // ループかつBlockingは無ぁE�Eずだが、念のため、E
                     if (!_animatioCurrens.EstCircularis) {
                         events.OnEnd = _fInvocanda;
                     } else {
@@ -158,13 +158,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 return;
             }
 
-            // 非強制PlayかつBlockingでない
+            // 非強制PlayかつBlockingでなぁE
             TractarePetitionem();
         }
 
         private void TractarePetitionem() {
             PurgareInvocandamCurrens();
-            // RequestAnimatioが存在しない場合、停止。
+            // RequestAnimatioが存在しなぁE��合、停止、E
             if (_animatioPostulata == null) {
                 Desinere();
                 return; 
@@ -195,3 +195,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
     }
 }
+
+
