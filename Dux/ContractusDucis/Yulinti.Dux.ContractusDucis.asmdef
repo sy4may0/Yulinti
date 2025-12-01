@@ -1,7 +1,10 @@
 {
   "name": "Yulinti.Dux.ContractusDucis",
   "rootNamespace": "Yulinti.Dux.ContractusDucis",
-  "references": [],
+  "references": [
+    "Yulinti.MinisteriaUnity.ContractusMinisterii",
+    "Yulinti.Nucleus"
+  ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

@@ -1,6 +1,6 @@
-﻿using System;
+using Yulinti.Dux.ContractusDucis;
+using System;
 using System.Numerics;
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.Dux.Miles {
     internal sealed class Motor {

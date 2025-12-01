@@ -1,3 +1,4 @@
+using Yulinti.Dux.ContractusDucis;
 
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {

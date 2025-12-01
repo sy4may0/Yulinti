@@ -1,7 +1,6 @@
-﻿using Yulinti.Dux.Thesaurus;
+using Yulinti.Dux.Thesaurus;
 using Yulinti.Dux.ContractusDucis;
 using Yulinti.Dux.Miles;
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Miles {

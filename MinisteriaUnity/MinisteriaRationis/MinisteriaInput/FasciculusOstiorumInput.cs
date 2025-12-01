@@ -1,6 +1,7 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
+using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class FasciculusOstiorumInput {

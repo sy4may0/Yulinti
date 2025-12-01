@@ -1,13 +1,15 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
+using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public sealed class FasciculusOstiorumPuellae : IPulsabilis, IPulsabilisTardus {
         private readonly MinisteriumPuellaeOssis _miPuellaeOssis;
         private readonly MiniateriumPuellaeLoci _miPuellaeLoci;
         private readonly MinisteriumPuellaeAnimationes _miPuellaeAnimationes;
-        private readonly MinisteriumPuellaeFigurae _miPuellaeFigurae;
+        private readonly MinisteriumPuellaeFiguraePelvis _miPuellaeFiguraePelvis;
+        private readonly MinisteriumPuellaeFiguraeGenus _miPuellaeFiguraeGenus;
         private readonly MinisteriumPuellaeRelationisTerrae _miPuellaeRelationisTerrae;
 
         private readonly IOstiumPuellaeOssisLegibile _osPuellaeOssisLeg;
@@ -20,10 +22,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         private readonly IOstiumPuellaeFiguraePelvisLegibile _osPuellaeFiguraePelvisLeg;
         private readonly IOstiumPuellaeFiguraePelvisMutabile _osPuellaeFiguraePelvisMut;
-        private readonly IOstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusSinLeg;
-        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusSinMut;
-        private readonly IOstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusDexLeg;
-        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusDexMut;
+        private readonly IOstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusLeg;
+        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusMut;
 
         private readonly IOstiumPuellaeRelationisTerraeLegibile _osPuellaeRelationisTerraeLeg;
 
@@ -36,7 +36,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeOssis = new MinisteriumPuellaeOssis(vasculum.AnchoraPuellae);
             _miPuellaeLoci = new MiniateriumPuellaeLoci(vasculum.AnchoraPuellae, temporis);
             _miPuellaeAnimationes = new MinisteriumPuellaeAnimationes(vasculum.Configuratio.Animatio, vasculum.AnchoraPuellae);
-            _miPuellaeFigurae = new MinisteriumPuellaeFigurae(vasculum.Configuratio.Figura, vasculum.AnchoraPuellae);
+            _miPuellaeFiguraePelvis = new MinisteriumPuellaeFiguraePelvis(vasculum.Configuratio.Figura.Pelvis, vasculum.AnchoraPuellae);
+            _miPuellaeFiguraeGenus = new MinisteriumPuellaeFiguraeGenus(vasculum.Configuratio.Figura.GenusDex, vasculum.Configuratio.Figura.GenusSin, vasculum.AnchoraPuellae);
             _miPuellaeRelationisTerrae = new MinisteriumPuellaeRelationisTerrae(
                 vasculum.Configuratio.Relatio.Terrae, vasculum.AnchoraPuellae
             );
@@ -46,12 +47,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _osPuellaeLociLeg = new OstiumPuellaeLociLegibile(_miPuellaeLoci);
             _osPuellaeLociMut = new OstiumPuellaeLociMutabile(_miPuellaeLoci);
             _osPuellaeAnimationesM = new OstiumPuellaeAnimationesMutabile(_miPuellaeAnimationes);
-            _osPuellaeFiguraePelvisLeg = new OstiumPuellaeFiguraePelvisLegibile(_miPuellaeFigurae.Pelvis);
-            _osPuellaeFiguraePelvisMut = new OstiumPuellaeFiguraePelvisMutabile(_miPuellaeFigurae.Pelvis);
-            _osPuellaeFiguraeGenusSinLeg = new OstiumPuellaeFiguraeGenusLegibile(_miPuellaeFigurae.GenusSin);
-            _osPuellaeFiguraeGenusSinMut = new OstiumPuellaeFiguraeGenusMutabile(_miPuellaeFigurae.GenusSin);
-            _osPuellaeFiguraeGenusDexLeg = new OstiumPuellaeFiguraeGenusLegibile(_miPuellaeFigurae.GenusDex);
-            _osPuellaeFiguraeGenusDexMut = new OstiumPuellaeFiguraeGenusMutabile(_miPuellaeFigurae.GenusDex);
+            _osPuellaeFiguraePelvisLeg = new OstiumPuellaeFiguraePelvisLegibile(_miPuellaeFiguraePelvis);
+            _osPuellaeFiguraePelvisMut = new OstiumPuellaeFiguraePelvisMutabile(_miPuellaeFiguraePelvis);
+            _osPuellaeFiguraeGenusLeg = new OstiumPuellaeFiguraeGenusLegibile(_miPuellaeFiguraeGenus);
+            _osPuellaeFiguraeGenusMut = new OstiumPuellaeFiguraeGenusMutabile(_miPuellaeFiguraeGenus);
             _osPuellaeRelationisTerraeLeg = new OstiumPuellaeRelationisTerraeLegibile(_miPuellaeRelationisTerrae);
         }
 
@@ -62,10 +61,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public IOstiumPuellaeAnimationesMutabile AnimatioMut => _osPuellaeAnimationesM;
         public IOstiumPuellaeFiguraePelvisLegibile FiguraPelvisLeg => _osPuellaeFiguraePelvisLeg;
         public IOstiumPuellaeFiguraePelvisMutabile FiguraPelvisMut => _osPuellaeFiguraePelvisMut;
-        public IOstiumPuellaeFiguraeGenusLegibile FiguraGenusSinLeg => _osPuellaeFiguraeGenusSinLeg;
-        public IOstiumPuellaeFiguraeGenusMutabile FiguraGenusSinMut => _osPuellaeFiguraeGenusSinMut;
-        public IOstiumPuellaeFiguraeGenusLegibile FiguraGenusDexLeg => _osPuellaeFiguraeGenusDexLeg;
-        public IOstiumPuellaeFiguraeGenusMutabile FiguraGenusDexMut => _osPuellaeFiguraeGenusDexMut;
+        public IOstiumPuellaeFiguraeGenusLegibile FiguraGenusLeg => _osPuellaeFiguraeGenusLeg;
+        public IOstiumPuellaeFiguraeGenusMutabile FiguraGenusMut => _osPuellaeFiguraeGenusMut;
         public IOstiumPuellaeRelationisTerraeLegibile RelatioTerraeLeg => _osPuellaeRelationisTerraeLeg;
 
         public void Pulsus() {
@@ -73,7 +70,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         public void PulsusTardus() {
-            // Grounder更新は無ぁE��E
+            // Grounder更新は無ぁE��E
         }
     }
 }

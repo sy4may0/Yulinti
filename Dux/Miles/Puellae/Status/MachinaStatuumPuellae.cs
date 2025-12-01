@@ -1,8 +1,7 @@
-﻿using Yulinti.Dux.Miles;
+using Yulinti.Dux.Miles;
 using Yulinti.Dux.Thesaurus;
 using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus;
 using System;
 

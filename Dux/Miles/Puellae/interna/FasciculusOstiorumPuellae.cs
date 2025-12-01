@@ -1,4 +1,5 @@
-﻿using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Dux.ContractusDucis;
+using Yulinti.MinisteriaUnity.MinisteriaRationis;
 
 namespace Yulinti.Dux.Miles {
     internal sealed class FasciculusOstiorumPuellae {
@@ -23,10 +24,8 @@ namespace Yulinti.Dux.Miles {
 
         private readonly IOstiumPuellaeFiguraePelvisLegibile _osPuellaeFiguraePelvisLeg;
         private readonly IOstiumPuellaeFiguraePelvisMutabile _osPuellaeFiguraePelvisMut;
-        private readonly IOstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusSinLeg;
-        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusSinMut;
-        private readonly IOstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusDexLeg;
-        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusDexMut;
+        private readonly IOstiumPuellaeFiguraeGenusLegibile _osPuellaeFiguraeGenusLeg;
+        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusMut;
 
         private readonly IOstiumPuellaeRelationisTerraeLegibile _osPuellaeRelationisTerraeLeg;
 
@@ -46,10 +45,8 @@ namespace Yulinti.Dux.Miles {
             _osPuellaeAnimationesM = osRationis.Puellae.AnimatioMut;
             _osPuellaeFiguraePelvisLeg = osRationis.Puellae.FiguraPelvisLeg;
             _osPuellaeFiguraePelvisMut = osRationis.Puellae.FiguraPelvisMut;
-            _osPuellaeFiguraeGenusSinLeg = osRationis.Puellae.FiguraGenusSinLeg;
-            _osPuellaeFiguraeGenusSinMut = osRationis.Puellae.FiguraGenusSinMut;
-            _osPuellaeFiguraeGenusDexLeg = osRationis.Puellae.FiguraGenusDexLeg;
-            _osPuellaeFiguraeGenusDexMut = osRationis.Puellae.FiguraGenusDexMut;
+            _osPuellaeFiguraeGenusLeg = osRationis.Puellae.FiguraGenusLeg;
+            _osPuellaeFiguraeGenusMut = osRationis.Puellae.FiguraGenusMut;
             _osPuellaeRelationisTerraeLeg = osRationis.Puellae.RelatioTerraeLeg;
             _osPuellaeCrinisAdiunctionisMut = osRationis.PuellaeCrinis.OsPuellaeCrinisAdiunctionisMut;
         }
@@ -65,10 +62,8 @@ namespace Yulinti.Dux.Miles {
         public IOstiumPuellaeAnimationesMutabile PuellaeAnimationesMut => _osPuellaeAnimationesM;
         public IOstiumPuellaeFiguraePelvisLegibile PuellaeFiguraePelvisLeg => _osPuellaeFiguraePelvisLeg;
         public IOstiumPuellaeFiguraePelvisMutabile PuellaeFiguraePelvisMut => _osPuellaeFiguraePelvisMut;
-        public IOstiumPuellaeFiguraeGenusLegibile PuellaeFiguraeGenusSinLeg => _osPuellaeFiguraeGenusSinLeg;
-        public IOstiumPuellaeFiguraeGenusMutabile PuellaeFiguraeGenusSinMut => _osPuellaeFiguraeGenusSinMut;
-        public IOstiumPuellaeFiguraeGenusLegibile PuellaeFiguraeGenusDexLeg => _osPuellaeFiguraeGenusDexLeg;
-        public IOstiumPuellaeFiguraeGenusMutabile PuellaeFiguraeGenusDexMut => _osPuellaeFiguraeGenusDexMut;
+        public IOstiumPuellaeFiguraeGenusLegibile PuellaeFiguraeGenusLeg => _osPuellaeFiguraeGenusLeg;
+        public IOstiumPuellaeFiguraeGenusMutabile PuellaeFiguraeGenusMut => _osPuellaeFiguraeGenusMut;
         public IOstiumPuellaeRelationisTerraeLegibile PuellaeRelationisTerraeLeg => _osPuellaeRelationisTerraeLeg;
         public IOstiumPuellaeCrinisAdiunctionisMutabile PuellaeCrinisAdiunctionisMut => _osPuellaeCrinisAdiunctionisMut;
     }

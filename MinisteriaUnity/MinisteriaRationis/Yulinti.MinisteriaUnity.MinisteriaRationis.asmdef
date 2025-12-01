@@ -6,7 +6,7 @@
         "Unity.InputSystem",
         "Yulinti.Nucleus",
         "Yulinti.MinisteriaUnity.ContractusMinisterii",
-        "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
+        "Yulinti.Dux.ContractusDucis",
         "Unity.Addressables",
         "Unity.ResourceManager",
         "UniTask"

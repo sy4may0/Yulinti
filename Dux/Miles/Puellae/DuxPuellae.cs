@@ -22,8 +22,7 @@ namespace Yulinti.Dux.Miles {
             _figura = new Figura(
                 ostia.PuellaeOssisLeg,
                 ostia.PuellaeFiguraePelvisMut,
-                ostia.PuellaeFiguraeGenusDexMut,
-                ostia.PuellaeFiguraeGenusSinMut
+                ostia.PuellaeFiguraeGenusMut
             );
             _crinis = new Crinis(ostia.PuellaeCrinisAdiunctionisMut);
         }

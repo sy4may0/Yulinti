@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Dux.ContractusDucis;
+using UnityEngine;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Miles {

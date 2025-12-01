@@ -1,6 +1,7 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
+using Yulinti.Dux.ContractusDucis;
 
 // ãƒ©ãƒEƒ³èªžnote
 // Main => Camera Princeps

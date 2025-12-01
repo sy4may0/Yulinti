@@ -1,4 +1,4 @@
-﻿using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Dux.Thesaurus;
 using System.Numerics;

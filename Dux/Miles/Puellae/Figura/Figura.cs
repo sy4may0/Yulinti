@@ -1,5 +1,5 @@
-﻿using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Dux.ContractusDucis;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 using System;
 
@@ -7,19 +7,16 @@ namespace Yulinti.Dux.Miles {
     internal sealed class Figura {
         private readonly IOstiumPuellaeOssisLegibile _osPuellaeOssisLeg;
         private readonly IOstiumPuellaeFiguraePelvisMutabile _osPuellaeFiguraePelvisMut;
-        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusDexMut;
-        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusSinMut;
+        private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusMut;
 
         public Figura(
             IOstiumPuellaeOssisLegibile osPuellaeOssisLeg,
             IOstiumPuellaeFiguraePelvisMutabile osPuellaeFiguraePelvisMut,
-            IOstiumPuellaeFiguraeGenusMutabile osPuellaeFiguraeGenusDexMut,
-            IOstiumPuellaeFiguraeGenusMutabile osPuellaeFiguraeGenusSinMut
+            IOstiumPuellaeFiguraeGenusMutabile osPuellaeFiguraeGenusMut
         ) {
             _osPuellaeOssisLeg = osPuellaeOssisLeg;
             _osPuellaeFiguraePelvisMut = osPuellaeFiguraePelvisMut;
-            _osPuellaeFiguraeGenusDexMut = osPuellaeFiguraeGenusDexMut;
-            _osPuellaeFiguraeGenusSinMut = osPuellaeFiguraeGenusSinMut;
+            _osPuellaeFiguraeGenusMut = osPuellaeFiguraeGenusMut;
         }
 
         private void FiguroGenu() {
@@ -43,12 +40,12 @@ namespace Yulinti.Dux.Miles {
             float pondus150Sin = InstrumentaFigurae.AngulusAdPondus(angulusGenusSinisteri, 90f, 160f);
             float pondus120OffsetSin = InstrumentaFigurae.AngulusAdTriPondus(angulusGenusSinisteri, 90f, 120f, 160f);
 
-            _osPuellaeFiguraeGenusDexMut.PonoPondus(IDPuellaeFiguraeGenus.csknee90, pondus90Dex);
-            _osPuellaeFiguraeGenusDexMut.PonoPondus(IDPuellaeFiguraeGenus.csknee150, pondus150Dex);
-            _osPuellaeFiguraeGenusDexMut.PonoPondus(IDPuellaeFiguraeGenus.csknee120Offset, pondus120OffsetDex);
-            _osPuellaeFiguraeGenusSinMut.PonoPondus(IDPuellaeFiguraeGenus.csknee90, pondus90Sin);
-            _osPuellaeFiguraeGenusSinMut.PonoPondus(IDPuellaeFiguraeGenus.csknee150, pondus150Sin);
-            _osPuellaeFiguraeGenusSinMut.PonoPondus(IDPuellaeFiguraeGenus.csknee120Offset, pondus120OffsetSin);
+            _osPuellaeFiguraeGenusMut.PonoPondusDexter(IDPuellaeFiguraeGenus.csknee90, pondus90Dex);
+            _osPuellaeFiguraeGenusMut.PonoPondusDexter(IDPuellaeFiguraeGenus.csknee150, pondus150Dex);
+            _osPuellaeFiguraeGenusMut.PonoPondusDexter(IDPuellaeFiguraeGenus.csknee120Offset, pondus120OffsetDex);
+            _osPuellaeFiguraeGenusMut.PonoPondusSinister(IDPuellaeFiguraeGenus.csknee90, pondus90Sin);
+            _osPuellaeFiguraeGenusMut.PonoPondusSinister(IDPuellaeFiguraeGenus.csknee150, pondus150Sin);
+            _osPuellaeFiguraeGenusMut.PonoPondusSinister(IDPuellaeFiguraeGenus.csknee120Offset, pondus120OffsetSin);
         }
 
         private float CalculateXCapacitatemSquamae(float pondusX90, float pondusX150, float pondusY90) {
