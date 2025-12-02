@@ -1,0 +1,53 @@
+Milites/
+  Interfacies/
+    ICenturio.cs
+    ICenturioPulsabilis.cs
+    ICenturioPulsabilisPrimum.cs
+    ICenturioPulsabilisPostRationem.cs
+    ICenturioPulsabilisFixus.cs
+    ICenturioPulsabilisFixusPrimum.cs
+    ICenturioPulsabilisFixusPostRationem.cs
+    ICenturioPulsabilisTardus.cs
+    ICenturioPulsabilisTardusPrimum.cs
+    ICenturioPulsabilisTardusPostRationem.cs
+  MilesPuellae/
+    Crinis/
+      MilesPuellaeCrinis.cs
+      IMilesPuellaeCrinis.cs
+    Figura/
+      interna/
+        InstrumentaFigurae.cs
+      MilesPuellaeFigurae.cs
+      IMilesPuellaeFigurae.cs
+    Relatio/
+      MilesPuellaeRelationisInTerrae.cs
+      IMilesPuellaeRelationisInTerrae.cs
+    Actio/
+      MachinaStatuum/
+        Statuum/
+          Corpus/
+            IStatuumCoporis.cs
+            ...
+        Tabula/
+          TabulaStatuumPuellaeCorporis.cs
+        MachinaStatuumPuellae.cs
+        IMachinaStatuumPuellae.cs
+      Motus/
+        ResFluida/
+          ResFluidaPuellaeMotus.cs
+          IResFluidaPuellaeMotusLegibile.cs
+          IResFluidaPuellaeMotusMutabile.cs
+        Ordinator/
+          OrdinatioPuellaeMotus.cs
+          OrdinatorPuellaeMotus.cs
+        Motor/
+          IMotorPuellae.cs
+          MotorPuellae.cs
+      MilesPuellaeActionis.cs
+      IMilesPuellaeActionis.cs
+    CenturioPuellae.cs
+    ICenturioPuellae.cs
+
+    
+    
+      
