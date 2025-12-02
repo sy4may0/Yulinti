@@ -3,7 +3,7 @@ using Yulinti.Dux.Thesaurus;
 using Yulinti.Dux.Miles;
 
 namespace Yulinti.Dux.Miles {
-    public sealed class DuxPuellae : IPulsabilis, IPulsabilisFixus, IPulsabilisTardus, IPulsabilisPostRationem {
+    public sealed class DuxPuellae : IPulsabilis, IPulsabilisFixus, IPulsabilisTardus  {
         private readonly MachinaStatuumPuellae _machinaStatuumPuellae;
         private readonly InTerrae _inTerrae;
         private readonly Figura _figura;
@@ -29,8 +29,6 @@ namespace Yulinti.Dux.Miles {
 
         public void Pulsus() {
             _machinaStatuumPuellae.Opero();
-        }
-        public void PulsusPostRationem() {
         }
 
         public void PulsusFixus() {

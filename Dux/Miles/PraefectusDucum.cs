@@ -3,7 +3,7 @@ using Yulinti.Dux.Thesaurus;
 using Yulinti.Nucleus;
 
 namespace Yulinti.Dux.Miles {
-    public sealed class PraefectusDucum : IPulsabilis, IPulsabilisPostRationem, IPulsabilisFixus, IPulsabilisTardus {
+    public sealed class PraefectusDucum : IPulsabilis,  IPulsabilisFixus, IPulsabilisTardus {
         private readonly DuxPuellae _duxPuellae;
         private readonly FasciculusOstiorumPuellae _ostiorumPuellae;
 
@@ -17,10 +17,6 @@ namespace Yulinti.Dux.Miles {
 
         public void Pulsus() {
             _duxPuellae.Pulsus();
-        }
-
-        public void PulsusPostRationem() {
-            _duxPuellae.PulsusPostRationem();
         }
 
         public void PulsusFixus() {

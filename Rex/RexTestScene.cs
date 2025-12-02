@@ -50,7 +50,6 @@ namespace Yulinti.Rex {
 
             _praefectusDucum.Pulsus();
             _ministeria.Pulsus();
-            _praefectusDucum.PulsusPostRationem();
         }
 
         private void FixedUpdate() {

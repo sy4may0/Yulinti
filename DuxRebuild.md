@@ -1,4 +1,4 @@
-Milites/
+Exercitus/
   Interfacies/
     ICenturio.cs
     ICenturioPulsabilis.cs
