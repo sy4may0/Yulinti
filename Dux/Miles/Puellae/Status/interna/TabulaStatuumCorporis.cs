@@ -3,8 +3,7 @@ using Yulinti.Dux.ContractusDucis;
 using Yulinti.Dux.Miles;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
-
-
+using System;
 
 namespace Yulinti.Dux.Miles {
     internal sealed class TabulaStatuumCorporis {
@@ -20,7 +19,7 @@ namespace Yulinti.Dux.Miles {
         ) {
             _osErrorumLeg = osErrorumLeg;
 
-            int longitudo = (int)IDStatus.Count;
+            int longitudo = Enum.GetValues(typeof(IDStatus)).Length;
             _status = new IStatusCorporis[longitudo];
             _status[(int)IDStatus.Quies] = new StatusQuietes(
                 thesauriPuellaeStatus.Globalis,

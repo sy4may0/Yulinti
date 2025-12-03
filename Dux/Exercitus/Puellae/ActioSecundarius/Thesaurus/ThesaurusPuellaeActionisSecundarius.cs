@@ -9,10 +9,6 @@ namespace Yulinti.Dux.Exercitus {
         public float MaxElevatio { get; set; } = 0.45f;
 
         public ThesaurusPuellaeActionisSecundarius(IConfiguratioPuellaeActionisSecundarius configuratio) {
-            if (configuratio == null) {
-                return;
-            }
-
             RaycastAltitudo = configuratio.RaycastAltitudo;
             RaycastDistantia = configuratio.RaycastDistantia;
             PesYCorrectivus = configuratio.PesYCorrectivus;

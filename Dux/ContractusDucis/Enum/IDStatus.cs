@@ -5,7 +5,6 @@
         Ambulatio,            // Walk
         Cursus,               // Run
         Incumbo,              // Crouch
-        IncumboAmbulationem,  // CrouchWalk
-        Count
+        IncumboAmbulationem  // CrouchWalk
     }
 }

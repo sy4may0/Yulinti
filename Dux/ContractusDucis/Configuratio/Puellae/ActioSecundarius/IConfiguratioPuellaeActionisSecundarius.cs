@@ -8,5 +8,6 @@ namespace Yulinti.Dux.ContractusDucis {
         float PesYCorrectivus { get; }
         float DigitusPedisYCorrectivus { get; }
         float MaxElevatio { get; }
+        IDPuellaeAnimationisFundamenti IdAnimationisPraedefinitus { get; }
     }
 }
