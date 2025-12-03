@@ -1,6 +1,5 @@
 using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.Dux.Thesaurus;
 using System.Numerics;
 using System;
 
@@ -9,7 +8,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly IOstiumPuellaeRelationisTerraeLegibile _osPuellaeRelationisTerraeLeg;
         private readonly IOstiumPuellaeOssisMutabile _osPuellaeOssisMut;
         private readonly IOstiumPuellaeOssisLegibile _osPuellaeOssisLeg;
-        private readonly ThesaurusPuellaeInTerrae _thesaurusPuellaeInTerrae;
+        private readonly ThesaurusPuellaeActionisSecundarius _thesaurus;
 
         private float _elevatioActualis = 0f;
 
@@ -17,18 +16,18 @@ namespace Yulinti.Dux.Exercitus {
             IOstiumPuellaeRelationisTerraeLegibile osPuellaeRelationisTerraeLeg,
             IOstiumPuellaeOssisMutabile osPuellaeOssisMut,
             IOstiumPuellaeOssisLegibile osPuellaeOssisLeg,
-            ThesaurusPuellaeInTerrae thesaurusPuellaeInTerrae
+            ThesaurusPuellaeActionisSecundarius thesaurus
         ) {
             _osPuellaeRelationisTerraeLeg = osPuellaeRelationisTerraeLeg;
             _osPuellaeOssisMut = osPuellaeOssisMut;
             _osPuellaeOssisLeg = osPuellaeOssisLeg;
-            _thesaurusPuellaeInTerrae = thesaurusPuellaeInTerrae;
+            _thesaurus = thesaurus;
         }
 
         public void ElevoPelvis() {
             float differentia = ComputareDifferentiam();
 
-            if (differentia < -_thesaurusPuellaeInTerrae.MaxElevatio) {
+            if (differentia < -_thesaurus.MaxElevatio) {
                 _elevatioActualis = 0f;
                 return;
             }
@@ -61,27 +60,27 @@ namespace Yulinti.Dux.Exercitus {
             // ヒールとかの調整をやる場合、ここDebugして出たaltitudeをCorrectivusに入れるとちょうどぴったりになるよ。
 
             float differentiaTerraeDex = (altitudoPedisDex < altitudoDigitusPedisDex) ?
-                altitudoPedisDex - (altitudoTerraeDex + _thesaurusPuellaeInTerrae.PesYCorrectivus)
-                : altitudoDigitusPedisDex - (altitudoTerraeDex + _thesaurusPuellaeInTerrae.DigitusPedisYCorrectivus);
+                altitudoPedisDex - (altitudoTerraeDex + _thesaurus.PesYCorrectivus)
+                : altitudoDigitusPedisDex - (altitudoTerraeDex + _thesaurus.DigitusPedisYCorrectivus);
 
             float differentiaTerraeSin = (altitudoPedisSin < altitudoDigitusPedisSin) ?
-                altitudoPedisSin - (altitudoTerraeSin + _thesaurusPuellaeInTerrae.PesYCorrectivus)
-                : altitudoDigitusPedisSin - (altitudoTerraeSin + _thesaurusPuellaeInTerrae.DigitusPedisYCorrectivus);
+                altitudoPedisSin - (altitudoTerraeSin + _thesaurus.PesYCorrectivus)
+                : altitudoDigitusPedisSin - (altitudoTerraeSin + _thesaurus.DigitusPedisYCorrectivus);
 
             return MathF.Min(differentiaTerraeDex, differentiaTerraeSin);
         }
 
         private float AltitudoTerraeDextra() {
             return _osPuellaeRelationisTerraeLeg.AltitudoTerraeDextra(
-                _thesaurusPuellaeInTerrae.RaycastAltitudo,
-                _thesaurusPuellaeInTerrae.RaycastDistantia
+                _thesaurus.RaycastAltitudo,
+                _thesaurus.RaycastDistantia
             );
         }
 
         private float AltitudoTerraeSinistra() {
             return _osPuellaeRelationisTerraeLeg.AltitudoTerraeSinistra(
-                _thesaurusPuellaeInTerrae.RaycastAltitudo,
-                _thesaurusPuellaeInTerrae.RaycastDistantia
+                _thesaurus.RaycastAltitudo,
+                _thesaurus.RaycastDistantia
             );
         }
 
