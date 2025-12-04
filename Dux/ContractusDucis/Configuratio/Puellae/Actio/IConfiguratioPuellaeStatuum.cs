@@ -7,6 +7,7 @@ namespace Yulinti.Dux.ContractusDucis {
         float TempusLevigatumMin { get; set; }
         float TempusLevigatumRotationis { get; set; }
         float AcceleratioGravitatis { get; set; }
+        float VelocitasContactus { get; set; }
         float VelocitasVerticalisMax { get; set; }
         IDPuellaeAnimationisFundamenti IdAnimationisPraedefinitus { get; }
         IConfiguratioPuellaeStatusCorporis[] StatusCorporum { get; }
