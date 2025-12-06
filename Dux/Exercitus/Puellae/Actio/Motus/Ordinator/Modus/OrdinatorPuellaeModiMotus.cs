@@ -1,32 +1,25 @@
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class StatusPuellaeIncubitus : IStatusCorporis {
+    internal sealed class OrdinatorPuellaeModiMotus : IOrdinatorPuellaeModi {
         private readonly ThesaurusPuellaeStatuum _thesaurus;
         private readonly ThesaurusPuellaeStatusCorporis _thesaurusStatus;
         private readonly IOstiumInputMotusLegibile _osInputMotusLeg;
+        private readonly IOstiumCameraLegibile _osCameraLeg;
         private readonly IOstiumTemporisLegibile _osTemporisLeg;
 
-        public StatusPuellaeIncubitus(
-            IContentumStatusCorporis contentum
-        ) {
+        public OrdinatorPuellaeModiMotus(IContentumOrdinatorPuellaeModi contentum) {
             _thesaurus = contentum.Thesaurus;
             _thesaurusStatus = contentum.ThesaurusStatus;
             _osInputMotusLeg = contentum.OsInputMotus;
+            _osCameraLeg = contentum.OsCamera;
             _osTemporisLeg = contentum.OsTemporis;
         }
 
-        public IDStatus Id => _thesaurusStatus.Id;
-        public IDPuellaeAnimationisCorporis IdAnimationis => _thesaurusStatus.IdAnimationis;
-        public void Intrare(IResFluidaPuellaeMotusLegibile resFluidaMotus) {
-        }
-        public void Exire(IResFluidaPuellaeMotusLegibile resFluidaMotus) {
-        }
         public OrdinatioPuellaeMotus Ordinare(IResFluidaPuellaeMotusLegibile resFluidaMotus) {
             OrdinatioPuellaeMotusHorizontalis oh =  OrdinatorPuellaeMotus.OrdinareMotusHorizontalis(
                 _osInputMotusLeg.LegoMotus,
-                0f,
+                _thesaurusStatus.VelocitasDesiderata,
                 resFluidaMotus.VelocitasActualisHorizontalis,
                 _thesaurusStatus.Acceleratio, _thesaurusStatus.Deceleratio,
                 _thesaurus.TempusLevigatumMin,
@@ -42,10 +35,17 @@ namespace Yulinti.Dux.Exercitus {
                 _thesaurus.VelocitasVerticalisMax,
                 _osTemporisLeg.Intervallum
             );
-            OrdinatioPuellaeMotusRotationisY or = OrdinatorPuellaeMotus.OrdinareMotusSineRotationisY(
-                resFluidaMotus.RotatioYActualis
+            OrdinatioPuellaeMotusRotationisY or = OrdinatorPuellaeMotus.OrdinareMotusRotationisYSecutoria(
+                _osCameraLeg.DexterXZ,
+                _osCameraLeg.AnteriorXZ,
+                _osInputMotusLeg.LegoMotus,
+                resFluidaMotus.RotatioYActualis,
+                _thesaurus.TempusLevigatumRotationis,
+                _thesaurus.LimenInputQuadratum,
+                _thesaurusStatus.EstLevigatum
             );
-            return new OrdinatioPuellaeMotus(oh, ov, or);
+
+            return new OrdinatioPuellaeMotus(oh, ov, or);           
         }
     }
 }

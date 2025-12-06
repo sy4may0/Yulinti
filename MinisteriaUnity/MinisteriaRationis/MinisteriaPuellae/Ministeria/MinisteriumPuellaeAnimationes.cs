@@ -6,97 +6,73 @@ using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumPuellaeAnimationes : IPulsabilis {
-        private readonly TabulaPuellaeAnimationumFundamenti _tabulaFundamenti;
-        private readonly TabulaPuellaeAnimationumCorporis _tabulaCorporis;
-        private readonly TabulaPuellaeAnimationumPartis _tabulaPartis;
+        private readonly TabulaPuellaeAnimationumContinuata _tabulaContinuata;
+        private readonly NewLuditorAnimationis[] _luditoris;
 
-        private readonly LuditorAnimationis _luditorFundamenti;
-        private readonly LuditorAnimationis _luditorCorporis;
-        private readonly LuditorAnimationis _luditorPartis;
 
         public MinisteriumPuellaeAnimationes(IConfiguratioPuellaeAnimationis config, IAnchoraPuellae anchora) {
             AnimancerComponent animancer = anchora.Animancer;
-            _tabulaFundamenti = new TabulaPuellaeAnimationumFundamenti(config.Fundamentum);
-            _tabulaCorporis = new TabulaPuellaeAnimationumCorporis(config.Corpus);
-            _tabulaPartis = new TabulaPuellaeAnimationumPartis(config.Pars);
-            _luditorFundamenti = new LuditorAnimationis(animancer, 0);
-            _luditorCorporis = new LuditorAnimationis(animancer, 1);
-            _luditorPartis = new LuditorAnimationis(animancer, 2);
+            _tabulaContinuata = new TabulaPuellaeAnimationumContinuata(config.Animationes);
+            _luditoris = new NewLuditorAnimationis[Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length];
+            for (int i = 0; i < Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length; i++) {
+                _luditoris[i] = new NewLuditorAnimationis(animancer, i);
+            }
         }
 
-        public void PostulareFundamenti(
-            IDPuellaeAnimationisFundamenti idFundamenti,
-            Action fInvocanda, bool estObsignatus = false
+        public void Postulare(
+            IDPuellaeAnimationisContinuata idContinuata,
+            Action adInitium = null, Action adFinem = null
         ) {
-            _luditorFundamenti.Postulare(_tabulaFundamenti.Lego(idFundamenti), fInvocanda, estObsignatus);
+            IAnimatioPuellaeContinuata animatio = _tabulaContinuata.Lego(idContinuata);
+            if (adInitium != null) {
+                animatio.PonoAdInitium(adInitium);
+            }
+            if (adFinem != null) {
+                animatio.PonoAdFinem(adFinem);
+            }
+            IDPuellaeAnimationisStratum stratum = animatio.Stratum;
+            VasculumAnimationis[] animationes = animatio.Animationes;
+            _luditoris[(int)stratum].Postulare(animationes);
         }
 
-        public void CogereFundamenti(
-            IDPuellaeAnimationisFundamenti idFundamenti,
-            Action fInvocanda, bool estObsignatus = false
+        public void Cogere(
+            IDPuellaeAnimationisContinuata idContinuata,
+            Action adInitium = null, Action adFinem = null
         ) {
-            _luditorFundamenti.Cogere(_tabulaFundamenti.Lego(idFundamenti), fInvocanda, estObsignatus);
-        }
-
-        public void PostulareCorporis(
-            IDPuellaeAnimationisCorporis idCorporis,
-            Action fInvocanda, bool estObsignatus = false
-        ) {
-            _luditorCorporis.Postulare(_tabulaCorporis.Lego(idCorporis), fInvocanda, estObsignatus);
-        }
-
-        public void CogereCorporis(
-            IDPuellaeAnimationisCorporis idCorporis,
-            Action fInvocanda, bool estObsignatus = false
-        ) {
-            _luditorCorporis.Cogere(_tabulaCorporis.Lego(idCorporis), fInvocanda, estObsignatus);
-        }
-
-        public void PostularePartis(
-            IDPuellaeAnimationisPartis idPartis,
-            Action fInvocanda, bool estObsignatus = false
-        ) {
-            _luditorPartis.Postulare(_tabulaPartis.Lego(idPartis), fInvocanda, estObsignatus);
-        }
-
-        public void CogerePartis(
-            IDPuellaeAnimationisPartis idPartis,
-            Action fInvocanda, bool estObsignatus = false
-        ) {
-            _luditorPartis.Cogere(_tabulaPartis.Lego(idPartis), fInvocanda, estObsignatus);
-        }
-
-        public void CogereDesinentiamFundamenti() {
-            _luditorFundamenti.CogereDesinentiam();
-        }
-
-        public void CogereDesinentiamCorporis() {
-            _luditorCorporis.CogereDesinentiam();
-        }
-
-        public void CogereDesinentiamPartis() {
-            _luditorPartis.CogereDesinentiam();
+            IAnimatioPuellaeContinuata animatio = _tabulaContinuata.Lego(idContinuata);
+            if (adInitium != null) {
+                animatio.PonoAdInitium(adInitium);
+            }
+            if (adFinem != null) {
+                animatio.PonoAdFinem(adFinem);
+            }
+            IDPuellaeAnimationisStratum stratum = animatio.Stratum;
+            VasculumAnimationis[] animationes = animatio.Animationes;
+            _luditoris[(int)stratum].Cogere(animationes);
         }
 
         public void InjicereVelocitatem(float vel) {
-            _luditorFundamenti.InjicereVelocitatem(vel);
-            _luditorCorporis.InjicereVelocitatem(vel);
-            _luditorPartis.InjicereVelocitatem(vel);
+            foreach (NewLuditorAnimationis luditor in _luditoris) {
+                luditor.PonoVelocitatem(vel);
+            }
         }
 
-        // 冁E�E��E�時間のみ同期し、Animancerの時間は同期しなぁE�E��E�E
-        // Animancer同期は、Play()が実行されたときだけ、E
         public void TemporareLuditores() {
-            float tempusFun = _luditorFundamenti.LegoTempusSimultaneum();
-            _luditorCorporis.PonoTempusSimultaneum(tempusFun);
-            _luditorPartis.PonoTempusSimultaneum(tempusFun);
+            // ファンダメンタル層は0固定としてくれ。
+            float tempusFundamenti = _luditoris[0].LegoTempusSimulataneum();
+            for (int i = 1; i < Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length; i++) {
+                _luditoris[i].PonoTempusSimulataneum(tempusFundamenti);
+            }
         }
 
         public void Pulsus() {
-            _luditorFundamenti.Pulsus();
-            _luditorCorporis.Pulsus();
-            _luditorPartis.Pulsus();
+            // まずFundamentum層のPulsusを実行する。これはTemporareLuditores同期のため。
+            _luditoris[0].Pulsus();
             TemporareLuditores();
+            for (int i = 1; i < Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length; i++) {
+                // その他の層のPulsusを実行する。
+                _luditoris[i].Pulsus();
+            }
         }
     }
 }

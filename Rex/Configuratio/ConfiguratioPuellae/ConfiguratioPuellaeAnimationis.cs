@@ -11,6 +11,7 @@ namespace Yulinti.Rex {
         [SerializeField] private ConfiguratioPuellaeAnimationisCorporisLM[] _corpusLM;
         [SerializeField] private ConfiguratioPuellaeAnimationisPartis[] _pars;
         [SerializeField] private ConfiguratioPuellaeAnimationisPartisLM[] _parsLM;
+        [SerializeField] private ConfiguratioPuellaeAnimationisContinuata[] _animationes;
 
         private IConfiguratioPuellaeAnimationisFundamenti[] _cacheFundamentum;
         private IConfiguratioPuellaeAnimationisCorporis[] _cacheCorpus;
@@ -30,5 +31,8 @@ namespace Yulinti.Rex {
             _cachePars ??= _pars.Cast<IConfiguratioPuellaeAnimationisPartis>()
                 .Concat(_parsLM.Cast<IConfiguratioPuellaeAnimationisPartis>())
                 .ToArray();
+
+        public IConfiguratioPuellaeAnimationisContinuata[] Animationes => _animationes;
+
     }
 }

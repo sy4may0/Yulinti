@@ -4,13 +4,13 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 namespace Yulinti.MinisteriaUnity.ConfiguratioDucis {
     [System.Serializable]
     public sealed class ConfiguratioPuellaeStatusCursus {
-        [SerializeField] private IDPuellaeAnimationisCorporis _idAnimationis = IDPuellaeAnimationisCorporis.None;
+        [SerializeField] private IDPuellaeAnimationisContinuata _idAnimationis = IDPuellaeAnimationisContinuata.None;
         [SerializeField] private float _velocitasDesiderata = 3.3f;
         [SerializeField] private float _acceleratio = 15f;
         [SerializeField] private float _deceleratio = 15f;
         [SerializeField] private bool _estLevigatum = true;
 
-        public IDPuellaeAnimationisCorporis IdAnimationis => _idAnimationis;
+        public IDPuellaeAnimationisContinuata IdAnimationis => _idAnimationis;
         public float VelocitasDesiderata => _velocitasDesiderata;
         public float Acceleratio => _acceleratio;
         public float Deceleratio => _deceleratio;

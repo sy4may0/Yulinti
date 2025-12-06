@@ -3,7 +3,7 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Thesaurus {
     public sealed class ThesaurusPuellaeStatusCursus {
-        public IDPuellaeAnimationisCorporis IdAnimationis { get; set; } = IDPuellaeAnimationisCorporis.None;
+        public IDPuellaeAnimationisContinuata IdAnimationis { get; set; } = IDPuellaeAnimationisContinuata.None;
         public float VelocitasDesiderata { get; set; } = 3.3f;
         public float Acceleratio { get; set; } = 15f;
         public float Deceleratio { get; set; } = 15f;

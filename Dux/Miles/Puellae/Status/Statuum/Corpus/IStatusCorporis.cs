@@ -5,7 +5,7 @@ using Yulinti.Dux.Miles;
 namespace Yulinti.Dux.Miles {
     internal interface IStatusCorporis {
         public IDStatus Id { get; }
-        public IDPuellaeAnimationisCorporis IdAnimationis { get; }
+        public IDPuellaeAnimationisContinuata IdAnimationis { get; }
         public void Intrare(IResFuluidaMotusLegibile resFuluidaMotus);
         public void Exire(IResFuluidaMotusLegibile resFuluidaMotus);
         public OrdinatioMotus Ordinare(IResFuluidaMotusLegibile resFuluidaMotus);

@@ -13,7 +13,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _animationes[(int)IDPuellaeAnimationisPartis.None] = null;
 
             foreach (IConfiguratioPuellaeAnimationisPartis c in config) {
-                _animationes[(int)c.ID] = FabricaStructuraeAnimationis.Create(
+                _animationes[(int)c.Id] = FabricaStructuraeAnimationis.Create(
                     c.Animatio.Evolvo(IDErrorum.TABULAPUELLAEANIMATIONUMPARTIS_ANIMATION_NULL),
                     c.TempusEvanescentiae,
                     c.Lenitio,

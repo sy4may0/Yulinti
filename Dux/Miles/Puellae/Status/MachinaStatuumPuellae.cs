@@ -43,9 +43,8 @@ namespace Yulinti.Dux.Miles {
             _motor = new Motor(ostia.PuellaeLociMut, ostia.PuellaeLociLeg, ostia.TemporisLeg);
         }
 
-        private void InitareAnimationem(IDPuellaeAnimationisFundamenti idFundamenti) {
-            _osAnimationesMut.CogereFundamenti(idFundamenti, null, false);
-            _osAnimationesMut.CogereDesinentiamCorporis();
+        private void InitareAnimationem(IDPuellaeAnimationisContinuata idContinuata) {
+            _osAnimationesMut.Cogere(idContinuata, null, null);
         }
 
         public void Opero() {
@@ -95,10 +94,10 @@ namespace Yulinti.Dux.Miles {
             if (_statusProximus == IDStatus.None) {
                 return;
             }
-            IDPuellaeAnimationisCorporis idAnimationisProximus = 
+            IDPuellaeAnimationisContinuata idAnimationisProximus = 
                 _tabulaStatuumCorporis.Lego(_statusProximus).IdAnimationis;
-            _osAnimationesMut.PostulareCorporis(
-                idAnimationisProximus, _fInvocanda, false
+            _osAnimationesMut.Postulare(
+                idAnimationisProximus, adInitium: _fInvocanda, adFinem: null
             );
         }
 

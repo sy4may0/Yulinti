@@ -12,7 +12,7 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioDucis {
         [SerializeField] private float _velocitasVerticalisMax = -50f;
         [SerializeField] private float _velocitasContactus = -9.8f;
 
-        [SerializeField] private IDPuellaeAnimationisFundamenti _idAnimationisFun = IDPuellaeAnimationisFundamenti.StandardBase;
+        [SerializeField] private IDPuellaeAnimationisContinuata _idAnimationisFun = IDPuellaeAnimationisContinuata.StandardBase;
 
         public float LimenInputQuadratum => _limenInputQuadratum;
         public float TempusLevigatumMax => _tempusLevigatumMax;
@@ -22,6 +22,6 @@ namespace Yulinti.MinisteriaUnity.ConfiguratioDucis {
         public float VelocitasVerticalisMax => _velocitasVerticalisMax;
         public float VelocitasContactus => _velocitasContactus;
 
-        public IDPuellaeAnimationisFundamenti IdAnimationisFun => _idAnimationisFun;
+        public IDPuellaeAnimationisContinuata IdAnimationisFun => _idAnimationisFun;
     }
 }

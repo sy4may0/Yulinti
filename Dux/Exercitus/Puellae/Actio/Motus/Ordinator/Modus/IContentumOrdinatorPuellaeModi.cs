@@ -1,7 +1,7 @@
 using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
-    internal interface IContentumStatusCorporis {
+    internal interface IContentumOrdinatorPuellaeModi {
         IOstiumTemporisLegibile OsTemporis { get; }
         IOstiumInputMotusLegibile OsInputMotus { get; }
         IOstiumCameraLegibile OsCamera { get; }

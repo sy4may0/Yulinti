@@ -3,5 +3,6 @@ namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
         IConfiguratioPuellaeAnimationisFundamenti[] Fundamentum { get; }
         IConfiguratioPuellaeAnimationisCorporis[] Corpus { get; }
         IConfiguratioPuellaeAnimationisPartis[] Pars { get; }
+        IConfiguratioPuellaeAnimationisContinuata[] Animationes { get; }
     }
 }

@@ -27,5 +27,7 @@ namespace Yulinti.Dux.Exercitus {
                 }
             }
         }
+
+        public ThesaurusPuellaeStatusCorporis Lego(IDStatus id) => _thesauri[(int)id];
     }
 }

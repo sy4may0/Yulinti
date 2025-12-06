@@ -14,7 +14,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _animationes[(int)IDPuellaeAnimationisCorporis.None] = null;
 
             foreach (IConfiguratioPuellaeAnimationisCorporis c in config) {
-                _animationes[(int)c.ID] = FabricaStructuraeAnimationis.Create(
+                _animationes[(int)c.Id] = FabricaStructuraeAnimationis.Create(
                     c.Animatio.Evolvo(IDErrorum.TABULAPUELLAEANIMATIONUMCORPORIS_ANIMATION_NULL),
                     c.TempusEvanescentiae,
                     c.Lenitio,

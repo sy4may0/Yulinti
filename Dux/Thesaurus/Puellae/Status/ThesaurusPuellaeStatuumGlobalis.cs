@@ -10,7 +10,7 @@ namespace Yulinti.Dux.Thesaurus {
         public float AcceleratioGravitatis { get; set; } = 9.8f;
         public float VelocitasVerticalisMax { get; set; } = -50f;
         public float VelocitasContactus { get; set; } = -9.8f;
-        public IDPuellaeAnimationisFundamenti IdAnimationisFun { get; set; } = IDPuellaeAnimationisFundamenti.StandardBase;
+        public IDPuellaeAnimationisContinuata IdAnimationisFun { get; set; } = IDPuellaeAnimationisContinuata.StandardBase;
 
         public ThesaurusPuellaeStatuumGlobalis() {
         }

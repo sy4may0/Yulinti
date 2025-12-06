@@ -26,7 +26,7 @@ namespace Yulinti.Dux.Miles {
         }
 
         public IDStatus Id => IDStatus.Incumbo;
-        public IDPuellaeAnimationisCorporis IdAnimationis => _thesaurusStatus.IdAnimationis;
+        public IDPuellaeAnimationisContinuata IdAnimationis => _thesaurusStatus.IdAnimationis;
 
         public void Intrare(IResFuluidaMotusLegibile resFuluidaMotus) {
         }

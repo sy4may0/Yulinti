@@ -13,13 +13,15 @@ namespace Yulinti.Rex {
         [SerializeField] private bool _estSimultaneum = false;
         [SerializeField] private bool _estImpeditivus = false;
         [SerializeField] private bool _estCircularis = true;
+        [SerializeField] private bool _estObsignatus = false;
 
-        public IDPuellaeAnimationisCorporis ID => _id;
+        public IDPuellaeAnimationisCorporis Id => _id;
         public NihilAut<ITransition> Animatio => new NihilAut<ITransition>(_animatio);
         public float TempusEvanescentiae => _tempusEvanescentiae;
         public Easing.Function Lenitio => _lenitio;
         public bool EstSimultaneum => _estSimultaneum;
         public bool EstImpeditivus => _estImpeditivus;
         public bool EstCircularis => _estCircularis;
+        public bool EstObsignatus => _estObsignatus;
     }
 }
