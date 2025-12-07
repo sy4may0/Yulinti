@@ -2,10 +2,12 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.ContractusDucis {
     public interface IConfiguratioPuellaeStatusCorporis {
-        IDStatus Id { get; set; }
-        IDPuellaeModiMotus IdModusMotus { get; set; }
-        IDPuellaeAnimationisCorporis IdAnimationis { get; set; }
-        float VelocitasDesiderata { get; set; }
+        IDStatus Id { get; }
+        IDPuellaeModiMotus IdModusMotus { get; }
+        IDPuellaeAnimationisContinuata IdAnimationisIntrare { get; }
+        IDPuellaeAnimationisContinuata IdAnimationisExire { get; }
+        bool LudereExire { get; }
+        float VelocitasDesiderata { get; }
         float Acceleratio { get; set; }
         float Deceleratio { get; set; }
         bool EstLevigatum { get; set; }

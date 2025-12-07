@@ -5,9 +5,10 @@ using System;
 namespace Yulinti.Dux.Exercitus {
     internal interface IStatusPuellaeCorporis {
         IDStatus Id { get; }
-        IDPuellaeAnimationisCorporis IdAnimationis { get; }
-        void Intrare(IResFluidaPuellaeMotusLegibile resFuluidaMotus);
-        void Exire(IResFluidaPuellaeMotusLegibile resFuluidaMotus, Action fInvocanda);
+        IDPuellaeAnimationisContinuata IdAnimationisIntrare { get; }
+        IDPuellaeAnimationisContinuata IdAnimationisExire { get; }
+        void Intrare(IResFluidaPuellaeMotusLegibile resFuluidaMotus, Action adInitium);
+        void Exire(IResFluidaPuellaeMotusLegibile resFuluidaMotus, Action adFinem);
         OrdinatioPuellaeMotus Ordinare(IResFluidaPuellaeMotusLegibile resFuluidaMotus);
     }
 }

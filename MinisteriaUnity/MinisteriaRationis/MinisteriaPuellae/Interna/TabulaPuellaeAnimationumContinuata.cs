@@ -14,6 +14,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _animationes[(int)IDPuellaeAnimationisContinuata.None] = new AnimatioPuellaeContinuata();
 
             foreach (IConfiguratioPuellaeAnimationisContinuata c in config) {
+                // NoneのIDは既に設定済みなのでスキップ
+                if (c.Id == IDPuellaeAnimationisContinuata.None) {
+                    continue;
+                }
                 _animationes[(int)c.Id] = new AnimatioPuellaeContinuata(c);
             }
 

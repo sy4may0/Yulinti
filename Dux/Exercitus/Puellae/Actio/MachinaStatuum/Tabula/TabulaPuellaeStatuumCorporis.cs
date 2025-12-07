@@ -20,7 +20,9 @@ namespace Yulinti.Dux.Exercitus {
                 );
                 _statuum[i] = new StatusPuellaeCorporisMotus(
                     (IDStatus)i,
-                    thesaurus.IdAnimationis,
+                    thesaurus.IdAnimationisIntrare,
+                    thesaurus.IdAnimationisExire,
+                    thesaurus.LudereExire,
                     modus,
                     osAnimationes
                 );
