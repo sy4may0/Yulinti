@@ -16,20 +16,20 @@ namespace Yulinti.Dux.Exercitus {
             int longitudo = Enum.GetValues(typeof(IDStatus)).Length;
             _statuum = new IStatusPuellaeCorporis[longitudo];
 
-            for(int i = 1; i < longitudo; i++) {
+            foreach (var conf in configurationemCorporis) {
                 IOrdinatorPuellaeModi modus = FabricaOrdinatorPuellaeModi.Creare(
-                    configurationemCorporis[(int)i].IdModusMotus,
+                    conf.IdModusMotus,
                     configuratioStatuum,
-                    configurationemCorporis[(int)i],
+                    conf,
                     osInputMotusLeg,
                     osCameraLeg,
                     osTemporisLeg
                 );
-                _statuum[i] = new StatusPuellaeCorporisMotus(
-                    configurationemCorporis[(int)i].Id,
-                    configurationemCorporis[(int)i].IdAnimationisIntrare,
-                    configurationemCorporis[(int)i].IdAnimationisExire,
-                    configurationemCorporis[(int)i].LudereExire,
+                _statuum[(int)conf.Id] = new StatusPuellaeCorporisMotus(
+                    conf.Id,
+                    conf.IdAnimationisIntrare,
+                    conf.IdAnimationisExire,
+                    conf.LudereExire,
                     modus,
                     osAnimationes
                 );

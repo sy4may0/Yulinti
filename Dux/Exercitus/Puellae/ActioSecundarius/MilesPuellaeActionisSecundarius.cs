@@ -5,6 +5,7 @@ namespace Yulinti.Dux.Exercitus {
         private AdiectorPuellaePelvisAltitudinis _adiectorPuellaePelvisAltitudinis;
         private ThesaurusPuellaeActionisSecundarius _thsaurus;
 
+        // VContainer注入
         public MilesPuellaeActionisSecundarius(
             IOstiumPuellaeRelationisTerraeLegibile osPuellaeRelationisTerraeLeg,
             IOstiumPuellaeOssisMutabile osPuellaeOssisMut,

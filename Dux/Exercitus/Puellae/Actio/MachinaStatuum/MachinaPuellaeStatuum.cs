@@ -4,10 +4,11 @@ using Yulinti.Nucleus;
 using System;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class MachinaPuellaeStatuum : IPulsabilis {
+    internal sealed class MachinaPuellaeStatuum {
         private readonly TabulaPuellaeStatuumCorporis _tabulaStatuumCorporis;
         private readonly TabulaRamiPuellaeCorporis _tabulaRamiCorporis;
         private readonly IResFluidaPuellaeMotusLegibile _resFluidaMotusLeg;
+        private readonly IOstiumPuellaeAnimationesMutabile _osAnimationes;
         private readonly MotorPuellae _motor;
 
         private IStatusPuellaeCorporis _statusCorporisActualis;
@@ -16,6 +17,7 @@ namespace Yulinti.Dux.Exercitus {
 
         private Action _adMutareStatus;
 
+        public IDStatus IdStatusActualis => _idStatusActualis;
 
         public MachinaPuellaeStatuum(
             IConfiguratioPuellaeStatuum configuratioStatuum,
@@ -29,6 +31,7 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaPuellaeMotusLegibile resFluidaMotusLeg
         ) {
             _adMutareStatus = AdMutareStatus;
+            _osAnimationes = osAnimationes;
 
             _motor = new MotorPuellae(
                 osPuellaeLociMut,
@@ -64,17 +67,21 @@ namespace Yulinti.Dux.Exercitus {
             osAnimationes.Postulare(idAnimationis, null, null);
         }
 
-        public void Pulsus() {
+        public void Opero() {
             OrdinatioPuellaeMotus ordinatio = _statusCorporisActualis.Ordinare(_resFluidaMotusLeg);
             _motor.ApplicareMotus(ordinatio);
 
             MutareStatus();
         }
 
+        public void InjicereVelocitatem(float velocitas) {
+            _osAnimationes.InjicereVelocitatem(velocitas);
+        }
+
         private void MutareStatus() {
             IRamusPuellaeStatusCorporis[] rami = _tabulaRamiCorporis.Lego(_idStatusActualis);
             foreach (IRamusPuellaeStatusCorporis ramus in rami) {
-                if (ramus.Conditio(_resFluidaMotusLeg) && ramus.IdStatusProximus != _idStatusProximus) {
+                if (ramus.Conditio(_resFluidaMotusLeg) && ramus.IdStatusProximus != _idStatusActualis) {
                     _idStatusProximus = ramus.IdStatusProximus;
                     _statusCorporisActualis.Exire(_resFluidaMotusLeg, _adMutareStatus);
                     return;

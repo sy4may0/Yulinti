@@ -2,6 +2,8 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.ContractusDucis {
     public interface IConfiguratioPuellaeStatuum {
+        float LimenInputQuadratum { get; }
+        float TempusLevigatumRotationis { get; }
         float TempusLevigatumMax { get; }
         float TempusLevigatumMin { get; }
         float AcceleratioGravitatis { get; }
@@ -10,8 +12,5 @@ namespace Yulinti.Dux.ContractusDucis {
         IDPuellaeAnimationisContinuata IdAnimationisPraedefinitus { get; }
         IConfiguratioPuellaeStatusCorporis[] StatusCorporum { get; }
         IConfiguratioPuellaeStatusPartis[] StatusPartium { get; }
-
-        float LimenInputQuadratum { get; set; }
-        float TempusLevigatumRotationis { get; set; }
-    }
+   }
 }

@@ -46,7 +46,7 @@ namespace Yulinti.Rex {
                 }
             }
 
-            if (_anchoraPuellaeCrinis == null || _anchoraPuellaeCrinis.Length == 0) {
+            if (_anchoraPuellaeCrinis == null) {
                 var foundArray = UnityEngine.Object.FindObjectsByType<AnchoraPuellaeCrinis>(FindObjectsSortMode.None);
                 if (foundArray != null && foundArray.Length > 0) {
                     _anchoraPuellaeCrinis = foundArray;
@@ -54,7 +54,7 @@ namespace Yulinti.Rex {
                 }
             }
 
-            if (_anchoraPunctumViae == null || _anchoraPunctumViae.Length == 0) {
+            if (_anchoraPunctumViae == null) {
                 var foundArray = UnityEngine.Object.FindObjectsByType<AnchoraPunctumViae>(FindObjectsSortMode.None);
                 if (foundArray != null && foundArray.Length > 0) {
                     _anchoraPunctumViae = foundArray;
@@ -62,7 +62,7 @@ namespace Yulinti.Rex {
                 }
             }
 
-            if (_anchoraCivis == null || _anchoraCivis.Length == 0) {
+            if (_anchoraCivis == null) {
                 var foundArray = UnityEngine.Object.FindObjectsByType<AnchoraCivis>(FindObjectsSortMode.None);
                 if (foundArray != null && foundArray.Length > 0) {
                     _anchoraCivis = foundArray;
@@ -76,9 +76,9 @@ namespace Yulinti.Rex {
             if (_anchoraCamera == null ||
                 _anchoraInput == null ||
                 _anchoraPuellae == null ||
-                _anchoraPuellaeCrinis == null || _anchoraPuellaeCrinis.Length == 0 ||
-                _anchoraPunctumViae == null || _anchoraPunctumViae.Length == 0 ||
-                _anchoraCivis == null || _anchoraCivis.Length == 0) {
+                _anchoraPuellaeCrinis == null ||
+                _anchoraPunctumViae == null ||
+                _anchoraCivis == null) {
                 Errorum.Fatal(IDErrorum.REX_ANCHORA_RESOLVE_FAILED);
                 return;
             }

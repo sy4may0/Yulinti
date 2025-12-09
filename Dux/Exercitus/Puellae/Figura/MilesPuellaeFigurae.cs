@@ -9,6 +9,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly IOstiumPuellaeFiguraePelvisMutabile _osPuellaeFiguraePelvisMut;
         private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusMut;
 
+        // VContainer注入
         public MilesPuellaeFigurae(
             IOstiumPuellaeOssisLegibile osPuellaeOssisLeg,
             IOstiumPuellaeFiguraePelvisMutabile osPuellaeFiguraePelvisMut,

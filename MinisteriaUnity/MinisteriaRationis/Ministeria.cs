@@ -8,22 +8,18 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly FonsTemporis _fonsTemporis;
         private readonly ITemporis _temporis;
 
-        // Civis Test
-        private readonly LuditorPunctumViae _luditorPunctumViae;
-        private readonly Civis _civis;
-
         public Ministeria(
             IVasculumMinisterii vasculumMinisterii
         ) {
             _fonsTemporis = new FonsTemporis();
             _temporis = new Temporis(_fonsTemporis);
             _ostiorumRationis = new FasciculusOstiorumRationis(vasculumMinisterii, _temporis);
-
-            // Civis Test
-            _luditorPunctumViae = new LuditorPunctumViae(vasculumMinisterii.Civis.AnchoraPunctumViae);
-            _civis = new Civis(vasculumMinisterii.Civis.AnchoraCivis[0], _luditorPunctumViae);
-            _civis.Oriri();
-
+            // ostiumPuellaeLociLeg はここでnullかもしれない。
+            if (_ostiorumRationis.Puellae.LocusLeg == null) {
+                UnityEngine.Debug.LogError("ostiumPuellaeLociLeg is null");
+            } else {
+                UnityEngine.Debug.Log("ostiumPuellaeLociLeg is not null");
+            }
         }
 
         public FasciculusOstiorumRationis OstiorumRationis => _ostiorumRationis;
@@ -39,17 +35,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
         public void Pulsus() {
             _ostiorumRationis.Pulsus();
-
-            // Civis Test
-            if (_civis.EstActivum && _civis.NavMesh.EstAdPerveni(0.5f)) {
-                EventusCivisLociNavMesh result = _civis.NavMesh.Migrare();
-                if(result.estEvanescere) {
-                    if (result.ev.EstError()) {
-                        Memorator.MemorareErrorum(result.ev.ID());
-                    }
-                    _civis.Evanescere();
-                }
-            }
         }
 
         public void PulsusFixusPrimum() {

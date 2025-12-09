@@ -23,7 +23,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public OrdinatioPuellaeMotus Ordinare(IResFluidaPuellaeMotusLegibile resFluidaMotus) {
-            OrdinatioPuellaeMotusHorizontalis oh =  OrdinatorPuellaeMotus.OrdinareMotusHorizontalis(
+            OrdinatioPuellaeMotusHorizontalis oh =  InstrumentaPuellaeMotus.OrdinareMotusHorizontalis(
                 _osInputMotusLeg.LegoMotus,
                 _configurationCorporis.VelocitasDesiderata,
                 resFluidaMotus.VelocitasActualisHorizontalis,
@@ -33,7 +33,7 @@ namespace Yulinti.Dux.Exercitus {
                 _configuratioStatuum.LimenInputQuadratum,
                 _configurationCorporis.EstLevigatum
             );
-            OrdinatioPuellaeMotusVerticalis ov =  OrdinatorPuellaeMotus.OrdinareMotusVerticalis(
+            OrdinatioPuellaeMotusVerticalis ov =  InstrumentaPuellaeMotus.OrdinareMotusVerticalis(
                 resFluidaMotus.EstInTerra,
                 resFluidaMotus.VelocitasActualisVerticalis,
                 _configuratioStatuum.AcceleratioGravitatis,
@@ -41,7 +41,7 @@ namespace Yulinti.Dux.Exercitus {
                 _configuratioStatuum.VelocitasVerticalisMax,
                 _osTemporisLeg.Intervallum
             );
-            OrdinatioPuellaeMotusRotationisY or = OrdinatorPuellaeMotus.OrdinareMotusRotationisYSecutoria(
+            OrdinatioPuellaeMotusRotationisY or = InstrumentaPuellaeMotus.OrdinareMotusRotationisYSecutoria(
                 _osCameraLeg.DexterXZ,
                 _osCameraLeg.AnteriorXZ,
                 _osInputMotusLeg.LegoMotus,

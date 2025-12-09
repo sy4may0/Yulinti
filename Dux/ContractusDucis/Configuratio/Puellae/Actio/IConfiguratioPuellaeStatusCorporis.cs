@@ -8,8 +8,8 @@ namespace Yulinti.Dux.ContractusDucis {
         IDPuellaeAnimationisContinuata IdAnimationisExire { get; }
         bool LudereExire { get; }
         float VelocitasDesiderata { get; }
-        float Acceleratio { get; set; }
-        float Deceleratio { get; set; }
-        bool EstLevigatum { get; set; }
+        float Acceleratio { get; }
+        float Deceleratio { get; }
+        bool EstLevigatum { get; }
     }
 }

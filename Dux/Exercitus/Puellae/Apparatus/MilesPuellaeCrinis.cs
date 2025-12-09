@@ -5,6 +5,7 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class MilesPuellaeCrinis : IMilesPuellaeCrinis {
         private readonly IOstiumPuellaeCrinisAdiunctionisMutabile _osPuellaeCrinisAdiunctionisMut;
 
+        // VContainer注入
         public MilesPuellaeCrinis(
             IOstiumPuellaeCrinisAdiunctionisMutabile osPuellaeCrinisAdiunctionisMut
         ) {
