@@ -33,6 +33,8 @@ namespace Yulinti.Dux.Exercitus {
                 osPuellaeLociLeg,
                 _resFluidaMotusLeg
             );
+
+            _osPuellaeLociLeg = osPuellaeLociLeg;
        }
 
         public IDStatus StatusCorporisActualis => _machinaPuellaeStatuum.IdStatusActualis;

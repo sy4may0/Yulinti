@@ -68,6 +68,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void Opero() {
+            UnityEngine.Debug.Log("Opero");
             OrdinatioPuellaeMotus ordinatio = _statusCorporisActualis.Ordinare(_resFluidaMotusLeg);
             _motor.ApplicareMotus(ordinatio);
 
@@ -79,19 +80,19 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         private void MutareStatus() {
+            UnityEngine.Debug.Log("MutareStatus: " + _idStatusActualis);
             IRamusPuellaeStatusCorporis[] rami = _tabulaRamiCorporis.Lego(_idStatusActualis);
             foreach (IRamusPuellaeStatusCorporis ramus in rami) {
                 if (ramus.Conditio(_resFluidaMotusLeg) && ramus.IdStatusProximus != _idStatusActualis) {
                     _idStatusProximus = ramus.IdStatusProximus;
-                    _statusCorporisActualis.Exire(_resFluidaMotusLeg, _adMutareStatus);
+                    _statusCorporisActualis.Exire(_resFluidaMotusLeg, null);
+                    _tabulaStatuumCorporis.Lego(_idStatusProximus).Intrare(_resFluidaMotusLeg, _adMutareStatus);
                     return;
                 }
             }
         }
 
         private void AdMutareStatus() {
-            _statusCorporisActualis = _tabulaStatuumCorporis.Lego(_idStatusProximus);
-            _statusCorporisActualis.Intrare(_resFluidaMotusLeg, null);
             _idStatusActualis = _idStatusProximus;
             _idStatusProximus = IDStatus.Quies;
         }

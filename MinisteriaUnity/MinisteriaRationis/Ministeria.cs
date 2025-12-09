@@ -14,12 +14,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _fonsTemporis = new FonsTemporis();
             _temporis = new Temporis(_fonsTemporis);
             _ostiorumRationis = new FasciculusOstiorumRationis(vasculumMinisterii, _temporis);
-            // ostiumPuellaeLociLeg はここでnullかもしれない。
-            if (_ostiorumRationis.Puellae.LocusLeg == null) {
-                UnityEngine.Debug.LogError("ostiumPuellaeLociLeg is null");
-            } else {
-                UnityEngine.Debug.Log("ostiumPuellaeLociLeg is not null");
-            }
         }
 
         public FasciculusOstiorumRationis OstiorumRationis => _ostiorumRationis;

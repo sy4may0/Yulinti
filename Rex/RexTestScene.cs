@@ -30,7 +30,6 @@ namespace Yulinti.Rex {
                 _configuratioPuellae
             );
 
-            // Ministeria繧貞・譛溷喧
             _ministeria = new Ministeria(vasculumMinisteriiTestScene);
 
             _dux = new DuxExercitus(
