@@ -24,12 +24,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             Action adInitium = null, Action adFinem = null
         ) {
             IAnimatioPuellaeContinuata animatio = _tabulaContinuata.Lego(idContinuata);
-            if (adInitium != null) {
-                animatio.PonoAdInitium(adInitium);
-            }
-            if (adFinem != null) {
-                animatio.PonoAdFinem(adFinem);
-            }
+            animatio.PonoAdInitium(adInitium);
+            animatio.PonoAdFinem(adFinem);
+
             IDPuellaeAnimationisStratum stratum = animatio.Stratum;
             VasculumAnimationis[] animationes = animatio.Animationes;
             _luditoris[(int)stratum].Postulare(animationes);
@@ -40,12 +37,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             Action adInitium = null, Action adFinem = null
         ) {
             IAnimatioPuellaeContinuata animatio = _tabulaContinuata.Lego(idContinuata);
-            if (adInitium != null) {
-                animatio.PonoAdInitium(adInitium);
-            }
-            if (adFinem != null) {
-                animatio.PonoAdFinem(adFinem);
-            }
+            animatio.PonoAdInitium(adInitium);
+            animatio.PonoAdFinem(adFinem);
+
             IDPuellaeAnimationisStratum stratum = animatio.Stratum;
             VasculumAnimationis[] animationes = animatio.Animationes;
             _luditoris[(int)stratum].Cogere(animationes);

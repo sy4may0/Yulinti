@@ -2,24 +2,21 @@ using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class RamiPuellaeCorporis {
-        private readonly ThesaurusPuellaeStatuum _thesaurus;
-        private readonly TabulaPuellaeThesaurusCorporis _tabulaThesauri;
+        private readonly IConfiguratioPuellaeStatuum _configuratioStatuum;
         private readonly IOstiumInputMotusLegibile _osInputMotusLeg;
 
         public RamiPuellaeCorporis(
-            ThesaurusPuellaeStatuum thesaurus,
-            TabulaPuellaeThesaurusCorporis tabulaThesauri,
+            IConfiguratioPuellaeStatuum configuratioStatuum,
             IOstiumInputMotusLegibile osInputMotusLeg
         ) {
-            _thesaurus = thesaurus;
-            _tabulaThesauri = tabulaThesauri;
+            _configuratioStatuum = configuratioStatuum;
             _osInputMotusLeg = osInputMotusLeg;
         }
 
         // Cursusが押されているかどうかを判定する
         public bool EstActivumCursus(IResFluidaPuellaeMotusLegibile resFluidaMotus) {
             if (
-                _osInputMotusLeg.LegoMotus.LengthSquared() >= _thesaurus.LimenInputQuadratum &&
+                _osInputMotusLeg.LegoMotus.LengthSquared() >= _configuratioStatuum.LimenInputQuadratum &&
                 _osInputMotusLeg.LegoCursus
             ) {
                 return true;
@@ -30,7 +27,7 @@ namespace Yulinti.Dux.Exercitus {
         // Cursusが押されていないかどうかを判定する
         public bool EstInactivumCursus(IResFluidaPuellaeMotusLegibile resFluidaMotus) {
             if (
-                _osInputMotusLeg.LegoMotus.LengthSquared() < _thesaurus.LimenInputQuadratum ||
+                _osInputMotusLeg.LegoMotus.LengthSquared() < _configuratioStatuum.LimenInputQuadratum ||
                 !_osInputMotusLeg.LegoCursus
             ) {
                 return true;
@@ -70,7 +67,7 @@ namespace Yulinti.Dux.Exercitus {
 
         // 移動入力があるかどうかを判定する
         public bool EstActivumMotus(IResFluidaPuellaeMotusLegibile resFluidaMotus) {
-            if (_osInputMotusLeg.LegoMotus.LengthSquared() >= _thesaurus.LimenInputQuadratum) {
+            if (_osInputMotusLeg.LegoMotus.LengthSquared() >= _configuratioStatuum.LimenInputQuadratum) {
                 return true;
             }
             return false;
@@ -78,7 +75,7 @@ namespace Yulinti.Dux.Exercitus {
 
         // 移動入力がないかどうかを判定する
         public bool EstInactivumMotus(IResFluidaPuellaeMotusLegibile resFluidaMotus) {
-            if (_osInputMotusLeg.LegoMotus.LengthSquared() < _thesaurus.LimenInputQuadratum) {
+            if (_osInputMotusLeg.LegoMotus.LengthSquared() < _configuratioStatuum.LimenInputQuadratum) {
                 return true;
             }
             return false;

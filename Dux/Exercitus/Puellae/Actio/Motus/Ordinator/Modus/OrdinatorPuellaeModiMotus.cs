@@ -2,37 +2,43 @@ using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class OrdinatorPuellaeModiMotus : IOrdinatorPuellaeModi {
-        private readonly ThesaurusPuellaeStatuum _thesaurus;
-        private readonly ThesaurusPuellaeStatusCorporis _thesaurusStatus;
+        private readonly IConfiguratioPuellaeStatuum _configuratioStatuum;
+        private readonly IConfiguratioPuellaeStatusCorporis _configurationCorporis;
         private readonly IOstiumInputMotusLegibile _osInputMotusLeg;
         private readonly IOstiumCameraLegibile _osCameraLeg;
         private readonly IOstiumTemporisLegibile _osTemporisLeg;
 
-        public OrdinatorPuellaeModiMotus(IContentumOrdinatorPuellaeModi contentum) {
-            _thesaurus = contentum.Thesaurus;
-            _thesaurusStatus = contentum.ThesaurusStatus;
-            _osInputMotusLeg = contentum.OsInputMotus;
-            _osCameraLeg = contentum.OsCamera;
-            _osTemporisLeg = contentum.OsTemporis;
+        public OrdinatorPuellaeModiMotus(
+            IConfiguratioPuellaeStatuum configuratioStatuum,
+            IConfiguratioPuellaeStatusCorporis configurationCorporis,
+            IOstiumInputMotusLegibile osInputMotusLeg,
+            IOstiumCameraLegibile osCameraLeg,
+            IOstiumTemporisLegibile osTemporisLeg
+        ) {
+            _configuratioStatuum = configuratioStatuum;
+            _configurationCorporis = configurationCorporis;
+            _osInputMotusLeg = osInputMotusLeg;
+            _osCameraLeg = osCameraLeg;
+            _osTemporisLeg = osTemporisLeg;
         }
 
         public OrdinatioPuellaeMotus Ordinare(IResFluidaPuellaeMotusLegibile resFluidaMotus) {
             OrdinatioPuellaeMotusHorizontalis oh =  OrdinatorPuellaeMotus.OrdinareMotusHorizontalis(
                 _osInputMotusLeg.LegoMotus,
-                _thesaurusStatus.VelocitasDesiderata,
+                _configurationCorporis.VelocitasDesiderata,
                 resFluidaMotus.VelocitasActualisHorizontalis,
-                _thesaurusStatus.Acceleratio, _thesaurusStatus.Deceleratio,
-                _thesaurus.TempusLevigatumMin,
-                _thesaurus.TempusLevigatumMax,
-                _thesaurus.LimenInputQuadratum,
-                _thesaurusStatus.EstLevigatum
+                _configurationCorporis.Acceleratio, _configurationCorporis.Deceleratio,
+                _configuratioStatuum.TempusLevigatumMin,
+                _configuratioStatuum.TempusLevigatumMax,
+                _configuratioStatuum.LimenInputQuadratum,
+                _configurationCorporis.EstLevigatum
             );
             OrdinatioPuellaeMotusVerticalis ov =  OrdinatorPuellaeMotus.OrdinareMotusVerticalis(
                 resFluidaMotus.EstInTerra,
                 resFluidaMotus.VelocitasActualisVerticalis,
-                _thesaurus.AcceleratioGravitatis,
-                _thesaurus.VelocitasContactus,
-                _thesaurus.VelocitasVerticalisMax,
+                _configuratioStatuum.AcceleratioGravitatis,
+                _configuratioStatuum.VelocitasContactus,
+                _configuratioStatuum.VelocitasVerticalisMax,
                 _osTemporisLeg.Intervallum
             );
             OrdinatioPuellaeMotusRotationisY or = OrdinatorPuellaeMotus.OrdinareMotusRotationisYSecutoria(
@@ -40,9 +46,9 @@ namespace Yulinti.Dux.Exercitus {
                 _osCameraLeg.AnteriorXZ,
                 _osInputMotusLeg.LegoMotus,
                 resFluidaMotus.RotatioYActualis,
-                _thesaurus.TempusLevigatumRotationis,
-                _thesaurus.LimenInputQuadratum,
-                _thesaurusStatus.EstLevigatum
+                _configuratioStatuum.TempusLevigatumRotationis,
+                _configuratioStatuum.LimenInputQuadratum,
+                _configurationCorporis.EstLevigatum
             );
 
             return new OrdinatioPuellaeMotus(oh, ov, or);           

@@ -6,23 +6,30 @@ namespace Yulinti.Dux.Exercitus {
         private readonly IStatusPuellaeCorporis[] _statuum;
 
         public TabulaPuellaeStatuumCorporis(
-            TabulaPuellaeThesaurusCorporis tabulaThesauri,
-            IContentumOrdinatorPuellaeModi contentum,
+            IConfiguratioPuellaeStatuum configuratioStatuum,
+            IConfiguratioPuellaeStatusCorporis[] configurationemCorporis,
+            IOstiumInputMotusLegibile osInputMotusLeg,
+            IOstiumTemporisLegibile osTemporisLeg,
+            IOstiumCameraLegibile osCameraLeg,
             IOstiumPuellaeAnimationesMutabile osAnimationes
         ) {
             int longitudo = Enum.GetValues(typeof(IDStatus)).Length;
             _statuum = new IStatusPuellaeCorporis[longitudo];
 
             for(int i = 1; i < longitudo; i++) {
-                ThesaurusPuellaeStatusCorporis thesaurus = tabulaThesauri.Lego((IDStatus)i);
                 IOrdinatorPuellaeModi modus = FabricaOrdinatorPuellaeModi.Creare(
-                    thesaurus.IdModusMotus, contentum
+                    configurationemCorporis[(int)i].IdModusMotus,
+                    configuratioStatuum,
+                    configurationemCorporis[(int)i],
+                    osInputMotusLeg,
+                    osCameraLeg,
+                    osTemporisLeg
                 );
                 _statuum[i] = new StatusPuellaeCorporisMotus(
-                    (IDStatus)i,
-                    thesaurus.IdAnimationisIntrare,
-                    thesaurus.IdAnimationisExire,
-                    thesaurus.LudereExire,
+                    configurationemCorporis[(int)i].Id,
+                    configurationemCorporis[(int)i].IdAnimationisIntrare,
+                    configurationemCorporis[(int)i].IdAnimationisExire,
+                    configurationemCorporis[(int)i].LudereExire,
                     modus,
                     osAnimationes
                 );
