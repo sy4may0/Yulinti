@@ -7,7 +7,13 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class TabulaRamiPuellaeCorporis {
         private readonly Dictionary<int, IRamusPuellaeStatusCorporis[]> _tabula;
 
-        public TabulaRamiPuellaeCorporis(FasciculusRamiPuellaeCorporis fasciculus) {
+        public TabulaRamiPuellaeCorporis(
+            IConfiguratioPuellaeStatuum configuratioStatuum,
+            IOstiumInputMotusLegibile osInputMotusLeg
+        ) {
+            RamiPuellaeCorporis ramiCorporis = new RamiPuellaeCorporis(configuratioStatuum, osInputMotusLeg);
+            FasciculusRamiPuellaeCorporis fasciculus = new FasciculusRamiPuellaeCorporis(ramiCorporis);
+
             int longitudo = Enum.GetValues(typeof(IDStatus)).Length;
             _tabula = new Dictionary<int, IRamusPuellaeStatusCorporis[]>();
 
