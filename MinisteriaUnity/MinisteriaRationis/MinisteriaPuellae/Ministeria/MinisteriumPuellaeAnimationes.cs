@@ -15,7 +15,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _tabulaContinuata = new TabulaPuellaeAnimationumContinuata(config.Animationes);
             _luditoris = new NewLuditorAnimationis[Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length];
             for (int i = 0; i < Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length; i++) {
-                _luditoris[i] = new NewLuditorAnimationis(animancer, i);
+                if (i == (int)IDPuellaeAnimationisStratum.Fundamentum) {
+                    // Fundamentum層は永続化する。
+                    _luditoris[i] = new NewLuditorAnimationis(animancer, i, true);
+                } else {
+                    _luditoris[i] = new NewLuditorAnimationis(animancer, i);
+                }
             }
         }
 

@@ -16,9 +16,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private float _tempusSimulataneum;
         // LinearMixerTransition用速度パラメータ。
         private float _velocitas;
+        private bool _aeternitas;
 
-        public NewLuditorAnimationis(AnimancerComponent animancer, int indexusLuditoris)
-        {
+        public NewLuditorAnimationis(
+            AnimancerComponent animancer, int indexusLuditoris,
+            bool aeternitas = false
+        ) {
+            _aeternitas = aeternitas;
             _layer = animancer.Layers[indexusLuditoris];
             if (_layer == null)
             {
@@ -109,7 +113,16 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         private void Ludere() {
-            _animatioCurrens = _animationesPostulata.Dequeue();
+            if (_animationesPostulata.Count == 0) {
+                return;
+            }
+
+            VasculumAnimationis p = _animationesPostulata.Dequeue();
+            if (p.Animatio == _animatioCurrens?.Animatio) {
+                return;
+            }
+
+            _animatioCurrens = p;
             _animatioCurrens.AdInitium?.Invoke();
             if (_animatioCurrens.Animatio == null ) {
                 Desinere();
@@ -128,6 +141,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         private void Desinere() {
+            if (_aeternitas) {
+                return;
+            }
             if (_animatioCurrens != null) {
                 _layer.StartFade(0f, _animatioCurrens.TempusEvanescentiae);
                 _layer.FadeGroup.SetEasing(_animatioCurrens.Lenitio);

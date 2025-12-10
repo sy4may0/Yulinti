@@ -6,43 +6,20 @@
         Pars = 2
     }
 
+    // これはUnicaeに対応する。
+    // 1Clip = 1ID
     public enum IDPuellaeAnimationis {
         None,
+        NihilCorporis,
+        NihilPartis,
         StandardBase,
-        Crouch
+        Crouch,
     }
 
+    // これはContinuataに対応する。
     public enum IDPuellaeAnimationisContinuata {
         None,
         StandardBase,
         Crouch
-    }
-
-    public enum IDPuellaeAnimationisFundamenti {
-        None,
-        StandardBase
-    }
-
-    public enum IDPuellaeAnimationisFundamentiContinuata {
-        None,
-        StandardBase
-    }
-
-    public enum IDPuellaeAnimationisCorporis {
-        None,
-        Crouch
-    }
-
-    public enum IDPuellaeAnimationisCorporisContinuata {
-        None,
-        Crouch
-    }
-
-    public enum IDPuellaeAnimationisPartis {
-        None
-    }
-
-    public enum IDPuellaeAnimationisPartisContinuata {
-        None
     }
 }
