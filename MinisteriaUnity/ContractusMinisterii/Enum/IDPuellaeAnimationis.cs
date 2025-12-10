@@ -19,7 +19,11 @@
     // これはContinuataに対応する。
     public enum IDPuellaeAnimationisContinuata {
         None,
+        // Fundamenti
         StandardBase,
+
+        // Corpus
+        NihilCorporis,
         Crouch
     }
 }

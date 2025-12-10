@@ -15,14 +15,16 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         // 同期用時刻（アニメーションの再生位置を同期するため）
         private float _tempusSimulataneum;
         // LinearMixerTransition用速度パラメータ。
-        private float _velocitas;
+        private LinearMixerTransition _linearMixerC = null;
         private bool _aeternitas;
+        private bool _stratumNihil;
 
         public NewLuditorAnimationis(
             AnimancerComponent animancer, int indexusLuditoris,
-            bool aeternitas = false
+            bool aeternitas = false, bool stratumNihil = false
         ) {
             _aeternitas = aeternitas;
+            _stratumNihil = stratumNihil;
             _layer = animancer.Layers[indexusLuditoris];
             if (_layer == null)
             {
@@ -66,17 +68,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             Postulare(animationes, true);
         }
 
-        public void PonoVelocitatem(float velocitas)
-        {
-            _velocitas = velocitas;
-        }
-
         public void PonoTempusSimulataneum(float tempus)
         {
             _tempusSimulataneum = tempus;
         }
 
-        public float LegoTempusSimulataneum() => _tempusSimulataneum;
+        public float LegoTempusSimulataneum() => _statusCurrens?.NormalizedTime ?? _tempusSimulataneum;
 
         public void Pulsus() {
             // キューが空なら何もしない
@@ -108,28 +105,32 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (deberetLudere) {
                 Ludere();
             }
-            InjicereVelocitatem();
-            Temporare();
         }
 
         private void Ludere() {
             if (_animationesPostulata.Count == 0) {
+                _animatioCurrens?.AdInitium?.Invoke();
                 return;
             }
 
             VasculumAnimationis p = _animationesPostulata.Dequeue();
             if (p.Animatio == _animatioCurrens?.Animatio) {
+                _animatioCurrens?.AdInitium?.Invoke();
                 return;
             }
 
             _animatioCurrens = p;
             _animatioCurrens.AdInitium?.Invoke();
-            if (_animatioCurrens.Animatio == null ) {
+            if (_animatioCurrens == null ||
+                _animatioCurrens.Animatio == null ||
+                _animatioCurrens.EstTerminare
+            ) {
                 Desinere();
                 return;
             }
             _statusCurrens = _layer.Play(_animatioCurrens.Animatio, _animatioCurrens.TempusEvanescentiae);
             _layer.FadeGroup.SetEasing(_animatioCurrens.Lenitio);
+            Temporare();
 
             if (_statusCurrens.Events(this, out AnimancerEvent.Sequence events)) {
                 events.OnEnd = _animatioCurrens.AdFinem;
@@ -154,15 +155,23 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         private void Temporare() {
-            if (_statusCurrens != null) {
-                _tempusSimulataneum = _statusCurrens.NormalizedTime;
+            if (_statusCurrens != null && !_stratumNihil) {
+                _statusCurrens.NormalizedTime = _tempusSimulataneum;
             }
         }
 
-        private void InjicereVelocitatem() {
-            if (_animatioCurrens?.Animatio is LinearMixerTransition mixer) {
-                mixer.State.Parameter = _velocitas;
+        public void InjicereVelocitatem(float velocitas) {
+            // EstLinierMixerC: 線形ミキサーのキャッシュフラグ。
+            if (_linearMixerC != null) {
+                _linearMixerC.State.Parameter = velocitas;
+                return;
             }
+            if (_animatioCurrens?.Animatio is LinearMixerTransition mixer) {
+                _linearMixerC = mixer;
+                _linearMixerC.State.Parameter = velocitas;
+                return;
+            }
+            _linearMixerC = null;
         }
     }
 }

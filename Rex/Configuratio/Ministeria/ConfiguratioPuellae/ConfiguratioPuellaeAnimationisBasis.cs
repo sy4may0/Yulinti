@@ -12,6 +12,7 @@ namespace Yulinti.Rex {
         [SerializeField] private bool _estImpeditivus = false;
         [SerializeField] private bool _estCircularis = true;
         [SerializeField] private bool _estObsignatus = false;
+        [SerializeField] private bool _estTerminare = false;
 
         public IDPuellaeAnimationis Id => _id;
         public abstract ITransition Animatio { get; }
@@ -21,5 +22,6 @@ namespace Yulinti.Rex {
         public bool EstImpeditivus => _estImpeditivus;
         public bool EstCircularis => _estCircularis;
         public bool EstObsignatus => _estObsignatus;
+        public bool EstTerminare => _estTerminare;
     }
 }

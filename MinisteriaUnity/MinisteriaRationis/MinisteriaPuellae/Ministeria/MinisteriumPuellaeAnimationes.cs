@@ -16,8 +16,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _luditoris = new NewLuditorAnimationis[Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length];
             for (int i = 0; i < Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length; i++) {
                 if (i == (int)IDPuellaeAnimationisStratum.Fundamentum) {
-                    // Fundamentum層は永続化する。
-                    _luditoris[i] = new NewLuditorAnimationis(animancer, i, true);
+                    // Fundamentum層は永続化する。かつ、Stratum0。
+                    _luditoris[i] = new NewLuditorAnimationis(animancer, i, true, true);
                 } else {
                     _luditoris[i] = new NewLuditorAnimationis(animancer, i);
                 }
@@ -52,7 +52,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public void InjicereVelocitatem(float vel) {
             foreach (NewLuditorAnimationis luditor in _luditoris) {
-                luditor.PonoVelocitatem(vel);
+                luditor.InjicereVelocitatem(vel);
             }
         }
 
@@ -66,12 +66,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public void Pulsus() {
             // まずFundamentum層のPulsusを実行する。これはTemporareLuditores同期のため。
-            _luditoris[0].Pulsus();
             TemporareLuditores();
             for (int i = 1; i < Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length; i++) {
                 // その他の層のPulsusを実行する。
                 _luditoris[i].Pulsus();
             }
+            _luditoris[0].Pulsus();
         }
     }
 }

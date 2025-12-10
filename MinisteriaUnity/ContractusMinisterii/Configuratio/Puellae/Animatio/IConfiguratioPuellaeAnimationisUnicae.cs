@@ -13,5 +13,6 @@ namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
         public bool EstImpeditivus { get; }
         public bool EstCircularis { get; }
         public bool EstObsignatus { get; }
+        public bool EstTerminare { get; }
     }
 }

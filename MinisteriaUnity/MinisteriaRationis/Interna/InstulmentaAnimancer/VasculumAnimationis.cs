@@ -11,6 +11,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly bool _estImpeditivus;
         private readonly bool _estCircularis;
         private readonly bool _estObsignatus;
+        private readonly bool _estTerminare;
         public Action AdInitium {get; set;}
         public Action AdFinem {get; set;}
 
@@ -21,7 +22,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             bool estSimulataneum = false,
             bool estImpeditivus = false,
             bool estCircularis = false,
-            bool estObsignatus = false
+            bool estObsignatus = false,
+            bool estTerminare = false
         ) {
             _animatio = animatio;
             _tempusEvanescentiae = tempusEvanescentiae;
@@ -30,6 +32,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _estImpeditivus = estImpeditivus;
             _estCircularis = estCircularis;
             _estObsignatus = estObsignatus;
+            _estTerminare = estTerminare;
         }
 
         public ITransition Animatio => _animatio;
@@ -39,5 +42,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public bool EstImpeditivus => _estImpeditivus;
         public bool EstCircularis => _estCircularis;
         public bool EstObsignatus => _estObsignatus;
+        public bool EstTerminare => _estTerminare;
     }
 }

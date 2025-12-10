@@ -15,7 +15,6 @@ namespace Yulinti.Rex {
         private DuxExercitus _dux;
 
         private void Awake() {
-            // 繧｢繝ｳ繧ｫ繝ｼ繧定ｧ｣豎ｺ
             _resolvorAnchorae.Resolvo();
             _resolvorAnchorae.Validare();
 

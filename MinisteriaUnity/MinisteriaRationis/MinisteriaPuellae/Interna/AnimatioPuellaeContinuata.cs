@@ -25,7 +25,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                     config.Animationes[i].EstSimultaneum,
                     config.Animationes[i].EstImpeditivus,
                     config.Animationes[i].EstCircularis,
-                    config.Animationes[i].EstObsignatus
+                    config.Animationes[i].EstObsignatus,
+                    config.Animationes[i].EstTerminare
                 );
             }
         }
@@ -34,7 +35,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _animationes = new VasculumAnimationis[1];
             _animationes[0] = new VasculumAnimationis(
                 null,
-                0,
+                0, // ここが問題個所。Noneを送るとFundamentiがStopする。StopCorporis/StopPartisのEnumを使い、Noneを使わないようにするべき。
                 Animancer.Easing.Function.Linear,
                 false,
                 false,

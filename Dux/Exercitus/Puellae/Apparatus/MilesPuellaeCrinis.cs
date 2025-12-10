@@ -10,6 +10,8 @@ namespace Yulinti.Dux.Exercitus {
             IOstiumPuellaeCrinisAdiunctionisMutabile osPuellaeCrinisAdiunctionisMut
         ) {
             _osPuellaeCrinisAdiunctionisMut = osPuellaeCrinisAdiunctionisMut;
+            // Default Hair
+            _osPuellaeCrinisAdiunctionisMut.Muto(IDPuellaeCrinis.Resiliens);
         }
 
         public void MutareComam(IDPuellaeCrinis idCrinis) {

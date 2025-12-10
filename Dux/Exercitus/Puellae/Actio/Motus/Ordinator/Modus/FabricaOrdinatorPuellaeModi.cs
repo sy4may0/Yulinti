@@ -1,4 +1,5 @@
 using Yulinti.Dux.ContractusDucis;
+using Yulinti.Nucleus;
 
 namespace Yulinti.Dux.Exercitus {
     internal static class FabricaOrdinatorPuellaeModi {
@@ -16,7 +17,8 @@ namespace Yulinti.Dux.Exercitus {
                 case IDPuellaeModiMotus.ModusQuietus:
                     return new OrdinatorPuellaeModiQuietes(configuratioStatuum, configurationemCorporis, osInputMotusLeg, osCameraLeg, osTemporisLeg);
                 default:
-                    return new OrdinatorPuellaeModiQuietes(configuratioStatuum, configurationemCorporis, osInputMotusLeg, osCameraLeg, osTemporisLeg);
+                    Errorum.Fatal(IDErrorum.FABRICAPUELLAEORDDINATORMODI_MODUS_NOT_FOUND);
+                    return null;
             }
         }
     }
