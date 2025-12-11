@@ -20,6 +20,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public bool LegoCursus => _sprintInput?.action?.enabled == true && _sprintInput.action.IsPressed();
         public bool LegoIncumbo => _crouchInput?.action?.enabled == true && _crouchInput.action.IsPressed();
     }
+
 }
 
 

@@ -1,15 +1,29 @@
 ﻿namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
-    public enum IDPuellaeAnimationisFundamenti {
-        None,
-        StandardBase
+    public enum IDPuellaeAnimationisStratum {
+        // ファンダメンタル層は0固定としてくれ。
+        Fundamentum = 0,
+        Corpus = 1,
+        Pars = 2
     }
 
-    public enum IDPuellaeAnimationisCorporis {
+    // これはUnicaeに対応する。
+    // 1Clip = 1ID
+    public enum IDPuellaeAnimationis {
         None,
+        NihilCorporis,
+        NihilPartis,
+        StandardBase,
+        Crouch,
+    }
+
+    // これはContinuataに対応する。
+    public enum IDPuellaeAnimationisContinuata {
+        None,
+        // Fundamenti
+        StandardBase,
+
+        // Corpus
+        NihilCorporis,
         Crouch
-    }
-
-    public enum IDPuellaeAnimationisPartis {
-        None
     }
 }

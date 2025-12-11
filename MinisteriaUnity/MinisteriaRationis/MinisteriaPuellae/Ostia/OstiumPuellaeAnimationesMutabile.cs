@@ -14,24 +14,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeAnimationes = miPuellaeAnimationes;
         }
 
-        public void PostulareFundamenti(IDPuellaeAnimationisFundamenti idFundamenti, Action fInvocanda, bool estObsignatus = false) {
-            _miPuellaeAnimationes.PostulareFundamenti(idFundamenti, fInvocanda, estObsignatus);
+        public void Postulare(IDPuellaeAnimationisContinuata idContinuata, Action adInitium, Action adFinem) {
+            _miPuellaeAnimationes.Postulare(idContinuata, adInitium, adFinem);
         }
-        public void CogereFundamenti(IDPuellaeAnimationisFundamenti idFundamenti, Action fInvocanda, bool estObsignatus = false) {
-            _miPuellaeAnimationes.CogereFundamenti(idFundamenti, fInvocanda, estObsignatus);
+        public void Cogere(IDPuellaeAnimationisContinuata idContinuata, Action adInitium, Action adFinem) {
+            _miPuellaeAnimationes.Cogere(idContinuata, adInitium, adFinem);
         }
-        public void PostulareCorporis(IDPuellaeAnimationisCorporis idCorporis, Action fInvocanda, bool estObsignatus = false) {
-            _miPuellaeAnimationes.PostulareCorporis(idCorporis, fInvocanda, estObsignatus);
-        }
-        public void CogereCorporis(IDPuellaeAnimationisCorporis idCorporis, Action fInvocanda, bool estObsignatus = false) {
-            _miPuellaeAnimationes.CogereCorporis(idCorporis, fInvocanda, estObsignatus);
-        }
-        public void CogereDesinentiamFundamenti() {
-            _miPuellaeAnimationes.CogereDesinentiamFundamenti();
-        }
-        public void CogereDesinentiamCorporis() {
-            _miPuellaeAnimationes.CogereDesinentiamCorporis();
-        }
+
         public void TemporareLuditores() {
             _miPuellaeAnimationes.TemporareLuditores();
         }

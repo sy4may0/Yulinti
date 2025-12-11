@@ -1,4 +1,4 @@
-Milites/
+Exercitus/
   Interfacies/
     ICenturio.cs
     ICenturioPulsabilis.cs
@@ -39,7 +39,7 @@ Milites/
           IResFluidaPuellaeMotusMutabile.cs
         Ordinator/
           OrdinatioPuellaeMotus.cs
-          OrdinatorPuellaeMotus.cs
+          InstrumentaPuellaeMotus.cs
         Motor/
           IMotorPuellae.cs
           MotorPuellae.cs

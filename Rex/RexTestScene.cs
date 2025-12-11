@@ -1,23 +1,20 @@
 ﻿using UnityEngine;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.ConfiguratioDucis;
-using Yulinti.Dux.Thesaurus;
-using Yulinti.Dux.Miles;
+using Yulinti.Dux.Exercitus;
 
 namespace Yulinti.Rex {
     public sealed class RexTestScene : MonoBehaviour {
-        [SerializeField] private FasciculusConfigurationumDucis _configurationumDucis;
         [SerializeField] private ResolvorAnchoraeTestScene _resolvorAnchorae;
 
         [SerializeField] private ConfiguratioCivis _configuratioCivis;
         [SerializeField] private ConfiguratioPuellae _configuratioPuellae;
+        [SerializeField] private ConfiguratioExercitusPuellae _configuratioExercitusPuellae;
 
         private Ministeria _ministeria;
-        private PraefectusDucum _praefectusDucum;
+        private DuxExercitus _dux;
 
         private void Awake() {
-            // 繧｢繝ｳ繧ｫ繝ｼ繧定ｧ｣豎ｺ
             _resolvorAnchorae.Resolvo();
             _resolvorAnchorae.Validare();
 
@@ -32,14 +29,25 @@ namespace Yulinti.Rex {
                 _configuratioPuellae
             );
 
-            // Ministeria繧貞・譛溷喧
             _ministeria = new Ministeria(vasculumMinisteriiTestScene);
 
-            // Runtime繧貞・譛溷喧縲・
-            FasciculusThesaurorum thesaurorum = new FasciculusThesaurorum(_configurationumDucis);
-
-            // Dux繧貞・譛溷喧
-            _praefectusDucum = new PraefectusDucum(thesaurorum, _ministeria.OstiorumRationis);
+            _dux = new DuxExercitus(
+                _configuratioExercitusPuellae.Statuum,
+                _configuratioExercitusPuellae.Statuum.StatusCorporum,
+                _configuratioExercitusPuellae.ActionisSecundarius,
+                _ministeria.Input.MotusLeg,
+                _ministeria.Nuclei.TempusLeg,
+                _ministeria.Camera.PrincepsLeg,
+                _ministeria.Puellae.AnimatioMut,
+                _ministeria.Puellae.LocusMut,
+                _ministeria.Puellae.LocusLeg,
+                _ministeria.Puellae.RelatioTerraeLeg,
+                _ministeria.Puellae.OsMut,
+                _ministeria.Puellae.OsLeg,
+                _ministeria.Puellae.FiguraPelvisMut,
+                _ministeria.Puellae.FiguraGenusMut,
+                _ministeria.OstiorumRationis.PuellaeCrinis.OsPuellaeCrinisAdiunctionisMut
+            );
         }
 
         private void Start() {
@@ -47,21 +55,18 @@ namespace Yulinti.Rex {
 
         private void Update() {
             _ministeria.PulsusPrimum();
-
-            _praefectusDucum.Pulsus();
             _ministeria.Pulsus();
-            _praefectusDucum.PulsusPostRationem();
+            _dux.Pulsus();
         }
 
         private void FixedUpdate() {
             _ministeria.PulsusFixusPrimum();
-
             _ministeria.PulsusFixus();
         }
 
         private void LateUpdate() {
-            _praefectusDucum.PulsusTardus();
             _ministeria.PulsusTardus();
+            _dux.PulsusTardus();
         }
     }
 }
