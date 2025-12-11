@@ -5,10 +5,9 @@ using Yulinti.Nucleus;
 
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class MinisteriumPuellaeAnimationes : IPulsabilis {
+    internal sealed class MinisteriumPuellaeAnimationes : IMinisteriumPulsabilis {
         private readonly TabulaPuellaeAnimationumContinuata _tabulaContinuata;
         private readonly NewLuditorAnimationis[] _luditoris;
-
 
         public MinisteriumPuellaeAnimationes(IConfiguratioPuellaeAnimationis config, IAnchoraPuellae anchora) {
             AnimancerComponent animancer = anchora.Animancer;

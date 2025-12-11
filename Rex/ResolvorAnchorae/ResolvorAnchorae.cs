@@ -4,7 +4,7 @@ using Yulinti.Nucleus;
 
 namespace Yulinti.Rex {
     [System.Serializable]
-    internal class ResolvorAnchoraeTestScene : IResolvorAnchorae {
+    internal sealed class ResolvorAnchorae {
         [SerializeField] private AnchoraCamera _anchoraCamera;
         [SerializeField] private AnchoraInput _anchoraInput;
         [SerializeField] private AnchoraPuellae _anchoraPuellae;
@@ -19,8 +19,6 @@ namespace Yulinti.Rex {
         public AnchoraPunctumViae[] AnchoraPunctumViae => _anchoraPunctumViae;
         public AnchoraCivis[] AnchoraCivis => _anchoraCivis;
 
-        // Resolvo : null/empty繧堤｢ｺ隱阪＠null縺後≠繧後・FindObjectOfType<T>() / FindObjectsOfType<T>()縺ｧ蜿門ｾ励・
-        // Find縺励◆蝣ｴ蜷医・Memorator縺ｫIDErrorum.REX_ANCHORA_NOT_SET縺ｧ隴ｦ蜻翫ｒ逋ｺ陦後・
         public void Resolvo() {
             if (_anchoraCamera == null) {
                 var found = UnityEngine.Object.FindFirstObjectByType<AnchoraCamera>();
@@ -72,7 +70,6 @@ namespace Yulinti.Rex {
         }
 
         public void Validare() {
-            // Resolvo 蠕後ｂ隗｣豎ｺ縺ｧ縺阪※縺・↑縺・い繝ｳ繧ｫ繝ｼ縺後≠繧後・蜊ｳ Fatal
             if (_anchoraCamera == null ||
                 _anchoraInput == null ||
                 _anchoraPuellae == null ||

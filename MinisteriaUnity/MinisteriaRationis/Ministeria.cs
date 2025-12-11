@@ -3,45 +3,68 @@ using Yulinti.Nucleus;
 using UnityEngine;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class Ministeria : IPulsabilis, IPulsabilisPrimum, IPulsabilisFixus, IPulsabilisFixusPrimum, IPulsabilisTardus {
-        private readonly FasciculusOstiorumRationis _ostiorumRationis;
+    internal sealed class Ministeria : IMinisteria {
         private readonly FonsTemporis _fonsTemporis;
         private readonly ITemporis _temporis;
 
+        private readonly IMinisteriumPulsabilis[] _ministeriaPulsabilis;
+        private readonly IMinisteriumPulsabilisPrimum[] _ministeriaPulsabilisPrimum;
+        private readonly IMinisteriumPulsabilisFixus[] _ministeriaPulsabilisFixus;
+        private readonly IMinisteriumPulsabilisFixusPrimum[] _ministeriaPulsabilisFixusPrimum;
+        private readonly IMinisteriumPulsabilisTardus[] _ministeriaPulsabilisTardus;
+        private readonly IMinisteriumPulsabilisTardusPrimum[] _ministeriaPulsabilisTardusPrimum;
+
         public Ministeria(
-            IVasculumMinisterii vasculumMinisterii
+            FonsTemporis fonsTemporis,
+            ITemporis temporis,
+            IMinisteriumPulsabilis[] ministeriaPulsabilis,
+            IMinisteriumPulsabilisPrimum[] ministeriaPulsabilisPrimum,
+            IMinisteriumPulsabilisFixus[] ministeriaPulsabilisFixus,
+            IMinisteriumPulsabilisFixusPrimum[] ministeriaPulsabilisFixusPrimum,
+            IMinisteriumPulsabilisTardus[] ministeriaPulsabilisTardus,
+            IMinisteriumPulsabilisTardusPrimum[] ministeriaPulsabilisTardusPrimum
         ) {
-            _fonsTemporis = new FonsTemporis();
-            _temporis = new Temporis(_fonsTemporis);
-            _ostiorumRationis = new FasciculusOstiorumRationis(vasculumMinisterii, _temporis);
+            _fonsTemporis = fonsTemporis;
+            _temporis = temporis;
         }
-
-        public FasciculusOstiorumRationis OstiorumRationis => _ostiorumRationis;
-        public FasciculusOstiorumPuellae Puellae => _ostiorumRationis.Puellae;
-        public FasciculusOstiorumNuclei Nuclei => _ostiorumRationis.Nuclei;
-        public FasciculusOstiorumInput Input => _ostiorumRationis.Input;
-        public FasciculusOstiorumCamera Camera => _ostiorumRationis.Camera;
-
 
         public void PulsusPrimum() {
-            // ここでDeltaTime更新。　-> 以降�EてITemporis/OstiumTemporisLegibileにアクセスする、E
+            // ここでDeltaTime更新。　-> 以降でITemporis/OstiumTemporisLegibileにアクセスする
             _fonsTemporis.Pulsus();
+            foreach (IMinisteriumPulsabilisPrimum ministeria in _ministeriaPulsabilisPrimum) {
+                ministeria.PulsusPrimum();
+            }
         }
         public void Pulsus() {
-            _ostiorumRationis.Pulsus();
+            foreach (IMinisteriumPulsabilis ministeria in _ministeriaPulsabilis) {
+                ministeria.Pulsus();
+            }
         }
 
         public void PulsusFixusPrimum() {
-            // ここでFixedDeltaTime更新。　-> 以降�EてITemporis/OstiumTemporisLegibileにアクセスする、E
+            // ここでFixedDeltaTime更新。　-> 以降でITemporis/OstiumTemporisLegibileにアクセスする
             _fonsTemporis.PulsusFixus();
+            foreach (IMinisteriumPulsabilisFixusPrimum ministeria in _ministeriaPulsabilisFixusPrimum) {
+                ministeria.PulsusFixusPrimum();
+            }
         }
 
         public void PulsusFixus() {
-            _ostiorumRationis.PulsusFixus();
+            foreach (IMinisteriumPulsabilisFixus ministeria in _ministeriaPulsabilisFixus) {
+                ministeria.PulsusFixus();
+            }
+        }
+
+        public void PulsusTardusPrimum() {
+            foreach (IMinisteriumPulsabilisTardusPrimum ministeria in _ministeriaPulsabilisTardusPrimum) {
+                ministeria.PulsusTardusPrimum();
+            }
         }
 
         public void PulsusTardus() {
-            _ostiorumRationis.PulsusTardus();
+            foreach (IMinisteriumPulsabilisTardus ministeria in _ministeriaPulsabilisTardus) {
+                ministeria.PulsusTardus();
+            }
         }
     }
 }
