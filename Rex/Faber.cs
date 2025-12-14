@@ -9,10 +9,12 @@ namespace Yulinti.Rex {
     internal sealed class Faber : LifetimeScope {
         private readonly Configuratio _configuratio;
         private readonly ResolvorAnchorae _resolvorAnchorae;
+        private readonly FarberMinisterium _farberMinisterium;
 
         public Faber(Configuratio configuratio, ResolvorAnchorae resolvorAnchorae) {
             _configuratio = configuratio;
             _resolvorAnchorae = resolvorAnchorae;
+            _farberMinisterium = new FarberMinisterium();
 
             _resolvorAnchorae.Resolvo();
             _resolvorAnchorae.Validare();
@@ -38,6 +40,8 @@ namespace Yulinti.Rex {
             builder.RegisterInstance<IConfiguratioPuellaeFiguraeGenusSinister>(_configuratio.Puellae.Figura.GenusSin);
             builder.RegisterInstance<IConfiguratioPuellaeFiguraePelvis>(_configuratio.Puellae.Figura.Pelvis);
             builder.RegisterInstance<IConfiguratioPuellaeRelationisTerrae>(_configuratio.Puellae.Relatio.Terrae);
+
+            _farberMinisterium.Configure(builder);
         }
     }
 }

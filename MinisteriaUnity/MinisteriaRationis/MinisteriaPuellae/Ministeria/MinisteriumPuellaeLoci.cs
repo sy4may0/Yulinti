@@ -4,7 +4,7 @@ using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class MiniateriumPuellaeLoci {
+    internal sealed class MinisteriumPuellaeLoci {
         private readonly CharacterController _characterController;
         private readonly ITemporis _temporis;
 
@@ -16,7 +16,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private float _velocitasVerticalisActualis;
         private float _rotationisYActualis;
 
-        public MiniateriumPuellaeLoci(IAnchoraPuellae anchoraPuellae, ITemporis temporis) {
+        public MinisteriumPuellaeLoci(IAnchoraPuellae anchoraPuellae, ITemporis temporis) {
             if (temporis == null) {
                 Errorum.Fatal(IDErrorum.MINIATERIUMPUELLAELOCI_TEMPORIS_NULL);
             }
