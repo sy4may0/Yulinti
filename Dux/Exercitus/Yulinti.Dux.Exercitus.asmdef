@@ -2,6 +2,7 @@
   "name": "Yulinti.Dux.Exercitus",
   "rootNamespace": "Yulinti.Dux.Exercitus",
   "references": [
+    "VContainer",
     "Yulinti.MinisteriaUnity.ContractusMinisterii",
     "Yulinti.Dux.ContractusDucis",
     "Yulinti.Nucleus"

@@ -1,8 +1,8 @@
 using UnityEngine;
 
 namespace Yulinti.Rex {
-    [System.Serializable]
-    public sealed class Configuratio {
+    [CreateAssetMenu(fileName = "Configuratio", menuName = "Yulinti/Rex/Configuratio")]
+    public sealed class Configuratio : ScriptableObject {
         [SerializeField] private ConfiguratioCivis civis;
         [SerializeField] private ConfiguratioPuellae puellae;
         [SerializeField] private ConfiguratioExercitusPuellae exercitusPuellae;

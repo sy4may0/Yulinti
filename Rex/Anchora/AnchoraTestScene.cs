@@ -4,7 +4,7 @@ using Yulinti.Nucleus;
 
 namespace Yulinti.Rex {
     [System.Serializable]
-    internal sealed class ResolvorAnchorae {
+    internal sealed class AnchoraTestScene {
         [SerializeField] private AnchoraCamera _anchoraCamera;
         [SerializeField] private AnchoraInput _anchoraInput;
         [SerializeField] private AnchoraPuellae _anchoraPuellae;
@@ -21,51 +21,27 @@ namespace Yulinti.Rex {
 
         public void Resolvo() {
             if (_anchoraCamera == null) {
-                var found = UnityEngine.Object.FindFirstObjectByType<AnchoraCamera>();
-                if (found != null) {
-                    _anchoraCamera = found;
-                    Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
-                }
+                Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
             }
 
             if (_anchoraInput == null) {
-                var found = UnityEngine.Object.FindFirstObjectByType<AnchoraInput>();
-                if (found != null) {
-                    _anchoraInput = found;
-                    Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
-                }
+                Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
             }
 
             if (_anchoraPuellae == null) {
-                var found = UnityEngine.Object.FindFirstObjectByType<AnchoraPuellae>();
-                if (found != null) {
-                    _anchoraPuellae = found;
-                    Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
-                }
+                Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
             }
 
             if (_anchoraPuellaeCrinis == null) {
-                var foundArray = UnityEngine.Object.FindObjectsByType<AnchoraPuellaeCrinis>(FindObjectsSortMode.None);
-                if (foundArray != null && foundArray.Length > 0) {
-                    _anchoraPuellaeCrinis = foundArray;
-                    Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
-                }
+                Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
             }
 
             if (_anchoraPunctumViae == null) {
-                var foundArray = UnityEngine.Object.FindObjectsByType<AnchoraPunctumViae>(FindObjectsSortMode.None);
-                if (foundArray != null && foundArray.Length > 0) {
-                    _anchoraPunctumViae = foundArray;
-                    Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
-                }
+                Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
             }
 
             if (_anchoraCivis == null) {
-                var foundArray = UnityEngine.Object.FindObjectsByType<AnchoraCivis>(FindObjectsSortMode.None);
-                if (foundArray != null && foundArray.Length > 0) {
-                    _anchoraCivis = foundArray;
-                    Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
-                }
+                Memorator.MemorareErrorum(IDErrorum.REX_ANCHORA_NOT_SET);
             }
         }
 
