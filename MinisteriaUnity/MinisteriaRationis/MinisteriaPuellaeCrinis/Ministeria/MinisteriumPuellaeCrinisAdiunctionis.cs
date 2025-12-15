@@ -4,7 +4,7 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public sealed class MinisteriumPuellaeCrinisAdiunctionis {
+    internal sealed class MinisteriumPuellaeCrinisAdiunctionis {
         private readonly TabulaPuellaeCrinis _tabulaCrinis;
         private IAnchoraPuellaeCrinis _crinisActualis;
         private Transform _osCaputis;

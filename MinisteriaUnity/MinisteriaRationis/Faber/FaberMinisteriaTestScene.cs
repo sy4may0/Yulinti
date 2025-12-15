@@ -4,7 +4,7 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    public static class FaberMinisterium {
+    public static class FaberMinisteriaTestScene {
 
         public static void Initio(IContainerBuilder builder) {
             // Temporis

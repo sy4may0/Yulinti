@@ -3,7 +3,7 @@ using VContainer.Unity;
 using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
-    public static class FaberDucis {
+    public static class FaberDucisTestScene {
         public static void Initio(IContainerBuilder builder) {
             // Puellae
             builder.Register<IMilesPuellaeActionis, MilesPuellaeActionis>(Lifetime.Singleton);

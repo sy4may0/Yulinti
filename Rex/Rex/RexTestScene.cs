@@ -31,8 +31,8 @@ namespace Yulinti.Rex {
             builder.RegisterInstance<IConfiguratioPuellaeStatuum>(_configuratioExercitusPuellae.Statuum);
             builder.RegisterInstance<IConfiguratioPuellaeActionisSecundarius>(_configuratioExercitusPuellae.ActionisSecundarius);
 
-            FaberMinisterium.Initio(builder);
-            FaberDucis.Initio(builder);
+            FaberMinisteriaTestScene.Initio(builder);
+            FaberDucisTestScene.Initio(builder);
 
             builder.RegisterEntryPoint<PraefectusTestScene>();
         }
