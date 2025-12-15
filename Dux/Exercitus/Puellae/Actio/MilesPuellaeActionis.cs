@@ -11,7 +11,6 @@ namespace Yulinti.Dux.Exercitus {
         // VContainer注入
         public MilesPuellaeActionis(
             IConfiguratioPuellaeStatuum configuratioStatuum,
-            IConfiguratioPuellaeStatusCorporis[] configurationemCorporis,
             IOstiumInputMotusLegibile osInputMotusLeg,
             IOstiumTemporisLegibile osTemporisLeg,
             IOstiumCameraLegibile osCameraLeg,
@@ -24,7 +23,7 @@ namespace Yulinti.Dux.Exercitus {
  
             _machinaPuellaeStatuum = new MachinaPuellaeStatuum(
                 configuratioStatuum,
-                configurationemCorporis,
+                configuratioStatuum.StatusCorporum,
                 osInputMotusLeg,
                 osTemporisLeg,
                 osCameraLeg,

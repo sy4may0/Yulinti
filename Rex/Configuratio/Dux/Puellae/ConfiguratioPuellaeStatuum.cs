@@ -6,7 +6,7 @@ namespace Yulinti.Rex {
     [System.Serializable]
     public sealed class ConfiguratioPuellaeStatuum : IConfiguratioPuellaeStatuum {
         [SerializeField] private float limenInputQuadratum = 0.001f;
-        [SerializeField] private float tempusLevigatumRotationis = 1.0f;
+        [SerializeField] private float tempusLevigatumRotationis = 0.3f;
         [SerializeField] private float tempusLevigatumMax = 1.0f;
         [SerializeField] private float tempusLevigatumMin = 0.05f;
         [SerializeField] private float acceleratioGravitatis = -9.81f;

@@ -1,69 +1,67 @@
 using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Yulinti.Dux.Exercitus {
-    public sealed class DuxExercitus : IPulsabilis, IPulsabilisTardus  {
-        // VContainerにするけど仮で手動ビルドする。
-        private readonly CenturioPuellae _centurioPuellae;
+    internal sealed class DuxExercitus : IDuxExercitus {
+        private readonly ICenturioPulsabilis[] _centurioPulsabilis;
+        private readonly ICenturioPulsabilisPrimum[] _centurioPulsabilisPrimum;
+        private readonly ICenturioPulsabilisFixus[] _centurioPulsabilisFixus;
+        private readonly ICenturioPulsabilisFixusPrimum[] _centurioPulsabilisFixusPrimum;
+        private readonly ICenturioPulsabilisTardus[] _centurioPulsabilisTardus;
+        private readonly ICenturioPulsabilisTardusPrimum[] _centurioPulsabilisTardusPrimum;
 
         public DuxExercitus(
-            IConfiguratioPuellaeStatuum configuratioStatuum,
-            IConfiguratioPuellaeStatusCorporis[] configurationemCorporis,
-            IConfiguratioPuellaeActionisSecundarius configuratioActionisSecundarius,
-            IOstiumInputMotusLegibile osInputMotusLeg,
-            IOstiumTemporisLegibile osTemporisLeg,
-            IOstiumCameraLegibile osCameraLeg,
-            IOstiumPuellaeAnimationesMutabile osAnimationes,
-            IOstiumPuellaeLociMutabile osPuellaeLociMut,
-            IOstiumPuellaeLociLegibile osPuellaeLociLeg,
-            IOstiumPuellaeRelationisTerraeLegibile osPuellaeRelationisTerraeLeg,
-            IOstiumPuellaeOssisMutabile osPuellaeOssisMut,
-            IOstiumPuellaeOssisLegibile osPuellaeOssisLeg,
-            IOstiumPuellaeFiguraePelvisMutabile osPuellaeFiguraePelvisMut,
-            IOstiumPuellaeFiguraeGenusMutabile osPuellaeFiguraeGenusMut,
-            IOstiumPuellaeCrinisAdiunctionisMutabile osPuellaeCrinisAdiunctionisMut
+            IReadOnlyList<ICenturioPulsabilis> centurioPulsabilis,
+            IReadOnlyList<ICenturioPulsabilisPrimum> centurioPulsabilisPrimum,
+            IReadOnlyList<ICenturioPulsabilisFixus> centurioPulsabilisFixus,
+            IReadOnlyList<ICenturioPulsabilisFixusPrimum> centurioPulsabilisFixusPrimum,
+            IReadOnlyList<ICenturioPulsabilisTardus> centurioPulsabilisTardus,
+            IReadOnlyList<ICenturioPulsabilisTardusPrimum> centurioPulsabilisTardusPrimum
         ) {
-            IMilesPuellaeActionis milesPuellaeActionis = new MilesPuellaeActionis(
-                configuratioStatuum,
-                configurationemCorporis,
-                osInputMotusLeg,
-                osTemporisLeg,
-                osCameraLeg,
-                osAnimationes,
-                osPuellaeLociMut,
-                osPuellaeLociLeg
-            );
-            IMilesPuellaeActionisSecundarius milesPuellaeActionisSecundarius = new MilesPuellaeActionisSecundarius(
-                osPuellaeRelationisTerraeLeg,
-                osPuellaeOssisMut,
-                osPuellaeOssisLeg,
-                configuratioActionisSecundarius
-            );
-
-            IMilesPuellaeFigurae milesPuellaeFigurae = new MilesPuellaeFigurae(
-                osPuellaeOssisLeg,
-                osPuellaeFiguraePelvisMut,
-                osPuellaeFiguraeGenusMut
-            );
-            IMilesPuellaeCrinis milesPuellaeCrinis = new MilesPuellaeCrinis(
-                osPuellaeCrinisAdiunctionisMut
-            );
-
-            _centurioPuellae = new CenturioPuellae(
-                milesPuellaeActionis,
-                milesPuellaeActionisSecundarius,
-                milesPuellaeFigurae,
-                milesPuellaeCrinis
-            );
+            _centurioPulsabilis = centurioPulsabilis.ToArray();
+            _centurioPulsabilisPrimum = centurioPulsabilisPrimum.ToArray();
+            _centurioPulsabilisFixus = centurioPulsabilisFixus.ToArray();
+            _centurioPulsabilisFixusPrimum = centurioPulsabilisFixusPrimum.ToArray();
+            _centurioPulsabilisTardus = centurioPulsabilisTardus.ToArray();
+            _centurioPulsabilisTardusPrimum = centurioPulsabilisTardusPrimum.ToArray();
         }
 
         public void Pulsus() {
-            _centurioPuellae.Pulsus();
+            foreach (ICenturioPulsabilis centurio in _centurioPulsabilis) {
+                centurio.Pulsus();
+            }
+        }
+        public void PulsusPrimum() {
+            foreach (ICenturioPulsabilisPrimum centurio in _centurioPulsabilisPrimum) {
+                centurio.PulsusPrimum();
+            }
+        }
+
+        public void PulsusFixus() {
+            foreach (ICenturioPulsabilisFixus centurio in _centurioPulsabilisFixus) {
+                centurio.PulsusFixus();
+            }
+        }
+
+        public void PulsusFixusPrimum() {
+            foreach (ICenturioPulsabilisFixusPrimum centurio in _centurioPulsabilisFixusPrimum) {
+                centurio.PulsusFixusPrimum();
+            }
         }
 
         public void PulsusTardus() {
-            _centurioPuellae.PulsusTardus();
+            foreach (ICenturioPulsabilisTardus centurio in _centurioPulsabilisTardus) {
+                centurio.PulsusTardus();
+            }
+        }
+
+        public void PulsusTardusPrimum() {
+            foreach (ICenturioPulsabilisTardusPrimum centurio in _centurioPulsabilisTardusPrimum) {
+                centurio.PulsusTardusPrimum();
+            }
         }
     }
 }

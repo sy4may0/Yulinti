@@ -4,8 +4,8 @@ using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumPuellaeLociMutabile : IOstiumPuellaeLociMutabile {
-        private readonly MiniateriumPuellaeLoci _miPuellaeLoci;
-        public OstiumPuellaeLociMutabile(MiniateriumPuellaeLoci miPuellaeLoci) {
+        private readonly MinisteriumPuellaeLoci _miPuellaeLoci;
+        public OstiumPuellaeLociMutabile(MinisteriumPuellaeLoci miPuellaeLoci) {
             if (miPuellaeLoci == null) {
                 Errorum.Fatal(IDErrorum.OSTIUMPUELLAELOCIMUTABILE_INSTANCE_NULL);
             }
