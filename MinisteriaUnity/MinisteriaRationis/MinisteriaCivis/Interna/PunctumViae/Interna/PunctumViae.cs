@@ -4,6 +4,7 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class PunctumViae {
+        private readonly int _id;
         private IAnchoraPunctumViae _anchoraPunctumViae;
 
         private bool _estActivum = false;
@@ -16,10 +17,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public Vector3 Positio => _anchoraPunctumViae.Positio;
 
         public PunctumViae(
+            int id,
             IAnchoraPunctumViae anchoraPunctumViae,
             IResolvorPunctumViae resolvorPunctumViae,
             TabulaPunctumViae tabulaPunctumViae
         ) {
+            _id = id;
             _anchoraPunctumViae = anchoraPunctumViae;
             _resolvorPunctumViae = resolvorPunctumViae;
             _tabulaPunctumViae = tabulaPunctumViae;

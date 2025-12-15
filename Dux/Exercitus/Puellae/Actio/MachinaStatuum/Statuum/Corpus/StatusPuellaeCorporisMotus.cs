@@ -4,7 +4,7 @@ using System;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class StatusPuellaeCorporisMotus : IStatusPuellaeCorporis {
-        private IDStatus _id;
+        private IDStatusCorporis _id;
         private IDPuellaeAnimationisContinuata _idAnimationisIntrare;
         private IDPuellaeAnimationisContinuata _idAnimationisExire;
         private bool _ludereExire;
@@ -12,7 +12,7 @@ namespace Yulinti.Dux.Exercitus {
         private IOstiumPuellaeAnimationesMutabile _osAnimationes;
 
         public StatusPuellaeCorporisMotus(
-            IDStatus id,
+            IDStatusCorporis id,
             IDPuellaeAnimationisContinuata idAnimationisIntrare,
             IDPuellaeAnimationisContinuata idAnimationisExire,
             bool ludereExire,
@@ -27,7 +27,7 @@ namespace Yulinti.Dux.Exercitus {
             _osAnimationes = osAnimationes;
         }
 
-        public IDStatus Id => _id;
+        public IDStatusCorporis Id => _id;
         public IDPuellaeAnimationisContinuata IdAnimationisIntrare => _idAnimationisIntrare;
         public IDPuellaeAnimationisContinuata IdAnimationisExire => _idAnimationisExire;
 

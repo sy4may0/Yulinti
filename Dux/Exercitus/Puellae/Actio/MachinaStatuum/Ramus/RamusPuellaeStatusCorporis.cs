@@ -4,13 +4,13 @@ using System;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class RamusPuellaeStatusCorporis : IRamusPuellaeStatusCorporis {
-        public IDStatus IdStatusActualis { get; }
-        public IDStatus IdStatusProximus { get; }
+        public IDStatusCorporis IdStatusActualis { get; }
+        public IDStatusCorporis IdStatusProximus { get; }
         public Func<IResFluidaPuellaeMotusLegibile, bool> Conditio { get; }
 
         public RamusPuellaeStatusCorporis(
-            IDStatus idStatusActualis,
-            IDStatus idStatusProximus,
+            IDStatusCorporis idStatusActualis,
+            IDStatusCorporis idStatusProximus,
             Func<IResFluidaPuellaeMotusLegibile, bool> conditio
         ) {
             IdStatusActualis = idStatusActualis;

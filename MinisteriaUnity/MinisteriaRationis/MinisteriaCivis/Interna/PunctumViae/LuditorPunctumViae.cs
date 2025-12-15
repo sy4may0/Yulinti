@@ -44,7 +44,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _punctaCrematorium = punctaCrematorium.ToArray();
             _punctaNatorium = punctaNatorium.ToArray();
 
-            // Crematorium/Natoriumは忁E��存在する
+            // Crematorium/Natoriumは必須
             if (_punctaCrematorium.Length == 0 || _punctaNatorium.Length == 0) {
                 Errorum.Fatal(IDErrorum.LUDITORPUNCTUMVIAE_NO_CREMATORIUM_OR_NATORIUM);
             }

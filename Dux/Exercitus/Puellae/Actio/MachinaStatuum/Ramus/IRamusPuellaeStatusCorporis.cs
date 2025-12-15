@@ -4,8 +4,8 @@ using System;
 
 namespace Yulinti.Dux.Exercitus {
     internal interface IRamusPuellaeStatusCorporis {
-        IDStatus IdStatusActualis { get; }
-        IDStatus IdStatusProximus { get; }
+        IDStatusCorporis IdStatusActualis { get; }
+        IDStatusCorporis IdStatusProximus { get; }
         Func<IResFluidaPuellaeMotusLegibile, bool> Conditio { get; }
     }
 }

@@ -6,20 +6,27 @@ using Yulinti.Nucleus;
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class TabulaPunctumViae {
         private readonly Dictionary<IAnchoraPunctumViae, PunctumViae> _tabla;
+        private readonly PunctumViae[] _tabulaIndexus;
 
         public TabulaPunctumViae(IAnchoraPunctumViae[] anchoraPunctumViae) {
             _tabla = new Dictionary<IAnchoraPunctumViae, PunctumViae>(anchoraPunctumViae.Length);
+            _tabulaIndexus = new PunctumViae[anchoraPunctumViae.Length];
+            int id = 0;
             foreach (IAnchoraPunctumViae anc in anchoraPunctumViae) {
                 PunctumViae pv = new PunctumViae(
+                    id,
                     anc,
                     FabricaResolvor.Creare(anc.Typus).Evolvo(IDErrorum.PUNCTUMVIAE_RESOLVOR_CREATION_FAILED),
                     this
                 );
                 _tabla.Add(anc, pv);
+                _tabulaIndexus[id] = pv;
+                id++;
             }
         }
 
         public PunctumViae Lego(IAnchoraPunctumViae anchoraPunctumViae) => _tabla[anchoraPunctumViae];
+        public PunctumViae Lego(int id) => _tabulaIndexus[id];
 
         public PunctumViae[] IacereOrdinem(
             IAnchoraPunctumViae[] anchorae
