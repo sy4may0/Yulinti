@@ -46,6 +46,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             builder.Register<MinisteriumPuellaeCrinisAdiunctionis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<IOstiumPuellaeCrinisAdiunctionisMutabile, OstiumPuellaeCrinisAdiunctionisMutabile>(Lifetime.Singleton);
 
+            // PunctumViae
+            builder.Register<MinisteriumPunctumViae>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<IOstiumPunctumViaeLegibile, OstiumPunctumViaeLegibile>(Lifetime.Singleton);
+            builder.Register<IOstiumPunctumViaeMutabile, OstiumPunctumViaeMutabile>(Lifetime.Singleton);
+
             // Ministeria
             builder.Register<IMinisteria, Ministeria>(Lifetime.Singleton);
         }

@@ -6,9 +6,11 @@ namespace Yulinti.Rex {
         [SerializeField] private ConfiguratioCivis civis;
         [SerializeField] private ConfiguratioPuellae puellae;
         [SerializeField] private ConfiguratioExercitusPuellae exercitusPuellae;
+        [SerializeField] private ConfiguratioPunctumViae punctumViae;
 
         public ConfiguratioCivis Civis => civis;
         public ConfiguratioPuellae Puellae => puellae;
         public ConfiguratioExercitusPuellae ExercitusPuellae => exercitusPuellae;
+        public ConfiguratioPunctumViae PunctumViae => punctumViae;
     }
 }

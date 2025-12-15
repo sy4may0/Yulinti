@@ -1,33 +1,35 @@
 using System.Numerics;
 using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
-namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
-    public interface IPunctumViae {
+namespace Yulinti.Dux.ContractusDucis {
+    public interface IPunctumViaeLegibile {
         int ID { get; }
         IDPunctumViaeTypi Typus { get; }
         Vector3 Positio { get; }
+        bool EstActivum { get; }
     }
 
-    public interface IOstiumPunctumViae {
+    public interface IOstiumPunctumViaeLegibile {
         // ランダムにエントリーポイントを取得。
-        ErrorAut<IPunctumViae> LegoTemere();
+        ErrorAut<IPunctumViaeLegibile> LegoTemere();
         // 最短エントリーポイントを取得。
-        ErrorAut<IPunctumViae> LegoVicinam();
+        ErrorAut<IPunctumViaeLegibile> LegoVicinam(Vector3 positio);
 
         // ランダムにDespawn地点を取得。
-        ErrorAut<IPunctumViae> LegoCrematoriumTemere();
+        ErrorAut<IPunctumViaeLegibile> LegoCrematoriumTemere();
         // 最短Despawn地点を取得。
-        ErrorAut<IPunctumViae> LegoCrematoriumVicinam();
+        ErrorAut<IPunctumViaeLegibile> LegoCrematoriumVicinam(Vector3 positio);
 
         // ランダムNatorium地点を取得。
-        ErrorAut<IPunctumViae> LegoNatoriumTemere();
+        ErrorAut<IPunctumViaeLegibile> LegoNatoriumTemere();
         // 最短Natorium地点を取得。
-        ErrorAut<IPunctumViae> LegoNatoriumVicinam();
+        ErrorAut<IPunctumViaeLegibile> LegoNatoriumVicinam(Vector3 positio);
 
         // ランダムに指定IDの地点を取得。
-        ErrorAut<IPunctumViae> LegoTypumTemere(IDPunctumViaeTypi typus);
+        ErrorAut<IPunctumViaeLegibile> LegoTypumTemere(IDPunctumViaeTypi typus);
         // 最短指定IDの地点を取得。
-        ErrorAut<IPunctumViae> LegoTypumVicinam(IDPunctumViaeTypi typus);
+        ErrorAut<IPunctumViaeLegibile> LegoTypumVicinam(IDPunctumViaeTypi typus, Vector3 positio);
     }
 }
 
