@@ -6,5 +6,6 @@ namespace Yulinti.Dux.ContractusDucis {
         void Deactivare();
         void Transporto(Vector3 positio);
         void IncipereMigrare(Vector3 positio);
+        void TerminareMigrare();
     }
 }

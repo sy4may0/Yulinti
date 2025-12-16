@@ -3,8 +3,8 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.ContractusDucis {
     public interface IOstiumCivisLociLegibile {
+        bool EstActivum { get; }
         bool EstAdPerveni { get; }
-        bool EstMigrare { get; }
         float VelocitasHorizontalisActualis { get; }
         float VelocitasVerticalisActualis { get; }
         float RotatioYActualis { get; }
