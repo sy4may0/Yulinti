@@ -2,6 +2,7 @@
 using UnityEngine.AI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Animancer;
 using Cysharp.Threading.Tasks;
 using Yulinti.Nucleus;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
@@ -16,6 +17,7 @@ namespace Yulinti.MinisteriaUnity.Anchora {
         private bool _estEns;
 
         public Animator Animator => _anchoraInf.Animator;
+        public AnimancerComponent Animancer => _anchoraInf.Animancer;
         public SkinnedMeshRenderer Figura => _anchoraInf.SkinnedMeshRenderer;
         public CharacterController CharacterController => _anchoraInf.CharacterController;
         public NavMeshAgent NavMeshAgent => _anchoraInf.NavMeshAgent;
@@ -67,6 +69,10 @@ namespace Yulinti.MinisteriaUnity.Anchora {
             }
             if (_anchoraInf.Animator == null) {
                 Memorator.MemorareErrorum(IDErrorum.ANCHORACIVIS_ANIMATOR_NULL);
+                result = false;
+            }
+            if (_anchoraInf.Animancer == null) {
+                Memorator.MemorareErrorum(IDErrorum.ANCHORACIVIS_ANIMANCER_NULL);
                 result = false;
             }
             if (_anchoraInf.SkinnedMeshRenderer == null) {

@@ -64,13 +64,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         public void Pulsus() {
-            // まずFundamentum層のPulsusを実行する。これはTemporareLuditores同期のため。
+            _luditoris[0].Pulsus();
             TemporareLuditores();
             for (int i = 1; i < Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length; i++) {
                 // その他の層のPulsusを実行する。
                 _luditoris[i].Pulsus();
             }
-            _luditoris[0].Pulsus();
         }
     }
 }
