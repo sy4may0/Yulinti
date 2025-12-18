@@ -42,10 +42,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             radix.SetParent(_osCaputis);
             radix.localPosition = Vector3.zero;
             radix.localRotation = Quaternion.identity;
+            _crinisActualis.Incarnare();
         }
 
         public void Deleto() {
             if (_crinisActualis != null) {
+                _crinisActualis.Spirituare();
                 _crinisActualis.Deleto();
             }
             _crinisActualis = null;

@@ -57,6 +57,18 @@ namespace Yulinti.MinisteriaUnity.Anchora {
             _estEns = false;
         }
 
+        public void Incarnare() {
+            if (!_estEns) return;
+            if (_ens.activeSelf) return;
+            _ens.SetActive(true);
+        }
+        
+        public void Spirituare() {
+            if (!_estEns) return;
+            if (!_ens.activeSelf) return;
+            _ens.SetActive(false);
+        }
+
         public bool ValidareManifestatio() {
             bool result = true;
             if (_ens == null) {
@@ -91,6 +103,7 @@ namespace Yulinti.MinisteriaUnity.Anchora {
         }
 
         public bool EstEns => _estEns;
+        public bool EstActivum => _estEns && _ens.activeSelf;
         
     }
 }

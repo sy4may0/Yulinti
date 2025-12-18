@@ -5,6 +5,9 @@ namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
         UniTask Manifestatio();
         void Deleto();
         bool ValidareManifestatio();
+        void Incarnare();
+        void Spirituare();
         bool EstEns { get; } 
+        bool EstActivum { get; }
     }
 }
