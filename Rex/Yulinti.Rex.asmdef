@@ -11,6 +11,7 @@
     "Yulinti.MinisteriaUnity.ConfiguratioDucis",
     "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
     "Yulinti.MinisteriaUnity.MinisteriaRationis",
+    "Yulinti.MinisteriaUnity.MinistriiRationis",
     "Yulinti.MinisteriaUnity.Anchora"
   ],
   "includePlatforms": [],

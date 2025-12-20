@@ -1,9 +1,10 @@
 using VContainer.Unity;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Dux.Exercitus;
+using System;
 
 namespace Yulinti.Rex {
-    internal sealed class PraefectusTestScene : IStartable, ITickable, IFixedTickable, ILateTickable {
+    internal sealed class PraefectusTestScene : IStartable, ITickable, IFixedTickable, ILateTickable, IDisposable {
         private IMinisteria _ministeria;
         private IDuxExercitus _duxExercitus;
 
@@ -16,6 +17,7 @@ namespace Yulinti.Rex {
         }
 
         public void Start() {
+            _ministeria.Incipere();
         }
 
         public void Tick() {
@@ -40,6 +42,10 @@ namespace Yulinti.Rex {
 
             _duxExercitus.PulsusTardus();
             _ministeria.PulsusTardus();
+        }
+
+        public void Dispose() {
+            _ministeria.Liberare();
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Yulinti.Rex {
     public sealed class RexTestScene : LifetimeScope {
         [SerializeField] private AnchoraTestScene _anchora;
         [SerializeField] private Configuratio _configuratio;
-        [SerializeField] private ConfiguratioExercitusPuellae _configuratioExercitusPuellae;
 
         protected override void Configure(IContainerBuilder builder) {
             Debug.Log("RexTestScene Configure");
@@ -27,10 +26,14 @@ namespace Yulinti.Rex {
             builder.RegisterInstance<IConfiguratioPuellaeFiguraePelvis>(_configuratio.Puellae.Figura.Pelvis);
             builder.RegisterInstance<IConfiguratioPuellaeRelationisTerrae>(_configuratio.Puellae.Relatio.Terrae);
             builder.RegisterInstance<IConfiguratioPuellaeAnimationis>(_configuratio.Puellae.Animatio);
+            builder.RegisterInstance<IConfiguratioCivis>(_configuratio.Civis);
+            builder.RegisterInstance<IConfiguratioCivisLoci>(_configuratio.Civis.Loci);
+            builder.RegisterInstance<IConfiguratioCivisAnimationis>(_configuratio.Civis.Animatio);
+            builder.RegisterInstance<IConfiguratioCivisGenerator>(_configuratio.Civis.Generator);
             builder.RegisterInstance<IConfiguratioPunctumViae>(_configuratio.PunctumViae);
 
-            builder.RegisterInstance<IConfiguratioPuellaeStatuum>(_configuratioExercitusPuellae.Statuum);
-            builder.RegisterInstance<IConfiguratioPuellaeActionisSecundarius>(_configuratioExercitusPuellae.ActionisSecundarius);
+            builder.RegisterInstance<IConfiguratioPuellaeStatuum>(_configuratio.ExercitusPuellae.Statuum);
+            builder.RegisterInstance<IConfiguratioPuellaeActionisSecundarius>(_configuratio.ExercitusPuellae.ActionisSecundarius);
 
             FaberMinisteriaTestScene.Initio(builder);
             FaberDucisTestScene.Initio(builder);

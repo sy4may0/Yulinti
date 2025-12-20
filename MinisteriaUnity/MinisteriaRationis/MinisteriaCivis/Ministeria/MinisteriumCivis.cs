@@ -6,42 +6,70 @@ using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCivis {
-        private int _id;
-        private IAnchoraCivis _anchora;
+        private readonly TabulaCivis _tabulaCivis;
+        private bool[] _estServam;
 
-        public MinisteriumCivis(int id, IAnchoraCivis anchora) {
-            _id = id;
-            _anchora = anchora;
-        }
-
-        public void Creare() {
-            CreareAsync().Forget(e => Memorator.MemorareException(e));
-        }
-
-        private async UniTask CreareAsync() {
-            await _anchora.Manifestatio();
-            bool ex = _anchora.ValidareManifestatio();
-
-            if (!ex) {
-                _anchora.Deleto();
-                Memorator.MemorareErrorum(IDErrorum.CIVIS_INSTANTIATE_FAILED);
+        public MinisteriumCivis(TabulaCivis tabulaCivis, IConfiguratioCivisGenerator configuratio) {
+            _tabulaCivis = tabulaCivis;
+            _estServam = new bool[tabulaCivis.Longitudo];
+            for (int id = 0; id < tabulaCivis.Longitudo; id++) {
+                _estServam[id] = false;
             }
         }
 
-        public void Destuere() {
-            _anchora.Deleto();
+        public int[] IDs => _tabulaCivis.IDs;
+        public int Longitudo => _tabulaCivis.Longitudo;
+        public int LongitudoActivum => longitudoActivum();
+        public bool EstActivum(int id) => estActivum(id);
+        public bool EstServam(int id) => _estServam[id];
+
+        public void Dominare(int id) {
+            if (id < 0 || id >= _tabulaCivis.Longitudo) return;
+            _estServam[id] = true;
         }
 
-        public void Incarnare() {
-            _anchora.Incarnare();
+        public void Liberare(int id) {
+            if (id < 0 || id >= _tabulaCivis.Longitudo) return;
+            _estServam[id] = false;
         }
 
-        public void Spirituare() {
-            _anchora.Spirituare();
+        public void Incarnare(int id) {
+            if (id < 0 || id >= _tabulaCivis.Longitudo) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.Incarnare();
         }
 
-        public int ID => _id;
-        public bool EstActivum => _anchora.EstActivum;
+        public void Spirituare(int id) {
+            if (id < 0 || id >= _tabulaCivis.Longitudo) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.Spirituare();
+        }
 
+        // 非実体化ID(Incarnareされていない者)を取得
+        public int LegoIDIntactus() {
+            int id = -1;
+            for (int i = 0; i < _tabulaCivis.Longitudo; i++) {
+                if (!_tabulaCivis.ConareLego(i, out IAnchoraCivis anchora)) continue;
+                if (anchora.EstActivum) continue;
+                id = i;
+                break;
+            }
+            return id;
+        }
+
+        private bool estActivum(int id) {
+            if (id < 0 || id >= _tabulaCivis.Longitudo) return false;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return false;
+            if (!anchora.EstActivum) return false;
+            return true;
+        }
+
+        private int longitudoActivum() {
+            int longitudo = 0;
+            for (int i = 0; i < _tabulaCivis.Longitudo; i++) {
+                if (estActivum(i)) longitudo++;
+            }
+            return longitudo;
+        }
     }
 }

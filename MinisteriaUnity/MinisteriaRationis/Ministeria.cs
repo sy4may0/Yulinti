@@ -15,10 +15,14 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private readonly IMinisteriumPulsabilisFixusPrimum[] _ministeriaPulsabilisFixusPrimum;
         private readonly IMinisteriumPulsabilisTardus[] _ministeriaPulsabilisTardus;
         private readonly IMinisteriumPulsabilisTardusPrimum[] _ministeriaPulsabilisTardusPrimum;
+        private readonly IMinisteriumIncipabilis[] _ministeriaIncipabilis;
+        private readonly IMinisteriumLiberabilis[] _ministeriaLiberabilis;
 
         public Ministeria(
             FonsTemporis fonsTemporis,
             ITemporis temporis,
+            IReadOnlyList<IMinisteriumIncipabilis> ministeriaIncipabilis,
+            IReadOnlyList<IMinisteriumLiberabilis> ministeriaLiberabilis,
             IReadOnlyList<IMinisteriumPulsabilis> ministeriaPulsabilis,
             IReadOnlyList<IMinisteriumPulsabilisPrimum> ministeriaPulsabilisPrimum,
             IReadOnlyList<IMinisteriumPulsabilisFixus> ministeriaPulsabilisFixus,
@@ -29,12 +33,20 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _fonsTemporis = fonsTemporis;
             _temporis = temporis;
 
+            _ministeriaIncipabilis = ministeriaIncipabilis.ToArray();
+            _ministeriaLiberabilis = ministeriaLiberabilis.ToArray();
             _ministeriaPulsabilis = ministeriaPulsabilis.ToArray();
             _ministeriaPulsabilisPrimum = ministeriaPulsabilisPrimum.ToArray();
             _ministeriaPulsabilisFixus = ministeriaPulsabilisFixus.ToArray();
             _ministeriaPulsabilisFixusPrimum = ministeriaPulsabilisFixusPrimum.ToArray();
             _ministeriaPulsabilisTardus = ministeriaPulsabilisTardus.ToArray();
             _ministeriaPulsabilisTardusPrimum = ministeriaPulsabilisTardusPrimum.ToArray();
+        }
+
+        public void Incipere() {
+            foreach (IMinisteriumIncipabilis ministeria in _ministeriaIncipabilis) {
+                ministeria.Incipere();
+            }
         }
 
         public void PulsusPrimum() {
@@ -73,6 +85,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public void PulsusTardus() {
             foreach (IMinisteriumPulsabilisTardus ministeria in _ministeriaPulsabilisTardus) {
                 ministeria.PulsusTardus();
+            }
+        }
+
+        public void Liberare() {
+            foreach (IMinisteriumLiberabilis ministeria in _ministeriaLiberabilis) {
+                ministeria.Liberare();
             }
         }
     }

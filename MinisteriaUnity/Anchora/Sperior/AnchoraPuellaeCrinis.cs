@@ -48,7 +48,6 @@ namespace Yulinti.MinisteriaUnity.Anchora {
                 }
             }
             _estEns = true;
-            Spirituare();
             return result;
         }
 
@@ -63,6 +62,14 @@ namespace Yulinti.MinisteriaUnity.Anchora {
             await UniTask.SwitchToMainThread();
 
             _anchoraInf = _ens.GetComponent<AnchoraPuellaeCrinisInf>();
+            _ens.SetActive(false);
+
+            if (ValidareManifestatio()) {
+                _estEns = true;
+            } else {
+                Deleto();
+                Memorator.MemorareErrorum(IDErrorum.ANCHORAPUELLAE_CRINIS_INSTANTIATE_FAILED);
+            }
         }
 
         public void Deleto() {

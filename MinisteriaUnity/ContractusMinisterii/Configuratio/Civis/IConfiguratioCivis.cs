@@ -1,5 +1,7 @@
 namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
     public interface IConfiguratioCivis {
-        public float DistantiaPelveni { get; }
+        IConfiguratioCivisLoci Loci { get; }
+        IConfiguratioCivisAnimationis Animatio { get; }
+        IConfiguratioCivisGenerator Generator { get; }
     }
 }

@@ -16,11 +16,10 @@ namespace Yulinti.MinisteriaUnity.Anchora {
 
         private bool _estEns;
 
-        public Animator Animator => _anchoraInf.Animator;
-        public AnimancerComponent Animancer => _anchoraInf.Animancer;
-        public SkinnedMeshRenderer Figura => _anchoraInf.SkinnedMeshRenderer;
-        public CharacterController CharacterController => _anchoraInf.CharacterController;
-        public NavMeshAgent NavMeshAgent => _anchoraInf.NavMeshAgent;
+        public Animator Animator => _anchoraInf?.Animator;
+        public AnimancerComponent Animancer => _anchoraInf?.Animancer;
+        public SkinnedMeshRenderer Figura => _anchoraInf?.SkinnedMeshRenderer;
+        public NavMeshAgent NavMeshAgent => _anchoraInf?.NavMeshAgent;
 
         public Vector3 Positio => transform.position;
         public Quaternion Rotatio => transform.rotation;
@@ -37,16 +36,27 @@ namespace Yulinti.MinisteriaUnity.Anchora {
 
         public async UniTask Manifestatio() {
             var handle = _prefab.InstantiateAsync(
-                transform.position,
-                transform.rotation
+                Vector3.zero,
+                Quaternion.identity
             );
 
             _ens = await handle.Task;
+            _ens.transform.SetParent(transform, false);
+            _ens.transform.localPosition = Vector3.zero;
+            _ens.transform.localRotation = Quaternion.identity;
+            _ens.transform.localScale = Vector3.one;
+
             await UniTask.SwitchToMainThread();
 
             _anchoraInf = _ens.GetComponent<AnchoraCivisInf>();
+            _ens.SetActive(false);
 
-            _estEns = true;
+            if (ValidareManifestatio()) {
+                _estEns = true;
+            } else {
+                Deleto();
+                Memorator.MemorareErrorum(IDErrorum.ANCHORACIVIS_INSTANTIATE_FAILED);
+            }
         }
 
         public void Deleto() {
@@ -89,10 +99,6 @@ namespace Yulinti.MinisteriaUnity.Anchora {
             }
             if (_anchoraInf.SkinnedMeshRenderer == null) {
                 Memorator.MemorareErrorum(IDErrorum.ANCHORACIVIS_SKINNEDMESHRENDERER_NULL);
-                result = false;
-            }
-            if (_anchoraInf.CharacterController == null) {
-                Memorator.MemorareErrorum(IDErrorum.ANCHORACIVIS_CHARACTERCONTROLLER_NULL);
                 result = false;
             }
             if (_anchoraInf.NavMeshAgent == null) {

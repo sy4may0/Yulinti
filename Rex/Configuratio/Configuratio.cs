@@ -5,8 +5,8 @@ namespace Yulinti.Rex {
     public sealed class Configuratio : ScriptableObject {
         [SerializeField] private ConfiguratioCivis civis;
         [SerializeField] private ConfiguratioPuellae puellae;
-        [SerializeField] private ConfiguratioExercitusPuellae exercitusPuellae;
         [SerializeField] private ConfiguratioPunctumViae punctumViae;
+        [SerializeField] private ConfiguratioExercitusPuellae exercitusPuellae;
 
         public ConfiguratioCivis Civis => civis;
         public ConfiguratioPuellae Puellae => puellae;

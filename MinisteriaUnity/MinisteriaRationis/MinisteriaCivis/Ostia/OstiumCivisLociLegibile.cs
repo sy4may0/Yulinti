@@ -1,6 +1,5 @@
-using System.Numerics;
-using Yulinti.Nucleus;
 using Yulinti.Dux.ContractusDucis;
+using System.Numerics;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumCivisLociLegibile : IOstiumCivisLociLegibile {
@@ -10,12 +9,35 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miCivisLoci = miCivisLoci;
         }
 
-        public bool EstActivum => _miCivisLoci.EstActivum;
-        public bool EstAdPerveni => _miCivisLoci.EstAdPerveni;
-        public float VelocitasHorizontalisActualis => _miCivisLoci.VelocitasHorizontalisActualis;
-        public float VelocitasVerticalisActualis => _miCivisLoci.VelocitasVerticalisActualis;
-        public float RotatioYActualis => _miCivisLoci.RotatioYActualis;
-        public Vector3 Positio => InterpressNumericus.ToNumerics(_miCivisLoci.Positio);
-        public Quaternion Rotatio => InterpressNumericus.ToNumerics(_miCivisLoci.Rotatio);
+        public int[] IDs => _miCivisLoci.IDs;
+        public int Longitudo => _miCivisLoci.Longitudo;
+        public bool EstActivum(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return false;
+            return _miCivisLoci.EstActivum(id);
+        }
+        public bool EstAdPerveni(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return false;
+            return _miCivisLoci.EstAdPerveni(id);
+        }
+        public float VelocitasHorizontalisActualis(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return 0f;
+            return _miCivisLoci.VelocitasHorizontalisActualis(id);
+        }
+        public float VelocitasVerticalisActualis(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return 0f;
+            return _miCivisLoci.VelocitasVerticalisActualis(id);
+        }
+        public float RotatioYActualis(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return 0f;
+            return _miCivisLoci.RotatioYActualis(id);
+        }
+        public Vector3 Positio(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return new Vector3(0,0,0);
+            return InterpressNumericus.ToNumerics(_miCivisLoci.Positio(id));
+        }
+        public Quaternion Rotatio(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return new Quaternion(0,0,0,1);
+            return InterpressNumericus.ToNumerics(_miCivisLoci.Rotatio(id));
+        }
     }
 }

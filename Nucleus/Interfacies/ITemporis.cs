@@ -1,4 +1,8 @@
 ﻿namespace Yulinti.Nucleus {
+    public interface IIncipabilis {
+        void Incipere();
+    }
+
     public interface IPulsabilis {
         void Pulsus();
     }
@@ -21,5 +25,9 @@
 
     public interface IPulsabilisTardusPrimum {
         void PulsusTardusPrimum();
+    }
+
+    public interface ILiberabilis {
+        void Liberare();
     }
 }

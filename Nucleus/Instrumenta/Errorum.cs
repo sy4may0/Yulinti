@@ -22,5 +22,9 @@ namespace Yulinti.Nucleus {
         public static void Fatal(IDErrorum error, IDErrorum from) {
             Fatal("Error: " + error.ToString() + "\nFrom: " + from.ToString());
         }
+
+        public static void Fatal(Exception ex) {
+            Fatal(ex.Message, ex);
+        }
     }
 }

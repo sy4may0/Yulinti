@@ -2,69 +2,110 @@ using UnityEngine;
 using UnityEngine.AI;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Dux.ContractusDucis;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal class MinisteriumCivisLoci {
-        private readonly NavMeshAgent _navmesh;
-        private readonly IConfiguratioCivisLoci _config;
+        private readonly IConfiguratioCivisLoci _configLoci;
+        private readonly TabulaCivis _tabulaCivis;
 
         public MinisteriumCivisLoci(
-            IAnchoraCivis anchora,
-            IConfiguratioCivisLoci config
+            TabulaCivis tabulaCivis,
+            IConfiguratioCivisLoci configLoci
         ) {
-            _navmesh = anchora.NavMeshAgent;
-            _config = config;
+            _tabulaCivis = tabulaCivis;
+            _configLoci = configLoci;
         }
 
-        public bool EstActivum => _navmesh.enabled;
-        public bool EstAdPerveni => AdPerveni();
+        public int[] IDs => _tabulaCivis.IDs;
+        public int Longitudo => _tabulaCivis.Longitudo;
 
-        public float VelocitasHorizontalisActualis => VelocitasHorizontaris();
-        public float VelocitasVerticalisActualis => _navmesh.velocity.y;
-        public float RotatioYActualis => _navmesh.transform.rotation.y;
-
-        public Vector3 Positio => _navmesh.transform.position;
-        public Quaternion Rotatio => _navmesh.transform.rotation;
-
-
-        public void Activare() {
-            _navmesh.enabled = true;
+        public bool EstActivum(int id) {
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return false;
+            if (anchora.NavMeshAgent == null) return false;
+            if (!anchora.EstActivum) return false;
+            return anchora.NavMeshAgent.enabled;
         }
 
-        public void Deactivare() {
-            _navmesh.enabled = false;
+        public bool EstAdPerveni(int id) {
+            if (!EstActivum(id)) return false;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return false;
+            return AdPerveni(anchora.NavMeshAgent);
         }
 
-        public void Transporto(Vector3 positio) {
-            if (!EstActivum) return;
-            _navmesh.ResetPath();
-            _navmesh.Warp(positio);
+        public float VelocitasHorizontalisActualis(int id) {
+            if (!EstActivum(id)) return 0f;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return 0f;
+            return VelocitasHorizontaris(anchora.NavMeshAgent);
         }
 
-        public void IncipereMigrare(Vector3 positio) {
-            if (!EstActivum) return;
-            _navmesh.SetDestination(positio);
+        public float VelocitasVerticalisActualis(int id) {
+            if (!EstActivum(id)) return 0f;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return 0f;
+            return anchora.NavMeshAgent.velocity.y;
+        }
+        public float RotatioYActualis(int id) {
+            if (!EstActivum(id)) return 0f;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return 0f;
+            return anchora.NavMeshAgent.transform.eulerAngles.y;
         }
 
-        public void TerminareMigrare() {
-            if (!EstActivum) return;
-            _navmesh.ResetPath();
+        public Vector3 Positio(int id) {
+            if (!EstActivum(id)) return Vector3.zero;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return Vector3.zero;
+            return anchora.NavMeshAgent.transform.position;
+        }
+        public Quaternion Rotatio(int id) {
+            if (!EstActivum(id)) return Quaternion.identity;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return Quaternion.identity;
+            return anchora.NavMeshAgent.transform.rotation;
         }
 
-        private bool AdPerveni() {
-            if (!EstActivum && !_navmesh.pathPending) {
-                if (_navmesh.remainingDistance <= _config.DistantiaAdPerveni) {
+
+        public void Activare(int id) {
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            if (!anchora.EstActivum || anchora.NavMeshAgent == null) return;
+            anchora.NavMeshAgent.enabled = true;
+        }
+
+        public void Deactivare(int id) {
+            if (!EstActivum(id)) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.enabled = false;
+        }
+
+        public void Transporto(int id, Vector3 positio) {
+            if (!EstActivum(id)) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.ResetPath();
+            anchora.NavMeshAgent.Warp(positio);
+        }
+
+        public void IncipereMigrare(int id, Vector3 positio) {
+            if (!EstActivum(id)) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.SetDestination(positio);
+        }
+
+        public void TerminareMigrare(int id) {
+            if (!EstActivum(id)) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.ResetPath();
+        }
+
+        private bool AdPerveni(NavMeshAgent navmesh) {
+            if (!navmesh.pathPending) {
+                if (navmesh.remainingDistance <= _configLoci.DistantiaAdPerveni) {
                     return true;
                 }
             }
             return false;
         }
 
-        private float VelocitasHorizontaris() {
-            Vector3 v = _navmesh.velocity;
+        private float VelocitasHorizontaris(NavMeshAgent navmesh) {
+            Vector3 v = navmesh.velocity;
             Vector3 hv = new Vector3(v.x, 0f, v.z);
             return hv.magnitude;
         }
-
     }
 }

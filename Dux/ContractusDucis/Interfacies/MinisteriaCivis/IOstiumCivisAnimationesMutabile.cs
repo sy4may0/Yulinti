@@ -3,9 +3,22 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.ContractusDucis {
     public interface IOstiumCivisAnimationesMutabile {
-        void Postulare(IDCivisAnimationisContinuata idAnimationis, Action adInitium, Action adFinem);
-        void Cogere(IDCivisAnimationisContinuata idAnimationis, Action adInitium, Action adFinem);
-        void TemporareLuditores();
-        void InjicereVelocitatem(float vel);
+        int[] IDs { get; }
+        int Longitudo { get; }
+        bool EstActivum(int id);
+        void Postulare(
+            int id,
+            IDCivisAnimationisContinuata idAnimationis,
+            Action adInitium,
+            Action adFinem
+        );
+        void Cogere(
+            int id,
+            IDCivisAnimationisContinuata idAnimationis,
+            Action adInitium,
+            Action adFinem
+        );
+        void TemporareLuditores(int id);
+        void InjicereVelocitatem(int id, float vel);
     }
 }

@@ -33,4 +33,8 @@ namespace Yulinti.Dux.Exercitus {
     public interface ICenturioPulsabilisTardusPostRationem {
         void PulsusTardusPostRationem();
     }
+
+    public interface ICenturioLiberabilis {
+        void Liberare();
+    }
 }

@@ -1,6 +1,8 @@
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
+    public interface IMinisteriumIncipabilis : IIncipabilis {
+    }
     public interface IMinisteriumPulsabilis : IPulsabilis {
     }
 
@@ -17,5 +19,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     }
 
     public interface IMinisteriumPulsabilisTardusPrimum : IPulsabilisTardusPrimum {
+    }
+
+    public interface IMinisteriumLiberabilis : ILiberabilis {
     }
 }

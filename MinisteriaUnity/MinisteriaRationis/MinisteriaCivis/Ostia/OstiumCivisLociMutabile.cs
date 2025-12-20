@@ -1,5 +1,5 @@
-using System.Numerics;
 using Yulinti.Dux.ContractusDucis;
+using System.Numerics;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
@@ -10,21 +10,31 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miCivisLoci = miCivisLoci;
         }
 
-        public void Activare() {
-            _miCivisLoci.Activare();
+        public int[] IDs => _miCivisLoci.IDs;
+        public int Longitudo => _miCivisLoci.Longitudo;
+        public bool EstActivum(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return false;
+            return _miCivisLoci.EstActivum(id);
         }
-        public void Deactivare() {
-            _miCivisLoci.Deactivare();
+        public void Activare(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
+            _miCivisLoci.Activare(id);
         }
-        public void Transporto(Vector3 positio) {
-            _miCivisLoci.Transporto(InterpressNumericus.ToUnity(positio));
+        public void Deactivare(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
+            _miCivisLoci.Deactivare(id);
         }
-
-        public void IncipereMigrare(Vector3 positio) {
-            _miCivisLoci.IncipereMigrare(InterpressNumericus.ToUnity(positio));
+        public void Transporto(int id, Vector3 positio) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
+            _miCivisLoci.Transporto(id, InterpressNumericus.ToUnity(positio));
         }
-        public void TerminareMigrare() {
-            _miCivisLoci.TerminareMigrare();
+        public void IncipereMigrare(int id, Vector3 positio) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
+            _miCivisLoci.IncipereMigrare(id, InterpressNumericus.ToUnity(positio));
+        }
+        public void TerminareMigrare(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
+            _miCivisLoci.TerminareMigrare(id);
         }
     }
 }
