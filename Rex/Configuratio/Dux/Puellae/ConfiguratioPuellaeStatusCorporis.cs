@@ -5,7 +5,7 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 namespace Yulinti.Rex {
     [CreateAssetMenu(fileName = "ConfiguratioPuellaeStatusCorporis", menuName = "Yulinti/Rex/ConfiguratioPuellaeStatusCorporis")]
     public sealed class ConfiguratioPuellaeStatusCorporis : ScriptableObject, IConfiguratioPuellaeStatusCorporis {
-        [SerializeField] private IDStatusCorporis id;
+        [SerializeField] private IDPuellaeStatusCorporis id;
         [SerializeField] private IDPuellaeModiMotus idModusMotus;
         [SerializeField] private IDPuellaeAnimationisContinuata idAnimationisIntrare;
         [SerializeField] private IDPuellaeAnimationisContinuata idAnimationisExire;
@@ -15,7 +15,7 @@ namespace Yulinti.Rex {
         [SerializeField] private float deceleratio = 0.0f;
         [SerializeField] private bool estLevigatum = false;
 
-        public IDStatusCorporis Id => id;
+        public IDPuellaeStatusCorporis Id => id;
         public IDPuellaeModiMotus IdModusMotus => idModusMotus;
         public IDPuellaeAnimationisContinuata IdAnimationisIntrare => idAnimationisIntrare;
         public IDPuellaeAnimationisContinuata IdAnimationisExire => idAnimationisExire;

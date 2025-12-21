@@ -1,5 +1,5 @@
 ﻿namespace Yulinti.Dux.ContractusDucis {
-    public enum IDStatusCorporis {
+    public enum IDPuellaeStatusCorporis {
         None,
         Quies,                // Idle
         Ambulatio,            // Walk

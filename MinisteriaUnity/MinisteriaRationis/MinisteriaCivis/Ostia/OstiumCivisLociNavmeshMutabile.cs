@@ -3,10 +3,10 @@ using System.Numerics;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class OstiumCivisLociMutabile : IOstiumCivisLociMutabile {
-        private readonly MinisteriumCivisLoci _miCivisLoci;
+    internal sealed class OstiumCivisLociNavmeshMutabile : IOstiumCivisLociNavmeshMutabile {
+        private readonly MinisteriumCivisLociNavmesh _miCivisLoci;
 
-        public OstiumCivisLociMutabile(MinisteriumCivisLoci miCivisLoci) {
+        public OstiumCivisLociNavmeshMutabile(MinisteriumCivisLociNavmesh miCivisLoci) {
             _miCivisLoci = miCivisLoci;
         }
 
@@ -31,6 +31,22 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public void IncipereMigrare(int id, Vector3 positio) {
             if (id < 0 || id >= _miCivisLoci.Longitudo) return;
             _miCivisLoci.IncipereMigrare(id, InterpressNumericus.ToUnity(positio));
+        }
+        public void PonoVelocitatem(int id, float velocitatem) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
+            _miCivisLoci.PonoVelocitatem(id, velocitatem);
+        }
+        public void PonoAccelerationem(int id, float accelerationem) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
+            _miCivisLoci.PonoAccelerationem(id, accelerationem);
+        }
+        public void PonoVelocitatemRotationis(int id, int velocitatemRotationisDeg) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
+            _miCivisLoci.PonoVelocitatemRotationis(id, velocitatemRotationisDeg);
+        }
+        public void PonoDistantiaDeaccelerationis(int id, float distantiaDeaccelerationis) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
+            _miCivisLoci.PonoDistantiaDeaccelerationis(id, distantiaDeaccelerationis);
         }
         public void TerminareMigrare(int id) {
             if (id < 0 || id >= _miCivisLoci.Longitudo) return;

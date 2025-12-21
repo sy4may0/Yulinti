@@ -4,7 +4,7 @@ using System;
 
 namespace Yulinti.Dux.Exercitus {
     internal interface IStatusPuellaeCorporis {
-        IDStatusCorporis Id { get; }
+        IDPuellaeStatusCorporis Id { get; }
         IDPuellaeAnimationisContinuata IdAnimationisIntrare { get; }
         IDPuellaeAnimationisContinuata IdAnimationisExire { get; }
         void Intrare(IResFluidaPuellaeMotusLegibile resFuluidaMotus, Action adInitium);

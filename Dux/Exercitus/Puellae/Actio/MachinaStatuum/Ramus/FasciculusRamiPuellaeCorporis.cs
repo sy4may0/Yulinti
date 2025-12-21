@@ -9,70 +9,70 @@ namespace Yulinti.Dux.Exercitus {
                 // [Quietes Transitions to Other Statuses]
                 // Quietes -> Ambulatio
                 new RamusPuellaeStatusCorporis(
-                    IDStatusCorporis.Quies,
-                    IDStatusCorporis.Ambulatio,
+                    IDPuellaeStatusCorporis.Quies,
+                    IDPuellaeStatusCorporis.Ambulatio,
                     ramiPuellaeCorporis.EstActivumMotus
                 ),
                 // Quietes -> Incumbo
                 new RamusPuellaeStatusCorporis(
-                    IDStatusCorporis.Quies,
-                    IDStatusCorporis.Incumbo,
+                    IDPuellaeStatusCorporis.Quies,
+                    IDPuellaeStatusCorporis.Incumbo,
                     ramiPuellaeCorporis.EstActivumIncumbo
                 ),
 
                 // [Ambulatio Transitions to Other Statuses]
                 // Ambulatio -> Quietes
                 new RamusPuellaeStatusCorporis(
-                    IDStatusCorporis.Ambulatio,
-                    IDStatusCorporis.Quies,
+                    IDPuellaeStatusCorporis.Ambulatio,
+                    IDPuellaeStatusCorporis.Quies,
                     ramiPuellaeCorporis.EstInactivumMotus
                 ),
                 // Ambulatio -> Cursus
                 new RamusPuellaeStatusCorporis(
-                    IDStatusCorporis.Ambulatio,
-                    IDStatusCorporis.Cursus,
+                    IDPuellaeStatusCorporis.Ambulatio,
+                    IDPuellaeStatusCorporis.Cursus,
                     ramiPuellaeCorporis.EstActivumCursus
                 ),
                 // Ambulatio -> IncumboAmbulationem
                 new RamusPuellaeStatusCorporis(
-                    IDStatusCorporis.Ambulatio,
-                    IDStatusCorporis.IncumboAmbulationem,
+                    IDPuellaeStatusCorporis.Ambulatio,
+                    IDPuellaeStatusCorporis.IncumboAmbulationem,
                     ramiPuellaeCorporis.EstActivumIncumbo
                 ),
 
                 // [Cursus Transitions to Other Statuses]
                 // Cursus -> Ambulatio
                 new RamusPuellaeStatusCorporis(
-                    IDStatusCorporis.Cursus,
-                    IDStatusCorporis.Ambulatio,
+                    IDPuellaeStatusCorporis.Cursus,
+                    IDPuellaeStatusCorporis.Ambulatio,
                     ramiPuellaeCorporis.EstInactivumCursus
                 ),
 
                 // [Incumbo Transitions to Other Statuses]
                 // Incumbo -> Quietes
                 new RamusPuellaeStatusCorporis(
-                    IDStatusCorporis.Incumbo,
-                    IDStatusCorporis.Quies,
+                    IDPuellaeStatusCorporis.Incumbo,
+                    IDPuellaeStatusCorporis.Quies,
                     ramiPuellaeCorporis.EstInactivumIncumbo
                 ),
                 // Incumbo -> IncumboAmbulationem
                 new RamusPuellaeStatusCorporis(
-                    IDStatusCorporis.Incumbo,
-                    IDStatusCorporis.IncumboAmbulationem,
+                    IDPuellaeStatusCorporis.Incumbo,
+                    IDPuellaeStatusCorporis.IncumboAmbulationem,
                     ramiPuellaeCorporis.EstActivumIncumboMotus
                 ),
 
                 // [IncumboAmbulationem Transitions to Other Statuses]
                 // IncumboAmbulationem -> Incumbo
                 new RamusPuellaeStatusCorporis(
-                    IDStatusCorporis.IncumboAmbulationem,
-                    IDStatusCorporis.Incumbo,
+                    IDPuellaeStatusCorporis.IncumboAmbulationem,
+                    IDPuellaeStatusCorporis.Incumbo,
                     ramiPuellaeCorporis.EstInactivumIncumboMotus
                 ),
                 // IncumboAmbulationem -> Ambulatio
                 new RamusPuellaeStatusCorporis(
-                    IDStatusCorporis.IncumboAmbulationem,
-                    IDStatusCorporis.Ambulatio,
+                    IDPuellaeStatusCorporis.IncumboAmbulationem,
+                    IDPuellaeStatusCorporis.Ambulatio,
                     ramiPuellaeCorporis.EstInactivumIncumbo
                 )
             };

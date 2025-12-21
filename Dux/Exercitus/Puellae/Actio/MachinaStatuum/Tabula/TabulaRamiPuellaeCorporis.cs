@@ -14,12 +14,12 @@ namespace Yulinti.Dux.Exercitus {
             RamiPuellaeCorporis ramiCorporis = new RamiPuellaeCorporis(configuratioStatuum, osInputMotusLeg);
             FasciculusRamiPuellaeCorporis fasciculus = new FasciculusRamiPuellaeCorporis(ramiCorporis);
 
-            int longitudo = Enum.GetValues(typeof(IDStatusCorporis)).Length;
+            int longitudo = Enum.GetValues(typeof(IDPuellaeStatusCorporis)).Length;
             _tabula = new Dictionary<int, IRamusPuellaeStatusCorporis[]>();
 
             // IdStatusActualisごとに配列を分割
             for (int i = 1; i < longitudo; i++) {
-                IDStatusCorporis idStatus = (IDStatusCorporis)i;
+                IDPuellaeStatusCorporis idStatus = (IDPuellaeStatusCorporis)i;
                 IRamusPuellaeStatusCorporis[] rami = fasciculus.Rami
                     .Where(r => r.IdStatusActualis == idStatus)
                     .ToArray();
@@ -27,7 +27,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public IRamusPuellaeStatusCorporis[] Lego(IDStatusCorporis id) {
+        public IRamusPuellaeStatusCorporis[] Lego(IDPuellaeStatusCorporis id) {
             return _tabula[(int)id];
         }
     }

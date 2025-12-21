@@ -12,12 +12,12 @@ namespace Yulinti.Dux.Exercitus {
         private readonly MotorPuellae _motor;
 
         private IStatusPuellaeCorporis _statusCorporisActualis;
-        private IDStatusCorporis _idStatusActualis;
-        private IDStatusCorporis _idStatusProximus;
+        private IDPuellaeStatusCorporis _idStatusActualis;
+        private IDPuellaeStatusCorporis _idStatusProximus;
 
         private Action _adMutareStatus;
 
-        public IDStatusCorporis IdStatusActualis => _statusCorporisActualis.Id;
+        public IDPuellaeStatusCorporis IdStatusActualis => _statusCorporisActualis.Id;
 
         public MachinaPuellaeStatuum(
             IConfiguratioPuellaeStatuum configuratioStatuum,
@@ -53,9 +53,9 @@ namespace Yulinti.Dux.Exercitus {
             );
             _resFluidaMotusLeg = resFluidaMotusLeg;
 
-            _statusCorporisActualis = _tabulaStatuumCorporis.Lego(IDStatusCorporis.Quies);
-            _idStatusActualis = IDStatusCorporis.Quies;
-            _idStatusProximus = IDStatusCorporis.None;
+            _statusCorporisActualis = _tabulaStatuumCorporis.Lego(IDPuellaeStatusCorporis.Quies);
+            _idStatusActualis = IDPuellaeStatusCorporis.Quies;
+            _idStatusProximus = IDPuellaeStatusCorporis.None;
 
             InitareAnimationem(configuratioStatuum.IdAnimationisPraedefinitus, osAnimationes);
         }
@@ -92,7 +92,7 @@ namespace Yulinti.Dux.Exercitus {
 
         private void AdMutareStatus() {
             _idStatusActualis = _idStatusProximus;
-            _idStatusProximus = IDStatusCorporis.None;
+            _idStatusProximus = IDPuellaeStatusCorporis.None;
             _statusCorporisActualis = _tabulaStatuumCorporis.Lego(_idStatusActualis);
         }
     }

@@ -13,7 +13,7 @@ namespace Yulinti.Dux.Exercitus {
             IOstiumCameraLegibile osCameraLeg,
             IOstiumPuellaeAnimationesMutabile osAnimationes
         ) {
-            int longitudo = Enum.GetValues(typeof(IDStatusCorporis)).Length;
+            int longitudo = Enum.GetValues(typeof(IDPuellaeStatusCorporis)).Length;
             _statuum = new IStatusPuellaeCorporis[longitudo];
 
             foreach (var conf in configurationemCorporis) {
@@ -36,7 +36,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public IStatusPuellaeCorporis Lego(IDStatusCorporis id) {
+        public IStatusPuellaeCorporis Lego(IDPuellaeStatusCorporis id) {
             return _statuum[(int)id];
         }
     }

@@ -2,7 +2,7 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.ContractusDucis {
     public interface IConfiguratioPuellaeStatusCorporis {
-        IDStatusCorporis Id { get; }
+        IDPuellaeStatusCorporis Id { get; }
         IDPuellaeModiMotus IdModusMotus { get; }
         IDPuellaeAnimationisContinuata IdAnimationisIntrare { get; }
         IDPuellaeAnimationisContinuata IdAnimationisExire { get; }

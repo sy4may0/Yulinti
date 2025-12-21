@@ -5,11 +5,11 @@ using Yulinti.Dux.ContractusDucis;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal class MinisteriumCivisLoci {
+    internal class MinisteriumCivisLociNavmesh {
         private readonly IConfiguratioCivisLoci _configLoci;
         private readonly TabulaCivis _tabulaCivis;
 
-        public MinisteriumCivisLoci(
+        public MinisteriumCivisLociNavmesh(
             TabulaCivis tabulaCivis,
             IConfiguratioCivisLoci configLoci
         ) {
@@ -91,6 +91,48 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (!EstActivum(id)) return;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
             anchora.NavMeshAgent.ResetPath();
+        }
+
+        public void PonoVelocitatem(int id, float velocitatem) {
+            if (!EstActivum(id)) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.speed = velocitatem;
+        }
+        public void PonoAccelerationem(int id, float accelerationem) {
+            if (!EstActivum(id)) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.acceleration = accelerationem;
+        }
+        public void PonoVelocitatemRotationis(int id, int velocitatemRotationisDeg) {
+            if (!EstActivum(id)) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.angularSpeed = velocitatemRotationisDeg;
+        }
+        public void PonoDistantiaDeaccelerationis(int id, float distantiaDeaccelerationis) {
+            if (!EstActivum(id)) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.stoppingDistance = distantiaDeaccelerationis;
+        }
+
+        public float LegoVelocitatem(int id) {
+            if (!EstActivum(id)) return 0f;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return 0f;
+            return anchora.NavMeshAgent.speed;
+        }
+        public float LegoAccelerationem(int id) {
+            if (!EstActivum(id)) return 0f;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return 0f;
+            return anchora.NavMeshAgent.acceleration;
+        }
+        public float LegoDistantiaDeaccelerationis(int id) {
+            if (!EstActivum(id)) return 0f;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return 0f;
+            return anchora.NavMeshAgent.stoppingDistance;
+        }
+        public int LegoVelocitatemRotationisDeg(int id) {
+            if (!EstActivum(id)) return 0;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return 0;
+            return (int)anchora.NavMeshAgent.angularSpeed;
         }
 
         private bool AdPerveni(NavMeshAgent navmesh) {

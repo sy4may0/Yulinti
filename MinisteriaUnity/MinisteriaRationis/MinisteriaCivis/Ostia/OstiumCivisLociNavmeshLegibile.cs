@@ -2,10 +2,10 @@ using Yulinti.Dux.ContractusDucis;
 using System.Numerics;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
-    internal sealed class OstiumCivisLociLegibile : IOstiumCivisLociLegibile {
-        private readonly MinisteriumCivisLoci _miCivisLoci;
+    internal sealed class OstiumCivisLociNavmeshLegibile : IOstiumCivisLociNavmeshLegibile {
+        private readonly MinisteriumCivisLociNavmesh _miCivisLoci;
 
-        public OstiumCivisLociLegibile(MinisteriumCivisLoci miCivisLoci) {
+        public OstiumCivisLociNavmeshLegibile(MinisteriumCivisLociNavmesh miCivisLoci) {
             _miCivisLoci = miCivisLoci;
         }
 
@@ -30,6 +30,22 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public float RotatioYActualis(int id) {
             if (id < 0 || id >= _miCivisLoci.Longitudo) return 0f;
             return _miCivisLoci.RotatioYActualis(id);
+        }
+        public float LegoVelocitatem(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return 0f;
+            return _miCivisLoci.LegoVelocitatem(id);
+        }
+        public float LegoAccelerationem(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return 0f;
+            return _miCivisLoci.LegoAccelerationem(id);
+        }
+        public float LegoDistantiaDeaccelerationis(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return 0f;
+            return _miCivisLoci.LegoDistantiaDeaccelerationis(id);
+        }
+        public int LegoVelocitatemRotationisDeg(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return 0;
+            return _miCivisLoci.LegoVelocitatemRotationisDeg(id);
         }
         public Vector3 Positio(int id) {
             if (id < 0 || id >= _miCivisLoci.Longitudo) return new Vector3(0,0,0);

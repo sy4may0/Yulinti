@@ -1,5 +1,5 @@
 namespace Yulinti.Dux.ContractusDucis {
-    public enum IDStatusPartis {
+    public enum IDCivisStatusPartis {
         None
     }
 }

@@ -4,6 +4,7 @@ namespace Yulinti.Dux.Exercitus {
         int IDPunctumViaeActualis { get; }
         int IDPunctumViaeProximus { get; }
         float VelocitasActualisHorizontalis { get; }
+        float VelocitasActualisVerticalis { get; }
         float RotatioYActualis { get; }
         bool EstInTerra { get; }
     }

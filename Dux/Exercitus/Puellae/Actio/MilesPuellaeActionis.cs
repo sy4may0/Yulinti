@@ -36,7 +36,7 @@ namespace Yulinti.Dux.Exercitus {
             _osPuellaeLociLeg = osPuellaeLociLeg;
        }
 
-        public IDStatusCorporis StatusCorporisActualis => _machinaPuellaeStatuum.IdStatusActualis;
+        public IDPuellaeStatusCorporis StatusCorporisActualis => _machinaPuellaeStatuum.IdStatusActualis;
 
         public void Opero() {
             _machinaPuellaeStatuum.Opero();

@@ -4,10 +4,12 @@ using System;
 
 namespace Yulinti.Dux.Exercitus {
     internal interface IStatusCivisCorporis {
-        IDStatusCorporis Id { get; }
+        int IdCivis { get; }
+        IDCivisStatusCorporis IdStatus { get; }
         IDCivisAnimationisContinuata IdAnimationisIntrare { get; }
         IDCivisAnimationisContinuata IdAnimationisExire { get; }
         void Intrare(IResFluidaCivisMotusLegibile resFuluidaMotus, Action adInitium);
         void Exire(IResFluidaCivisMotusLegibile resFuluidaMotus, Action adFinem);
+        OrdinatioCivisMotus Ordinare(IResFluidaCivisMotusLegibile resFuluidaMotus);
     }
 }
