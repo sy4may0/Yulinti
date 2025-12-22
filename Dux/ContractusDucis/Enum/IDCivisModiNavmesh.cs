@@ -1,5 +1,5 @@
 namespace Yulinti.Dux.ContractusDucis {
-    internal enum IDCivisModiNavmesh {
+    public enum IDCivisModiNavmesh {
         None,
         MigrareAditrium,
         Suicidium
