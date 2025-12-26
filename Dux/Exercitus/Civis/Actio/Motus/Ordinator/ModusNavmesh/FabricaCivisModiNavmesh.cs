@@ -4,18 +4,18 @@ using Yulinti.Nucleus;
 namespace Yulinti.Dux.Exercitus {
     public static class FabricaCivisModiNavmesh {
         public static ICivisModiNavmesh Creare(
-            IConfiguratioCivisStatusCorporis configurationCorporis,
+            IConfiguratioCivisStatusNavmesh configurationNavmesh,
             IOstiumCivisLociNavmeshLegibile osLociNavmeshLegibile,
             IOstiumCivisLociNavmeshMutabile osLociNavmeshMutabile,
             IOstiumPunctumViaeLegibile osPunctumViaeLegibile
         ) {
-            switch (configurationCorporis.IdModiNavmesh) {
+            switch (configurationNavmesh.IdModiNavmesh) {
                 case IDCivisModiNavmesh.None:
-                    return new CivisModiNavmeshNihil(configurationCorporis, osLociNavmeshLegibile, osLociNavmeshMutabile);
-                case IDCivisModiNavmesh.MigrareAditrium:
-                    return new CivisModiNavmeshMigrareAditrium(configurationCorporis, osLociNavmeshLegibile, osLociNavmeshMutabile, osPunctumViaeLegibile);
+                    return new CivisModiNavmeshNihil(configurationNavmesh, osLociNavmeshLegibile, osLociNavmeshMutabile);
+                case IDCivisModiNavmesh.MigrareAditorium:
+                    return new CivisModiNavmeshMigrareAditorium(configurationNavmesh, osLociNavmeshLegibile, osLociNavmeshMutabile, osPunctumViaeLegibile);
                 case IDCivisModiNavmesh.Suicidium:
-                    return new CivisModiNavmeshSuicidium(configurationCorporis, osLociNavmeshLegibile, osLociNavmeshMutabile, osPunctumViaeLegibile);
+                    return new CivisModiNavmeshSuicidium(configurationNavmesh, osLociNavmeshLegibile, osLociNavmeshMutabile, osPunctumViaeLegibile);
                 default:
                     Errorum.Fatal(IDErrorum.FABRICACIVISMODINAVMESH_MODI_NOT_FOUND);
                     return null;

@@ -3,7 +3,7 @@ using Yulinti.Nucleus;
 
 namespace Yulinti.Dux.Exercitus {
     internal class CivisModiNavmeshSuicidium : ICivisModiNavmesh {
-        private readonly IConfiguratioCivisStatusCorporis _configurationCorporis;
+        private readonly IConfiguratioCivisStatusNavmesh _configurationNavmesh;
         private readonly IDCivisModiNavmesh _idModi = IDCivisModiNavmesh.Suicidium;
         private readonly IOstiumCivisLociNavmeshLegibile _osLoci;
         private readonly IOstiumCivisLociNavmeshMutabile _osLociMutabile;
@@ -11,12 +11,12 @@ namespace Yulinti.Dux.Exercitus {
 
         // Crematriumに移動する。
         public CivisModiNavmeshSuicidium(
-            IConfiguratioCivisStatusCorporis configurationCorporis,
+            IConfiguratioCivisStatusNavmesh configurationNavmesh,
             IOstiumCivisLociNavmeshLegibile osLoci,
             IOstiumCivisLociNavmeshMutabile osLociMutabile,
             IOstiumPunctumViaeLegibile osPunctumViae
         ) {
-            _configurationCorporis = configurationCorporis;
+            _configurationNavmesh = configurationNavmesh;
             _osLoci = osLoci;
             _osLociMutabile = osLociMutabile;
             _osPunctumViae = osPunctumViae;
@@ -32,10 +32,10 @@ namespace Yulinti.Dux.Exercitus {
             if (errorAut.Conare(out IPunctumViaeLegibile punctumViae)) {
                 _osLociMutabile.Activare(idCivis);
                 _osLociMutabile.IncipereMigrare(idCivis, punctumViae.Positio);
-                _osLociMutabile.PonoVelocitatem(idCivis, _configurationCorporis.VelocitasDesiderata);
-                _osLociMutabile.PonoAccelerationem(idCivis, _configurationCorporis.Acceleratio);
-                _osLociMutabile.PonoVelocitatemRotationis(idCivis, _configurationCorporis.VelocitasRotationis);
-                _osLociMutabile.PonoDistantiaDeaccelerationis(idCivis, _configurationCorporis.DistantiaDeaccelerationis);
+                _osLociMutabile.PonoVelocitatem(idCivis, _configurationNavmesh.VelocitasDesiderata);
+                _osLociMutabile.PonoAccelerationem(idCivis, _configurationNavmesh.Acceleratio);
+                _osLociMutabile.PonoVelocitatemRotationis(idCivis, _configurationNavmesh.VelocitasRotationis);
+                _osLociMutabile.PonoDistantiaDeaccelerationis(idCivis, _configurationNavmesh.DistantiaDeaccelerationis);
                 return punctumViae;
             } else {
                 return null;

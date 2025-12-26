@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class ResolutorPuellaeRamorumCorporis : IResolutorPuellaeRamorum {
-        private readonly IRamusPuellae[] _rami;
+    internal sealed class ResolutorPuellaeRamorumCorporis { 
+        private readonly IRamusPuellaeCorporis[] _rami;
         // キー: IDPuellaeStatusCorporisActualis
         // 値: ジャグ配列 [Prioritas順のインデックス][同一Prioritasを持つRamus配列]
-        private readonly Dictionary<IDPuellaeStatusCorporis, IRamusPuellae[][]> _tabula;
+        private readonly Dictionary<IDPuellaeStatusCorporis, IRamusPuellaeCorporis[][]> _tabula;
         private readonly Random _random;
 
         public ResolutorPuellaeRamorumCorporis() {
             _random = new Random();
 
-            _rami = new IRamusPuellae[] {
+            _rami = new IRamusPuellaeCorporis[] {
                 new RamusPuellaeCorporisAmbulatioAdCursus(),
                 new RamusPuellaeCorporisAmbulatioAdIncumboAmbulationem(),
                 new RamusPuellaeCorporisAmbulatioAdQuies(),
@@ -27,7 +27,7 @@ namespace Yulinti.Dux.Exercitus {
                 new RamusPuellaeCorporisQuiesAdIncumbo(),
             };
 
-            _tabula = new Dictionary<IDPuellaeStatusCorporis, IRamusPuellae[][]>();
+            _tabula = new Dictionary<IDPuellaeStatusCorporis, IRamusPuellaeCorporis[][]>();
             
             // 各StatusCorporisごとにRamusをグループ化
             foreach (IDPuellaeStatusCorporis status in Enum.GetValues(typeof(IDPuellaeStatusCorporis))) {
@@ -73,11 +73,11 @@ namespace Yulinti.Dux.Exercitus {
 
         // ランダムにRamusを選択する
         private IDPuellaeStatusCorporis selegereCaecus(
-            IRamusPuellae[] rami,
+            IRamusPuellaeCorporis[] rami,
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             ContextusPuellaeResFluidaLegibile contextusResFluida
         ) {
-            IRamusPuellae selecta = null;
+            IRamusPuellaeCorporis selecta = null;
             int summa = 0;
 
             foreach (var ramus in rami) {

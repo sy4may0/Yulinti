@@ -1,7 +1,7 @@
 using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class RamusPuellaeCorporisCursusAdAmbulatio : IRamusPuellae {
+    internal sealed class RamusPuellaeCorporisCursusAdAmbulatio : IRamusPuellaeCorporis {
         public IDPuellaeStatusCorporis IdStatusActualis => IDPuellaeStatusCorporis.Cursus;
         public IDPuellaeStatusCorporis IdStatusProximus => IDPuellaeStatusCorporis.Ambulatio;
         public int Prioritas => 1000;

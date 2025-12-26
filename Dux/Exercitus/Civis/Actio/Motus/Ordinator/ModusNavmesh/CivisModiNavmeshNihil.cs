@@ -2,18 +2,18 @@ using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
     internal class CivisModiNavmeshNihil : ICivisModiNavmesh {
-        private readonly IConfiguratioCivisStatusCorporis _configurationCorporis;
+        private readonly IConfiguratioCivisStatusNavmesh _configurationNavmesh;
         private readonly IDCivisModiNavmesh _idModi = IDCivisModiNavmesh.None;
         private readonly IOstiumCivisLociNavmeshLegibile _osLoci;
         private readonly IOstiumCivisLociNavmeshMutabile _osLociMutabile;
 
         // Navmeshを使わないCharacterController使用ステートなどで使用する。
         public CivisModiNavmeshNihil(
-            IConfiguratioCivisStatusCorporis configurationCorporis,
+            IConfiguratioCivisStatusNavmesh configurationNavmesh,
             IOstiumCivisLociNavmeshLegibile osLoci,
             IOstiumCivisLociNavmeshMutabile osLociMutabile
         ) {
-            _configurationCorporis = configurationCorporis;
+            _configurationNavmesh = configurationNavmesh;
             _osLoci = osLoci;
             _osLociMutabile = osLociMutabile;
         }

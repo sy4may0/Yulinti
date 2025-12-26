@@ -2,24 +2,23 @@ using Yulinti.Dux.ContractusDucis;
 using System;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class TabulaCivisStatuumCorporis {
+    internal sealed class TabulaCivisStatuumNavmesh {
         private int IdCivis;
-        private readonly IStatusCivisCorporis[] _statuum;
+        private readonly IStatusCivisNavmesh[] _statuum;
 
-        public TabulaCivisStatuumCorporis(
+        public TabulaCivisStatuumNavmesh(
             int idCivis,
-            IConfiguratioCivisStatusCorporis[] configurationemCorporis,
+            IConfiguratioCivisStatusNavmesh[] configurationemNavmesh,
             IOstiumCivisAnimationesMutabile osAnimationes,
-            IOstiumCivisLociNavmeshMutabile osLoci,
             IOstiumCivisLociNavmeshLegibile osLociNavmeshLegibile,
             IOstiumCivisLociNavmeshMutabile osLociNavmeshMutabile,
             IOstiumPunctumViaeLegibile osPunctumViaeLegibile
         ) {
             IdCivis = idCivis;
-            int longitudo = Enum.GetValues(typeof(IDCivisStatusCorporis)).Length;
-            _statuum = new IStatusCivisCorporis[longitudo];
+            int longitudo = Enum.GetValues(typeof(IDCivisStatusNavmesh)).Length;
+            _statuum = new IStatusCivisNavmesh[longitudo];
 
-            foreach (var conf in configurationemCorporis) {
+            foreach (var conf in configurationemNavmesh) {
                 ICivisModiNavmesh modusNavmesh = FabricaCivisModiNavmesh.Creare(
                     conf,
                     osLociNavmeshLegibile,
@@ -27,17 +26,17 @@ namespace Yulinti.Dux.Exercitus {
                     osPunctumViaeLegibile
                 );
 
-                _statuum[(int)conf.Id] = new StatusCivisCorporis(
+                _statuum[(int)conf.Id] = new StatusCivisNavmesh(
                     idCivis,
                     conf,
                     osAnimationes,
-                    osLoci,
+                    osLociNavmeshMutabile,
                     modusNavmesh
                 );
             }
         }
 
-        public IStatusCivisCorporis Lego(IDCivisStatusCorporis id) {
+        public IStatusCivisNavmesh Lego(IDCivisStatusNavmesh id) {
             return _statuum[(int)id];
         }
     }
