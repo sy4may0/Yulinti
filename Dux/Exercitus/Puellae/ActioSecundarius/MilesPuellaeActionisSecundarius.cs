@@ -2,27 +2,27 @@ using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class MilesPuellaeActionisSecundarius : IMilesPuellaeActionisSecundarius {
-        private AdiectorPuellaePelvisAltitudinis _adiectorPuellaePelvisAltitudinis;
-        private ThesaurusPuellaeActionisSecundarius _thsaurus;
+        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
+        private readonly AdiectorPuellaePelvisAltitudinis _adiectorPuellaePelvisAltitudinis;
+        private readonly ThesaurusPuellaeActionisSecundarius _thsaurus;
 
-        // VContainer注入
         public MilesPuellaeActionisSecundarius(
-            IOstiumPuellaeRelationisTerraeLegibile osPuellaeRelationisTerraeLeg,
-            IOstiumPuellaeOssisMutabile osPuellaeOssisMut,
-            IOstiumPuellaeOssisLegibile osPuellaeOssisLeg,
-            IConfiguratioPuellaeActionisSecundarius configuratio
+            IConfiguratioPuellaeActionisSecundarius configuratio,
+            IOstiumPuellaeOssisMutabile osPuellaeOssisMut
         ) {
             _thsaurus = new ThesaurusPuellaeActionisSecundarius(configuratio);
             _adiectorPuellaePelvisAltitudinis = new AdiectorPuellaePelvisAltitudinis(
-                osPuellaeRelationisTerraeLeg,
                 osPuellaeOssisMut,
-                osPuellaeOssisLeg,
                 _thsaurus
             );
         }
 
-        public void ElevoPelvimSequensTerra() {
-            _adiectorPuellaePelvisAltitudinis.ElevoPelvis();
+        public void ElevoPelvimSequensTerra(
+            ContextusPuellaeOstiorumLegibile contextusOstiorum
+        ) {
+            _adiectorPuellaePelvisAltitudinis.ElevoPelvis(
+                contextusOstiorum
+            );
         }
     }
 }

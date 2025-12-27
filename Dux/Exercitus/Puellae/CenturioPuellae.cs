@@ -3,36 +3,67 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Exercitus {
     public sealed class CenturioPuellae : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisTardus {
-        private readonly IMilesPuellaeActionis _milesPuellaeActionis;
-        private readonly IMilesPuellaeActionisSecundarius _milesPuellaeActionisSecundarius;
-        private readonly IMilesPuellaeFigurae _milesPuellaeFigurae;
-        private readonly IMilesPuellaeCrinis _milesPuellaeCrinis;
+        private readonly MilesPuellaeActionis _milesPuellaeActionis;
+
+        private readonly ResolutorPuellaeVeletudinis _resolutorVeletudinis;
+
+        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
+        private readonly ContextusPuellaeResFluidaLegibile _contextusResFluida;
+
+        private ResFluidaPuellaeVeletudinis _resFluidaVeletudinis;
+        private ResFluidaPuellaeMotus _resFluidaMotus;
 
         // VContainer注入
         public CenturioPuellae(
-            IMilesPuellaeActionis milesPuellaeActionis,
-            IMilesPuellaeActionisSecundarius milesPuellaeActionisSecundarius,
-            IMilesPuellaeFigurae milesPuellaeFigurae,
-            IMilesPuellaeCrinis milesPuellaeCrinis
+            IConfiguratioExercitusPuellae configuratio,
+            IOstiumTemporisLegibile temporis,
+            IOstiumCameraLegibile camera,
+            IOstiumInputMotusLegibile inputMotus,
+            IOstiumPuellaeLociLegibile puellaeLoci,
+            IOstiumPuellaeRelationisTerraeLegibile relationisTerrae,
+            IOstiumPuellaeOssisLegibile ossis,
+            IOstiumPuellaeAnimationesMutabile osAnimationesMut,
+            IOstiumPuellaeLociMutabile osLociMut
         ) {
-            _milesPuellaeActionis = milesPuellaeActionis;
-            _milesPuellaeActionisSecundarius = milesPuellaeActionisSecundarius;
-            _milesPuellaeFigurae = milesPuellaeFigurae;
-            _milesPuellaeCrinis = milesPuellaeCrinis;
+            _resFluidaVeletudinis = new ResFluidaPuellaeVeletudinis();
+            _resFluidaMotus = new ResFluidaPuellaeMotus();
+
+            _contextusResFluida = new ContextusPuellaeResFluidaLegibile(
+                _resFluidaVeletudinis,
+                _resFluidaMotus
+            );
+            _contextusOstiorum = new ContextusPuellaeOstiorumLegibile(
+                configuratio,
+                temporis,
+                camera,
+                inputMotus,
+                puellaeLoci,
+                relationisTerrae,
+                ossis
+            );
+            _resolutorVeletudinis = new ResolutorPuellaeVeletudinis();
+
+            _milesPuellaeActionis = new MilesPuellaeActionis(
+                _contextusOstiorum,
+                osAnimationesMut,
+                osLociMut
+            );
         }
 
         public void Pulsus() {
-            // ステート更新/アクション実行
-            _milesPuellaeActionis.Opero();
-            // Runtime更新/Animation速度流し込み
-            _milesPuellaeActionis.RenovareFluidaMotus();
+            _milesPuellaeActionis.OrdinareActionis(_contextusResFluida);
+            _milesPuellaeActionis.ApplicareActionis(_contextusResFluida);
+            _milesPuellaeActionis.RenovareResFluidaMotus(ref _resFluidaMotus);
+            _resolutorVeletudinis.Resolvere(
+                _milesPuellaeActionis.OrdinareVeletudinis(_contextusResFluida)
+            );
+            _milesPuellaeActionis.InjicereVelocitatis();
         }
 
         public void PulsusTardus() {
-            // 強制地面補正(root移動)
-            _milesPuellaeActionisSecundarius.ElevoPelvimSequensTerra();
-            // BlendShape適用
-            _milesPuellaeFigurae.ApplicareFiguram();
+            _resolutorVeletudinis.Applicare(
+                ref _resFluidaVeletudinis
+            );
         }
 
     }

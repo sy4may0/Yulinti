@@ -7,7 +7,7 @@ namespace Yulinti.Dux.Exercitus {
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             ContextusPuellaeResFluidaLegibile contextusResFluida
         ) {
-            float limenInputQuadratum = contextusOstiorum.Configuratio.LimenInputQuadratum;
+            float limenInputQuadratum = contextusOstiorum.Configuratio.Statuum.LimenInputQuadratum;
             IOstiumInputMotusLegibile inputMotus = contextusOstiorum.InputMotus;
 
             return inputMotus.LegoMotus.LengthSquared() >= limenInputQuadratum;

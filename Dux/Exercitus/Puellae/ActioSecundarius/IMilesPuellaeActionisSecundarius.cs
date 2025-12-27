@@ -1,5 +1,7 @@
 namespace Yulinti.Dux.Exercitus {
-    public interface IMilesPuellaeActionisSecundarius {
-        void ElevoPelvimSequensTerra();
+    internal interface IMilesPuellaeActionisSecundarius {
+        void ElevoPelvimSequensTerra(
+            ContextusPuellaeOstiorumLegibile contextusOstiorum
+        );
     }
 }
