@@ -12,5 +12,6 @@ namespace Yulinti.Dux.ContractusDucis {
         IDPuellaeAnimationisContinuata IdAnimationisPraedefinitus { get; }
         IConfiguratioPuellaeStatusCorporis[] StatusCorporum { get; }
         IConfiguratioPuellaeStatusPartis[] StatusPartium { get; }
+        IConfiguratioPuellaeStatusCorporis2[] StatuumCorporis { get; }
    }
 }

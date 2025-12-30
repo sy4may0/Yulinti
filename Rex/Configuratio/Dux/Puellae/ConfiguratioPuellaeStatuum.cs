@@ -15,6 +15,7 @@ namespace Yulinti.Rex {
         [SerializeField] private IDPuellaeAnimationisContinuata idAnimationisPraedefinitus;
         [SerializeField] private ConfiguratioPuellaeStatusCorporis[] statusCorporum;
         [SerializeField] private ConfiguratioPuellaeStatusPartis[] statusPartium;
+        [SerializeField] private ConfiguratioPuellaeStatusCorporisBasis[] statuumCorporis;
 
         public float LimenInputQuadratum => limenInputQuadratum;
         public float TempusLevigatumRotationis => tempusLevigatumRotationis;
@@ -26,5 +27,6 @@ namespace Yulinti.Rex {
         public IDPuellaeAnimationisContinuata IdAnimationisPraedefinitus => idAnimationisPraedefinitus;
         public IConfiguratioPuellaeStatusCorporis[] StatusCorporum => statusCorporum;
         public IConfiguratioPuellaeStatusPartis[] StatusPartium => statusPartium;
+        public IConfiguratioPuellaeStatusCorporis2[] StatuumCorporis => statuumCorporis;
     }
 }

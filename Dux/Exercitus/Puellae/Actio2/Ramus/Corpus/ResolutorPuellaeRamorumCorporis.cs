@@ -5,13 +5,17 @@ using System.Linq;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class ResolutorPuellaeRamorumCorporis { 
+        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
         private readonly IRamusPuellaeCorporis[] _rami;
         // キー: IDPuellaeStatusCorporisActualis
         // 値: ジャグ配列 [Prioritas順のインデックス][同一Prioritasを持つRamus配列]
         private readonly Dictionary<IDPuellaeStatusCorporis, IRamusPuellaeCorporis[][]> _tabula;
         private readonly Random _random;
 
-        public ResolutorPuellaeRamorumCorporis() {
+        public ResolutorPuellaeRamorumCorporis(
+            ContextusPuellaeOstiorumLegibile contextusOstiorum
+        ) {
+            _contextusOstiorum = contextusOstiorum;
             _random = new Random();
 
             _rami = new IRamusPuellaeCorporis[] {
@@ -52,7 +56,6 @@ namespace Yulinti.Dux.Exercitus {
         // マッチしない場合はNoneを返す
         public IDPuellaeStatusCorporis Resolvere(
             IDPuellaeStatusCorporis idStatusActualis,
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             ContextusPuellaeResFluidaLegibile contextusResFluida
         ) {
             // 該当するStatusActualisのテーブルが存在しない場合は現在の状態を返す
@@ -62,7 +65,10 @@ namespace Yulinti.Dux.Exercitus {
 
             // Prioritas順（外側のループ）→同一Prioritas内（内側のループ）の順で条件をチェック
             foreach (var ramiPG in _tabula[idStatusActualis]) {
-                IDPuellaeStatusCorporis idStatusProximus = selegereCaecus(ramiPG, contextusOstiorum, contextusResFluida);
+                IDPuellaeStatusCorporis idStatusProximus = selegereCaecus(
+                    ramiPG,
+                    contextusResFluida
+                );
                 if (idStatusProximus != IDPuellaeStatusCorporis.None) {
                     return idStatusProximus;
                 }
@@ -74,14 +80,13 @@ namespace Yulinti.Dux.Exercitus {
         // ランダムにRamusを選択する
         private IDPuellaeStatusCorporis selegereCaecus(
             IRamusPuellaeCorporis[] rami,
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             ContextusPuellaeResFluidaLegibile contextusResFluida
         ) {
             IRamusPuellaeCorporis selecta = null;
             int summa = 0;
 
             foreach (var ramus in rami) {
-                if (!ramus.Condicio(contextusOstiorum, contextusResFluida)) {
+                if (!ramus.Condicio(_contextusOstiorum, contextusResFluida)) {
                     continue;
                 }
 

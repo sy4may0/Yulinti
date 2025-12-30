@@ -4,18 +4,18 @@ using Yulinti.Nucleus;
 using System;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class MilesPuellaeFigurae : IMilesPuellaeFigurae {
+    internal sealed class MilesPuellaeFigurae {
         private readonly IOstiumPuellaeOssisLegibile _osPuellaeOssisLeg;
         private readonly IOstiumPuellaeFiguraePelvisMutabile _osPuellaeFiguraePelvisMut;
         private readonly IOstiumPuellaeFiguraeGenusMutabile _osPuellaeFiguraeGenusMut;
 
         // VContainer注入
         public MilesPuellaeFigurae(
-            IOstiumPuellaeOssisLegibile osPuellaeOssisLeg,
+            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IOstiumPuellaeFiguraePelvisMutabile osPuellaeFiguraePelvisMut,
             IOstiumPuellaeFiguraeGenusMutabile osPuellaeFiguraeGenusMut
         ) {
-            _osPuellaeOssisLeg = osPuellaeOssisLeg;
+            _osPuellaeOssisLeg = contextusOstiorum.Ossis;
             _osPuellaeFiguraePelvisMut = osPuellaeFiguraePelvisMut;
             _osPuellaeFiguraeGenusMut = osPuellaeFiguraeGenusMut;
         }

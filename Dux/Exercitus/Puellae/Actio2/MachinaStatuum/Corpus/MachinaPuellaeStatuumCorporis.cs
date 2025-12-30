@@ -26,7 +26,9 @@ namespace Yulinti.Dux.Exercitus {
                 _contextusOstiorum.Configuratio.Statuum.StatuumCorporis,
                 osAnimationes
             );
-            _resolutorRamorumCorporis = new ResolutorPuellaeRamorumCorporis();
+            _resolutorRamorumCorporis = new ResolutorPuellaeRamorumCorporis(
+                _contextusOstiorum
+            );
 
             _statusCorporisActualis = _statuum[(int)IDPuellaeStatusCorporis.Quies];
             _idStatusActualis = IDPuellaeStatusCorporis.Quies;
@@ -78,7 +80,6 @@ namespace Yulinti.Dux.Exercitus {
         ) {
             IDPuellaeStatusCorporis idStatusProximus = _resolutorRamorumCorporis.Resolvere(
                 _idStatusActualis,
-                _contextusOstiorum,
                 contextusResFluida
             );
             if (idStatusProximus == IDPuellaeStatusCorporis.None) return;

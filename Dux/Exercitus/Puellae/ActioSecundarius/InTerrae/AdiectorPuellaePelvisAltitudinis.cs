@@ -5,31 +5,25 @@ using System;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class AdiectorPuellaePelvisAltitudinis {
+        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
         private readonly IOstiumPuellaeOssisMutabile _osPuellaeOssisMut;
-        private readonly ThesaurusPuellaeActionisSecundarius _thesaurus;
+        private readonly IConfiguratioPuellaeActionisSecundarius _configuratio;
 
         private float _elevatioActualis = 0f;
 
         public AdiectorPuellaePelvisAltitudinis(
             IOstiumPuellaeOssisMutabile osPuellaeOssisMut,
-            ThesaurusPuellaeActionisSecundarius thesaurus
-        ) {
-            _osPuellaeOssisMut = osPuellaeOssisMut;
-            _thesaurus = thesaurus;
-        }
-
-        public void ElevoPelvis(
             ContextusPuellaeOstiorumLegibile contextusOstiorum
         ) {
-            IOstiumPuellaeRelationisTerraeLegibile relationisTerraeLeg = contextusOstiorum.RelationisTerrae;
-            IOstiumPuellaeOssisLegibile ossisLeg = contextusOstiorum.Ossis;
+            _osPuellaeOssisMut = osPuellaeOssisMut;
+            _contextusOstiorum = contextusOstiorum;
+            _configuratio = _contextusOstiorum.Configuratio.ActionisSecundarius;
+        }
 
-            float differentia = ComputareDifferentiam(
-                relationisTerraeLeg,
-                ossisLeg
-            );
+        public void ElevoPelvis() {
+            float differentia = ComputareDifferentiam();
 
-            if (differentia < -_thesaurus.MaxElevatio) {
+            if (differentia < -_configuratio.MaxElevatio) {
                 _elevatioActualis = 0f;
                 return;
             }
@@ -43,7 +37,7 @@ namespace Yulinti.Dux.Exercitus {
                 return;
             }
 
-            Vector3 pelvisPositionis = ossisLeg.LegoPositionem(IDPuellaeOssis.Hips);
+            Vector3 pelvisPositionis = _contextusOstiorum.Ossis.LegoPositionem(IDPuellaeOssis.Hips);
             pelvisPositionis.Y -= differentia;
 
             _osPuellaeOssisMut.PonoPositionem(IDPuellaeOssis.Hips, pelvisPositionis);
@@ -51,52 +45,49 @@ namespace Yulinti.Dux.Exercitus {
             _elevatioActualis = differentia;
         }
 
-        private float ComputareDifferentiam(
-            IOstiumPuellaeRelationisTerraeLegibile relationisTerraeLeg,
-            IOstiumPuellaeOssisLegibile ossisLeg
-        ) {
-            float altitudoTerraeDex = AltitudoTerraeDextra(relationisTerraeLeg);
-            float altitudoTerraeSin = AltitudoTerraeSinistra(relationisTerraeLeg);
+        private float ComputareDifferentiam() {
+            float altitudoTerraeDex = AltitudoTerraeDextra();
+            float altitudoTerraeSin = AltitudoTerraeSinistra();
 
-            float altitudoPedisDex = AltitudoPedis(ossisLeg, IDPuellaeOssis.RightFoot);
-            float altitudoPedisSin = AltitudoPedis(ossisLeg, IDPuellaeOssis.LeftFoot);
-            float altitudoDigitusPedisDex = AltitudoDigitusPedis(ossisLeg, IDPuellaeOssis.RightToe);
-            float altitudoDigitusPedisSin = AltitudoDigitusPedis(ossisLeg, IDPuellaeOssis.LeftToe);
+            float altitudoPedisDex = AltitudoPedis(IDPuellaeOssis.RightFoot);
+            float altitudoPedisSin = AltitudoPedis(IDPuellaeOssis.LeftFoot);
+            float altitudoDigitusPedisDex = AltitudoDigitusPedis(IDPuellaeOssis.RightToe);
+            float altitudoDigitusPedisSin = AltitudoDigitusPedis(IDPuellaeOssis.LeftToe);
             // ヒールとかの調整をやる場合、ここDebugして出たaltitudeをCorrectivusに入れるとちょうどぴったりになるよ。
 
             float differentiaTerraeDex = (altitudoPedisDex < altitudoDigitusPedisDex) ?
-                altitudoPedisDex - (altitudoTerraeDex + _thesaurus.PesYCorrectivus)
-                : altitudoDigitusPedisDex - (altitudoTerraeDex + _thesaurus.DigitusPedisYCorrectivus);
+                altitudoPedisDex - (altitudoTerraeDex + _configuratio.PesYCorrectivus)
+                : altitudoDigitusPedisDex - (altitudoTerraeDex + _configuratio.DigitusPedisYCorrectivus);
 
             float differentiaTerraeSin = (altitudoPedisSin < altitudoDigitusPedisSin) ?
-                altitudoPedisSin - (altitudoTerraeSin + _thesaurus.PesYCorrectivus)
-                : altitudoDigitusPedisSin - (altitudoTerraeSin + _thesaurus.DigitusPedisYCorrectivus);
+                altitudoPedisSin - (altitudoTerraeSin + _configuratio.PesYCorrectivus)
+                : altitudoDigitusPedisSin - (altitudoTerraeSin + _configuratio.DigitusPedisYCorrectivus);
 
             return MathF.Min(differentiaTerraeDex, differentiaTerraeSin);
         }
 
-        private float AltitudoTerraeDextra(IOstiumPuellaeRelationisTerraeLegibile relationisTerraeLeg) {
-            return relationisTerraeLeg.AltitudoTerraeDextra(
-                _thesaurus.RaycastAltitudo,
-                _thesaurus.RaycastDistantia
+        private float AltitudoTerraeDextra() {
+            return _contextusOstiorum.RelationisTerrae.AltitudoTerraeDextra(
+                _configuratio.RaycastAltitudo,
+                _configuratio.RaycastDistantia
             );
         }
 
-        private float AltitudoTerraeSinistra(IOstiumPuellaeRelationisTerraeLegibile relationisTerraeLeg) {
-            return relationisTerraeLeg.AltitudoTerraeSinistra(
-                _thesaurus.RaycastAltitudo,
-                _thesaurus.RaycastDistantia
+        private float AltitudoTerraeSinistra() {
+            return _contextusOstiorum.RelationisTerrae.AltitudoTerraeSinistra(
+                _configuratio.RaycastAltitudo,
+                _configuratio.RaycastDistantia
             );
         }
 
-        private float AltitudoPedis(IOstiumPuellaeOssisLegibile ossisLeg, IDPuellaeOssis idPedisOssis) {
-            Vector3 pesPositionisDex = ossisLeg.LegoPositionem(idPedisOssis);
+        private float AltitudoPedis(IDPuellaeOssis idPedisOssis) {
+            Vector3 pesPositionisDex = _contextusOstiorum.Ossis.LegoPositionem(idPedisOssis);
 
             return pesPositionisDex.Y;
         }
 
-        private float AltitudoDigitusPedis(IOstiumPuellaeOssisLegibile ossisLeg, IDPuellaeOssis idDigitusPedisOssis) {
-            Vector3 digitusPedisPositionis = ossisLeg.LegoPositionem(idDigitusPedisOssis);
+        private float AltitudoDigitusPedis(IDPuellaeOssis idDigitusPedisOssis) {
+            Vector3 digitusPedisPositionis = _contextusOstiorum.Ossis.LegoPositionem(idDigitusPedisOssis);
 
             return digitusPedisPositionis.Y;
         }

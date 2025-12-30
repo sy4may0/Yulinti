@@ -2,7 +2,7 @@ using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Exercitus {
-    public sealed class CenturioPuellae : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisTardus {
+    internal sealed class CenturioPuellae : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisTardus {
         private readonly MilesPuellaeActionis _milesPuellaeActionis;
 
         private readonly ResolutorPuellaeVeletudinis _resolutorVeletudinis;

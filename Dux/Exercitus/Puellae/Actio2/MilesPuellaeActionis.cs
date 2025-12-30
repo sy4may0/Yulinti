@@ -1,7 +1,7 @@
 using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class MilesPuellaeActionis : IMilesPuellaeActionis {
+    internal sealed class MilesPuellaeActionis {
         private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
         private readonly MachinaPuellaeStatuumCorporis _machinaCorporis;
         private readonly MotorPuellaeActionis _motor;
