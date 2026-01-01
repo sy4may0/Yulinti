@@ -7,7 +7,7 @@ namespace Yulinti.Dux.ContractusDucis {
         bool EstActivum(int id);
         void Activare(int id);
         void Deactivare(int id);
-        void Transporto(int id, Vector3 positio);
+        void Transporto(int id, Vector3 positio, Quaternion rotatio);
         void IncipereMigrare(int id, Vector3 positio);
         void PonoVelocitatem(int id, float velocitatem);
         void PonoAccelerationem(int id, float accelerationem);

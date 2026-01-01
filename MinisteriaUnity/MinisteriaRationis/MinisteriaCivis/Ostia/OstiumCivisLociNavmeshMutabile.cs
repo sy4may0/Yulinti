@@ -24,9 +24,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (id < 0 || id >= _miCivisLoci.Longitudo) return;
             _miCivisLoci.Deactivare(id);
         }
-        public void Transporto(int id, Vector3 positio) {
+        public void Transporto(int id, Vector3 positio, Quaternion rotatio) {
             if (id < 0 || id >= _miCivisLoci.Longitudo) return;
-            _miCivisLoci.Transporto(id, InterpressNumericus.ToUnity(positio));
+            _miCivisLoci.Transporto(
+                id, InterpressNumericus.ToUnity(positio), InterpressNumericus.ToUnity(rotatio)
+            );
         }
         public void IncipereMigrare(int id, Vector3 positio) {
             if (id < 0 || id >= _miCivisLoci.Longitudo) return;

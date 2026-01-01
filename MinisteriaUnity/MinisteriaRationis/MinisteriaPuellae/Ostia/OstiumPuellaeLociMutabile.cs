@@ -12,6 +12,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miPuellaeLoci = miPuellaeLoci;
         }
 
+        public void Activare() {
+            _miPuellaeLoci.Activare();
+        }
+        public void Deactivare() {
+            _miPuellaeLoci.Deactivare();
+        }
+
         public void PonoPositionemCoacte(System.Numerics.Vector3 positio) {
             _miPuellaeLoci.PonoPositionemCoacte(InterpressNumericus.ToUnity(positio));
         }

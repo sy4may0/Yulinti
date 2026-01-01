@@ -1,5 +1,7 @@
 namespace Yulinti.Dux.ContractusDucis {
     public interface IOstiumPuellaeLociMutabile {
+        void Activare();
+        void Deactivare();
         void PonoPositionemCoacte(System.Numerics.Vector3 positio);
         void PonoRotationemCoacte(System.Numerics.Quaternion rotatio);
         void Moto(

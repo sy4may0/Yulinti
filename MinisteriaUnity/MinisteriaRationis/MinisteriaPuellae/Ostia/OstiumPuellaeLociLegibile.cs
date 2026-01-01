@@ -11,6 +11,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             }
             _miPuellaeLoci = miPuellaeLoci;
         }
+        public bool EstActivum => _miPuellaeLoci.EstActivum;
         public float VelHorizontalisActualis => _miPuellaeLoci.VelHorizontalisActualis;
         public float VelVerticalisActualis => _miPuellaeLoci.VelVerticalisActualis;
         public float RotatioYActualis => _miPuellaeLoci.RotatioYActualis;

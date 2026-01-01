@@ -16,6 +16,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private float _velocitasVerticalisActualis;
         private float _rotationisYActualis;
 
+        private bool _estActivum = false;
+
         public MinisteriumPuellaeLoci(IAnchoraPuellae anchoraPuellae, ITemporis temporis) {
             if (temporis == null) {
                 Errorum.Fatal(IDErrorum.MINIATERIUMPUELLAELOCI_TEMPORIS_NULL);
@@ -30,6 +32,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _velocitasVerticalisActualis = 0f;
             _rotationisYActualis = _characterController.transform.rotation.eulerAngles.y;
         }
+
+        public bool EstActivum => _estActivum;
 
         public float VelHorizontalisActualis => _velocitasHorizontalisActualis;
         public float VelVerticalisActualis => _velocitasVerticalisActualis;
@@ -49,12 +53,23 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _rotationisYActualis = _characterController.transform.rotation.eulerAngles.y;
         }
 
+        public void Activare() {
+            if (_estActivum) return;
+            _estActivum = true;
+        }
+        public void Deactivare() {
+            if (!_estActivum) return;
+            _estActivum = false;
+        }
+
         public void PonoPositionemCoacte(Vector3 positio) {
+            if (!_estActivum) return;
             _characterController.transform.position = positio;
             PurgareVelocitates();
         }
 
         public void PonoRotationemCoacte(Quaternion rotatio) {
+            if (!_estActivum) return;
             _characterController.transform.rotation = rotatio;
             PurgareRotationes();
         }
@@ -68,6 +83,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             float tempusLevigatumRotatioY,
             float intervallum
         ) {
+            if (!_estActivum) return;
             _velocitasHorizontalisActualis = ComputareVelocitasHorizontalis(
                 velocitasHorizontalisDesiderata,
                 tempusLevigatumHorizontalis,

@@ -74,11 +74,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             anchora.NavMeshAgent.enabled = false;
         }
 
-        public void Transporto(int id, Vector3 positio) {
+        public void Transporto(int id, Vector3 positio, Quaternion rotatio) {
             if (!EstActivum(id)) return;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
             anchora.NavMeshAgent.ResetPath();
             anchora.NavMeshAgent.Warp(positio);
+            anchora.NavMeshAgent.transform.rotation = rotatio;
         }
 
         public void IncipereMigrare(int id, Vector3 positio) {

@@ -3,7 +3,6 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 namespace Yulinti.Dux.ContractusDucis {
     public interface IConfiguratioCivisStatuum {
         IDCivisAnimationisContinuata IdAnimationisPraedefinitus { get; }
-        IConfiguratioCivisStatusNavmesh[] StatusNavmesh { get; }
-        IConfiguratioCivisStatusPartis[] StatusPartium { get; }
+        IConfiguratioCivisStatusCorporis[] StatusCorporis { get; }
     }
 }

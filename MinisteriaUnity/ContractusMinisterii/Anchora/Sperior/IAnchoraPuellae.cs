@@ -4,6 +4,7 @@ using Animancer;
 namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
     public interface IAnchoraPuellae : IAnchora {
         CharacterController CharacterController { get; }
+        UnityEngine.AI.NavMeshAgent NavMeshAgent { get; }
         Animator Animator { get; }
         AnimancerComponent Animancer { get; }
 

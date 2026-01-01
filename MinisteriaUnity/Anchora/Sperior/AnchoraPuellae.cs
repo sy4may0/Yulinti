@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 using Animancer;
 using Yulinti.Nucleus;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
@@ -6,6 +7,7 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 namespace Yulinti.MinisteriaUnity.Anchora {
     public sealed class AnchoraPuellae : MonoBehaviour, IAnchora, IAnchoraPuellae {
         [SerializeField] private CharacterController _characterController;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
 
         [SerializeField] private Animator _animator;
         [SerializeField] private AnimancerComponent _animancer;
@@ -52,6 +54,7 @@ namespace Yulinti.MinisteriaUnity.Anchora {
 
 
         public CharacterController CharacterController => _characterController;
+        public NavMeshAgent NavMeshAgent => _navMeshAgent;
         public Animator Animator => _animator;
         public AnimancerComponent Animancer => _animancer;
 
@@ -101,6 +104,10 @@ namespace Yulinti.MinisteriaUnity.Anchora {
             bool result = true;
             if (_characterController == null) {
                 Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_CHARACTERCONTROLLER_NULL);
+                result = false;
+            }
+            if (_navMeshAgent == null) {
+                Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_NAVMESHAGENT_NULL);
                 result = false;
             }
             if (_animator == null) {

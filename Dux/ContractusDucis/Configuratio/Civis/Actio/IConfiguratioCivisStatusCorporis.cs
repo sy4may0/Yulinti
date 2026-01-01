@@ -1,19 +1,23 @@
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.ContractusDucis {
-    public interface IConfiguratioCivisStatusNavmesh {
+    public interface IConfiguratioCivisStatusCorporis {
         IDCivisStatusNavmesh Id { get; }
         IDCivisAnimationisContinuata IdAnimationisIntrare { get; }
         IDCivisAnimationisContinuata IdAnimationisExire { get; }
         bool LudereExire { get; }
-        bool EstLevigatum { get; }
+
+        // ライフタイム消費量
         int ConsumptioVitae { get; }
 
-        // Navmesh設定
-        IDCivisModiNavmesh IdModiNavmesh { get; }
-        float VelocitasDesiderata { get; }
-        float Acceleratio { get; }
-        int VelocitasRotationis { get; }
-        float DistantiaDeaccelerationis { get; }
+        // 視力
+        float Visus { get; }
+        // 視認範囲
+        float VisusDistantia { get; }
+
+        // 聴力
+        float Auditus { get; }
+        // 聴認範囲
+        float AuditusDistantia { get; }
     }
 }

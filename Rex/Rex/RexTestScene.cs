@@ -26,6 +26,7 @@ namespace Yulinti.Rex {
             builder.RegisterInstance<IConfiguratioPuellaeFiguraePelvis>(_configuratio.Puellae.Figura.Pelvis);
             builder.RegisterInstance<IConfiguratioPuellaeRelationisTerrae>(_configuratio.Puellae.Relatio.Terrae);
             builder.RegisterInstance<IConfiguratioPuellaeAnimationis>(_configuratio.Puellae.Animatio);
+            builder.RegisterInstance<IConfiguratioPuellaeLoci>(_configuratio.Puellae.Loci);
             builder.RegisterInstance<IConfiguratioCivis>(_configuratio.Civis);
             builder.RegisterInstance<IConfiguratioCivisLoci>(_configuratio.Civis.Loci);
             builder.RegisterInstance<IConfiguratioCivisAnimationis>(_configuratio.Civis.Animatio);
