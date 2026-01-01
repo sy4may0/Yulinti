@@ -6,14 +6,14 @@ using System;
 namespace Yulinti.Rex {
     internal sealed class PraefectusTestScene : IStartable, ITickable, IFixedTickable, ILateTickable, IDisposable {
         private IMinisteria _ministeria;
-        private IDuxExercitus _duxExercitus;
+        private IDuxExercitus _ducisExercitus;
 
         public PraefectusTestScene(
             IMinisteria ministeria,
-            IDuxExercitus duxExercitus
+            IDuxExercitus ducisExercitus
         ) {
             _ministeria = ministeria;
-            _duxExercitus = duxExercitus;
+            _ducisExercitus = ducisExercitus;
         }
 
         public void Start() {
@@ -21,27 +21,24 @@ namespace Yulinti.Rex {
         }
 
         public void Tick() {
-            _duxExercitus.PulsusPrimum();
             _ministeria.PulsusPrimum();
-
-            _duxExercitus.Pulsus();
+            _ducisExercitus.PulsusPrimum();
             _ministeria.Pulsus();
+            _ducisExercitus.Pulsus();
         }
 
         public void FixedTick() {
-            _duxExercitus.PulsusFixusPrimum();
             _ministeria.PulsusFixusPrimum();
-
-            _duxExercitus.PulsusFixus();
+            _ducisExercitus.PulsusFixusPrimum();
             _ministeria.PulsusFixus();
+            _ducisExercitus.PulsusFixus();
         }
 
         public void LateTick() {
-            _duxExercitus.PulsusTardusPrimum();
             _ministeria.PulsusTardusPrimum();
-
-            _duxExercitus.PulsusTardus();
+            _ducisExercitus.PulsusTardusPrimum();
             _ministeria.PulsusTardus();
+            _ducisExercitus.PulsusTardus();
         }
 
         public void Dispose() {

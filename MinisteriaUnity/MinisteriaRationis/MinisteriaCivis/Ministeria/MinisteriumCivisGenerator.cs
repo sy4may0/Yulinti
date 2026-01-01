@@ -29,13 +29,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         private void Initiare() {
-            Debug.Log("GeneratorCivis Initiare");
             InitiareAsync().Forget(e => Memorator.MemorareException(e));
             TempusExactumInitiareAsync().Forget(e => Memorator.MemorareException(e));
         }
 
         private void Generare() {
-            Debug.Log("GeneratorCivis Generare");
             GenerareAsync().Forget(e => Memorator.MemorareException(e));
         }
         
@@ -50,7 +48,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
                 // LegoIDIntactusはエラーなら-1を返す。Incarnareは-1を無視する。
                 _miCivis.Incarnare(_miCivis.LegoIDIntactus());
-                Debug.Log("GeneratorCivis Incarnare: " + _miCivis.LegoIDIntactus());
             }
             _estInitiare = false;
         }

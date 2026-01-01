@@ -4,66 +4,63 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 namespace Yulinti.Dux.Exercitus {
     internal sealed class CenturioPuellae : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisTardus {
         private readonly MilesPuellaeActionis _milesPuellaeActionis;
+        private readonly MilesPuellaeVeletudinis _milesPuellaeVeletudinis;
+        private readonly MilesPuellaeCrinis _milesPuellaeCrinis;
+        private readonly MilesPuellaeFigurae _milesPuellaeFigurae;
 
-        private readonly ResolutorPuellaeVeletudinis _resolutorVeletudinis;
+        // ResFluida実体
+        private readonly ResFluidaPuellaeMotus _resFluidaMotus;
+        private readonly ResFluidaPuellaeVeletudinis _resFluidaVeletudinis;
 
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
-        private readonly ContextusPuellaeResFluidaLegibile _contextusResFluida;
-
-        private ResFluidaPuellaeVeletudinis _resFluidaVeletudinis;
-        private ResFluidaPuellaeMotus _resFluidaMotus;
+        // ResFluidaファサード
+        private readonly IResFluidaPuellaeLegibile _resFluidaLegibile;
 
         // VContainer注入
         public CenturioPuellae(
-            IConfiguratioExercitusPuellae configuratio,
-            IOstiumTemporisLegibile temporis,
-            IOstiumCameraLegibile camera,
-            IOstiumInputMotusLegibile inputMotus,
-            IOstiumPuellaeLociLegibile puellaeLoci,
-            IOstiumPuellaeRelationisTerraeLegibile relationisTerrae,
-            IOstiumPuellaeOssisLegibile ossis,
-            IOstiumPuellaeAnimationesMutabile osAnimationesMut,
-            IOstiumPuellaeLociMutabile osLociMut
+            MilesPuellaeVeletudinis milesPuellaeVeletudinis,
+            MilesPuellaeActionis milesPuellaeActionis,
+            MilesPuellaeCrinis milesPuellaeCrinis,
+            MilesPuellaeFigurae milesPuellaeFigurae,
+            ResFluidaPuellaeMotus resFluidaMotus,
+            ResFluidaPuellaeVeletudinis resFluidaVeletudinis,
+            IResFluidaPuellaeLegibile resFluidaLegibile
         ) {
-            _resFluidaVeletudinis = new ResFluidaPuellaeVeletudinis();
-            _resFluidaMotus = new ResFluidaPuellaeMotus();
-
-            _contextusResFluida = new ContextusPuellaeResFluidaLegibile(
-                _resFluidaVeletudinis,
-                _resFluidaMotus
-            );
-            _contextusOstiorum = new ContextusPuellaeOstiorumLegibile(
-                configuratio,
-                temporis,
-                camera,
-                inputMotus,
-                puellaeLoci,
-                relationisTerrae,
-                ossis
-            );
-            _resolutorVeletudinis = new ResolutorPuellaeVeletudinis();
-
-            _milesPuellaeActionis = new MilesPuellaeActionis(
-                _contextusOstiorum,
-                osAnimationesMut,
-                osLociMut
-            );
+            _milesPuellaeActionis = milesPuellaeActionis;
+            _milesPuellaeVeletudinis = milesPuellaeVeletudinis;
+            _milesPuellaeCrinis = milesPuellaeCrinis;
+            _milesPuellaeFigurae = milesPuellaeFigurae;
+            _resFluidaMotus = resFluidaMotus;
+            _resFluidaVeletudinis = resFluidaVeletudinis;
+            _resFluidaLegibile = resFluidaLegibile;
         }
 
         public void Pulsus() {
-            _milesPuellaeActionis.OrdinareActionis(_contextusResFluida);
-            _milesPuellaeActionis.ApplicareActionis(_contextusResFluida);
-            _milesPuellaeActionis.RenovareResFluidaMotus(ref _resFluidaMotus);
-            _resolutorVeletudinis.Resolvere(
-                _milesPuellaeActionis.OrdinareVeletudinis(_contextusResFluida)
+            // Veletudoキャッシュを初期化
+            _milesPuellaeVeletudinis.InitarePhantasma(in _resFluidaVeletudinis);
+
+            // Actioループ
+            _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);
+            _milesPuellaeActionis.OrdinareActionis(_resFluidaLegibile);
+            _milesPuellaeActionis.ApplicareActionis(_resFluidaLegibile);
+
+            // Veletudo加算値を反映
+            _milesPuellaeVeletudinis.Resolvere(
+                _milesPuellaeActionis.OrdinareVeletudinis(_resFluidaLegibile)
             );
-            _milesPuellaeActionis.InjicereVelocitatis();
+
+            // ResFluidaMotusを更新
+            _milesPuellaeActionis.RenovareResFluidaMotus(in _resFluidaMotus);
+            // Animation速度を更新
+            _milesPuellaeActionis.InjicereVelocitatis(_resFluidaLegibile);
         }
 
         public void PulsusTardus() {
-            _resolutorVeletudinis.Applicare(
-                ref _resFluidaVeletudinis
-            );
+            // VeletudoキャッシュをResFluidaに反映
+            _milesPuellaeVeletudinis.Applicare(in _resFluidaVeletudinis);
+
+            // BlendShape適用
+            _milesPuellaeFigurae.ApplicareFiguram();
+            
         }
 
     }

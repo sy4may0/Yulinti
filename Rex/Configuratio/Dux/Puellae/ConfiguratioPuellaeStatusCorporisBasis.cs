@@ -3,7 +3,7 @@ using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Rex {
-    public sealed class ConfiguratioPuellaeStatusCorporisBasis : IConfiguratioPuellaeStatusCorporis2 {
+    public abstract class ConfiguratioPuellaeStatusCorporisBasis : ScriptableObject, IConfiguratioPuellaeStatusCorporis {
         [SerializeField] private IDPuellaeStatusCorporis id;
         [SerializeField] private IDPuellaeAnimationisContinuata idAnimationisIntrare;
         [SerializeField] private IDPuellaeAnimationisContinuata idAnimationisExire;

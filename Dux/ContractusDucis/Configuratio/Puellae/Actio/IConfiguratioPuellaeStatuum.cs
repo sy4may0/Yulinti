@@ -10,8 +10,7 @@ namespace Yulinti.Dux.ContractusDucis {
         float VelocitasContactus { get; }
         float VelocitasVerticalisMax { get; }
         IDPuellaeAnimationisContinuata IdAnimationisPraedefinitus { get; }
-        IConfiguratioPuellaeStatusCorporis[] StatusCorporum { get; }
-        IConfiguratioPuellaeStatusPartis[] StatusPartium { get; }
-        IConfiguratioPuellaeStatusCorporis2[] StatuumCorporis { get; }
+        IConfiguratioPuellaeStatusCorporis[] StatuumCorporis { get; }
+        IConfiguratioPuellaeStatusPartis[] StatuumPartium { get; }
    }
 }
