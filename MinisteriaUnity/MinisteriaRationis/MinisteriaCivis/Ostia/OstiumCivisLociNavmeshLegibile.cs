@@ -19,6 +19,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (id < 0 || id >= _miCivisLoci.Longitudo) return false;
             return _miCivisLoci.EstAdPerveni(id);
         }
+        public bool EstMigrare(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return false;
+            return _miCivisLoci.EstMigrare(id);
+        }
         public float VelocitasHorizontalisActualis(int id) {
             if (id < 0 || id >= _miCivisLoci.Longitudo) return 0f;
             return _miCivisLoci.VelocitasHorizontalisActualis(id);

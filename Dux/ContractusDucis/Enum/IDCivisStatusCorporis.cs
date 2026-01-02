@@ -1,5 +1,5 @@
 namespace Yulinti.Dux.ContractusDucis {
-    public enum IDCivisStatusNavmesh {
+    public enum IDCivisStatusCorporis {
         None,
         Nativitas,
         MigrareAditorium,
@@ -8,12 +8,10 @@ namespace Yulinti.Dux.ContractusDucis {
     }
 
     public enum IDCivisStatusCorporisModiMotus {
-        MotusQuietus,
-        MotusLoci
+        MotusQuietus
     }
 
     public enum IDCivisStatusCorporisModiNavmesh {
-        NavmeshQuietus,
-        NavmeshLoci
+        NavmeshLociTemere
     }
 }

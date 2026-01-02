@@ -107,5 +107,6 @@ namespace Yulinti.Dux.Exercitus {
             }
             return 0f;
         }
+
     }
 }

@@ -1,26 +1,38 @@
 using Yulinti.Dux.ContractusDucis;
 namespace Yulinti.Dux.Exercitus {
     internal sealed class ContextusCivisOstiorumLegibile {
+        private readonly IConfiguratioExercitusCivis _configuratio;
         private readonly IOstiumTemporisLegibile _temporis;
         private readonly IOstiumCameraLegibile _camera;
-        private readonly IOstiumCivisLegibile _ostiumCivis;
-        private readonly IOstiumCivisLociNavmeshLegibile _civisLoci;
+        private readonly IOstiumCivisLegibile _civis;
+        private readonly IOstiumCivisLociLegibile _loci;
+        private readonly IOstiumCivisLociNavmeshLegibile _lociNavmesh;
+        private readonly IOstiumPunctumViaeLegibile _punctumViae;
 
         public ContextusCivisOstiorumLegibile(
+            IConfiguratioExercitusCivis configuratio,
             IOstiumTemporisLegibile temporis,
             IOstiumCameraLegibile camera,
-            IOstiumCivisLegibile ostiumCivis,
-            IOstiumCivisLociNavmeshLegibile civisLoci
+            IOstiumCivisLegibile civis,
+            IOstiumCivisLociLegibile loci,
+            IOstiumCivisLociNavmeshLegibile lociNavmesh,
+            IOstiumPunctumViaeLegibile punctumViae
         ) {
+            _configuratio = configuratio;
             _temporis = temporis;
             _camera = camera;
-            _ostiumCivis = ostiumCivis;
-            _civisLoci = civisLoci;
+            _civis = civis;
+            _loci = loci;
+            _lociNavmesh = lociNavmesh;
+            _punctumViae = punctumViae;
         }
 
+        public IConfiguratioExercitusCivis Configuratio => _configuratio;
         public IOstiumTemporisLegibile Temporis => _temporis;
         public IOstiumCameraLegibile Camera => _camera;
-        public IOstiumCivisLegibile OstiumCivis => _ostiumCivis;
-        public IOstiumCivisLociNavmeshLegibile CivisLoci => _civisLoci;
+        public IOstiumCivisLegibile Civis => _civis;
+        public IOstiumCivisLociLegibile Loci => _loci;
+        public IOstiumCivisLociNavmeshLegibile LociNavmesh => _lociNavmesh;
+        public IOstiumPunctumViaeLegibile PunctumViae => _punctumViae;
     }
 }

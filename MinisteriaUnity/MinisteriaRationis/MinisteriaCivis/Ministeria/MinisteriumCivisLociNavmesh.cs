@@ -33,6 +33,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             return AdPerveni(anchora.NavMeshAgent);
         }
 
+        public bool EstMigrare(int id) {
+            if (!EstActivum(id)) return false;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return false;
+            return anchora.NavMeshAgent.pathPending && !anchora.NavMeshAgent.hasPath;
+        }
+
         public float VelocitasHorizontalisActualis(int id) {
             if (!EstActivum(id)) return 0f;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return 0f;
@@ -82,9 +88,16 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             anchora.NavMeshAgent.transform.rotation = rotatio;
         }
 
+        public void InitareMigrare(int id) {
+            if (!EstActivum(id)) return;
+            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.ResetPath();
+        }
+
         public void IncipereMigrare(int id, Vector3 positio) {
             if (!EstActivum(id)) return;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            if (EstMigrare(id)) return;
             anchora.NavMeshAgent.SetDestination(positio);
         }
 

@@ -7,6 +7,7 @@ namespace Yulinti.Dux.ContractusDucis {
         int Longitudo { get; }
         bool EstActivum(int id);
         bool EstAdPerveni(int id);
+        bool EstMigrare(int id);
         float VelocitasHorizontalisActualis(int id);
         float VelocitasVerticalisActualis(int id);
         float RotatioYActualis(int id);

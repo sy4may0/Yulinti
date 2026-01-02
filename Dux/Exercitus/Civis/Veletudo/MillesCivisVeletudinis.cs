@@ -24,6 +24,10 @@ namespace Yulinti.Dux.Exercitus {
             _resolutorVeletudinis.Addo(ordinatio);
         }
 
+        public void ApplicareMors(OrdinatioCivisVeletudinis ordinatio, ResFluidaCivisVeletudinis resFluida) {
+            _resolutorVeletudinis.ApplicareMors(ordinatio, resFluida);
+        }
+
         public void Applicare(ResFluidaCivisVeletudinis resFluida) {
             _resolutorVeletudinis.Applicare(resFluida);
         }
@@ -38,6 +42,10 @@ namespace Yulinti.Dux.Exercitus {
 
         public void Spirituare(int id) {
             _resolutorVeletudinis.Spirituare(id);
+        }
+
+        public void ServereMotus(int id, ResFluidaCivisVeletudinis resFluida) {
+            _resolutorVeletudinis.ServereMotus(id, resFluida);
         }
     }
 }

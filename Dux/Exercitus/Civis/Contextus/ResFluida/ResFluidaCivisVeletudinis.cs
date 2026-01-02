@@ -2,11 +2,13 @@ using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class ResFluidaCivisVeletudinis : IResFluidaCivisVeletudinisLegibile {
-        private int[] _vitae;
+        private float[] _vitae;
         private bool[] _estDominare;
+        // モーション適用有無 StateMachineから捕縛される前までfalse
+        private bool[] _estMotus;
 
         public ResFluidaCivisVeletudinis(IOstiumCivisLegibile ostiumCivis) {
-            _vitae = new int[ostiumCivis.Longitudo];
+            _vitae = new float[ostiumCivis.Longitudo];
             _estDominare = new bool[ostiumCivis.Longitudo];
             for (int i = 0; i < ostiumCivis.Longitudo; i++) {
                 _vitae[i] = 100;
@@ -21,7 +23,7 @@ namespace Yulinti.Dux.Exercitus {
             return _estDominare[idCivis];
         }
 
-        public int Vitae(int idCivis) {
+        public float Vitae(int idCivis) {
             if (!estActivum(idCivis)) return 0;
             return _vitae[idCivis];
         }
@@ -32,7 +34,12 @@ namespace Yulinti.Dux.Exercitus {
             if (!estActivum(idCivis)) return false;
             return _vitae[idCivis] <= 0;
         }
-        public void RenovareVitae(int idCivis, int vitae) {
+        public bool EstMotus(int idCivis) {
+            if (!estActivum(idCivis)) return false;
+            return _estMotus[idCivis];
+        }
+
+        public void RenovareVitae(int idCivis, float vitae) {
             if (!estActivum(idCivis)) return;
             _vitae[idCivis] = vitae;
         }
@@ -41,11 +48,18 @@ namespace Yulinti.Dux.Exercitus {
             if (_estDominare[idCivis]) return;
             _vitae[idCivis] = 100;
             _estDominare[idCivis] = true;
+            _estMotus[idCivis] = false;
         }
         public void Liberare(int idCivis) {
             if (!estActivum(idCivis)) return;
             _vitae[idCivis] = 100;
             _estDominare[idCivis] = false;
+            _estMotus[idCivis] = false;
+        }
+
+        public void ServereMotus(int idCivis) {
+            if (!estActivum(idCivis)) return;
+            _estMotus[idCivis] = true;
         }
     }
 }

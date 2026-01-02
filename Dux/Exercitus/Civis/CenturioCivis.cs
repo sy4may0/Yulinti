@@ -4,6 +4,7 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 namespace Yulinti.Dux.Exercitus {
     internal sealed class CenturioCivis : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisTardus {
         private readonly MilesCivisVeletudinis _milesCivisVeletudinis;
+        private readonly MilesCivisActionis _milesCivisActionis;
 
         // ResFluida実体
         private readonly ResFluidaCivisMotus _resFluidaMotus;
@@ -15,6 +16,7 @@ namespace Yulinti.Dux.Exercitus {
         // VContainer注入
         public CenturioCivis(
             MilesCivisVeletudinis milesCivisVeletudinis,
+            MilesCivisActionis milesCivisActionis,
             ResFluidaCivisMotus resFluidaMotus,
             ResFluidaCivisVeletudinis resFluidaVeletudinis,
             IResFluidaCivisLegibile resFluidaLegibile

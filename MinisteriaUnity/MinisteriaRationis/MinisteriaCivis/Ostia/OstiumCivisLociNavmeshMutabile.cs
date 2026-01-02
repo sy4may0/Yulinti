@@ -30,6 +30,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 id, InterpressNumericus.ToUnity(positio), InterpressNumericus.ToUnity(rotatio)
             );
         }
+        public void InitareMigrare(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
+            _miCivisLoci.InitareMigrare(id);
+        }
         public void IncipereMigrare(int id, Vector3 positio) {
             if (id < 0 || id >= _miCivisLoci.Longitudo) return;
             _miCivisLoci.IncipereMigrare(id, InterpressNumericus.ToUnity(positio));
