@@ -7,14 +7,14 @@ namespace Yulinti.Dux.Exercitus {
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ){
-            return resFluida.Veletudinis.Vigor <= Numerus.Epsilon;
+            return resFluida.Veletudinis.EstExhauritaVigoris;
         }
 
         public static bool EstExhauritaPatientiae(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ){
-            return resFluida.Veletudinis.Patientia <= Numerus.Epsilon;
+            return resFluida.Veletudinis.EstExhauritaPatientiae;
         }
     }
 }

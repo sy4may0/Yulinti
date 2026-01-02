@@ -9,14 +9,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miCivis = miCivis;
         }
 
-        public void Dominare(int id) {
-            _miCivis.Dominare(id);
-        }
-
-        public void Liberare(int id) {
-            _miCivis.Liberare(id);
-        }
-
         public void Incarnare(int id) {
             _miCivis.Incarnare(id);
         }
@@ -27,6 +19,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public void TerminareGenerare() {
             _miCivisGenerator.Terminare();
+        }
+
+        public void Servare() {
+            _miCivis.Servare();
         }
 
         public int[] IDs => _miCivis.IDs;

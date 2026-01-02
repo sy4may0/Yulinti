@@ -38,7 +38,7 @@ namespace Yulinti.Dux.Exercitus {
             _phantasmaIntentio = resFluida.Intentio;
         }
 
-        public void Resolvere(OrdinatioPuellaeVeletudinis ordinatio) {
+        public void Addo(OrdinatioPuellaeVeletudinis ordinatio) {
             _phantasmaVigoris += ordinatio.DtVigoris;
             _phantasmaPatientiae += ordinatio.DtPatientiae;
             _phantasmaClaritas += ordinatio.DtClaritatis;
@@ -53,6 +53,22 @@ namespace Yulinti.Dux.Exercitus {
             resFluida.RenovareAether(DuxMath.Clamp(_phantasmaAether, 0f, _atherirMaxima));
             resFluida.RenovareIntentio(DuxMath.Clamp(_phantasmaIntentio, 0f, _intentioMaxima));
             Purgare();
+        }
+
+        public void Resolvere(
+            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            in ResFluidaPuellaeVeletudinis resFluida
+        ) {
+            resFluida.ResolvereExhauritaVigoris(
+                contextusOstiorum.Configuratio.Veletudo.LimenExhauritaVigoris,
+                contextusOstiorum.Configuratio.Veletudo.LimenRefectaVigoris,
+                _vigorMaxima
+            );
+            resFluida.ResolvereExhauritaPatientiae(
+                contextusOstiorum.Configuratio.Veletudo.LimenExhauritaPatientiae,
+                contextusOstiorum.Configuratio.Veletudo.LimenRefectaPatientiae,
+                _patientiaMaxima
+            );
         }
 
         public void Purgare() {

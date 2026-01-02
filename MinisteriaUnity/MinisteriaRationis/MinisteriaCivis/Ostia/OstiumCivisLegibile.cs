@@ -10,14 +10,14 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public int[] IDs => _miCivis.IDs;
         public int Longitudo => _miCivis.Longitudo;
+        public int LongitudoActivum => _miCivis.LongitudoActivum;
         public int LegoIDIntactus() => _miCivis.LegoIDIntactus();
         public bool EstActivum(int id) {
             if (id < 0 || id >= _miCivis.Longitudo) return false;
             return _miCivis.EstActivum(id);
         }
-        public bool EstServam(int id) {
-            if (id < 0 || id >= _miCivis.Longitudo) return false;
-            return _miCivis.EstServam(id);
-        }
+
+        public bool EstServam => _miCivis.EstServam;
+        public void Servare() => _miCivis.Servare();
     }
 }

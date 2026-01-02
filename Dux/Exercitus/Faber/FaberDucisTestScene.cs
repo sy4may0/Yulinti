@@ -17,17 +17,33 @@ namespace Yulinti.Dux.Exercitus {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            builder.Register<ResFluidaCivisMotus>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<ResFluidaCivisVeletudinis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<ResFluidaCivisLegibile>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
             // ContextusOstiorum
             builder.Register<ContextusPuellaeOstiorumLegibile>(Lifetime.Singleton);
+            builder.Register<ContextusCivisOstiorumLegibile>(Lifetime.Singleton);
 
             // Miles
             builder.Register<MilesPuellaeActionis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVeletudinis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeCrinis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeFigurae>(Lifetime.Singleton);
+            builder.Register<MilesCivisVeletudinis>(Lifetime.Singleton);
 
             // Centurio
             builder.Register<CenturioPuellae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CenturioCivis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 

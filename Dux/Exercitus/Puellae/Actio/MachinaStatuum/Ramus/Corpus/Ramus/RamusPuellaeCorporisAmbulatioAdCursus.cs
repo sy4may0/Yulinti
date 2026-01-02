@@ -9,7 +9,8 @@ namespace Yulinti.Dux.Exercitus {
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            return CondicioPuellaeInput.EstCursus(contextusOstiorum, resFluida);
+            return CondicioPuellaeInput.EstCursus(contextusOstiorum, resFluida) && 
+                   !CondicioPuellaeVeletudinis.EstExhauritaPatientiae(contextusOstiorum, resFluida);
         }
     }
 }

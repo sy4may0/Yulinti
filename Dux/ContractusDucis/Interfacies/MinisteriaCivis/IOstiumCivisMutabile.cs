@@ -3,10 +3,6 @@ namespace Yulinti.Dux.ContractusDucis {
         int[] IDs { get; }
         int Longitudo { get; }
         bool EstActivum(int id);
-        // Dux管理化へ登録
-        void Dominare(int id);
-        // Dux管理化から削除
-        void Liberare(int id);
 
         // 実体化
         void Incarnare(int id);
@@ -15,5 +11,8 @@ namespace Yulinti.Dux.ContractusDucis {
 
         // 自動生成終了
         void TerminareGenerare();
+
+        // 全員奴隷化完了フラグを立てる
+        void Servare();
     }
 }

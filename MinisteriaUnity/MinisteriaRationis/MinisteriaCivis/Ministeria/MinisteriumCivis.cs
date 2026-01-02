@@ -7,42 +7,31 @@ using Yulinti.Nucleus;
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCivis {
         private readonly TabulaCivis _tabulaCivis;
-        private bool[] _estServam;
+        // Dirtyフラグ。Incarnare/Spirituareにより状態が変わったらfalse、処理したらtrue。
+        private bool _estServam;
 
         public MinisteriumCivis(TabulaCivis tabulaCivis, IConfiguratioCivisGenerator configuratio) {
             _tabulaCivis = tabulaCivis;
-            _estServam = new bool[tabulaCivis.Longitudo];
-            for (int id = 0; id < tabulaCivis.Longitudo; id++) {
-                _estServam[id] = false;
-            }
         }
 
         public int[] IDs => _tabulaCivis.IDs;
         public int Longitudo => _tabulaCivis.Longitudo;
         public int LongitudoActivum => longitudoActivum();
         public bool EstActivum(int id) => estActivum(id);
-        public bool EstServam(int id) => _estServam[id];
-
-        public void Dominare(int id) {
-            if (id < 0 || id >= _tabulaCivis.Longitudo) return;
-            _estServam[id] = true;
-        }
-
-        public void Liberare(int id) {
-            if (id < 0 || id >= _tabulaCivis.Longitudo) return;
-            _estServam[id] = false;
-        }
+        public bool EstServam => _estServam;
 
         public void Incarnare(int id) {
             if (id < 0 || id >= _tabulaCivis.Longitudo) return;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
             anchora.Incarnare();
+            _estServam = false;
         }
 
         public void Spirituare(int id) {
             if (id < 0 || id >= _tabulaCivis.Longitudo) return;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
             anchora.Spirituare();
+            _estServam = false;
         }
 
         // 非実体化ID(Incarnareされていない者)を取得
@@ -55,6 +44,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 break;
             }
             return id;
+        }
+
+        public void Servare() {
+            _estServam = true;
         }
 
         private bool estActivum(int id) {

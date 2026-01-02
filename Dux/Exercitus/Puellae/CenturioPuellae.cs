@@ -37,6 +37,8 @@ namespace Yulinti.Dux.Exercitus {
         public void Pulsus() {
             // Veletudoキャッシュを初期化
             _milesPuellaeVeletudinis.InitarePhantasma(in _resFluidaVeletudinis);
+            // VeletudoExhauritaチェック
+            _milesPuellaeVeletudinis.Resolvere(in _resFluidaVeletudinis);
 
             // Actioループ
             _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);
@@ -44,7 +46,7 @@ namespace Yulinti.Dux.Exercitus {
             _milesPuellaeActionis.ApplicareActionis(_resFluidaLegibile);
 
             // Veletudo加算値を反映
-            _milesPuellaeVeletudinis.Resolvere(
+            _milesPuellaeVeletudinis.Addo(
                 _milesPuellaeActionis.OrdinareVeletudinis(_resFluidaLegibile)
             );
 
