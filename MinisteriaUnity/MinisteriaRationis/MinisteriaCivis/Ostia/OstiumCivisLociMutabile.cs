@@ -8,49 +8,60 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public OstiumCivisLociMutabile(MinisteriumCivisLoci miCivisLoci) {
             _miCivisLoci = miCivisLoci;
         }
+
+        private bool VerificareID(int id) {
+            if (id < 0 || id >= _miCivisLoci.Longitudo) return false;
+            return true;
+        }
+
         public int[] IDs => _miCivisLoci.IDs;
         public int Longitudo => _miCivisLoci.Longitudo;
         public bool EstActivum(int id) {
-            if (id < 0 || id >= _miCivisLoci.Longitudo) return false;
+            if (!VerificareID(id)) return false;
             return _miCivisLoci.EstActivum(id);
         }
-        public void Activare(int id) {
-            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
-            _miCivisLoci.Activare(id);
+        public void ActivareMotus(int id) {
+            if (!VerificareID(id)) return;
+            _miCivisLoci.ActivareMotus(id);
         }
-        public void Deactivare(int id) {
-            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
-            _miCivisLoci.Deactivare(id);
+        public void ActivareNavMesh(int id) {
+            if (!VerificareID(id)) return;
+            _miCivisLoci.ActivareNavMesh(id);
         }
-        public void PonoPositionemCoacte(int id, Vector3 positio) {
-            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
-            _miCivisLoci.PonoPositionemCoacte(id, InterpressNumericus.ToUnity(positio));
-        }
-        public void PonoRotationemCoacte(int id, Quaternion rotatio) {
-            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
-            _miCivisLoci.PonoRotationemCoacte(id, InterpressNumericus.ToUnity(rotatio));
-        }
-        public void Moto(
-            int id, 
-            float velocitasHorizontalisDesiderata, 
-            float tempusLevigatumHorizontalis, 
-            float velocitasVerticalisDesiderata, 
-            float tempusLevigatumVerticalis, 
-            float rotatioYDesiderata, 
-            float tempusLevigatumRotatioY, 
-            float intervallum
-        ) {
-            if (id < 0 || id >= _miCivisLoci.Longitudo) return;
-            _miCivisLoci.Moto(
-                id, 
-                velocitasHorizontalisDesiderata, 
-                tempusLevigatumHorizontalis, 
-                velocitasVerticalisDesiderata, 
-                tempusLevigatumVerticalis, 
-                rotatioYDesiderata, 
-                tempusLevigatumRotatioY, 
-                intervallum
+        public void Transporto(int id, Vector3 positio, Quaternion rotatio) {
+            if (!VerificareID(id)) return;
+            _miCivisLoci.Transporto(id, 
+                InterpressNumericus.ToUnity(positio),
+                InterpressNumericus.ToUnity(rotatio)
             );
+        }
+        public void InitareMigrare(int id) {
+            if (!VerificareID(id)) return;
+            _miCivisLoci.InitareMigrare(id);
+        }
+        public void IncipereMigrare(int id, Vector3 positio) {
+            if (!VerificareID(id)) return;
+            _miCivisLoci.IncipereMigrare(id, InterpressNumericus.ToUnity(positio));
+        }
+        public void PonoVelocitatem(int id, float velocitatem) {
+            if (!VerificareID(id)) return;
+            _miCivisLoci.PonoVelocitatem(id, velocitatem);
+        }
+        public void PonoAccelerationem(int id, float accelerationem) {
+            if (!VerificareID(id)) return;
+            _miCivisLoci.PonoAccelerationem(id, accelerationem);
+        }
+        public void PonoVelocitatemRotationis(int id, int velocitatemRotationisDeg) {
+            if (!VerificareID(id)) return;
+            _miCivisLoci.PonoVelocitatemRotationis(id, velocitatemRotationisDeg);
+        }
+        public void PonoDistantiaDeaccelerationis(int id, float distantiaDeaccelerationis) {
+            if (!VerificareID(id)) return;
+            _miCivisLoci.PonoDistantiaDeaccelerationis(id, distantiaDeaccelerationis);
+        }
+        public void Moto(int id, float velocitasHorizontalisDesiderata, float tempusLevigatumHorizontalis, float rotatioYDesiderata, float tempusLevigatumRotatioY, float intervallum) {
+            if (!VerificareID(id)) return;
+            _miCivisLoci.Moto(id, velocitasHorizontalisDesiderata, tempusLevigatumHorizontalis, rotatioYDesiderata, tempusLevigatumRotatioY, intervallum);
         }
     }
 }

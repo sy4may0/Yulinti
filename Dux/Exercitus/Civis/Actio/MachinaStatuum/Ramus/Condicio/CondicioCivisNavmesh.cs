@@ -5,7 +5,7 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum
         ) {
-            return contextusOstiorum.LociNavmesh.EstAdPerveni(idCivis);
+            return contextusOstiorum.Loci.EstAdPerveni(idCivis);
         }
     }
 }

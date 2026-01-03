@@ -8,7 +8,7 @@ namespace Yulinti.Dux.ContractusDucis {
         bool LudereExire { get; }
 
         // ライフタイム消費量
-        int ConsumptioVitae { get; }
+        float ConsumptioVitae { get; }
 
         // 視力
         float Visus { get; }

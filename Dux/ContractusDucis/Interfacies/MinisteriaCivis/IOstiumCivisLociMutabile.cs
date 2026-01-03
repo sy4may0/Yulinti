@@ -3,16 +3,19 @@ namespace Yulinti.Dux.ContractusDucis {
         int[] IDs { get; }
         int Longitudo { get; }
         bool EstActivum(int id);
-        void Activare(int id);
-        void Deactivare(int id);
-        void PonoPositionemCoacte(int id, System.Numerics.Vector3 positio);
-        void PonoRotationemCoacte(int id, System.Numerics.Quaternion rotatio);
+        void ActivareMotus(int id);
+        void ActivareNavMesh(int id);
+        void Transporto(int id, System.Numerics.Vector3 positio, System.Numerics.Quaternion rotatio);
+        void InitareMigrare(int id);
+        void IncipereMigrare(int id, System.Numerics.Vector3 positio);
+        void PonoVelocitatem(int id, float velocitatem);
+        void PonoAccelerationem(int id, float accelerationem);
+        void PonoVelocitatemRotationis(int id, int velocitatemRotationisDeg);
+        void PonoDistantiaDeaccelerationis(int id, float distantiaDeaccelerationis);
         void Moto(
             int id,
             float velocitasHorizontalisDesiderata,
             float tempusLevigatumHorizontalis,
-            float velocitasVerticalisDesiderata,
-            float tempusLevigatumVerticalis,
             float rotatioYDesiderata,
             float tempusLevigatumRotatioY,
             float intervallum

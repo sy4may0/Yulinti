@@ -89,10 +89,10 @@ namespace Yulinti.Dux.Exercitus {
             } else if (ordinatio.EstSpirituare) {
                 Spirituare(ordinatio.IdCivis);
             }
+        }
 
-            if (ordinatio.EstMotus) {
-                resFluida.ServereMotus(ordinatio.IdCivis);
-            }
+        public void Servatum(int id, ResFluidaCivisVeletudinis resFluida) {
+            resFluida.ServereMotus(id);
         }
 
         public void LiberareServatum(int id, ResFluidaCivisVeletudinis resFluida) {

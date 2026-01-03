@@ -45,6 +45,10 @@ namespace Yulinti.Dux.Exercitus {
             _resolutorVeletudinis.ApplicareMors(ordinatio, resFluida);
         }
 
+        public void Servatum(int id, ResFluidaCivisVeletudinis resFluida) {
+            _resolutorVeletudinis.Servatum(id, resFluida);
+        }
+
         public void LiberareServatum(int id, ResFluidaCivisVeletudinis resFluida) {
             _resolutorVeletudinis.LiberareServatum(id, resFluida);
         }

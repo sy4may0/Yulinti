@@ -5,18 +5,15 @@ using Yulinti.Nucleus;
 namespace Yulinti.Dux.Exercitus {
     internal sealed class MotorCivisActionis {
         private readonly IOstiumCivisLociMutabile _ostiumCivisLociMutabile;
-        private readonly IOstiumCivisLociNavmeshMutabile _ostiumCivisLociNavmeshMutabile;
         private readonly ContextusCivisOstiorumLegibile _contextusOstiorum;
 
         private readonly SpeciesOrdinationisCivis?[] _speciesActualis;
 
         public MotorCivisActionis(
             ContextusCivisOstiorumLegibile contextusOstiorum,
-            IOstiumCivisLociMutabile ostiumCivisLociMutabile,
-            IOstiumCivisLociNavmeshMutabile ostiumCivisLociNavmeshMutabile
+            IOstiumCivisLociMutabile ostiumCivisLociMutabile
         ) {
             _ostiumCivisLociMutabile = ostiumCivisLociMutabile;
-            _ostiumCivisLociNavmeshMutabile = ostiumCivisLociNavmeshMutabile;
             _contextusOstiorum = contextusOstiorum;
             _speciesActualis = new SpeciesOrdinationisCivis?[contextusOstiorum.Civis.Longitudo];
         }
@@ -44,8 +41,6 @@ namespace Yulinti.Dux.Exercitus {
                 idCivis,
                 motus.Horizontalis.Velocitas,
                 motus.Horizontalis.TempusLevigatum,
-                motus.Verticalis.Velocitas,
-                motus.Verticalis.TempusLevigatum,
                 motus.RotationisY.RotatioY,
                 motus.RotationisY.TempusLevigatum,
                 _contextusOstiorum.Temporis.Intervallum
@@ -59,12 +54,12 @@ namespace Yulinti.Dux.Exercitus {
             if (_speciesActualis[idCivis] != SpeciesOrdinationisCivis.Navmesh) {
                 IntrareNavmesh(idCivis);
             }
-            _ostiumCivisLociNavmeshMutabile.InitareMigrare(idCivis);
-            _ostiumCivisLociNavmeshMutabile.IncipereMigrare(idCivis, navmesh.Positio);
-            _ostiumCivisLociNavmeshMutabile.PonoVelocitatem(idCivis, navmesh.VelocitasDesiderata);
-            _ostiumCivisLociNavmeshMutabile.PonoAccelerationem(idCivis, navmesh.Acceleratio);
-            _ostiumCivisLociNavmeshMutabile.PonoVelocitatemRotationis(idCivis, navmesh.VelocitasRotationis);
-            _ostiumCivisLociNavmeshMutabile.PonoDistantiaDeaccelerationis(idCivis, navmesh.DistantiaDeaccelerationis);
+            _ostiumCivisLociMutabile.InitareMigrare(idCivis);
+            _ostiumCivisLociMutabile.IncipereMigrare(idCivis, navmesh.Positio);
+            _ostiumCivisLociMutabile.PonoVelocitatem(idCivis, navmesh.VelocitasDesiderata);
+            _ostiumCivisLociMutabile.PonoAccelerationem(idCivis, navmesh.Acceleratio);
+            _ostiumCivisLociMutabile.PonoVelocitatemRotationis(idCivis, navmesh.VelocitasRotationis);
+            _ostiumCivisLociMutabile.PonoDistantiaDeaccelerationis(idCivis, navmesh.DistantiaDeaccelerationis);
         }
 
         private void ApplicareInitareNavmesh(
@@ -74,56 +69,23 @@ namespace Yulinti.Dux.Exercitus {
             if (_speciesActualis[idCivis] != SpeciesOrdinationisCivis.InitareNavmesh) {
                 IntrareNavmesh(idCivis);
             }
-            _ostiumCivisLociNavmeshMutabile.Transporto(idCivis, initareNavmesh.Positio, _contextusOstiorum.LociNavmesh.Rotatio(idCivis));
+            _ostiumCivisLociMutabile.Transporto(idCivis, initareNavmesh.Positio, _contextusOstiorum.Loci.Rotatio(idCivis));
         }
 
         private void IntrareMotus(int idCivis) {
-            Vector3 positio = _contextusOstiorum.LociNavmesh.Positio(idCivis);
-            Quaternion rotatio = _contextusOstiorum.LociNavmesh.Rotatio(idCivis);
-
-            _ostiumCivisLociNavmeshMutabile.Deactivare(idCivis);
-            _ostiumCivisLociMutabile.Activare(idCivis);
-
-            _ostiumCivisLociMutabile.PonoPositionemCoacte(idCivis, positio);
-            _ostiumCivisLociMutabile.PonoRotationemCoacte(idCivis, rotatio);
+            _ostiumCivisLociMutabile.ActivareMotus(idCivis);
         }
 
         private void IntrareNavmesh(int idCivis) {
-            Vector3 positio = _contextusOstiorum.Loci.Positio(idCivis);
-            Quaternion rotatio = _contextusOstiorum.Loci.Rotatio(idCivis);
-            _ostiumCivisLociMutabile.Deactivare(idCivis);
-            _ostiumCivisLociNavmeshMutabile.Activare(idCivis);
-            _ostiumCivisLociNavmeshMutabile.Transporto(idCivis, positio, rotatio);
+            _ostiumCivisLociMutabile.ActivareNavMesh(idCivis);
         }
 
         public float VelocitasHorizontalisActualis(int idCivis) {
-            if (_speciesActualis[idCivis] == SpeciesOrdinationisCivis.Motus) {
-                return _contextusOstiorum.Loci.VelHorizontalisActualis(idCivis);
-            }
-            if (_speciesActualis[idCivis] == SpeciesOrdinationisCivis.Navmesh) {
-                return _contextusOstiorum.LociNavmesh.VelocitasHorizontalisActualis(idCivis);
-            }
-            return 0f;
-        }
-
-        public float VelocitasVerticalisActualis(int idCivis) {
-            if (_speciesActualis[idCivis] == SpeciesOrdinationisCivis.Motus) {
-                return _contextusOstiorum.Loci.VelVerticalisActualis(idCivis);
-            }
-            if (_speciesActualis[idCivis] == SpeciesOrdinationisCivis.Navmesh) {
-                return _contextusOstiorum.LociNavmesh.VelocitasVerticalisActualis(idCivis);
-            }
-            return 0f;
+            return _contextusOstiorum.Loci.VelocitasHorizontalisActualis(idCivis);
         }
 
         public float RotatioYActualis(int idCivis) {
-            if (_speciesActualis[idCivis] == SpeciesOrdinationisCivis.Motus) {
-                return _contextusOstiorum.Loci.RotatioYActualis(idCivis);
-            }
-            if (_speciesActualis[idCivis] == SpeciesOrdinationisCivis.Navmesh) {
-                return _contextusOstiorum.LociNavmesh.RotatioYActualis(idCivis);
-            }
-            return 0f;
+            return _contextusOstiorum.Loci.RotatioYActualis(idCivis);
         }
     }
 }

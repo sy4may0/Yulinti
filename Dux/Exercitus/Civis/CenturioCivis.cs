@@ -43,8 +43,12 @@ namespace Yulinti.Dux.Exercitus {
                     var (initare, intrareStatus) = _milesCivisActionis.InitareServatum(i, _resFluidaLegibile);
                     ResolvereOrdinatio(initare);
                     ResolvereOrdinatio(intrareStatus);
+
+                    // EstDominareとEstMotusを同期する。
+                    _milesCivisVeletudinis.Servatum(i, _resFluidaVeletudinis);
                 }
                 if (!_resFluidaVeletudinis.EstDominare(i) && _resFluidaVeletudinis.EstMotus(i)) {
+                    // EstDominareとEstMotusを同期する。
                     _milesCivisVeletudinis.LiberareServatum(i, _resFluidaVeletudinis);
                 }
 

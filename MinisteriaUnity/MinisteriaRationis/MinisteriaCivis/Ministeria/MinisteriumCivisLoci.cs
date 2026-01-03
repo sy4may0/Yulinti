@@ -1,126 +1,217 @@
 using UnityEngine;
+using UnityEngine.AI;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.Dux.ContractusDucis;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCivisLoci {
         private readonly TabulaCivis _tabulaCivis;
+        private readonly IConfiguratioCivisLoci _configLoci;
 
-        private float[] _refVelocitisHorizontalis;
-        private float[] _refVelocitisVerticalis;
-        private float[] _refRotationisY;
+        private readonly float[] _refVelocitisHorizontalis;
+        private readonly float[] _refRotationisY;
 
-        private float[] _velocitasHorizontalisActualis;
-        private float[] _velocitasVerticalisActualis;
-        private float[] _rotationisYActualis;
+        private readonly float[] _velocitasHorizontalisActualis;
+        private readonly float[] _rotationisYActualis;
 
-        private bool[] _estActivumCC;
+        private bool[] _estMotus;
+        private bool[] _estNavMesh;
 
-        public MinisteriumCivisLoci(TabulaCivis tabulaCivis) {
+        public MinisteriumCivisLoci(
+            TabulaCivis tabulaCivis,
+            IConfiguratioCivisLoci configLoci
+        ) {
             _tabulaCivis = tabulaCivis;
-            // 0fですべて初期化
+            _configLoci = configLoci;
+
             _refVelocitisHorizontalis = new float[tabulaCivis.Longitudo];
-            _refVelocitisVerticalis = new float[tabulaCivis.Longitudo];
             _refRotationisY = new float[tabulaCivis.Longitudo];
             _velocitasHorizontalisActualis = new float[tabulaCivis.Longitudo];
-            _velocitasVerticalisActualis = new float[tabulaCivis.Longitudo];
             _rotationisYActualis = new float[tabulaCivis.Longitudo];
-            _estActivumCC = new bool[tabulaCivis.Longitudo];
+
+            _estMotus = new bool[tabulaCivis.Longitudo];
+            _estNavMesh = new bool[tabulaCivis.Longitudo];
+            for (int id = 0; id < tabulaCivis.Longitudo; id++) {
+                _estMotus[id] = true;
+                _estNavMesh[id] = false;
+            }
         }
 
         public int[] IDs => _tabulaCivis.IDs;
         public int Longitudo => _tabulaCivis.Longitudo;
 
-        public bool EstActivum(int id) {
-            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return false;
+        private bool ConareLegoNavMesh(int id, out IAnchoraCivis anchora) {
+            if (!_tabulaCivis.ConareLego(id, out anchora)) return false;
+            if (anchora.NavMeshAgent == null) return false;
             if (!anchora.EstActivum) return false;
-            if (anchora.CharacterController == null) return false;
-            if (!_estActivumCC[id]) return false;
-            return true;
+            return anchora.NavMeshAgent.enabled;
         }
 
+        public bool EstActivum(int id) {
+            return ConareLegoNavMesh(id, out _);
+        }
+
+        public void ActivareMotus(int id) {
+            if (EstActivumMotus(id)) return;
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.isStopped = true;
+            anchora.NavMeshAgent.updateRotation = false;
+            anchora.NavMeshAgent.updatePosition = false;
+            _estMotus[id] = true;
+            _estNavMesh[id] = false;
+            // 速度をNavMesh移動から同期する。
+            _velocitasHorizontalisActualis[id] = VelocitasHorizontalisNavMesh(id, anchora);
+            _rotationisYActualis[id] = anchora.NavMeshAgent.transform.eulerAngles.y;
+            anchora.NavMeshAgent.ResetPath();
+        }
+
+        public void ActivareNavMesh(int id) {
+            if (EstActivumNavMesh(id)) return;
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.isStopped = false;
+            anchora.NavMeshAgent.updateRotation = true;
+            anchora.NavMeshAgent.updatePosition = true;
+            _estMotus[id] = false;
+            _estNavMesh[id] = true;
+            // 多分NavMeshAgentに初速を与えることができない。 
+            Transporto(
+                id,
+                anchora.NavMeshAgent.transform.position,
+                anchora.NavMeshAgent.transform.rotation
+            );
+            anchora.NavMeshAgent.ResetPath();
+        }
+
+        public bool EstActivumMotus(int id) {
+            return _estMotus[id];
+        }
+        public bool EstActivumNavMesh(int id) {
+            return _estNavMesh[id];
+        }
+
+        // NavMesh制御
+        public bool EstAdPerveni(int id) {
+            if (!EstActivumNavMesh(id)) return false;
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return false;
+            if (!anchora.NavMeshAgent.pathPending) {
+                if (anchora.NavMeshAgent.remainingDistance <= _configLoci.DistantiaAdPerveni) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // NavMesh制御
+        public bool EstMigrare(int id) {
+            if (!EstActivumNavMesh(id)) return false;
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return false;
+            return !anchora.NavMeshAgent.pathPending && anchora.NavMeshAgent.hasPath;
+        }
+
+        // 共通
         public float VelocitasHorizontalisActualis(int id) {
-            if (!EstActivum(id)) return 0f;
-            return _velocitasHorizontalisActualis[id];
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return 0f;
+            if (EstActivumNavMesh(id)) {
+                return VelocitasHorizontalisNavMesh(id, anchora);
+            } else {
+                return _velocitasHorizontalisActualis[id];
+            }
         }
 
-        public float VelocitasVerticalisActualis(int id) {
-            if (!EstActivum(id)) return 0f;
-            return _velocitasVerticalisActualis[id];
+        private float VelocitasHorizontalisNavMesh(int id, IAnchoraCivis anchora) {
+            Vector3 v = anchora.NavMeshAgent.velocity;
+            Vector3 hv = new Vector3(v.x, 0f, v.z);
+            return hv.magnitude;
         }
 
+        // 共通
         public float RotatioYActualis(int id) {
-            if (!EstActivum(id)) return 0f;
-            return _rotationisYActualis[id];
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return 0f;
+            return anchora.NavMeshAgent.transform.eulerAngles.y;
         }
 
+        // 共通
         public Vector3 Positio(int id) {
-            if (!EstActivum(id)) return Vector3.zero;
-            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return Vector3.zero;
-            return anchora.CharacterController.transform.position;
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return Vector3.zero;
+            return anchora.NavMeshAgent.transform.position;
         }
+
+        // 共通
         public Quaternion Rotatio(int id) {
-            if (!EstActivum(id)) return Quaternion.identity;
-            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return Quaternion.identity;
-            return anchora.CharacterController.transform.rotation;
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return Quaternion.identity;
+            return anchora.NavMeshAgent.transform.rotation;
         }
 
-        private void PurgareVelocitates(int id) {
-            _refVelocitisHorizontalis[id] = 0f;
-            _refVelocitisVerticalis[id] = 0f;
-            _velocitasHorizontalisActualis[id] = 0f;
-            _velocitasVerticalisActualis[id] = 0f;
-        }
-        private void PurgareRotationes(int id) {
-            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
-            _refRotationisY[id] = 0f;
-            _rotationisYActualis[id] = anchora.CharacterController.transform.rotation.eulerAngles.y;
-        }
-
-        public void Activare(int id) {
-            _estActivumCC[id] = true;
-        }
-        public void Deactivare(int id) {
-            _estActivumCC[id] = false;
+        // 共通
+        public void Transporto(int id, Vector3 positio, Quaternion rotatio) {
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
+            if (NavMesh.SamplePosition(positio, out NavMeshHit hit, 5f, NavMesh.AllAreas)) {
+                positio = hit.position;
+            }
+            anchora.NavMeshAgent.Warp(positio);
+            anchora.NavMeshAgent.transform.rotation = rotatio;
+            Purgare(id, anchora.NavMeshAgent);
         }
 
-        public void PonoPositionemCoacte(int id, Vector3 positio) {
-            if (!EstActivum(id)) return;
-            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
-            anchora.CharacterController.transform.position = positio;
-            PurgareVelocitates(id);
-        }
-        public void PonoRotationemCoacte(int id, Quaternion rotatio) {
-            if (!EstActivum(id)) return;
-            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
-            anchora.CharacterController.transform.rotation = rotatio;
-            PurgareRotationes(id);
+        // NavMesh制御
+        public void InitareMigrare(int id) {
+            if (!EstActivumNavMesh(id)) return;
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.ResetPath();
         }
 
+        // NavMesh制御
+        public void IncipereMigrare(int id, Vector3 positio) {
+            if (!EstActivumNavMesh(id)) return;
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
+            if (EstMigrare(id)) return;
+            UnityEngine.Debug.LogError("MinisteriumCivisLoci: IncipereMigrare: id: " + id + " positio: " + positio);
+            anchora.NavMeshAgent.SetDestination(positio);
+        }
+
+        // NavMesh制御
+        public void PonoVelocitatem(int id, float velocitatem) {
+            if (!EstActivumNavMesh(id)) return;
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.speed = velocitatem;
+        }
+
+        // NavMesh制御
+        public void PonoAccelerationem(int id, float accelerationem) {
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.acceleration = accelerationem;
+        }
+
+        // NavMesh制御
+        public void PonoVelocitatemRotationis(int id, int velocitatemRotationisDeg) {
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.angularSpeed = velocitatemRotationisDeg;
+        }
+
+        // NavMesh制御
+        public void PonoDistantiaDeaccelerationis(int id, float distantiaDeaccelerationis) {
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
+            anchora.NavMeshAgent.stoppingDistance = distantiaDeaccelerationis;
+        }
+
+        // Motus制御
         public void Moto(
             int id,
             float velocitasHorizontalisDesiderata,
             float tempusLevigatumHorizontalis,
-            float velocitasVerticalisDesiderata,
-            float tempusLevigatumVerticalis,
             float rotatioYDesiderata,
             float tempusLevigatumRotatioY,
             float intervallum
         ) {
-            if (!EstActivum(id)) return;
-            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
+            if (!EstActivumMotus(id)) return;
+            if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
+
+            NavMeshAgent navMeshAgent = anchora.NavMeshAgent;
 
             _velocitasHorizontalisActualis[id] = ComputareVelocitasHorizontalis(
                 id,
                 velocitasHorizontalisDesiderata,
                 tempusLevigatumHorizontalis,
-                intervallum
-            );
-            _velocitasVerticalisActualis[id] = ComputareVelocitasVerticalis(
-                id,
-                velocitasVerticalisDesiderata,
-                tempusLevigatumVerticalis,
                 intervallum
             );
             _rotationisYActualis[id] = ComputareRotationisY(
@@ -130,14 +221,23 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 intervallum
             );
 
-            Vector3 motusHorizontalis =
-                anchora.CharacterController.transform.forward * _velocitasHorizontalisActualis[id] * intervallum;
-            Vector3 motusVerticalis =
-                Vector3.up * _velocitasVerticalisActualis[id] * intervallum;
+            Vector3 motusHorizontalis = navMeshAgent.transform.forward * _velocitasHorizontalisActualis[id] * intervallum;
             Quaternion rotatio = Quaternion.Euler(0f, _rotationisYActualis[id], 0f);
 
-            anchora.CharacterController.transform.rotation = rotatio;
-            anchora.CharacterController.Move(motusHorizontalis + motusVerticalis);
+            navMeshAgent.transform.rotation = rotatio;
+            navMeshAgent.Move(motusHorizontalis);
+
+            // Actualis回転は実体と同期する。
+            // Actualis速度は壁衝突とかを無視するため、計算で求めた値を使う。
+            _rotationisYActualis[id] = navMeshAgent.transform.rotation.eulerAngles.y;
+        }
+
+        private void Purgare(int id, NavMeshAgent navMeshAgent) {
+            _refVelocitisHorizontalis[id] = 0f;
+            _velocitasHorizontalisActualis[id] = 0f;
+            _refRotationisY[id] = 0f;
+            _rotationisYActualis[id] = navMeshAgent.transform.rotation.eulerAngles.y;
+ 
         }
 
         private float ComputareVelocitasHorizontalis(
@@ -146,11 +246,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             float tempusLevigatum,
             float intervallum
         ) {
-            float velocitas = 0f;
             if (tempusLevigatum <= 0.000001f) {
-                velocitas = velocitasDesiderata;
+                return velocitasDesiderata;
             } else {
-                velocitas = Mathf.SmoothDamp(
+                return Mathf.SmoothDamp(
                     _velocitasHorizontalisActualis[id],
                     velocitasDesiderata,
                     ref _refVelocitisHorizontalis[id],
@@ -159,30 +258,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                     intervallum
                 );
             }
-
-            return velocitas;
-        }
-
-        private float ComputareVelocitasVerticalis(
-            int id,
-            float velocitasVerticalisDesiderata,
-            float tempusLevigatumVerticalis,
-            float intervallum
-        ) {
-            float velocitas = 0f;
-            if (tempusLevigatumVerticalis <= 0.000001f) {
-                velocitas = velocitasVerticalisDesiderata;
-            } else {
-                velocitas = Mathf.SmoothDamp(
-                    _velocitasVerticalisActualis[id],
-                    velocitasVerticalisDesiderata,
-                    ref _refVelocitisVerticalis[id],
-                    tempusLevigatumVerticalis,
-                    Mathf.Infinity,
-                    intervallum
-                );
-            }
-            return velocitas;
         }
 
         private float ComputareRotationisY(
@@ -191,11 +266,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             float tempusLevigatum,
             float intervallum
         ) {
-            float rotatioY = 0f;
             if (tempusLevigatum <= 0.000001f) {
-                rotatioY = rotatioYDesiderata;
+                return rotatioYDesiderata;
             } else {
-                rotatioY = Mathf.SmoothDampAngle(
+                return Mathf.SmoothDampAngle(
                     _rotationisYActualis[id],
                     rotatioYDesiderata,
                     ref _refRotationisY[id],
@@ -204,8 +278,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                     intervallum
                 );
             }
-
-            return rotatioY;
         }
     }
 }

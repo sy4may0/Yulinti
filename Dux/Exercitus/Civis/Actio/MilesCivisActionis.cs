@@ -10,8 +10,7 @@ namespace Yulinti.Dux.Exercitus {
         public MilesCivisActionis(
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IOstiumCivisAnimationesMutabile osAnimationes,
-            IOstiumCivisLociMutabile osLociMutabile,
-            IOstiumCivisLociNavmeshMutabile osLociNavmeshMutabile
+            IOstiumCivisLociMutabile osLociMutabile
         ) {
             _contextusOstiorum = contextusOstiorum;
             _machinaCorporis = new MachinaCivisStatuumCorporis[contextusOstiorum.Civis.Longitudo];
@@ -23,8 +22,7 @@ namespace Yulinti.Dux.Exercitus {
             }
             _motorActionis = new MotorCivisActionis(
                 contextusOstiorum,
-                osLociMutabile,
-                osLociNavmeshMutabile
+                osLociMutabile
             );
             _motorAnimationis = new MotorCivisAnimationis(
                 osAnimationes
@@ -35,6 +33,9 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
+            _motorAnimationis.InitiarePreadefinitus(
+                idCivis, _contextusOstiorum.Configuratio.Statuum.IdAnimationisPraedefinitus
+            );
             return _machinaCorporis[idCivis].Initare(resFluida);
         }
 
@@ -70,7 +71,8 @@ namespace Yulinti.Dux.Exercitus {
             ResFluidaCivisMotus resFluidaMotus
         ) {
             resFluidaMotus.RenovareVelocitasActualisHorizontalis(idCivis, _motorActionis.VelocitasHorizontalisActualis(idCivis));
-            resFluidaMotus.RenovareVelocitasActualisVerticalis(idCivis, _motorActionis.VelocitasVerticalisActualis(idCivis));
+            // 垂直移動は未実装。
+            resFluidaMotus.RenovareVelocitasActualisVerticalis(idCivis, 9.81f);
             resFluidaMotus.RenovareRotatioYActualis(idCivis, _motorActionis.RotatioYActualis(idCivis));
             resFluidaMotus.RenovareEstInTerra(idCivis, true);
         }

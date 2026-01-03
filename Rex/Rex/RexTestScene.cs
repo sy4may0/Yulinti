@@ -34,6 +34,7 @@ namespace Yulinti.Rex {
             builder.RegisterInstance<IConfiguratioPunctumViae>(_configuratio.PunctumViae);
 
             builder.RegisterInstance<IConfiguratioExercitusPuellae>(_configuratio.ExercitusPuellae);
+            builder.RegisterInstance<IConfiguratioExercitusCivis>(_configuratio.ExercitusCivis);
 
             FaberMinisteriaTestScene.Initio(builder);
             FaberDucisTestScene.Initio(builder);

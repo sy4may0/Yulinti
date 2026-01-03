@@ -57,13 +57,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             // Civis
             builder.Register<TabulaCivis>(Lifetime.Singleton);
             builder.Register<MinisteriumCivis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<MinisteriumCivisLociNavmesh>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<MinisteriumCivisLoci>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumCivisAnimationes>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumCivisGenerator>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<IOstiumCivisLegibile, OstiumCivisLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisMutabile, OstiumCivisMutabile>(Lifetime.Singleton);
-            builder.Register<IOstiumCivisLociNavmeshLegibile, OstiumCivisLociNavmeshLegibile>(Lifetime.Singleton);
-            builder.Register<IOstiumCivisLociNavmeshMutabile, OstiumCivisLociNavmeshMutabile>(Lifetime.Singleton);
+            builder.Register<IOstiumCivisLociLegibile, OstiumCivisLociLegibile>(Lifetime.Singleton);
+            builder.Register<IOstiumCivisLociMutabile, OstiumCivisLociMutabile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisAnimationesMutabile, OstiumCivisAnimationesMutabile>(Lifetime.Singleton);
 
             // Ministeria
