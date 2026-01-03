@@ -57,44 +57,30 @@ namespace Yulinti.Dux.Exercitus {
             return statuum;
         }
 
-        public OrdinatioPuellaeActionis OrdinareActionis(
+        public OrdinatioPuellae Ordinare(
             IResFluidaPuellaeLegibile resFluida
         ) {
-            OrdinatioPuellaeActionis ordinatio = 
-                _statusCorporisActualis.OrdinareActionis(_contextusOstiorum, resFluida);
+            OrdinatioPuellae ordinatio = 
+                _statusCorporisActualis.Ordinare(_contextusOstiorum, resFluida);
             return ordinatio;
         }
 
-        public OrdinatioPuellaeVeletudinis OrdinareVeletudinis(
+        public (OrdinatioPuellae Exire, OrdinatioPuellae Intrare) MutareStatus(
             IResFluidaPuellaeLegibile resFluida
-        ) {
-            OrdinatioPuellaeVeletudinis ordinatio = 
-                _statusCorporisActualis.OrdinareVeletudinis(_contextusOstiorum, resFluida);
-            return ordinatio;
-        }
-
-        public void MutareStatus(
-            IResFluidaPuellaeLegibile resFluida,
-            in MotorPuellaeAnimationis motorAnimationis
         ) {
             IDPuellaeStatusCorporis idStatusProximus = _resolutorRamorumCorporis.Resolvere(
                 _idStatusActualis,
                 resFluida
             );
-            if (idStatusProximus == IDPuellaeStatusCorporis.None) return;
+            if (idStatusProximus == IDPuellaeStatusCorporis.None) return (OrdinatioPuellae.Nihil(), OrdinatioPuellae.Nihil());
 
             _idStatusProximus = idStatusProximus;
-            OrdinatioPuellaeAnimationis ordinatioExire = 
+            OrdinatioPuellae ordinatioExire = 
                 _statusCorporisActualis.Exire(_contextusOstiorum, resFluida, null);
-            OrdinatioPuellaeAnimationis ordinatioIntrare = 
+            OrdinatioPuellae ordinatioIntrare = 
                 _statuum[(int)_idStatusProximus].Intrare(_contextusOstiorum, resFluida, _adMutareStatus);
             
-            if (ordinatioExire.EstApplicandum) {
-                motorAnimationis.ApplicareAnimationis(ordinatioExire);
-            }
-            if (ordinatioIntrare.EstApplicandum) {
-                motorAnimationis.ApplicareAnimationis(ordinatioIntrare);
-            }
+            return (ordinatioExire, ordinatioIntrare);
         }
 
         private void AdMutareStatus() {

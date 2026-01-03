@@ -20,32 +20,38 @@ namespace Yulinti.Dux.Exercitus {
         public IDPuellaeAnimationisContinuata IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
         public IDPuellaeAnimationisContinuata IdAnimationisExire => _configuratio.IdAnimationisExire;
 
-        public OrdinatioPuellaeAnimationis Intrare(
+        public OrdinatioPuellae Intrare(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida,
             Action adInitium
         ) {
-            return new OrdinatioPuellaeAnimationis(
+            OrdinatioPuellaeAnimationis animationis = new OrdinatioPuellaeAnimationis(
                 true, _configuratio.IdAnimationisIntrare, adInitium, null
+            );
+            return new OrdinatioPuellae(
+                animationis: animationis
             );
         }
         
-        public OrdinatioPuellaeAnimationis Exire(
+        public OrdinatioPuellae Exire(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida,
             Action adFinem
         ) {
+            OrdinatioPuellaeAnimationis animationis = new OrdinatioPuellaeAnimationis(
+                false, IDPuellaeAnimationisContinuata.None, null, null
+            );
             if (_configuratio.LudereExire) {
-                return new OrdinatioPuellaeAnimationis(
+                animationis = new OrdinatioPuellaeAnimationis(
                     true, _configuratio.IdAnimationisExire, null, adFinem
                 );
             }
-            return new OrdinatioPuellaeAnimationis(
-                false, IDPuellaeAnimationisContinuata.None, null, null
+            return new OrdinatioPuellae(
+                animationis: animationis
             );
         }
 
-        public OrdinatioPuellaeActionis OrdinareActionis(
+        public OrdinatioPuellae Ordinare(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
@@ -70,22 +76,18 @@ namespace Yulinti.Dux.Exercitus {
             OrdinatioPuellaeMotusRotationisY or = InstrumentaPuellaeMotus.OrdinareMotusSineRotationisY(
                 resFluida.Motus.RotatioYActualis
             );
-            return OrdinatioPuellaeActionis.FromMotus(
+            OrdinatioPuellaeActionis actionis = OrdinatioPuellaeActionis.FromMotus(
                 new OrdinatioPuellaeMotus(oh, ov, or)
             );
-        }
-
-        public OrdinatioPuellaeVeletudinis OrdinareVeletudinis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
-            IResFluidaPuellaeLegibile resFluida
-        ) {
-            return new OrdinatioPuellaeVeletudinis(
+            OrdinatioPuellaeVeletudinis veletudinis = new OrdinatioPuellaeVeletudinis(
                 dtVigoris: _configuratio.ConsumptioVigorisSec * contextusOstiorum.Temporis.Intervallum,
                 dtPatientiae: _configuratio.ConsumptioPatientiaeSec * contextusOstiorum.Temporis.Intervallum,
                 dtAetheris: _configuratio.IncrementumAetherisSec * contextusOstiorum.Temporis.Intervallum,
                 dtIntentionis: _configuratio.Intentio
             );
-
+            return new OrdinatioPuellae(
+                actionis: actionis, veletudinis: veletudinis
+            );
         }
     }
 }

@@ -41,14 +41,10 @@ namespace Yulinti.Dux.Exercitus {
             _milesPuellaeVeletudinis.Resolvere(in _resFluidaVeletudinis);
 
             // Actioループ
-            _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);
-            _milesPuellaeActionis.OrdinareActionis(_resFluidaLegibile);
-            _milesPuellaeActionis.ApplicareActionis(_resFluidaLegibile);
-
-            // Veletudo加算値を反映
-            _milesPuellaeVeletudinis.Addo(
-                _milesPuellaeActionis.OrdinareVeletudinis(_resFluidaLegibile)
-            );
+            var (exire, intrare) = _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);
+            ResolvereOrdinatio(exire);
+            ResolvereOrdinatio(intrare);
+            ResolvereOrdinatio(_milesPuellaeActionis.Ordinare(_resFluidaLegibile));
 
             // ResFluidaMotusを更新
             _milesPuellaeActionis.RenovareResFluidaMotus(in _resFluidaMotus);
@@ -65,5 +61,18 @@ namespace Yulinti.Dux.Exercitus {
             
         }
 
+        private void ResolvereOrdinatio(
+            OrdinatioPuellae ordinatio
+        ) {
+            if (ordinatio.ConareLegoActionis(out OrdinatioPuellaeActionis actionis)) {
+                _milesPuellaeActionis.ApplicareActionis(actionis);
+            }
+            if (ordinatio.ConareLegoAnimationis(out OrdinatioPuellaeAnimationis animationis)) {
+                _milesPuellaeActionis.ApplicareAnimationis(animationis);
+            }
+            if (ordinatio.ConareLegoVeletudinis(out OrdinatioPuellaeVeletudinis veletudinis)) {
+                _milesPuellaeVeletudinis.Addo(veletudinis);
+            }
+        }
     }
 }

@@ -32,33 +32,28 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
-        public void OrdinareActionis(
+        public OrdinatioPuellae Ordinare(
             IResFluidaPuellaeLegibile resFluida
         ) {
-            _ordinatioActionis = _machinaCorporis.OrdinareActionis(resFluida);
+            return _machinaCorporis.Ordinare(resFluida);
         }
 
-        public OrdinatioPuellaeVeletudinis OrdinareVeletudinis(
+        public (OrdinatioPuellae Exire, OrdinatioPuellae Intrare) MutareStatus(
             IResFluidaPuellaeLegibile resFluida
         ) {
-            return _machinaCorporis.OrdinareVeletudinis(resFluida);
-        }
-
-        public void MutareStatus(
-            IResFluidaPuellaeLegibile resFluida
-        ) {
-            _machinaCorporis.MutareStatus(
-                resFluida,
-                in _motorAnimationis
-            );
+            return _machinaCorporis.MutareStatus(resFluida);
         }
 
         public void ApplicareActionis(
-            IResFluidaPuellaeLegibile resFluida
+            OrdinatioPuellaeActionis ordinatio
         ) {
-            if (_ordinatioActionis.EstApplicandum) {
-                _motorActionis.ApplicareActionis(_ordinatioActionis);
-            }
+            _motorActionis.ApplicareActionis(ordinatio);
+        }
+
+        public void ApplicareAnimationis(
+            OrdinatioPuellaeAnimationis animationis
+        ) {
+            _motorAnimationis.ApplicareAnimationis(animationis);
         }
 
         public void RenovareResFluidaMotus(

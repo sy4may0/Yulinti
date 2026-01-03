@@ -7,21 +7,17 @@ namespace Yulinti.Dux.Exercitus {
         IDPuellaeStatusCorporis Id { get; }
         IDPuellaeAnimationisContinuata IdAnimationisIntrare { get; }
         IDPuellaeAnimationisContinuata IdAnimationisExire { get; }
-        OrdinatioPuellaeAnimationis Intrare(
+        OrdinatioPuellae Intrare(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida,
             Action adInitium
         );
-        OrdinatioPuellaeAnimationis Exire(
+        OrdinatioPuellae Exire(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida,
             Action adFinem
         );
-        OrdinatioPuellaeActionis OrdinareActionis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
-            IResFluidaPuellaeLegibile resFluida
-        );
-        OrdinatioPuellaeVeletudinis OrdinareVeletudinis(
+        OrdinatioPuellae Ordinare(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         );
