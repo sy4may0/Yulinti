@@ -2,7 +2,6 @@ using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class MilesCivisVeletudinis {
-        private readonly ContextusCivisOstiorumLegibile _contextusOstiorum;
         private readonly ResolutorCivisVeletudinis _resolutorVeletudinis;
 
         public MilesCivisVeletudinis(
@@ -13,19 +12,14 @@ namespace Yulinti.Dux.Exercitus {
                 contextusOstiorum,
                 ostiumCivisMut
             );
-            _contextusOstiorum = contextusOstiorum;
         }
 
         public void InitarePhantasma(ResFluidaCivisVeletudinis resFluida) {
             _resolutorVeletudinis.InitarePhantasma(resFluida);
         }
 
-        public void Addo(OrdinatioCivisVeletudinis ordinatio) {
+        public void Addo(OrdinatioCivisVeletudinisValoris ordinatio) {
             _resolutorVeletudinis.Addo(ordinatio);
-        }
-
-        public void ApplicareMors(OrdinatioCivisVeletudinis ordinatio, ResFluidaCivisVeletudinis resFluida) {
-            _resolutorVeletudinis.ApplicareMors(ordinatio, resFluida);
         }
 
         public void Applicare(ResFluidaCivisVeletudinis resFluida) {
@@ -44,8 +38,16 @@ namespace Yulinti.Dux.Exercitus {
             _resolutorVeletudinis.Spirituare(id);
         }
 
-        public void ServereMotus(int id, ResFluidaCivisVeletudinis resFluida) {
-            _resolutorVeletudinis.ServereMotus(id, resFluida);
+        public void ApplicareMors(
+            OrdinatioCivisVeletudinisMortis ordinatio,
+            ResFluidaCivisVeletudinis resFluida
+        ) {
+            _resolutorVeletudinis.ApplicareMors(ordinatio, resFluida);
         }
+
+        public void LiberareServatum(int id, ResFluidaCivisVeletudinis resFluida) {
+            _resolutorVeletudinis.LiberareServatum(id, resFluida);
+        }
+
     }
 }

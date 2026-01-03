@@ -10,9 +10,11 @@ namespace Yulinti.Dux.Exercitus {
         public ResFluidaCivisVeletudinis(IOstiumCivisLegibile ostiumCivis) {
             _vitae = new float[ostiumCivis.Longitudo];
             _estDominare = new bool[ostiumCivis.Longitudo];
+            _estMotus = new bool[ostiumCivis.Longitudo];
             for (int i = 0; i < ostiumCivis.Longitudo; i++) {
                 _vitae[i] = 100;
                 _estDominare[i] = false;
+                _estMotus[i] = false;
             }
         }
 
@@ -60,6 +62,10 @@ namespace Yulinti.Dux.Exercitus {
         public void ServereMotus(int idCivis) {
             if (!estActivum(idCivis)) return;
             _estMotus[idCivis] = true;
+        }
+
+        public void LiberareServatum(int idCivis) {
+            _estMotus[idCivis] = false;
         }
     }
 }

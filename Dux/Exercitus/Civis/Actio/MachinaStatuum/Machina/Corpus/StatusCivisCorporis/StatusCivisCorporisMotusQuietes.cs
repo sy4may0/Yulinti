@@ -20,34 +20,40 @@ namespace Yulinti.Dux.Exercitus {
         public IDCivisAnimationisContinuata IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
         public IDCivisAnimationisContinuata IdAnimationisExire => _configuratio.IdAnimationisExire;
 
-        public OrdinatioCivisAnimationis Intrare(
+        public OrdinatioCivis Intrare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adInitium
         ) {
-            return new OrdinatioCivisAnimationis(
+            OrdinatioCivisAnimationis animationis = new OrdinatioCivisAnimationis(
                 idCivis, true, _configuratio.IdAnimationisIntrare, adInitium, null
+            );
+            return new OrdinatioCivis(
+                idCivis, animationis: animationis
             );
         }
 
-        public OrdinatioCivisAnimationis Exire(
+        public OrdinatioCivis Exire(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adFinem
         ) {
+            OrdinatioCivisAnimationis animationis = new OrdinatioCivisAnimationis(
+                idCivis, false, IDCivisAnimationisContinuata.None, null, null
+            );
             if (_configuratio.LudereExire) {
-                return new OrdinatioCivisAnimationis(
+                animationis = new OrdinatioCivisAnimationis(
                     idCivis, true, _configuratio.IdAnimationisExire, null, adFinem
                 );
             }
-            return new OrdinatioCivisAnimationis(
-                idCivis, false, IDCivisAnimationisContinuata.None, null, null
+            return new OrdinatioCivis(
+                idCivis, animationis: animationis
             );
-        }
+       }
 
-        public OrdinatioCivisActionis OrdinareActionis(
+        public OrdinatioCivis Ordinare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
@@ -64,19 +70,15 @@ namespace Yulinti.Dux.Exercitus {
                 resFluida.Motus.RotatioYActualis(idCivis),
                 0f
             );
-            return OrdinatioCivisActionis.FromMotus(
+            OrdinatioCivisActionis motus = OrdinatioCivisActionis.FromMotus(
                 idCivis,
                 new OrdinatioCivisMotus(oh, ov, or)
             );
-        }
-
-        public OrdinatioCivisVeletudinis OrdinareVeletudinis(
-            int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
-            IResFluidaCivisLegibile resFluida
-        ) {
-            return new OrdinatioCivisVeletudinis(
+            OrdinatioCivisVeletudinisValoris veletudinis = new OrdinatioCivisVeletudinisValoris(
                 idCivis, -_configuratio.ConsumptioVitae * contextusOstiorum.Temporis.Intervallum
+            );
+            return new OrdinatioCivis(
+                idCivis, actionis: motus, veletudinisValoris: veletudinis
             );
         }
     }

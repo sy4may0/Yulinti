@@ -31,11 +31,12 @@ namespace Yulinti.Dux.Exercitus {
                 _contextusOstiorum
             );
 
-            _statusCorporisActualis = _statuum[(int)IDCivisStatusCorporis.Nativitas];
-            _idStatusActualis = IDCivisStatusCorporis.Nativitas;
+            _statusCorporisActualis = _statuum[(int)IDCivisStatusCorporis.None];
+            _idStatusActualis = IDCivisStatusCorporis.None;
             _idStatusProximus = IDCivisStatusCorporis.None;
 
             _adMutareStatus = AdMutareStatus;
+
         }
 
         private IStatusCivisCorporis[] InitiareStatuum(
@@ -51,8 +52,7 @@ namespace Yulinti.Dux.Exercitus {
                     conf
                 );
             }
-            // Nativitas/Suicidiumは特別扱いなので、ここで初期化。
-            statuum[(int)IDCivisStatusCorporis.Nativitas] = new StatusCivisCorporisNativitas();
+            // Suicidiumは特別扱いなので、ここで初期化。
             statuum[(int)IDCivisStatusCorporis.Suicidium] = new StatusCivisCorporisSuicidium();
 
             foreach (IDCivisStatusCorporis id in Enum.GetValues(typeof(IDCivisStatusCorporis))) {
@@ -64,51 +64,62 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         // Dominare後に初期化しろ。
-        public void Initare() {
-            _statusCorporisActualis = _statuum[(int)IDCivisStatusCorporis.Nativitas];
-            _idStatusActualis = IDCivisStatusCorporis.Nativitas;
+        public (OrdinatioCivis Initare, OrdinatioCivis IntrareStatus) Initare(
+            IResFluidaCivisLegibile resFluida
+        ) {
+            _statusCorporisActualis = _statuum[(int)IDCivisStatusCorporis.MigrareAditorium];
+            _idStatusActualis = IDCivisStatusCorporis.MigrareAditorium;
             _idStatusProximus = IDCivisStatusCorporis.None;
+
+            // ランダムにNatorium地点を取得してTransporto要求を生成
+            ErrorAut<IPunctumViaeLegibile> punctumViae = _contextusOstiorum.PunctumViae.LegoNatoriumTemere();
+
+            if (punctumViae.EstError()) {
+                OrdinatioCivisVeletudinisMortis mortis = new OrdinatioCivisVeletudinisMortis(
+                    _idCivis, estSpirituare: true
+                );
+                return (new OrdinatioCivis(
+                    _idCivis, veletudinisMortis: mortis
+                ), OrdinatioCivis.Nihil(_idCivis));
+            }
+            OrdinatioCivisInitareNavmesh initareNavmesh = new OrdinatioCivisInitareNavmesh(
+                punctumViae.Evolvo().Positio
+            );
+            OrdinatioCivis Initare = new OrdinatioCivis(
+                _idCivis, actionis: OrdinatioCivisActionis.FromInitareNavmesh(_idCivis, initareNavmesh)
+            );
+
+            // 初期ステートのIntrareを実行
+            OrdinatioCivis IntrareStatus = _statusCorporisActualis.Intrare(_idCivis, _contextusOstiorum, resFluida, null);
+
+            return (Initare, IntrareStatus);
         }
 
-        public OrdinatioCivisActionis OrdinareActionis(
+        public OrdinatioCivis Ordinare(
             IResFluidaCivisLegibile resFluida
         ) {
-            OrdinatioCivisActionis ordinatio = 
-                _statusCorporisActualis.OrdinareActionis(_idCivis, _contextusOstiorum, resFluida);
-            return ordinatio;
+            return _statusCorporisActualis.Ordinare(_idCivis, _contextusOstiorum, resFluida);
         }
 
-        public OrdinatioCivisVeletudinis OrdinareVeletudinis(
+        public (OrdinatioCivis Exire, OrdinatioCivis Intrare) MutareStatus(
             IResFluidaCivisLegibile resFluida
-        ) {
-            OrdinatioCivisVeletudinis ordinatio = 
-                _statusCorporisActualis.OrdinareVeletudinis(_idCivis, _contextusOstiorum, resFluida);
-            return ordinatio;
-        }
-
-        public void MutareStatus(
-            IResFluidaCivisLegibile resFluida,
-            in MotorCivisAnimationis motorAnimationis
         ) {
             IDCivisStatusCorporis idStatusProximus = _resolutorRamorumCorporis.Resolvere(
                 _idStatusActualis,
                 _idCivis,
                 resFluida
             );
-            if (idStatusProximus == IDCivisStatusCorporis.None) return;
+            if (idStatusProximus == IDCivisStatusCorporis.None) { 
+                return (OrdinatioCivis.Nihil(_idCivis), OrdinatioCivis.Nihil(_idCivis));
+            }
 
             _idStatusProximus = idStatusProximus;
-            OrdinatioCivisAnimationis ordinatioExire = 
+            OrdinatioCivis exire = 
                 _statusCorporisActualis.Exire(_idCivis, _contextusOstiorum, resFluida, null);
-            OrdinatioCivisAnimationis ordinatioIntrare = 
+            OrdinatioCivis intrare = 
                 _statuum[(int)_idStatusProximus].Intrare(_idCivis, _contextusOstiorum, resFluida, _adMutareStatus);
-            
-            if (ordinatioExire.EstApplicandum) {
-                motorAnimationis.ApplicareAnimationis(ordinatioExire);
-            }
-            if (ordinatioIntrare.EstApplicandum) {
-                motorAnimationis.ApplicareAnimationis(ordinatioIntrare);
-            }
+
+            return (exire, intrare);
         }
 
         private void AdMutareStatus() {

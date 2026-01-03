@@ -19,7 +19,6 @@ namespace Yulinti.Dux.Exercitus {
             _random = new Random();
 
             _rami = new IRamusCivisCorporis[] {
-                new RamusCivisCorporisNativitasAdMigrareAditorium(),
                 new RamusCivisCorporisMigrareAditoriumAdMigrareAditorium(),
                 new RamusCivisCorporisMigrareAditoriumAdMigrareCrematorium(),
                 new RamusCivisCorporisMigrareCrematoriumAdSuicidium(),

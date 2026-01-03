@@ -1,7 +1,6 @@
 namespace Yulinti.Dux.ContractusDucis {
     public enum IDCivisStatusCorporis {
         None,
-        Nativitas,
         MigrareAditorium,
         MigrareCrematorium,
         Suicidium

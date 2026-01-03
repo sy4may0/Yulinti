@@ -5,13 +5,15 @@ namespace Yulinti.Dux.Exercitus {
     internal enum SpeciesOrdinationisCivis {
         Nihil, // このEnumの先頭をNihilから変更するな。
         Motus,
-        Navmesh
+        Navmesh,
+        InitareNavmesh
     }
 
     internal readonly struct OrdinatioCivisActionis {
         public SpeciesOrdinationisCivis Species { get; }
         private readonly OrdinatioCivisMotus _motus;
         private readonly OrdinatioCivisNavmesh _navmesh;
+        private readonly OrdinatioCivisInitareNavmesh _initareNavmesh;
         private readonly int _idCivis;
         private readonly bool _estError;
 
@@ -19,6 +21,7 @@ namespace Yulinti.Dux.Exercitus {
             Species = SpeciesOrdinationisCivis.Motus;
             _motus = motus;
             _navmesh = default;
+            _initareNavmesh = default;
             _idCivis = idCivis;
             _estError = false;
         }
@@ -27,6 +30,16 @@ namespace Yulinti.Dux.Exercitus {
             Species = SpeciesOrdinationisCivis.Navmesh;
             _navmesh = navmesh;
             _motus = default;
+            _initareNavmesh = default;
+            _idCivis = idCivis;
+            _estError = false;
+        }
+
+        private OrdinatioCivisActionis(int idCivis, OrdinatioCivisInitareNavmesh initareNavmesh) {
+            Species = SpeciesOrdinationisCivis.InitareNavmesh;
+            _initareNavmesh = initareNavmesh;
+            _motus = default;
+            _navmesh = default;
             _idCivis = idCivis;
             _estError = false;
         }
@@ -36,6 +49,7 @@ namespace Yulinti.Dux.Exercitus {
             Species = SpeciesOrdinationisCivis.Nihil;
             _motus = default;
             _navmesh = default;
+            _initareNavmesh = default;
             _idCivis = idCivis;
             _estError = false;
         }
@@ -44,6 +58,7 @@ namespace Yulinti.Dux.Exercitus {
             Species = SpeciesOrdinationisCivis.Nihil;
             _motus = default;
             _navmesh = default;
+            _initareNavmesh = default;
             _idCivis = idCivis;
             _estError = true;
         }
@@ -64,6 +79,9 @@ namespace Yulinti.Dux.Exercitus {
         }
         public static OrdinatioCivisActionis FromNavmesh(int idCivis, OrdinatioCivisNavmesh navmesh) {
             return new(idCivis, navmesh);
+        }
+        public static OrdinatioCivisActionis FromInitareNavmesh(int idCivis, OrdinatioCivisInitareNavmesh initareNavmesh) {
+            return new(idCivis, initareNavmesh);
         }
         public static OrdinatioCivisActionis Nihil(int idCivis) {
             return new(idCivis);
@@ -96,10 +114,20 @@ namespace Yulinti.Dux.Exercitus {
                 return default;
             }
         }
+        public OrdinatioCivisInitareNavmesh InitareNavmesh {
+            get {
+                if (Species == SpeciesOrdinationisCivis.InitareNavmesh) {
+                    return _initareNavmesh;
+                }
+                Memorator.MemorareErrorum(IDErrorum.ORDINATIOCIVISACTIONIS_GET_MISSMATCH_SPECIES);
+                return default;
+            }
+        }
 
         public void Match(
             Action<OrdinatioCivisMotus> motus,
-            Action<OrdinatioCivisNavmesh> navmesh
+            Action<OrdinatioCivisNavmesh> navmesh,
+            Action<OrdinatioCivisInitareNavmesh> initareNavmesh
         ) {
             switch (Species) {
                 case SpeciesOrdinationisCivis.Motus:
@@ -107,6 +135,9 @@ namespace Yulinti.Dux.Exercitus {
                     return;
                 case SpeciesOrdinationisCivis.Navmesh:
                     navmesh(Navmesh);
+                    return;
+                case SpeciesOrdinationisCivis.InitareNavmesh:
+                    initareNavmesh(InitareNavmesh);
                     return;
                 case SpeciesOrdinationisCivis.Nihil:
                     return;

@@ -15,6 +15,39 @@ namespace Yulinti.Dux.Exercitus {
             _phantasmaVitae = new float[contextus.Civis.Longitudo];
         }
 
+
+        public void InitarePhantasma(ResFluidaCivisVeletudinis resFluida) {
+            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+                if (resFluida.EstDominare(i)) {
+                    _phantasmaVitae[i] = resFluida.Vitae(i);
+                }
+            }
+        }
+
+        public void Addo(OrdinatioCivisVeletudinisValoris ordinatio) {
+            _phantasmaVitae[ordinatio.IdCivis] += ordinatio.DtVitae;
+        }
+
+        // 寿命の適用
+        public void Applicare(ResFluidaCivisVeletudinis resFluida) {
+            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+                if (resFluida.EstDominare(i)) {
+                    resFluida.RenovareVitae(i, DuxMath.Clamp(_phantasmaVitae[i], 0, 100));
+                }
+            }
+            PurgareAll();
+        }
+
+        public void PurgareAll() {
+            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+                Purgare(i);
+            }
+        }
+
+        private void Purgare(int id) {
+            _phantasmaVitae[id] = 100;
+        }
+
         public void Incarnare(int id) {
             _ostiumCivisMut.Incarnare(id);
         }
@@ -22,6 +55,7 @@ namespace Yulinti.Dux.Exercitus {
             _ostiumCivisMut.Spirituare(id);
         }
 
+        // Dominare/Liberareは自動的に適用される。
         public void RenovereDomina(
             ResFluidaCivisVeletudinis resFluida
         ) {
@@ -46,50 +80,23 @@ namespace Yulinti.Dux.Exercitus {
             _ostiumCivisMut.Servare();
         }
 
-        public void InitarePhantasma(ResFluidaCivisVeletudinis resFluida) {
-            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
-                if (resFluida.EstDominare(i)) {
-                    _phantasmaVitae[i] = resFluida.Vitae(i);
-                }
-            }
-        }
-
-        public void Addo(OrdinatioCivisVeletudinis ordinatio) {
-            _phantasmaVitae[ordinatio.IdCivis] += ordinatio.DtVitae;
-        }
-
-        // 生死フラグの適用
-        public void ApplicareMors(OrdinatioCivisVeletudinis ordinatio, ResFluidaCivisVeletudinis resFluida) {
+        public void ApplicareMors(
+            OrdinatioCivisVeletudinisMortis ordinatio,
+            ResFluidaCivisVeletudinis resFluida
+        ) {
             if (ordinatio.EstIncarnere) {
                 Incarnare(ordinatio.IdCivis);
             } else if (ordinatio.EstSpirituare) {
                 Spirituare(ordinatio.IdCivis);
             }
-        }
 
-        // 寿命の適用
-        public void Applicare(ResFluidaCivisVeletudinis resFluida) {
-            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
-                if (resFluida.EstDominare(i)) {
-                    resFluida.RenovareVitae(i, DuxMath.Clamp(_phantasmaVitae[i], 0, 100));
-                }
-            }
-            PurgareAll();
-        }
-
-        public void PurgareAll() {
-            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
-                Purgare(i);
+            if (ordinatio.EstMotus) {
+                resFluida.ServereMotus(ordinatio.IdCivis);
             }
         }
 
-        private void Purgare(int id) {
-            _phantasmaVitae[id] = 100;
-        }
-
-        // モーション管理下フラグの適用
-        public void ServereMotus(int id, ResFluidaCivisVeletudinis resFluida) {
-            resFluida.ServereMotus(id);
+        public void LiberareServatum(int id, ResFluidaCivisVeletudinis resFluida) {
+            resFluida.LiberareServatum(id);
         }
     }
 }

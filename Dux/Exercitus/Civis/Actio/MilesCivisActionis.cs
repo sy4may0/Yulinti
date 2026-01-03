@@ -7,8 +7,6 @@ namespace Yulinti.Dux.Exercitus {
         private readonly MotorCivisActionis _motorActionis;
         private readonly MotorCivisAnimationis _motorAnimationis;
 
-        private OrdinatioCivisActionis[] _ordinatioActionis;
-
         public MilesCivisActionis(
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IOstiumCivisAnimationesMutabile osAnimationes,
@@ -33,43 +31,37 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
-        public OrdinatioCivisVeletudinis InitareServatum(
-            int idCivis
-        ) {
-            _machinaCorporis[idCivis].Initare();
-            return _motorActionis.InitareNavmesh(idCivis);
-        }
-
-        public void OrdinareActionis(
+        public (OrdinatioCivis Initare, OrdinatioCivis IntrareStatus) InitareServatum(
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _ordinatioActionis[idCivis] = _machinaCorporis[idCivis].OrdinareActionis(resFluida);
+            return _machinaCorporis[idCivis].Initare(resFluida);
         }
 
-        public OrdinatioCivisVeletudinis OrdinareVeletudinis(
+        public OrdinatioCivis Ordinare(
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            // OrdinatioCivisActionisがErrorの場合は、NPC除去
-            if (_ordinatioActionis[idCivis].EstError) {
-                return new OrdinatioCivisVeletudinis(idCivis, 0f, estSpirituare: true);
-            }
-            return _machinaCorporis[idCivis].OrdinareVeletudinis(resFluida);
+            return _machinaCorporis[idCivis].Ordinare(resFluida);
         }
 
-        public void MutareStatus(
+        public (OrdinatioCivis Exire, OrdinatioCivis Intrare) MutareStatus(
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _machinaCorporis[idCivis].MutareStatus(resFluida, in _motorAnimationis);
+            return _machinaCorporis[idCivis].MutareStatus(resFluida);
         }
 
         public void ApplicareActionis(
-            int idCivis,
-            IResFluidaCivisLegibile resFluida
+            OrdinatioCivisActionis ordinatio
         ) {
-            _motorActionis.ApplicareActionis(_ordinatioActionis[idCivis]);
+            _motorActionis.ApplicareActionis(ordinatio);
+        }
+
+        public void ApplicareAnimationis(
+            OrdinatioCivisAnimationis animationis
+        ) {
+            _motorAnimationis.ApplicareAnimationis(animationis);
         }
 
         public void RenovareResFluidaMotus(

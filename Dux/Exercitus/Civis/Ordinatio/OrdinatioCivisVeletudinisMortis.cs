@@ -1,21 +1,20 @@
 namespace Yulinti.Dux.Exercitus {
-    internal readonly struct OrdinatioCivisVeletudinis {
+    internal readonly struct OrdinatioCivisVeletudinisMortis {
         public readonly int IdCivis { get; }
-
-        public readonly float DtVitae { get; }
         public readonly bool EstIncarnere { get; }
         public readonly bool EstSpirituare { get; }
+        public readonly bool EstMotus { get; }
 
-        public OrdinatioCivisVeletudinis(
+        public OrdinatioCivisVeletudinisMortis(
             int idCivis,
-            float dtVitae,
             bool estIncarnere = false,
-            bool estSpirituare = false
+            bool estSpirituare = false,
+            bool estMotus = false
         ) {
             IdCivis = idCivis;
-            DtVitae = dtVitae;
             EstIncarnere = estIncarnere;
             EstSpirituare = estSpirituare;
+            EstMotus = estMotus;
         }
     }
 }

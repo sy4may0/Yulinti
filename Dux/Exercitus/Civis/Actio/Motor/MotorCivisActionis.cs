@@ -27,7 +27,8 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis = ordinatio.IdCivis;
             ordinatio.Match(
                 motus => ApplicareMotus(idCivis, motus),
-                navmesh => ApplicareNavmesh(idCivis, navmesh)
+                navmesh => ApplicareNavmesh(idCivis, navmesh),
+                initareNavmesh => ApplicareInitareNavmesh(idCivis, initareNavmesh)
             );
             _speciesActualis[idCivis] = ordinatio.Species;
         }
@@ -64,6 +65,16 @@ namespace Yulinti.Dux.Exercitus {
             _ostiumCivisLociNavmeshMutabile.PonoAccelerationem(idCivis, navmesh.Acceleratio);
             _ostiumCivisLociNavmeshMutabile.PonoVelocitatemRotationis(idCivis, navmesh.VelocitasRotationis);
             _ostiumCivisLociNavmeshMutabile.PonoDistantiaDeaccelerationis(idCivis, navmesh.DistantiaDeaccelerationis);
+        }
+
+        private void ApplicareInitareNavmesh(
+            int idCivis,
+            OrdinatioCivisInitareNavmesh initareNavmesh
+        ) {
+            if (_speciesActualis[idCivis] != SpeciesOrdinationisCivis.InitareNavmesh) {
+                IntrareNavmesh(idCivis);
+            }
+            _ostiumCivisLociNavmeshMutabile.Transporto(idCivis, initareNavmesh.Positio, _contextusOstiorum.LociNavmesh.Rotatio(idCivis));
         }
 
         private void IntrareMotus(int idCivis) {
@@ -114,27 +125,5 @@ namespace Yulinti.Dux.Exercitus {
             }
             return 0f;
         }
-
-        // NatoriumにTransporto
-        // 失敗時は除去Ordinatioを返す。
-        public OrdinatioCivisVeletudinis InitareNavmesh(
-            int idCivis
-        ) {
-            _ostiumCivisLociNavmeshMutabile.Activare(idCivis);
-            _ostiumCivisLociMutabile.Deactivare(idCivis);
-            _speciesActualis[idCivis] = SpeciesOrdinationisCivis.Navmesh;
-
-            ErrorAut<IPunctumViaeLegibile> punctumViae = _contextusOstiorum.PunctumViae.LegoNatoriumTemere();
-            if (punctumViae.EstError()) {
-                return new OrdinatioCivisVeletudinis(idCivis, 0f, estSpirituare: true);
-            }
-            _ostiumCivisLociNavmeshMutabile.Transporto(
-                idCivis,
-                punctumViae.Evolvo().Positio,
-                _contextusOstiorum.LociNavmesh.Rotatio(idCivis)
-            );
-            return new OrdinatioCivisVeletudinis(idCivis, 0f);
-        }
-
     }
 }

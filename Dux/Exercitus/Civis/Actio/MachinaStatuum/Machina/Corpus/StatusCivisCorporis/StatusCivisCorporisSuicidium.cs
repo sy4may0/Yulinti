@@ -8,44 +8,35 @@ namespace Yulinti.Dux.Exercitus {
         public IDCivisAnimationisContinuata IdAnimationisIntrare => IDCivisAnimationisContinuata.NihilCorporis;
         public IDCivisAnimationisContinuata IdAnimationisExire => IDCivisAnimationisContinuata.NihilCorporis;
 
-        public OrdinatioCivisAnimationis Intrare(
+        public OrdinatioCivis Intrare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adInitium
         ) {
-            // NihilCorporisでアニメーションを初期化。
-            return new OrdinatioCivisAnimationis(
-                idCivis, true, IdAnimationisIntrare, null, null
+            OrdinatioCivisVeletudinisMortis mortis = new OrdinatioCivisVeletudinisMortis(
+                idCivis, estSpirituare: true
+            );
+            return new OrdinatioCivis(
+                idCivis, veletudinisMortis: mortis
             );
         }
 
-        public OrdinatioCivisAnimationis Exire(
+        public OrdinatioCivis Exire(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adFinem
         ) {
-            return new OrdinatioCivisAnimationis(
-                idCivis, false, IdAnimationisExire, null, null
-            );
+            return OrdinatioCivis.Nihil(idCivis);
         }
 
-        public OrdinatioCivisActionis OrdinareActionis(
+        public OrdinatioCivis Ordinare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            return OrdinatioCivisActionis.Nihil(idCivis);
-        }
-
-        public OrdinatioCivisVeletudinis OrdinareVeletudinis(
-            int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
-            IResFluidaCivisLegibile resFluida
-        ) {
-            // 削除フラグを立ててVeletudo要請
-            return new OrdinatioCivisVeletudinis(idCivis, 0f, estSpirituare: true);
+            return OrdinatioCivis.Nihil(idCivis);
         }
     }
 }
