@@ -4,8 +4,8 @@ namespace Yulinti.Dux.ContractusDucis {
         int Longitudo { get; }
         bool EstActivum(int id);
         void ActivareMotus(int id);
-        void ActivareNavMesh(int id);
-        void Transporto(int id, System.Numerics.Vector3 positio, System.Numerics.Quaternion rotatio);
+        bool ActivareNavMesh(int id);
+        bool Transporto(int id, System.Numerics.Vector3 positio, System.Numerics.Quaternion rotatio);
         void InitareMigrare(int id);
         void IncipereMigrare(int id, System.Numerics.Vector3 positio);
         void PonoVelocitatem(int id, float velocitatem);

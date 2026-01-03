@@ -64,6 +64,9 @@ namespace Yulinti.Dux.Exercitus {
                 _milesCivisActionis.RenovareResFluidaMotus(i, _resFluidaLegibile, _resFluidaMotus);
                 // Animationis更新
                 _milesCivisActionis.InjicereVelocitatis(i, _resFluidaLegibile);
+
+                // Navmesh確認(Transporto失敗時に除去)
+                ResolvereOrdinatio(_milesCivisActionis.VerificareNavmesh(i));
             }
         }
 

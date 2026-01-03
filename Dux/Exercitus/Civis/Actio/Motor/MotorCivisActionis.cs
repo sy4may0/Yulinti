@@ -9,6 +9,10 @@ namespace Yulinti.Dux.Exercitus {
 
         private readonly SpeciesOrdinationisCivis?[] _speciesActualis;
 
+        // TransportoおよびActivareNavmeshの結果を保存する。
+        // falseがあればNavmesh上にいない。
+        private bool[] _estInNavmesh;
+
         public MotorCivisActionis(
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IOstiumCivisLociMutabile ostiumCivisLociMutabile
@@ -16,6 +20,10 @@ namespace Yulinti.Dux.Exercitus {
             _ostiumCivisLociMutabile = ostiumCivisLociMutabile;
             _contextusOstiorum = contextusOstiorum;
             _speciesActualis = new SpeciesOrdinationisCivis?[contextusOstiorum.Civis.Longitudo];
+            _estInNavmesh = new bool[contextusOstiorum.Civis.Longitudo];
+            for (int i = 0; i < contextusOstiorum.Civis.Longitudo; i++) {
+                _estInNavmesh[i] = true;
+            }
         }
 
         public void ApplicareActionis(
@@ -69,7 +77,7 @@ namespace Yulinti.Dux.Exercitus {
             if (_speciesActualis[idCivis] != SpeciesOrdinationisCivis.InitareNavmesh) {
                 IntrareNavmesh(idCivis);
             }
-            _ostiumCivisLociMutabile.Transporto(idCivis, initareNavmesh.Positio, _contextusOstiorum.Loci.Rotatio(idCivis));
+            _estInNavmesh[idCivis] = _ostiumCivisLociMutabile.Transporto(idCivis, initareNavmesh.Positio, _contextusOstiorum.Loci.Rotatio(idCivis));
         }
 
         private void IntrareMotus(int idCivis) {
@@ -77,7 +85,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         private void IntrareNavmesh(int idCivis) {
-            _ostiumCivisLociMutabile.ActivareNavMesh(idCivis);
+            _estInNavmesh[idCivis] = _ostiumCivisLociMutabile.ActivareNavMesh(idCivis);
         }
 
         public float VelocitasHorizontalisActualis(int idCivis) {
@@ -86,6 +94,17 @@ namespace Yulinti.Dux.Exercitus {
 
         public float RotatioYActualis(int idCivis) {
             return _contextusOstiorum.Loci.RotatioYActualis(idCivis);
+        }
+
+        public OrdinatioCivis VerificareNavmesh(int idCivis) {
+            // Navmesh上にいない場合、Civis消去Ordinatioを返す。
+            if (!_estInNavmesh[idCivis]) {
+                return new OrdinatioCivis(
+                    idCivis, 
+                    veletudinisMortis: new OrdinatioCivisVeletudinisMortis(idCivis, estSpirituare: true)
+                );
+            }
+            return OrdinatioCivis.Nihil(idCivis);
         }
     }
 }

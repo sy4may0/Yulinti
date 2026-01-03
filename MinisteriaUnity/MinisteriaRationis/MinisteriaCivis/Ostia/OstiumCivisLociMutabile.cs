@@ -24,13 +24,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (!VerificareID(id)) return;
             _miCivisLoci.ActivareMotus(id);
         }
-        public void ActivareNavMesh(int id) {
-            if (!VerificareID(id)) return;
-            _miCivisLoci.ActivareNavMesh(id);
+        public bool ActivareNavMesh(int id) {
+            if (!VerificareID(id)) return false;
+            return _miCivisLoci.ActivareNavMesh(id);
         }
-        public void Transporto(int id, Vector3 positio, Quaternion rotatio) {
-            if (!VerificareID(id)) return;
-            _miCivisLoci.Transporto(id, 
+        public bool Transporto(int id, Vector3 positio, Quaternion rotatio) {
+            if (!VerificareID(id)) return false;
+            return _miCivisLoci.Transporto(id, 
                 InterpressNumericus.ToUnity(positio),
                 InterpressNumericus.ToUnity(rotatio)
             );

@@ -83,5 +83,9 @@ namespace Yulinti.Dux.Exercitus {
         ) {
             _motorAnimationis.InjicereVelocitatem(idCivis, resFluida.Motus.VelocitasActualisHorizontalis(idCivis));
         }
+
+        public OrdinatioCivis VerificareNavmesh(int idCivis) {
+            return _motorActionis.VerificareNavmesh(idCivis);
+        }
     }
 }
