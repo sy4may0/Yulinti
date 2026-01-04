@@ -39,6 +39,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _estActivum[id] = true;
         }
 
+        public void Purgere(int id) {
+            for (int i = 0; i < Enum.GetValues(typeof(IDCivisAnimationisStratum)).Length; i++) {
+                _luditoris[id, i].Purgere();
+            }
+        }
+
         public int[] IDs => _tabulaCivis.IDs;
         public int Longitudo => _tabulaCivis.Longitudo;
 

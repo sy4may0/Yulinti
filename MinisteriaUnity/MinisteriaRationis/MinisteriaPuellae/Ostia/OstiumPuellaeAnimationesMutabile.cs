@@ -27,6 +27,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public void InjicereVelocitatem(float vel) {
             _miPuellaeAnimationes.InjicereVelocitatem(vel);
         }
+        public void Purgere() {
+            _miPuellaeAnimationes.Purgere();
+        }
     }
 }
 

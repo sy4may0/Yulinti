@@ -68,11 +68,9 @@ namespace Yulinti.Dux.Exercitus {
                 if (estDom == estAct) continue;
 
                 if (estAct) {
-                    UnityEngine.Debug.Log($"Dominare: {i}");
                     resFluida.Dominare(i);
                     Purgare(i);
                 } else {
-                    UnityEngine.Debug.Log($"Liberare: {i}");
                     resFluida.Liberare(i);
                     Purgare(i);
                 }
@@ -89,6 +87,21 @@ namespace Yulinti.Dux.Exercitus {
             } else if (ordinatio.EstSpirituare) {
                 Spirituare(ordinatio.IdCivis);
             }
+        }
+
+        public void ApplicareCustodiae(
+            OrdinatioCivisVeletudinisCustodiae ordinatio,
+            ResFluidaCivisVeletudinis resFluida
+        ) {
+            ordinatio.Match(
+                visa: (visa) => {
+                    resFluida.RenovareVisa(ordinatio.IdCivis, visa.DtVisa);
+                },
+                detectio: (detectio) => {
+                    resFluida.RenovareVigilantia(ordinatio.IdCivis, detectio.EstVigilantia);
+                    resFluida.RenovareDetectio(ordinatio.IdCivis, detectio.EstDetectio);
+                }
+            );
         }
 
         public void Servatum(int id, ResFluidaCivisVeletudinis resFluida) {

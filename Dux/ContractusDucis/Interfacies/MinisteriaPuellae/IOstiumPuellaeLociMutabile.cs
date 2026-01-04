@@ -1,14 +1,18 @@
 namespace Yulinti.Dux.ContractusDucis {
     public interface IOstiumPuellaeLociMutabile {
-        void Activare();
-        void Deactivare();
-        void PonoPositionemCoacte(System.Numerics.Vector3 positio);
-        void PonoRotationemCoacte(System.Numerics.Quaternion rotatio);
+        bool EstActivum();
+        void ActivareMotus();
+        bool ActivareNavMesh();
+        bool Transporto(System.Numerics.Vector3 positio, System.Numerics.Quaternion rotatio);
+        void InitareMigrare();
+        void IncipereMigrare(System.Numerics.Vector3 positio);
+        void PonoVelocitatem(float velocitatem);
+        void PonoAccelerationem(float accelerationem);
+        void PonoVelocitatemRotationis(int velocitatemRotationisDeg);
+        void PonoDistantiaDeaccelerationis(float distantiaDeaccelerationis);
         void Moto(
             float velocitasHorizontalisDesiderata,
             float tempusLevigatumHorizontalis,
-            float velocitasVerticalisDesiderata,
-            float tempusLevigatumVerticalis,
             float rotatioYDesiderata,
             float tempusLevigatumRotatioY,
             float intervallum

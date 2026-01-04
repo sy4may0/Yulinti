@@ -1,97 +1,196 @@
 using UnityEngine;
+using UnityEngine.AI;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumPuellaeLoci {
-        private readonly CharacterController _characterController;
-        private readonly ITemporis _temporis;
+        private readonly IAnchoraPuellae _anchoraPuellae;
+        private readonly IConfiguratioPuellaeLoci _configLoci;
 
-        private float _refVelocitisHorizontalis;
-        private float _refVelocitisVerticalis;
+        private float _refVelocitasHorizontalis;
         private float _refRotationisY;
 
         private float _velocitasHorizontalisActualis;
-        private float _velocitasVerticalisActualis;
         private float _rotationisYActualis;
 
-        private bool _estActivum = false;
+        private bool _estMotus;
+        private bool _estNavMesh;
 
-        public MinisteriumPuellaeLoci(IAnchoraPuellae anchoraPuellae, ITemporis temporis) {
-            if (temporis == null) {
-                Errorum.Fatal(IDErrorum.MINIATERIUMPUELLAELOCI_TEMPORIS_NULL);
+        public MinisteriumPuellaeLoci(
+            IAnchoraPuellae anchoraPuellae,
+            IConfiguratioPuellaeLoci configLoci
+        ) {
+            if (configLoci == null) {
+                Errorum.Fatal(IDErrorum.MINIATERIUMPUELLAELOCI_CONFIG_NULL);
             }
+            _anchoraPuellae = anchoraPuellae;
+            _configLoci = configLoci;
 
-            _characterController = anchoraPuellae.CharacterController;
-            _temporis = temporis;
-            _refVelocitisHorizontalis = 0f;
-            _refVelocitisVerticalis = 0f;
+            _refVelocitasHorizontalis = 0f;
             _refRotationisY = 0f;
             _velocitasHorizontalisActualis = 0f;
-            _velocitasVerticalisActualis = 0f;
-            _rotationisYActualis = _characterController.transform.rotation.eulerAngles.y;
+            _rotationisYActualis = ConareLegoNavMesh(out NavMeshAgent navMeshAgent)
+                ? navMeshAgent.transform.rotation.eulerAngles.y
+                : 0f;
+
+            _estMotus = true;
+            _estNavMesh = false;
         }
 
-        public bool EstActivum => _estActivum;
-
-        public float VelHorizontalisActualis => _velocitasHorizontalisActualis;
-        public float VelVerticalisActualis => _velocitasVerticalisActualis;
-        public float RotatioYActualis => _rotationisYActualis;
-        public Vector3 Positio => _characterController.transform.position;
-        public Quaternion Rotatio => _characterController.transform.rotation;
-
-        private void PurgareVelocitates() {
-            _refVelocitisHorizontalis = 0f;
-            _refVelocitisVerticalis = 0f;
-            _velocitasHorizontalisActualis = 0f;
-            _velocitasVerticalisActualis = 0f;
+        private bool ConareLegoNavMesh(out NavMeshAgent navMeshAgent) {
+            navMeshAgent = _anchoraPuellae?.NavMeshAgent;
+            if (navMeshAgent == null) return false;
+            if (!navMeshAgent.enabled) return false;
+            return navMeshAgent.gameObject.activeInHierarchy;
         }
 
-        private void PurgareRotationes() {
-            _refRotationisY = 0f;
-            _rotationisYActualis = _characterController.transform.rotation.eulerAngles.y;
+        public bool EstActivum() {
+            return ConareLegoNavMesh(out _);
         }
 
-        public void Activare() {
-            if (_estActivum) return;
-            _estActivum = true;
-        }
-        public void Deactivare() {
-            if (!_estActivum) return;
-            _estActivum = false;
-        }
-
-        public void PonoPositionemCoacte(Vector3 positio) {
-            if (!_estActivum) return;
-            _characterController.transform.position = positio;
-            PurgareVelocitates();
+        public void ActivareMotus() {
+            if (EstActivumMotus()) return;
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return;
+            navMeshAgent.isStopped = true;
+            navMeshAgent.updateRotation = false;
+            navMeshAgent.updatePosition = false;
+            _estMotus = true;
+            _estNavMesh = false;
+            _velocitasHorizontalisActualis = VelocitasHorizontalisNavMesh(navMeshAgent);
+            _rotationisYActualis = navMeshAgent.transform.eulerAngles.y;
+            navMeshAgent.ResetPath();
         }
 
-        public void PonoRotationemCoacte(Quaternion rotatio) {
-            if (!_estActivum) return;
-            _characterController.transform.rotation = rotatio;
-            PurgareRotationes();
+        public bool ActivareNavMesh() {
+            if (EstActivumNavMesh()) return true;
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return false;
+            navMeshAgent.isStopped = false;
+            navMeshAgent.updateRotation = true;
+            navMeshAgent.updatePosition = true;
+            _estMotus = false;
+            _estNavMesh = true;
+            bool r = Transporto(
+                navMeshAgent.transform.position,
+                navMeshAgent.transform.rotation
+            );
+            navMeshAgent.ResetPath();
+            return r;
+        }
+
+        public bool EstActivumMotus() {
+            return _estMotus;
+        }
+
+        public bool EstActivumNavMesh() {
+            return _estNavMesh;
+        }
+
+        public bool EstAdPerveni() {
+            if (!EstActivumNavMesh()) return false;
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return false;
+            if (!navMeshAgent.pathPending) {
+                if (navMeshAgent.remainingDistance <= _configLoci.DistantiaAdPerveni) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool EstMigrare() {
+            if (!EstActivumNavMesh()) return false;
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return false;
+            return !navMeshAgent.pathPending && navMeshAgent.hasPath;
+        }
+
+        public float VelocitasHorizontalisActualis() {
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return 0f;
+            if (EstActivumNavMesh()) {
+                return VelocitasHorizontalisNavMesh(navMeshAgent);
+            }
+            return _velocitasHorizontalisActualis;
+        }
+
+        private float VelocitasHorizontalisNavMesh(NavMeshAgent navMeshAgent) {
+            Vector3 v = navMeshAgent.velocity;
+            Vector3 hv = new Vector3(v.x, 0f, v.z);
+            return hv.magnitude;
+        }
+
+        public float RotatioYActualis() {
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return 0f;
+            return navMeshAgent.transform.eulerAngles.y;
+        }
+
+        public Vector3 Positio() {
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return Vector3.zero;
+            return navMeshAgent.transform.position;
+        }
+
+        public Quaternion Rotatio() {
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return Quaternion.identity;
+            return navMeshAgent.transform.rotation;
+        }
+
+        public bool Transporto(Vector3 positio, Quaternion rotatio) {
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return false;
+            if (NavMesh.SamplePosition(positio, out NavMeshHit hit, 5f, NavMesh.AllAreas)) {
+                positio = hit.position;
+            }
+            bool r = navMeshAgent.Warp(positio);
+            if (!r) return false;
+            navMeshAgent.transform.rotation = rotatio;
+            Purgare(navMeshAgent);
+            return true;
+        }
+
+        public void InitareMigrare() {
+            if (!EstActivumNavMesh()) return;
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return;
+            navMeshAgent.ResetPath();
+        }
+
+        public void IncipereMigrare(Vector3 positio) {
+            if (!EstActivumNavMesh()) return;
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return;
+            if (EstMigrare()) return;
+            navMeshAgent.SetDestination(positio);
+        }
+
+        public void PonoVelocitatem(float velocitatem) {
+            if (!EstActivumNavMesh()) return;
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return;
+            navMeshAgent.speed = velocitatem;
+        }
+
+        public void PonoAccelerationem(float accelerationem) {
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return;
+            navMeshAgent.acceleration = accelerationem;
+        }
+
+        public void PonoVelocitatemRotationis(int velocitatemRotationisDeg) {
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return;
+            navMeshAgent.angularSpeed = velocitatemRotationisDeg;
+        }
+
+        public void PonoDistantiaDeaccelerationis(float distantiaDeaccelerationis) {
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return;
+            navMeshAgent.stoppingDistance = distantiaDeaccelerationis;
         }
 
         public void Moto(
             float velocitasHorizontalisDesiderata,
             float tempusLevigatumHorizontalis,
-            float velocitasVerticalisDesiderata,
-            float tempusLevigatumVerticalis,
             float rotatioYDesiderata,
             float tempusLevigatumRotatioY,
             float intervallum
         ) {
-            if (!_estActivum) return;
+            if (!EstActivumMotus()) return;
+            if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return;
+
             _velocitasHorizontalisActualis = ComputareVelocitasHorizontalis(
                 velocitasHorizontalisDesiderata,
                 tempusLevigatumHorizontalis,
-                intervallum
-            );
-            _velocitasVerticalisActualis = ComputareVelocitasVerticalis(
-                velocitasVerticalisDesiderata,
-                tempusLevigatumVerticalis,
                 intervallum
             );
             _rotationisYActualis = ComputareRotationisY(
@@ -100,14 +199,20 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 intervallum
             );
 
-            Vector3 motusHorizontalis =
-                _characterController.transform.forward * _velocitasHorizontalisActualis * intervallum;
-            Vector3 motusVerticalis =
-                Vector3.up * _velocitasVerticalisActualis * intervallum;
+            Vector3 motusHorizontalis = navMeshAgent.transform.forward * _velocitasHorizontalisActualis * intervallum;
             Quaternion rotatio = Quaternion.Euler(0f, _rotationisYActualis, 0f);
 
-            _characterController.transform.rotation = rotatio;
-            _characterController.Move(motusHorizontalis + motusVerticalis);
+            navMeshAgent.transform.rotation = rotatio;
+            navMeshAgent.Move(motusHorizontalis);
+
+            _rotationisYActualis = navMeshAgent.transform.rotation.eulerAngles.y;
+        }
+
+        private void Purgare(NavMeshAgent navMeshAgent) {
+            _refVelocitasHorizontalis = 0f;
+            _velocitasHorizontalisActualis = 0f;
+            _refRotationisY = 0f;
+            _rotationisYActualis = navMeshAgent.transform.rotation.eulerAngles.y;
         }
 
         private float ComputareVelocitasHorizontalis(
@@ -115,42 +220,17 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             float tempusLevigatum,
             float intervallum
         ) {
-            float velocitas = 0f;
             if (tempusLevigatum <= 0.000001f) {
-                velocitas = velocitasDesiderata;
-            } else {
-                velocitas = Mathf.SmoothDamp(
-                    _velocitasHorizontalisActualis,
-                    velocitasDesiderata,
-                    ref _refVelocitisHorizontalis,
-                    tempusLevigatum,
-                    Mathf.Infinity,
-                    intervallum
-                );
+                return velocitasDesiderata;
             }
-
-            return velocitas;
-        }
-
-        private float ComputareVelocitasVerticalis(
-            float velocitasVerticalisDesiderata,
-            float tempusLevigatumVerticalis,
-            float intervallum
-        ) {
-            float velocitas = 0f;
-            if (tempusLevigatumVerticalis <= 0.000001f) {
-                velocitas = velocitasVerticalisDesiderata;
-            } else {
-                velocitas = Mathf.SmoothDamp(
-                    _velocitasVerticalisActualis,
-                    velocitasVerticalisDesiderata,
-                    ref _refVelocitisVerticalis,
-                    tempusLevigatumVerticalis,
-                    Mathf.Infinity,
-                    intervallum
-                );
-            }
-            return velocitas;
+            return Mathf.SmoothDamp(
+                _velocitasHorizontalisActualis,
+                velocitasDesiderata,
+                ref _refVelocitasHorizontalis,
+                tempusLevigatum,
+                Mathf.Infinity,
+                intervallum
+            );
         }
 
         private float ComputareRotationisY(
@@ -158,27 +238,17 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             float tempusLevigatum,
             float intervallum
         ) {
-            float rotatioY = 0f;
             if (tempusLevigatum <= 0.000001f) {
-                rotatioY = rotatioYDesiderata;
-            } else {
-                rotatioY = Mathf.SmoothDampAngle(
-                    _rotationisYActualis,
-                    rotatioYDesiderata,
-                    ref _refRotationisY,
-                    tempusLevigatum,
-                    Mathf.Infinity,
-                    intervallum
-                );
+                return rotatioYDesiderata;
             }
-
-            return rotatioY;
-
+            return Mathf.SmoothDampAngle(
+                _rotationisYActualis,
+                rotatioYDesiderata,
+                ref _refRotationisY,
+                tempusLevigatum,
+                Mathf.Infinity,
+                intervallum
+            );
         }
     }
 }
-
-
-
-
-

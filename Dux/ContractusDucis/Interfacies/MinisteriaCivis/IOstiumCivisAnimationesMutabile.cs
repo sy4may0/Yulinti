@@ -5,6 +5,7 @@ namespace Yulinti.Dux.ContractusDucis {
     public interface IOstiumCivisAnimationesMutabile {
         int[] IDs { get; }
         int Longitudo { get; }
+        void Purgere(int id);
         bool EstActivum(int id);
         void Postulare(
             int id,

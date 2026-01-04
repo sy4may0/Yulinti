@@ -14,12 +14,8 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaCivisLegibile resFluida,
             Action adInitium
         ) {
-            OrdinatioCivisVeletudinisMortis mortis = new OrdinatioCivisVeletudinisMortis(
-                idCivis, estSpirituare: true
-            );
-            return new OrdinatioCivis(
-                idCivis, veletudinisMortis: mortis
-            );
+            adInitium?.Invoke();
+            return OrdinatioCivis.Nihil(idCivis);
         }
 
         public OrdinatioCivis Exire(
@@ -28,6 +24,7 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaCivisLegibile resFluida,
             Action adFinem
         ) {
+            adFinem?.Invoke();
             return OrdinatioCivis.Nihil(idCivis);
         }
 
@@ -36,7 +33,12 @@ namespace Yulinti.Dux.Exercitus {
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            return OrdinatioCivis.Nihil(idCivis);
+            OrdinatioCivisVeletudinisMortis mortis = new OrdinatioCivisVeletudinisMortis(
+                idCivis, estSpirituare: true
+            );
+            return new OrdinatioCivis(
+                idCivis, veletudinisMortis: mortis
+            );
         }
     }
 }

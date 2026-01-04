@@ -39,6 +39,10 @@ namespace Yulinti.Dux.Exercitus {
             return _machinaCorporis[idCivis].Initare(resFluida);
         }
 
+        public void Purgere(int idCivis) {
+            _motorAnimationis.Purgere(idCivis);
+        }
+
         public OrdinatioCivis Ordinare(
             int idCivis,
             IResFluidaCivisLegibile resFluida

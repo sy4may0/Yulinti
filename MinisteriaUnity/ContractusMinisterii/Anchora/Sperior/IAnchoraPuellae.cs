@@ -3,7 +3,6 @@ using Animancer;
 
 namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
     public interface IAnchoraPuellae : IAnchora {
-        CharacterController CharacterController { get; }
         UnityEngine.AI.NavMeshAgent NavMeshAgent { get; }
         Animator Animator { get; }
         AnimancerComponent Animancer { get; }
@@ -44,5 +43,12 @@ namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
         Transform OsHipsRightY90Pin { get; }
         Transform OsHipsLeftX150Pin { get; }
         Transform OsHipsLeftY90Pin { get; }
+
+        Transform ResVisaeCapitisDexter { get; }
+        Transform ResVisaeCapitisSinister { get; }
+        Transform ResVisaePectorisDexter { get; }
+        Transform ResVisaePectorisSinister { get; }
+        Transform ResVisaeNatiumDexter { get; }
+        Transform ResVisaeNatiumSinister { get; }
     }
 }

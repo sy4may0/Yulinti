@@ -98,6 +98,14 @@ namespace Yulinti.Dux.Exercitus {
         public OrdinatioCivis Ordinare(
             IResFluidaCivisLegibile resFluida
         ) {
+            // Actualisがnullの場合はNPCを削除する。
+            if (_statusCorporisActualis == null) {
+                return new OrdinatioCivis(
+                    _idCivis, veletudinisMortis: new OrdinatioCivisVeletudinisMortis(
+                        _idCivis, estSpirituare: true
+                    )
+                );
+            }
             return _statusCorporisActualis.Ordinare(_idCivis, _contextusOstiorum, resFluida);
         }
 
@@ -114,6 +122,9 @@ namespace Yulinti.Dux.Exercitus {
             }
 
             _idStatusProximus = idStatusProximus;
+            if (_idCivis == 0) {
+                UnityEngine.Debug.Log($"MutareStatus: {_idStatusActualis} -> {_idStatusProximus}");
+            }
             OrdinatioCivis exire = 
                 _statusCorporisActualis.Exire(_idCivis, _contextusOstiorum, resFluida, null);
             OrdinatioCivis intrare = 
@@ -123,9 +134,17 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         private void AdMutareStatus() {
+            // フォローバック: _idStatusProximusがNoneの場合は処理をスキップ
+            if (_idStatusProximus == IDCivisStatusCorporis.None) {
+                return;
+            }
             _idStatusActualis = _idStatusProximus;
             _idStatusProximus = IDCivisStatusCorporis.None;
             _statusCorporisActualis = _statuum[(int)_idStatusActualis];
+            // フォローバック: _statusCorporisActualisがnullの場合はNoneにリセット
+            if (_statusCorporisActualis == null) {
+                _idStatusActualis = IDCivisStatusCorporis.None;
+            }
         }
     }
 }

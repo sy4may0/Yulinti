@@ -12,8 +12,7 @@ namespace Yulinti.Dux.Exercitus {
         public MilesPuellaeActionis(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IOstiumPuellaeAnimationesMutabile osAnimationes,
-            IOstiumPuellaeLociMutabile osLociMutabile,
-            IOstiumPuellaeLociNavmeshMutabile osLociNavmeshMutabile
+            IOstiumPuellaeLociMutabile osLociMutabile
         ) {
             _contextusOstiorum = contextusOstiorum;
             _machinaCorporis = new MachinaPuellaeStatuumCorporis(
@@ -21,8 +20,7 @@ namespace Yulinti.Dux.Exercitus {
             );
             _motorActionis = new MotorPuellaeActionis(
                 _contextusOstiorum,
-                osLociMutabile,
-                osLociNavmeshMutabile
+                osLociMutabile
             );
             _motorAnimationis = new MotorPuellaeAnimationis(
                 osAnimationes
@@ -54,6 +52,14 @@ namespace Yulinti.Dux.Exercitus {
             OrdinatioPuellaeAnimationis animationis
         ) {
             _motorAnimationis.ApplicareAnimationis(animationis);
+        }
+
+        public OrdinatioPuellae ValidereNavmesh(IResFluidaPuellaeLegibile resFluida) {
+            if (!_motorActionis.EstInNavmesh()) {
+                _motorAnimationis.Purgere();
+                return _machinaCorporis.Initare(resFluida);
+            }
+            return OrdinatioPuellae.Nihil();
         }
 
         public void RenovareResFluidaMotus(

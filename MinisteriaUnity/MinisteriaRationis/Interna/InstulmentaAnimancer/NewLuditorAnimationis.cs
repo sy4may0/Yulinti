@@ -15,8 +15,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         // 同期用時刻（アニメーションの再生位置を同期するため）
         private LinearMixerState _linearMixerStateC;
         private float _tempusSimulataneum;
-        private bool _aeternitas;
-        private bool _stratumNihil;
+        private readonly bool _aeternitas;
+        private readonly bool _stratumNihil;
 
         public NewLuditorAnimationis(
             AnimancerComponent animancer, int indexusLuditoris,
@@ -34,6 +34,14 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             // [TODO] 設定もしくはどっかのconstにする。
             _animationesPostulata = new Queue<VasculumAnimationis>(5); // Assuming a reasonable capacity
         }
+
+        public void Purgere() {
+            _animatioCurrens = null;
+            _animationesPostulata.Clear();
+            _statusCurrens = null;
+            _linearMixerStateC = null;
+        }
+
 
         public int IndexusLuditoris => _indexusLuditoris;
         public VasculumAnimationis AnimatioCurrens => _animatioCurrens;

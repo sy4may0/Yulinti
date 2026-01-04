@@ -39,6 +39,7 @@ namespace Yulinti.Dux.Exercitus {
             builder.Register<MilesPuellaeFigurae>(Lifetime.Singleton);
             builder.Register<MilesCivisVeletudinis>(Lifetime.Singleton);
             builder.Register<MilesCivisActionis>(Lifetime.Singleton);
+            builder.Register<MilesCivisCustodiae>(Lifetime.Singleton);
 
             // Centurio
             builder.Register<CenturioPuellae>(Lifetime.Singleton)

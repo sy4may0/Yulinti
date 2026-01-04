@@ -31,6 +31,7 @@ namespace Yulinti.Rex {
             builder.RegisterInstance<IConfiguratioCivisLoci>(_configuratio.Civis.Loci);
             builder.RegisterInstance<IConfiguratioCivisAnimationis>(_configuratio.Civis.Animatio);
             builder.RegisterInstance<IConfiguratioCivisGenerator>(_configuratio.Civis.Generator);
+            builder.RegisterInstance<IConfiguratioCivisVisae>(_configuratio.Civis.Visa);
             builder.RegisterInstance<IConfiguratioPunctumViae>(_configuratio.PunctumViae);
 
             builder.RegisterInstance<IConfiguratioExercitusPuellae>(_configuratio.ExercitusPuellae);

@@ -5,25 +5,29 @@ namespace Yulinti.Dux.Exercitus {
         private readonly OrdinatioCivisAnimationis? _animationis;
         private readonly OrdinatioCivisVeletudinisValoris? _veletudinisValoris;
         private readonly OrdinatioCivisVeletudinisMortis? _veletudinisMortis;
+        private readonly OrdinatioCivisVeletudinisCustodiae? _veletudinisCustodiae;
 
         public OrdinatioCivis(
             int idCivis,
             OrdinatioCivisActionis? actionis = null,
             OrdinatioCivisAnimationis? animationis = null,
             OrdinatioCivisVeletudinisValoris? veletudinisValoris = null,
-            OrdinatioCivisVeletudinisMortis? veletudinisMortis = null
+            OrdinatioCivisVeletudinisMortis? veletudinisMortis = null,
+            OrdinatioCivisVeletudinisCustodiae? veletudinisCustodiae = null
         ) {
             IdCivis = idCivis;
             _actionis = actionis;
             _animationis = animationis;
             _veletudinisValoris = veletudinisValoris;
             _veletudinisMortis = veletudinisMortis;
+            _veletudinisCustodiae = veletudinisCustodiae;
         }
 
         public bool EstApplicandumActionis => _actionis.HasValue;
         public bool EstApplicandumAnimationis => _animationis.HasValue;
         public bool EstApplicandumVeletudinisValoris => _veletudinisValoris.HasValue;
         public bool EstApplicandumVeletudinisMortis => _veletudinisMortis.HasValue;
+        public bool EstApplicandumVeletudinisCustodiae => _veletudinisCustodiae.HasValue;
 
         public static OrdinatioCivis Nihil(int idCivis) {
             return new OrdinatioCivis(idCivis);
@@ -62,6 +66,15 @@ namespace Yulinti.Dux.Exercitus {
                 return false;
             }
             veletudinisMortis = _veletudinisMortis.Value;
+            return true;
+        }
+
+        public bool ConareLegoVeletudinisCustodiae(out OrdinatioCivisVeletudinisCustodiae veletudinisCustodiae) {
+            if (!_veletudinisCustodiae.HasValue) {
+                veletudinisCustodiae = default;
+                return false;
+            }
+            veletudinisCustodiae = _veletudinisCustodiae.Value;
             return true;
         }
     }

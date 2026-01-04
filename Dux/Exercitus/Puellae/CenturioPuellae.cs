@@ -44,6 +44,9 @@ namespace Yulinti.Dux.Exercitus {
             var (exire, intrare) = _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);
             ResolvereOrdinatio(exire);
             ResolvereOrdinatio(intrare);
+
+            // Navmeshチェック / 失敗時はAnimetion初期化、初期ステート遷移(MachinaPuellaeStatuumCorporis.Initare())
+            ResolvereOrdinatio(_milesPuellaeActionis.ValidereNavmesh(_resFluidaLegibile));
             ResolvereOrdinatio(_milesPuellaeActionis.Ordinare(_resFluidaLegibile));
 
             // ResFluidaMotusを更新

@@ -12,6 +12,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public int[] IDs => _miCivisAnimationes.IDs;
         public int Longitudo => _miCivisAnimationes.Longitudo;
+        public void Purgere(int id) {
+            if (id < 0 || id >= _miCivisAnimationes.Longitudo) return;
+            _miCivisAnimationes.Purgere(id);
+        }
+
         public bool EstActivum(int id) {
             if (id < 0 || id >= _miCivisAnimationes.Longitudo) return false;
             return _miCivisAnimationes.EstActivum(id);

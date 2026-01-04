@@ -20,6 +20,7 @@ namespace Yulinti.MinisteriaUnity.Anchora {
         public AnimancerComponent Animancer => _anchoraInf?.Animancer;
         public SkinnedMeshRenderer Figura => _anchoraInf?.SkinnedMeshRenderer;
         public NavMeshAgent NavMeshAgent => _anchoraInf?.NavMeshAgent;
+        public Transform Capitis => _anchoraInf?.Capitis;
 
         public Vector3 Positio => transform.position;
         public Quaternion Rotatio => transform.rotation;
@@ -103,6 +104,10 @@ namespace Yulinti.MinisteriaUnity.Anchora {
             }
             if (_anchoraInf.NavMeshAgent == null) {
                 Memorator.MemorareErrorum(IDErrorum.ANCHORACIVIS_NAVMESHAGENT_NULL);
+                result = false;
+            }
+            if (_anchoraInf.Capitis == null) {
+                Memorator.MemorareErrorum(IDErrorum.ANCHORACIVIS_CAPITIS_NULL);
                 result = false;
             }
             return result;

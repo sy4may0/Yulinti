@@ -71,6 +71,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 _luditoris[i].Pulsus();
             }
         }
+
+        public void Purgere() {
+            foreach (NewLuditorAnimationis luditor in _luditoris) {
+                luditor.Purgere();
+            }
+        }
     }
 }
 

@@ -9,5 +9,6 @@ namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
         AnimancerComponent Animancer { get; }
         SkinnedMeshRenderer Figura { get; }
         NavMeshAgent NavMeshAgent { get; }
+        Transform Capitis { get; }
     }
 }

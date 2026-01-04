@@ -30,5 +30,9 @@ namespace Yulinti.Dux.Exercitus {
         public void InjicereVelocitatem(float velocitas) {
             _ostiumPuellaeAnimationesMutabile.InjicereVelocitatem(velocitas);
         }
+
+        public void Purgere() {
+            _ostiumPuellaeAnimationesMutabile.Purgere();
+        }
     }
 }

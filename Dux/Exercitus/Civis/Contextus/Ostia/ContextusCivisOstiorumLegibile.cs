@@ -7,6 +7,8 @@ namespace Yulinti.Dux.Exercitus {
         private readonly IOstiumCivisLegibile _civis;
         private readonly IOstiumCivisLociLegibile _loci;
         private readonly IOstiumPunctumViaeLegibile _punctumViae;
+        private readonly IOstiumCivisVisaeLegibile _visa;
+        private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
 
         public ContextusCivisOstiorumLegibile(
             IConfiguratioExercitusCivis configuratio,
@@ -14,7 +16,9 @@ namespace Yulinti.Dux.Exercitus {
             IOstiumCameraLegibile camera,
             IOstiumCivisLegibile civis,
             IOstiumCivisLociLegibile loci,
-            IOstiumPunctumViaeLegibile punctumViae
+            IOstiumPunctumViaeLegibile punctumViae,
+            IOstiumCivisVisaeLegibile visa,
+            IOstiumPuellaeResVisaeLegibile puellaeResVisae
         ) {
             _configuratio = configuratio;
             _temporis = temporis;
@@ -22,6 +26,8 @@ namespace Yulinti.Dux.Exercitus {
             _civis = civis;
             _loci = loci;
             _punctumViae = punctumViae;
+            _visa = visa;
+            _puellaeResVisae = puellaeResVisae;
         }
 
         public IConfiguratioExercitusCivis Configuratio => _configuratio;
@@ -30,5 +36,7 @@ namespace Yulinti.Dux.Exercitus {
         public IOstiumCivisLegibile Civis => _civis;
         public IOstiumCivisLociLegibile Loci => _loci;
         public IOstiumPunctumViaeLegibile PunctumViae => _punctumViae;
+        public IOstiumCivisVisaeLegibile Visa => _visa;
+        public IOstiumPuellaeResVisaeLegibile PuellaeResVisae => _puellaeResVisae;
     }
 }

@@ -3,5 +3,6 @@ namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
         IConfiguratioCivisLoci Loci { get; }
         IConfiguratioCivisAnimationis Animatio { get; }
         IConfiguratioCivisGenerator Generator { get; }
+        IConfiguratioCivisVisae Visa { get; }
     }
 }

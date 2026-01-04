@@ -4,22 +4,17 @@ using System.Numerics;
 namespace Yulinti.Dux.Exercitus {
     internal sealed class MotorPuellaeActionis {
         private readonly IOstiumPuellaeLociMutabile _ostiumPuellaeLociMutabile;
-        private readonly IOstiumPuellaeLociNavmeshMutabile _ostiumPuellaeLociNavmeshMutabile;
         private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
 
         private SpeciesOrdinationisPuellae? _speciesActualis = null;
 
-        // IOstiumPuellaeNavmeshMutabileを追加
-        // IOstiumPuellaeNavmeshLegibileを追加
-
+        private bool _estInNavmesh = true;
 
         public MotorPuellaeActionis(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
-            IOstiumPuellaeLociMutabile ostiumPuellaeLociMutabile,
-            IOstiumPuellaeLociNavmeshMutabile ostiumPuellaeLociNavmeshMutabile
+            IOstiumPuellaeLociMutabile ostiumPuellaeLociMutabile
         ) {
             _ostiumPuellaeLociMutabile = ostiumPuellaeLociMutabile;
-            _ostiumPuellaeLociNavmeshMutabile = ostiumPuellaeLociNavmeshMutabile;
             _contextusOstiorum = contextusOstiorum;
         }
 
@@ -33,6 +28,7 @@ namespace Yulinti.Dux.Exercitus {
             _speciesActualis = ordinatio.Species;
         }
 
+        // 垂直移動は対象外のため無視する。
         private void ApplicareMotus(
             OrdinatioPuellaeMotus motus
         ) {
@@ -42,12 +38,11 @@ namespace Yulinti.Dux.Exercitus {
             _ostiumPuellaeLociMutabile.Moto(
                 motus.Horizontalis.Velocitas,
                 motus.Horizontalis.TempusLevigatum,
-                motus.Verticalis.Velocitas,
-                motus.Verticalis.TempusLevigatum,
                 motus.RotationisY.RotatioY,
                 motus.RotationisY.TempusLevigatum,
                 _contextusOstiorum.Temporis.Intervallum
             );
+            _estInNavmesh = true;
         }
 
         private void ApplicareNavmesh(
@@ -56,54 +51,52 @@ namespace Yulinti.Dux.Exercitus {
             if (_speciesActualis != SpeciesOrdinationisPuellae.Navmesh) {
                 IntrareNavmesh();
             }
-            // OstiumPuellaeNavmesh実装後に追加。
+            _ostiumPuellaeLociMutabile.InitareMigrare();
+            _ostiumPuellaeLociMutabile.IncipereMigrare(navmesh.Positio);
+            _ostiumPuellaeLociMutabile.PonoVelocitatem(navmesh.VelocitasDesiderata);
+            _ostiumPuellaeLociMutabile.PonoAccelerationem(navmesh.Acceleratio);
+            _ostiumPuellaeLociMutabile.PonoVelocitatemRotationis((int)navmesh.VelocitasRotationis);
+            _ostiumPuellaeLociMutabile.PonoDistantiaDeaccelerationis(navmesh.DistantiaDeaccelerationis);
         }
 
         private void IntrareMotus() {
-            Vector3 positio = _contextusOstiorum.LociNavmesh.Positio();
-            Quaternion rotatio = _contextusOstiorum.LociNavmesh.Rotatio();
-
-            _ostiumPuellaeLociNavmeshMutabile.Deactivare();
-            _ostiumPuellaeLociMutabile.Activare();
-
-            _ostiumPuellaeLociMutabile.PonoPositionemCoacte(positio);
-            _ostiumPuellaeLociMutabile.PonoRotationemCoacte(rotatio);
+            _ostiumPuellaeLociMutabile.ActivareMotus();
         }
 
         private void IntrareNavmesh() {
-            Vector3 positio = _contextusOstiorum.Loci.Positio;
-            Quaternion rotatio = _contextusOstiorum.Loci.Rotatio;
-            _ostiumPuellaeLociMutabile.Deactivare();
-            _ostiumPuellaeLociNavmeshMutabile.Activare();
-            _ostiumPuellaeLociNavmeshMutabile.Transporto(positio, rotatio);
+            _estInNavmesh = _ostiumPuellaeLociMutabile.ActivareNavMesh();
+        }
+
+        public bool EstInNavmesh() {
+            return _estInNavmesh;
         }
 
         public float VelocitasHorizontalisActualis() {
             if (_speciesActualis == SpeciesOrdinationisPuellae.Motus) {
-                return _contextusOstiorum.Loci.VelHorizontalisActualis;
+                return _contextusOstiorum.Loci.VelocitasHorizontalisActualis();
             }
             if (_speciesActualis == SpeciesOrdinationisPuellae.Navmesh) {
-                return _contextusOstiorum.LociNavmesh.VelocitasHorizontalisActualis();
+                return _contextusOstiorum.Loci.VelocitasHorizontalisActualis();
             }
             return 0f;
         }
 
         public float VelocitasVerticalisActualis() {
             if (_speciesActualis == SpeciesOrdinationisPuellae.Motus) {
-                return _contextusOstiorum.Loci.VelVerticalisActualis;
+                return 0f;
             }
             if (_speciesActualis == SpeciesOrdinationisPuellae.Navmesh) {
-                return _contextusOstiorum.LociNavmesh.VelocitasVerticalisActualis();
+                return 0f;
             }
             return 0f;
         }
 
         public float RotatioYActualis() {
             if (_speciesActualis == SpeciesOrdinationisPuellae.Motus) {
-                return _contextusOstiorum.Loci.RotatioYActualis;
+                return _contextusOstiorum.Loci.RotatioYActualis();
             }
             if (_speciesActualis == SpeciesOrdinationisPuellae.Navmesh) {
-                return _contextusOstiorum.LociNavmesh.RotatioYActualis();
+                return _contextusOstiorum.Loci.RotatioYActualis();
             }
             return 0f;
         }

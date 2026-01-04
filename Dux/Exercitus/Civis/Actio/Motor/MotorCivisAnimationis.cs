@@ -46,5 +46,9 @@ namespace Yulinti.Dux.Exercitus {
         public void InjicereVelocitatem(int idCivis, float velocitas) {
             _ostiumCivisAnimationesMutabile.InjicereVelocitatem(idCivis, velocitas);
         }
+
+        public void Purgere(int idCivis) {
+            _ostiumCivisAnimationesMutabile.Purgere(idCivis);
+        }
     }
 }

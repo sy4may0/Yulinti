@@ -57,6 +57,13 @@ namespace Yulinti.Dux.Exercitus {
             return statuum;
         }
 
+        public OrdinatioPuellae Initare(IResFluidaPuellaeLegibile resFluida) {
+            _statusCorporisActualis = _statuum[(int)IDPuellaeStatusCorporis.Quies];
+            _idStatusActualis = IDPuellaeStatusCorporis.Quies;
+            _idStatusProximus = IDPuellaeStatusCorporis.None;
+            return _statusCorporisActualis.Intrare(_contextusOstiorum, resFluida, null);
+        }
+
         public OrdinatioPuellae Ordinare(
             IResFluidaPuellaeLegibile resFluida
         ) {
