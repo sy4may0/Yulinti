@@ -7,9 +7,11 @@ namespace Yulinti.Rex {
         [SerializeField] ConfiguratioPuellaeRelationis relatio;
         [SerializeField] ConfiguratioPuellaeFigurae figura;
         [SerializeField] ConfiguratioPuellaeAnimationis animatio;
+        [SerializeField] ConfiguratioPuellaeLoci loci;
 
         public IConfiguratioPuellaeRelationis Relatio => relatio;
         public IConfiguratioPuellaeFigurae Figura => figura;
         public IConfiguratioPuellaeAnimationis Animatio => animatio;
+        public IConfiguratioPuellaeLoci Loci => loci;
     }
 }

@@ -15,6 +15,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public float Intervallum => _temporis.Intervallum;
         public float IntervallumFixus => _temporis.IntervallumFixus;
+        public int PulsusElapsus => _temporis.PulsusElapsus;
     }
 }
 

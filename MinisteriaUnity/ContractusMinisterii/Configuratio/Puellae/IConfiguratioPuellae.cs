@@ -3,5 +3,6 @@ namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
         IConfiguratioPuellaeRelationis Relatio { get; }
         IConfiguratioPuellaeFigurae Figura { get; }
         IConfiguratioPuellaeAnimationis Animatio { get; }
+        IConfiguratioPuellaeLoci Loci { get; }
     }
 }

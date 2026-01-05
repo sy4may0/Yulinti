@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 using Animancer;
 using Yulinti.Nucleus;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.Anchora {
     public sealed class AnchoraPuellae : MonoBehaviour, IAnchora, IAnchoraPuellae {
-        [SerializeField] private CharacterController _characterController;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
 
         [SerializeField] private Animator _animator;
         [SerializeField] private AnimancerComponent _animancer;
@@ -50,8 +51,15 @@ namespace Yulinti.MinisteriaUnity.Anchora {
         [SerializeField] private Transform _osHipsLeftX150Pin;
         [SerializeField] private Transform _osHipsLeftY90Pin;
 
+        [SerializeField] private Transform _resVisaeCapitisDexter;
+        [SerializeField] private Transform _resVisaeCapitisSinister;
+        [SerializeField] private Transform _resVisaePectorisDexter;
+        [SerializeField] private Transform _resVisaePectorisSinister;
+        [SerializeField] private Transform _resVisaeNatiumDexter;
+        [SerializeField] private Transform _resVisaeNatiumSinister;
 
-        public CharacterController CharacterController => _characterController;
+
+        public NavMeshAgent NavMeshAgent => _navMeshAgent;
         public Animator Animator => _animator;
         public AnimancerComponent Animancer => _animancer;
 
@@ -97,10 +105,20 @@ namespace Yulinti.MinisteriaUnity.Anchora {
         public Quaternion Rotatio => transform.rotation;
         public Vector3 Scala => transform.localScale;
 
+        // 頭の視認ポイント
+        public Transform ResVisaeCapitisDexter => _resVisaeCapitisDexter;
+        public Transform ResVisaeCapitisSinister => _resVisaeCapitisSinister;
+        // 胸の視認ポイント
+        public Transform ResVisaePectorisDexter => _resVisaePectorisDexter;
+        public Transform ResVisaePectorisSinister => _resVisaePectorisSinister;
+        // ケツの視認ポイント
+        public Transform ResVisaeNatiumDexter => _resVisaeNatiumDexter;
+        public Transform ResVisaeNatiumSinister => _resVisaeNatiumSinister;
+
         public bool Validare() {
             bool result = true;
-            if (_characterController == null) {
-                Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_CHARACTERCONTROLLER_NULL);
+            if (_navMeshAgent == null) {
+                Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_NAVMESHAGENT_NULL);
                 result = false;
             }
             if (_animator == null) {
@@ -245,6 +263,19 @@ namespace Yulinti.MinisteriaUnity.Anchora {
             }
             if (_osHipsLeftY90Pin == null) {
                 Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_BONE_HIPS_LEFT_Y90PIN_NULL);
+                result = false;
+            }
+
+            if (_resVisaeCapitisDexter == null || _resVisaeCapitisSinister == null) {
+                Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_BONE_VISAE_CAPITIS_NULL);
+                result = false;
+            }
+            if (_resVisaePectorisDexter == null || _resVisaePectorisSinister == null) {
+                Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_BONE_VISAE_PECTORIS_NULL);
+                result = false;
+            }
+            if (_resVisaeNatiumDexter == null || _resVisaeNatiumSinister == null) {
+                Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_BONE_VISAE_NATIUM_NULL);
                 result = false;
             }
             return result;

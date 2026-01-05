@@ -13,7 +13,7 @@
         NihilCorporis,
         NihilPartis,
         StandardBase,
-        Crouch,
+        Crouch
     }
 
     // これはContinuataに対応する。
@@ -24,6 +24,9 @@
 
         // Corpus
         NihilCorporis,
-        Crouch
+        Crouch,
+
+        // Pars
+        NihilPartis
     }
 }

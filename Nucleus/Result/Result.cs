@@ -92,6 +92,16 @@ namespace Yulinti.Nucleus {
                 return defalta;
             }
         }
+
+        public bool Conare(out T valor) {
+            if (EstSuccessus()) {
+                valor = _valor;
+                return true;
+            } else {
+                valor = default(T);
+                return false;
+            }
+        }
     }
 }
 

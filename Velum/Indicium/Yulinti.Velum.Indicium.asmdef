@@ -1,0 +1,19 @@
+{
+  "name": "Yulinti.Velum.Indicium",
+  "rootNamespace": "Yulinti.Velum.Indicium",
+  "references": [
+    "VContainer",
+    "Yulinti.Dux.ContractusDucis",
+    "Yulinti.Velum.ContractusVeli",
+    "Yulinti.Nucleus"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

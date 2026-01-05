@@ -19,6 +19,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _intervallumFixus = Time.fixedDeltaTime;
         }
 
+        // FrameCount
+        public int PulsusElapsus() {
+            return Time.frameCount;
+        }
+
         public float Intervallum => _intervallum;
         public float IntervallumFixus => _intervallumFixus;
     }

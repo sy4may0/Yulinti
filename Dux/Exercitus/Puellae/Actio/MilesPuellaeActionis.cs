@@ -1,55 +1,82 @@
 using Yulinti.Dux.ContractusDucis;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class MilesPuellaeActionis : IMilesPuellaeActionis {
-        private readonly MachinaPuellaeStatuum _machinaPuellaeStatuum;
-        private readonly IResFluidaPuellaeMotusLegibile _resFluidaMotusLeg;
-        private readonly IOstiumPuellaeLociLegibile _osPuellaeLociLeg;
-        private ResFluidaPuellaeMotus _resFluidaMotus;
+    internal sealed class MilesPuellaeActionis {
+        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
+        private readonly MachinaPuellaeStatuumCorporis _machinaCorporis;
+        private readonly MotorPuellaeActionis _motorActionis;
+        private readonly MotorPuellaeAnimationis _motorAnimationis;
 
-        // VContainer注入
+        private OrdinatioPuellaeActionis _ordinatioActionis;
+
         public MilesPuellaeActionis(
-            IConfiguratioPuellaeStatuum configuratioStatuum,
-            IOstiumInputMotusLegibile osInputMotusLeg,
-            IOstiumTemporisLegibile osTemporisLeg,
-            IOstiumCameraLegibile osCameraLeg,
+            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IOstiumPuellaeAnimationesMutabile osAnimationes,
-            IOstiumPuellaeLociMutabile osPuellaeLociMut,
-            IOstiumPuellaeLociLegibile osPuellaeLociLeg
+            IOstiumPuellaeLociMutabile osLociMutabile
         ) {
-            _resFluidaMotus = new ResFluidaPuellaeMotus();
-            _resFluidaMotusLeg = new ResFluidaPuellaeMotusLegibile(_resFluidaMotus);
- 
-            _machinaPuellaeStatuum = new MachinaPuellaeStatuum(
-                configuratioStatuum,
-                configuratioStatuum.StatusCorporum,
-                osInputMotusLeg,
-                osTemporisLeg,
-                osCameraLeg,
-                osAnimationes,
-                osPuellaeLociMut,
-                osPuellaeLociLeg,
-                _resFluidaMotusLeg
+            _contextusOstiorum = contextusOstiorum;
+            _machinaCorporis = new MachinaPuellaeStatuumCorporis(
+                _contextusOstiorum
             );
-
-            _osPuellaeLociLeg = osPuellaeLociLeg;
-       }
-
-        public IDStatus StatusCorporisActualis => _machinaPuellaeStatuum.IdStatusActualis;
-
-        public void Opero() {
-            _machinaPuellaeStatuum.Opero();
+            _motorActionis = new MotorPuellaeActionis(
+                _contextusOstiorum,
+                osLociMutabile
+            );
+            _motorAnimationis = new MotorPuellaeAnimationis(
+                osAnimationes
+            );
+            _motorAnimationis.InitiarePreadefinitus(
+                contextusOstiorum.Configuratio.Statuum.IdAnimationisPraedefinitus
+            );
         }
 
-        public void RenovareFluidaMotus() {
-            _resFluidaMotus.Renovare(
-                _osPuellaeLociLeg.VelHorizontalisActualis,
-                _osPuellaeLociLeg.VelVerticalisActualis,
-                _osPuellaeLociLeg.RotatioYActualis,
-                true // 接地判定は未設計。高所落下を実装するのであればここになんか作らないといけない。
+        public OrdinatioPuellae Ordinare(
+            IResFluidaPuellaeLegibile resFluida
+        ) {
+            return _machinaCorporis.Ordinare(resFluida);
+        }
+
+        public (OrdinatioPuellae Exire, OrdinatioPuellae Intrare) MutareStatus(
+            IResFluidaPuellaeLegibile resFluida
+        ) {
+            return _machinaCorporis.MutareStatus(resFluida);
+        }
+
+        public void ApplicareActionis(
+            OrdinatioPuellaeActionis ordinatio
+        ) {
+            _motorActionis.ApplicareActionis(ordinatio);
+        }
+
+        public void ApplicareAnimationis(
+            OrdinatioPuellaeAnimationis animationis
+        ) {
+            _motorAnimationis.ApplicareAnimationis(animationis);
+        }
+
+        public OrdinatioPuellae ValidereNavmesh(IResFluidaPuellaeLegibile resFluida) {
+            if (!_motorActionis.EstInNavmesh()) {
+                _motorAnimationis.Purgere();
+                return _machinaCorporis.Initare(resFluida);
+            }
+            return OrdinatioPuellae.Nihil();
+        }
+
+        public void RenovareResFluidaMotus(
+            in ResFluidaPuellaeMotus resFluidaMotus
+        ) {
+            resFluidaMotus.Renovare(
+                _motorActionis.VelocitasHorizontalisActualis(),
+                _motorActionis.VelocitasVerticalisActualis(),
+                _motorActionis.RotatioYActualis(),
+                true
             );
-            _machinaPuellaeStatuum.InjicereVelocitatem(_resFluidaMotus.VelocitasActualisHorizontalis);
+        }
+
+        public void InjicereVelocitatis(
+            IResFluidaPuellaeLegibile resFluida
+        ) {
+            _motorAnimationis.InjicereVelocitatem(resFluida.Motus.VelocitasActualisHorizontalis);
         }
     }
 }

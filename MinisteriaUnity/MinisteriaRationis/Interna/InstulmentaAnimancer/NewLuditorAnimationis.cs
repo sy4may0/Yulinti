@@ -13,11 +13,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private Queue<VasculumAnimationis> _animationesPostulata;
         private AnimancerState _statusCurrens;
         // 同期用時刻（アニメーションの再生位置を同期するため）
+        private LinearMixerState _linearMixerStateC;
         private float _tempusSimulataneum;
-        // LinearMixerTransition用速度パラメータ。
-        private LinearMixerTransition _linearMixerC = null;
-        private bool _aeternitas;
-        private bool _stratumNihil;
+        private readonly bool _aeternitas;
+        private readonly bool _stratumNihil;
 
         public NewLuditorAnimationis(
             AnimancerComponent animancer, int indexusLuditoris,
@@ -35,6 +34,14 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             // [TODO] 設定もしくはどっかのconstにする。
             _animationesPostulata = new Queue<VasculumAnimationis>(5); // Assuming a reasonable capacity
         }
+
+        public void Purgere() {
+            _animatioCurrens = null;
+            _animationesPostulata.Clear();
+            _statusCurrens = null;
+            _linearMixerStateC = null;
+        }
+
 
         public int IndexusLuditoris => _indexusLuditoris;
         public VasculumAnimationis AnimatioCurrens => _animatioCurrens;
@@ -162,16 +169,16 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public void InjicereVelocitatem(float velocitas) {
             // EstLinierMixerC: 線形ミキサーのキャッシュフラグ。
-            if (_linearMixerC != null) {
-                _linearMixerC.State.Parameter = velocitas;
+            if (_linearMixerStateC != null) {
+                _linearMixerStateC.Parameter = velocitas;
                 return;
             }
-            if (_animatioCurrens?.Animatio is LinearMixerTransition mixer) {
-                _linearMixerC = mixer;
-                _linearMixerC.State.Parameter = velocitas;
+            if (_statusCurrens != null && _statusCurrens is LinearMixerState linearMixerState) {
+                _linearMixerStateC = linearMixerState;
+                _linearMixerStateC.Parameter = velocitas;
                 return;
             }
-            _linearMixerC = null;
+            _linearMixerStateC = null;
         }
     }
 }

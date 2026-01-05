@@ -7,6 +7,7 @@ namespace Yulinti.Dux.ContractusDucis {
         void Cogere(IDPuellaeAnimationisContinuata idContinuata, Action adInitium, Action adFinem);
         void TemporareLuditores();
         void InjicereVelocitatem(float vel);
+        void Purgere();
     }
 }
 

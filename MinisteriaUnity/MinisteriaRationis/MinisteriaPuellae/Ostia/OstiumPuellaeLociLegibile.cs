@@ -1,6 +1,5 @@
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.Nucleus;
 using Yulinti.Dux.ContractusDucis;
+using Yulinti.Nucleus;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumPuellaeLociLegibile : IOstiumPuellaeLociLegibile {
@@ -11,14 +10,16 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             }
             _miPuellaeLoci = miPuellaeLoci;
         }
-        public float VelHorizontalisActualis => _miPuellaeLoci.VelHorizontalisActualis;
-        public float VelVerticalisActualis => _miPuellaeLoci.VelVerticalisActualis;
-        public float RotatioYActualis => _miPuellaeLoci.RotatioYActualis;
-        public System.Numerics.Vector3 Positio => 
-            InterpressNumericus.ToNumerics(_miPuellaeLoci.Positio);
-        public System.Numerics.Quaternion Rotatio => 
-            InterpressNumericus.ToNumerics(_miPuellaeLoci.Rotatio);
+
+        public bool EstActivum() => _miPuellaeLoci.EstActivum();
+        public bool EstActivumMotus() => _miPuellaeLoci.EstActivumMotus();
+        public bool EstActivumNavMesh() => _miPuellaeLoci.EstActivumNavMesh();
+        public bool EstAdPerveni() => _miPuellaeLoci.EstAdPerveni();
+        public bool EstMigrare() => _miPuellaeLoci.EstMigrare();
+        public float VelocitasHorizontalisActualis() => _miPuellaeLoci.VelocitasHorizontalisActualis();
+        public float RotatioYActualis() => _miPuellaeLoci.RotatioYActualis();
+        public System.Numerics.Vector3 Positio() => InterpressNumericus.ToNumerics(_miPuellaeLoci.Positio());
+        public System.Numerics.Quaternion Rotatio() => InterpressNumericus.ToNumerics(_miPuellaeLoci.Rotatio());
     }
 }
-
 
