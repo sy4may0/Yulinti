@@ -12,7 +12,9 @@
     "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
     "Yulinti.MinisteriaUnity.MinisteriaRationis",
     "Yulinti.MinisteriaUnity.MinistriiRationis",
-    "Yulinti.MinisteriaUnity.Anchora"
+    "Yulinti.MinisteriaUnity.Anchora",
+    "Yulinti.Velum.ContractusVeli",
+    "Yulinti.Velum.Indicium"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

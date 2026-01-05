@@ -6,6 +6,7 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Dux.ContractusDucis;
 using Yulinti.Dux.Exercitus;
+using Yulinti.Velum.Indicium;
 
 namespace Yulinti.Rex {
     public sealed class RexTestScene : LifetimeScope {
@@ -39,6 +40,9 @@ namespace Yulinti.Rex {
 
             FaberMinisteriaTestScene.Initio(builder);
             FaberDucisTestScene.Initio(builder);
+            FaberTestScene.Initio(builder);
+
+            builder.RegisterComponentInHierarchy<VelumTestScene>();
 
             builder.RegisterEntryPoint<PraefectusTestScene>();
         }
