@@ -5,6 +5,9 @@ namespace Yulinti.Dux.Exercitus {
         private readonly ContextusCivisOstiorumLegibile _contextus;
         private readonly IOstiumCivisMutabile _ostiumCivisMut;
         private float[] _phantasmaVitae;
+        private float[] _phantasmaVisa;
+        private bool[] _phantasmaEstVigilantia;
+        private bool[] _phantasmaEstDetectio;
 
         public ResolutorCivisVeletudinis(
             ContextusCivisOstiorumLegibile contextus,
@@ -13,6 +16,9 @@ namespace Yulinti.Dux.Exercitus {
             _contextus = contextus;
             _ostiumCivisMut = ostiumCivisMut;
             _phantasmaVitae = new float[contextus.Civis.Longitudo];
+            _phantasmaVisa = new float[contextus.Civis.Longitudo];
+            _phantasmaEstVigilantia = new bool[contextus.Civis.Longitudo];
+            _phantasmaEstDetectio = new bool[contextus.Civis.Longitudo];
         }
 
 
@@ -20,6 +26,9 @@ namespace Yulinti.Dux.Exercitus {
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
                 if (resFluida.EstDominare(i)) {
                     _phantasmaVitae[i] = resFluida.Vitae(i);
+                    _phantasmaVisa[i] = resFluida.Visa(i);
+                    _phantasmaEstVigilantia[i] = resFluida.EstVigilantia(i);
+                    _phantasmaEstDetectio[i] = resFluida.EstDetectio(i);
                 }
             }
         }
@@ -27,12 +36,26 @@ namespace Yulinti.Dux.Exercitus {
         public void Addo(OrdinatioCivisVeletudinisValoris ordinatio) {
             _phantasmaVitae[ordinatio.IdCivis] += ordinatio.DtVitae;
         }
+        
+        public void AddoVisa(int idCivis, OrdinatioCivisCustodiaeVisa visa) {
+            _phantasmaVisa[idCivis] += visa.DtVisa;
+        }
+
+        public void AddDetectio(int idCivis, OrdinatioCivisCustodiaeDetectio detectio) {
+            _phantasmaEstVigilantia[idCivis] = detectio.EstVigilantia;
+            _phantasmaEstDetectio[idCivis] = detectio.EstDetectio;
+        }
 
         // 寿命の適用
-        public void Applicare(ResFluidaCivisVeletudinis resFluida) {
+        public void Applicare(
+            ResFluidaCivisVeletudinis resFluida
+        ) {
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
                 if (resFluida.EstDominare(i)) {
                     resFluida.RenovareVitae(i, DuxMath.Clamp(_phantasmaVitae[i], 0, 100));
+                    resFluida.RenovareVisa(i, DuxMath.Clamp(_phantasmaVisa[i], 0, 100));
+                    resFluida.RenovareVigilantia(i, _phantasmaEstVigilantia[i]);
+                    resFluida.RenovareDetectio(i, _phantasmaEstDetectio[i]);
                 }
             }
             PurgareAll();
@@ -44,8 +67,11 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        private void Purgare(int id) {
+        public void Purgare(int id) {
             _phantasmaVitae[id] = 100;
+            _phantasmaVisa[id] = 0f;
+            _phantasmaEstVigilantia[id] = false;
+            _phantasmaEstDetectio[id] = false;
         }
 
         public void Incarnare(int id) {
@@ -87,21 +113,6 @@ namespace Yulinti.Dux.Exercitus {
             } else if (ordinatio.EstSpirituare) {
                 Spirituare(ordinatio.IdCivis);
             }
-        }
-
-        public void ApplicareCustodiae(
-            OrdinatioCivisVeletudinisCustodiae ordinatio,
-            ResFluidaCivisVeletudinis resFluida
-        ) {
-            ordinatio.Match(
-                visa: (visa) => {
-                    resFluida.RenovareVisa(ordinatio.IdCivis, visa.DtVisa);
-                },
-                detectio: (detectio) => {
-                    resFluida.RenovareVigilantia(ordinatio.IdCivis, detectio.EstVigilantia);
-                    resFluida.RenovareDetectio(ordinatio.IdCivis, detectio.EstDetectio);
-                }
-            );
         }
 
         public void Servatum(int id, ResFluidaCivisVeletudinis resFluida) {

@@ -63,9 +63,8 @@ namespace Yulinti.Dux.Exercitus {
                     _milesCivisActionis.Purgere(i);
                 }
 
-                // Actionis処理実行
                 if (!_resFluidaVeletudinis.EstDominare(i) || !_resFluidaVeletudinis.EstMotus(i)) continue;
-
+                // Actionis処理実行
                 var (exire, intrare) = _milesCivisActionis.MutareStatus(i, _resFluidaLegibile);
                 ResolvereOrdinatio(exire);
                 ResolvereOrdinatio(intrare);
@@ -81,6 +80,7 @@ namespace Yulinti.Dux.Exercitus {
 
                 // 視認度を更新
                 ResolvereOrdinatio(_milesCivisCustodiae.Ordinare(i, _resFluidaLegibile));
+                ResolvereOrdinatio(_milesCivisCustodiae.OrdinareDetectio(i, _resFluidaLegibile));
             }
         }
 
@@ -110,7 +110,14 @@ namespace Yulinti.Dux.Exercitus {
                 _milesCivisVeletudinis.ApplicareMors(veletudinisMortis, _resFluidaVeletudinis);
             }
             if (ordinatio.ConareLegoVeletudinisCustodiae(out OrdinatioCivisVeletudinisCustodiae veletudinisCustodiae)) {
-                _milesCivisVeletudinis.ApplicareCustodiae(veletudinisCustodiae, _resFluidaVeletudinis);
+                veletudinisCustodiae.Match(
+                    visa: (visa) => {
+                        _milesCivisVeletudinis.AddoVisa(ordinatio.IdCivis, visa);
+                    },
+                    detectio: (detectio) => {
+                        _milesCivisVeletudinis.AddDetectio(ordinatio.IdCivis, detectio);
+                    }
+                );  
             }
         }
     }

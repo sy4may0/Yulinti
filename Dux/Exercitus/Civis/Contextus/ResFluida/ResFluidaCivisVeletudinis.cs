@@ -95,20 +95,24 @@ namespace Yulinti.Dux.Exercitus {
             _estDetectio[idCivis] = estDetectio;
         }
 
-        public void Dominare(int idCivis) {
-            if (idCivis < 0 || idCivis >= _estDominare.Length) return;
-            if (_estDominare[idCivis]) return;
+        public void Purgare(int idCivis) {
             _vitae[idCivis] = 100;
             _visus[idCivis] = 100;
             _visa[idCivis] = 0f;
+            _estVigilantia[idCivis] = false;
+            _estDetectio[idCivis] = false;
+        }
+
+        public void Dominare(int idCivis) {
+            if (idCivis < 0 || idCivis >= _estDominare.Length) return;
+            if (_estDominare[idCivis]) return;
+            Purgare(idCivis);
             _estDominare[idCivis] = true;
             _estMotus[idCivis] = false;
         }
         public void Liberare(int idCivis) {
             if (!estActivum(idCivis)) return;
-            _vitae[idCivis] = 100;
-            _visus[idCivis] = 100;
-            _visa[idCivis] = 0f;
+            Purgare(idCivis);
             _estDominare[idCivis] = false;
             _estMotus[idCivis] = false;
         }

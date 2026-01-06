@@ -4,6 +4,7 @@ namespace Yulinti.Dux.ContractusDucis {
         float DistantiaCustodiaeMaxima { get; }
         float LimenVigilantia { get; }
         float LimenDetectio { get; }
+        float ConsumptioVisaeVigilantiaSec { get; }
         float ConsumptioVisaeSec { get; }
     }
 }

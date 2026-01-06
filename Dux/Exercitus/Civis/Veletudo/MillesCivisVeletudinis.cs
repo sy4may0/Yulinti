@@ -22,6 +22,14 @@ namespace Yulinti.Dux.Exercitus {
             _resolutorVeletudinis.Addo(ordinatio);
         }
 
+        public void AddoVisa(int idCivis, OrdinatioCivisCustodiaeVisa visa) {
+            _resolutorVeletudinis.AddoVisa(idCivis, visa);
+        }
+
+        public void AddDetectio(int idCivis, OrdinatioCivisCustodiaeDetectio detectio) {
+            _resolutorVeletudinis.AddDetectio(idCivis, detectio);
+        }
+
         public void Applicare(ResFluidaCivisVeletudinis resFluida) {
             _resolutorVeletudinis.Applicare(resFluida);
         }
@@ -45,13 +53,6 @@ namespace Yulinti.Dux.Exercitus {
             _resolutorVeletudinis.ApplicareMors(ordinatio, resFluida);
         }
 
-        public void ApplicareCustodiae(
-            OrdinatioCivisVeletudinisCustodiae ordinatio,
-            ResFluidaCivisVeletudinis resFluida
-        ) {
-            _resolutorVeletudinis.ApplicareCustodiae(ordinatio, resFluida);
-        }
-
         public void Servatum(int id, ResFluidaCivisVeletudinis resFluida) {
             _resolutorVeletudinis.Servatum(id, resFluida);
         }
@@ -60,5 +61,8 @@ namespace Yulinti.Dux.Exercitus {
             _resolutorVeletudinis.LiberareServatum(id, resFluida);
         }
 
+        public void Purgare(int id) {
+            _resolutorVeletudinis.Purgare(id);
+        }
     }
 }
