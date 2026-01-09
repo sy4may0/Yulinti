@@ -8,8 +8,6 @@ using Yulinti.Nucleus;
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCivis {
         private readonly TabulaCivis _tabulaCivis;
-        // Dirtyフラグ。Incarnare/Spirituareにより状態が変わったらfalse、処理したらtrue。
-        private bool _estServam;
 
         private Action<int> _adIncarnare;
         private Action<int> _adSpirituare;
@@ -24,14 +22,12 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public int Longitudo => _tabulaCivis.Longitudo;
         public int LongitudoActivum => longitudoActivum();
         public bool EstActivum(int id) => estActivum(id);
-        public bool EstServam => _estServam;
 
         public void Incarnare(int id) {
             if (id < 0 || id >= _tabulaCivis.Longitudo) return;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
             anchora.Incarnare();
             _adIncarnare?.Invoke(id);
-            _estServam = false;
         }
 
         public void Spirituare(int id) {
@@ -39,7 +35,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
             anchora.Spirituare();
             _adSpirituare?.Invoke(id);
-            _estServam = false;
         }
 
         // 非実体化ID(Incarnareされていない者)を取得
@@ -52,10 +47,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
                 break;
             }
             return id;
-        }
-
-        public void Servare() {
-            _estServam = true;
         }
 
         public void PonoAdIncarnare(Action<int> adIncarnare) {

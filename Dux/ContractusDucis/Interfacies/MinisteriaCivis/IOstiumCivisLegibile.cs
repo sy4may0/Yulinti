@@ -10,7 +10,5 @@ namespace Yulinti.Dux.ContractusDucis {
         int LegoIDIntactus();
         // 実体化しているか。
         bool EstActivum(int id);
-        // 全員奴隷化完了フラグ
-        bool EstServam { get; }
     }
 }

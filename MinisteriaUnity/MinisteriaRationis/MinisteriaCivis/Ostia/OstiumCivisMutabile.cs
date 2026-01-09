@@ -22,10 +22,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miCivisGenerator.Terminare();
         }
 
-        public void Servare() {
-            _miCivis.Servare();
-        }
-
         public int[] IDs => _miCivis.IDs;
         public int Longitudo => _miCivis.Longitudo;
         public bool EstActivum(int id) => _miCivis.EstActivum(id);
