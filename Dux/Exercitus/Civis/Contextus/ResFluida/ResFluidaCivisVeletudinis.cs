@@ -4,8 +4,6 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class ResFluidaCivisVeletudinis : IResFluidaCivisVeletudinisLegibile {
         private float[] _vitae;
         private bool[] _estDominare;
-        // モーション適用有無 StateMachineから捕縛される前までfalse
-        private bool[] _estMotus;
 
         // 視力(0~100%)
         private float[] _visus;
@@ -23,7 +21,6 @@ namespace Yulinti.Dux.Exercitus {
             _visa = new float[ostiumCivis.Longitudo];
 
             _estDominare = new bool[ostiumCivis.Longitudo];
-            _estMotus = new bool[ostiumCivis.Longitudo];
             _estVigilantia = new bool[ostiumCivis.Longitudo];
             _estDetectio = new bool[ostiumCivis.Longitudo];
  
@@ -32,7 +29,6 @@ namespace Yulinti.Dux.Exercitus {
                 _visus[i] = 100f;
                 _visa[i] = 0f;
                 _estDominare[i] = false;
-                _estMotus[i] = false;
             }
         }
 
@@ -62,10 +58,6 @@ namespace Yulinti.Dux.Exercitus {
         public bool EstExhaurita(int idCivis) {
             if (!estActivum(idCivis)) return false;
             return _vitae[idCivis] <= 0;
-        }
-        public bool EstMotus(int idCivis) {
-            if (!estActivum(idCivis)) return false;
-            return _estMotus[idCivis];
         }
         public bool EstVigilantia(int idCivis) {
             if (!estActivum(idCivis)) return false;
@@ -108,22 +100,11 @@ namespace Yulinti.Dux.Exercitus {
             if (_estDominare[idCivis]) return;
             Purgare(idCivis);
             _estDominare[idCivis] = true;
-            _estMotus[idCivis] = false;
         }
         public void Liberare(int idCivis) {
             if (!estActivum(idCivis)) return;
             Purgare(idCivis);
             _estDominare[idCivis] = false;
-            _estMotus[idCivis] = false;
-        }
-
-        public void ServereMotus(int idCivis) {
-            if (!estActivum(idCivis)) return;
-            _estMotus[idCivis] = true;
-        }
-
-        public void LiberareServatum(int idCivis) {
-            _estMotus[idCivis] = false;
         }
     }
 }

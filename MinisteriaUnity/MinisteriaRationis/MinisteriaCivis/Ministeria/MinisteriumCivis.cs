@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System;
 using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
@@ -10,8 +11,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         // Dirtyフラグ。Incarnare/Spirituareにより状態が変わったらfalse、処理したらtrue。
         private bool _estServam;
 
+        private Action<int> _adIncarnare;
+        private Action<int> _adSpirituare;
+
         public MinisteriumCivis(TabulaCivis tabulaCivis, IConfiguratioCivisGenerator configuratio) {
             _tabulaCivis = tabulaCivis;
+            _adIncarnare = null;
+            _adSpirituare = null;
         }
 
         public int[] IDs => _tabulaCivis.IDs;
@@ -24,6 +30,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (id < 0 || id >= _tabulaCivis.Longitudo) return;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
             anchora.Incarnare();
+            _adIncarnare?.Invoke(id);
             _estServam = false;
         }
 
@@ -31,6 +38,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (id < 0 || id >= _tabulaCivis.Longitudo) return;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
             anchora.Spirituare();
+            _adSpirituare?.Invoke(id);
             _estServam = false;
         }
 
@@ -48,6 +56,13 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public void Servare() {
             _estServam = true;
+        }
+
+        public void PonoAdIncarnare(Action<int> adIncarnare) {
+            _adIncarnare = adIncarnare;
+        }
+        public void PonoAdSpirituare(Action<int> adSpirituare) {
+            _adSpirituare = adSpirituare;
         }
 
         private bool estActivum(int id) {

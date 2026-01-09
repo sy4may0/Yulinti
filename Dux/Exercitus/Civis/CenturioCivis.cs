@@ -32,6 +32,26 @@ namespace Yulinti.Dux.Exercitus {
             _resFluidaVeletudinis = resFluidaVeletudinis;
             _resFluidaLegibile = resFluidaLegibile;
             _contextus = contextus;
+
+            // 実体化完了時に呼ばれる
+            _milesCivisVeletudinis.PonoAdIncarnare(AdIncarnare);
+            // 実体化解除完了時に呼ばれる
+            _milesCivisVeletudinis.PonoAdSpirituare(AdSpirituare);
+        }
+
+        private void AdIncarnare(int idCivis) {
+            _resFluidaVeletudinis.Dominare(idCivis);
+            _milesCivisVeletudinis.Purgare(idCivis);
+            _milesCivisActionis.Purgere(idCivis);
+            var (initare, intrareStatus) = _milesCivisActionis.InitareServatum(idCivis, _resFluidaLegibile);
+            ResolvereOrdinatio(initare);
+            ResolvereOrdinatio(intrareStatus);
+        }
+
+        private void AdSpirituare(int idCivis) {
+            _resFluidaVeletudinis.Liberare(idCivis);
+            _milesCivisVeletudinis.Purgare(idCivis);
+            _milesCivisActionis.Purgere(idCivis);
         }
 
         // !注意
@@ -43,27 +63,10 @@ namespace Yulinti.Dux.Exercitus {
         public void Pulsus() {
             // Veletudoキャッシュを初期化
             _milesCivisVeletudinis.InitarePhantasma(_resFluidaVeletudinis);
-            // Dominate
-            _milesCivisVeletudinis.RenovereDomina(_resFluidaVeletudinis);
 
             // MilesCivisActionisの初期化。処理対象整理
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
-                if (_resFluidaVeletudinis.EstDominare(i) && !_resFluidaVeletudinis.EstMotus(i)) {
-                    _milesCivisActionis.Purgere(i);
-                    var (initare, intrareStatus) = _milesCivisActionis.InitareServatum(i, _resFluidaLegibile);
-                    ResolvereOrdinatio(initare);
-                    ResolvereOrdinatio(intrareStatus);
-
-                    // EstDominareとEstMotusを同期する。
-                    _milesCivisVeletudinis.Servatum(i, _resFluidaVeletudinis);
-                }
-                if (!_resFluidaVeletudinis.EstDominare(i) && _resFluidaVeletudinis.EstMotus(i)) {
-                    // EstDominareとEstMotusを同期する。
-                    _milesCivisVeletudinis.LiberareServatum(i, _resFluidaVeletudinis);
-                    _milesCivisActionis.Purgere(i);
-                }
-
-                if (!_resFluidaVeletudinis.EstDominare(i) || !_resFluidaVeletudinis.EstMotus(i)) continue;
+                if (!_resFluidaVeletudinis.EstDominare(i)) continue;
                 // Actionis処理実行
                 var (exire, intrare) = _milesCivisActionis.MutareStatus(i, _resFluidaLegibile);
                 ResolvereOrdinatio(exire);
