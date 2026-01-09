@@ -20,6 +20,23 @@ namespace Yulinti.Dux.Exercitus {
         private const float cos95 = -0.087155744f;
         private const float cos45 =  0.707106782f;
 
+        // 距離減衰パラメータ
+        // 距離減衰が上がり始める距離のratio(0~1)
+        private readonly float _ratioDistantiaCustodiaeAscensus;
+        // 距離減衰カーブのy0, y1キャッシュ(シグモイドexp計算削減のため)
+        private readonly float _sigmoidY0DistantiaCustodiae;
+        private readonly float _sigmoidY1DistantiaCustodiae;
+
+        // 興味喪失パラメータ
+        // 減少経過時間(sec)
+        private readonly float[] _tempusStudiumAmittere;
+        // 興味を失うまでの時間のratio(0~1)
+        private readonly float _ratioTempusStudiumAmittere;
+        // 興味の減少カーブのy0, y1キャッシュ(シグモイドexp計算削減のため)
+        private readonly float _sigmoidY0TempusAmittere;
+        private readonly float _sigmoidY1TempusAmittere;
+
+
         // enum配列キャッシュ
         private readonly IDPuellaeResVisaeCapitis[] _cIDPuellaeResVisaeCapitis;
         private readonly IDPuellaeResVisaePectoris[] _cIDPuellaeResVisaePectoris;
@@ -31,15 +48,34 @@ namespace Yulinti.Dux.Exercitus {
             _numerusIctuumCorporis = new float[contextus.Civis.Longitudo];
             _angulusRationemCapitis = new float[contextus.Civis.Longitudo];
             _angulusRationemCorporis = new float[contextus.Civis.Longitudo];
+            _tempusStudiumAmittere = new float[contextus.Civis.Longitudo];
             for (int i = 0; i < contextus.Civis.Longitudo; i++) {
                 _numerusIctuumCapitis[i] = 0;
                 _numerusIctuumCorporis[i] = 0;
                 _angulusRationemCapitis[i] = 0f;
                 _angulusRationemCorporis[i] = 0f;
+                _tempusStudiumAmittere[i] = 0f;
             }
             _cIDPuellaeResVisaeCapitis = (IDPuellaeResVisaeCapitis[])Enum.GetValues(typeof(IDPuellaeResVisaeCapitis));
             _cIDPuellaeResVisaePectoris = (IDPuellaeResVisaePectoris[])Enum.GetValues(typeof(IDPuellaeResVisaePectoris));
             _cIDPuellaeResVisaeNatium = (IDPuellaeResVisaeNatium[])Enum.GetValues(typeof(IDPuellaeResVisaeNatium));
+
+            // 距離減衰パラメータ初期化
+            _ratioDistantiaCustodiaeAscensus = DuxMath.Clamp(
+                DuxMath.InverseLeap(
+                    _contextus.Configuratio.Custodiae.DistantiaCustodiae,
+                    _contextus.Configuratio.Custodiae.DistantiaCustodiaeMaxima,
+                    _contextus.Configuratio.Custodiae.DistantiaCustodiaeAscensus
+                ),
+            0f, 1f);
+            _sigmoidY0DistantiaCustodiae = DuxMath.Sigmoid(0f, _ratioDistantiaCustodiaeAscensus, _contextus.Configuratio.Custodiae.PrecalculusDistantiaAscensus);
+            _sigmoidY1DistantiaCustodiae = DuxMath.Sigmoid(1f, _ratioDistantiaCustodiaeAscensus, _contextus.Configuratio.Custodiae.PrecalculusDistantiaAscensus);
+
+            // 興味喪失パラメータ初期化
+            _ratioTempusStudiumAmittere = DuxMath.Clamp(_contextus.Configuratio.Custodiae.TempusStudiumAmittereSec / _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec, 0f, 1f);
+            _sigmoidY0TempusAmittere = DuxMath.Sigmoid(0f, _ratioTempusStudiumAmittere, _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere);
+            _sigmoidY1TempusAmittere = DuxMath.Sigmoid(1f, _ratioTempusStudiumAmittere, _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere);
+
         }
 
         private float ComputareVisus(
@@ -48,11 +84,22 @@ namespace Yulinti.Dux.Exercitus {
             float distantiaCustodiae,
             float distantiaCustodiaeMaxima
         ) {
-            float t = (MathF.Abs(distantiaCustodiaeMaxima - distantiaCustodiae) > Numerus.Epsilon)
-                ? (distantia - distantiaCustodiae) / (distantiaCustodiaeMaxima - distantiaCustodiae)
-                : 0f;
-            t = DuxMath.Clamp(t, 0f, 1f);
-            float k = t * t * (3f - 2f * t);
+            // シグモイド関数でカーブを計算する。
+            float d = DuxMath.Clamp(DuxMath.InverseLeap(
+                distantiaCustodiae,
+                distantiaCustodiaeMaxima,
+                distantia
+            ), 0f, 1f);
+
+            float k = DuxMath.SigmoidCaudaSinistra(
+                d,
+                _ratioDistantiaCustodiaeAscensus,
+                _contextus.Configuratio.Custodiae.PrecalculusDistantiaAscensus,
+                _sigmoidY0DistantiaCustodiae,
+                _sigmoidY1DistantiaCustodiae
+            );
+
+            // visusが100%レンジのため/100で割る。
             return visus * k / 100f;
         }
 
@@ -67,45 +114,80 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            // 警戒時はVisaeVigilantiaSecで減少する。
-            // 通常時はVisaeSecで減少する。
-            float consumptio = _contextus.Configuratio.Custodiae.ConsumptioVisaeSec * _contextus.Temporis.Intervallum;
-            if (resFluida.Veletudinis.EstVigilantia(idCivis) || resFluida.Veletudinis.EstDetectio(idCivis)) {
-                consumptio = _contextus.Configuratio.Custodiae.ConsumptioVisaeVigilantiaSec * _contextus.Temporis.Intervallum;
-            }
+            float consumptio = ComputareConsumptioVisae(idCivis, resFluida);
 
             float numerusIctuum = 
                 _numerusIctuumCapitis[idCivis] * _angulusRationemCapitis[idCivis] + 
                 _numerusIctuumCorporis[idCivis] * _angulusRationemCorporis[idCivis];
 
             // 視認数0で減少する。
-            if (numerusIctuum <= Numerus.Epsilon) return new OrdinatioCivis(
-                idCivis,
-                veletudinisCustodiae: OrdinatioCivisVeletudinisCustodiae.FromVisa(idCivis, new OrdinatioCivisCustodiaeVisa(
-                    consumptio
-                ))
-            );
+            if (numerusIctuum <= Numerus.Epsilon) {
+                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) {
+                    return OrdinatioCivis.Nihil(idCivis);
+                } else {
+                    return new OrdinatioCivis(
+                        idCivis,
+                        veletudinisCustodiae: OrdinatioCivisVeletudinisCustodiae.FromVisa(idCivis, new OrdinatioCivisCustodiaeVisa(
+                            consumptio
+                        ))
+                    );
+                }
+            }
 
             float distantia = ComputareDistantia(idCivis);
-            // distantiaがDistantiaCustodiaeより大きい場合は5%毎秒減少する。
-            if (distantia > _contextus.Configuratio.Custodiae.DistantiaCustodiae) return new OrdinatioCivis(
-                idCivis,
-                veletudinisCustodiae: OrdinatioCivisVeletudinisCustodiae.FromVisa(idCivis, new OrdinatioCivisCustodiaeVisa(
-                    consumptio
-                ))
-            );
+            // distantiaがDistantiaCustodiaeより大きい場合はVisaeを減少する。
+            if (distantia > _contextus.Configuratio.Custodiae.DistantiaCustodiae) {
+                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) {
+                    return OrdinatioCivis.Nihil(idCivis);
+                } else {
+                    return new OrdinatioCivis(
+                        idCivis,
+                        veletudinisCustodiae: OrdinatioCivisVeletudinisCustodiae.FromVisa(idCivis, new OrdinatioCivisCustodiaeVisa(
+                            consumptio
+                        ))
+                    );
+                }
+            }
 
             float visus = resFluida.Veletudinis.Visus(idCivis);
             float distantiaCustodiaeMaxima = _contextus.Configuratio.Custodiae.DistantiaCustodiaeMaxima;
             float distantiaCustodiae = _contextus.Configuratio.Custodiae.DistantiaCustodiae;
-            float ratioVirsus = ComputareVisus(visus, distantia, distantiaCustodiae, distantiaCustodiaeMaxima);
+            float ratioDistantia = ComputareVisus(visus, distantia, distantiaCustodiae, distantiaCustodiaeMaxima);
 
-            // 視認数 * 10 * ratioVirsus / 毎秒
-            float dtVisa = numerusIctuum * 10f * ratioVirsus * _contextus.Temporis.Intervallum;
+            // 視認数 * 10 * ratioVirsus / 毎秒 * 視認度上昇倍率
+            float dtVisa = numerusIctuum * ratioDistantia * _contextus.Temporis.Intervallum;
+            // 固定設定レシオを乗算する。
+            dtVisa *= _contextus.Configuratio.Custodiae.RatioVisus;
+            // 興味喪失時間をリセット
+            _tempusStudiumAmittere[idCivis] = 0f;
             return new OrdinatioCivis(
                 idCivis,
                 veletudinisCustodiae: OrdinatioCivisVeletudinisCustodiae.FromVisa(idCivis, new OrdinatioCivisCustodiaeVisa(dtVisa))
             );
+        }
+
+        // Detectio状態ではConsumptioVisaeDetectioSecで減少する。
+        // Vigilantia/通常時は興味喪失パラメータに従ってConsumptioVisaeSecで減少する。
+        private float ComputareConsumptioVisae(
+            int idCivis,
+            IResFluidaCivisLegibile resFluida
+        ) {
+            if (resFluida.Veletudinis.EstDetectio(idCivis)) {
+                _tempusStudiumAmittere[idCivis] = 0f;
+                return _contextus.Configuratio.Custodiae.ConsumptioVisaeDetectioSec * _contextus.Temporis.Intervallum;
+            } else {
+                _tempusStudiumAmittere[idCivis] += _contextus.Temporis.Intervallum;
+                // 経過時間を0~1に正規化
+                float t = DuxMath.Clamp(_tempusStudiumAmittere[idCivis] / _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec, 0f, 1f);
+                float ratio = DuxMath.SigmoidCaudaSinistra(
+                    t,
+                    _ratioTempusStudiumAmittere,
+                    _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere,
+                    _sigmoidY0TempusAmittere,
+                    _sigmoidY1TempusAmittere
+                );
+                return _contextus.Configuratio.Custodiae.ConsumptioVisaeSec * ratio * _contextus.Temporis.Intervallum;
+            }
         }
 
         // Detectio判定を行う。
