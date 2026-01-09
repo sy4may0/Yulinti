@@ -54,6 +54,20 @@ namespace Yulinti.Dux.Exercitus {
             _milesCivisActionis.Purgere(idCivis);
         }
 
+        // 不整合のNPCが存在すれば修復する。
+        private void RenovareDominare(int idCivis) {
+            bool estActivum = _contextus.Civis.EstActivum(idCivis);
+            bool estDominare = _resFluidaVeletudinis.EstDominare(idCivis);
+
+            if (estActivum == estDominare) return;
+
+            if (estActivum) {
+                AdIncarnare(idCivis);
+            } else {
+                AdSpirituare(idCivis);
+            }
+        }
+
         // !注意
         // 処理対象整理とステートマシンのステート切り替えが同期しないことがある。
         // MutareStatus()がステート遷移要求を返し、アニメーション適用時にコールバックで自身のステートを更新する。
@@ -66,6 +80,9 @@ namespace Yulinti.Dux.Exercitus {
 
             // MilesCivisActionisの初期化。処理対象整理
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+                // AdIncarnare/AdSpirituareが生成時にInvoke()されなかった場合に修復する。
+                RenovareDominare(i);
+
                 if (!_resFluidaVeletudinis.EstDominare(i)) continue;
                 // Actionis処理実行
                 var (exire, intrare) = _milesCivisActionis.MutareStatus(i, _resFluidaLegibile);

@@ -9,6 +9,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCivis {
         private readonly TabulaCivis _tabulaCivis;
 
+        private bool _estPonoAdIncarnare;
+        private bool _estPonoAdSpirituare;
         private Action<int> _adIncarnare;
         private Action<int> _adSpirituare;
 
@@ -16,6 +18,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _tabulaCivis = tabulaCivis;
             _adIncarnare = null;
             _adSpirituare = null;
+            _estPonoAdIncarnare = false;
+            _estPonoAdSpirituare = false;
         }
 
         public int[] IDs => _tabulaCivis.IDs;
@@ -50,10 +54,18 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         public void PonoAdIncarnare(Action<int> adIncarnare) {
+            if (_estPonoAdIncarnare) {
+                Errorum.Fatal(IDErrorum.CIVIS_ADINCARNARE_ALREADY_SET);
+            }
             _adIncarnare = adIncarnare;
+            _estPonoAdIncarnare = true;
         }
         public void PonoAdSpirituare(Action<int> adSpirituare) {
+            if (_estPonoAdSpirituare) {
+                Errorum.Fatal(IDErrorum.CIVIS_ADSPIRITUARE_ALREADY_SET);
+            }
             _adSpirituare = adSpirituare;
+            _estPonoAdSpirituare = true;
         }
 
         private bool estActivum(int id) {
