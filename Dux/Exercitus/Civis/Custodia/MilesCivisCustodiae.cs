@@ -20,21 +20,20 @@ namespace Yulinti.Dux.Exercitus {
         private const float cos95 = -0.087155744f;
         private const float cos45 =  0.707106782f;
 
+        private const int LONGITUDOLUT = 256;
         // 距離減衰パラメータ
         // 距離減衰が上がり始める距離のratio(0~1)
         private readonly float _ratioDistantiaCustodiaeAscensus;
-        // 距離減衰カーブのy0, y1キャッシュ(シグモイドexp計算削減のため)
-        private readonly float _sigmoidY0DistantiaCustodiae;
-        private readonly float _sigmoidY1DistantiaCustodiae;
+        // 距離減衰カーブLUT
+        private readonly SigmoidLUT _sigmoidLUTDistantiaCustodiae;
 
         // 興味喪失パラメータ
         // 減少経過時間(sec)
         private readonly float[] _tempusStudiumAmittere;
         // 興味を失うまでの時間のratio(0~1)
         private readonly float _ratioTempusStudiumAmittere;
-        // 興味の減少カーブのy0, y1キャッシュ(シグモイドexp計算削減のため)
-        private readonly float _sigmoidY0TempusAmittere;
-        private readonly float _sigmoidY1TempusAmittere;
+        // 興味喪失カーブLUT
+        private readonly SigmoidLUT _sigmoidLUTTempusAmittere;
 
 
         // enum配列キャッシュ
@@ -68,13 +67,19 @@ namespace Yulinti.Dux.Exercitus {
                     _contextus.Configuratio.Custodiae.DistantiaCustodiaeAscensus
                 ),
             0f, 1f);
-            _sigmoidY0DistantiaCustodiae = DuxMath.Sigmoid(0f, _ratioDistantiaCustodiaeAscensus, _contextus.Configuratio.Custodiae.PrecalculusDistantiaAscensus);
-            _sigmoidY1DistantiaCustodiae = DuxMath.Sigmoid(1f, _ratioDistantiaCustodiaeAscensus, _contextus.Configuratio.Custodiae.PrecalculusDistantiaAscensus);
+            _sigmoidLUTDistantiaCustodiae = new SigmoidLUT(
+                _contextus.Configuratio.Custodiae.PrecalculusDistantiaAscensus,
+                _ratioDistantiaCustodiaeAscensus,
+                LONGITUDOLUT
+            );
 
             // 興味喪失パラメータ初期化
             _ratioTempusStudiumAmittere = DuxMath.Clamp(_contextus.Configuratio.Custodiae.TempusStudiumAmittereSec / _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec, 0f, 1f);
-            _sigmoidY0TempusAmittere = DuxMath.Sigmoid(0f, _ratioTempusStudiumAmittere, _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere);
-            _sigmoidY1TempusAmittere = DuxMath.Sigmoid(1f, _ratioTempusStudiumAmittere, _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere);
+            _sigmoidLUTTempusAmittere = new SigmoidLUT(
+                _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere,
+                _ratioTempusStudiumAmittere,
+                LONGITUDOLUT
+            );
 
         }
 
@@ -91,13 +96,7 @@ namespace Yulinti.Dux.Exercitus {
                 distantia
             ), 0f, 1f);
 
-            float k = DuxMath.SigmoidCaudaSinistra(
-                d,
-                _ratioDistantiaCustodiaeAscensus,
-                _contextus.Configuratio.Custodiae.PrecalculusDistantiaAscensus,
-                _sigmoidY0DistantiaCustodiae,
-                _sigmoidY1DistantiaCustodiae
-            );
+            float k = _sigmoidLUTDistantiaCustodiae[d];
 
             return visus * k;
         }
@@ -182,13 +181,7 @@ namespace Yulinti.Dux.Exercitus {
                 _tempusStudiumAmittere[idCivis] += _contextus.Temporis.Intervallum;
                 // 経過時間を0~1に正規化
                 float t = DuxMath.Clamp(_tempusStudiumAmittere[idCivis] / _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec, 0f, 1f);
-                float ratio = DuxMath.SigmoidCaudaSinistra(
-                    t,
-                    _ratioTempusStudiumAmittere,
-                    _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere,
-                    _sigmoidY0TempusAmittere,
-                    _sigmoidY1TempusAmittere
-                );
+                float ratio = _sigmoidLUTTempusAmittere[t];
                 return _contextus.Configuratio.Custodiae.ConsumptioVisaeSec * ratio * _contextus.Temporis.Intervallum;
             }
         }
