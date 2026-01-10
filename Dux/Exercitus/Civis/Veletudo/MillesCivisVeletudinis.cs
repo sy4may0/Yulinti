@@ -49,8 +49,8 @@ namespace Yulinti.Dux.Exercitus {
         public void Applicare(ResFluidaCivisVeletudinis resFluida) {
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
                 if (resFluida.EstDominare(i)) {
-                    resFluida.RenovareVitae(i, DuxMath.Clamp(_phantasmaVitae[i], 0, 100));
-                    resFluida.RenovareVisa(i, DuxMath.Clamp(_phantasmaVisa[i], 0, 100));
+                    resFluida.RenovareVitae(i, DuxMath.Clamp(_phantasmaVitae[i], 0f, 1f));
+                    resFluida.RenovareVisa(i, DuxMath.Clamp(_phantasmaVisa[i], 0f, 1f));
                     resFluida.RenovareVigilantia(i, _phantasmaEstVigilantia[i]);
                     resFluida.RenovareDetectio(i, _phantasmaEstDetectio[i]);
                 }
@@ -65,7 +65,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void Purgare(int id) {
-            _phantasmaVitae[id] = 100;
+            _phantasmaVitae[id] = 1f;
             _phantasmaVisa[id] = 0f;
             _phantasmaEstVigilantia[id] = false;
             _phantasmaEstDetectio[id] = false;

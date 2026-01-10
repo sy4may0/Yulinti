@@ -9,10 +9,10 @@ namespace Yulinti.Rex {
         [SerializeField] private float distantiaCustodiaeAscensus = 12f;
         [SerializeField] private float precalculusDistantiaAscensus = 10f;
         [SerializeField] private float ratioVisus = 15f;
-        [SerializeField] private float limenVigilantia = 50f;
-        [SerializeField] private float limenDetectio = 90f;
-        [SerializeField] private float consumptioVisaeDetectioSec = -10f;
-        [SerializeField] private float consumptioVisaeSec = -15f;
+        [SerializeField] private float limenVigilantia = 0.5f;
+        [SerializeField] private float limenDetectio = 0.9f;
+        [SerializeField] private float consumptioVisaeDetectioSec = -0.1f;
+        [SerializeField] private float consumptioVisaeSec = -0.15f;
         [SerializeField] private float tempusStudiumAmittereSec = 5f;
         [SerializeField] private float tempusStudiumAmittereMaximaSec = 10f;
         [SerializeField] private float praeruptioTempusAmittere = 12f;

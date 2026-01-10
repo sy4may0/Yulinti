@@ -5,9 +5,9 @@ namespace Yulinti.Dux.Exercitus {
         private float[] _vitae;
         private bool[] _estDominare;
 
-        // 視力(0~100%)
+        // 視力(0~1)
         private float[] _visus;
-        // Puellae視認度 (0~100)
+        // Puellae視認度 (0~1)
         private float[] _visa;
 
         // 警戒フラグ
@@ -25,8 +25,8 @@ namespace Yulinti.Dux.Exercitus {
             _estDetectio = new bool[ostiumCivis.Longitudo];
  
             for (int i = 0; i < ostiumCivis.Longitudo; i++) {
-                _vitae[i] = 100f;
-                _visus[i] = 100f;
+                _vitae[i] = 1f;
+                _visus[i] = 1f;
                 _visa[i] = 0f;
                 _estDominare[i] = false;
             }
@@ -70,12 +70,12 @@ namespace Yulinti.Dux.Exercitus {
 
         public void RenovareVitae(int idCivis, float vitae) {
             if (!estActivum(idCivis)) return;
-            _vitae[idCivis] = DuxMath.Clamp(vitae, 0f, 100f);
+            _vitae[idCivis] = DuxMath.Clamp(vitae, 0f, 1f);
         }
 
         public void RenovareVisa(int idCivis, float visa) {
             if (!estActivum(idCivis)) return;
-            _visa[idCivis] = DuxMath.Clamp(visa, 0f, 100f);
+            _visa[idCivis] = DuxMath.Clamp(visa, 0f, 1f);
         }
 
         public void RenovareVigilantia(int idCivis, bool estVigilantia) {
@@ -88,8 +88,8 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void Purgare(int idCivis) {
-            _vitae[idCivis] = 100;
-            _visus[idCivis] = 100;
+            _vitae[idCivis] = 1f;
+            _visus[idCivis] = 1f;
             _visa[idCivis] = 0f;
             _estVigilantia[idCivis] = false;
             _estDetectio[idCivis] = false;

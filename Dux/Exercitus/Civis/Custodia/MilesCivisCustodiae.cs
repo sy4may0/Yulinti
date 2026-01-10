@@ -99,8 +99,7 @@ namespace Yulinti.Dux.Exercitus {
                 _sigmoidY1DistantiaCustodiae
             );
 
-            // visusが100%レンジのため/100で割る。
-            return visus * k / 100f;
+            return visus * k;
         }
 
         private float ComputareDistantia(int idCivis) {
@@ -154,10 +153,14 @@ namespace Yulinti.Dux.Exercitus {
             float distantiaCustodiae = _contextus.Configuratio.Custodiae.DistantiaCustodiae;
             float ratioDistantia = ComputareVisus(visus, distantia, distantiaCustodiae, distantiaCustodiaeMaxima);
 
-            // 視認数 * 10 * ratioVirsus / 毎秒 * 視認度上昇倍率
-            float dtVisa = numerusIctuum * ratioDistantia * _contextus.Temporis.Intervallum;
+            // /100は固定補正値。
+            // 視認数 * ratioVirsus / 毎秒 * 視認度上昇倍率
+            float dtVisa = (numerusIctuum/100f) * ratioDistantia * _contextus.Temporis.Intervallum;
             // 固定設定レシオを乗算する。
             dtVisa *= _contextus.Configuratio.Custodiae.RatioVisus;
+            // PuellaeステートのClaritasを適用する。
+            dtVisa *= _contextus.ResFPuellae.Veletudinis.Claritas;
+            UnityEngine.Debug.Log($"claritas: {_contextus.ResFPuellae.Veletudinis.Claritas}");
             // 興味喪失時間をリセット
             _tempusStudiumAmittere[idCivis] = 0f;
             return new OrdinatioCivis(
@@ -200,24 +203,24 @@ namespace Yulinti.Dux.Exercitus {
             // 通常時変動
             OrdinatioCivis ordinatio = OrdinatioCivis.Nihil(idCivis);
             if (!resFluida.Veletudinis.EstVigilantia(idCivis) && !resFluida.Veletudinis.EstDetectio(idCivis)) {
-                if (resFluida.Veletudinis.Visa(idCivis) > _contextus.Configuratio.Custodiae.LimenVigilantia + 3f) {
+                if (resFluida.Veletudinis.Visa(idCivis) > _contextus.Configuratio.Custodiae.LimenVigilantia + 0.03f) {
                     // 通常 -> 警戒
                     vigilantiaProximus = true;
                     detectioProximus = false;
                 }
             // 警戒時変動
             } else if (resFluida.Veletudinis.EstVigilantia(idCivis)) {
-                if (resFluida.Veletudinis.Visa(idCivis) > _contextus.Configuratio.Custodiae.LimenDetectio + 3f) {
+                if (resFluida.Veletudinis.Visa(idCivis) > _contextus.Configuratio.Custodiae.LimenDetectio + 0.03f) {
                     // 警戒 -> 検知
                     vigilantiaProximus = false;
                     detectioProximus = true;
-                } else if (resFluida.Veletudinis.Visa(idCivis) < _contextus.Configuratio.Custodiae.LimenVigilantia - 3f) {
+                } else if (resFluida.Veletudinis.Visa(idCivis) < _contextus.Configuratio.Custodiae.LimenVigilantia - 0.03f) {
                     // 警戒 -> 通常
                     vigilantiaProximus = false;
                     detectioProximus = false;
                 }
             } else if (resFluida.Veletudinis.EstDetectio(idCivis)) {
-                if (resFluida.Veletudinis.Visa(idCivis) < _contextus.Configuratio.Custodiae.LimenDetectio - 3f) {
+                if (resFluida.Veletudinis.Visa(idCivis) < _contextus.Configuratio.Custodiae.LimenDetectio - 0.03f) {
                     // 検知 -> 警戒
                     vigilantiaProximus = true;
                     detectioProximus = false;

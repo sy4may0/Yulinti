@@ -83,7 +83,8 @@ namespace Yulinti.Dux.Exercitus {
                 dtVigoris: _configuratio.ConsumptioVigorisSec * contextusOstiorum.Temporis.Intervallum,
                 dtPatientiae: _configuratio.ConsumptioPatientiaeSec * contextusOstiorum.Temporis.Intervallum,
                 dtAetheris: _configuratio.IncrementumAetherisSec * contextusOstiorum.Temporis.Intervallum,
-                dtIntentionis: _configuratio.Intentio
+                intentio: _configuratio.Intentio,
+                claritas: _configuratio.Claritas
             );
             return new OrdinatioPuellae(
                 actionis: actionis, veletudinis: veletudinis

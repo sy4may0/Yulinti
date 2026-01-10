@@ -12,6 +12,7 @@ namespace Yulinti.Rex {
         [SerializeField] private float consumptioPatientiaeSec;
         [SerializeField] private float incrementumAetherisSec;
         [SerializeField] private float intentio;
+        [SerializeField] private float claritas;
 
         public IDPuellaeStatusCorporis Id => id;
         public IDPuellaeAnimationisContinuata IdAnimationisIntrare => idAnimationisIntrare;
@@ -22,5 +23,6 @@ namespace Yulinti.Rex {
         public float ConsumptioPatientiaeSec => consumptioPatientiaeSec;
         public float IncrementumAetherisSec => incrementumAetherisSec;
         public float Intentio => intentio;
+        public float Claritas => claritas;
     }
 }
