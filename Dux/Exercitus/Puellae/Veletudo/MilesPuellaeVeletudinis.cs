@@ -2,10 +2,15 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class MilesPuellaeVeletudinis {
         private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
 
+        // 加算変動値
+        // 初期化時に現在の値を取得する。HPや何たらゲージみたいな、毎フレーム加算/減算される値。
         private float _phantasmaVigoris;
         private float _phantasmaPatientiae;
-        private float _phantasmaClaritas;
         private float _phantasmaAether;
+
+        // 固定変動値
+        // 初期化時に0fにされる。フレーム毎に状態により固定の値が決まる。
+        private float _phantasmaClaritas;
         private float _phantasmaIntentio;
 
         private float _vigorMaxima;
@@ -32,24 +37,26 @@ namespace Yulinti.Dux.Exercitus {
             _intentioMaxima = 1f;
         }
 
-        public void InitarePhantasma(in ResFluidaPuellaeVeletudinis resFluida) {
+        // phantasmaの値を初期化。
+        public void InitarePhantasma(ResFluidaPuellaeVeletudinis resFluida) {
             _phantasmaVigoris = resFluida.Vigor;
             _phantasmaPatientiae = resFluida.Patientia;
-            _phantasmaClaritas = resFluida.Claritas;
             _phantasmaAether = resFluida.Aether;
-            _phantasmaIntentio = resFluida.Intentio;
+            _phantasmaClaritas = 0f;
+            _phantasmaIntentio = 0f;
         }
 
+        // 変動値の加算。
         public void Addo(OrdinatioPuellaeVeletudinis ordinatio) {
             _phantasmaVigoris += ordinatio.DtVigoris;
             _phantasmaPatientiae += ordinatio.DtPatientiae;
-            _phantasmaClaritas += ordinatio.DtClaritatis;
             _phantasmaAether += ordinatio.DtAetheris;
-            _phantasmaIntentio = ordinatio.Intentio;
-            _phantasmaClaritas = ordinatio.Claritas;
+            _phantasmaIntentio += ordinatio.DtIntentio;
+            _phantasmaClaritas += ordinatio.DtClaritas;
         }
 
-        public void Resolvere(in ResFluidaPuellaeVeletudinis resFluida) {
+        // 値により確定するフラグの解決。
+        public void Resolvere(ResFluidaPuellaeVeletudinis resFluida) {
             resFluida.ResolvereExhauritaVigoris(
                 _contextusOstiorum.Configuratio.Veletudo.LimenExhauritaVigoris,
                 _contextusOstiorum.Configuratio.Veletudo.LimenRefectaVigoris,
@@ -62,20 +69,22 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
-        public void Applicare(in ResFluidaPuellaeVeletudinis resFluida) {
+        // phantasmaの値をresFluidaに反映。
+        public void Applicare(ResFluidaPuellaeVeletudinis resFluida) {
             resFluida.RenovareVigor(DuxMath.Clamp(_phantasmaVigoris, 0f, _vigorMaxima));
             resFluida.RenovarePatientia(DuxMath.Clamp(_phantasmaPatientiae, 0f, _patientiaMaxima));
-            resFluida.RenovareClaritas(DuxMath.Clamp(_phantasmaClaritas, 0f, _claritasMaxima));
             resFluida.RenovareAether(DuxMath.Clamp(_phantasmaAether, 0f, _atherirMaxima));
             resFluida.RenovareIntentio(DuxMath.Clamp(_phantasmaIntentio, 0f, _intentioMaxima));
             resFluida.RenovareClaritas(DuxMath.Clamp(_phantasmaClaritas, 0f, _claritasMaxima));
             Purgare();
         }
 
+        // phantasmaの値をリセット。
+        // 注意: 完全初期化時以外に使用しない。
+        // Pulsus()先頭で実行する初期化はInitarePhantasma()を使用する。
         private void Purgare() {
             _phantasmaVigoris = 0f;
             _phantasmaPatientiae = 0f;
-            _phantasmaClaritas = 0f;
             _phantasmaAether = 0f;
             _phantasmaIntentio = 0f;
             _phantasmaClaritas = 0f;

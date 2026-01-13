@@ -36,9 +36,9 @@ namespace Yulinti.Dux.Exercitus {
 
         public void Pulsus() {
             // Veletudoキャッシュを初期化
-            _milesPuellaeVeletudinis.InitarePhantasma(in _resFluidaVeletudinis);
+            _milesPuellaeVeletudinis.InitarePhantasma(_resFluidaVeletudinis);
             // VeletudoExhauritaチェック
-            _milesPuellaeVeletudinis.Resolvere(in _resFluidaVeletudinis);
+            _milesPuellaeVeletudinis.Resolvere(_resFluidaVeletudinis);
 
             // Actioループ
             var (exire, intrare) = _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);
@@ -57,7 +57,7 @@ namespace Yulinti.Dux.Exercitus {
 
         public void PulsusTardus() {
             // VeletudoキャッシュをResFluidaに反映
-            _milesPuellaeVeletudinis.Applicare(in _resFluidaVeletudinis);
+            _milesPuellaeVeletudinis.Applicare(_resFluidaVeletudinis);
 
             // BlendShape適用
             _milesPuellaeFigurae.ApplicareFiguram();
