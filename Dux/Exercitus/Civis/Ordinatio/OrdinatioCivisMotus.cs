@@ -35,9 +35,9 @@ namespace Yulinti.Dux.Exercitus {
         public readonly OrdinatioCivisMotusRotationisY RotationisY { get; }
 
         public OrdinatioCivisMotus(
-            OrdinatioCivisMotusHorizontalis horizontalis,
-            OrdinatioCivisMotusVerticalis verticalis,
-            OrdinatioCivisMotusRotationisY rotationisY
+            in OrdinatioCivisMotusHorizontalis horizontalis,
+            in OrdinatioCivisMotusVerticalis verticalis,
+            in OrdinatioCivisMotusRotationisY rotationisY
         ) {
             Horizontalis = horizontalis;
             Verticalis = verticalis;

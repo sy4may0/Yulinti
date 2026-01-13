@@ -12,13 +12,13 @@ namespace Yulinti.Dux.Exercitus {
         private readonly OrdinatioPuellaeMotus _motus;
         private readonly OrdinatioPuellaeNavmesh _navmesh;
 
-        private OrdinatioPuellaeActionis(OrdinatioPuellaeMotus motus) {
+        private OrdinatioPuellaeActionis(in OrdinatioPuellaeMotus motus) {
             Species = SpeciesOrdinationisPuellae.Motus;
             _motus = motus;
             _navmesh = default;
         }
 
-        private OrdinatioPuellaeActionis(OrdinatioPuellaeNavmesh navmesh) {
+        private OrdinatioPuellaeActionis(in OrdinatioPuellaeNavmesh navmesh) {
             Species = SpeciesOrdinationisPuellae.Navmesh;
             _navmesh = navmesh;
             _motus = default;
@@ -30,10 +30,10 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public static OrdinatioPuellaeActionis FromMotus(OrdinatioPuellaeMotus motus) {
+        public static OrdinatioPuellaeActionis FromMotus(in OrdinatioPuellaeMotus motus) {
             return new(motus);
         } 
-        public static OrdinatioPuellaeActionis FromNavmesh(OrdinatioPuellaeNavmesh navmesh) {
+        public static OrdinatioPuellaeActionis FromNavmesh(in OrdinatioPuellaeNavmesh navmesh) {
             return new(navmesh);
         }
         public static OrdinatioPuellaeActionis Nihil() {
@@ -77,4 +77,3 @@ namespace Yulinti.Dux.Exercitus {
         }
     }
 }
-

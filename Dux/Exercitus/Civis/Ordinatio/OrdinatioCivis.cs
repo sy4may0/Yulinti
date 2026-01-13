@@ -9,11 +9,11 @@ namespace Yulinti.Dux.Exercitus {
 
         public OrdinatioCivis(
             int idCivis,
-            OrdinatioCivisActionis? actionis = null,
-            OrdinatioCivisAnimationis? animationis = null,
-            OrdinatioCivisVeletudinisValoris? veletudinisValoris = null,
-            OrdinatioCivisVeletudinisMortis? veletudinisMortis = null,
-            OrdinatioCivisVeletudinisCustodiae? veletudinisCustodiae = null
+            in OrdinatioCivisActionis? actionis = null,
+            in OrdinatioCivisAnimationis? animationis = null,
+            in OrdinatioCivisVeletudinisValoris? veletudinisValoris = null,
+            in OrdinatioCivisVeletudinisMortis? veletudinisMortis = null,
+            in OrdinatioCivisVeletudinisCustodiae? veletudinisCustodiae = null
         ) {
             IdCivis = idCivis;
             _actionis = actionis;

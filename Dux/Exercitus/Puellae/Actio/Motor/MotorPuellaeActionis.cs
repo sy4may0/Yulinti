@@ -19,18 +19,18 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void ApplicareActionis(
-            OrdinatioPuellaeActionis ordinatio
+            in OrdinatioPuellaeActionis ordinatio
         ) {
             ordinatio.Match(
-                ApplicareMotus,
-                ApplicareNavmesh
+                motus => ApplicareMotus(motus),
+                navmesh => ApplicareNavmesh(navmesh)
             );
             _speciesActualis = ordinatio.Species;
         }
 
         // 垂直移動は対象外のため無視する。
         private void ApplicareMotus(
-            OrdinatioPuellaeMotus motus
+            in OrdinatioPuellaeMotus motus
         ) {
             if (_speciesActualis != SpeciesOrdinationisPuellae.Motus) {
                 IntrareMotus();
@@ -46,7 +46,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         private void ApplicareNavmesh(
-            OrdinatioPuellaeNavmesh navmesh
+            in OrdinatioPuellaeNavmesh navmesh
         ) {
             if (_speciesActualis != SpeciesOrdinationisPuellae.Navmesh) {
                 IntrareNavmesh();

@@ -9,7 +9,7 @@ namespace Yulinti.Dux.Exercitus {
         public readonly float DistantiaDeaccelerationis { get; }
 
         public OrdinatioCivisNavmesh(
-            Vector3 positio,
+            in Vector3 positio,
             float velocitasDesiderata,
             float accelerationem,
             int velocitasRotationis,

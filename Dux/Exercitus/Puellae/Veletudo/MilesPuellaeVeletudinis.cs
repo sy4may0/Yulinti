@@ -47,7 +47,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         // 変動値の加算。
-        public void Addo(OrdinatioPuellaeVeletudinis ordinatio) {
+        public void Addo(in OrdinatioPuellaeVeletudinis ordinatio) {
             _phantasmaVigoris += ordinatio.DtVigoris;
             _phantasmaPatientiae += ordinatio.DtPatientiae;
             _phantasmaAether += ordinatio.DtAetheris;

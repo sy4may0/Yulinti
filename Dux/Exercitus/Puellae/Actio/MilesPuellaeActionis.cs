@@ -43,13 +43,13 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void ApplicareActionis(
-            OrdinatioPuellaeActionis ordinatio
+            in OrdinatioPuellaeActionis ordinatio
         ) {
             _motorActionis.ApplicareActionis(ordinatio);
         }
 
         public void ApplicareAnimationis(
-            OrdinatioPuellaeAnimationis animationis
+            in OrdinatioPuellaeAnimationis animationis
         ) {
             _motorAnimationis.ApplicareAnimationis(animationis);
         }

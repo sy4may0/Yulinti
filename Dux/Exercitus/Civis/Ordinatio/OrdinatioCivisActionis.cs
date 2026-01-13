@@ -17,7 +17,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly int _idCivis;
         private readonly bool _estError;
 
-        private OrdinatioCivisActionis(int idCivis, OrdinatioCivisMotus motus) {
+        private OrdinatioCivisActionis(int idCivis, in OrdinatioCivisMotus motus) {
             Species = SpeciesOrdinationisCivis.Motus;
             _motus = motus;
             _navmesh = default;
@@ -26,7 +26,7 @@ namespace Yulinti.Dux.Exercitus {
             _estError = false;
         }
 
-        private OrdinatioCivisActionis(int idCivis, OrdinatioCivisNavmesh navmesh) {
+        private OrdinatioCivisActionis(int idCivis, in OrdinatioCivisNavmesh navmesh) {
             Species = SpeciesOrdinationisCivis.Navmesh;
             _navmesh = navmesh;
             _motus = default;
@@ -35,7 +35,7 @@ namespace Yulinti.Dux.Exercitus {
             _estError = false;
         }
 
-        private OrdinatioCivisActionis(int idCivis, OrdinatioCivisInitareNavmesh initareNavmesh) {
+        private OrdinatioCivisActionis(int idCivis, in OrdinatioCivisInitareNavmesh initareNavmesh) {
             Species = SpeciesOrdinationisCivis.InitareNavmesh;
             _initareNavmesh = initareNavmesh;
             _motus = default;
@@ -74,13 +74,13 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public static OrdinatioCivisActionis FromMotus(int idCivis, OrdinatioCivisMotus motus) {
+        public static OrdinatioCivisActionis FromMotus(int idCivis, in OrdinatioCivisMotus motus) {
             return new(idCivis, motus);
         }
-        public static OrdinatioCivisActionis FromNavmesh(int idCivis, OrdinatioCivisNavmesh navmesh) {
+        public static OrdinatioCivisActionis FromNavmesh(int idCivis, in OrdinatioCivisNavmesh navmesh) {
             return new(idCivis, navmesh);
         }
-        public static OrdinatioCivisActionis FromInitareNavmesh(int idCivis, OrdinatioCivisInitareNavmesh initareNavmesh) {
+        public static OrdinatioCivisActionis FromInitareNavmesh(int idCivis, in OrdinatioCivisInitareNavmesh initareNavmesh) {
             return new(idCivis, initareNavmesh);
         }
         public static OrdinatioCivisActionis Nihil(int idCivis) {

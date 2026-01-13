@@ -65,7 +65,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         private void ResolvereOrdinatio(
-            OrdinatioPuellae ordinatio
+            in OrdinatioPuellae ordinatio
         ) {
             if (ordinatio.ConareLegoActionis(out OrdinatioPuellaeActionis actionis)) {
                 _milesPuellaeActionis.ApplicareActionis(actionis);

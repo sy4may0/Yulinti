@@ -115,7 +115,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         private void ResolvereOrdinatio(
-            OrdinatioCivis ordinatio
+            in OrdinatioCivis ordinatio
         ) {
             if (ordinatio.ConareLegoActionis(out OrdinatioCivisActionis actionis)) {
                 _milesCivisActionis.ApplicareActionis(actionis);
@@ -130,12 +130,13 @@ namespace Yulinti.Dux.Exercitus {
                 _milesCivisVeletudinis.ApplicareMors(veletudinisMortis, _resFluidaVeletudinis);
             }
             if (ordinatio.ConareLegoVeletudinisCustodiae(out OrdinatioCivisVeletudinisCustodiae veletudinisCustodiae)) {
+                int idCivis = ordinatio.IdCivis;
                 veletudinisCustodiae.Match(
                     visa: (visa) => {
-                        _milesCivisVeletudinis.AddoVisa(ordinatio.IdCivis, visa);
+                        _milesCivisVeletudinis.AddoVisa(idCivis, visa);
                     },
                     detectio: (detectio) => {
-                        _milesCivisVeletudinis.AddDetectio(ordinatio.IdCivis, detectio);
+                        _milesCivisVeletudinis.AddDetectio(idCivis, detectio);
                     }
                 );  
             }

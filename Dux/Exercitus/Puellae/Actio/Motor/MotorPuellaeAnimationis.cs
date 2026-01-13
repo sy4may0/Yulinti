@@ -19,7 +19,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void ApplicareAnimationis(
-            OrdinatioPuellaeAnimationis ordinatio
+            in OrdinatioPuellaeAnimationis ordinatio
         ) {
             if (ordinatio.EstCogere) {
                 _ostiumPuellaeAnimationesMutabile.Cogere(ordinatio.IdAnimationis, ordinatio.AdInitium, ordinatio.AdFinem);

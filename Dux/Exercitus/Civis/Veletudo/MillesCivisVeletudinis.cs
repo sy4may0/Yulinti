@@ -33,15 +33,15 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void Addo(OrdinatioCivisVeletudinisValoris ordinatio) {
+        public void Addo(in OrdinatioCivisVeletudinisValoris ordinatio) {
             _phantasmaVitae[ordinatio.IdCivis] += ordinatio.DtVitae;
         }
 
-        public void AddoVisa(int idCivis, OrdinatioCivisCustodiaeVisa visa) {
+        public void AddoVisa(int idCivis, in OrdinatioCivisCustodiaeVisa visa) {
             _phantasmaVisa[idCivis] += visa.DtVisa;
         }
 
-        public void AddDetectio(int idCivis, OrdinatioCivisCustodiaeDetectio detectio) {
+        public void AddDetectio(int idCivis, in OrdinatioCivisCustodiaeDetectio detectio) {
             _phantasmaEstVigilantia[idCivis] = detectio.EstVigilantia;
             _phantasmaEstDetectio[idCivis] = detectio.EstDetectio;
         }
@@ -88,7 +88,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void ApplicareMors(
-            OrdinatioCivisVeletudinisMortis ordinatio,
+            in OrdinatioCivisVeletudinisMortis ordinatio,
             ResFluidaCivisVeletudinis resFluida
         ) {
             if (ordinatio.EstIncarnere) {
