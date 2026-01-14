@@ -1,0 +1,53 @@
+namespace Yulinti.Dux.Exercitus {
+    // Ordinatioを受け取り、Executorに渡す。
+    internal sealed class CarrusPuellae {
+        private readonly ExecutorPuellaeAnimationis _exAnimationis;
+        private readonly ExecutorPuellaeCrinis _exCrinis;
+        private readonly ExecutorPuellaeFigurae _exFigurae;
+        private readonly ExecutorPuellaeLoci _exLoci;
+        private readonly ExecutorPuellaeVeletudinis _exVeletudinis;
+
+        public CarrusPuellae(
+            ExecutorPuellaeAnimationis exAnimationis,
+            ExecutorPuellaeCrinis exCrinis,
+            ExecutorPuellaeFigurae exFigurae,
+            ExecutorPuellaeLoci exLoci,
+            ExecutorPuellaeVeletudinis exVeletudinis
+        ) {
+            _exAnimationis = exAnimationis;
+            _exCrinis = exCrinis;
+            _exFigurae = exFigurae;
+            _exLoci = exLoci;
+            _exVeletudinis = exVeletudinis;
+        }
+
+        public void Primum() {
+            _exAnimationis.Primum();
+            _exCrinis.Primum();
+            _exFigurae.Primum();
+            _exLoci.Primum();
+            _exVeletudinis.Primum();
+        }
+
+        public void Confirmare() {
+            // ここは適用順を制御する所!!!
+            // Lociから適用して速度回りを反映する。
+            _exLoci.Confirmare();
+
+            _exAnimationis.Confirmare();
+            _exCrinis.Confirmare();
+            _exFigurae.Confirmare();
+
+            // Veletudinisは最後に適用する。
+            _exVeletudinis.Confirmare();
+        }
+
+        public void Purgare() {
+            _exAnimationis.Purgare();
+            _exCrinis.Purgare();
+            _exFigurae.Purgare();
+            _exLoci.Purgare();
+            _exVeletudinis.Purgare();
+        }
+    }
+}
