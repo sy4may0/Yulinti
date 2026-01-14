@@ -3,8 +3,26 @@ using System.Numerics;
 using Yulinti.Nucleus;
 
 namespace Yulinti.Dux.Exercitus {
+    internal struct MotusPuellaeHorizontalis {
+        public readonly float Velocitas { get; }
+        public readonly float TempusLevigatum { get; }
+        public MotusPuellaeHorizontalis(float velocitas, float tempusLevigatum) {
+            Velocitas = velocitas;
+            TempusLevigatum = tempusLevigatum;
+        }
+    }
+
+    internal struct MotusPuellaeRotationisY {
+        public readonly float RotatioY { get; }
+        public readonly float TempusLevigatum { get; }
+        public MotusPuellaeRotationisY(float rotatioY, float tempusLevigatum) {
+            RotatioY = rotatioY;
+            TempusLevigatum = tempusLevigatum;
+        }
+    }
+
     internal static class InstrumentaPuellaeMotus {
-        public static OrdinatioPuellaeMotusHorizontalis OrdinareMotusHorizontalis(
+        public static MotusPuellaeHorizontalis OrdinareMotusHorizontalis(
             Vector2 inputMotus,
             float velocitasDesiderata,
             float velocitasActualis,
@@ -18,7 +36,7 @@ namespace Yulinti.Dux.Exercitus {
             float velocitasAptata = (inputMotus.LengthSquared() >= limenInputQuadratum) 
                                     ? velocitasDesiderata : 0f;
             if (!estLevigatum) {
-                return new OrdinatioPuellaeMotusHorizontalis(velocitasAptata, 0f);
+                return new MotusPuellaeHorizontalis(velocitasAptata, 0f);
             }
 
             float dv = MathF.Abs(velocitasAptata - velocitasActualis);
@@ -29,39 +47,24 @@ namespace Yulinti.Dux.Exercitus {
                 dv > Numerus.Epsilon ? 2f * MathF.Sqrt(dv / aEx) : tempusLevigatumMin;
             tempusLevigatum = Math.Clamp(tempusLevigatum, tempusLevigatumMin, tempusLevigatumMax);
 
-            return new OrdinatioPuellaeMotusHorizontalis(velocitasAptata, tempusLevigatum);
+            return new MotusPuellaeHorizontalis(velocitasAptata, tempusLevigatum);
         }
 
-        public static OrdinatioPuellaeMotusVerticalis OrdinareMotusVerticalis(
-            bool estInTerra,
-            float velocitasActualis,
-            float acceleratioGravitatis,
-            float velocitasContactus,
-            float velocitasMax,
-            float intervallum
-        ) {
-            if (estInTerra) {
-                return new OrdinatioPuellaeMotusVerticalis(velocitasContactus, 0f);
-            } else {
-                float velocitas = velocitasActualis + acceleratioGravitatis * intervallum;
-                return new OrdinatioPuellaeMotusVerticalis(velocitas < velocitasMax ? velocitasMax : velocitas, 0f);
-            }
-        }
 
-        public static OrdinatioPuellaeMotusRotationisY OrdinareMotusRotationisY(
+        public static MotusPuellaeRotationisY OrdinareMotusRotationisY(
             float rotatioYDesiderata,
             float rotatioYActualis,
             float tempusLevigatum,
             bool estLevigatum
         ) {
             if (!estLevigatum) {
-                return new OrdinatioPuellaeMotusRotationisY(rotatioYDesiderata, 0f);
+                return new MotusPuellaeRotationisY(rotatioYDesiderata, 0f);
             }
 
-            return new OrdinatioPuellaeMotusRotationisY(rotatioYDesiderata, tempusLevigatum);
+            return new MotusPuellaeRotationisY(rotatioYDesiderata, tempusLevigatum);
         }
 
-        public static OrdinatioPuellaeMotusRotationisY OrdinareMotusRotationisYSecutoria(
+        public static MotusPuellaeRotationisY OrdinareMotusRotationisYSecutoria(
             Vector3 directioCameraDexterXZ,
             Vector3 directioCameraAnteriorXZ,
             Vector2 inputMotus,
@@ -71,7 +74,7 @@ namespace Yulinti.Dux.Exercitus {
             bool estLevigatum
         ) {
             if (inputMotus.LengthSquared() < limenInputQuadratum) {
-                return new OrdinatioPuellaeMotusRotationisY(rotatioYActualis, 0f);
+                return new MotusPuellaeRotationisY(rotatioYActualis, 0f);
             }
 
             Vector3 directio = 
@@ -79,22 +82,22 @@ namespace Yulinti.Dux.Exercitus {
                 directioCameraAnteriorXZ * inputMotus.Y;
 
             if (directio.LengthSquared() < Single.Epsilon) {
-                return new OrdinatioPuellaeMotusRotationisY(rotatioYActualis, 0f);
+                return new MotusPuellaeRotationisY(rotatioYActualis, 0f);
             }
 
             Vector3 directioUnitioris = Vector3.Normalize(directio);
             float rotatioYDesiderata = 
                 MathF.Atan2(directioUnitioris.X, directioUnitioris.Z) * Numerus.Rad2Deg;
 
-            return OrdinareMotusRotationisY(
-                rotatioYDesiderata, rotatioYActualis, tempusLevigatum, estLevigatum
+            return new MotusPuellaeRotationisY(
+                rotatioYDesiderata, tempusLevigatum
             );
         }
 
-        public static OrdinatioPuellaeMotusRotationisY OrdinareMotusSineRotationisY(
+        public static MotusPuellaeRotationisY OrdinareMotusSineRotationisY(
             float rotatioYActualis
         ) {
-            return new OrdinatioPuellaeMotusRotationisY(rotatioYActualis, 0f);
+            return new MotusPuellaeRotationisY(rotatioYActualis, 0f);
         }
     }
 }

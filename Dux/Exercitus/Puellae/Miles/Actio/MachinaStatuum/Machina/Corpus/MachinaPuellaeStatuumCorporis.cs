@@ -62,6 +62,13 @@ namespace Yulinti.Dux.Exercitus {
             _idStatusActualis = IDPuellaeStatusCorporis.Quies;
             _idStatusProximus = IDPuellaeStatusCorporis.None;
             _statusCorporisActualis.Intrare(_contextusOstiorum, resFluida, null);
+            // ベースアニメーションを適用
+            _contextusOstiorum.Carrus.ExecutareAnimationis(
+                _contextusOstiorum.Configuratio.Statuum.IdAnimationisPraedefinitus,
+                adInitium: null,
+                adFinem: null,
+                estCogere: true
+            );
         }
 
         public void Ordinare(

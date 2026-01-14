@@ -25,7 +25,7 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaPuellaeLegibile resFluida,
             Action adInitium
         ) {
-            _contextusOstiorum.Carrus.ExecutareAnimationis(
+            contextusOstiorum.Carrus.ExecutareAnimationis(
                 _configuratio.IdAnimationisIntrare,
                 adInitium,
                 null,
@@ -38,11 +38,8 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaPuellaeLegibile resFluida,
             Action adFinem
         ) {
-            OrdinatioPuellaeAnimationis animationis = new OrdinatioPuellaeAnimationis(
-                false, IDPuellaeAnimationisContinuata.None, null, null
-            );
             if (_configuratio.LudereExire) {
-                _contextusOstiorum.Carrus.ExecutareAnimationis(
+                contextusOstiorum.Carrus.ExecutareAnimationis(
                     _configuratio.IdAnimationisExire,
                     null,
                     adFinem,
@@ -55,39 +52,27 @@ namespace Yulinti.Dux.Exercitus {
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            //OrdinatioPuellaeMotusHorizontalis oh = InstrumentaPuellaeMotus.OrdinareMotusHorizontalis(
-            //    contextusOstiorum.InputMotus.LegoMotus,
-            //    0f,
-            //    resFluida.Motus.VelocitasActualisHorizontalis,
-            //    _configuratio.Acceleratio, _configuratio.Deceleratio,
-            //    _configuratioStatuum.TempusLevigatumMin,
-            //    _configuratioStatuum.TempusLevigatumMax,
-            //    _configuratioStatuum.LimenInputQuadratum,
-            //    _configuratio.EstLevigatum
-            //);
-            //OrdinatioPuellaeMotusVerticalis ov = InstrumentaPuellaeMotus.OrdinareMotusVerticalis(
-            //    resFluida.Motus.EstInTerra,
-            //    resFluida.Motus.VelocitasActualisVerticalis,
-            //    _configuratioStatuum.AcceleratioGravitatis,
-            //    _configuratioStatuum.VelocitasContactus,
-            //    _configuratioStatuum.VelocitasVerticalisMax,
-            //    contextusOstiorum.Temporis.Intervallum
-            //);
-            //OrdinatioPuellaeMotusRotationisY or = InstrumentaPuellaeMotus.OrdinareMotusSineRotationisY(
-            //    resFluida.Motus.RotatioYActualis
-            //);
-            //OrdinatioPuellaeActionis actionis = OrdinatioPuellaeActionis.FromMotus(
-            //    new OrdinatioPuellaeMotus(oh, ov, or)
-            //);
-            // ここから上何とかして。
-            _contextusOstiorum.Carrus.ExecutareMotus(
-                0f, // velocitasHorizontalis
-                0f, // tempusLevigatumHorizontalis
-                0f, // rotatioYDeg
-                0f // tempusLevigatumRotationisYDeg
+            MotusPuellaeHorizontalis oh = InstrumentaPuellaeMotus.OrdinareMotusHorizontalis(
+                contextusOstiorum.InputMotus.LegoMotus,
+                0f,
+                resFluida.Motus.VelocitasActualisHorizontalis,
+                _configuratio.Acceleratio, _configuratio.Deceleratio,
+                _configuratioStatuum.TempusLevigatumMin,
+                _configuratioStatuum.TempusLevigatumMax,
+                _configuratioStatuum.LimenInputQuadratum,
+                _configuratio.EstLevigatum
+            );
+            MotusPuellaeRotationisY or = InstrumentaPuellaeMotus.OrdinareMotusSineRotationisY(
+                resFluida.Motus.RotatioYActualis
             );
 
-            _contextusOstiorum.Carrus.ExecutareVeletudinis(
+            contextusOstiorum.Carrus.ExecutareMotus(
+                oh.Velocitas,
+                oh.TempusLevigatum,
+                or.RotatioY,
+                or.TempusLevigatum
+            );
+            contextusOstiorum.Carrus.ExecutareVeletudinis(
                 dtVigoris: _configuratio.ConsumptioVigorisSec * contextusOstiorum.Temporis.Intervallum,
                 dtPatientiae: _configuratio.ConsumptioPatientiaeSec * contextusOstiorum.Temporis.Intervallum,
                 dtAetheris: _configuratio.IncrementumAetherisSec * contextusOstiorum.Temporis.Intervallum,

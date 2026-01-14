@@ -4,30 +4,22 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class MilesPuellaeActionis {
         private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
         private readonly MachinaPuellaeStatuumCorporis _machinaCorporis;
-        private readonly MotorPuellaeActionis _motorActionis;
-        private readonly MotorPuellaeAnimationis _motorAnimationis;
-
-        private OrdinatioPuellaeActionis _ordinatioActionis;
 
         public MilesPuellaeActionis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
-            IOstiumPuellaeAnimationesMutabile osAnimationes,
-            IOstiumPuellaeLociMutabile osLociMutabile
+            ContextusPuellaeOstiorumLegibile contextusOstiorum
         ) {
             _contextusOstiorum = contextusOstiorum;
             _machinaCorporis = new MachinaPuellaeStatuumCorporis(
                 _contextusOstiorum
             );
-            _motorActionis = new MotorPuellaeActionis(
-                _contextusOstiorum,
-                osLociMutabile
-            );
-            _motorAnimationis = new MotorPuellaeAnimationis(
-                osAnimationes
-            );
-            _motorAnimationis.InitiarePreadefinitus(
-                contextusOstiorum.Configuratio.Statuum.IdAnimationisPraedefinitus
-            );
+        }
+
+        // [TODO] Nevmeshから外れた時のリカバリがきえちゃった
+
+        public void Initare(
+            IResFluidaPuellaeLegibile resFluida
+        ) {
+            _machinaCorporis.Initare(resFluida);
         }
 
         public void Ordinare(
@@ -40,43 +32,6 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaPuellaeLegibile resFluida
         ) {
             _machinaCorporis.MutareStatus(resFluida);
-        }
-
-        public void ApplicareActionis(
-            in OrdinatioPuellaeActionis ordinatio
-        ) {
-            _motorActionis.ApplicareActionis(ordinatio);
-        }
-
-        public void ApplicareAnimationis(
-            in OrdinatioPuellaeAnimationis animationis
-        ) {
-            _motorAnimationis.ApplicareAnimationis(animationis);
-        }
-
-        public void ValidereNavmesh(IResFluidaPuellaeLegibile resFluida) {
-            if (!_motorActionis.EstInNavmesh()) {
-                _motorAnimationis.Purgere();
-                _machinaCorporis.Initare(resFluida);
-                return;
-            }
-        }
-
-        public void RenovareResFluidaMotus(
-            in ResFluidaPuellaeMotus resFluidaMotus
-        ) {
-            resFluidaMotus.Renovare(
-                _motorActionis.VelocitasHorizontalisActualis(),
-                _motorActionis.VelocitasVerticalisActualis(),
-                _motorActionis.RotatioYActualis(),
-                true
-            );
-        }
-
-        public void InjicereVelocitatis(
-            IResFluidaPuellaeLegibile resFluida
-        ) {
-            _motorAnimationis.InjicereVelocitatem(resFluida.Motus.VelocitasActualisHorizontalis);
         }
     }
 }
