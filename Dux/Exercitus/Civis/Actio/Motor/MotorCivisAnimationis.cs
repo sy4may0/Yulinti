@@ -24,7 +24,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void ApplicareAnimationis(
-            OrdinatioCivisAnimationis ordinatio
+            in OrdinatioCivisAnimationis ordinatio
         ) {
             if (ordinatio.EstCogere) {
                 _ostiumCivisAnimationesMutabile.Cogere(

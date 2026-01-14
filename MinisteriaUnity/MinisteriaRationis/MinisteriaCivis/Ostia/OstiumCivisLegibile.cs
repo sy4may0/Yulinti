@@ -16,8 +16,5 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (id < 0 || id >= _miCivis.Longitudo) return false;
             return _miCivis.EstActivum(id);
         }
-
-        public bool EstServam => _miCivis.EstServam;
-        public void Servare() => _miCivis.Servare();
     }
 }

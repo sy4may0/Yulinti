@@ -5,9 +5,9 @@ namespace Yulinti.Dux.Exercitus {
         private readonly OrdinatioPuellaeVeletudinis? _veletudinis;
 
         public OrdinatioPuellae(
-            OrdinatioPuellaeActionis? actionis = null,
-            OrdinatioPuellaeAnimationis? animationis = null,
-            OrdinatioPuellaeVeletudinis? veletudinis = null
+            in OrdinatioPuellaeActionis? actionis = null,
+            in OrdinatioPuellaeAnimationis? animationis = null,
+            in OrdinatioPuellaeVeletudinis? veletudinis = null
         ) {
             _actionis = actionis;
             _animationis = animationis;

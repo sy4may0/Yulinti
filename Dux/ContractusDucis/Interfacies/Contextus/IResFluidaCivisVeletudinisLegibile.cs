@@ -7,7 +7,6 @@ namespace Yulinti.Dux.ContractusDucis {
 
         bool EstDominare(int idCivis);
         bool EstExhaurita(int idCivis);
-        bool EstMotus(int idCivis);
 
         bool EstVigilantia(int idCivis);
         bool EstDetectio(int idCivis);

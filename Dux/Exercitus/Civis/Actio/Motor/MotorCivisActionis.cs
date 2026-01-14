@@ -27,7 +27,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void ApplicareActionis(
-            OrdinatioCivisActionis ordinatio
+            in OrdinatioCivisActionis ordinatio
         ) {
             int idCivis = ordinatio.IdCivis;
             ordinatio.Match(
@@ -40,7 +40,7 @@ namespace Yulinti.Dux.Exercitus {
 
         private void ApplicareMotus(
             int idCivis,
-            OrdinatioCivisMotus motus
+            in OrdinatioCivisMotus motus
         ) {
             if (_speciesActualis[idCivis] != SpeciesOrdinationisCivis.Motus) {
                 IntrareMotus(idCivis);
@@ -57,7 +57,7 @@ namespace Yulinti.Dux.Exercitus {
 
         private void ApplicareNavmesh(
             int idCivis,
-            OrdinatioCivisNavmesh navmesh
+            in OrdinatioCivisNavmesh navmesh
         ) {
             if (_speciesActualis[idCivis] != SpeciesOrdinationisCivis.Navmesh) {
                 IntrareNavmesh(idCivis);
@@ -72,7 +72,7 @@ namespace Yulinti.Dux.Exercitus {
 
         private void ApplicareInitareNavmesh(
             int idCivis,
-            OrdinatioCivisInitareNavmesh initareNavmesh
+            in OrdinatioCivisInitareNavmesh initareNavmesh
         ) {
             if (_speciesActualis[idCivis] != SpeciesOrdinationisCivis.InitareNavmesh) {
                 IntrareNavmesh(idCivis);

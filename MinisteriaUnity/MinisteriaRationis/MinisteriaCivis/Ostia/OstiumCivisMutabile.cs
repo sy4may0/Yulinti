@@ -1,4 +1,5 @@
 using Yulinti.Dux.ContractusDucis;
+using System;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumCivisMutabile : IOstiumCivisMutabile {
@@ -21,12 +22,15 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             _miCivisGenerator.Terminare();
         }
 
-        public void Servare() {
-            _miCivis.Servare();
-        }
-
         public int[] IDs => _miCivis.IDs;
         public int Longitudo => _miCivis.Longitudo;
         public bool EstActivum(int id) => _miCivis.EstActivum(id);
+
+        public void PonoAdIncarnare(Action<int> adIncarnare) {
+            _miCivis.PonoAdIncarnare(adIncarnare);
+        }
+        public void PonoAdSpirituare(Action<int> adSpirituare) {
+            _miCivis.PonoAdSpirituare(adSpirituare);
+        }
     }
 }

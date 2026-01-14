@@ -4,12 +4,10 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class ResFluidaCivisVeletudinis : IResFluidaCivisVeletudinisLegibile {
         private float[] _vitae;
         private bool[] _estDominare;
-        // モーション適用有無 StateMachineから捕縛される前までfalse
-        private bool[] _estMotus;
 
-        // 視力(0~100%)
+        // 視力(0~1)
         private float[] _visus;
-        // Puellae視認度 (0~100)
+        // Puellae視認度 (0~1)
         private float[] _visa;
 
         // 警戒フラグ
@@ -23,16 +21,14 @@ namespace Yulinti.Dux.Exercitus {
             _visa = new float[ostiumCivis.Longitudo];
 
             _estDominare = new bool[ostiumCivis.Longitudo];
-            _estMotus = new bool[ostiumCivis.Longitudo];
             _estVigilantia = new bool[ostiumCivis.Longitudo];
             _estDetectio = new bool[ostiumCivis.Longitudo];
  
             for (int i = 0; i < ostiumCivis.Longitudo; i++) {
-                _vitae[i] = 100f;
-                _visus[i] = 100f;
+                _vitae[i] = 1f;
+                _visus[i] = 1f;
                 _visa[i] = 0f;
                 _estDominare[i] = false;
-                _estMotus[i] = false;
             }
         }
 
@@ -63,10 +59,6 @@ namespace Yulinti.Dux.Exercitus {
             if (!estActivum(idCivis)) return false;
             return _vitae[idCivis] <= 0;
         }
-        public bool EstMotus(int idCivis) {
-            if (!estActivum(idCivis)) return false;
-            return _estMotus[idCivis];
-        }
         public bool EstVigilantia(int idCivis) {
             if (!estActivum(idCivis)) return false;
             return _estVigilantia[idCivis];
@@ -78,12 +70,12 @@ namespace Yulinti.Dux.Exercitus {
 
         public void RenovareVitae(int idCivis, float vitae) {
             if (!estActivum(idCivis)) return;
-            _vitae[idCivis] = DuxMath.Clamp(vitae, 0f, 100f);
+            _vitae[idCivis] = DuxMath.Clamp(vitae, 0f, 1f);
         }
 
         public void RenovareVisa(int idCivis, float visa) {
             if (!estActivum(idCivis)) return;
-            _visa[idCivis] = DuxMath.Clamp(visa, 0f, 100f);
+            _visa[idCivis] = DuxMath.Clamp(visa, 0f, 1f);
         }
 
         public void RenovareVigilantia(int idCivis, bool estVigilantia) {
@@ -95,31 +87,24 @@ namespace Yulinti.Dux.Exercitus {
             _estDetectio[idCivis] = estDetectio;
         }
 
+        public void Purgare(int idCivis) {
+            _vitae[idCivis] = 1f;
+            _visus[idCivis] = 1f;
+            _visa[idCivis] = 0f;
+            _estVigilantia[idCivis] = false;
+            _estDetectio[idCivis] = false;
+        }
+
         public void Dominare(int idCivis) {
             if (idCivis < 0 || idCivis >= _estDominare.Length) return;
             if (_estDominare[idCivis]) return;
-            _vitae[idCivis] = 100;
-            _visus[idCivis] = 100;
-            _visa[idCivis] = 0f;
+            Purgare(idCivis);
             _estDominare[idCivis] = true;
-            _estMotus[idCivis] = false;
         }
         public void Liberare(int idCivis) {
             if (!estActivum(idCivis)) return;
-            _vitae[idCivis] = 100;
-            _visus[idCivis] = 100;
-            _visa[idCivis] = 0f;
+            Purgare(idCivis);
             _estDominare[idCivis] = false;
-            _estMotus[idCivis] = false;
-        }
-
-        public void ServereMotus(int idCivis) {
-            if (!estActivum(idCivis)) return;
-            _estMotus[idCivis] = true;
-        }
-
-        public void LiberareServatum(int idCivis) {
-            _estMotus[idCivis] = false;
         }
     }
 }

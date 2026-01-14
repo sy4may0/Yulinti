@@ -1,6 +1,4 @@
 using Yulinti.Dux.ContractusDucis;
-using System;
-
 namespace Yulinti.Dux.Exercitus {
     internal sealed class ResFluidaPuellaeVeletudinis : IResFluidaPuellaeVeletudinisLegibile {
         // health
@@ -11,7 +9,7 @@ namespace Yulinti.Dux.Exercitus {
         private float patientia;
         private bool estExhauritaPatientiae;
 
-        // visibility(0~100)
+        // visibility(0~1)
         private float claritas;
         // electricity
         private float aether;
@@ -20,11 +18,11 @@ namespace Yulinti.Dux.Exercitus {
 
 
         public ResFluidaPuellaeVeletudinis() {
-            this.vigor = 100;
-            this.patientia = 100;
-            this.claritas = 100;
-            this.aether = 100;
-            this.intentio = 100;
+            this.vigor = 1f;
+            this.patientia = 1f;
+            this.claritas = 1f;
+            this.aether = 1f;
+            this.intentio = 1f;
         }
 
         public float Vigor => vigor;

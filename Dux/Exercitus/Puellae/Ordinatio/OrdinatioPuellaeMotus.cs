@@ -35,9 +35,9 @@ namespace Yulinti.Dux.Exercitus {
         public readonly OrdinatioPuellaeMotusRotationisY RotationisY { get; }
 
         public OrdinatioPuellaeMotus(
-            OrdinatioPuellaeMotusHorizontalis horizontalis,
-            OrdinatioPuellaeMotusVerticalis verticalis,
-            OrdinatioPuellaeMotusRotationisY rotationisY
+            in OrdinatioPuellaeMotusHorizontalis horizontalis,
+            in OrdinatioPuellaeMotusVerticalis verticalis,
+            in OrdinatioPuellaeMotusRotationisY rotationisY
         ) {
             Horizontalis = horizontalis;
             Verticalis = verticalis;

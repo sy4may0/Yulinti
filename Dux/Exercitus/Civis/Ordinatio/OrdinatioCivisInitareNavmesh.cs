@@ -5,7 +5,7 @@ namespace Yulinti.Dux.Exercitus {
         public readonly Vector3 Positio { get; }
 
         public OrdinatioCivisInitareNavmesh(
-            Vector3 positio
+            in Vector3 positio
         ) {
             Positio = positio;
         }

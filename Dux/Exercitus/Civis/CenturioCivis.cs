@@ -32,6 +32,40 @@ namespace Yulinti.Dux.Exercitus {
             _resFluidaVeletudinis = resFluidaVeletudinis;
             _resFluidaLegibile = resFluidaLegibile;
             _contextus = contextus;
+
+            // 実体化完了時に呼ばれる
+            _milesCivisVeletudinis.PonoAdIncarnare(AdIncarnare);
+            // 実体化解除完了時に呼ばれる
+            _milesCivisVeletudinis.PonoAdSpirituare(AdSpirituare);
+        }
+
+        private void AdIncarnare(int idCivis) {
+            _resFluidaVeletudinis.Dominare(idCivis);
+            _milesCivisVeletudinis.Purgare(idCivis);
+            _milesCivisActionis.Purgere(idCivis);
+            var (initare, intrareStatus) = _milesCivisActionis.InitareServatum(idCivis, _resFluidaLegibile);
+            ResolvereOrdinatio(initare);
+            ResolvereOrdinatio(intrareStatus);
+        }
+
+        private void AdSpirituare(int idCivis) {
+            _resFluidaVeletudinis.Liberare(idCivis);
+            _milesCivisVeletudinis.Purgare(idCivis);
+            _milesCivisActionis.Purgere(idCivis);
+        }
+
+        // 不整合のNPCが存在すれば修復する。
+        private void RenovareDominare(int idCivis) {
+            bool estActivum = _contextus.Civis.EstActivum(idCivis);
+            bool estDominare = _resFluidaVeletudinis.EstDominare(idCivis);
+
+            if (estActivum == estDominare) return;
+
+            if (estActivum) {
+                AdIncarnare(idCivis);
+            } else {
+                AdSpirituare(idCivis);
+            }
         }
 
         // !注意
@@ -43,29 +77,14 @@ namespace Yulinti.Dux.Exercitus {
         public void Pulsus() {
             // Veletudoキャッシュを初期化
             _milesCivisVeletudinis.InitarePhantasma(_resFluidaVeletudinis);
-            // Dominate
-            _milesCivisVeletudinis.RenovereDomina(_resFluidaVeletudinis);
 
             // MilesCivisActionisの初期化。処理対象整理
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
-                if (_resFluidaVeletudinis.EstDominare(i) && !_resFluidaVeletudinis.EstMotus(i)) {
-                    _milesCivisActionis.Purgere(i);
-                    var (initare, intrareStatus) = _milesCivisActionis.InitareServatum(i, _resFluidaLegibile);
-                    ResolvereOrdinatio(initare);
-                    ResolvereOrdinatio(intrareStatus);
+                // AdIncarnare/AdSpirituareが生成時にInvoke()されなかった場合に修復する。
+                RenovareDominare(i);
 
-                    // EstDominareとEstMotusを同期する。
-                    _milesCivisVeletudinis.Servatum(i, _resFluidaVeletudinis);
-                }
-                if (!_resFluidaVeletudinis.EstDominare(i) && _resFluidaVeletudinis.EstMotus(i)) {
-                    // EstDominareとEstMotusを同期する。
-                    _milesCivisVeletudinis.LiberareServatum(i, _resFluidaVeletudinis);
-                    _milesCivisActionis.Purgere(i);
-                }
-
+                if (!_resFluidaVeletudinis.EstDominare(i)) continue;
                 // Actionis処理実行
-                if (!_resFluidaVeletudinis.EstDominare(i) || !_resFluidaVeletudinis.EstMotus(i)) continue;
-
                 var (exire, intrare) = _milesCivisActionis.MutareStatus(i, _resFluidaLegibile);
                 ResolvereOrdinatio(exire);
                 ResolvereOrdinatio(intrare);
@@ -81,6 +100,7 @@ namespace Yulinti.Dux.Exercitus {
 
                 // 視認度を更新
                 ResolvereOrdinatio(_milesCivisCustodiae.Ordinare(i, _resFluidaLegibile));
+                ResolvereOrdinatio(_milesCivisCustodiae.OrdinareDetectio(i, _resFluidaLegibile));
             }
         }
 
@@ -95,7 +115,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         private void ResolvereOrdinatio(
-            OrdinatioCivis ordinatio
+            in OrdinatioCivis ordinatio
         ) {
             if (ordinatio.ConareLegoActionis(out OrdinatioCivisActionis actionis)) {
                 _milesCivisActionis.ApplicareActionis(actionis);
@@ -110,7 +130,15 @@ namespace Yulinti.Dux.Exercitus {
                 _milesCivisVeletudinis.ApplicareMors(veletudinisMortis, _resFluidaVeletudinis);
             }
             if (ordinatio.ConareLegoVeletudinisCustodiae(out OrdinatioCivisVeletudinisCustodiae veletudinisCustodiae)) {
-                _milesCivisVeletudinis.ApplicareCustodiae(veletudinisCustodiae, _resFluidaVeletudinis);
+                int idCivis = ordinatio.IdCivis;
+                veletudinisCustodiae.Match(
+                    visa: (visa) => {
+                        _milesCivisVeletudinis.AddoVisa(idCivis, visa);
+                    },
+                    detectio: (detectio) => {
+                        _milesCivisVeletudinis.AddDetectio(idCivis, detectio);
+                    }
+                );  
             }
         }
     }

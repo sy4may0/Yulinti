@@ -11,5 +11,6 @@ namespace Yulinti.Dux.ContractusDucis {
         float ConsumptioPatientiaeSec { get; }
         float IncrementumAetherisSec { get; }
         float Intentio { get; }
+        float Claritas { get; }
     }
 }

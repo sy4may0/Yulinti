@@ -34,7 +34,7 @@ namespace Yulinti.Dux.Exercitus {
 
         private OrdinatioCivisVeletudinisCustodiae(
             int idCivis,
-            OrdinatioCivisCustodiaeVisa visa
+            in OrdinatioCivisCustodiaeVisa visa
         ) {
             Species = SpeciesOrdinationisCivisCustodiae.Visa;
             _idCivis = idCivis;
@@ -44,7 +44,7 @@ namespace Yulinti.Dux.Exercitus {
 
         private OrdinatioCivisVeletudinisCustodiae(
             int idCivis,
-            OrdinatioCivisCustodiaeDetectio detectio
+            in OrdinatioCivisCustodiaeDetectio detectio
         ) {
             Species = SpeciesOrdinationisCivisCustodiae.Detectio;
             _idCivis = idCivis;
@@ -66,10 +66,10 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public static OrdinatioCivisVeletudinisCustodiae FromVisa(int idCivis, OrdinatioCivisCustodiaeVisa visa) {
+        public static OrdinatioCivisVeletudinisCustodiae FromVisa(int idCivis, in OrdinatioCivisCustodiaeVisa visa) {
             return new(idCivis, visa);
         }
-        public static OrdinatioCivisVeletudinisCustodiae FromDetectio(int idCivis, OrdinatioCivisCustodiaeDetectio detectio) {
+        public static OrdinatioCivisVeletudinisCustodiae FromDetectio(int idCivis, in OrdinatioCivisCustodiaeDetectio detectio) {
             return new(idCivis, detectio);
         }
         public static OrdinatioCivisVeletudinisCustodiae Nihil(int idCivis) {
