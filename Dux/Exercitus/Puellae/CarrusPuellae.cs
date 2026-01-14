@@ -49,5 +49,70 @@ namespace Yulinti.Dux.Exercitus {
             _exLoci.Purgare();
             _exVeletudinis.Purgare();
         }
+
+        public void ExecutareAnimationis(
+            IDPuellaeAnimationisContinuata idAnimationis,
+            Action adInitium = null,
+            Action adFinem = null,
+            bool estCogere = false
+        ){
+            // [TODO] 実装
+        }
+
+        public void ExecutareCrinis(
+            IDPuellaeCrinis idCrinis
+        ){
+
+            // [TODO] 実装
+        }
+
+        public void ExecutareFiguraeGenus(
+            IDPuellaeFiguraeGenus idFiguraeGenus,
+            LatusPuellaeGenus latus,
+            float pondus
+        ){
+
+            // [TODO] 実装
+        }
+
+        public void ExecutareFiguraePelvis(
+            IDPuellaeFiguraePelvis idFiguraePelvis,
+            float pondus
+        ){
+
+            // [TODO] 実装
+        }
+
+        public void ExecutareMotus(
+            float velocitasHorizontalis,
+            float tempusLevigatumHorizontalis,
+            float rotatioYDeg,
+            float tempusLevigatumRotationisYDeg
+        ){
+
+            // [TODO] 実装
+        }
+
+        public void ExecutareNavmesh(
+            Vector3 positio,
+            float velocitasDesiderata,
+            float accelerationem,
+            int velocitasRotationis,
+            float distantiaDeaccelerationis
+        ){
+
+            // [TODO] 実装
+        }
+
+        public void ExecutareVeletudinis(
+            float dtVigoris,
+            float dtPatientiae,
+            float dtAetheris,
+            float dtIntentio,
+            float dtClaritas
+        ){
+
+            // [TODO] 実装
+        }
     }
 }

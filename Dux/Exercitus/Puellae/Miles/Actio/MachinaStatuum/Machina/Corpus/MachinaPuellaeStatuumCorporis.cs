@@ -57,37 +57,31 @@ namespace Yulinti.Dux.Exercitus {
             return statuum;
         }
 
-        public OrdinatioPuellae Initare(IResFluidaPuellaeLegibile resFluida) {
+        public void Initare(IResFluidaPuellaeLegibile resFluida) {
             _statusCorporisActualis = _statuum[(int)IDPuellaeStatusCorporis.Quies];
             _idStatusActualis = IDPuellaeStatusCorporis.Quies;
             _idStatusProximus = IDPuellaeStatusCorporis.None;
-            return _statusCorporisActualis.Intrare(_contextusOstiorum, resFluida, null);
+            _statusCorporisActualis.Intrare(_contextusOstiorum, resFluida, null);
         }
 
-        public OrdinatioPuellae Ordinare(
+        public void Ordinare(
             IResFluidaPuellaeLegibile resFluida
         ) {
-            OrdinatioPuellae ordinatio = 
-                _statusCorporisActualis.Ordinare(_contextusOstiorum, resFluida);
-            return ordinatio;
+            _statusCorporisActualis.Ordinare(_contextusOstiorum, resFluida);
         }
 
-        public (OrdinatioPuellae Exire, OrdinatioPuellae Intrare) MutareStatus(
+        public void MutareStatus(
             IResFluidaPuellaeLegibile resFluida
         ) {
             IDPuellaeStatusCorporis idStatusProximus = _resolutorRamorumCorporis.Resolvere(
                 _idStatusActualis,
                 resFluida
             );
-            if (idStatusProximus == IDPuellaeStatusCorporis.None) return (OrdinatioPuellae.Nihil(), OrdinatioPuellae.Nihil());
+            if (idStatusProximus == IDPuellaeStatusCorporis.None) return;
 
             _idStatusProximus = idStatusProximus;
-            OrdinatioPuellae ordinatioExire = 
-                _statusCorporisActualis.Exire(_contextusOstiorum, resFluida, null);
-            OrdinatioPuellae ordinatioIntrare = 
-                _statuum[(int)_idStatusProximus].Intrare(_contextusOstiorum, resFluida, _adMutareStatus);
-            
-            return (ordinatioExire, ordinatioIntrare);
+            _statusCorporisActualis.Exire(_contextusOstiorum, resFluida, null);
+            _statuum[(int)_idStatusProximus].Intrare(_contextusOstiorum, resFluida, _adMutareStatus);
         }
 
         private void AdMutareStatus() {

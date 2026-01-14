@@ -30,16 +30,16 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
-        public OrdinatioPuellae Ordinare(
+        public void Ordinare(
             IResFluidaPuellaeLegibile resFluida
         ) {
-            return _machinaCorporis.Ordinare(resFluida);
+            _machinaCorporis.Ordinare(resFluida);
         }
 
-        public (OrdinatioPuellae Exire, OrdinatioPuellae Intrare) MutareStatus(
+        public void MutareStatus(
             IResFluidaPuellaeLegibile resFluida
         ) {
-            return _machinaCorporis.MutareStatus(resFluida);
+            _machinaCorporis.MutareStatus(resFluida);
         }
 
         public void ApplicareActionis(
@@ -54,12 +54,12 @@ namespace Yulinti.Dux.Exercitus {
             _motorAnimationis.ApplicareAnimationis(animationis);
         }
 
-        public OrdinatioPuellae ValidereNavmesh(IResFluidaPuellaeLegibile resFluida) {
+        public void ValidereNavmesh(IResFluidaPuellaeLegibile resFluida) {
             if (!_motorActionis.EstInNavmesh()) {
                 _motorAnimationis.Purgere();
-                return _machinaCorporis.Initare(resFluida);
+                _machinaCorporis.Initare(resFluida);
+                return;
             }
-            return OrdinatioPuellae.Nihil();
         }
 
         public void RenovareResFluidaMotus(
