@@ -4,12 +4,5 @@ namespace Yulinti.Dux.Exercitus {
         float TempusLevigatumHorizontalis { get; }
         float RotatioYDeg { get; }
         float TempusLevigatumRotationisYDeg { get; }
-
-        void Pono(
-            float velocitasHorizontalis = 0f,
-            float tempusLevigatumHorizontalis = 0f,
-            float rotatioYDeg = 0f,
-            float tempusLevigatumRotationisYDeg = 0f
-        );
     }
 }

@@ -1,5 +1,6 @@
-namespace Yulinti.Dux.Exercitus {
+using Yulinti.Dux.ContractusDucis;
 
+namespace Yulinti.Dux.Exercitus {
     internal sealed class PhantasmaPuellaeVeletudinis {
         private float _phantasmaVigoris;
         private float _phantasmaPatientiae;
@@ -64,16 +65,16 @@ namespace Yulinti.Dux.Exercitus {
     }
 
     internal sealed class ExecutorPuellaeVeletudinis : IExecutorPuellae {
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
+        private readonly IConfiguratioPuellaeVeletudinis _configuratioVeletudinis;
         private readonly ResFluidaPuellaeVeletudinis _resFluidaVeletudinis;
 
         private readonly PhantasmaPuellaeVeletudinis _phantasma;
 
         public ExecutorPuellaeVeletudinis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            IConfiguratioExercitusPuellae configuratioExercitusPuellae,
             ResFluidaPuellaeVeletudinis resFluidaVeletudinis
         ) {
-            _contextusOstiorum = contextusOstiorum;
+            _configuratioVeletudinis = configuratioExercitusPuellae.Veletudo;
             _resFluidaVeletudinis = resFluidaVeletudinis;
             _phantasma = new PhantasmaPuellaeVeletudinis();
         }
@@ -108,13 +109,13 @@ namespace Yulinti.Dux.Exercitus {
             _resFluidaVeletudinis.RenovareIntentio(_phantasma.PhantasmaIntentio);
 
             _resFluidaVeletudinis.ResolvereExhauritaVigoris(
-                _contextusOstiorum.Configuratio.Veletudo.LimenExhauritaVigoris,
-                _contextusOstiorum.Configuratio.Veletudo.LimenRefectaVigoris,
+                _configuratioVeletudinis.LimenExhauritaVigoris,
+                _configuratioVeletudinis.LimenRefectaVigoris,
                 1f // VigorMaxima Config設定可能にするならここを変える。
             );
             _resFluidaVeletudinis.ResolvereExhauritaPatientiae(
-                _contextusOstiorum.Configuratio.Veletudo.LimenExhauritaPatientiae,
-                _contextusOstiorum.Configuratio.Veletudo.LimenRefectaPatientiae,
+                _configuratioVeletudinis.LimenExhauritaPatientiae,
+                _configuratioVeletudinis.LimenRefectaPatientiae,
                 1f // PatientiaMaxima Config設定可能にするならここを変える。
             );
         }

@@ -11,8 +11,9 @@ namespace Yulinti.Dux.Exercitus {
     }
 
     internal sealed class ExecutorPuellaeLoci : IExecutorPuellae {
+        private readonly IOstiumPuellaeLociLegibile _ostiumPuellaeLociLegibile;
         private readonly IOstiumPuellaeLociMutabile _ostiumPuellaeLociMutabile;
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
+        private readonly IOstiumTemporisLegibile _ostiumTemporisLegibile;
         private readonly ResFluidaPuellaeMotus _resFluidaMotus;
 
         private IOrdinatioPuellae _ordinatioActualis;
@@ -20,12 +21,14 @@ namespace Yulinti.Dux.Exercitus {
         private SpeciesPuellaeLoci? _speciesActualis = null;
 
         public ExecutorPuellaeLoci(
+            IOstiumPuellaeLociLegibile ostiumPuellaeLociLegibile,
             IOstiumPuellaeLociMutabile ostiumPuellaeLociMutabile,
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            IOstiumTemporisLegibile ostiumTemporisLegibile,
             ResFluidaPuellaeMotus resFluidaMotus
         ) {
+            _ostiumPuellaeLociLegibile = ostiumPuellaeLociLegibile;
             _ostiumPuellaeLociMutabile = ostiumPuellaeLociMutabile;
-            _contextusOstiorum = contextusOstiorum;
+            _ostiumTemporisLegibile = ostiumTemporisLegibile;
             _resFluidaMotus = resFluidaMotus;
 
             _ordinatioActualis = null;
@@ -71,7 +74,7 @@ namespace Yulinti.Dux.Exercitus {
                 motus.TempusLevigatumHorizontalis,
                 motus.RotatioYDeg,
                 motus.TempusLevigatumRotationisYDeg,
-                _contextusOstiorum.Temporis.Intervallum
+                _ostiumTemporisLegibile.Intervallum
             );
         }
 
@@ -104,8 +107,8 @@ namespace Yulinti.Dux.Exercitus {
                     break;
             }
 
-            float vhActualis = _contextusOstiorum.Loci.VelocitasHorizontalisActualis();
-            float ryActualis = _contextusOstiorum.Loci.RotatioYActualis();
+            float vhActualis = _ostiumPuellaeLociLegibile.VelocitasHorizontalisActualis();
+            float ryActualis = _ostiumPuellaeLociLegibile.RotatioYActualis();
 
             // 移動はNavmesh平面上のみ実装しているため、垂直は計算しない。
             float vvActualis = -9.81f;

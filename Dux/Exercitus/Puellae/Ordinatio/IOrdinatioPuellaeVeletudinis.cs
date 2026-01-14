@@ -5,13 +5,5 @@ namespace Yulinti.Dux.Exercitus {
         float DtAetheris { get; }
         float DtIntentio { get; }
         float DtClaritas { get; }
-
-        void Pono(
-            float dtVigoris,
-            float dtPatientiae,
-            float dtAetheris,
-            float dtIntentio,
-            float dtClaritas
-        );
     }
 }

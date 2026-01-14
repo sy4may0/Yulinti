@@ -7,12 +7,5 @@ namespace Yulinti.Dux.Exercitus {
         Action AdInitium { get; }
         Action AdFinem { get; }
         bool EstCogere { get; }
-
-        void Pono(
-            IDPuellaeAnimationisContinuata idAnimationis,
-            Action adInitium = null,
-            Action adFinem = null,
-            bool estCogere = false
-        );
     }
 }

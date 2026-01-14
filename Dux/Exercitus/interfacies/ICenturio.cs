@@ -4,6 +4,9 @@ namespace Yulinti.Dux.Exercitus {
     public interface ICenturio {
     }
 
+    public interface ICenturioIncipabilis : IIncipabilis {
+    }
+
     public interface ICenturioPulsabilis : IPulsabilis {
     }
 

@@ -159,7 +159,6 @@ namespace Yulinti.Dux.Exercitus {
             dtVisa *= _contextus.Configuratio.Custodiae.RatioVisus;
             // PuellaeステートのClaritasを適用する。
             dtVisa *= _contextus.ResFPuellae.Veletudinis.Claritas;
-            UnityEngine.Debug.Log($"claritas: {_contextus.ResFPuellae.Veletudinis.Claritas}");
             // 興味喪失時間をリセット
             _tempusStudiumAmittere[idCivis] = 0f;
             return new OrdinatioCivis(
@@ -258,6 +257,7 @@ namespace Yulinti.Dux.Exercitus {
                     if (_contextus.PuellaeResVisae.ConareLegoCapitis(idCapitis, out Vector3 positionem)) {
                         if (_contextus.Visa.EstVisa(i, positionem)) {
                             _numerusIctuumCapitis[i] += 1f;
+                            // 視野角における角度を計算しておく。
                             summaAngulusRationemCapitis += ComputareAngulusRationem(
                                 positioCivisCapitis,
                                 directioCivisCapitis,
@@ -272,6 +272,7 @@ namespace Yulinti.Dux.Exercitus {
                     if (_contextus.PuellaeResVisae.ConareLegoPectoris(idPectoris, out Vector3 positionem)) {
                         if (_contextus.Visa.EstVisa(i, positionem)) {
                             _numerusIctuumCorporis[i] += 1f;
+                            // 視野角における角度を計算しておく。
                             summaAngulusRationemCorporis += ComputareAngulusRationem(
                                 positioCivisCapitis,
                                 directioCivisCapitis,
@@ -286,6 +287,7 @@ namespace Yulinti.Dux.Exercitus {
                     if (_contextus.PuellaeResVisae.ConareLegoNatium(idNatium, out Vector3 positionem)) {
                         if (_contextus.Visa.EstVisa(i, positionem)) {
                             _numerusIctuumCorporis[i] += 1f;
+                            // 視野角における角度を計算しておく。
                             summaAngulusRationemCorporis += ComputareAngulusRationem(
                                 positioCivisCapitis,
                                 directioCivisCapitis,
@@ -295,6 +297,7 @@ namespace Yulinti.Dux.Exercitus {
                     }
                 }
 
+                // 視野角角度の平均値を計算する。↑後で合成してNumerusIctuumに反映する。
                 _angulusRationemCapitis[i] = summaAngulusRationemCapitis / _cIDPuellaeResVisaeCapitis.Length;
                 _angulusRationemCorporis[i] = summaAngulusRationemCorporis / (_cIDPuellaeResVisaePectoris.Length + _cIDPuellaeResVisaeNatium.Length);
             }

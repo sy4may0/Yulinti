@@ -10,20 +10,10 @@ namespace Yulinti.Dux.Exercitus {
         IDPuellaeFiguraeGenus IdFiguraeGenus { get; }
         LatusPuellaeGenus Latus { get; }
         float Pondus { get; }
-
-        void Pono(
-            IDPuellaeFiguraeGenus idFiguraeGenus,
-            float pondus
-        );
     }
 
     internal interface IOrdinatioPuellaeFiguraePelvis : IOrdinatioPuellae {
         IDPuellaeFiguraePelvis IdFiguraePelvis { get; }
         float Pondus { get; }
-
-        void Pono(
-            IDPuellaeFiguraePelvis idFiguraePelvis,
-            float pondus
-        );
     }
 }

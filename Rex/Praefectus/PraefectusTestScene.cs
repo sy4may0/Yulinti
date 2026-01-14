@@ -17,6 +17,7 @@ namespace Yulinti.Rex {
         }
 
         public void Start() {
+            _ducisExercitus.Incipere();
             _ministeria.Incipere();
         }
 

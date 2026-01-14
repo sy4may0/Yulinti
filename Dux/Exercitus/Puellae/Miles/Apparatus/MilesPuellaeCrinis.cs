@@ -3,23 +3,22 @@ using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class MilesPuellaeCrinis {
-        private readonly IOstiumPuellaeCrinisAdiunctionisMutabile _osPuellaeCrinisAdiunctionisMut;
+        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
 
         // VContainer注入
         public MilesPuellaeCrinis(
-            IOstiumPuellaeCrinisAdiunctionisMutabile osPuellaeCrinisAdiunctionisMut
+            ContextusPuellaeOstiorumLegibile contextusOstiorum
         ) {
-            _osPuellaeCrinisAdiunctionisMut = osPuellaeCrinisAdiunctionisMut;
+            _contextusOstiorum = contextusOstiorum;
+        }
+
+        public void Initare() {
             // Default Hair
-            _osPuellaeCrinisAdiunctionisMut.Muto(IDPuellaeCrinis.Resiliens);
+            _contextusOstiorum.Carrus.ExecutareCrinis(IDPuellaeCrinis.Resiliens);
         }
 
         public void MutareComam(IDPuellaeCrinis idCrinis) {
-            _osPuellaeCrinisAdiunctionisMut.Muto(idCrinis);
-        }
-
-        public void AscendeCalve() {
-            _osPuellaeCrinisAdiunctionisMut.Deleto();
+            _contextusOstiorum.Carrus.ExecutareCrinis(idCrinis);
         }
     }
 }

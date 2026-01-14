@@ -28,13 +28,24 @@ namespace Yulinti.Dux.Exercitus {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            // Carrus
+            builder.Register<CarrusPuellae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
             // ContextusOstiorum
             builder.Register<ContextusPuellaeOstiorumLegibile>(Lifetime.Singleton);
             builder.Register<ContextusCivisOstiorumLegibile>(Lifetime.Singleton);
 
+            // Executor
+            builder.Register<ExecutorPuellaeAnimationis>(Lifetime.Singleton);
+            builder.Register<ExecutorPuellaeCrinis>(Lifetime.Singleton);
+            builder.Register<ExecutorPuellaeFigurae>(Lifetime.Singleton);
+            builder.Register<ExecutorPuellaeLoci>(Lifetime.Singleton);
+            builder.Register<ExecutorPuellaeVeletudinis>(Lifetime.Singleton);
+
             // Miles
             builder.Register<MilesPuellaeActionis>(Lifetime.Singleton);
-            builder.Register<MilesPuellaeVeletudinis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeCrinis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeFigurae>(Lifetime.Singleton);
             builder.Register<MilesCivisVeletudinis>(Lifetime.Singleton);

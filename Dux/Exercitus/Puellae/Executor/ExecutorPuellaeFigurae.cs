@@ -4,26 +4,24 @@ using Yulinti.Nucleus;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class ExecutorPuellaeFigurae : IExecutorPuellae {
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
         private readonly IOstiumPuellaeFiguraeGenusMutabile _ostiumPuellaeFiguraeGenusMutabile;
         private readonly IOstiumPuellaeFiguraePelvisMutabile _ostiumPuellaeFiguraePelvisMutabile;
 
         private DuxQueue<IOrdinatioPuellaeFiguraeGenus> _queueFiguraeGenus;
         private DuxQueue<IOrdinatioPuellaeFiguraePelvis> _queueFiguraePelvis;
 
-        private const int _queueGenusMaxima = 24;
-        private const int _queuePelvisMaxima = 12;
-
         public ExecutorPuellaeFigurae(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IOstiumPuellaeFiguraeGenusMutabile ostiumPuellaeFiguraeGenusMutabile,
             IOstiumPuellaeFiguraePelvisMutabile ostiumPuellaeFiguraePelvisMutabile
         ) {
-            _contextusOstiorum = contextusOstiorum;
             _ostiumPuellaeFiguraeGenusMutabile = ostiumPuellaeFiguraeGenusMutabile;
             _ostiumPuellaeFiguraePelvisMutabile = ostiumPuellaeFiguraePelvisMutabile;
-            _queueFiguraeGenus = new DuxQueue<IOrdinatioPuellaeFiguraeGenus>(_queueGenusMaxima);
-            _queueFiguraePelvis = new DuxQueue<IOrdinatioPuellaeFiguraePelvis>(_queuePelvisMaxima);
+            _queueFiguraeGenus = new DuxQueue<IOrdinatioPuellaeFiguraeGenus>(
+                ConstansPuellae.LongitudoOrdinatioFiguraeGenus
+            );
+            _queueFiguraePelvis = new DuxQueue<IOrdinatioPuellaeFiguraePelvis>(
+                ConstansPuellae.LongitudoOrdinatioFiguraePelvis
+            );
         }
 
         public void Primum() {

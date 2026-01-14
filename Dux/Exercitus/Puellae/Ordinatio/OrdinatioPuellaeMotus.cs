@@ -1,29 +1,24 @@
 namespace Yulinti.Dux.Exercitus {
-    internal readonly class OrdinatioPuellaeMotus : IOrdinatioPuellaeMotus {
-        private readonly SpeciesOrdinatioPuellae _species = SpeciesOrdinatioPuellae.ActioMotus;
-        private bool _estApplicandum;
-
+    internal sealed class OrdinatioPuellaeMotus : OrdinatioPuellae, IOrdinatioPuellaeMotus {
         private float _velocitasHorizontalis;
         private float _tempusLevigatumHorizontalis;
         private float _rotatioYDeg;
         private float _tempusLevigatumRotationisYDeg;
 
-        public OrdinatioPuellaeMotus() {
-            _estApplicandum = true;
+        public OrdinatioPuellaeMotus()
+            : base(true, SpeciesOrdinatioPuellae.ActioMotus) {
             _velocitasHorizontalis = 0f;
             _tempusLevigatumHorizontalis = 0f;
             _rotatioYDeg = 0f;
             _tempusLevigatumRotationisYDeg = 0f;
         }
 
-        public bool EstApplicandum => _estApplicandum;
-        public SpeciesOrdinatioPuellae Species => _species;
         public float VelocitasHorizontalis => _velocitasHorizontalis;
         public float TempusLevigatumHorizontalis => _tempusLevigatumHorizontalis;
         public float RotatioYDeg => _rotatioYDeg;
         public float TempusLevigatumRotationisYDeg => _tempusLevigatumRotationisYDeg;
 
-        public void Purgere() {
+        public override void Purgere() {
             _estApplicandum = false;
             _velocitasHorizontalis = 0f;
             _tempusLevigatumHorizontalis = 0f;

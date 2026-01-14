@@ -3,19 +3,17 @@ using Yulinti.Nucleus;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class ExecutorPuellaeCrinis : IExecutorPuellae {
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
         private readonly IOstiumPuellaeCrinisAdiunctionisMutabile _ostiumPuellaeCrinisAdiunctionisMutabile;
 
         private DuxQueue<IOrdinatioPuellaeCrinis> _queueCrinis;
-        private const int _queueCrinisMaxima = 6;
 
         public ExecutorPuellaeCrinis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IOstiumPuellaeCrinisAdiunctionisMutabile ostiumPuellaeCrinisAdiunctionisMutabile
         ) {
-            _contextusOstiorum = contextusOstiorum;
             _ostiumPuellaeCrinisAdiunctionisMutabile = ostiumPuellaeCrinisAdiunctionisMutabile;
-            _queueCrinis = new DuxQueue<IOrdinatioPuellaeCrinis>(_queueCrinisMaxima);
+            _queueCrinis = new DuxQueue<IOrdinatioPuellaeCrinis>(
+                ConstansPuellae.LongitudoOrdinatioCrinis
+            );
         }
 
         public void Primum() {

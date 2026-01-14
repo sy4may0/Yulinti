@@ -49,7 +49,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public bool ConrareLego(out T res) {
+        public bool ConareLego(out T res) {
             if (Capacitas == 0) {
                 res = null;
                 return false;

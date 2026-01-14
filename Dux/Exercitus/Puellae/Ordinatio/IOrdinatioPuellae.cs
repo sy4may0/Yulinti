@@ -7,11 +7,14 @@ namespace Yulinti.Dux.Exercitus {
         ActioNavmesh,
         ActioAnimationis,
         Veletudinis,
-        Figura,
+        FiguraGenus,
+        FiguraPelvis,
         Apparatus
     }
     internal interface IOrdinatioPuellae {
         bool EstApplicandum { get; }
+        void Initare();
+        void Liberare();
         SpeciesOrdinatioPuellae Species { get; }
         void Purgere();
     }

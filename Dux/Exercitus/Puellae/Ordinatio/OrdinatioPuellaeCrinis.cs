@@ -1,22 +1,17 @@
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Exercitus {
-    internal readonly class OrdinatioPuellaeCrinis : IOrdinatioPuellaeCrinis {
-        private readonly SpeciesOrdinatioPuellae _species = SpeciesOrdinatioPuellae.Apparatus;
-        private bool _estApplicandum;
-
+    internal sealed class OrdinatioPuellaeCrinis : OrdinatioPuellae, IOrdinatioPuellaeCrinis {
         private IDPuellaeCrinis _idCrinis;
 
-        public OrdinatioPuellaeCrinis() {
-            _estApplicandum = true;
+        public OrdinatioPuellaeCrinis()
+            : base(true, SpeciesOrdinatioPuellae.Apparatus) {
             _idCrinis = default;
         }
 
-        public bool EstApplicandum => _estApplicandum;
-        public SpeciesOrdinatioPuellae Species => _species;
         public IDPuellaeCrinis IdCrinis => _idCrinis;
 
-        public void Purgere() {
+        public override void Purgere() {
             _estApplicandum = false;
             _idCrinis = default;
         }

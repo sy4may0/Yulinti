@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class DuxExercitus : IDuxExercitus {
+        private readonly ICenturioIncipabilis[] _centurioIncipabilis;
         private readonly ICenturioPulsabilis[] _centurioPulsabilis;
         private readonly ICenturioPulsabilisPrimum[] _centurioPulsabilisPrimum;
         private readonly ICenturioPulsabilisFixus[] _centurioPulsabilisFixus;
@@ -14,6 +15,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly ICenturioPulsabilisTardusPrimum[] _centurioPulsabilisTardusPrimum;
 
         public DuxExercitus(
+            IReadOnlyList<ICenturioIncipabilis> centurioIncipabilis,
             IReadOnlyList<ICenturioPulsabilis> centurioPulsabilis,
             IReadOnlyList<ICenturioPulsabilisPrimum> centurioPulsabilisPrimum,
             IReadOnlyList<ICenturioPulsabilisFixus> centurioPulsabilisFixus,
@@ -21,12 +23,19 @@ namespace Yulinti.Dux.Exercitus {
             IReadOnlyList<ICenturioPulsabilisTardus> centurioPulsabilisTardus,
             IReadOnlyList<ICenturioPulsabilisTardusPrimum> centurioPulsabilisTardusPrimum
         ) {
+            _centurioIncipabilis = centurioIncipabilis.ToArray();
             _centurioPulsabilis = centurioPulsabilis.ToArray();
             _centurioPulsabilisPrimum = centurioPulsabilisPrimum.ToArray();
             _centurioPulsabilisFixus = centurioPulsabilisFixus.ToArray();
             _centurioPulsabilisFixusPrimum = centurioPulsabilisFixusPrimum.ToArray();
             _centurioPulsabilisTardus = centurioPulsabilisTardus.ToArray();
             _centurioPulsabilisTardusPrimum = centurioPulsabilisTardusPrimum.ToArray();
+        }
+
+        public void Incipere() {
+            foreach (ICenturioIncipabilis centurio in _centurioIncipabilis) {
+                centurio.Incipere();
+            }
         }
 
         public void Pulsus() {

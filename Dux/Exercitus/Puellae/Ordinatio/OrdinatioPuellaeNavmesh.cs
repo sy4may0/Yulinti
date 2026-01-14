@@ -1,18 +1,15 @@
 using System.Numerics;
 
 namespace Yulinti.Dux.Exercitus {
-    internal readonly class OrdinatioPuellaeNavmesh : IOrdinatioPuellaeNavmesh {
-        private readonly SpeciesOrdinatioPuellae _species = SpeciesOrdinatioPuellae.ActioNavmesh;
-        private bool _estApplicandum;
-
+    internal sealed class OrdinatioPuellaeNavmesh : OrdinatioPuellae, IOrdinatioPuellaeNavmesh {
         private Vector3 _positio;
         private float _velocitasDesiderata;
         private float _acceleratio;
         private float _velocitasRotationis;
         private float _distantiaDeaccelerationis;
 
-        public OrdinatioPuellaeNavmesh() {
-            _estApplicandum = true;
+        public OrdinatioPuellaeNavmesh()
+            : base(true, SpeciesOrdinatioPuellae.ActioNavmesh) {
             _positio = default;
             _velocitasDesiderata = 0f;
             _acceleratio = 0f;
@@ -20,15 +17,13 @@ namespace Yulinti.Dux.Exercitus {
             _distantiaDeaccelerationis = 0f;
         }
 
-        public bool EstApplicandum => _estApplicandum;
-        public SpeciesOrdinatioPuellae Species => _species;
         public Vector3 Positio => _positio;
         public float VelocitasDesiderata => _velocitasDesiderata;
         public float Acceleratio => _acceleratio;
         public float VelocitasRotationis => _velocitasRotationis;
         public float DistantiaDeaccelerationis => _distantiaDeaccelerationis;
 
-        public void Purgere() {
+        public override void Purgere() {
             _estApplicandum = false;
             _positio = default;
             _velocitasDesiderata = 0f;

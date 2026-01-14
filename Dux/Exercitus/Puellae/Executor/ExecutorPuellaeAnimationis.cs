@@ -3,19 +3,20 @@ using Yulinti.Nucleus;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class ExecutorPuellaeAnimationis : IExecutorPuellae {
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
+        private readonly IOstiumPuellaeLociLegibile _ostiumPuellaeLociLegibile;
         private readonly IOstiumPuellaeAnimationesMutabile _ostiumPuellaeAnimationesMutabile;
 
         private DuxQueue<IOrdinatioPuellaeAnimationis> _queueAnimationis;
-        private const int _queueAnimationisMaxima = 12;
 
         public ExecutorPuellaeAnimationis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            IOstiumPuellaeLociLegibile ostiumPuellaeLociLegibile,
             IOstiumPuellaeAnimationesMutabile ostiumPuellaeAnimationesMutabile
         ) {
-            _contextusOstiorum = contextusOstiorum;
+            _ostiumPuellaeLociLegibile = ostiumPuellaeLociLegibile;
             _ostiumPuellaeAnimationesMutabile = ostiumPuellaeAnimationesMutabile;
-            _queueAnimationis = new DuxQueue<IOrdinatioPuellaeAnimationis>(_queueAnimationisMaxima);
+            _queueAnimationis = new DuxQueue<IOrdinatioPuellaeAnimationis>(
+                ConstansPuellae.LongitudoOrdinatioAnimationis
+            );
         }
 
         public void Primum() {
@@ -46,7 +47,7 @@ namespace Yulinti.Dux.Exercitus {
                 ApplicareAnimationis(animationis);
             }
             _ostiumPuellaeAnimationesMutabile.InjicereVelocitatem(
-                _contextusOstiorum.Loci.VelocitasHorizontalisActualis()
+                _ostiumPuellaeLociLegibile.VelocitasHorizontalisActualis()
             );
         }
 
