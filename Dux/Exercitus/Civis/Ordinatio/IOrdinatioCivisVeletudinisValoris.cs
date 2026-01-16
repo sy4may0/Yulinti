@@ -1,7 +1,9 @@
 namespace Yulinti.Dux.Exercitus {
-    internal interface IOrdinatioCivisVeletudinisCustodiae : IOrdinatioCivis {
+    internal interface IOrdinatioCivisVeletudinisValoris : IOrdinatioCivis {
         // 寿命
         float DtVitae { get; }
+        // 視力
+        float DtVisus { get; }
         // 視認判定
         float DtVisa { get; }
         // 聴覚判定

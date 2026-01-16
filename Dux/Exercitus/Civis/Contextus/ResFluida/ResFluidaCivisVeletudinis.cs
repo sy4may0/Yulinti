@@ -9,6 +9,10 @@ namespace Yulinti.Dux.Exercitus {
         private float[] _visus;
         // Puellae視認度 (0~1)
         private float[] _visa;
+        // 聞き耳
+        private float[] _audita;
+        // 疑心度
+        private float[] _suspecta;
 
         // 警戒フラグ
         private bool[] _estVigilantia;
@@ -19,6 +23,8 @@ namespace Yulinti.Dux.Exercitus {
             _vitae = new float[ostiumCivis.Longitudo];
             _visus = new float[ostiumCivis.Longitudo];
             _visa = new float[ostiumCivis.Longitudo];
+            _audita = new float[ostiumCivis.Longitudo];
+            _suspecta = new float[ostiumCivis.Longitudo];
 
             _estDominare = new bool[ostiumCivis.Longitudo];
             _estVigilantia = new bool[ostiumCivis.Longitudo];
@@ -28,6 +34,8 @@ namespace Yulinti.Dux.Exercitus {
                 _vitae[i] = 1f;
                 _visus[i] = 1f;
                 _visa[i] = 0f;
+                _audita[i] = 0f;
+                _suspecta[i] = 0f;
                 _estDominare[i] = false;
             }
         }
@@ -50,6 +58,14 @@ namespace Yulinti.Dux.Exercitus {
         public float Visa(int idCivis) {
             if (!estActivum(idCivis)) return 0f;
             return _visa[idCivis];
+        }
+        public float Audita(int idCivis) {
+            if (!estActivum(idCivis)) return 0f;
+            return _audita[idCivis];
+        }
+        public float Suspecta(int idCivis) {
+            if (!estActivum(idCivis)) return 0f;
+            return _suspecta[idCivis];
         }
 
         public bool EstDominare(int idCivis) {
@@ -87,10 +103,28 @@ namespace Yulinti.Dux.Exercitus {
             _estDetectio[idCivis] = estDetectio;
         }
 
+        public void RenovareValoris(
+            int idCivis,
+            float vitae,
+            float visus,
+            float visa,
+            float audita,
+            float suspecta
+        ) {
+            if (!estActivum(idCivis)) return;
+            _vitae[idCivis] = DuxMath.Clamp(vitae, 0f, 1f);
+            _visus[idCivis] = DuxMath.Clamp(visus, 0f, 1f);
+            _visa[idCivis] = DuxMath.Clamp(visa, 0f, 1f);
+            _audita[idCivis] = DuxMath.Clamp(audita, 0f, 1f);
+            _suspecta[idCivis] = DuxMath.Clamp(suspecta, 0f, 1f);
+        }
+
         public void Purgare(int idCivis) {
             _vitae[idCivis] = 1f;
             _visus[idCivis] = 1f;
             _visa[idCivis] = 0f;
+            _audita[idCivis] = 0f;
+            _suspecta[idCivis] = 0f;
             _estVigilantia[idCivis] = false;
             _estDetectio[idCivis] = false;
         }

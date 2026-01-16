@@ -5,8 +5,8 @@ namespace Yulinti.Dux.Exercitus {
         public const int LongitudoOrdinatioCrinis = 6;
         public const int LongitudoOrdinatioFiguraeGenus = 24;
         public const int LongitudoOrdinatioFiguraePelvis = 12;
-        public const int LongitudoOrdinatioMotus = 1;
-        public const int LongitudoOrdinatioNavmesh = 1;
+        public const int LongitudoOrdinatioMotus = 6;
+        public const int LongitudoOrdinatioNavmesh = 12;
         public const int LongitudoOrdinatioVeletudinis = 32;
 
     }

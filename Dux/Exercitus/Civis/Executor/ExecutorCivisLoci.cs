@@ -108,7 +108,8 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void Confirmare(int idCivis) {
-            if (_queueMotus[idCivis].EstEmpty && _queueNavmesh[idCivis].EstEmpty) return;
+            if (_queueMotus[idCivis].Capacitas == 0 && 
+                _queueNavmesh[idCivis].Capacitas == 0) return;
             // Motusを優先する。かつ、Motusは最後に投入されたOrdinatioのみ反映する。
             // 最後に投入されたMotusを取得する。
             IOrdinatioCivisMotus motus = null;

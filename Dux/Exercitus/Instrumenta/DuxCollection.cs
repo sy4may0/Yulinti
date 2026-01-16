@@ -5,6 +5,9 @@ namespace Yulinti.Dux.Exercitus {
         private readonly Queue<T> _queue;
         private readonly int _longitudo;
 
+        public int Longitudo => _longitudo;
+        public int Capacitas => _queue.Count;
+
         public DuxQueue(int longitudo) {
             _queue = new Queue<T>(longitudo);
             _longitudo = longitudo;
