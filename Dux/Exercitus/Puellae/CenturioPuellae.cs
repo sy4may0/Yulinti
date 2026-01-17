@@ -2,80 +2,62 @@ using Yulinti.Dux.ContractusDucis;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class CenturioPuellae : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisTardus {
+    internal sealed class CenturioPuellae : ICenturio, ICenturioIncipabilis, ICenturioPulsabilis, ICenturioPulsabilisTardus {
         private readonly MilesPuellaeActionis _milesPuellaeActionis;
-        private readonly MilesPuellaeVeletudinis _milesPuellaeVeletudinis;
         private readonly MilesPuellaeCrinis _milesPuellaeCrinis;
         private readonly MilesPuellaeFigurae _milesPuellaeFigurae;
 
-        // ResFluida実体
-        private readonly ResFluidaPuellaeMotus _resFluidaMotus;
-        private readonly ResFluidaPuellaeVeletudinis _resFluidaVeletudinis;
+        // Carrus
+        private readonly CarrusPuellae _carrusPuellae;
 
         // ResFluidaファサード
         private readonly IResFluidaPuellaeLegibile _resFluidaLegibile;
 
         // VContainer注入
         public CenturioPuellae(
-            MilesPuellaeVeletudinis milesPuellaeVeletudinis,
             MilesPuellaeActionis milesPuellaeActionis,
             MilesPuellaeCrinis milesPuellaeCrinis,
             MilesPuellaeFigurae milesPuellaeFigurae,
-            ResFluidaPuellaeMotus resFluidaMotus,
-            ResFluidaPuellaeVeletudinis resFluidaVeletudinis,
-            IResFluidaPuellaeLegibile resFluidaLegibile
+            IResFluidaPuellaeLegibile resFluidaLegibile,
+            CarrusPuellae carrusPuellae
         ) {
             _milesPuellaeActionis = milesPuellaeActionis;
-            _milesPuellaeVeletudinis = milesPuellaeVeletudinis;
             _milesPuellaeCrinis = milesPuellaeCrinis;
             _milesPuellaeFigurae = milesPuellaeFigurae;
-            _resFluidaMotus = resFluidaMotus;
-            _resFluidaVeletudinis = resFluidaVeletudinis;
             _resFluidaLegibile = resFluidaLegibile;
+            _carrusPuellae = carrusPuellae;
+        }
+
+        public void Incipere() {
+            _carrusPuellae.Initare();
+            _carrusPuellae.Primum();
+            _milesPuellaeActionis.Initare(_resFluidaLegibile);
+            _milesPuellaeCrinis.Initare();
+            _carrusPuellae.ConfirmareIncipabilis();
         }
 
         public void Pulsus() {
-            // Veletudoキャッシュを初期化
-            _milesPuellaeVeletudinis.InitarePhantasma(_resFluidaVeletudinis);
-            // VeletudoExhauritaチェック
-            _milesPuellaeVeletudinis.Resolvere(_resFluidaVeletudinis);
+            UnityEngine.Debug.Log("Pulsus: " + _resFluidaLegibile.Veletudinis.Claritas);
+            // Carrus初期化実行
+            _carrusPuellae.Primum();
 
-            // Actioループ
-            var (exire, intrare) = _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);
-            ResolvereOrdinatio(exire);
-            ResolvereOrdinatio(intrare);
+            // Ordinatio計画
+            _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);
+            _milesPuellaeActionis.Ordinare(_resFluidaLegibile);
 
-            // Navmeshチェック / 失敗時はAnimetion初期化、初期ステート遷移(MachinaPuellaeStatuumCorporis.Initare())
-            ResolvereOrdinatio(_milesPuellaeActionis.ValidereNavmesh(_resFluidaLegibile));
-            ResolvereOrdinatio(_milesPuellaeActionis.Ordinare(_resFluidaLegibile));
-
-            // ResFluidaMotusを更新
-            _milesPuellaeActionis.RenovareResFluidaMotus(in _resFluidaMotus);
-            // Animation速度を更新
-            _milesPuellaeActionis.InjicereVelocitatis(_resFluidaLegibile);
+            // Carrus適用(Ordinatio実行)
+            _carrusPuellae.Confirmare();
+            UnityEngine.Debug.Log("Pulsus End: " + _resFluidaLegibile.Veletudinis.Claritas);
         }
 
         public void PulsusTardus() {
-            // VeletudoキャッシュをResFluidaに反映
-            _milesPuellaeVeletudinis.Applicare(_resFluidaVeletudinis);
+            // Ordinatio計画
+            _milesPuellaeFigurae.Ordinare();
 
-            // BlendShape適用
-            _milesPuellaeFigurae.ApplicareFiguram();
-            
+            // Carrus適用(Ordinatio実行)
+            _carrusPuellae.ConfirmareTardus();
+            UnityEngine.Debug.Log("PulsusTardus: " + _resFluidaLegibile.Veletudinis.Claritas);
         }
 
-        private void ResolvereOrdinatio(
-            in OrdinatioPuellae ordinatio
-        ) {
-            if (ordinatio.ConareLegoActionis(out OrdinatioPuellaeActionis actionis)) {
-                _milesPuellaeActionis.ApplicareActionis(actionis);
-            }
-            if (ordinatio.ConareLegoAnimationis(out OrdinatioPuellaeAnimationis animationis)) {
-                _milesPuellaeActionis.ApplicareAnimationis(animationis);
-            }
-            if (ordinatio.ConareLegoVeletudinis(out OrdinatioPuellaeVeletudinis veletudinis)) {
-                _milesPuellaeVeletudinis.Addo(veletudinis);
-            }
-        }
     }
 }

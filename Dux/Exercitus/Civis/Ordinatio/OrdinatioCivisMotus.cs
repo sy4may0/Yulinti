@@ -1,47 +1,41 @@
 namespace Yulinti.Dux.Exercitus {
-    internal readonly struct OrdinatioCivisMotusHorizontalis {
-        public readonly float Velocitas { get; }
-        public readonly float TempusLevigatum { get; }
+    internal sealed class OrdinatioCivisMotus : OrdinatioCivis, IOrdinatioCivisMotus {
+        private float _velocitasHorizontalis;
+        private float _tempusLevigatumHorizontalis;
+        private float _rotatioYDeg;
+        private float _tempusLevigatumRotationisYDeg;
 
-        public OrdinatioCivisMotusHorizontalis(float velocitas, float tempusLevigatum) {
-            Velocitas = velocitas;
-            TempusLevigatum = tempusLevigatum;
+        public OrdinatioCivisMotus(int idCivis)
+            : base(idCivis, true, SpeciesOrdinatioCivis.ActioMotus) {
+            _velocitasHorizontalis = 0f;
+            _tempusLevigatumHorizontalis = 0f;
+            _rotatioYDeg = 0f;
+            _tempusLevigatumRotationisYDeg = 0f;
         }
-    }
 
-    internal readonly struct OrdinatioCivisMotusVerticalis {
-        public readonly float Velocitas { get; }
-        public readonly float TempusLevigatum { get; }
+        public float VelocitasHorizontalis => _velocitasHorizontalis;
+        public float TempusLevigatumHorizontalis => _tempusLevigatumHorizontalis;
+        public float RotatioYDeg => _rotatioYDeg;
+        public float TempusLevigatumRotationisYDeg => _tempusLevigatumRotationisYDeg;
 
-        public OrdinatioCivisMotusVerticalis(float velocitas, float tempusLevigatum) {
-            Velocitas = velocitas;
-            TempusLevigatum = tempusLevigatum;
+        public override void Purgere() {
+            _estApplicandum = false;
+            _velocitasHorizontalis = 0f;
+            _tempusLevigatumHorizontalis = 0f;
+            _rotatioYDeg = 0f;
+            _tempusLevigatumRotationisYDeg = 0f;
         }
-    }
 
-    internal readonly struct OrdinatioCivisMotusRotationisY {
-        public readonly float RotatioY { get; }
-        public readonly float TempusLevigatum { get; }
-
-        public OrdinatioCivisMotusRotationisY(float rotatioY, float tempusLevigatum) {
-            RotatioY = rotatioY;
-            TempusLevigatum = tempusLevigatum;
-        }
-    }
-
-    internal readonly struct OrdinatioCivisMotus {
-        public readonly OrdinatioCivisMotusHorizontalis Horizontalis { get; }
-        public readonly OrdinatioCivisMotusVerticalis Verticalis { get; }
-        public readonly OrdinatioCivisMotusRotationisY RotationisY { get; }
-
-        public OrdinatioCivisMotus(
-            in OrdinatioCivisMotusHorizontalis horizontalis,
-            in OrdinatioCivisMotusVerticalis verticalis,
-            in OrdinatioCivisMotusRotationisY rotationisY
+        public void Pono(
+            float velocitasHorizontalis = 0f,
+            float tempusLevigatumHorizontalis = 0f,
+            float rotatioYDeg = 0f,
+            float tempusLevigatumRotationisYDeg = 0f
         ) {
-            Horizontalis = horizontalis;
-            Verticalis = verticalis;
-            RotationisY = rotationisY;
+            _velocitasHorizontalis = velocitasHorizontalis;
+            _tempusLevigatumHorizontalis = tempusLevigatumHorizontalis;
+            _rotatioYDeg = rotatioYDeg;
+            _tempusLevigatumRotationisYDeg = tempusLevigatumRotationisYDeg;
         }
     }
 }

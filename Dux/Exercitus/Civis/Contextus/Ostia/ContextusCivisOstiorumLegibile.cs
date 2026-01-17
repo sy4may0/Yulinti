@@ -10,6 +10,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly IOstiumCivisVisaeLegibile _visa;
         private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
         private readonly IResFluidaPuellaeLegibile _resFPuellae;
+        private readonly IOstiumCarrusCivis _carrus;
 
         public ContextusCivisOstiorumLegibile(
             IConfiguratioExercitusCivis configuratio,
@@ -20,7 +21,8 @@ namespace Yulinti.Dux.Exercitus {
             IOstiumPunctumViaeLegibile punctumViae,
             IOstiumCivisVisaeLegibile visa,
             IOstiumPuellaeResVisaeLegibile puellaeResVisae,
-            IResFluidaPuellaeLegibile resFPuellae
+            IResFluidaPuellaeLegibile resFPuellae,
+            IOstiumCarrusCivis carrus
         ) {
             _configuratio = configuratio;
             _temporis = temporis;
@@ -31,6 +33,7 @@ namespace Yulinti.Dux.Exercitus {
             _visa = visa;
             _puellaeResVisae = puellaeResVisae;
             _resFPuellae = resFPuellae;
+            _carrus = carrus;
         }
 
         public IConfiguratioExercitusCivis Configuratio => _configuratio;
@@ -42,5 +45,6 @@ namespace Yulinti.Dux.Exercitus {
         public IOstiumCivisVisaeLegibile Visa => _visa;
         public IOstiumPuellaeResVisaeLegibile PuellaeResVisae => _puellaeResVisae;
         public IResFluidaPuellaeLegibile ResFPuellae => _resFPuellae;
+        public IOstiumCarrusCivis Carrus => _carrus;
     }
 }

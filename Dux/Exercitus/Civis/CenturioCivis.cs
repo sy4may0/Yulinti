@@ -4,60 +4,47 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 namespace Yulinti.Dux.Exercitus {
     internal sealed class CenturioCivis : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisFixus, ICenturioPulsabilisTardus {
         private readonly ContextusCivisOstiorumLegibile _contextus;
-        private readonly MilesCivisVeletudinis _milesCivisVeletudinis;
         private readonly MilesCivisActionis _milesCivisActionis;
         private readonly MilesCivisCustodiae _milesCivisCustodiae;
 
-        // ResFluida実体
-        private readonly ResFluidaCivisMotus _resFluidaMotus;
-        private readonly ResFluidaCivisVeletudinis _resFluidaVeletudinis;
+        // Carrus
+        private readonly CarrusCivis _carrusCivis;
 
         // ResFluidaファサード
         private readonly IResFluidaCivisLegibile _resFluidaLegibile;
 
         // VContainer注入
         public CenturioCivis(
-            MilesCivisVeletudinis milesCivisVeletudinis,
             MilesCivisActionis milesCivisActionis,
             MilesCivisCustodiae milesCivisCustodiae,
-            ResFluidaCivisMotus resFluidaMotus,
-            ResFluidaCivisVeletudinis resFluidaVeletudinis,
             IResFluidaCivisLegibile resFluidaLegibile,
-            ContextusCivisOstiorumLegibile contextus
+            ContextusCivisOstiorumLegibile contextus,
+            CarrusCivis carrusCivis
         ) {
-            _milesCivisVeletudinis = milesCivisVeletudinis;
             _milesCivisActionis = milesCivisActionis;
             _milesCivisCustodiae = milesCivisCustodiae;
-            _resFluidaMotus = resFluidaMotus;
-            _resFluidaVeletudinis = resFluidaVeletudinis;
             _resFluidaLegibile = resFluidaLegibile;
             _contextus = contextus;
+            _carrusCivis = carrusCivis;
 
-            // 実体化完了時に呼ばれる
-            _milesCivisVeletudinis.PonoAdIncarnare(AdIncarnare);
-            // 実体化解除完了時に呼ばれる
-            _milesCivisVeletudinis.PonoAdSpirituare(AdSpirituare);
+            _carrusCivis.PonoAd(AdIncarnare, AdSpirituare);
         }
 
         private void AdIncarnare(int idCivis) {
-            _resFluidaVeletudinis.Dominare(idCivis);
-            _milesCivisVeletudinis.Purgare(idCivis);
-            _milesCivisActionis.Purgere(idCivis);
-            var (initare, intrareStatus) = _milesCivisActionis.InitareServatum(idCivis, _resFluidaLegibile);
-            ResolvereOrdinatio(initare);
-            ResolvereOrdinatio(intrareStatus);
+            _carrusCivis.Initare(idCivis);
+            _carrusCivis.Primum(idCivis);
+            _milesCivisActionis.Initare(idCivis, _resFluidaLegibile);
+            _carrusCivis.ConfirmareIncipabilis(idCivis);
         }
 
         private void AdSpirituare(int idCivis) {
-            _resFluidaVeletudinis.Liberare(idCivis);
-            _milesCivisVeletudinis.Purgare(idCivis);
-            _milesCivisActionis.Purgere(idCivis);
+            _carrusCivis.Purgare(idCivis);
         }
 
         // 不整合のNPCが存在すれば修復する。
         private void RenovareDominare(int idCivis) {
             bool estActivum = _contextus.Civis.EstActivum(idCivis);
-            bool estDominare = _resFluidaVeletudinis.EstDominare(idCivis);
+            bool estDominare = _resFluidaLegibile.Veletudinis.EstDominare(idCivis);
 
             if (estActivum == estDominare) return;
 
@@ -75,70 +62,37 @@ namespace Yulinti.Dux.Exercitus {
         // この問題はInitareServatumでPurgereを実行することで解決するはずではあるが、確実ではない。
         // したがって、Ordinatio()時に現在StateがnullならNPCをIncarnareする。
         public void Pulsus() {
-            // Veletudoキャッシュを初期化
-            _milesCivisVeletudinis.InitarePhantasma(_resFluidaVeletudinis);
-
             // MilesCivisActionisの初期化。処理対象整理
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
                 // AdIncarnare/AdSpirituareが生成時にInvoke()されなかった場合に修復する。
                 RenovareDominare(i);
 
-                if (!_resFluidaVeletudinis.EstDominare(i)) continue;
+                // ActiveでないCivisはスキップ
+                if (!_resFluidaLegibile.Veletudinis.EstDominare(i)) continue;
+
+                _carrusCivis.Primum(i);
+
                 // Actionis処理実行
-                var (exire, intrare) = _milesCivisActionis.MutareStatus(i, _resFluidaLegibile);
-                ResolvereOrdinatio(exire);
-                ResolvereOrdinatio(intrare);
-                ResolvereOrdinatio(_milesCivisActionis.Ordinare(i, _resFluidaLegibile));
+                _milesCivisActionis.MutareStatus(i, _resFluidaLegibile);
+                _milesCivisActionis.Ordinare(i, _resFluidaLegibile);
 
-                //ResFluidaMotus更新
-                _milesCivisActionis.RenovareResFluidaMotus(i, _resFluidaLegibile, _resFluidaMotus);
-                // Animationis更新
-                _milesCivisActionis.InjicereVelocitatis(i, _resFluidaLegibile);
+                // 視認度Ordinatio実行
+                _milesCivisCustodiae.Ordinare(i, _resFluidaLegibile);
 
-                // Navmesh確認(Transporto失敗時に除去)
-                ResolvereOrdinatio(_milesCivisActionis.VerificareNavmesh(i));
-
-                // 視認度を更新
-                ResolvereOrdinatio(_milesCivisCustodiae.Ordinare(i, _resFluidaLegibile));
-                ResolvereOrdinatio(_milesCivisCustodiae.OrdinareDetectio(i, _resFluidaLegibile));
+                // Carrus適用(Ordinatio実行)
+                _carrusCivis.Confirmare(i);
             }
         }
 
         public void PulsusFixus() {
-            // Raycast
             _milesCivisCustodiae.ResolvereIctuum();
         }
 
         public void PulsusTardus() {
-            // VeletudoキャッシュをResFluidaに反映
-            _milesCivisVeletudinis.Applicare(_resFluidaVeletudinis);
-        }
+            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+                if (!_resFluidaLegibile.Veletudinis.EstDominare(i)) continue;
 
-        private void ResolvereOrdinatio(
-            in OrdinatioCivis ordinatio
-        ) {
-            if (ordinatio.ConareLegoActionis(out OrdinatioCivisActionis actionis)) {
-                _milesCivisActionis.ApplicareActionis(actionis);
-            }
-            if (ordinatio.ConareLegoAnimationis(out OrdinatioCivisAnimationis animationis)) {
-                _milesCivisActionis.ApplicareAnimationis(animationis);
-            }
-            if (ordinatio.ConareLegoVeletudinisValoris(out OrdinatioCivisVeletudinisValoris veletudinisValoris)) {
-                _milesCivisVeletudinis.Addo(veletudinisValoris);
-            }
-            if (ordinatio.ConareLegoVeletudinisMortis(out OrdinatioCivisVeletudinisMortis veletudinisMortis)) {
-                _milesCivisVeletudinis.ApplicareMors(veletudinisMortis, _resFluidaVeletudinis);
-            }
-            if (ordinatio.ConareLegoVeletudinisCustodiae(out OrdinatioCivisVeletudinisCustodiae veletudinisCustodiae)) {
-                int idCivis = ordinatio.IdCivis;
-                veletudinisCustodiae.Match(
-                    visa: (visa) => {
-                        _milesCivisVeletudinis.AddoVisa(idCivis, visa);
-                    },
-                    detectio: (detectio) => {
-                        _milesCivisVeletudinis.AddDetectio(idCivis, detectio);
-                    }
-                );  
+                _carrusCivis.ConfirmareTardus(i);
             }
         }
     }

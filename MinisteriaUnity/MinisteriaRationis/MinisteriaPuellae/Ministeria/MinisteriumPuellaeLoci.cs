@@ -17,6 +17,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private bool _estMotus;
         private bool _estNavMesh;
 
+        private bool _estErrans;
+
         public MinisteriumPuellaeLoci(
             IAnchoraPuellae anchoraPuellae,
             IConfiguratioPuellaeLoci configLoci
@@ -47,6 +49,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public bool EstActivum() {
             return ConareLegoNavMesh(out _);
+        }
+
+        public bool EstErrans() {
+            return _estErrans;
         }
 
         public void ActivareMotus() {
@@ -137,11 +143,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (NavMesh.SamplePosition(positio, out NavMeshHit hit, 5f, NavMesh.AllAreas)) {
                 positio = hit.position;
             }
-            bool r = navMeshAgent.Warp(positio);
-            if (!r) return false;
+            _estErrans = !navMeshAgent.Warp(positio);
+            if (_estErrans) return false;
             navMeshAgent.transform.rotation = rotatio;
             Purgare(navMeshAgent);
-            return true;
+            return !_estErrans;
         }
 
         public void InitareMigrare() {
@@ -153,7 +159,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public void IncipereMigrare(Vector3 positio) {
             if (!EstActivumNavMesh()) return;
             if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return;
-            if (EstMigrare()) return;
+            navMeshAgent.ResetPath();
             navMeshAgent.SetDestination(positio);
         }
 

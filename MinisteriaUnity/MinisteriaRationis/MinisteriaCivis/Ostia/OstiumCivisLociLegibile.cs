@@ -20,6 +20,10 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (!VerificareID(id)) return false;
             return _miCivisLoci.EstActivum(id);
         }
+        public bool EstErrans(int id) {
+            if (!VerificareID(id)) return false;
+            return _miCivisLoci.EstErrans(id);
+        }
         public bool EstActivumMotus(int id) {
             if (!VerificareID(id)) return false;
             return _miCivisLoci.EstActivumMotus(id);

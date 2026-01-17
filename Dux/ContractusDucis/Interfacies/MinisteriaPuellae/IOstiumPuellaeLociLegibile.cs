@@ -1,6 +1,7 @@
 namespace Yulinti.Dux.ContractusDucis {
     public interface IOstiumPuellaeLociLegibile {
         bool EstActivum();
+        bool EstErrans();
         bool EstActivumMotus();
         bool EstActivumNavMesh();
         bool EstAdPerveni();

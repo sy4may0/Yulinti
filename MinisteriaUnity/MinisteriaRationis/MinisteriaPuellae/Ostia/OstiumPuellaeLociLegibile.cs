@@ -12,6 +12,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         }
 
         public bool EstActivum() => _miPuellaeLoci.EstActivum();
+        public bool EstErrans() => _miPuellaeLoci.EstErrans();
         public bool EstActivumMotus() => _miPuellaeLoci.EstActivumMotus();
         public bool EstActivumNavMesh() => _miPuellaeLoci.EstActivumNavMesh();
         public bool EstAdPerveni() => _miPuellaeLoci.EstAdPerveni();

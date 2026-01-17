@@ -17,6 +17,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         private bool[] _estMotus;
         private bool[] _estNavMesh;
 
+        // Transporto失敗時にTrueになる。
+        private bool[] _estErrans;
+
         public MinisteriumCivisLoci(
             TabulaCivis tabulaCivis,
             IConfiguratioCivisLoci configLoci
@@ -31,9 +34,11 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
             _estMotus = new bool[tabulaCivis.Longitudo];
             _estNavMesh = new bool[tabulaCivis.Longitudo];
+            _estErrans = new bool[tabulaCivis.Longitudo];
             for (int id = 0; id < tabulaCivis.Longitudo; id++) {
                 _estMotus[id] = true;
                 _estNavMesh[id] = false;
+                _estErrans[id] = false;
             }
         }
 
@@ -49,6 +54,9 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
 
         public bool EstActivum(int id) {
             return ConareLegoNavMesh(id, out _);
+        }
+        public bool EstErrans(int id) {
+            return _estErrans[id];
         }
 
         public void ActivareMotus(int id) {
@@ -102,7 +110,6 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             return false;
         }
 
-        // NavMesh制御
         public bool EstMigrare(int id) {
             if (!EstActivumNavMesh(id)) return false;
             if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return false;
@@ -149,8 +156,8 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
             if (NavMesh.SamplePosition(positio, out NavMeshHit hit, 5f, NavMesh.AllAreas)) {
                 positio = hit.position;
             }
-            bool r = anchora.NavMeshAgent.Warp(positio);
-            if (!r) return false;
+            _estErrans[id] = !anchora.NavMeshAgent.Warp(positio);
+            if (_estErrans[id]) return false;
             anchora.NavMeshAgent.transform.rotation = rotatio;
             Purgare(id, anchora.NavMeshAgent);
             return true;
@@ -167,7 +174,7 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public void IncipereMigrare(int id, Vector3 positio) {
             if (!EstActivumNavMesh(id)) return;
             if (!ConareLegoNavMesh(id, out IAnchoraCivis anchora)) return;
-            if (EstMigrare(id)) return;
+            anchora.NavMeshAgent.ResetPath();
             anchora.NavMeshAgent.SetDestination(positio);
         }
 
