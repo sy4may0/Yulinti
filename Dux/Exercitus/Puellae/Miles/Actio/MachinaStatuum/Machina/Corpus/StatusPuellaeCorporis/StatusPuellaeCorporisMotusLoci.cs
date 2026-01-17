@@ -25,7 +25,7 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaPuellaeLegibile resFluida,
             Action adInitium
         ) {
-            contextusOstiorum.Carrus.ExecutareAnimationis(
+            contextusOstiorum.Carrus.PostulareAnimationis(
                 _configuratio.IdAnimationisIntrare,
                 adInitium,
                 null,
@@ -39,7 +39,7 @@ namespace Yulinti.Dux.Exercitus {
             Action adFinem
         ) {
             if (_configuratio.LudereExire) {
-                contextusOstiorum.Carrus.ExecutareAnimationis(
+                contextusOstiorum.Carrus.PostulareAnimationis(
                     _configuratio.IdAnimationisExire,
                     null,
                     adFinem,
@@ -72,13 +72,13 @@ namespace Yulinti.Dux.Exercitus {
                 _configuratio.EstLevigatum
             );
 
-            contextusOstiorum.Carrus.ExecutareMotus(
+            contextusOstiorum.Carrus.PostulareMotus(
                 oh.Velocitas,
                 oh.TempusLevigatum,
                 or.RotatioY,
                 or.TempusLevigatum
             );
-            contextusOstiorum.Carrus.ExecutareVeletudinis(
+            contextusOstiorum.Carrus.PostulareVeletudinis(
                 dtVigoris: _configuratio.ConsumptioVigorisSec * contextusOstiorum.Temporis.Intervallum,
                 dtPatientiae: _configuratio.ConsumptioPatientiaeSec * contextusOstiorum.Temporis.Intervallum,
                 dtAetheris: _configuratio.IncrementumAetherisSec * contextusOstiorum.Temporis.Intervallum,

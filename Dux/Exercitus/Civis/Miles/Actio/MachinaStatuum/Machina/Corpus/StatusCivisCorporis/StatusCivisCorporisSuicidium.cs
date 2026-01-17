@@ -31,7 +31,7 @@ namespace Yulinti.Dux.Exercitus {
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.ExecutareVeletudinisMortis(
+            contextusOstiorum.Carrus.PostulareMortis(
                 idCivis, SpeciesOrdinationisCivisMortis.Spirituare
             );
         }

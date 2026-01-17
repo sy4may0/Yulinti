@@ -26,7 +26,7 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaCivisLegibile resFluida,
             Action adInitium
         ) {
-            contextusOstiorum.Carrus.ExecutareAnimationis(
+            contextusOstiorum.Carrus.PostulareAnimationis(
                 idCivis, _configuratio.IdAnimationisIntrare, adInitium, null, false
             );
         }
@@ -38,7 +38,7 @@ namespace Yulinti.Dux.Exercitus {
             Action adFinem
         ) {
             if (_configuratio.LudereExire) {
-                contextusOstiorum.Carrus.ExecutareAnimationis(
+                contextusOstiorum.Carrus.PostulareAnimationis(
                     idCivis, _configuratio.IdAnimationisExire, null, adFinem, false
                 );
             }
@@ -49,8 +49,8 @@ namespace Yulinti.Dux.Exercitus {
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.ExecutareMotus(idCivis, 0f, 0f, 0f, 0f);
-            contextusOstiorum.Carrus.ExecutareVeletudinisValoris(
+            contextusOstiorum.Carrus.PostulareMotus(idCivis, 0f, 0f, 0f, 0f);
+            contextusOstiorum.Carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtVitae: -_configuratio.ConsumptioVitae * contextusOstiorum.Temporis.Intervallum,
                 dtVisus: _configuratio.Visus

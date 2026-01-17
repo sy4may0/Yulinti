@@ -104,7 +104,7 @@ namespace Yulinti.Dux.Exercitus {
             _lacusOrdinatioPuellae.ColligereOmnia();
         }
 
-        public void ExecutareAnimationis(
+        public void PostulareAnimationis(
             IDPuellaeAnimationisContinuata idAnimationis,
             Action adInitium = null,
             Action adFinem = null,
@@ -116,7 +116,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void ExecutareCrinis(
+        public void PostulareCrinis(
             IDPuellaeCrinis idCrinis
         ){
             if(_lacusOrdinatioPuellae.EmittareCrinis(out var ordinatio)) {
@@ -125,7 +125,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void ExecutareFiguraeGenus(
+        public void PostulareFiguraeGenus(
             IDPuellaeFiguraeGenus idFiguraeGenus,
             LatusPuellaeGenus latus,
             float pondus
@@ -136,7 +136,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void ExecutareFiguraePelvis(
+        public void PostulareFiguraePelvis(
             IDPuellaeFiguraePelvis idFiguraePelvis,
             float pondus
         ){
@@ -146,7 +146,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void ExecutareMotus(
+        public void PostulareMotus(
             float velocitasHorizontalis,
             float tempusLevigatumHorizontalis,
             float rotatioYDeg,
@@ -158,7 +158,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void ExecutareNavmesh(
+        public void PostulareNavmesh(
             Vector3 positio,
             float velocitasDesiderata,
             float accelerationem,
@@ -171,7 +171,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void ExecutareVeletudinis(
+        public void PostulareVeletudinis(
             float dtVigoris,
             float dtPatientiae,
             float dtAetheris,

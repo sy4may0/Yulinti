@@ -75,14 +75,14 @@ namespace Yulinti.Dux.Exercitus {
             ErrorAut<IPunctumViaeLegibile> punctumViae = _contextusOstiorum.PunctumViae.LegoNatoriumTemere();
 
             if (punctumViae.EstError()) {
-                _contextusOstiorum.Carrus.ExecutareVeletudinisMortis(
+                _contextusOstiorum.Carrus.PostulareMortis(
                     _idCivis,
                     SpeciesOrdinationisCivisMortis.Spirituare
                 );
                 return;
             }
 
-            _contextusOstiorum.Carrus.ExecutareNavmesh(
+            _contextusOstiorum.Carrus.PostulareNavmesh(
                 _idCivis,
                 punctumViae.Evolvo().Positio,
                 true,
@@ -96,7 +96,7 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaCivisLegibile resFluida
         ) {
             if (_statusCorporisActualis == null) {
-                _contextusOstiorum.Carrus.ExecutareVeletudinisMortis(
+                _contextusOstiorum.Carrus.PostulareMortis(
                     _idCivis,
                     SpeciesOrdinationisCivisMortis.Spirituare
                 );

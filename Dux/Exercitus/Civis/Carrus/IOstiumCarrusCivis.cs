@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Yulinti.Dux.Exercitus {
     internal interface IOstiumCarrusCivis {
-        void ExecutareAnimationis(
+        void PostulareAnimationis(
             int idCivis,
             IDCivisAnimationisContinuata idAnimationis,
             Action adInitium,
@@ -12,7 +12,7 @@ namespace Yulinti.Dux.Exercitus {
             bool estCogere
         );
 
-        void ExecutareMotus(
+        void PostulareMotus(
             int idCivis,
             float velocitasHorizontalis,
             float tempusLevigatumHorizontalis,
@@ -20,7 +20,7 @@ namespace Yulinti.Dux.Exercitus {
             float tempusLevigatumRotationisYDeg
         );
 
-        void ExecutareNavmesh(
+        void PostulareNavmesh(
             int idCivis,
             Vector3 positio,
             bool estTransporto,
@@ -30,7 +30,7 @@ namespace Yulinti.Dux.Exercitus {
             float distantiaDeaccelerationis
         );
 
-        void ExecutareVeletudinisValoris(
+        void PostulareVeletudinisValoris(
             int idCivis,
             float dtVitae = 0f,
             float dtVisus = 0f,
@@ -39,7 +39,7 @@ namespace Yulinti.Dux.Exercitus {
             float dtSuspecta = 0f
         );
 
-        void ExecutareVeletudinisMortis(
+        void PostulareMortis(
             int idCivis,
             SpeciesOrdinationisCivisMortis speciesMortis
         );

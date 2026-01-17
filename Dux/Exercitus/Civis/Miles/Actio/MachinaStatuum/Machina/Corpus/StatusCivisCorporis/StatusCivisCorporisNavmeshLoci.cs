@@ -27,7 +27,7 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaCivisLegibile resFluida,
             Action adInitium
         ) {
-            contextusOstiorum.Carrus.ExecutareAnimationis(
+            contextusOstiorum.Carrus.PostulareAnimationis(
                 idCivis, _configuratio.IdAnimationisIntrare, adInitium, null, false
             );
 
@@ -35,12 +35,12 @@ namespace Yulinti.Dux.Exercitus {
                 _configuratio.TypusPunctumViae
             );
             if (punctumViae.EstError()) {
-                contextusOstiorum.Carrus.ExecutareVeletudinisMortis(
+                contextusOstiorum.Carrus.PostulareMortis(
                     idCivis, SpeciesOrdinationisCivisMortis.Spirituare
                 );
             }
 
-            contextusOstiorum.Carrus.ExecutareNavmesh(
+            contextusOstiorum.Carrus.PostulareNavmesh(
                 idCivis,
                 punctumViae.Evolvo().Positio,
                 false,
@@ -57,7 +57,7 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaCivisLegibile resFluida,
             Action adFinem
         ) {
-            contextusOstiorum.Carrus.ExecutareAnimationis(
+            contextusOstiorum.Carrus.PostulareAnimationis(
                 idCivis, _configuratio.IdAnimationisExire, null, adFinem, false
             );
         }
@@ -69,12 +69,12 @@ namespace Yulinti.Dux.Exercitus {
         ) {
             // 直近のTransporto失敗時はNPCを削除する。
             if (contextusOstiorum.Loci.EstErrans(idCivis)) {
-                contextusOstiorum.Carrus.ExecutareVeletudinisMortis(
+                contextusOstiorum.Carrus.PostulareMortis(
                     idCivis, SpeciesOrdinationisCivisMortis.Spirituare
                 );
                 return;
             }
-            contextusOstiorum.Carrus.ExecutareVeletudinisValoris(
+            contextusOstiorum.Carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtVitae: -_configuratio.ConsumptioVitae * contextusOstiorum.Temporis.Intervallum,
                 dtVisus: _configuratio.Visus

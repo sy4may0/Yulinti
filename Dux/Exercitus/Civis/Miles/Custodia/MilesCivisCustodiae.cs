@@ -122,7 +122,7 @@ namespace Yulinti.Dux.Exercitus {
             if (numerusIctuum <= Numerus.Epsilon) {
                 if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) return;
 
-                _contextus.Carrus.ExecutareVeletudinisValoris(
+                _contextus.Carrus.PostulareVeletudinisValoris(
                     idCivis,
                     dtVisa: consumptio
                 );
@@ -134,7 +134,7 @@ namespace Yulinti.Dux.Exercitus {
             if (distantia > _contextus.Configuratio.Custodiae.DistantiaCustodiae) {
                 if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) return;
 
-                _contextus.Carrus.ExecutareVeletudinisValoris(
+                _contextus.Carrus.PostulareVeletudinisValoris(
                     idCivis,
                     dtVisa: consumptio
                 );
@@ -158,7 +158,7 @@ namespace Yulinti.Dux.Exercitus {
             _tempusStudiumAmittere[idCivis] = 0f;
 
 
-            _contextus.Carrus.ExecutareVeletudinisValoris(
+            _contextus.Carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtVisa: dtVisa
             );

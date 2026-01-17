@@ -4,36 +4,36 @@ using System.Numerics;
 
 namespace Yulinti.Dux.Exercitus {
     internal interface IOstiumCarrusPuellae {
-        void ExecutareAnimationis(
+        void PostulareAnimationis(
             IDPuellaeAnimationisContinuata idAnimationis,
             Action adInitium,
             Action adFinem,
             bool estCogere
         );
 
-        void ExecutareCrinis(
+        void PostulareCrinis(
             IDPuellaeCrinis idCrinis
         );
 
-        void ExecutareFiguraeGenus(
+        void PostulareFiguraeGenus(
             IDPuellaeFiguraeGenus idFiguraeGenus,
             LatusPuellaeGenus latus,
             float pondus
         );
 
-        void ExecutareFiguraePelvis(
+        void PostulareFiguraePelvis(
             IDPuellaeFiguraePelvis idFiguraePelvis,
             float pondus
         );
 
-        void ExecutareMotus(
+        void PostulareMotus(
             float velocitasHorizontalis,
             float tempusLevigatumHorizontalis,
             float rotatioYDeg,
             float tempusLevigatumRotationisYDeg
         );
 
-        void ExecutareNavmesh(
+        void PostulareNavmesh(
             Vector3 positio,
             float velocitasDesiderata,
             float accelerationem,
@@ -41,7 +41,7 @@ namespace Yulinti.Dux.Exercitus {
             float distantiaDeaccelerationis
         );
 
-        void ExecutareVeletudinis(
+        void PostulareVeletudinis(
             float dtVigoris,
             float dtPatientiae,
             float dtAetheris,

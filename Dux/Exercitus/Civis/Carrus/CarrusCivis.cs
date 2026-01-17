@@ -99,7 +99,7 @@ namespace Yulinti.Dux.Exercitus {
             _lacusOrdinatioCivis.ColligereOmnia(idCivis);
         }
 
-        public void ExecutareAnimationis(
+        public void PostulareAnimationis(
             int idCivis,
             IDCivisAnimationisContinuata idAnimationis,
             Action adInitium = null,
@@ -112,7 +112,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void ExecutareMotus(
+        public void PostulareMotus(
             int idCivis,
             float velocitasHorizontalis,
             float tempusLevigatumHorizontalis,
@@ -125,7 +125,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void ExecutareNavmesh(
+        public void PostulareNavmesh(
             int idCivis,
             Vector3 positio,
             bool estTransporto,
@@ -140,7 +140,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void ExecutareVeletudinisValoris(
+        public void PostulareVeletudinisValoris(
             int idCivis,
             float dtVitae = 0f,
             float dtVisus = 0f,
@@ -154,7 +154,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        public void ExecutareVeletudinisMortis(
+        public void PostulareMortis(
             int idCivis,
             SpeciesOrdinationisCivisMortis speciesMortis
         ) {

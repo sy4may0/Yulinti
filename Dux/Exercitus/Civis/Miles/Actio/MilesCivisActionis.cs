@@ -22,7 +22,7 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _contextusOstiorum.Carrus.ExecutareAnimationis(
+            _contextusOstiorum.Carrus.PostulareAnimationis(
                 idCivis,
                 _contextusOstiorum.Configuratio.Statuum.IdAnimationisPraedefinitus,
                 null,

@@ -14,11 +14,11 @@ namespace Yulinti.Dux.Exercitus {
 
         public void Initare() {
             // Default Hair
-            _contextusOstiorum.Carrus.ExecutareCrinis(IDPuellaeCrinis.Resiliens);
+            _contextusOstiorum.Carrus.PostulareCrinis(IDPuellaeCrinis.Resiliens);
         }
 
         public void MutareComam(IDPuellaeCrinis idCrinis) {
-            _contextusOstiorum.Carrus.ExecutareCrinis(idCrinis);
+            _contextusOstiorum.Carrus.PostulareCrinis(idCrinis);
         }
     }
 }
