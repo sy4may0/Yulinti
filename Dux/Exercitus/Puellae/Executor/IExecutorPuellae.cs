@@ -1,5 +1,6 @@
 namespace Yulinti.Dux.Exercitus {
     internal interface IExecutorPuellae {
+        void Initare();
         // Pulsusの最初に実行
         void Primum();
         // PulsusまたはPulsusTardusの最後に実行

@@ -108,7 +108,7 @@ namespace Yulinti.Dux.Exercitus {
             return (positioCivis - positioPuellae).Length();
         }
 
-        public OrdinatioCivis Ordinare(
+        public void Ordinare(
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
@@ -120,50 +120,47 @@ namespace Yulinti.Dux.Exercitus {
 
             // 視認数0で減少する。
             if (numerusIctuum <= Numerus.Epsilon) {
-                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) {
-                    return OrdinatioCivis.Nihil(idCivis);
-                } else {
-                    return new OrdinatioCivis(
-                        idCivis,
-                        veletudinisCustodiae: OrdinatioCivisVeletudinisCustodiae.FromVisa(idCivis, new OrdinatioCivisCustodiaeVisa(
-                            consumptio
-                        ))
-                    );
-                }
+                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) return;
+
+                _contextus.Carrus.ExecutareVeletudinisValoris(
+                    idCivis,
+                    dtVisa: consumptio
+                );
+                return;
             }
 
             float distantia = ComputareDistantia(idCivis);
             // distantiaがDistantiaCustodiaeより大きい場合はVisaeを減少する。
             if (distantia > _contextus.Configuratio.Custodiae.DistantiaCustodiae) {
-                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) {
-                    return OrdinatioCivis.Nihil(idCivis);
-                } else {
-                    return new OrdinatioCivis(
-                        idCivis,
-                        veletudinisCustodiae: OrdinatioCivisVeletudinisCustodiae.FromVisa(idCivis, new OrdinatioCivisCustodiaeVisa(
-                            consumptio
-                        ))
-                    );
-                }
+                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) return;
+
+                _contextus.Carrus.ExecutareVeletudinisValoris(
+                    idCivis,
+                    dtVisa: consumptio
+                );
+                return;
             }
+
 
             float visus = resFluida.Veletudinis.Visus(idCivis);
             float distantiaCustodiaeMaxima = _contextus.Configuratio.Custodiae.DistantiaCustodiaeMaxima;
             float distantiaCustodiae = _contextus.Configuratio.Custodiae.DistantiaCustodiae;
-            float ratioDistantia = ComputareVisus(visus, distantia, distantiaCustodiae, distantiaCustodiaeMaxima);
+            float ratio = ComputareVisus(visus, distantia, distantiaCustodiae, distantiaCustodiaeMaxima);
 
             // /100は固定補正値。
             // 視認数 * ratioVirsus / 毎秒 * 視認度上昇倍率
-            float dtVisa = (numerusIctuum/100f) * ratioDistantia * _contextus.Temporis.Intervallum;
+            float dtVisa = (numerusIctuum/100f) * ratio * _contextus.Temporis.Intervallum;
             // 固定設定レシオを乗算する。
             dtVisa *= _contextus.Configuratio.Custodiae.RatioVisus;
             // PuellaeステートのClaritasを適用する。
             dtVisa *= _contextus.ResFPuellae.Veletudinis.Claritas;
             // 興味喪失時間をリセット
             _tempusStudiumAmittere[idCivis] = 0f;
-            return new OrdinatioCivis(
+
+
+            _contextus.Carrus.ExecutareVeletudinisValoris(
                 idCivis,
-                veletudinisCustodiae: OrdinatioCivisVeletudinisCustodiae.FromVisa(idCivis, new OrdinatioCivisCustodiaeVisa(dtVisa))
+                dtVisa: dtVisa
             );
         }
 
@@ -184,49 +181,6 @@ namespace Yulinti.Dux.Exercitus {
                 return _contextus.Configuratio.Custodiae.ConsumptioVisaeSec * ratio * _contextus.Temporis.Intervallum;
             }
         }
-
-        // Detectio判定を行う。
-        public OrdinatioCivis OrdinareDetectio(
-            int idCivis,
-            IResFluidaCivisLegibile resFluida
-        ) {
-            bool vigilantiaProximus = resFluida.Veletudinis.EstVigilantia(idCivis);
-            bool detectioProximus = resFluida.Veletudinis.EstDetectio(idCivis);
-            // 通常時変動
-            OrdinatioCivis ordinatio = OrdinatioCivis.Nihil(idCivis);
-            if (!resFluida.Veletudinis.EstVigilantia(idCivis) && !resFluida.Veletudinis.EstDetectio(idCivis)) {
-                if (resFluida.Veletudinis.Visa(idCivis) > _contextus.Configuratio.Custodiae.LimenVigilantia + 0.03f) {
-                    // 通常 -> 警戒
-                    vigilantiaProximus = true;
-                    detectioProximus = false;
-                }
-            // 警戒時変動
-            } else if (resFluida.Veletudinis.EstVigilantia(idCivis)) {
-                if (resFluida.Veletudinis.Visa(idCivis) > _contextus.Configuratio.Custodiae.LimenDetectio + 0.03f) {
-                    // 警戒 -> 検知
-                    vigilantiaProximus = false;
-                    detectioProximus = true;
-                } else if (resFluida.Veletudinis.Visa(idCivis) < _contextus.Configuratio.Custodiae.LimenVigilantia - 0.03f) {
-                    // 警戒 -> 通常
-                    vigilantiaProximus = false;
-                    detectioProximus = false;
-                }
-            } else if (resFluida.Veletudinis.EstDetectio(idCivis)) {
-                if (resFluida.Veletudinis.Visa(idCivis) < _contextus.Configuratio.Custodiae.LimenDetectio - 0.03f) {
-                    // 検知 -> 警戒
-                    vigilantiaProximus = true;
-                    detectioProximus = false;
-                }
-            }
-            return new OrdinatioCivis(
-                idCivis,
-                veletudinisCustodiae: OrdinatioCivisVeletudinisCustodiae.FromDetectio(idCivis, new OrdinatioCivisCustodiaeDetectio(
-                    vigilantiaProximus,
-                    detectioProximus
-                ))
-            );
-        }
-
 
         public void ResolvereIctuum() {
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {

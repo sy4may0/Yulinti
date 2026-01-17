@@ -6,6 +6,6 @@ namespace Yulinti.Dux.Exercitus {
         // CivisのNavmesh要求は重複する可能性がある。
         public const int LongitudoOrdinatioNavmesh = 12;
         public const int LongitudoOrdinatioVeletudinisValoris = 32;
-        public const int LongitudoOrdinatioVeletudinisMortis = 6;
+        public const int LongitudoOrdinatioMortis = 6;
     }
 }

@@ -4,7 +4,7 @@ namespace Yulinti.Dux.Exercitus {
         Spirituare,
         Incarnare,
     }
-    internal interface IOrdinatioCivisVeletudinisMortis : IOrdinatioCivis {
+    internal interface IOrdinatioCivisMortis : IOrdinatioCivis {
         SpeciesOrdinationisCivisMortis SpeciesMortis { get; }
     }
 }

@@ -12,6 +12,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly IOstiumCivisLociLegibile _ostiumCivisLociLegibile;
         private readonly IOstiumCivisLociMutabile _ostiumCivisLociMutabile;
         private readonly IOstiumTemporisLegibile _ostiumTemporisLegibile;
+        private readonly IOstiumPunctumViaeLegibile _ostiumPunctumViaeLegibile;
         private readonly ResFluidaCivisMotus _resFluidaMotus;
 
         private DuxQueue<IOrdinatioCivisMotus>[] _queueMotus;
@@ -23,11 +24,13 @@ namespace Yulinti.Dux.Exercitus {
             IOstiumCivisLociLegibile ostiumCivisLociLegibile,
             IOstiumCivisLociMutabile ostiumCivisLociMutabile,
             IOstiumTemporisLegibile ostiumTemporisLegibile,
+            IOstiumPunctumViaeLegibile ostiumPunctumViaeLegibile,
             ResFluidaCivisMotus resFluidaMotus
         ) {
             _ostiumCivisLociLegibile = ostiumCivisLociLegibile;
             _ostiumCivisLociMutabile = ostiumCivisLociMutabile;
             _ostiumTemporisLegibile = ostiumTemporisLegibile;
+            _ostiumPunctumViaeLegibile = ostiumPunctumViaeLegibile;
             _resFluidaMotus = resFluidaMotus;
 
             _queueMotus = new DuxQueue<IOrdinatioCivisMotus>[ostiumCivisLegibile.Longitudo];
@@ -39,6 +42,25 @@ namespace Yulinti.Dux.Exercitus {
                 _queueNavmesh[i] = new DuxQueue<IOrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
                 _speciesActualis[i] = SpeciesCivisLoci.Nihil;
             }
+        }
+
+        // Incarnare時にこれを実行する。
+        // - resFluida初期化
+        // - 初期位置にTransporto
+        // - Species初期化
+        // - キュー初期化
+        public void Initare(int idCivis) {
+            _resFluidaMotus.Purgare(idCivis);
+            ErrorAut<IPunctumViaeLegibile> punctumViae = _ostiumPunctumViaeLegibile.LegoNatoriumTemere();
+            if (punctumViae.EstError()) {
+                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISLOCI_INITARE_TRANSPORTO_FAILED);
+                return;
+            }
+            _ostiumCivisLociMutabile.InitareMigrare(idCivis);
+            _ostiumCivisLociMutabile.Transporto(idCivis, punctumViae.Evolvo().Positio, Quaternion.Identity);
+            _speciesActualis[idCivis] = SpeciesCivisLoci.Nihil;
+            _queueMotus[idCivis].Purgere();
+            _queueNavmesh[idCivis].Purgere();
         }
 
         public void Primum(int idCivis) {
@@ -100,6 +122,7 @@ namespace Yulinti.Dux.Exercitus {
                 _ostiumCivisLociMutabile.ActivareNavMesh(idCivis);
                 _speciesActualis[idCivis] = SpeciesCivisLoci.Navmesh;
             }
+            UnityEngine.Debug.Log("IncipereMigrare: " + navmesh.Positio);
             _ostiumCivisLociMutabile.IncipereMigrare(idCivis, navmesh.Positio);
             _ostiumCivisLociMutabile.PonoVelocitatem(idCivis, navmesh.VelocitasDesiderata);
             _ostiumCivisLociMutabile.PonoAccelerationem(idCivis, navmesh.Acceleratio);
@@ -146,10 +169,21 @@ namespace Yulinti.Dux.Exercitus {
             _queueNavmesh[idCivis].Purgere();
         }
 
+        // Spirituare時にこれを実行する。
+        // - 初期位置にTransporto(エラーの場合は0,0,0にTransporto)
+        // - resFluida初期化
+        // - Species初期化
+        // - キュー初期化
         public void Purgare(int idCivis) {
             _ostiumCivisLociMutabile.InitareMigrare(idCivis);
-            _ostiumCivisLociMutabile.Transporto(idCivis, new Vector3(0f, 0f, 0f), Quaternion.Identity);
-            _resFluidaMotus.Renovare(idCivis, 0f, 0f, 0f, true);
+            ErrorAut<IPunctumViaeLegibile> punctumViae = _ostiumPunctumViaeLegibile.LegoCrematoriumTemere();
+            if (punctumViae.EstError()) {
+                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISLOCI_PURGARE_TRANSPORTO_FAILED);
+                _ostiumCivisLociMutabile.Transporto(idCivis, new Vector3(0f, 0f, 0f), Quaternion.Identity);
+            } else {
+                _ostiumCivisLociMutabile.Transporto(idCivis, punctumViae.Evolvo().Positio, Quaternion.Identity);
+            }
+            _resFluidaMotus.Purgare(idCivis);
             _speciesActualis[idCivis] = SpeciesCivisLoci.Nihil;
             _queueMotus[idCivis].Purgere();
             _queueNavmesh[idCivis].Purgere();

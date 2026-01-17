@@ -2,51 +2,65 @@ using Yulinti.Dux.ContractusDucis;
 namespace Yulinti.Dux.Exercitus {
     internal sealed class ResFluidaPuellaeVeletudinis : IResFluidaPuellaeVeletudinisLegibile {
         // health
-        private float vigor;
-        private bool estExhauritaVigoris;
+        private float _vigor;
+        private bool _estExhauritaVigoris;
 
         // stamina
-        private float patientia;
-        private bool estExhauritaPatientiae;
+        private float _patientia;
+        private bool _estExhauritaPatientiae;
 
         // visibility(0~1)
-        private float claritas;
+        private float _claritas;
         // electricity
-        private float aether;
+        private float _aether;
         // voltage
-        private float intentio;
+        private float _intentio;
 
 
         public ResFluidaPuellaeVeletudinis() {
-            this.vigor = 1f;
-            this.patientia = 1f;
-            this.claritas = 1f;
-            this.aether = 1f;
-            this.intentio = 1f;
+            this._vigor = 1f;
+            this._patientia = 1f;
+            this._claritas = 1f;
+            this._aether = 1f;
+            this._intentio = 1f;
         }
 
-        public float Vigor => vigor;
-        public bool EstExhauritaVigoris => estExhauritaVigoris;
-        public float Patientia => patientia;
-        public bool EstExhauritaPatientiae => estExhauritaPatientiae;
-        public float Claritas => claritas;
-        public float Aether => aether;
-        public float Intentio => intentio;
+        public float Vigor => _vigor;
+        public bool EstExhauritaVigoris => _estExhauritaVigoris;
+        public float Patientia => _patientia;
+        public bool EstExhauritaPatientiae => _estExhauritaPatientiae;
+        public float Claritas => _claritas;
+        public float Aether => _aether;
+        public float Intentio => _intentio;
 
         public void RenovareVigor(float valor) {
-            vigor = valor;
+            _vigor = valor;
         }
         public void RenovarePatientia(float valor) {
-            patientia = valor;
+            _patientia = valor;
         }
         public void RenovareClaritas(float valor) {
-            claritas = valor;
+            _claritas = valor;
         }
         public void RenovareAether(float valor) {
-            aether = valor;
+            _aether = valor;
         }
         public void RenovareIntentio(float valor) {
-            intentio = valor;
+            _intentio = valor;
+        }
+
+        public void Renovare(
+            float vigor,
+            float patientia,
+            float claritas,
+            float aether,
+            float intentio
+        ) {
+            _vigor = DuxMath.Clamp(vigor, 0f, 1f);
+            _patientia = DuxMath.Clamp(patientia, 0f, 1f);
+            _claritas = DuxMath.Clamp(claritas, 0f, 1f);
+            _aether = DuxMath.Clamp(aether, 0f, 1f);
+            _intentio = DuxMath.Clamp(intentio, 0f, 1f);
         }
 
         public void ResolvereExhauritaVigoris(
@@ -55,13 +69,13 @@ namespace Yulinti.Dux.Exercitus {
             float VigorMaxima
         ) {
             float limenEx = VigorMaxima * LimenExhauritaVigoris;
-            if (!estExhauritaVigoris && vigor <= limenEx) {
-                estExhauritaVigoris = true;
+            if (!_estExhauritaVigoris && _vigor <= limenEx) {
+                _estExhauritaVigoris = true;
             }
 
             float limenRe = VigorMaxima * LimenRefectaVigoris;
-            if (estExhauritaVigoris && vigor >= limenRe) {
-                estExhauritaVigoris = false;
+            if (_estExhauritaVigoris && _vigor >= limenRe) {
+                _estExhauritaVigoris = false;
             }
         }
 
@@ -71,14 +85,22 @@ namespace Yulinti.Dux.Exercitus {
             float PatientiaMaxima
         ) {
             float limenEx = PatientiaMaxima * LimenExhauritaPatientiae;
-            if (!estExhauritaPatientiae && patientia <= limenEx) {
-                estExhauritaPatientiae = true;
+            if (!_estExhauritaPatientiae && _patientia <= limenEx) {
+                _estExhauritaPatientiae = true;
             }
 
             float limenRe = PatientiaMaxima * LimenRefectaPatientiae;
-            if (estExhauritaPatientiae && patientia >= limenRe) {
-                estExhauritaPatientiae = false;
+            if (_estExhauritaPatientiae && _patientia >= limenRe) {
+                _estExhauritaPatientiae = false;
             }
+        }
+
+        public void Purgare() {
+            _vigor = 1f;
+            _patientia = 1f;
+            _claritas = 0f;
+            _aether = 0f;
+            _intentio = 0f;
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Numerics;
 
 namespace Yulinti.Dux.Exercitus {
     // Ordinatioを受け取り、Executorに渡す。
+    // 適用順の制御はここでやる。
     internal sealed class CarrusPuellae : IOstiumCarrusPuellae {
         private readonly ExecutorPuellaeAnimationis _exAnimationis;
         private readonly ExecutorPuellaeCrinis _exCrinis;
@@ -36,39 +37,60 @@ namespace Yulinti.Dux.Exercitus {
             _exVeletudinis.Primum();
         }
 
-        // Incipereの最後に実行 Start()で適用が必要なケースはここでやる。
-        public void ConfirmareIncipabilis() {
+        // Start()の一番最初に実行する。
+        public void Initare() {
+            _exAnimationis.Initare();
+            _exCrinis.Initare();
+            _exFigurae.Initare();
+            _exLoci.Initare();
+            _exVeletudinis.Initare();
+        }
+
+        private void ConfirmareAnimationis() {
             _exAnimationis.Confirmare();
             _lacusOrdinatioPuellae.ColligereAnimationis();
+        }
+        private void ConfirmareCrinis() {
             _exCrinis.Confirmare();
             _lacusOrdinatioPuellae.ColligereCrinis();
+        }
+        private void ConfirmareFigurae() {
+            _exFigurae.Confirmare();
+            _lacusOrdinatioPuellae.ColligereFiguraeGenus();
+            _lacusOrdinatioPuellae.ColligereFiguraePelvis();
+        }
+        private void ConfirmareLoci() {
+            _exLoci.Confirmare();
+            _lacusOrdinatioPuellae.ColligereMotus();
+            _lacusOrdinatioPuellae.ColligereNavmesh();
+        }
+        private void ConfirmareVeletudinis() {
+            _exVeletudinis.Confirmare();
+            _lacusOrdinatioPuellae.ColligereVeletudinis();
+        }
+
+        // Incipereの最後に実行 Start()で適用が必要なケースはここでやる。
+        public void ConfirmareIncipabilis() {
+            ConfirmareAnimationis();
+            ConfirmareCrinis();
         }
 
         // Pulsusの最後に実行
         public void Confirmare() {
             // Lociから適用して速度回りを反映する。
-            _exLoci.Confirmare();
-            _lacusOrdinatioPuellae.ColligereMotus();
-            _lacusOrdinatioPuellae.ColligereNavmesh();
-
+            ConfirmareLoci();
             // Animationisを適用
-            _exAnimationis.Confirmare();
-            _lacusOrdinatioPuellae.ColligereAnimationis();
+            ConfirmareAnimationis();
         }
 
         // PulsusTardusの最後に実行
         public void ConfirmareTardus() {
             // Crinisを適用
-            _exCrinis.Confirmare();
-            _lacusOrdinatioPuellae.ColligereCrinis();
+            ConfirmareCrinis();
             // Figuraeを適用
-            _exFigurae.Confirmare();
-            _lacusOrdinatioPuellae.ColligereFiguraeGenus();
-            _lacusOrdinatioPuellae.ColligereFiguraePelvis();
-
+            ConfirmareFigurae();
             // Veletudinisを適用
-            _exVeletudinis.Confirmare();
-            _lacusOrdinatioPuellae.ColligereVeletudinis();
+            ConfirmareVeletudinis();
 
             _lacusOrdinatioPuellae.ColligereOmnia();
         }

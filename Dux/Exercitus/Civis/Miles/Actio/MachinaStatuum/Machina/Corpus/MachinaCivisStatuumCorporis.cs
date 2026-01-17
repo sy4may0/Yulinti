@@ -63,8 +63,8 @@ namespace Yulinti.Dux.Exercitus {
             return statuum;
         }
 
-        // Dominare後に初期化しろ。
-        public (OrdinatioCivis Initare, OrdinatioCivis IntrareStatus) Initare(
+        // Incarnare後に必ず実行。
+        public void Initare(
             IResFluidaCivisLegibile resFluida
         ) {
             _statusCorporisActualis = _statuum[(int)IDCivisStatusCorporis.MigrareAditorium];
@@ -75,41 +75,37 @@ namespace Yulinti.Dux.Exercitus {
             ErrorAut<IPunctumViaeLegibile> punctumViae = _contextusOstiorum.PunctumViae.LegoNatoriumTemere();
 
             if (punctumViae.EstError()) {
-                OrdinatioCivisVeletudinisMortis mortis = new OrdinatioCivisVeletudinisMortis(
-                    _idCivis, estSpirituare: true
+                _contextusOstiorum.Carrus.ExecutareVeletudinisMortis(
+                    _idCivis,
+                    SpeciesOrdinationisCivisMortis.Spirituare
                 );
-                return (new OrdinatioCivis(
-                    _idCivis, veletudinisMortis: mortis
-                ), OrdinatioCivis.Nihil(_idCivis));
+                return;
             }
-            OrdinatioCivisInitareNavmesh initareNavmesh = new OrdinatioCivisInitareNavmesh(
-                punctumViae.Evolvo().Positio
-            );
-            OrdinatioCivis Initare = new OrdinatioCivis(
-                _idCivis, actionis: OrdinatioCivisActionis.FromInitareNavmesh(_idCivis, initareNavmesh)
-            );
 
-            // 初期ステートのIntrareを実行
-            OrdinatioCivis IntrareStatus = _statusCorporisActualis.Intrare(_idCivis, _contextusOstiorum, resFluida, null);
-
-            return (Initare, IntrareStatus);
+            _contextusOstiorum.Carrus.ExecutareNavmesh(
+                _idCivis,
+                punctumViae.Evolvo().Positio,
+                true,
+                0f, 0f, 0, 0f
+            );
+            // 初期ステートのIntrareを実行。
+            _statusCorporisActualis.Intrare(_idCivis, _contextusOstiorum, resFluida, null);
         }
 
-        public OrdinatioCivis Ordinare(
+        public void Ordinare(
             IResFluidaCivisLegibile resFluida
         ) {
-            // Actualisがnullの場合はNPCを削除する。
             if (_statusCorporisActualis == null) {
-                return new OrdinatioCivis(
-                    _idCivis, veletudinisMortis: new OrdinatioCivisVeletudinisMortis(
-                        _idCivis, estSpirituare: true
-                    )
+                _contextusOstiorum.Carrus.ExecutareVeletudinisMortis(
+                    _idCivis,
+                    SpeciesOrdinationisCivisMortis.Spirituare
                 );
+                return;
             }
-            return _statusCorporisActualis.Ordinare(_idCivis, _contextusOstiorum, resFluida);
+            _statusCorporisActualis.Ordinare(_idCivis, _contextusOstiorum, resFluida);
         }
 
-        public (OrdinatioCivis Exire, OrdinatioCivis Intrare) MutareStatus(
+        public void MutareStatus(
             IResFluidaCivisLegibile resFluida
         ) {
             IDCivisStatusCorporis idStatusProximus = _resolutorRamorumCorporis.Resolvere(
@@ -117,20 +113,12 @@ namespace Yulinti.Dux.Exercitus {
                 _idCivis,
                 resFluida
             );
-            if (idStatusProximus == IDCivisStatusCorporis.None) { 
-                return (OrdinatioCivis.Nihil(_idCivis), OrdinatioCivis.Nihil(_idCivis));
-            }
+            if (idStatusProximus == IDCivisStatusCorporis.None) return;
 
             _idStatusProximus = idStatusProximus;
-            if (_idCivis == 0) {
-                UnityEngine.Debug.Log($"MutareStatus: {_idStatusActualis} -> {_idStatusProximus}");
-            }
-            OrdinatioCivis exire = 
-                _statusCorporisActualis.Exire(_idCivis, _contextusOstiorum, resFluida, null);
-            OrdinatioCivis intrare = 
-                _statuum[(int)_idStatusProximus].Intrare(_idCivis, _contextusOstiorum, resFluida, _adMutareStatus);
 
-            return (exire, intrare);
+            _statusCorporisActualis.Exire(_idCivis, _contextusOstiorum, resFluida, null);
+            _statuum[(int)_idStatusProximus].Intrare(_idCivis, _contextusOstiorum, resFluida, _adMutareStatus);
         }
 
         private void AdMutareStatus() {

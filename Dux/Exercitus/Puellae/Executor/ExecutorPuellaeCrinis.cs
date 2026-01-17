@@ -16,6 +16,11 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
+        public void Initare() {
+            _ostiumPuellaeCrinisAdiunctionisMutabile.Deleto();
+            _queueCrinis.Purgere();
+        }
+
         public void Primum() {
             _queueCrinis.Purgere();
         }

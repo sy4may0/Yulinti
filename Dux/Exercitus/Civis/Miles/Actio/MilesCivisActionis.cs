@@ -4,13 +4,9 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class MilesCivisActionis {
         private readonly ContextusCivisOstiorumLegibile _contextusOstiorum;
         private readonly MachinaCivisStatuumCorporis[] _machinaCorporis;
-        private readonly MotorCivisActionis _motorActionis;
-        private readonly MotorCivisAnimationis _motorAnimationis;
 
         public MilesCivisActionis(
-            ContextusCivisOstiorumLegibile contextusOstiorum,
-            IOstiumCivisAnimationesMutabile osAnimationes,
-            IOstiumCivisLociMutabile osLociMutabile
+            ContextusCivisOstiorumLegibile contextusOstiorum
         ) {
             _contextusOstiorum = contextusOstiorum;
             _machinaCorporis = new MachinaCivisStatuumCorporis[contextusOstiorum.Civis.Longitudo];
@@ -20,76 +16,34 @@ namespace Yulinti.Dux.Exercitus {
                     contextusOstiorum
                 );
             }
-            _motorActionis = new MotorCivisActionis(
-                contextusOstiorum,
-                osLociMutabile
+        }
+
+        public void Initare(
+            int idCivis,
+            IResFluidaCivisLegibile resFluida
+        ) {
+            _contextusOstiorum.Carrus.ExecutareAnimationis(
+                idCivis,
+                _contextusOstiorum.Configuratio.Statuum.IdAnimationisPraedefinitus,
+                null,
+                null,
+                true
             );
-            _motorAnimationis = new MotorCivisAnimationis(
-                osAnimationes
-            );
+            _machinaCorporis[idCivis].Initare(resFluida);
         }
 
-        public (OrdinatioCivis Initare, OrdinatioCivis IntrareStatus) InitareServatum(
+        public void Ordinare(
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _motorAnimationis.InitiarePreadefinitus(
-                idCivis, _contextusOstiorum.Configuratio.Statuum.IdAnimationisPraedefinitus
-            );
-            return _machinaCorporis[idCivis].Initare(resFluida);
+            _machinaCorporis[idCivis].Ordinare(resFluida);
         }
 
-        public void Purgere(int idCivis) {
-            _motorAnimationis.Purgere(idCivis);
-        }
-
-        public OrdinatioCivis Ordinare(
+        public void MutareStatus(
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            return _machinaCorporis[idCivis].Ordinare(resFluida);
-        }
-
-        public (OrdinatioCivis Exire, OrdinatioCivis Intrare) MutareStatus(
-            int idCivis,
-            IResFluidaCivisLegibile resFluida
-        ) {
-            return _machinaCorporis[idCivis].MutareStatus(resFluida);
-        }
-
-        public void ApplicareActionis(
-            in OrdinatioCivisActionis ordinatio
-        ) {
-            _motorActionis.ApplicareActionis(ordinatio);
-        }
-
-        public void ApplicareAnimationis(
-            in OrdinatioCivisAnimationis animationis
-        ) {
-            _motorAnimationis.ApplicareAnimationis(animationis);
-        }
-
-        public void RenovareResFluidaMotus(
-            int idCivis,
-            IResFluidaCivisLegibile resFluida,
-            ResFluidaCivisMotus resFluidaMotus
-        ) {
-            resFluidaMotus.RenovareVelocitasActualisHorizontalis(idCivis, _motorActionis.VelocitasHorizontalisActualis(idCivis));
-            // 垂直移動は未実装。
-            resFluidaMotus.RenovareVelocitasActualisVerticalis(idCivis, 9.81f);
-            resFluidaMotus.RenovareRotatioYActualis(idCivis, _motorActionis.RotatioYActualis(idCivis));
-            resFluidaMotus.RenovareEstInTerra(idCivis, true);
-        }
-
-        public void InjicereVelocitatis(
-            int idCivis,
-            IResFluidaCivisLegibile resFluida
-        ) {
-            _motorAnimationis.InjicereVelocitatem(idCivis, resFluida.Motus.VelocitasActualisHorizontalis(idCivis));
-        }
-
-        public OrdinatioCivis VerificareNavmesh(int idCivis) {
-            return _motorActionis.VerificareNavmesh(idCivis);
+            _machinaCorporis[idCivis].MutareStatus(resFluida);
         }
     }
 }

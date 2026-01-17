@@ -8,19 +8,19 @@ namespace Yulinti.Dux.Exercitus {
         IDCivisAnimationisContinuata IdAnimationisIntrare { get; }
         IDCivisAnimationisContinuata IdAnimationisExire { get; }
 
-        OrdinatioCivis Intrare(
+        void Intrare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adInitium
         );
-        OrdinatioCivis Exire(
+        void Exire(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adFinem
         );
-        OrdinatioCivis Ordinare(
+        void Ordinare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida

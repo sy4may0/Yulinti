@@ -79,6 +79,17 @@ namespace Yulinti.Dux.Exercitus {
             _phantasma = new PhantasmaPuellaeVeletudinis();
         }
 
+        public void Initare() {
+            _phantasma.Pono(
+                vigor: 0f,
+                patientia: 0f,
+                aether: 0f,
+                claritas: 0f,
+                intentio: 0f
+            );
+            _resFluidaVeletudinis.Purgare();
+        }
+
         public void Primum() {
             _phantasma.Pono(
                 vigor: _resFluidaVeletudinis.Vigor,
@@ -102,11 +113,13 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void Confirmare() {
-            _resFluidaVeletudinis.RenovareVigor(_phantasma.PhantasmaVigoris);
-            _resFluidaVeletudinis.RenovarePatientia(_phantasma.PhantasmaPatientiae);
-            _resFluidaVeletudinis.RenovareAether(_phantasma.PhantasmaAether);
-            _resFluidaVeletudinis.RenovareClaritas(_phantasma.PhantasmaClaritas);
-            _resFluidaVeletudinis.RenovareIntentio(_phantasma.PhantasmaIntentio);
+            _resFluidaVeletudinis.Renovare(
+                vigor: _phantasma.PhantasmaVigoris,
+                patientia: _phantasma.PhantasmaPatientiae,
+                aether: _phantasma.PhantasmaAether,
+                claritas: _phantasma.PhantasmaClaritas,
+                intentio: _phantasma.PhantasmaIntentio
+            );
 
             _resFluidaVeletudinis.ResolvereExhauritaVigoris(
                 _configuratioVeletudinis.LimenExhauritaVigoris,
@@ -128,6 +141,7 @@ namespace Yulinti.Dux.Exercitus {
                 claritas: 0f,
                 intentio: 0f
             );
+            _resFluidaVeletudinis.Purgare();
         }
     }
 }

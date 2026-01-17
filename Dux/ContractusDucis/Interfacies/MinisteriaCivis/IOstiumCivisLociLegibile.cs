@@ -3,6 +3,7 @@ namespace Yulinti.Dux.ContractusDucis {
         int[] IDs { get; }
         int Longitudo { get; }
         bool EstActivum(int id);
+        bool EstErrans(int id);
         bool EstActivumMotus(int id);
         bool EstActivumNavMesh(int id);
         bool EstAdPerveni(int id);

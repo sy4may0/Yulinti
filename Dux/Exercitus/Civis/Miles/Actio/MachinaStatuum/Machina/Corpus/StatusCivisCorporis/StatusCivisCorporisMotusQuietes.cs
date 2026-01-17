@@ -20,65 +20,40 @@ namespace Yulinti.Dux.Exercitus {
         public IDCivisAnimationisContinuata IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
         public IDCivisAnimationisContinuata IdAnimationisExire => _configuratio.IdAnimationisExire;
 
-        public OrdinatioCivis Intrare(
+        public void Intrare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adInitium
         ) {
-            OrdinatioCivisAnimationis animationis = new OrdinatioCivisAnimationis(
-                idCivis, true, _configuratio.IdAnimationisIntrare, adInitium, null
-            );
-            return new OrdinatioCivis(
-                idCivis, animationis: animationis
+            contextusOstiorum.Carrus.ExecutareAnimationis(
+                idCivis, _configuratio.IdAnimationisIntrare, adInitium, null, false
             );
         }
 
-        public OrdinatioCivis Exire(
+        public void Exire(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adFinem
         ) {
-            OrdinatioCivisAnimationis animationis = new OrdinatioCivisAnimationis(
-                idCivis, false, IDCivisAnimationisContinuata.None, null, null
-            );
             if (_configuratio.LudereExire) {
-                animationis = new OrdinatioCivisAnimationis(
-                    idCivis, true, _configuratio.IdAnimationisExire, null, adFinem
+                contextusOstiorum.Carrus.ExecutareAnimationis(
+                    idCivis, _configuratio.IdAnimationisExire, null, adFinem, false
                 );
             }
-            return new OrdinatioCivis(
-                idCivis, animationis: animationis
-            );
        }
 
-        public OrdinatioCivis Ordinare(
+        public void Ordinare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            OrdinatioCivisMotusHorizontalis oh = new OrdinatioCivisMotusHorizontalis(
-                0f,
-                0f
-            );
-            OrdinatioCivisMotusVerticalis ov = new OrdinatioCivisMotusVerticalis(
-                0f,
-                0f
-            );
-            OrdinatioCivisMotusRotationisY or = new OrdinatioCivisMotusRotationisY(
-                resFluida.Motus.RotatioYActualis(idCivis),
-                0f
-            );
-            OrdinatioCivisActionis motus = OrdinatioCivisActionis.FromMotus(
+            contextusOstiorum.Carrus.ExecutareMotus(idCivis, 0f, 0f, 0f, 0f);
+            contextusOstiorum.Carrus.ExecutareVeletudinisValoris(
                 idCivis,
-                new OrdinatioCivisMotus(oh, ov, or)
-            );
-            OrdinatioCivisVeletudinisValoris veletudinis = new OrdinatioCivisVeletudinisValoris(
-                idCivis, -_configuratio.ConsumptioVitae * contextusOstiorum.Temporis.Intervallum
-            );
-            return new OrdinatioCivis(
-                idCivis, actionis: motus, veletudinisValoris: veletudinis
+                dtVitae: -_configuratio.ConsumptioVitae * contextusOstiorum.Temporis.Intervallum,
+                dtVisus: _configuratio.Visus
             );
         }
     }

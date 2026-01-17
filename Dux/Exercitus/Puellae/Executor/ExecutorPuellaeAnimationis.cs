@@ -19,6 +19,11 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
+        public void Initare() {
+            _ostiumPuellaeAnimationesMutabile.Purgere();
+            _queueAnimationis.Purgere();
+        }
+
         public void Primum() {
             _queueAnimationis.Purgere();
         }

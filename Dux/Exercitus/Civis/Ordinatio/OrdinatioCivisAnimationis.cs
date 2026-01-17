@@ -2,34 +2,46 @@ using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using System;
 
 namespace Yulinti.Dux.Exercitus {
-    internal readonly struct OrdinatioCivisAnimationis {
-        public readonly bool EstApplicandum { get; }
-        public readonly IDCivisAnimationisContinuata IdAnimationis { get; }
-        public readonly Action AdInitium { get; }
-        public readonly Action AdFinem { get; }
-        public readonly bool EstCogere { get; }
-        private readonly int _idCivis;
+    internal sealed class OrdinatioCivisAnimationis : OrdinatioCivis, IOrdinatioCivisAnimationis {
+        private IDCivisAnimationisContinuata _idAnimationis;
+        private Action _adInitium;
+        private Action _adFinem;
+        private bool _estCogere;
 
-        public OrdinatioCivisAnimationis(
-            int idCivis,
-            bool estApplicandum,
+        public OrdinatioCivisAnimationis(int idCivis)
+            : base(idCivis, true, SpeciesOrdinatioCivis.ActioAnimationis) {
+            _idAnimationis = default;
+            _adInitium = null;
+            _adFinem = null;
+            _estCogere = false;
+        }
+
+        public IDCivisAnimationisContinuata IdAnimationis => _idAnimationis;
+        public Action AdInitium => _adInitium;
+        public Action AdFinem => _adFinem;
+        public bool EstCogere => _estCogere;
+
+        public override void Purgere() {
+            _estApplicandum = false;
+
+            _idAnimationis = default;
+            _adInitium = null;
+            _adFinem = null;
+            _estCogere = false;
+        }
+
+        public void Pono(
             IDCivisAnimationisContinuata idAnimationis,
             Action adInitium = null,
             Action adFinem = null,
             bool estCogere = false
         ) {
-            _idCivis = idCivis;
-            EstApplicandum = estApplicandum;
-            IdAnimationis = idAnimationis;
-            AdInitium = adInitium;
-            AdFinem = adFinem;
-            EstCogere = estCogere;
-        }
+            _estApplicandum = true;
 
-        public int IdCivis {
-            get {
-                return _idCivis;
-            }
+            _idAnimationis = idAnimationis;
+            _adInitium = adInitium;
+            _adFinem = adFinem;
+            _estCogere = estCogere;
         }
     }
 }

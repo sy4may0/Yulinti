@@ -8,36 +8,31 @@ namespace Yulinti.Dux.Exercitus {
         public IDCivisAnimationisContinuata IdAnimationisIntrare => IDCivisAnimationisContinuata.NihilCorporis;
         public IDCivisAnimationisContinuata IdAnimationisExire => IDCivisAnimationisContinuata.NihilCorporis;
 
-        public OrdinatioCivis Intrare(
+        public void Intrare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adInitium
         ) {
             adInitium?.Invoke();
-            return OrdinatioCivis.Nihil(idCivis);
         }
 
-        public OrdinatioCivis Exire(
+        public void Exire(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adFinem
         ) {
             adFinem?.Invoke();
-            return OrdinatioCivis.Nihil(idCivis);
         }
 
-        public OrdinatioCivis Ordinare(
+        public void Ordinare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            OrdinatioCivisVeletudinisMortis mortis = new OrdinatioCivisVeletudinisMortis(
-                idCivis, estSpirituare: true
-            );
-            return new OrdinatioCivis(
-                idCivis, veletudinisMortis: mortis
+            contextusOstiorum.Carrus.ExecutareVeletudinisMortis(
+                idCivis, SpeciesOrdinationisCivisMortis.Spirituare
             );
         }
     }

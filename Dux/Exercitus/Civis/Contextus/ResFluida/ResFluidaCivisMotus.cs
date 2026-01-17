@@ -60,5 +60,13 @@ namespace Yulinti.Dux.Exercitus {
             _rotatioYActualis[idCivis] = rotatioYActualis;
             _estInTerra[idCivis] = estInTerra;
         }
+
+        public void Purgare(int idCivis) {
+            if (idCivis < 0 || idCivis >= _estInTerra.Length) return;
+            _velocitasActualisHorizontalis[idCivis] = 0f;
+            _velocitasActualisVerticalis[idCivis] = 0f;
+            _rotatioYActualis[idCivis] = 0f;
+            _estInTerra[idCivis] = true;
+        }
     }
 }

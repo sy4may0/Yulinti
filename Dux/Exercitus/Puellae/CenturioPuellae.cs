@@ -29,6 +29,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void Incipere() {
+            _carrusPuellae.Initare();
             _carrusPuellae.Primum();
             _milesPuellaeActionis.Initare(_resFluidaLegibile);
             _milesPuellaeCrinis.Initare();
@@ -36,6 +37,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void Pulsus() {
+            UnityEngine.Debug.Log("Pulsus: " + _resFluidaLegibile.Veletudinis.Claritas);
             // Carrus初期化実行
             _carrusPuellae.Primum();
 
@@ -45,6 +47,7 @@ namespace Yulinti.Dux.Exercitus {
 
             // Carrus適用(Ordinatio実行)
             _carrusPuellae.Confirmare();
+            UnityEngine.Debug.Log("Pulsus End: " + _resFluidaLegibile.Veletudinis.Claritas);
         }
 
         public void PulsusTardus() {
@@ -53,6 +56,7 @@ namespace Yulinti.Dux.Exercitus {
 
             // Carrus適用(Ordinatio実行)
             _carrusPuellae.ConfirmareTardus();
+            UnityEngine.Debug.Log("PulsusTardus: " + _resFluidaLegibile.Veletudinis.Claritas);
         }
 
     }

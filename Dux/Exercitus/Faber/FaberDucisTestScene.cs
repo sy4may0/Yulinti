@@ -32,6 +32,9 @@ namespace Yulinti.Dux.Exercitus {
             builder.Register<CarrusPuellae>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<CarrusCivis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             // ContextusOstiorum
             builder.Register<ContextusPuellaeOstiorumLegibile>(Lifetime.Singleton);
@@ -44,11 +47,15 @@ namespace Yulinti.Dux.Exercitus {
             builder.Register<ExecutorPuellaeLoci>(Lifetime.Singleton);
             builder.Register<ExecutorPuellaeVeletudinis>(Lifetime.Singleton);
 
+            builder.Register<ExecutorCivisAnimationis>(Lifetime.Singleton);
+            builder.Register<ExecutorCivisLoci>(Lifetime.Singleton);
+            builder.Register<ExecutorCivisMortis>(Lifetime.Singleton);
+            builder.Register<ExecutorCivisVeletudinisValoris>(Lifetime.Singleton);
+
             // Miles
             builder.Register<MilesPuellaeActionis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeCrinis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeFigurae>(Lifetime.Singleton);
-            builder.Register<MilesCivisVeletudinis>(Lifetime.Singleton);
             builder.Register<MilesCivisActionis>(Lifetime.Singleton);
             builder.Register<MilesCivisCustodiae>(Lifetime.Singleton);
 

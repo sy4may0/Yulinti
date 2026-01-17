@@ -15,24 +15,40 @@ namespace Yulinti.Dux.Exercitus {
         ) {
             _ostiumCivisLociLegibile = ostiumCivisLociLegibile;
             _ostiumCivisAnimationesMutabile = ostiumCivisAnimationesMutabile;
-            _queueAnimationis = new DuxQueue<IOrdinatioCivisAnimationis>[ostiumCivisLegibile.Longitudo];
+
+            _queueAnimationis = new DuxQueue<IOrdinatioCivisAnimationis>[
+                ostiumCivisLegibile.Longitudo
+            ];
             for (int i = 0; i < ostiumCivisLegibile.Longitudo; i++) {
-                 _queueAnimationis[i] = new DuxQueue<IOrdinatioCivisAnimationis>(ConstansCivis.LongitudoOrdinatioAnimationis);
+                _queueAnimationis[i] = new DuxQueue<IOrdinatioCivisAnimationis>(
+                    ConstansCivis.LongitudoOrdinatioAnimationis
+                );
             }
+        }
+
+        public void Initare(int idCivis) {
+            _ostiumCivisAnimationesMutabile.Purgere(idCivis);
+            _queueAnimationis[idCivis].Purgere();
         }
 
         public void Primum(int idCivis) {
             _queueAnimationis[idCivis].Purgere();
         }
 
-        public void Executare(int idCivis, IOrdinatioCivisAnimationis animationis) {
+        public void Executare(
+            int idCivis,
+            IOrdinatioCivisAnimationis animationis
+        ) {
             if (!_queueAnimationis[idCivis].ConarePono(animationis)) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISANIMATION_ORDINATIO_QUEUE_FULL);
+                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISANIMATIONIS_ORDINATIO_QUEUE_FULL);
                 return;
             }
         }
 
-        private void ApplicareAnimationis(int idCivis, IOrdinatioCivisAnimationis animationis) {
+        private void ApplicareAnimationis(
+            int idCivis,
+            IOrdinatioCivisAnimationis animationis
+        ) {
             if (animationis.EstCogere) {
                 _ostiumCivisAnimationesMutabile.Cogere(idCivis, animationis.IdAnimationis, animationis.AdInitium, animationis.AdFinem);
             } else {
@@ -45,7 +61,8 @@ namespace Yulinti.Dux.Exercitus {
                 ApplicareAnimationis(idCivis, animationis);
             }
             _ostiumCivisAnimationesMutabile.InjicereVelocitatem(
-                idCivis, _ostiumCivisLociLegibile.VelocitasHorizontalisActualis(idCivis)
+                idCivis,
+                _ostiumCivisLociLegibile.VelocitasHorizontalisActualis(idCivis)
             );
         }
 

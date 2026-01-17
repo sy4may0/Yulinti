@@ -36,6 +36,18 @@ namespace Yulinti.Dux.Exercitus {
             _speciesActualis = SpeciesPuellaeLoci.Nihil;
         }
 
+        public void Initare() {
+            _ostiumPuellaeLociMutabile.InitareMigrare();
+            _ostiumPuellaeLociMutabile.Transporto(
+                new Vector3(0f, 0f, 0f),
+                Quaternion.Identity
+            );
+            _resFluidaMotus.Purgare();
+            _speciesActualis = SpeciesPuellaeLoci.Nihil;
+            _queueMotus.Purgere();
+            _queueNavmesh.Purgere();
+        }
+
         public void Primum() {
             _queueMotus.Purgere();
             _queueNavmesh.Purgere();
@@ -118,16 +130,10 @@ namespace Yulinti.Dux.Exercitus {
             float vhActualis = _ostiumPuellaeLociLegibile.VelocitasHorizontalisActualis();
             float ryActualis = _ostiumPuellaeLociLegibile.RotatioYActualis();
 
-            // 移動はNavmesh平面上のみ実装しているため、垂直は計算しない。
-            float vvActualis = -9.81f;
-            bool estInTerra = true;
-            // 
-
             _resFluidaMotus.Renovare(
                 vhActualis,
-                vvActualis,
                 ryActualis,
-                estInTerra
+                true
             );
 
             _queueMotus.Purgere();
@@ -140,7 +146,7 @@ namespace Yulinti.Dux.Exercitus {
                 new Vector3(0f, 0f, 0f),
                 Quaternion.Identity
             );
-            _resFluidaMotus.Renovare(0f, 0f, 0f, true);
+            _resFluidaMotus.Purgare();
             _speciesActualis = SpeciesPuellaeLoci.Nihil;
             _queueMotus.Purgere();
             _queueNavmesh.Purgere();

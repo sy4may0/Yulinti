@@ -26,10 +26,11 @@ namespace Yulinti.Velum.Indicium {
             if (!_estActivum) return;
 
             GUI.Label(new Rect(10, 10, 300, 20), "Civis0 Visa: " + _resFCivisVeletudinis.Visa(0));
-            GUI.Label(new Rect(10, 30, 300, 20), "Civis0 EstVigilantia: " + _resFCivisVeletudinis.EstVigilantia(0));
-            GUI.Label(new Rect(10, 50, 300, 20), "Civis0 EstDetectio: " + _resFCivisVeletudinis.EstDetectio(0));
+            GUI.Label(new Rect(10, 30, 300, 20), "Civis0 Visus: " + _resFCivisVeletudinis.Visus(0));
+            GUI.Label(new Rect(10, 50, 300, 20), "Civis0 EstVigilantia: " + _resFCivisVeletudinis.EstVigilantia(0));
+            GUI.Label(new Rect(10, 70, 300, 20), "Civis0 EstDetectio: " + _resFCivisVeletudinis.EstDetectio(0));
 
-            GUI.Label(new Rect(10, 70, 300, 20), "Puellae Vigor: " + _resFPuellaeVeletudinis.Vigor);
+            GUI.Label(new Rect(10, 90, 300, 20), "Puellae Vigor: " + _resFPuellaeVeletudinis.Vigor);
         }
 
         public void Activare() {

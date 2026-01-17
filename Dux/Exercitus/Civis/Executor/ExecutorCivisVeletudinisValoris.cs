@@ -59,11 +59,11 @@ namespace Yulinti.Dux.Exercitus {
             float dtAudita = 0f,
             float dtSuspecta = 0f
         ) {
-            _phantasmaVitae[idCivis] += DuxMath.Clamp(_phantasmaVitae[idCivis] + dtVitae, 0f, _vitaeMaxima);
-            _phantasmaVisus[idCivis] += DuxMath.Clamp(_phantasmaVisus[idCivis] + dtVisus, 0f, _visusMaxima);
-            _phantasmaVisa[idCivis] += DuxMath.Clamp(_phantasmaVisa[idCivis] + dtVisa, 0f, _visaMaxima);
-            _phantasmaAudita[idCivis] += DuxMath.Clamp(_phantasmaAudita[idCivis] + dtAudita, 0f, _auditaMaxima);
-            _phantasmaSuspecta[idCivis] += DuxMath.Clamp(_phantasmaSuspecta[idCivis] + dtSuspecta, 0f, _suspectaMaxima);
+            _phantasmaVitae[idCivis] = DuxMath.Clamp(_phantasmaVitae[idCivis] + dtVitae, 0f, _vitaeMaxima);
+            _phantasmaVisus[idCivis] = DuxMath.Clamp(_phantasmaVisus[idCivis] + dtVisus, 0f, _visusMaxima);
+            _phantasmaVisa[idCivis] = DuxMath.Clamp(_phantasmaVisa[idCivis] + dtVisa, 0f, _visaMaxima);
+            _phantasmaAudita[idCivis] = DuxMath.Clamp(_phantasmaAudita[idCivis] + dtAudita, 0f, _auditaMaxima);
+            _phantasmaSuspecta[idCivis] = DuxMath.Clamp(_phantasmaSuspecta[idCivis] + dtSuspecta, 0f, _suspectaMaxima);
         }
 
         public void Pono(
@@ -97,6 +97,23 @@ namespace Yulinti.Dux.Exercitus {
             _configuratioCivisCustodiae = configuratioExercitusCivis.Custodiae;
             _resFluidaVeletudinis = resFluidaVeletudinis;
             _phantasma = new PhantasmaCivisVeletudinis(resFluidaVeletudinis.Longitudo);
+        }
+
+        // Incarnare時にこれを実行する。
+        // - Phantasma初期化
+        // - resFluida初期化
+        // - Dominare
+        public void Initare(int idCivis) {
+            _phantasma.Pono(
+                idCivis,
+                vitae: 1f,
+                visus: 0f, 
+                visa: 0f,
+                audita: 0f,
+                suspecta: 0f
+            );
+            _resFluidaVeletudinis.Purgare(idCivis);
+            _resFluidaVeletudinis.Dominare(idCivis);
         }
 
         public void Primum(int idCivis) {
@@ -137,6 +154,10 @@ namespace Yulinti.Dux.Exercitus {
             ResolvereDetectio(idCivis);
         }
 
+        // Spirituare時にこれを実行する。
+        // - Phantasma初期化
+        // - resFluida初期化
+        // - Liberare
         public void Purgare(int idCivis) {
             _phantasma.Pono(
                 idCivis,
@@ -146,8 +167,11 @@ namespace Yulinti.Dux.Exercitus {
                 audita: 0f,
                 suspecta: 0f
             );
+            _resFluidaVeletudinis.Purgare(idCivis);
+            _resFluidaVeletudinis.Liberare(idCivis);
         }
 
+        // Detectio/Vigilantiaのbool値を更新
         private void ResolvereDetectio(int idCivis) {
             bool vigilantiaProximus = _resFluidaVeletudinis.EstVigilantia(idCivis);
             bool detectioProximus = _resFluidaVeletudinis.EstDetectio(idCivis);

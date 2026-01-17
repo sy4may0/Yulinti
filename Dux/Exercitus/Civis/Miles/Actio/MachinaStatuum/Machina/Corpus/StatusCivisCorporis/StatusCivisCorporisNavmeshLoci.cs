@@ -21,69 +21,63 @@ namespace Yulinti.Dux.Exercitus {
         public IDCivisAnimationisContinuata IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
         public IDCivisAnimationisContinuata IdAnimationisExire => _configuratio.IdAnimationisExire;
 
-        public OrdinatioCivis Intrare(
+        public void Intrare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adInitium
         ) {
-            OrdinatioCivisAnimationis animationis = new OrdinatioCivisAnimationis(
-                idCivis, true, _configuratio.IdAnimationisIntrare, adInitium, null
+            contextusOstiorum.Carrus.ExecutareAnimationis(
+                idCivis, _configuratio.IdAnimationisIntrare, adInitium, null, false
             );
 
             ErrorAut<IPunctumViaeLegibile> punctumViae = contextusOstiorum.PunctumViae.LegoTypumTemere(
                 _configuratio.TypusPunctumViae
             );
             if (punctumViae.EstError()) {
-                OrdinatioCivisVeletudinisMortis mortis = new OrdinatioCivisVeletudinisMortis(
-                    idCivis, estSpirituare: true
-                );
-                return new OrdinatioCivis(
-                    idCivis, veletudinisMortis: mortis
+                contextusOstiorum.Carrus.ExecutareVeletudinisMortis(
+                    idCivis, SpeciesOrdinationisCivisMortis.Spirituare
                 );
             }
 
-            OrdinatioCivisActionis navmesh = OrdinatioCivisActionis.FromNavmesh(
+            contextusOstiorum.Carrus.ExecutareNavmesh(
                 idCivis,
-                new OrdinatioCivisNavmesh(
-                    punctumViae.Evolvo().Positio,
-                    _configuratio.VelocitasDesiderata,
-                    _configuratio.Acceleratio,
-                    _configuratio.VelocitasRotationis,
-                    _configuratio.DistantiaDeaccelerationis
-                )
-            );
-
-            return new OrdinatioCivis(
-                idCivis, animationis: animationis, actionis: navmesh
+                punctumViae.Evolvo().Positio,
+                false,
+                _configuratio.VelocitasDesiderata,
+                _configuratio.Acceleratio,
+                _configuratio.VelocitasRotationis,
+                _configuratio.DistantiaDeaccelerationis
             );
         }
 
-        public OrdinatioCivis Exire(
+        public void Exire(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida,
             Action adFinem
         ) {
-            OrdinatioCivisAnimationis animationis = new OrdinatioCivisAnimationis(
-                idCivis, false, _configuratio.IdAnimationisExire, null, adFinem
-            );
-            return new OrdinatioCivis(
-                idCivis, animationis: animationis
+            contextusOstiorum.Carrus.ExecutareAnimationis(
+                idCivis, _configuratio.IdAnimationisExire, null, adFinem, false
             );
         }
 
-        public OrdinatioCivis Ordinare(
+        public void Ordinare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            OrdinatioCivisVeletudinisValoris veletudinis = new OrdinatioCivisVeletudinisValoris(
+            // 直近のTransporto失敗時はNPCを削除する。
+            if (contextusOstiorum.Loci.EstErrans(idCivis)) {
+                contextusOstiorum.Carrus.ExecutareVeletudinisMortis(
+                    idCivis, SpeciesOrdinationisCivisMortis.Spirituare
+                );
+                return;
+            }
+            contextusOstiorum.Carrus.ExecutareVeletudinisValoris(
                 idCivis,
-                -_configuratio.ConsumptioVitae * contextusOstiorum.Temporis.Intervallum
-            );
-            return new OrdinatioCivis(
-                idCivis, veletudinisValoris: veletudinis
+                dtVitae: -_configuratio.ConsumptioVitae * contextusOstiorum.Temporis.Intervallum,
+                dtVisus: _configuratio.Visus
             );
         }
     }

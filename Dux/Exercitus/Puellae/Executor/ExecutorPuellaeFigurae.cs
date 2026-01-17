@@ -24,6 +24,11 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
+        public void Initare() {
+            _queueFiguraeGenus.Purgere();
+            _queueFiguraePelvis.Purgere();
+        }
+
         public void Primum() {
             _queueFiguraeGenus.Purgere();
             _queueFiguraePelvis.Purgere();
