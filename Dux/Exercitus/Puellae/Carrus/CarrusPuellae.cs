@@ -67,12 +67,14 @@ namespace Yulinti.Dux.Exercitus {
         private void ConfirmareVeletudinis() {
             _exVeletudinis.Confirmare();
             _lacusOrdinatioPuellae.ColligereVeletudinis();
+            _lacusOrdinatioPuellae.ColligereVeletudinisNudi();
         }
 
         // Incipereの最後に実行 Start()で適用が必要なケースはここでやる。
         public void ConfirmareIncipabilis() {
             ConfirmareAnimationis();
             ConfirmareCrinis();
+            ConfirmareVeletudinis();
         }
 
         // Pulsusの最後に実行
@@ -172,14 +174,24 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void PostulareVeletudinis(
-            float dtVigoris,
-            float dtPatientiae,
-            float dtAetheris,
-            float dtIntentio,
-            float dtClaritas
+            float dtVigoris = 0f,
+            float dtPatientiae = 0f,
+            float dtAetheris = 0f,
+            float dtIntentio = 0f,
+            float dtClaritas = 0f
         ){
             if(_lacusOrdinatioPuellae.EmittareVeletudinis(out var ordinatio)) {
                 ordinatio.Pono(dtVigoris, dtPatientiae, dtAetheris, dtIntentio, dtClaritas);
+                _exVeletudinis.Executare(ordinatio);
+            }
+        }
+
+        public void PostulareVeletudinisNudi(
+            bool estNudusAnterior,
+            bool estNudusPosterior
+        ){
+            if(_lacusOrdinatioPuellae.EmittareVeletudinisNudi(out var ordinatio)) {
+                ordinatio.Pono(estNudusAnterior, estNudusPosterior);
                 _exVeletudinis.Executare(ordinatio);
             }
         }

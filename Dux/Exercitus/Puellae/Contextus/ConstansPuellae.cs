@@ -8,6 +8,6 @@ namespace Yulinti.Dux.Exercitus {
         public const int LongitudoOrdinatioMotus = 6;
         public const int LongitudoOrdinatioNavmesh = 12;
         public const int LongitudoOrdinatioVeletudinis = 32;
-
+        public const int LongitudoOrdinatioVeletudinisNudi = 6;
     }
 }

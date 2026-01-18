@@ -14,6 +14,9 @@ namespace Yulinti.Dux.Exercitus {
         // 疑心度
         private float[] _suspecta;
 
+        private bool _estSpectareNudusAnterior;
+        private bool _estSpectareNudusPosterior;
+
         // 警戒フラグ
         private bool[] _estVigilantia;
         // 検知フラグ
@@ -29,6 +32,9 @@ namespace Yulinti.Dux.Exercitus {
             _estDominare = new bool[ostiumCivis.Longitudo];
             _estVigilantia = new bool[ostiumCivis.Longitudo];
             _estDetectio = new bool[ostiumCivis.Longitudo];
+
+            _estSpectareNudusAnterior = false;
+            _estSpectareNudusPosterior = false;
  
             for (int i = 0; i < ostiumCivis.Longitudo; i++) {
                 _vitae[i] = 1f;
@@ -37,6 +43,8 @@ namespace Yulinti.Dux.Exercitus {
                 _audita[i] = 0f;
                 _suspecta[i] = 0f;
                 _estDominare[i] = false;
+                _estSpectareNudusAnterior = false;
+                _estSpectareNudusPosterior = false;
             }
         }
 
@@ -84,14 +92,17 @@ namespace Yulinti.Dux.Exercitus {
             return _estDetectio[idCivis];
         }
 
-        public void RenovareVitae(int idCivis, float vitae) {
-            if (!estActivum(idCivis)) return;
-            _vitae[idCivis] = DuxMath.Clamp(vitae, 0f, 1f);
+        public bool EstSpectareNudusAnterior(int idCivis) {
+            if (!estActivum(idCivis)) return false;
+            return _estSpectareNudusAnterior;
         }
-
-        public void RenovareVisa(int idCivis, float visa) {
-            if (!estActivum(idCivis)) return;
-            _visa[idCivis] = DuxMath.Clamp(visa, 0f, 1f);
+        public bool EstSpectareNudusPosterior(int idCivis) {
+            if (!estActivum(idCivis)) return false;
+            return _estSpectareNudusPosterior;
+        }
+        public bool EstSpectareNudus(int idCivis) {
+            if (!estActivum(idCivis)) return false;
+            return _estSpectareNudusAnterior || _estSpectareNudusPosterior;
         }
 
         public void RenovareVigilantia(int idCivis, bool estVigilantia) {
@@ -119,6 +130,16 @@ namespace Yulinti.Dux.Exercitus {
             _suspecta[idCivis] = DuxMath.Clamp(suspecta, 0f, 1f);
         }
 
+        public void RenovareSpectareNudus(
+            int idCivis,
+            bool estSpectareNudusAnterior,
+            bool estSpectareNudusPosterior
+        ) {
+            if (!estActivum(idCivis)) return;
+            _estSpectareNudusAnterior = estSpectareNudusAnterior;
+            _estSpectareNudusPosterior = estSpectareNudusPosterior;
+        }
+
         public void Purgare(int idCivis) {
             _vitae[idCivis] = 1f;
             _visus[idCivis] = 1f;
@@ -127,6 +148,8 @@ namespace Yulinti.Dux.Exercitus {
             _suspecta[idCivis] = 0f;
             _estVigilantia[idCivis] = false;
             _estDetectio[idCivis] = false;
+            _estSpectareNudusAnterior = false;
+            _estSpectareNudusPosterior = false;
         }
 
         public void Dominare(int idCivis) {

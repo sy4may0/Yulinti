@@ -16,6 +16,10 @@ namespace Yulinti.Dux.Exercitus {
         // voltage
         private float _intentio;
 
+        // 前面露出
+        private bool _estNudusAnterior;
+        // 背面露出
+        private bool _estNudusPosterior;
 
         public ResFluidaPuellaeVeletudinis() {
             this._vigor = 1f;
@@ -32,24 +36,10 @@ namespace Yulinti.Dux.Exercitus {
         public float Claritas => _claritas;
         public float Aether => _aether;
         public float Intentio => _intentio;
+        public bool EstNudusAnterior => _estNudusAnterior;
+        public bool EstNudusPosterior => _estNudusPosterior;
 
-        public void RenovareVigor(float valor) {
-            _vigor = valor;
-        }
-        public void RenovarePatientia(float valor) {
-            _patientia = valor;
-        }
-        public void RenovareClaritas(float valor) {
-            _claritas = valor;
-        }
-        public void RenovareAether(float valor) {
-            _aether = valor;
-        }
-        public void RenovareIntentio(float valor) {
-            _intentio = valor;
-        }
-
-        public void Renovare(
+        public void RenovareValoris(
             float vigor,
             float patientia,
             float claritas,
@@ -61,6 +51,13 @@ namespace Yulinti.Dux.Exercitus {
             _claritas = DuxMath.Clamp(claritas, 0f, 1f);
             _aether = DuxMath.Clamp(aether, 0f, 1f);
             _intentio = DuxMath.Clamp(intentio, 0f, 1f);
+        }
+
+        public void RenovareNudusAnterior(bool estNudusAnterior) {
+            _estNudusAnterior = estNudusAnterior;
+        }
+        public void RenovareNudusPosterior(bool estNudusPosterior) {
+            _estNudusPosterior = estNudusPosterior;
         }
 
         public void ResolvereExhauritaVigoris(

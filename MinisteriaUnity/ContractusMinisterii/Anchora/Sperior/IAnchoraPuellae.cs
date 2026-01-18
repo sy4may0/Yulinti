@@ -50,5 +50,10 @@ namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
         Transform ResVisaePectorisSinister { get; }
         Transform ResVisaeNatiumDexter { get; }
         Transform ResVisaeNatiumSinister { get; }
+
+        Transform ResNudusPectoris { get;}
+        Transform ResNudusCatellus { get;}
+        Transform ResNudusNatium { get;}
+
     }
 }

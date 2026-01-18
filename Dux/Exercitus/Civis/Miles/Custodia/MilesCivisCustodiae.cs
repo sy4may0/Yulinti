@@ -19,6 +19,8 @@ namespace Yulinti.Dux.Exercitus {
 
         private const float cos95 = -0.087155744f;
         private const float cos45 =  0.707106782f;
+        private const float cos100 = -0.173648178f;
+        private const float ratioSuspectaVisa = 0.75f;
 
         private const int LONGITUDOLUT = 256;
         // 距離減衰パラメータ
@@ -35,11 +37,14 @@ namespace Yulinti.Dux.Exercitus {
         // 興味喪失カーブLUT
         private readonly SigmoidLUT _sigmoidLUTTempusAmittere;
 
+        private bool[] _estSpectareNudusPrioris;
 
         // enum配列キャッシュ
         private readonly IDPuellaeResVisaeCapitis[] _cIDPuellaeResVisaeCapitis;
         private readonly IDPuellaeResVisaePectoris[] _cIDPuellaeResVisaePectoris;
         private readonly IDPuellaeResVisaeNatium[] _cIDPuellaeResVisaeNatium;
+        private readonly IDPuellaeResNudusAnterior[] _cIDPuellaeResNudusAnterior;
+        private readonly IDPuellaeResNudusPosterior[] _cIDPuellaeResNudusPosterior;
 
         public MilesCivisCustodiae(ContextusCivisOstiorumLegibile contextus) {
             _contextus = contextus;
@@ -58,6 +63,8 @@ namespace Yulinti.Dux.Exercitus {
             _cIDPuellaeResVisaeCapitis = (IDPuellaeResVisaeCapitis[])Enum.GetValues(typeof(IDPuellaeResVisaeCapitis));
             _cIDPuellaeResVisaePectoris = (IDPuellaeResVisaePectoris[])Enum.GetValues(typeof(IDPuellaeResVisaePectoris));
             _cIDPuellaeResVisaeNatium = (IDPuellaeResVisaeNatium[])Enum.GetValues(typeof(IDPuellaeResVisaeNatium));
+            _cIDPuellaeResNudusAnterior = (IDPuellaeResNudusAnterior[])Enum.GetValues(typeof(IDPuellaeResNudusAnterior));
+            _cIDPuellaeResNudusPosterior = (IDPuellaeResNudusPosterior[])Enum.GetValues(typeof(IDPuellaeResNudusPosterior));
 
             // 距離減衰パラメータ初期化
             _ratioDistantiaCustodiaeAscensus = DuxMath.Clamp(
@@ -80,7 +87,10 @@ namespace Yulinti.Dux.Exercitus {
                 _ratioTempusStudiumAmittere,
                 LONGITUDOLUT
             );
-
+            _estSpectareNudusPrioris = new bool[_contextus.Civis.Longitudo];
+            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+                _estSpectareNudusPrioris[i] = false;
+            }
         }
 
         private float ComputareVisus(
@@ -113,6 +123,7 @@ namespace Yulinti.Dux.Exercitus {
             IResFluidaCivisLegibile resFluida
         ) {
             float consumptio = ComputareConsumptioVisae(idCivis, resFluida);
+            ResolvereSuspectaVisa(idCivis, resFluida);
 
             float numerusIctuum = 
                 _numerusIctuumCapitis[idCivis] * _angulusRationemCapitis[idCivis] + 
@@ -120,27 +131,49 @@ namespace Yulinti.Dux.Exercitus {
 
             // 視認数0で減少する。
             if (numerusIctuum <= Numerus.Epsilon) {
-                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) return;
+                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon &&
+                    resFluida.Veletudinis.Suspecta(idCivis) <= Numerus.Epsilon) return;
 
                 _contextus.Carrus.PostulareVeletudinisValoris(
                     idCivis,
-                    dtVisa: consumptio
+                    dtVisa: consumptio,
+                    dtSuspecta: consumptio
                 );
+
                 return;
             }
+
+            // Nudus視認数を更新する。
+            bool estSpectareNudus = ResolvereSpectareNudus(idCivis);
+            if (!estSpectareNudus) {
+                Memorator.MemorareErrorum(IDErrorum.MILIESCIVISCUSTODIAE_RESOLVERESPECTARENUDUS_FAILED);
+            }
+
 
             float distantia = ComputareDistantia(idCivis);
             // distantiaがDistantiaCustodiaeより大きい場合はVisaeを減少する。
             if (distantia > _contextus.Configuratio.Custodiae.DistantiaCustodiae) {
-                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) return;
+                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon &&
+                    resFluida.Veletudinis.Suspecta(idCivis) <= Numerus.Epsilon) return;
 
                 _contextus.Carrus.PostulareVeletudinisValoris(
                     idCivis,
-                    dtVisa: consumptio
+                    dtVisa: consumptio,
+                    dtSuspecta: consumptio
                 );
+
                 return;
             }
 
+            // 非SpectareNudus時はVisaのみ減少する。演算はやる。
+            if (!resFluida.Veletudinis.EstSpectareNudus(idCivis)) {
+                // 視認中なので興味喪失時間ではなく固定減少値を使用
+                float dtVisaReductio = _contextus.Configuratio.Custodiae.ConsumptioVisaeSec * _contextus.Temporis.Intervallum;
+                _contextus.Carrus.PostulareVeletudinisValoris(
+                    idCivis,
+                    dtVisa: dtVisaReductio
+                );
+            }
 
             float visus = resFluida.Veletudinis.Visus(idCivis);
             float distantiaCustodiaeMaxima = _contextus.Configuratio.Custodiae.DistantiaCustodiaeMaxima;
@@ -158,10 +191,61 @@ namespace Yulinti.Dux.Exercitus {
             _tempusStudiumAmittere[idCivis] = 0f;
 
 
-            _contextus.Carrus.PostulareVeletudinisValoris(
-                idCivis,
-                dtVisa: dtVisa
-            );
+            // Nudus視認時はVisaとsuspectaを上昇させる。Nudus非視認時はSuspectaを上昇させる。
+            // [TODO] Suspecta上昇は不審度によって変えるが、まだ不審度をResFluidaに反映していないので、Visaと同じ値で固定。
+            //        注) SpectareNudus時は不審度ではなくVisaと一致で上昇させる。
+            if (resFluida.Veletudinis.EstSpectareNudus(idCivis)) {
+                _contextus.Carrus.PostulareVeletudinisValoris(
+                    idCivis,
+                    dtVisa: dtVisa,
+                    dtSuspecta: dtVisa
+                );
+            } else {
+                _contextus.Carrus.PostulareVeletudinisValoris(
+                    idCivis,
+                    dtSuspecta: dtVisa
+                );
+            }
+        }
+
+        // Nudus視認前後の挙動を扱う。
+        private void ResolvereSuspectaVisa(int idCivis, IResFluidaCivisLegibile resFluida) {
+            // 前回のSpectareと今のSpectareが同じなら何もしない。
+            if (_estSpectareNudusPrioris[idCivis] == resFluida.Veletudinis.EstSpectareNudus(idCivis)) return;
+            bool _estSpectare = resFluida.Veletudinis.EstSpectareNudus(idCivis);
+
+            // 非視認 -> 視認
+            if (_estSpectare) {
+                // VisaをSuspectaの75%まで上げる。すでに超えている場合は何もしない。
+                float visa = resFluida.Veletudinis.Visa(idCivis);
+                float suspecta = resFluida.Veletudinis.Suspecta(idCivis);
+                float dtVisa = (suspecta * ratioSuspectaVisa - visa); // 一括で上げる。Temporisで割らない。 
+                if (dtVisa > 0f) {
+                    _contextus.Carrus.PostulareVeletudinisValoris(
+                        idCivis,
+                        dtVisa: dtVisa
+                    );
+                }
+            } else {
+                // Visilantia, Detectio時はSuspectaを1とする。
+                // それ以外はSuspectaをVisaに合わせる。
+                float visa = resFluida.Veletudinis.Visa(idCivis);
+                float suspecta = resFluida.Veletudinis.Suspecta(idCivis);
+                if (resFluida.Veletudinis.EstVigilantia(idCivis) || resFluida.Veletudinis.EstDetectio(idCivis)) {
+                    _contextus.Carrus.PostulareVeletudinisValoris(
+                        idCivis,
+                        dtSuspecta: 1f
+                    );
+                } else {
+                    _contextus.Carrus.PostulareVeletudinisValoris(
+                        idCivis,
+                        dtSuspecta: visa - suspecta
+                    );
+                }
+            }
+
+            _estSpectareNudusPrioris[idCivis] = _estSpectare;
+
         }
 
         // Detectio状態ではConsumptioVisaeDetectioSecで減少する。
@@ -287,6 +371,54 @@ namespace Yulinti.Dux.Exercitus {
                 1f
             );
             return ratio * ratio * (3f - 2f * ratio); // smoothstep
+        }
+
+        // Nudus視認ポイントのForward方向と、視認ポイントPosからCivisの頭PosまでのDirectioを比較する。
+        // 角度が100度以内なら視認判定とし、ResFluidaのSpectareNudusを更新する。
+        private bool ResolvereSpectareNudus(
+            int idCivis
+        ) {
+            bool estSpectareNudusAnterior = false;
+            bool estSpectareNudusPosterior = false;
+
+            Vector3 positioCivisCapitis = default;
+            if (!_contextus.Visa.ConareLegoPositioCapitis(idCivis, out positioCivisCapitis)) return false;
+
+            foreach (IDPuellaeResNudusAnterior idNudusAnterior in _cIDPuellaeResNudusAnterior) {
+                Vector3 directioResNudusAnterior = default;
+                Vector3 positioResNudus = default;
+
+                if (!_contextus.PuellaeResVisae.ConareLegoNudusAnterior(idNudusAnterior, out positioResNudus)) continue;
+                if (!_contextus.PuellaeResVisae.ConareLegoNudusAnteriorDirectio(idNudusAnterior, out directioResNudusAnterior)) continue;
+
+                Vector3 directio = positioCivisCapitis - positioResNudus;
+                float angle = Vector3.Dot(Vector3.Normalize(directioResNudusAnterior), Vector3.Normalize(directio));
+                if (angle > cos100) {
+                    estSpectareNudusAnterior = true;
+                }
+            }
+            foreach (IDPuellaeResNudusPosterior idNudusPosterior in _cIDPuellaeResNudusPosterior) {
+                Vector3 directioResNudusPosterior = default;
+                Vector3 positioResNudus = default;
+
+                if (!_contextus.PuellaeResVisae.ConareLegoNudusPosterior(idNudusPosterior, out positioResNudus)) continue;
+                if (!_contextus.PuellaeResVisae.ConareLegoNudusPosteriorDirectio(idNudusPosterior, out directioResNudusPosterior)) continue;
+
+                Vector3 directio = positioCivisCapitis - positioResNudus;
+                float angle = Vector3.Dot(Vector3.Normalize(directioResNudusPosterior), Vector3.Normalize(directio));
+                if (angle > cos100) {
+                    estSpectareNudusPosterior = true;
+                }
+            }
+
+            // Executorを実行する。
+            _contextus.Carrus.PostulareVeletudinisSpectare(
+                idCivis,
+                estSpectareNudusAnterior,
+                estSpectareNudusPosterior
+            );
+
+            return true;
         }
     }
 }

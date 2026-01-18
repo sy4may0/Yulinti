@@ -85,18 +85,24 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class ExecutorCivisVeletudinisValoris : IExecutorCivis {
         private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
         private readonly IOstiumCivisLegibile _ostiumCivisLegibile;
-        private readonly IOstiumCivisMutabile _ostiumCivisMutabile;
         private readonly ResFluidaCivisVeletudinis _resFluidaVeletudinis;
 
+        private readonly DuxQueue<IOrdinatioCivisVeletudinisSpectare>[] _queueVeletudinisSpectare;
         private readonly PhantasmaCivisVeletudinis _phantasma;
 
         public ExecutorCivisVeletudinisValoris(
             IConfiguratioExercitusCivis configuratioExercitusCivis,
-            ResFluidaCivisVeletudinis resFluidaVeletudinis
+            ResFluidaCivisVeletudinis resFluidaVeletudinis,
+            IOstiumCivisLegibile ostiumCivisLegibile
         ) {
             _configuratioCivisCustodiae = configuratioExercitusCivis.Custodiae;
             _resFluidaVeletudinis = resFluidaVeletudinis;
+            _ostiumCivisLegibile = ostiumCivisLegibile;
             _phantasma = new PhantasmaCivisVeletudinis(resFluidaVeletudinis.Longitudo);
+            _queueVeletudinisSpectare = new DuxQueue<IOrdinatioCivisVeletudinisSpectare>[_ostiumCivisLegibile.Longitudo];
+            for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
+                _queueVeletudinisSpectare[i] = new DuxQueue<IOrdinatioCivisVeletudinisSpectare>(ConstansCivis.LongitudoOrdinatioVeletudinisSpectare);
+            }
         }
 
         // Incarnare時にこれを実行する。
@@ -104,6 +110,7 @@ namespace Yulinti.Dux.Exercitus {
         // - resFluida初期化
         // - Dominare
         public void Initare(int idCivis) {
+            _queueVeletudinisSpectare[idCivis].Purgere();
             _phantasma.Pono(
                 idCivis,
                 vitae: 1f,
@@ -117,6 +124,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void Primum(int idCivis) {
+            _queueVeletudinisSpectare[idCivis].Purgere();
             _phantasma.Pono(
                 idCivis,
                 vitae: _resFluidaVeletudinis.Vitae(idCivis),
@@ -138,6 +146,13 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
+        public void Executare(int idCivis, IOrdinatioCivisVeletudinisSpectare veletudinisSpectare) {
+            if (!_queueVeletudinisSpectare[idCivis].ConarePono(veletudinisSpectare)) {
+                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISVELETUDINISVALORIS_ORDINATIO_QUEUE_FULL);
+                return;
+            }
+        }
+
         private void ApplicarePhantasma(int idCivis) {
             _resFluidaVeletudinis.RenovareValoris(
                 idCivis,
@@ -149,8 +164,19 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
+        private void ApplicareSpectare(int idCivis) {
+            while (_queueVeletudinisSpectare[idCivis].ConareLego(out var s)) {
+                _resFluidaVeletudinis.RenovareSpectareNudus(
+                    idCivis,
+                    s.EstSpectareNudusAnterior,
+                    s.EstSpectareNudusPosterior
+                );
+            }
+        }
+
         public void Confirmare(int idCivis) {
             ApplicarePhantasma(idCivis);
+            ApplicareSpectare(idCivis);
             ResolvereDetectio(idCivis);
         }
 
@@ -167,6 +193,7 @@ namespace Yulinti.Dux.Exercitus {
                 audita: 0f,
                 suspecta: 0f
             );
+            _queueVeletudinisSpectare[idCivis].Purgere();
             _resFluidaVeletudinis.Purgare(idCivis);
             _resFluidaVeletudinis.Liberare(idCivis);
         }

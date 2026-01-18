@@ -8,7 +8,8 @@ namespace Yulinti.Dux.Exercitus {
         ActioAnimationis,
         VeletudinisCustodiae,
         VeletudinisMortis,
-        VeletudinisValoris
+        VeletudinisValoris,
+        VeletudinisSpectare
     }
 
     internal interface IOrdinatioCivis {

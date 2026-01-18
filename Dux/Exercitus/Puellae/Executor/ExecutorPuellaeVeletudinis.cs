@@ -1,4 +1,5 @@
 using Yulinti.Dux.ContractusDucis;
+using Yulinti.Nucleus;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class PhantasmaPuellaeVeletudinis {
@@ -67,19 +68,25 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class ExecutorPuellaeVeletudinis : IExecutorPuellae {
         private readonly IConfiguratioPuellaeVeletudinis _configuratioVeletudinis;
         private readonly ResFluidaPuellaeVeletudinis _resFluidaVeletudinis;
+        private readonly IOstiumPuellaeResVisaeMutabile _ostiumPuellaeResVisaeMutabile;
 
+        private readonly DuxQueue<IOrdinatioPuellaeVeletudinisNudi> _queueVeletudinisNudi;
         private readonly PhantasmaPuellaeVeletudinis _phantasma;
 
         public ExecutorPuellaeVeletudinis(
             IConfiguratioExercitusPuellae configuratioExercitusPuellae,
+            IOstiumPuellaeResVisaeMutabile ostiumPuellaeResVisaeMutabile,
             ResFluidaPuellaeVeletudinis resFluidaVeletudinis
         ) {
             _configuratioVeletudinis = configuratioExercitusPuellae.Veletudo;
             _resFluidaVeletudinis = resFluidaVeletudinis;
+            _ostiumPuellaeResVisaeMutabile = ostiumPuellaeResVisaeMutabile;
             _phantasma = new PhantasmaPuellaeVeletudinis();
+            _queueVeletudinisNudi = new DuxQueue<IOrdinatioPuellaeVeletudinisNudi>(ConstansPuellae.LongitudoOrdinatioVeletudinisNudi);
         }
 
         public void Initare() {
+            _queueVeletudinisNudi.Purgere();
             _phantasma.Pono(
                 vigor: 0f,
                 patientia: 0f,
@@ -88,9 +95,11 @@ namespace Yulinti.Dux.Exercitus {
                 intentio: 0f
             );
             _resFluidaVeletudinis.Purgare();
+            _ostiumPuellaeResVisaeMutabile.Activare();
         }
 
         public void Primum() {
+            _queueVeletudinisNudi.Purgere();
             _phantasma.Pono(
                 vigor: _resFluidaVeletudinis.Vigor,
                 patientia: _resFluidaVeletudinis.Patientia,
@@ -112,8 +121,17 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
-        public void Confirmare() {
-            _resFluidaVeletudinis.Renovare(
+        public void Executare(
+            IOrdinatioPuellaeVeletudinisNudi veletudinisNudi
+        ) {
+            if (!_queueVeletudinisNudi.ConarePono(veletudinisNudi)) {
+                Memorator.MemorareErrorum(IDErrorum.EXECUTORPUELLAEVELETUDINIS_ORDINATIO_VELETUDINISNUDI_QUEUE_FULL);
+                return;
+            }
+        }
+
+        private void ApplicareValoris() {
+            _resFluidaVeletudinis.RenovareValoris(
                 vigor: _phantasma.PhantasmaVigoris,
                 patientia: _phantasma.PhantasmaPatientiae,
                 aether: _phantasma.PhantasmaAether,
@@ -131,6 +149,30 @@ namespace Yulinti.Dux.Exercitus {
                 _configuratioVeletudinis.LimenRefectaPatientiae,
                 1f // PatientiaMaxima Config設定可能にするならここを変える。
             );
+        }
+
+        private void ApplicareNudus() {
+            while (_queueVeletudinisNudi.ConareLego(out IOrdinatioPuellaeVeletudinisNudi veletudinisNudi)) {
+                _resFluidaVeletudinis.RenovareNudusAnterior(veletudinisNudi.EstNudusAnterior);
+                _resFluidaVeletudinis.RenovareNudusPosterior(veletudinisNudi.EstNudusPosterior);
+            }
+            // 現在のNudusの状態によって、対象のNudusAnterior/NudusPosteriorを有効/無効にする。
+            if (_resFluidaVeletudinis.EstNudusAnterior) {
+                _ostiumPuellaeResVisaeMutabile.ActivareNudusAnterior();
+            } else {
+                _ostiumPuellaeResVisaeMutabile.DeactivateNudusAnterior();
+            }
+
+            if (_resFluidaVeletudinis.EstNudusPosterior) {
+                _ostiumPuellaeResVisaeMutabile.ActivareNudusPosterior();
+            } else {
+                _ostiumPuellaeResVisaeMutabile.DeactivateNudusPosterior();
+            }
+        }
+
+        public void Confirmare() {
+            ApplicareValoris();
+            ApplicareNudus();
         }
 
         public void Purgare() {

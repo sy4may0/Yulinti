@@ -27,10 +27,20 @@ namespace Yulinti.Velum.Indicium {
 
             GUI.Label(new Rect(10, 10, 300, 20), "Civis0 Visa: " + _resFCivisVeletudinis.Visa(0));
             GUI.Label(new Rect(10, 30, 300, 20), "Civis0 Visus: " + _resFCivisVeletudinis.Visus(0));
-            GUI.Label(new Rect(10, 50, 300, 20), "Civis0 EstVigilantia: " + _resFCivisVeletudinis.EstVigilantia(0));
-            GUI.Label(new Rect(10, 70, 300, 20), "Civis0 EstDetectio: " + _resFCivisVeletudinis.EstDetectio(0));
+            GUI.Label(new Rect(10, 50, 300, 20), "Civis0 Suspecta: " + _resFCivisVeletudinis.Suspecta(0));
+            GUI.Label(new Rect(10, 70, 300, 20), "Civis0 EstVigilantia: " + _resFCivisVeletudinis.EstVigilantia(0));
+            GUI.Label(new Rect(10, 90, 300, 20), "Civis0 EstDetectio: " + _resFCivisVeletudinis.EstDetectio(0));
 
-            GUI.Label(new Rect(10, 90, 300, 20), "Puellae Vigor: " + _resFPuellaeVeletudinis.Vigor);
+            GUI.Label(new Rect(10, 110, 300, 20), "Puellae Vigor: " + _resFPuellaeVeletudinis.Vigor);
+            GUI.Label(new Rect(10, 130, 300, 20), "Puellae Patientia: " + _resFPuellaeVeletudinis.Patientia);
+            GUI.Label(new Rect(10, 150, 300, 20), "Puellae Claritas: " + _resFPuellaeVeletudinis.Claritas);
+            GUI.Label(new Rect(10, 170, 300, 20), "Puellae Aether: " + _resFPuellaeVeletudinis.Aether);
+            GUI.Label(new Rect(10, 190, 300, 20), "Puellae Intentio: " + _resFPuellaeVeletudinis.Intentio);
+            GUI.Label(new Rect(10, 210, 300, 20), "Puellae EstNudusAnterior: " + _resFPuellaeVeletudinis.EstNudusAnterior);
+            GUI.Label(new Rect(10, 230, 300, 20), "Puellae EstNudusPosterior: " + _resFPuellaeVeletudinis.EstNudusPosterior);
+
+            GUI.Label(new Rect(10, 250, 300, 20), "Civis0 EstSpectareNudusAnterior: " + _resFCivisVeletudinis.EstSpectareNudusAnterior(0));
+            GUI.Label(new Rect(10, 270, 300, 20), "Civis0 EstSpectareNudusPosterior: " + _resFCivisVeletudinis.EstSpectareNudusPosterior(0));
         }
 
         public void Activare() {

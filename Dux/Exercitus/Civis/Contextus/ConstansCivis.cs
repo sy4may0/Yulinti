@@ -7,5 +7,6 @@ namespace Yulinti.Dux.Exercitus {
         public const int LongitudoOrdinatioNavmesh = 12;
         public const int LongitudoOrdinatioVeletudinisValoris = 32;
         public const int LongitudoOrdinatioMortis = 6;
+        public const int LongitudoOrdinatioVeletudinisSpectare = 12;
     }
 }

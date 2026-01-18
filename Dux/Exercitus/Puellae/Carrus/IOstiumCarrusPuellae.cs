@@ -42,11 +42,16 @@ namespace Yulinti.Dux.Exercitus {
         );
 
         void PostulareVeletudinis(
-            float dtVigoris,
-            float dtPatientiae,
-            float dtAetheris,
-            float dtIntentio,
-            float dtClaritas
+            float dtVigoris = 0f,
+            float dtPatientiae = 0f,
+            float dtAetheris = 0f,
+            float dtIntentio = 0f,
+            float dtClaritas = 0f
+        );
+
+        void PostulareVeletudinisNudi(
+            bool estNudusAnterior,
+            bool estNudusPosterior
         );
     }
 }

@@ -61,6 +61,7 @@ namespace Yulinti.Dux.Exercitus {
         private void ConfirmareVeletudinisValoris(int idCivis) {
             _exVeletudinisValoris.Confirmare(idCivis);
             _lacusOrdinatioCivis.ColligereVeletudinisValoris(idCivis);
+            _lacusOrdinatioCivis.ColligereVeletudinisSpectare(idCivis);
         }
 
         private void ConfirmareVeletudinisMortis(int idCivis) {
@@ -161,6 +162,17 @@ namespace Yulinti.Dux.Exercitus {
             if (_lacusOrdinatioCivis.EmittareMortis(idCivis, out var ordinatio)) {
                 ordinatio.Pono(speciesMortis);
                 _exMortis.Executare(idCivis, ordinatio);
+            }
+        }
+
+        public void PostulareVeletudinisSpectare(
+            int idCivis,
+            bool estSpectareNudusAnterior,
+            bool estSpectareNudusPosterior
+        ) {
+            if (_lacusOrdinatioCivis.EmittareVeletudinisSpectare(idCivis, out var ordinatio)) {
+                ordinatio.Pono(estSpectareNudusAnterior, estSpectareNudusPosterior);
+                _exVeletudinisValoris.Executare(idCivis, ordinatio);
             }
         }
     }
