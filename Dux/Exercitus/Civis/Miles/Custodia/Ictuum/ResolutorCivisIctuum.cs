@@ -29,36 +29,33 @@ namespace Yulinti.Dux.Exercitus {
         ) {
             _contextus = contextus;
             _resolutorCivisDistantia = resolutorCivisDistantia;
-            // 仮設定
             _abacusDistantiaeVisus = new AbacusDistantiaeVisus(
-                distantiaMaxima: 30f,
-                distantiaMin: 3f,
-                distantiaMedius: 12f,
-                praeruptioDistantiaeVisus: 12f
+                distantiaMaxima: _contextus.Configuratio.Custodiae.DistantiaVisaeMaxima,
+                distantiaMin: _contextus.Configuratio.Custodiae.DistantiaVisaeMin,
+                distantiaMedius: _contextus.Configuratio.Custodiae.DistantiaVisaeMedius,
+                praeruptioDistantiaeVisus: _contextus.Configuratio.Custodiae.PraeruptioDistantiaVisae
             );
 
             _abacusDistantiaeVisusAngli = new AbacusDistantiaeVisus(
-                distantiaMaxima: 30f,
-                distantiaMin: 3f,
-                distantiaMedius: 12f,
-                praeruptioDistantiaeVisus: 18f
+                distantiaMaxima: _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMaxima,
+                distantiaMin: _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMin,
+                distantiaMedius: _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMedius,
+                praeruptioDistantiaeVisus: _contextus.Configuratio.Custodiae.PraeruptioDistantiaAnguliVisus
             );
 
-            // 仮設定
             // 近距離で適用する視野角
             _abacusAnguliVisus0 = new AbacusAnguliVisus(
-                angulusMaximaRad: DuxMath.Deg2Rad(100f),
-                angulusMinRad: DuxMath.Deg2Rad(45f),
-                angulusMediusRad: DuxMath.Deg2Rad(70f),
-                praeruptioAnguliVisus: 12f
+                angulusMaximaRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Maxima),
+                angulusMinRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Min),
+                angulusMediusRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Medius),
+                praeruptioAnguliVisus: _contextus.Configuratio.Custodiae.PraeruptioAngulusVisus0
             );
-            // 仮設定
             // 遠距離で適用する視野角
             _abacusAnguliVisus1 = new AbacusAnguliVisus(
-                angulusMaximaRad: DuxMath.Deg2Rad(90f),
-                angulusMinRad: DuxMath.Deg2Rad(0f),
-                angulusMediusRad: DuxMath.Deg2Rad(45f),
-                praeruptioAnguliVisus: 12f
+                angulusMaximaRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Maxima),
+                angulusMinRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Min),
+                angulusMediusRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Medius),
+                praeruptioAnguliVisus: _contextus.Configuratio.Custodiae.PraeruptioAngulusVisus1
             );
 
             _cIDPuellaeResVisaeCapitis = (IDPuellaeResVisaeCapitis[])Enum.GetValues(typeof(IDPuellaeResVisaeCapitis));
