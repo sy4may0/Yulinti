@@ -68,7 +68,7 @@ namespace Yulinti.Dux.Exercitus {
 
             // 距離減衰パラメータ初期化
             _ratioDistantiaCustodiaeAscensus = DuxMath.Clamp(
-                DuxMath.InverseLeap(
+                DuxMath.InverseLerp(
                     _contextus.Configuratio.Custodiae.DistantiaCustodiae,
                     _contextus.Configuratio.Custodiae.DistantiaCustodiaeMaxima,
                     _contextus.Configuratio.Custodiae.DistantiaCustodiaeAscensus
@@ -101,7 +101,7 @@ namespace Yulinti.Dux.Exercitus {
             float distantiaCustodiaeMaxima
         ) {
             // シグモイド関数でカーブを計算する。
-            float d = DuxMath.Clamp(DuxMath.InverseLeap(
+            float d = DuxMath.Clamp(DuxMath.InverseLerp(
                 distantiaCustodiae,
                 distantiaCustodiaeMaxima,
                 distantia

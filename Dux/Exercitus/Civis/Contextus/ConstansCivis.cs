@@ -11,5 +11,7 @@ namespace Yulinti.Dux.Exercitus {
 
         // Custodiaeの各種定数
         public const int LongitudoSigmoidStudiumAmittere = 256;
+        public const int LongitudoSigmoidDistantiaeVisus = 256;
+        public const int LongitudoSigmoidAnguliVisus = 256;
     }
 }
