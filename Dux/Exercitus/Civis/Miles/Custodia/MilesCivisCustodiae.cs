@@ -87,6 +87,7 @@ namespace Yulinti.Dux.Exercitus {
                 _ratioTempusStudiumAmittere,
                 LONGITUDOLUT
             );
+
             _estSpectareNudusPrioris = new bool[_contextus.Civis.Longitudo];
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
                 _estSpectareNudusPrioris[i] = false;

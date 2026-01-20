@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Animancer;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 using UnityEngine;
 using Yulinti.Nucleus;
 using System;

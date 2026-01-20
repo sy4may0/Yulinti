@@ -1,8 +1,8 @@
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.Nucleus;
 using Yulinti.Dux.ContractusDucis;
+using Yulinti.Nucleus;
 using System.Numerics;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumPuellaeResVisaeLegibile : IOstiumPuellaeResVisaeLegibile {

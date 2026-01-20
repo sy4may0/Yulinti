@@ -2,6 +2,7 @@ using Animancer;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 
+using Yulinti.Dux.ContractusDucis;
 namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
     public interface IConfiguratioPuellaeAnimationisUnicae {
         public IDPuellaeAnimationis Id { get; }

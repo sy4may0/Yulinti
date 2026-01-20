@@ -1,3 +1,4 @@
+using Yulinti.Dux.ContractusDucis;
 namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
     public interface IConfiguratioPunctumViae {
         IDPunctumViaeTypi[] Crematorium { get; }

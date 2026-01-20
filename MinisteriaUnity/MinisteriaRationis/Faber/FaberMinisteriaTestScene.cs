@@ -1,7 +1,7 @@
 using VContainer;
 using VContainer.Unity;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Dux.ContractusDucis;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     public static class FaberMinisteriaTestScene {

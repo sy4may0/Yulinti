@@ -1,8 +1,9 @@
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 using Yulinti.Nucleus;
 using System;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal enum CivisGenerationisStatus {

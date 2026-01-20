@@ -1,6 +1,6 @@
 using System;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Dux.ContractusDucis;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumCivisAnimationesMutabile : IOstiumCivisAnimationesMutabile {

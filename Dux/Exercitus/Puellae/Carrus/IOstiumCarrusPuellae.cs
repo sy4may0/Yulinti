@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 using System;
 using System.Numerics;
 

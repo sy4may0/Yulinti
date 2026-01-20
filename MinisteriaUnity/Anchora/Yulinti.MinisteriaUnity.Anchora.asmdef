@@ -5,6 +5,7 @@
         "Kybernetik.Animancer",
         "Unity.InputSystem",
         "Yulinti.Nucleus",
+        "Yulinti.Dux.ContractusDucis",
         "Yulinti.MinisteriaUnity.ContractusMinisterii",
         "Yulinti.MinisteriaUnity.ConfiguratioMinisterii",
         "Unity.Addressables",

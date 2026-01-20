@@ -1,6 +1,7 @@
 using Animancer;
 using Yulinti.Nucleus;
 
+using Yulinti.Dux.ContractusDucis;
 namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
     public interface IConfiguratioCivisAnimationisUnicae {
         public IDCivisAnimationis Id { get; }

@@ -8,5 +8,8 @@ namespace Yulinti.Dux.Exercitus {
         public const int LongitudoOrdinatioVeletudinisValoris = 32;
         public const int LongitudoOrdinatioMortis = 6;
         public const int LongitudoOrdinatioVeletudinisSpectare = 12;
+
+        // Custodiaeの各種定数
+        public const int LongitudoSigmoidStudiumAmittere = 256;
     }
 }

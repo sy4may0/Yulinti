@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 
+using Yulinti.Dux.ContractusDucis;
 namespace Yulinti.MinisteriaUnity.Anchora {
     public sealed class AnchoraPuellaeCrinis : MonoBehaviour, IAnchora, IPhantasma, IAnchoraPuellaeCrinis {
         [SerializeField] private AssetReferenceGameObject _prefab;

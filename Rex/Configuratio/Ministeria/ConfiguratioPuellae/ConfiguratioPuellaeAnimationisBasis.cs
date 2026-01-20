@@ -3,6 +3,7 @@ using UnityEngine;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 
+using Yulinti.Dux.ContractusDucis;
 namespace Yulinti.Rex {
     public abstract class ConfiguratioPuellaeAnimationisBasis : ScriptableObject, IConfiguratioPuellaeAnimationisUnicae {
         [SerializeField] private IDPuellaeAnimationis _id;

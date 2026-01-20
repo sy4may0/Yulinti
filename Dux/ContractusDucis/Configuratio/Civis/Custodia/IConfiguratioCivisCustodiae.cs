@@ -19,9 +19,9 @@ namespace Yulinti.Dux.ContractusDucis {
         // 警戒状態/通常時の視認減少量 => シグモイド関数で算出する興味喪失度で補正される。
         float ConsumptioVisaeSec { get; }
 
-        // 興味を失うまでの時間(sec)
+        // 興味を失い始める時間(Sigmoidの坂にあたるポイント)
         float TempusStudiumAmittereSec { get; }
-        // 視認減少が最大化するまでの時間(sec)
+        // 視認減少が最大化するまでの時間(Sigmoidの右端にあたるポイント)
         float TempusStudiumAmittereMaximaSec { get; }
         // 興味の減少カーブ角度
         float PraeruptioTempusAmittere { get; }

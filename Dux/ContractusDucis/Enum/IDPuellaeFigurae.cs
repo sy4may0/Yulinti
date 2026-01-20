@@ -1,4 +1,4 @@
-﻿namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
+﻿namespace Yulinti.Dux.ContractusDucis {
     public enum IDPuellaeFiguraePelvis {
         csLHipX90,
         csLHipX150,

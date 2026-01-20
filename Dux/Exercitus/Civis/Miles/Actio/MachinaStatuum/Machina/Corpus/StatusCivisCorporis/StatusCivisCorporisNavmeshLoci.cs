@@ -1,5 +1,4 @@
 using Yulinti.Dux.ContractusDucis;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using System;
 using Yulinti.Nucleus;
 

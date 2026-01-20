@@ -1,5 +1,6 @@
 using Yulinti.Dux.ContractusDucis;
 using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumPuellaeLociMutabile : IOstiumPuellaeLociMutabile {

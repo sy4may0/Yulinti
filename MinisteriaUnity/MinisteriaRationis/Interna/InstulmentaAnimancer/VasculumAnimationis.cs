@@ -1,5 +1,5 @@
 using Animancer;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 using System;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {

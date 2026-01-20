@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 using Yulinti.Nucleus;
 using UnityEngine;
 using System.Collections.Generic;

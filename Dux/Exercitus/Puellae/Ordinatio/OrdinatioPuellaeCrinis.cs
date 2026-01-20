@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class OrdinatioPuellaeCrinis : OrdinatioPuellae, IOrdinatioPuellaeCrinis {

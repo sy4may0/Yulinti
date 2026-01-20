@@ -1,6 +1,6 @@
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using System.Collections.Generic;
 using Yulinti.Dux.ContractusDucis;
+using System.Collections.Generic;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class TabulaPunctumViae {
