@@ -4,7 +4,7 @@ using Yulinti.Nucleus;
 using System;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class ResolutorCivisIctuum {
+    internal sealed class ResolutorCivisIctuum : IResolutorCivisIctuum {
         private readonly ContextusCivisOstiorumLegibile _contextus;
         private readonly AbacusDistantiaeVisus _abacusDistantiaeVisus;
 
@@ -21,10 +21,14 @@ namespace Yulinti.Dux.Exercitus {
         private readonly float[] _visaIctuumCapitis;
         private readonly float[] _visaIctuumCorporis;
 
+        private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
+
         public ResolutorCivisIctuum(
-            ContextusCivisOstiorumLegibile contextus
+            ContextusCivisOstiorumLegibile contextus,
+            IResolutorCivisDistantia resolutorCivisDistantia
         ) {
             _contextus = contextus;
+            _resolutorCivisDistantia = resolutorCivisDistantia;
             // 仮設定
             _abacusDistantiaeVisus = new AbacusDistantiaeVisus(
                 distantiaMaxima: 30f,
@@ -72,6 +76,7 @@ namespace Yulinti.Dux.Exercitus {
 
         public float VisaCapitis(int idCivis) => _visaIctuumCapitis[idCivis];
         public float VisaCorporis(int idCivis) => _visaIctuumCorporis[idCivis];
+        public bool EstVisa(int idCivis) => _visaIctuumCapitis[idCivis] + _visaIctuumCorporis[idCivis] > Numerus.Epsilon;
 
         // 距離による視力レシオを計算する。
         private float ComputareRatioDistantia(
@@ -161,6 +166,13 @@ namespace Yulinti.Dux.Exercitus {
         public void Resolvere(
             int idCivis, IResFluidaCivisLegibile resFluida
         ) {
+            // 視認範囲外の場合は視認数を0とする。
+            if (!_resolutorCivisDistantia.EstCustodiae(idCivis)) {
+                _visaIctuumCapitis[idCivis] = 0f;
+                _visaIctuumCorporis[idCivis] = 0f;
+                return;
+            }
+
             Vector3 positioCivisCapitis = default;
             Vector3 directioCivisCapitis = default;
 
