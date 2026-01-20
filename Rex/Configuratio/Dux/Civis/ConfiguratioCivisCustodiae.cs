@@ -69,6 +69,7 @@ namespace Yulinti.Rex {
         public float LimenDetectio => limenDetectio;
         public float ConsumptioVisaeDetectioSec => consumptioVisaeDetectioSec;
         public float ConsumptioVisaeSec => consumptioVisaeSec;
+        public float ConsumptioSuspectaSec => consumptioSuspectaSec;
         public float TempusStudiumAmittereSec => tempusStudiumAmittereSec;
         public float TempusStudiumAmittereMaximaSec => tempusStudiumAmittereMaximaSec;
         public float PraeruptioTempusAmittere => praeruptioTempusAmittere;
