@@ -170,6 +170,8 @@ namespace Yulinti.Dux.Exercitus {
                     idCivis,
                     estVigilantia: s.EstVigilantia,
                     estDetectio: s.EstDetectio,
+                    estAudivi: s.EstAudivi,
+                    estSuspecta: s.EstSuspecta,
                     estSpectareNudusAnterior: s.EstSpectareNudusAnterior,
                     estSpectareNudusPosterior: s.EstSpectareNudusPosterior
                 );

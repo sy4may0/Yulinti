@@ -168,11 +168,13 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis,
             bool? estVigilantia = null,
             bool? estDetectio = null,
+            bool? estAudivi = null,
+            bool? estSuspecta = null,
             bool? estSpectareNudusAnterior = null,
             bool? estSpectareNudusPosterior = null
         ) {
             if (_lacusOrdinatioCivis.EmittareVeletudinisCondicionis(idCivis, out var ordinatio)) {
-                ordinatio.Pono(estVigilantia, estDetectio, estSpectareNudusAnterior, estSpectareNudusPosterior);
+                ordinatio.Pono(estVigilantia, estDetectio, estAudivi, estSuspecta, estSpectareNudusAnterior, estSpectareNudusPosterior);
                 _exVeletudinis.Executare(idCivis, ordinatio);
             }
         }

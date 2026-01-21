@@ -21,6 +21,10 @@ namespace Yulinti.Dux.Exercitus {
         private bool[] _estVigilantia;
         // 検知フラグ
         private bool[] _estDetectio;
+        // 疑心フラグ
+        private bool[] _estSuspecta;
+        // 聴認フラグ
+        private bool[] _estAudivi;
 
         public ResFluidaCivisVeletudinis(IOstiumCivisLegibile ostiumCivis) {
             _vitae = new float[ostiumCivis.Longitudo];
@@ -32,6 +36,8 @@ namespace Yulinti.Dux.Exercitus {
             _estDominare = new bool[ostiumCivis.Longitudo];
             _estVigilantia = new bool[ostiumCivis.Longitudo];
             _estDetectio = new bool[ostiumCivis.Longitudo];
+            _estAudivi = new bool[ostiumCivis.Longitudo];
+            _estSuspecta = new bool[ostiumCivis.Longitudo];
 
             _estSpectareNudusAnterior = false;
             _estSpectareNudusPosterior = false;
@@ -43,6 +49,10 @@ namespace Yulinti.Dux.Exercitus {
                 _audita[i] = 0f;
                 _suspecta[i] = 0f;
                 _estDominare[i] = false;
+                _estVigilantia[i] = false;
+                _estDetectio[i] = false;
+                _estAudivi[i] = false;
+                _estSuspecta[i] = false;
                 _estSpectareNudusAnterior = false;
                 _estSpectareNudusPosterior = false;
             }
@@ -92,6 +102,15 @@ namespace Yulinti.Dux.Exercitus {
             return _estDetectio[idCivis];
         }
 
+        public bool EstAudivi(int idCivis) {
+            if (!estActivum(idCivis)) return false;
+            return _estAudivi[idCivis];
+        }
+        public bool EstSuspecta(int idCivis) {
+            if (!estActivum(idCivis)) return false;
+            return _estSuspecta[idCivis];
+        }
+
         public bool EstSpectareNudusAnterior(int idCivis) {
             if (!estActivum(idCivis)) return false;
             return _estSpectareNudusAnterior;
@@ -109,12 +128,16 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis,
             bool? estVigilantia = null,
             bool? estDetectio = null,
+            bool? estAudivi = null,
+            bool? estSuspecta = null,
             bool? estSpectareNudusAnterior = null,
             bool? estSpectareNudusPosterior = null
         ) {
             if (!estActivum(idCivis)) return;
             if (estVigilantia != null) _estVigilantia[idCivis] = estVigilantia.Value;
             if (estDetectio != null) _estDetectio[idCivis] = estDetectio.Value;
+            if (estAudivi != null) _estAudivi[idCivis] = estAudivi.Value;
+            if (estSuspecta != null) _estSuspecta[idCivis] = estSuspecta.Value;
             if (estSpectareNudusAnterior != null) _estSpectareNudusAnterior = estSpectareNudusAnterior.Value;
             if (estSpectareNudusPosterior != null) _estSpectareNudusPosterior = estSpectareNudusPosterior.Value;
         }

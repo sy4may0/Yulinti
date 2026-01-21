@@ -21,15 +21,23 @@ namespace Yulinti.Dux.Exercitus {
 
             if (_estSpectare) {
                 // 非Nudus視認 -> Nudus視認
+                // suspecta < RatioSuspectaVisaの場合、visa = suspecta。
+                // suspecta >= RatioSuspectaVisaの場合、visa = RatioSuspectaVisa。
+                // 最大RatioSuspectaVisaまでで、visaをsuspectaに合わせる。
                 float visa = resFluida.Veletudinis.Visa(idCivis);
                 float suspecta = resFluida.Veletudinis.Suspecta(idCivis);
-                float dtVisa = (suspecta * ConstansCivis.RatioSuspectaVisa - visa); // 一括で上げる。Temporisで割らない。 
-                if (dtVisa > 0f) {
-                    _contextus.Carrus.PostulareVeletudinisValoris(
-                        idCivis,
-                        dtVisa: dtVisa
-                    );
+                float dtVisa = 0f;
+
+                if (suspecta < ConstansCivis.RatioSuspectaVisa) {
+                    dtVisa = suspecta - visa;
+                } else {
+                    dtVisa = (ConstansCivis.RatioSuspectaVisa - visa);
                 }
+
+                _contextus.Carrus.PostulareVeletudinisValoris(
+                    idCivis,
+                    dtVisa: dtVisa
+                );
             }
             else {
                 // Nudus視認 -> 非Nudus視認
@@ -64,11 +72,11 @@ namespace Yulinti.Dux.Exercitus {
             bool detectioProximus = resFluida.Veletudinis.EstDetectio(idCivis);
             float limenVigilantia = _contextus.Configuratio.Custodiae.LimenVigilantia;
             float limenDetectio = _contextus.Configuratio.Custodiae.LimenDetectio;
-            float hysteresisDetectionis = ConstansCivis.HysteriaDetectionis;
+            float hysteriaDetectionis = ConstansCivis.HysteriaDetectionis;
 
             // 通常時変動
             if (!resFluida.Veletudinis.EstVigilantia(idCivis) && !resFluida.Veletudinis.EstDetectio(idCivis)) {
-                if (resFluida.Veletudinis.Visa(idCivis) > limenVigilantia + hysteresisDetectionis) {
+                if (resFluida.Veletudinis.Visa(idCivis) > limenVigilantia + hysteriaDetectionis) {
                     // 通常 -> 警戒
                     vigilantiaProximus = true;
                     detectioProximus = false;
@@ -76,11 +84,11 @@ namespace Yulinti.Dux.Exercitus {
             }
             // 警戒時変動
             if (resFluida.Veletudinis.EstVigilantia(idCivis)) {
-                if (resFluida.Veletudinis.Visa(idCivis) > limenDetectio + hysteresisDetectionis) {
+                if (resFluida.Veletudinis.Visa(idCivis) > limenDetectio + hysteriaDetectionis) {
                     // 警戒 -> 検知
                     vigilantiaProximus = false;
                     detectioProximus = true;
-                } else if (resFluida.Veletudinis.Visa(idCivis) < limenVigilantia - hysteresisDetectionis) {
+                } else if (resFluida.Veletudinis.Visa(idCivis) < limenVigilantia - hysteriaDetectionis) {
                     // 警戒 -> 通常
                     vigilantiaProximus = false;
                     detectioProximus = false;
@@ -88,17 +96,64 @@ namespace Yulinti.Dux.Exercitus {
             }
             // 検知時変動
             if (resFluida.Veletudinis.EstDetectio(idCivis)) {
-                if (resFluida.Veletudinis.Visa(idCivis) < limenDetectio - hysteresisDetectionis) {
+                if (resFluida.Veletudinis.Visa(idCivis) < limenDetectio - hysteriaDetectionis) {
                     // 検知 -> 警戒
                     vigilantiaProximus = true;
                     detectioProximus = false;
                 }
             }
 
+            if (
+                 vigilantiaProximus == resFluida.Veletudinis.EstVigilantia(idCivis) &&
+                 detectioProximus == resFluida.Veletudinis.EstDetectio(idCivis)
+            ) return;
+
             _contextus.Carrus.PostulareVeletudinisCondicionis(
                 idCivis,
                 estVigilantia: vigilantiaProximus,
                 estDetectio: detectioProximus
+            );
+        }
+
+        public void ResolvereAudivi(
+            int idCivis, IResFluidaCivisLegibile resFluida
+        ) {
+            bool audiviProximus = resFluida.Veletudinis.EstAudivi(idCivis);
+            float limenAudivi = _contextus.Configuratio.Custodiae.LimenAudivi;
+            float hysteriaAudivi = ConstansCivis.HysteriaAudivi;
+
+            if (resFluida.Veletudinis.Audita(idCivis) > limenAudivi + hysteriaAudivi) {
+                audiviProximus = true;
+            } else if (resFluida.Veletudinis.Audita(idCivis) < limenAudivi - hysteriaAudivi) {
+                audiviProximus = false;
+            } 
+            
+            if (audiviProximus == resFluida.Veletudinis.EstAudivi(idCivis)) return;
+
+            _contextus.Carrus.PostulareVeletudinisCondicionis(
+                idCivis,
+                estAudivi: audiviProximus
+            );
+        }
+
+        public void ResolvereSuspecta(
+            int idCivis, IResFluidaCivisLegibile resFluida
+        ) {
+            bool suspectaProximus = resFluida.Veletudinis.EstSuspecta(idCivis);
+            float limenSuspecta = _contextus.Configuratio.Custodiae.LimenSuspecta;
+            float hysteriaSuspecta = ConstansCivis.HysteriaSuspecta;
+
+            if (resFluida.Veletudinis.Suspecta(idCivis) > limenSuspecta + hysteriaSuspecta) {
+                suspectaProximus = true;
+            } else if (resFluida.Veletudinis.Suspecta(idCivis) < limenSuspecta - hysteriaSuspecta) {
+                suspectaProximus = false;
+            }
+
+            if (suspectaProximus == resFluida.Veletudinis.EstSuspecta(idCivis)) return;
+
+            _contextus.Carrus.PostulareVeletudinisCondicionis(
+                idCivis,
+                estSuspecta: suspectaProximus
             );
         }
     }

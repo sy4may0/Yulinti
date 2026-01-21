@@ -4,20 +4,18 @@ using Yulinti.Dux.ContractusDucis;
 namespace Yulinti.Rex {
     [System.Serializable]
     public sealed class ConfiguratioCivisCustodiae : IConfiguratioCivisCustodiae {
-        //この４つは消せる。
-        [SerializeField] private float distantiaCustodiae = 25f;
-        [SerializeField] private float distantiaCustodiaeMaxima = 3f;
-        [SerializeField] private float distantiaCustodiaeAscensus = 12f;
-        [SerializeField] private float precalculusDistantiaAscensus = 10f;
-
         [Header("視認度上昇倍率 (乗算値)")]
         [SerializeField] private float ratioVisus = 15f;
         [Header("猜疑度値上昇倍率 (乗算値)")]
         [SerializeField] private float ratioSuspecta = 15f;
+        [Header("聴認度上昇倍率 (乗算値)")]
+        [SerializeField] private float ratioAudita = 15f;
 
         [Header("警戒状態/通常時の視認判定値")]
         [SerializeField] private float limenVigilantia = 0.5f;
         [SerializeField] private float limenDetectio = 0.9f;
+        [SerializeField] private float limenAudivi = 0.75f;
+        [SerializeField] private float limenSuspecta = 0.35f;
 
         [Header("発覚状態での固定減少量")]
         [SerializeField] private float consumptioVisaeDetectioSec = -0.1f;
@@ -58,18 +56,24 @@ namespace Yulinti.Rex {
         [SerializeField] private float angulusVisus1Medius = 45f;
         [SerializeField] private float praeruptioAngulusVisus1 = 12f;
 
+        [Header("聴認範囲")]
+        [SerializeField] private float distantiaAuditaeActivum = 10f;
+
         public float DistantiaCustodiaeActivum => distantiaCustodiaeActivum;
-        public float DistantiaCustodiae => distantiaCustodiae;
-        public float DistantiaCustodiaeMaxima => distantiaCustodiaeMaxima;
-        public float DistantiaCustodiaeAscensus => distantiaCustodiaeAscensus;
-        public float PrecalculusDistantiaAscensus => precalculusDistantiaAscensus;
+
         public float RatioVisus => ratioVisus;
         public float RatioSuspecta => ratioSuspecta;
+        public float RatioAudita => ratioAudita;
+
         public float LimenVigilantia => limenVigilantia;
         public float LimenDetectio => limenDetectio;
+        public float LimenAudivi => limenAudivi;
+        public float LimenSuspecta => limenSuspecta;
+
         public float ConsumptioVisaeDetectioSec => consumptioVisaeDetectioSec;
         public float ConsumptioVisaeSec => consumptioVisaeSec;
         public float ConsumptioSuspectaSec => consumptioSuspectaSec;
+
         public float TempusStudiumAmittereSec => tempusStudiumAmittereSec;
         public float TempusStudiumAmittereMaximaSec => tempusStudiumAmittereMaximaSec;
         public float PraeruptioTempusAmittere => praeruptioTempusAmittere;
@@ -93,5 +97,7 @@ namespace Yulinti.Rex {
         public float AngulusVisus1Min => angulusVisus1Min;
         public float AngulusVisus1Medius => angulusVisus1Medius;
         public float PraeruptioAngulusVisus1 => praeruptioAngulusVisus1;
+
+        public float DistantiaAuditaeActivum => distantiaAuditaeActivum;
     }
 }

@@ -1,21 +1,16 @@
 namespace Yulinti.Dux.ContractusDucis {
     public interface IConfiguratioCivisCustodiae {
-        // 視認開始距離
-        float DistantiaCustodiae { get; }
-        // 視認上昇が最大になる距離
-        float DistantiaCustodiaeMaxima { get; }
-        // 視認上昇が上がり始める距離
-        float DistantiaCustodiaeAscensus { get; }
-        // 距離による視認上昇のカーブ角度
-        float PrecalculusDistantiaAscensus { get; }
-
         // 視認度上昇倍率 (乗算値)
         float RatioVisus { get; }
         // 猜疑度値上昇倍率 (乗算値)
         float RatioSuspecta { get; }
+        // 聴認度上昇倍率 (乗算値)
+        float RatioAudita { get; }
 
         float LimenVigilantia { get; }
         float LimenDetectio { get; }
+        float LimenAudivi { get; }
+        float LimenSuspecta { get; }
 
         // 発覚状態での固定減少量
         float ConsumptioVisaeDetectioSec { get; }
@@ -58,5 +53,8 @@ namespace Yulinti.Dux.ContractusDucis {
         float AngulusVisus1Min { get; }
         float AngulusVisus1Medius { get; }
         float PraeruptioAngulusVisus1 { get; }
+
+        // 聴認範囲 この範囲内で計算を行う。
+        float DistantiaAuditaeActivum { get; }
     }
 }

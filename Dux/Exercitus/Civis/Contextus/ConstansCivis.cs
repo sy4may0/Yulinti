@@ -18,5 +18,7 @@ namespace Yulinti.Dux.Exercitus {
         public const float RatioSuspectaVisa = 0.75f;
 
         public const float HysteriaDetectionis = 0.02f;
+        public const float HysteriaAudivi = 0.02f;
+        public const float HysteriaSuspecta = 0.02f;
     }
 }

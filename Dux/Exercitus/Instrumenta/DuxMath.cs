@@ -35,10 +35,23 @@ namespace Yulinti.Dux.Exercitus {
             return InverseLerp(y0, y1, y);
         }
 
+        // 0~1にクランプしないLerp
+        public static float NLerp(float y0, float y1, float t) {
+            return y0 + (y1 - y0) * t;
+        }
+
+        // ClampするLerp
         public static float Lerp(float y0, float y1, float t) {
             return Clamp(y0 + (y1 - y0) * t, 0f, 1f);
         }
 
+        // 0~1にクランプしないInverseLerp
+        public static float NInverseLerp(float y0, float y1, float y) {
+            if (MathF.Abs(y1 - y0) < Numerus.Epsilon) return 0f;
+            return (y - y0) / (y1 - y0);
+        }
+
+        // ClampするInverseLerp
         public static float InverseLerp(float y0, float y1, float y) {
             if (MathF.Abs(y1 - y0) < Numerus.Epsilon) return 0f;
             return Clamp((y - y0) / (y1 - y0), 0f, 1f);

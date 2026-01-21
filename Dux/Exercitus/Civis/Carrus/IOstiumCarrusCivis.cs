@@ -48,6 +48,8 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis,
             bool? estVigilantia = null,
             bool? estDetectio = null,
+            bool? estAudivi = null,
+            bool? estSuspecta = null,
             bool? estSpectareNudusAnterior = null,
             bool? estSpectareNudusPosterior = null
         );

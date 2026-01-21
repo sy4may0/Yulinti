@@ -12,6 +12,8 @@ namespace Yulinti.Dux.ContractusDucis {
 
         bool EstVigilantia(int idCivis);
         bool EstDetectio(int idCivis);
+        bool EstAudivi(int idCivis);
+        bool EstSuspecta(int idCivis);
 
         bool EstSpectareNudusAnterior(int idCivis);
         bool EstSpectareNudusPosterior(int idCivis);
