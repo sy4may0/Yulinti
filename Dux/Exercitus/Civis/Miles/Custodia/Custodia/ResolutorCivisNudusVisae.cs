@@ -24,15 +24,19 @@ namespace Yulinti.Dux.Exercitus {
             _cIDPuellaeResNudusPosterior = new IDPuellaeResNudusPosterior[Enum.GetValues(typeof(IDPuellaeResNudusPosterior)).Length];
         }
 
+        public void Initare(int idCivis) {
+            // 何もしない。
+        }
+
         public void Ordinare(
             int idCivis
         ) {
             // 視認範囲外の場合はSpectareNudusをfalseとする。
             if (!_resolutorCivisDistantia.EstCustodiae(idCivis)) {
-                _contextus.Carrus.PostulareVeletudinisSpectare(
+                _contextus.Carrus.PostulareVeletudinisCondicionis(
                     idCivis,
-                    false,
-                    false
+                    estSpectareNudusAnterior: false,
+                    estSpectareNudusPosterior: false
                 );
                 return;
             }
@@ -74,10 +78,10 @@ namespace Yulinti.Dux.Exercitus {
                 }
             }
 
-            _contextus.Carrus.PostulareVeletudinisSpectare(
+            _contextus.Carrus.PostulareVeletudinisCondicionis(
                 idCivis,
-                estSpectareNudusAnterior,
-                estSpectareNudusPosterior
+                estSpectareNudusAnterior: estSpectareNudusAnterior,
+                estSpectareNudusPosterior: estSpectareNudusPosterior
             );
         }
     }

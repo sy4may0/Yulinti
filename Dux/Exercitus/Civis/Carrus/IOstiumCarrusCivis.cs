@@ -44,10 +44,12 @@ namespace Yulinti.Dux.Exercitus {
             SpeciesOrdinationisCivisMortis speciesMortis
         );
 
-        void PostulareVeletudinisSpectare(
+        void PostulareVeletudinisCondicionis(
             int idCivis,
-            bool estSpectareNudusAnterior,
-            bool estSpectareNudusPosterior
+            bool? estVigilantia = null,
+            bool? estDetectio = null,
+            bool? estSpectareNudusAnterior = null,
+            bool? estSpectareNudusPosterior = null
         );
     }
 }

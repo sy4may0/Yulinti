@@ -82,15 +82,15 @@ namespace Yulinti.Dux.Exercitus {
         }
     }
 
-    internal sealed class ExecutorCivisVeletudinisValoris : IExecutorCivis {
+    internal sealed class ExecutorCivisVeletudinis : IExecutorCivis {
         private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
         private readonly IOstiumCivisLegibile _ostiumCivisLegibile;
         private readonly ResFluidaCivisVeletudinis _resFluidaVeletudinis;
 
-        private readonly DuxQueue<IOrdinatioCivisVeletudinisSpectare>[] _queueVeletudinisSpectare;
+        private readonly DuxQueue<IOrdinatioCivisVeletudinisCondicionis>[] _queueVeletudinisCondicionis;
         private readonly PhantasmaCivisVeletudinis _phantasma;
 
-        public ExecutorCivisVeletudinisValoris(
+        public ExecutorCivisVeletudinis(
             IConfiguratioExercitusCivis configuratioExercitusCivis,
             ResFluidaCivisVeletudinis resFluidaVeletudinis,
             IOstiumCivisLegibile ostiumCivisLegibile
@@ -99,9 +99,9 @@ namespace Yulinti.Dux.Exercitus {
             _resFluidaVeletudinis = resFluidaVeletudinis;
             _ostiumCivisLegibile = ostiumCivisLegibile;
             _phantasma = new PhantasmaCivisVeletudinis(resFluidaVeletudinis.Longitudo);
-            _queueVeletudinisSpectare = new DuxQueue<IOrdinatioCivisVeletudinisSpectare>[_ostiumCivisLegibile.Longitudo];
+            _queueVeletudinisCondicionis = new DuxQueue<IOrdinatioCivisVeletudinisCondicionis>[_ostiumCivisLegibile.Longitudo];
             for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
-                _queueVeletudinisSpectare[i] = new DuxQueue<IOrdinatioCivisVeletudinisSpectare>(ConstansCivis.LongitudoOrdinatioVeletudinisSpectare);
+                _queueVeletudinisCondicionis[i] = new DuxQueue<IOrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
             }
         }
 
@@ -110,7 +110,7 @@ namespace Yulinti.Dux.Exercitus {
         // - resFluida初期化
         // - Dominare
         public void Initare(int idCivis) {
-            _queueVeletudinisSpectare[idCivis].Purgere();
+            _queueVeletudinisCondicionis[idCivis].Purgere();
             _phantasma.Pono(
                 idCivis,
                 vitae: 1f,
@@ -124,7 +124,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void Primum(int idCivis) {
-            _queueVeletudinisSpectare[idCivis].Purgere();
+            _queueVeletudinisCondicionis[idCivis].Purgere();
             _phantasma.Pono(
                 idCivis,
                 vitae: _resFluidaVeletudinis.Vitae(idCivis),
@@ -146,8 +146,8 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
-        public void Executare(int idCivis, IOrdinatioCivisVeletudinisSpectare veletudinisSpectare) {
-            if (!_queueVeletudinisSpectare[idCivis].ConarePono(veletudinisSpectare)) {
+        public void Executare(int idCivis, IOrdinatioCivisVeletudinisCondicionis veletudinisCondicionis) {
+            if (!_queueVeletudinisCondicionis[idCivis].ConarePono(veletudinisCondicionis)) {
                 Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISVELETUDINISVALORIS_ORDINATIO_QUEUE_FULL);
                 return;
             }
@@ -165,11 +165,13 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         private void ApplicareSpectare(int idCivis) {
-            while (_queueVeletudinisSpectare[idCivis].ConareLego(out var s)) {
-                _resFluidaVeletudinis.RenovareSpectareNudus(
+            while (_queueVeletudinisCondicionis[idCivis].ConareLego(out var s)) {
+                _resFluidaVeletudinis.RenovareCondicionis(
                     idCivis,
-                    s.EstSpectareNudusAnterior,
-                    s.EstSpectareNudusPosterior
+                    estVigilantia: s.EstVigilantia,
+                    estDetectio: s.EstDetectio,
+                    estSpectareNudusAnterior: s.EstSpectareNudusAnterior,
+                    estSpectareNudusPosterior: s.EstSpectareNudusPosterior
                 );
             }
         }
@@ -177,7 +179,6 @@ namespace Yulinti.Dux.Exercitus {
         public void Confirmare(int idCivis) {
             ApplicarePhantasma(idCivis);
             ApplicareSpectare(idCivis);
-            ResolvereDetectio(idCivis);
         }
 
         // Spirituare時にこれを実行する。
@@ -193,45 +194,9 @@ namespace Yulinti.Dux.Exercitus {
                 audita: 0f,
                 suspecta: 0f
             );
-            _queueVeletudinisSpectare[idCivis].Purgere();
+            _queueVeletudinisCondicionis[idCivis].Purgere();
             _resFluidaVeletudinis.Purgare(idCivis);
             _resFluidaVeletudinis.Liberare(idCivis);
-        }
-
-        // Detectio/Vigilantiaのbool値を更新
-        private void ResolvereDetectio(int idCivis) {
-            bool vigilantiaProximus = _resFluidaVeletudinis.EstVigilantia(idCivis);
-            bool detectioProximus = _resFluidaVeletudinis.EstDetectio(idCivis);
-
-            // 通常時変動
-            if (!_resFluidaVeletudinis.EstVigilantia(idCivis) && !_resFluidaVeletudinis.EstDetectio(idCivis)) {
-                if (_resFluidaVeletudinis.Visa(idCivis) > _configuratioCivisCustodiae.LimenVigilantia + 0.03f) {
-                    // 通常 -> 警戒
-                    vigilantiaProximus = true;
-                    detectioProximus = false;
-                }
-            // 警戒時変動
-            } else if (_resFluidaVeletudinis.EstVigilantia(idCivis)) {
-                if (_resFluidaVeletudinis.Visa(idCivis) > _configuratioCivisCustodiae.LimenDetectio + 0.03f) {
-                    // 警戒 -> 検知
-                    vigilantiaProximus = false;
-                    detectioProximus = true;
-                } else if (_resFluidaVeletudinis.Visa(idCivis) < _configuratioCivisCustodiae.LimenVigilantia - 0.03f) {
-                    // 警戒 -> 通常
-                    vigilantiaProximus = false;
-                    detectioProximus = false;
-                }
-            // 検知時変動
-            } else if (_resFluidaVeletudinis.EstDetectio(idCivis)) {
-                if (_resFluidaVeletudinis.Visa(idCivis) < _configuratioCivisCustodiae.LimenDetectio - 0.03f) {
-                    // 検知 -> 警戒
-                    vigilantiaProximus = true;
-                    detectioProximus = false;
-                }
-            }
-
-            _resFluidaVeletudinis.RenovareVigilantia(idCivis, vigilantiaProximus);
-            _resFluidaVeletudinis.RenovareDetectio(idCivis, detectioProximus);
         }
     }
 }

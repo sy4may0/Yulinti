@@ -75,6 +75,11 @@ namespace Yulinti.Dux.Exercitus {
         public float VisaCorporis(int idCivis) => _visaIctuumCorporis[idCivis];
         public bool EstVisa(int idCivis) => _visaIctuumCapitis[idCivis] + _visaIctuumCorporis[idCivis] > Numerus.Epsilon;
 
+        public void Initare(int idCivis) {
+            _visaIctuumCapitis[idCivis] = 0f;
+            _visaIctuumCorporis[idCivis] = 0f;
+        }
+
         // 距離による視力レシオを計算する。
         private float ComputareRatioDistantia(
             Vector3 positioCivisCapitis, // 頭の位置

@@ -105,13 +105,18 @@ namespace Yulinti.Dux.Exercitus {
             return _estSpectareNudusAnterior || _estSpectareNudusPosterior;
         }
 
-        public void RenovareVigilantia(int idCivis, bool estVigilantia) {
+        public void RenovareCondicionis(
+            int idCivis,
+            bool? estVigilantia = null,
+            bool? estDetectio = null,
+            bool? estSpectareNudusAnterior = null,
+            bool? estSpectareNudusPosterior = null
+        ) {
             if (!estActivum(idCivis)) return;
-            _estVigilantia[idCivis] = estVigilantia;
-        }
-        public void RenovareDetectio(int idCivis, bool estDetectio) {
-            if (!estActivum(idCivis)) return;
-            _estDetectio[idCivis] = estDetectio;
+            if (estVigilantia != null) _estVigilantia[idCivis] = estVigilantia.Value;
+            if (estDetectio != null) _estDetectio[idCivis] = estDetectio.Value;
+            if (estSpectareNudusAnterior != null) _estSpectareNudusAnterior = estSpectareNudusAnterior.Value;
+            if (estSpectareNudusPosterior != null) _estSpectareNudusPosterior = estSpectareNudusPosterior.Value;
         }
 
         public void RenovareValoris(
@@ -128,16 +133,6 @@ namespace Yulinti.Dux.Exercitus {
             _visa[idCivis] = DuxMath.Clamp(visa, 0f, 1f);
             _audita[idCivis] = DuxMath.Clamp(audita, 0f, 1f);
             _suspecta[idCivis] = DuxMath.Clamp(suspecta, 0f, 1f);
-        }
-
-        public void RenovareSpectareNudus(
-            int idCivis,
-            bool estSpectareNudusAnterior,
-            bool estSpectareNudusPosterior
-        ) {
-            if (!estActivum(idCivis)) return;
-            _estSpectareNudusAnterior = estSpectareNudusAnterior;
-            _estSpectareNudusPosterior = estSpectareNudusPosterior;
         }
 
         public void Purgare(int idCivis) {

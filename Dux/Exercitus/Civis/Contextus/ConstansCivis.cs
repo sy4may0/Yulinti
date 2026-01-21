@@ -7,11 +7,16 @@ namespace Yulinti.Dux.Exercitus {
         public const int LongitudoOrdinatioNavmesh = 12;
         public const int LongitudoOrdinatioVeletudinisValoris = 32;
         public const int LongitudoOrdinatioMortis = 6;
-        public const int LongitudoOrdinatioVeletudinisSpectare = 12;
+        public const int LongitudoOrdinatioVeletudinisCondicionis = 12;
 
         // Custodiaeの各種定数
         public const int LongitudoSigmoidStudiumAmittere = 256;
         public const int LongitudoSigmoidDistantiaeVisus = 256;
         public const int LongitudoSigmoidAnguliVisus = 256;
+
+        // Nudus視認後のsuspecta -> visa変換比率
+        public const float RatioSuspectaVisa = 0.75f;
+
+        public const float HysteriaDetectionis = 0.02f;
     }
 }
