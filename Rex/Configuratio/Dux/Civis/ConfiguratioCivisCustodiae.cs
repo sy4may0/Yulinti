@@ -30,7 +30,7 @@ namespace Yulinti.Rex {
         [SerializeField] private float praeruptioTempusAmittere = 12f;
 
         [Header("視認範囲")]
-        [SerializeField] private float distantiaCustodiaeActivum = 10f;
+        [SerializeField] private float distantiaCustodiaeActivum = 32;
 
         [Header("距離による視認補正")]
         [SerializeField] private float distantiaVisaeMaxima = 30f;

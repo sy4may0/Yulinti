@@ -101,11 +101,14 @@ namespace Yulinti.Dux.Exercitus {
             if (directio.LengthSquared() < Numerus.EpsilonSq) return 1f;
 
             float ratioDistantia = _abacusDistantiaeVisusAngli.ComputareRatioInversus(positioCivisCapitis, positioPuellaeResVisae);
-            float ratioAngulus0 = _abacusAnguliVisus0.ComputareRatioInversus(directioCivisCapitis, directio);
-            float ratioAngulus1 = _abacusAnguliVisus1.ComputareRatioInversus(directioCivisCapitis, directio);
+            // angulusMaximaで0、angulusMinで1となるように逆補正を使う
+            float ratioAngulus0 = _abacusAnguliVisus0.ComputareRatio(directioCivisCapitis, directio);
+            float ratioAngulus1 = _abacusAnguliVisus1.ComputareRatio(directioCivisCapitis, directio);
 
             // anglulus0が近距離、anglulus1が遠距離の補正値。
             float ratio = DuxMath.Lerp(ratioAngulus1, ratioAngulus0, ratioDistantia);
+
+            UnityEngine.Debug.Log($"ratioDistantia: {ratioDistantia}, ratioAngulus0: {ratioAngulus0}, ratioAngulus1: {ratioAngulus1}, ratio: {ratio}");
             return ratio;
         }
 

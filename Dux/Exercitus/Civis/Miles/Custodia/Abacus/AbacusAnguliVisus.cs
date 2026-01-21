@@ -28,24 +28,32 @@ namespace Yulinti.Dux.Exercitus {
                 Errorum.Fatal(IDErrorum.ABACUSANGULIVISUS_INVALID_ANGULUS);
             }
             if (angulusMinRad <= 0f) {
-                Errorum.Fatal(IDErrorum.ABACUSANGULIVISUS_INVALID_ANGULUS);
+                angulusMinRad = Numerus.Epsilon;
             }
 
+            // ここで逆にするからradMaxはcosMinだぞボケが。死ね。
             _angulusMaximaRad = angulusMaximaRad;
             _angulusMinRad = angulusMinRad;
             _cosMin = MathF.Cos(angulusMaximaRad);
             _cosMax = MathF.Cos(angulusMinRad);
             float cosMed = MathF.Cos(angulusMediusRad);
-            
+
             _ratioAnguliMed = DuxMath.InverseLerp(_cosMin, _cosMax, cosMed);
             _sigmoid = new SigmoidLUT(praeruptioAnguliVisus, _ratioAnguliMed, ConstansCivis.LongitudoSigmoidAnguliVisus);
             _sigmoidInversus = new SigmoidLUT(praeruptioAnguliVisus, _ratioAnguliMed, ConstansCivis.LongitudoSigmoidAnguliVisus, true);
         }
 
         public float ComputareRatio(float angulusRad) {
-            if (angulusRad <= _angulusMinRad) return 0f;
-            if (angulusRad >= _angulusMaximaRad) return 1f;
+            if (angulusRad <= _angulusMinRad) return 1f;
+            if (angulusRad >= _angulusMaximaRad) return 0f;
             float cos = MathF.Cos(angulusRad);
+            float ratio = _sigmoid[DuxMath.InverseLerp(_cosMin, _cosMax, cos)];
+            return ratio;
+        }
+
+        public float ComputareRatioCos(float cos) {
+            if (cos >= _cosMax) return 1f; // 角度が最小角以下
+            if (cos <= _cosMin) return 0f; // 角度が最大角以上
             float ratio = _sigmoid[DuxMath.InverseLerp(_cosMin, _cosMax, cos)];
             return ratio;
         }
@@ -53,17 +61,20 @@ namespace Yulinti.Dux.Exercitus {
         public float ComputareRatio(Vector3 directio0, Vector3 directio1)
         {
             float dot = DuxMath.Clamp(Vector3.Dot(Vector3.Normalize(directio0), Vector3.Normalize(directio1)), -1f, 1f);
-            // Acosを使わずにcos値で直接判定
-            if (dot >= _cosMax) return 0f; // 角度が最小角以下
-            if (dot <= _cosMin) return 1f; // 角度が最大角以上
-            float ratio = _sigmoid[DuxMath.InverseLerp(_cosMin, _cosMax, dot)];
-            return ratio;
+            return ComputareRatioCos(dot);
         }
 
         public float ComputareRatioInversus(float angulusRad) {
-            if (angulusRad <= _angulusMinRad) return 1f;
-            if (angulusRad >= _angulusMaximaRad) return 0f;
+            if (angulusRad <= _angulusMinRad) return 0f;
+            if (angulusRad >= _angulusMaximaRad) return 1f;
             float cos = MathF.Cos(angulusRad);
+            float ratio = _sigmoidInversus[DuxMath.InverseLerp(_cosMin, _cosMax, cos)];
+            return ratio;
+        }
+
+        public float ComputareRatioInversusCos(float cos) {
+            if (cos >= _cosMax) return 0f; // 角度が最小角以下
+            if (cos <= _cosMin) return 1f; // 角度が最大角以上
             float ratio = _sigmoidInversus[DuxMath.InverseLerp(_cosMin, _cosMax, cos)];
             return ratio;
         }
@@ -71,11 +82,7 @@ namespace Yulinti.Dux.Exercitus {
         public float ComputareRatioInversus(Vector3 directio0, Vector3 directio1)
         {
             float dot = DuxMath.Clamp(Vector3.Dot(Vector3.Normalize(directio0), Vector3.Normalize(directio1)), -1f, 1f);
-            // Acosを使わずにcos値で直接判定
-            if (dot >= _cosMax) return 1f; // 角度が最小角以下
-            if (dot <= _cosMin) return 0f; // 角度が最大角以上
-            float ratio = _sigmoidInversus[DuxMath.InverseLerp(_cosMin, _cosMax, dot)];
-            return ratio;
+            return ComputareRatioInversusCos(dot);
         }
     }
 }

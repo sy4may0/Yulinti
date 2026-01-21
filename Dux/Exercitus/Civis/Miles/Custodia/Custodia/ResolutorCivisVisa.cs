@@ -94,6 +94,7 @@ namespace Yulinti.Dux.Exercitus {
             dtVisa /= 100f; // dtVisaは0~1の比率なので100で割る。
             dtVisa *= _contextus.Configuratio.Custodiae.RatioVisus; // 設定による上昇補正値
             dtVisa *= _contextus.ResFPuellae.Veletudinis.Claritas; // PuellaeステートのClaritas補正を適用する。
+            dtVisa *= _contextus.Temporis.Intervallum; // フレーム時間を適用する。
             _contextus.Carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtVisa: dtVisa

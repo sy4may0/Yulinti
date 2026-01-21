@@ -99,6 +99,8 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
+        public float[] LUT => _lut;
+
         public float this[float x] {
             get {
                 // 入力を0~1にクランプ

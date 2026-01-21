@@ -78,6 +78,7 @@ namespace Yulinti.Dux.Exercitus {
             dtSuspecta /= 100f; // dtSuspectaは0~1の比率なので100で割る。
             dtSuspecta *= _contextus.Configuratio.Custodiae.RatioSuspecta; // 設定による上昇補正値
             dtSuspecta *= _contextus.ResFPuellae.Veletudinis.Claritas; // PuellaeステートのClaritas補正を適用する。
+            dtSuspecta *= _contextus.Temporis.Intervallum; // フレーム時間を適用する。
             _contextus.Carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtSuspecta: dtSuspecta
