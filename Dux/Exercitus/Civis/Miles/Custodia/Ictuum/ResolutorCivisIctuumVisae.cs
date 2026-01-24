@@ -108,7 +108,6 @@ namespace Yulinti.Dux.Exercitus {
             // anglulus0が近距離、anglulus1が遠距離の補正値。
             float ratio = DuxMath.Lerp(ratioAngulus1, ratioAngulus0, ratioDistantia);
 
-            UnityEngine.Debug.Log($"ratioDistantia: {ratioDistantia}, ratioAngulus0: {ratioAngulus0}, ratioAngulus1: {ratioAngulus1}, ratio: {ratio}");
             return ratio;
         }
 
@@ -172,7 +171,7 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis, IResFluidaCivisLegibile resFluida
         ) {
             // 視認範囲外の場合は視認数を0とする。
-            if (!_resolutorCivisDistantia.EstCustodiae(idCivis)) {
+            if (!_resolutorCivisDistantia.EstCustodiaeVisae(idCivis)) {
                 _visaIctuumCapitis[idCivis] = 0f;
                 _visaIctuumCorporis[idCivis] = 0f;
                 return;

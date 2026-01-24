@@ -9,21 +9,27 @@ namespace Yulinti.Dux.Exercitus {
         private readonly ContextusCivisOstiorumLegibile _contextus;
 
         private readonly ResolutorCivisIctuumVisae _resolutorCivisIctuum;
+        private readonly ResolutorCivisIctuumAuditae _resolutorCivisIctuumAuditae;
+
         private readonly ResolutorCivisDistantia _resolutorCivisDistantia;
         private readonly ResolutorCivisNudusVisae _resolutorCivisNudusVisae;
         private readonly ResolutorCivisVisa _resolutorCivisVisa;
         private readonly ResolutorCivisSuspectae _resolutorCivisSuspectae;
         private readonly ResolutorCivisMutareCustodiae _resolutorCivisMutareCustodiae;
+        private readonly ResolutorCivisAuditae _resolutorCivisAuditae;
 
         public MilesCivisCustodiae(ContextusCivisOstiorumLegibile contextus) {
             _contextus = contextus;
 
             _resolutorCivisDistantia = new ResolutorCivisDistantia(contextus);
             _resolutorCivisIctuum = new ResolutorCivisIctuumVisae(contextus, _resolutorCivisDistantia);
+            _resolutorCivisIctuumAuditae = new ResolutorCivisIctuumAuditae(contextus, _resolutorCivisDistantia);
+
             _resolutorCivisNudusVisae = new ResolutorCivisNudusVisae(contextus, _resolutorCivisDistantia);
             _resolutorCivisVisa = new ResolutorCivisVisa(contextus, _resolutorCivisIctuum, _resolutorCivisDistantia);
             _resolutorCivisSuspectae = new ResolutorCivisSuspectae(contextus, _resolutorCivisIctuum, _resolutorCivisDistantia);
             _resolutorCivisMutareCustodiae = new ResolutorCivisMutareCustodiae(contextus);
+            _resolutorCivisAuditae = new ResolutorCivisAuditae(contextus, _resolutorCivisIctuumAuditae, _resolutorCivisDistantia);
         }
 
         public void Initare(
@@ -34,7 +40,9 @@ namespace Yulinti.Dux.Exercitus {
             _resolutorCivisVisa.Initare(idCivis);
             _resolutorCivisSuspectae.Initare(idCivis);
             _resolutorCivisIctuum.Initare(idCivis);
+            _resolutorCivisIctuumAuditae.Initare(idCivis);
             _resolutorCivisMutareCustodiae.Initare(idCivis);
+            _resolutorCivisAuditae.Initare(idCivis);
         }
 
         public void OrdinareCustodiae(
@@ -52,6 +60,8 @@ namespace Yulinti.Dux.Exercitus {
             _resolutorCivisVisa.Ordinare(idCivis, resFluida);
             // Suspectaの解決
             _resolutorCivisSuspectae.Ordinare(idCivis, resFluida);
+            // Auditaの解決
+            _resolutorCivisAuditae.Ordinare(idCivis, resFluida);
         }
 
         public void ResolvereIctuum(
@@ -59,12 +69,19 @@ namespace Yulinti.Dux.Exercitus {
         ) {
             // Puellae視認数を解決
             _resolutorCivisIctuum.Resolvere(idCivis, resFluida);
+            // Auditaの解決
+            _resolutorCivisIctuumAuditae.Resolvere(idCivis, resFluida);
         }
 
         public void ResolvereDetectio(
             int idCivis, IResFluidaCivisLegibile resFluida
         ) {
+            // Detectio, Vigilantiaの解決
             _resolutorCivisMutareCustodiae.ResolvereDetectio(idCivis, resFluida);
+            // Suspectaの解決
+            _resolutorCivisMutareCustodiae.ResolvereSuspecta(idCivis, resFluida);
+            // DetectioSonoraの解決
+            _resolutorCivisMutareCustodiae.ResolvereDetectioSonora(idCivis, resFluida);
         }
     }
 }

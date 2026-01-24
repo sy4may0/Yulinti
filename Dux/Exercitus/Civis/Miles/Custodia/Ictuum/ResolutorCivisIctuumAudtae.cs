@@ -31,7 +31,7 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public float Audita(int idCivis) => _auditaIctuum[idCivis];
-        public bool EstAudivi(int idCivis) => _auditaIctuum[idCivis] > Numerus.Epsilon;
+        public bool EstAudita(int idCivis) => _auditaIctuum[idCivis] > Numerus.Epsilon;
 
         public void Initare(int idCivis) {
             _auditaIctuum[idCivis] = 0f;
@@ -52,14 +52,14 @@ namespace Yulinti.Dux.Exercitus {
         ) {
             float distantiaMin = _contextus.Configuratio.Custodiae.DistantiaAuditaeSoniMin;
             float ratioActualis = DuxMath.InverseLerp(distantiaMin, distantiaMaxima, distantia);
-            return _abacusDistantiae.ComputareRatio(ratioActualis);
+            return _abacusDistantiae.ComputareRatioInversus(ratioActualis);
         }
 
         public void Resolvere(
             int idCivis, IResFluidaCivisLegibile resFluida
         ) {
             // 聴認範囲外の場合は聴認数を0とする。
-            if (!_resolutorCivisDistantia.EstAuditae(idCivis)) {
+            if (!_resolutorCivisDistantia.EstCustodiaeAuditae(idCivis)) {
                 _auditaIctuum[idCivis] = 0f;
                 return;
             }
@@ -72,9 +72,9 @@ namespace Yulinti.Dux.Exercitus {
             float distantiaMaxima = ComputareDistantiaSoni(sonus);
             float ratioDistantia = ComputareRatioDistantia(distantiaMaxima, distantiaPuellae);
 
-            float audita = resFluida.Veletudinis.Audita(idCivis);
+            float auditus = resFluida.Veletudinis.Auditus(idCivis);
 
-            _auditaIctuum[idCivis] = ratioDistantia * audita;
+            _auditaIctuum[idCivis] = ratioDistantia * auditus;
         }
     }
 }

@@ -145,11 +145,12 @@ namespace Yulinti.Dux.Exercitus {
             float dtVitae = 0f,
             float dtVisus = 0f,
             float dtVisa = 0f,
+            float dtAuditus = 0f,
             float dtAudita = 0f,
             float dtSuspecta = 0f
         ) {
             if (_lacusOrdinatioCivis.EmittareVeletudinisValoris(idCivis, out var ordinatio)) {
-                ordinatio.Pono(dtVitae, dtVisus, dtVisa, dtAudita, dtSuspecta);
+                ordinatio.Pono(dtVitae, dtVisus, dtVisa, dtAuditus, dtAudita, dtSuspecta);
                 _exVeletudinis.Executare(idCivis, ordinatio);
             }
         }
@@ -168,13 +169,13 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis,
             bool? estVigilantia = null,
             bool? estDetectio = null,
-            bool? estAudivi = null,
+            bool? estDetectioSonora = null,
             bool? estSuspecta = null,
             bool? estSpectareNudusAnterior = null,
             bool? estSpectareNudusPosterior = null
         ) {
             if (_lacusOrdinatioCivis.EmittareVeletudinisCondicionis(idCivis, out var ordinatio)) {
-                ordinatio.Pono(estVigilantia, estDetectio, estAudivi, estSuspecta, estSpectareNudusAnterior, estSpectareNudusPosterior);
+                ordinatio.Pono(estVigilantia, estDetectio, estDetectioSonora, estSuspecta, estSpectareNudusAnterior, estSpectareNudusPosterior);
                 _exVeletudinis.Executare(idCivis, ordinatio);
             }
         }

@@ -22,8 +22,8 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public float DistantiaPuellae(int idCivis) => _distantiaPuellae[idCivis];
-        public bool EstCustodiae(int idCivis) => _distantiaPuellae[idCivis] <= _contextus.Configuratio.Custodiae.DistantiaCustodiaeActivum;
-        public bool EstAuditae(int idCivis) => _distantiaPuellae[idCivis] <= _contextus.Configuratio.Custodiae.DistantiaAuditaeActivum;
+        public bool EstCustodiaeVisae(int idCivis) => _distantiaPuellae[idCivis] <= _contextus.Configuratio.Custodiae.DistantiaCustodiaeActivum;
+        public bool EstCustodiaeAuditae(int idCivis) => _distantiaPuellae[idCivis] <= _contextus.Configuratio.Custodiae.DistantiaAuditaeActivum;
 
         public void Ordinare(
             int idCivis

@@ -32,7 +32,7 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis
         ) {
             // 視認範囲外の場合はSpectareNudusをfalseとする。
-            if (!_resolutorCivisDistantia.EstCustodiae(idCivis)) {
+            if (!_resolutorCivisDistantia.EstCustodiaeVisae(idCivis)) {
                 _contextus.Carrus.PostulareVeletudinisCondicionis(
                     idCivis,
                     estSpectareNudusAnterior: false,

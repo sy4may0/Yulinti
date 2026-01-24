@@ -2,6 +2,7 @@ using System;
 
 namespace Yulinti.Dux.Exercitus {
     internal interface IDuxHorologium {
+        bool EstActivum();
         bool EstExhaurita(float tempus);
         void Purgere();
     }
@@ -11,16 +12,30 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class DuxHorologium {
         private readonly float _tempusMaxima;
         private float _tempusActualis;
+        private bool _estActivum;
+
+        public bool EstActivum => _estActivum;
 
         public DuxHorologium(float tempusMaxima) {
             _tempusMaxima = tempusMaxima;
             _tempusActualis = 0f;
+            _estActivum = false;
+        }
+
+        public void Activare() {
+            _estActivum = true;
+            Purgere();
+        }
+
+        public void Deactivare() {
+            _estActivum = false;
         }
 
         // Deltatime, FrameCountを渡し、_tempusMaximaまで経過したかを返す。
         // 経過していない場合、現在の経過時間を加算。
         // 経過していた場合、現在の経過時間を0にリセット。
         public bool EstExhaurita(float tempus) {
+            if (!_estActivum) return false;
             _tempusActualis += tempus;
 
             if (_tempusActualis >= _tempusMaxima) {
@@ -43,6 +58,9 @@ namespace Yulinti.Dux.Exercitus {
         private readonly float _temereMinima;
         private float _tempusMaxima;
         private float _tempusActualis;
+        private bool _estActivum;
+
+        public bool EstActivum => _estActivum;
 
         public DuxHorologiumTemere(float temereMinima, float temereMaxima, Random random) {
             _temereMinima = temereMinima;
@@ -50,6 +68,15 @@ namespace Yulinti.Dux.Exercitus {
             _tempusActualis = 0f;
             _random = random;
             _tempusMaxima = InitareTemere();
+        }
+
+        public void Activare() {
+            _estActivum = true;
+            Purgere();
+        }
+
+        public void Deactivare() {
+            _estActivum = false;
         }
 
         private float InitareTemere() {

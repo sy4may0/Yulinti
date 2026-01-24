@@ -9,7 +9,7 @@ namespace Yulinti.Dux.ContractusDucis {
 
         float LimenVigilantia { get; }
         float LimenDetectio { get; }
-        float LimenAudivi { get; }
+        float LimenDetectioSonora { get; }
         float LimenSuspecta { get; }
 
         // 発覚状態での固定減少量
@@ -19,6 +19,9 @@ namespace Yulinti.Dux.ContractusDucis {
 
         // 猜疑度値減少量 => シグモイド関数で算出する興味喪失度で補正される。
         float ConsumptioSuspectaSec { get; }
+
+        // 聴認減少量 => シグモイド関数で算出する興味喪失度で補正される。
+        float ConsumptioAuditaeSec { get; }
 
         // 興味を失い始める時間(Sigmoidの坂にあたるポイント)
         float TempusStudiumAmittereSec { get; }
@@ -67,5 +70,12 @@ namespace Yulinti.Dux.ContractusDucis {
         // Mediusは0~1の比率を直接指定する。
         float DistantiaAuditaeMedius { get; }
         float PraeruptioDistantiaAuditaeSoni { get; }
+
+        // 聴認状態維持時間(区間ランダム)
+        float TempusAuditaeSecMaxima { get; }
+        float TempusAuditaeSecMinima { get; }
+        // 聴認状態クールタイム(区間ランダム)
+        float TempusSurdaMaxima { get; }
+        float TempusSurdaMinima { get; }
     }
 }

@@ -115,24 +115,24 @@ namespace Yulinti.Dux.Exercitus {
             );
         }
 
-        public void ResolvereAudivi(
+        public void ResolvereDetectioSonora(
             int idCivis, IResFluidaCivisLegibile resFluida
         ) {
-            bool audiviProximus = resFluida.Veletudinis.EstAudivi(idCivis);
-            float limenAudivi = _contextus.Configuratio.Custodiae.LimenAudivi;
-            float hysteriaAudivi = ConstansCivis.HysteriaAudivi;
+            bool detectioSonoraProximus = resFluida.Veletudinis.EstDetectioSonora(idCivis);
+            float limenDetectioSonora = _contextus.Configuratio.Custodiae.LimenDetectioSonora;
+            float hysteriaDetectioSonora = ConstansCivis.HysteriaDetectioSonora;
 
-            if (resFluida.Veletudinis.Audita(idCivis) > limenAudivi + hysteriaAudivi) {
-                audiviProximus = true;
-            } else if (resFluida.Veletudinis.Audita(idCivis) < limenAudivi - hysteriaAudivi) {
-                audiviProximus = false;
+            if (resFluida.Veletudinis.Audita(idCivis) > limenDetectioSonora + hysteriaDetectioSonora) {
+                detectioSonoraProximus = true;
+            } else if (resFluida.Veletudinis.Audita(idCivis) < limenDetectioSonora - hysteriaDetectioSonora) {
+                detectioSonoraProximus = false;
             } 
             
-            if (audiviProximus == resFluida.Veletudinis.EstAudivi(idCivis)) return;
+            if (detectioSonoraProximus == resFluida.Veletudinis.EstDetectioSonora(idCivis)) return;
 
             _contextus.Carrus.PostulareVeletudinisCondicionis(
                 idCivis,
-                estAudivi: audiviProximus
+                estDetectioSonora: detectioSonoraProximus
             );
         }
 

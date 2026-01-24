@@ -3,7 +3,7 @@ namespace Yulinti.Dux.Exercitus {
         // 検知判定
         bool? EstVigilantia { get; }
         bool? EstDetectio { get; }
-        bool? EstAudivi { get; }
+        bool? EstDetectioSonora { get; }
         bool? EstSuspecta { get; }
 
         // 視認判定

@@ -6,6 +6,8 @@ namespace Yulinti.Dux.Exercitus {
         float DtVisus { get; }
         // 視認判定
         float DtVisa { get; }
+        // 聴力
+        float DtAuditus { get; }
         // 聴覚判定
         float DtAudita { get; }
         // 疑心判定(不審者状態で上昇していく。露出状態でDtVisaに統合)

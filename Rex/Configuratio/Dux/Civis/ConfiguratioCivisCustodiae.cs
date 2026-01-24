@@ -14,7 +14,7 @@ namespace Yulinti.Rex {
         [Header("警戒状態/通常時の視認判定値")]
         [SerializeField] private float limenVigilantia = 0.5f;
         [SerializeField] private float limenDetectio = 0.9f;
-        [SerializeField] private float limenAudivi = 0.75f;
+        [SerializeField] private float limenDetectioSonora = 0.9f;
         [SerializeField] private float limenSuspecta = 0.35f;
 
         [Header("発覚状態での固定減少量")]
@@ -23,6 +23,8 @@ namespace Yulinti.Rex {
         [SerializeField] private float consumptioVisaeSec = -0.15f;
         [Header("猜疑度値減少量")]
         [SerializeField] private float consumptioSuspectaSec = -0.15f;
+        [Header("聴認減少量")]
+        [SerializeField] private float consumptioAuditaeSec = -0.15f;
 
         [Header("興味喪失時間補正")]
         [SerializeField] private float tempusStudiumAmittereSec = 5f;
@@ -67,6 +69,13 @@ namespace Yulinti.Rex {
         [SerializeField] private float distantiaAuditaeMedius = 0.5f;
         [SerializeField] private float praeruptioDistantiaAuditaeSoni = 8f;
 
+        [Header("聴認状態維持時間(区間ランダム)")]
+        [SerializeField] private float tempusAuditaeSecMaxima = 13f;
+        [SerializeField] private float tempusAuditaeSecMinima = 7f;
+        [Header("聴認状態クールタイム(区間ランダム)")]
+        [SerializeField] private float tempusSurdaMaxima = 19f;
+        [SerializeField] private float tempusSurdaMinima = 14f;
+
         public float DistantiaCustodiaeActivum => distantiaCustodiaeActivum;
 
         public float RatioVisus => ratioVisus;
@@ -75,12 +84,13 @@ namespace Yulinti.Rex {
 
         public float LimenVigilantia => limenVigilantia;
         public float LimenDetectio => limenDetectio;
-        public float LimenAudivi => limenAudivi;
+        public float LimenDetectioSonora => limenDetectioSonora;
         public float LimenSuspecta => limenSuspecta;
 
         public float ConsumptioVisaeDetectioSec => consumptioVisaeDetectioSec;
         public float ConsumptioVisaeSec => consumptioVisaeSec;
         public float ConsumptioSuspectaSec => consumptioSuspectaSec;
+        public float ConsumptioAuditaeSec => consumptioAuditaeSec;
 
         public float TempusStudiumAmittereSec => tempusStudiumAmittereSec;
         public float TempusStudiumAmittereMaximaSec => tempusStudiumAmittereMaximaSec;
@@ -111,5 +121,10 @@ namespace Yulinti.Rex {
         public float DistantiaAuditaeSoniMin => distantiaAuditaeSoniMin;
         public float DistantiaAuditaeMedius => distantiaAuditaeMedius;
         public float PraeruptioDistantiaAuditaeSoni => praeruptioDistantiaAuditaeSoni;
+
+        public float TempusAuditaeSecMaxima => tempusAuditaeSecMaxima;
+        public float TempusAuditaeSecMinima => tempusAuditaeSecMinima;
+        public float TempusSurdaMaxima => tempusSurdaMaxima;
+        public float TempusSurdaMinima => tempusSurdaMinima;
     }
 }

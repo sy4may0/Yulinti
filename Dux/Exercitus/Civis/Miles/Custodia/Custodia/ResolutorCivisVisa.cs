@@ -53,7 +53,7 @@ namespace Yulinti.Dux.Exercitus {
             if (
                 _resolutorCivisIctuum.EstVisa(idCivis) && // 視認数がある。
                 resFluida.Veletudinis.EstSpectareNudus(idCivis) && // かつSpectareNudusである。
-                _resolutorCivisDistantia.EstCustodiae(idCivis) // かつ視認範囲内にいる。
+                _resolutorCivisDistantia.EstCustodiaeVisae(idCivis) // かつ視認範囲内にいる。
             ) {
                 _modiActualis[idCivis] = CustodiaCivisVisaeModi.Ictuum;
             } else if (resFluida.Veletudinis.EstDetectio(idCivis)) {

@@ -44,6 +44,10 @@ namespace Yulinti.Velum.Indicium {
 
             GUI.Label(new Rect(10, 290, 300, 20), "Puellae SonusQuietes: " + _resFPuellaeVeletudinis.SonusQuietes);
             GUI.Label(new Rect(10, 310, 300, 20), "Puellae SonusMotus: " + _resFPuellaeVeletudinis.SonusMotus);
+
+            GUI.Label(new Rect(10, 330, 300, 20), "Civis0 Audita: " + _resFCivisVeletudinis.Audita(0));
+            GUI.Label(new Rect(10, 350, 300, 20), "Civis0 EstDetectioSonora: " + _resFCivisVeletudinis.EstDetectioSonora(0));
+            GUI.Label(new Rect(10, 370, 300, 20), "Civis0 EstSuspecta: " + _resFCivisVeletudinis.EstSuspecta(0));
         }
 
         public void Activare() {

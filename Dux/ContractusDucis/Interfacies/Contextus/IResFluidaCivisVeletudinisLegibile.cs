@@ -4,6 +4,7 @@ namespace Yulinti.Dux.ContractusDucis {
         float Vitae(int idCivis);
         float Visus(int idCivis);
         float Visa(int idCivis);
+        float Auditus(int idCivis);
         float Audita(int idCivis);
         float Suspecta(int idCivis);
 
@@ -12,7 +13,7 @@ namespace Yulinti.Dux.ContractusDucis {
 
         bool EstVigilantia(int idCivis);
         bool EstDetectio(int idCivis);
-        bool EstAudivi(int idCivis);
+        bool EstDetectioSonora(int idCivis);
         bool EstSuspecta(int idCivis);
 
         bool EstSpectareNudusAnterior(int idCivis);
