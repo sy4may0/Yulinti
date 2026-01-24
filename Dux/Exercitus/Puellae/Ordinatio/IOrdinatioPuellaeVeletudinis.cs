@@ -5,5 +5,7 @@ namespace Yulinti.Dux.Exercitus {
         float DtAetheris { get; }
         float DtIntentio { get; }
         float DtClaritas { get; }
+        float DtSonusQuietes { get; }
+        float DtSonusMotus { get; }
     }
 }

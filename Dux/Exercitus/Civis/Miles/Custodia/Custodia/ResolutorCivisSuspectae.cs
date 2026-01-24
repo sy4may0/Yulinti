@@ -10,7 +10,7 @@ namespace Yulinti.Dux.Exercitus {
 
     internal sealed class ResolutorCivisSuspectae {
         private readonly ContextusCivisOstiorumLegibile _contextus;
-        private readonly IResolutorCivisIctuum _resolutorCivisIctuum;
+        private readonly IResolutorCivisIctuumVisae _resolutorCivisIctuum;
 
         private readonly CustodiaCivisSuspectaeModi[] _modiActualis;
         private readonly AbacusStudiumAmittere[] _abacusStudiumAmittere;
@@ -19,7 +19,7 @@ namespace Yulinti.Dux.Exercitus {
 
         public ResolutorCivisSuspectae(
             ContextusCivisOstiorumLegibile contextus,
-            IResolutorCivisIctuum resolutorCivisIctuum,
+            IResolutorCivisIctuumVisae resolutorCivisIctuum,
             IResolutorCivisDistantia resolutorCivisDistantia
         ) {
             _contextus = contextus;

@@ -82,7 +82,9 @@ namespace Yulinti.Dux.Exercitus {
                 dtPatientiae: _configuratio.ConsumptioPatientiaeSec * contextusOstiorum.Temporis.Intervallum,
                 dtAetheris: _configuratio.IncrementumAetherisSec * contextusOstiorum.Temporis.Intervallum,
                 dtIntentio: _configuratio.Intentio,
-                dtClaritas: _configuratio.Claritas
+                dtClaritas: _configuratio.Claritas,
+                dtSonusQuietes: _configuratio.SonusQuietes,
+                dtSonusMotus: _configuratio.SonusMotus
             );
         }
     }

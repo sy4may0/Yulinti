@@ -2,6 +2,8 @@ using Yulinti.Nucleus;
 using System.Numerics;
 using System;
 
+// [TODO] AbacusAnguliにリファクタリング
+
 namespace Yulinti.Dux.Exercitus {
     internal sealed class AbacusAnguliVisus {
         private readonly float _angulusMaximaRad;
@@ -58,7 +60,7 @@ namespace Yulinti.Dux.Exercitus {
             return ratio;
         }
 
-        public float ComputareRatio(Vector3 directio0, Vector3 directio1)
+        public float ComputareRatioInversus(Vector3 directio0, Vector3 directio1)
         {
             float dot = DuxMath.Clamp(Vector3.Dot(Vector3.Normalize(directio0), Vector3.Normalize(directio1)), -1f, 1f);
             return ComputareRatioCos(dot);
@@ -79,7 +81,7 @@ namespace Yulinti.Dux.Exercitus {
             return ratio;
         }
 
-        public float ComputareRatioInversus(Vector3 directio0, Vector3 directio1)
+        public float ComputareRatio(Vector3 directio0, Vector3 directio1)
         {
             float dot = DuxMath.Clamp(Vector3.Dot(Vector3.Normalize(directio0), Vector3.Normalize(directio1)), -1f, 1f);
             return ComputareRatioInversusCos(dot);

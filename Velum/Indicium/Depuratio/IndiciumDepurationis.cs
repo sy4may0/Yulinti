@@ -41,6 +41,9 @@ namespace Yulinti.Velum.Indicium {
 
             GUI.Label(new Rect(10, 250, 300, 20), "Civis0 EstSpectareNudusAnterior: " + _resFCivisVeletudinis.EstSpectareNudusAnterior(0));
             GUI.Label(new Rect(10, 270, 300, 20), "Civis0 EstSpectareNudusPosterior: " + _resFCivisVeletudinis.EstSpectareNudusPosterior(0));
+
+            GUI.Label(new Rect(10, 290, 300, 20), "Puellae SonusQuietes: " + _resFPuellaeVeletudinis.SonusQuietes);
+            GUI.Label(new Rect(10, 310, 300, 20), "Puellae SonusMotus: " + _resFPuellaeVeletudinis.SonusMotus);
         }
 
         public void Activare() {

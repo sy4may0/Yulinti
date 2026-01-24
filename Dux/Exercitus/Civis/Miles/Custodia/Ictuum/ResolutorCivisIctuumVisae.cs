@@ -4,7 +4,7 @@ using Yulinti.Nucleus;
 using System;
 
 namespace Yulinti.Dux.Exercitus {
-    internal sealed class ResolutorCivisIctuum : IResolutorCivisIctuum {
+    internal sealed class ResolutorCivisIctuumVisae : IResolutorCivisIctuumVisae {
         private readonly ContextusCivisOstiorumLegibile _contextus;
         private readonly AbacusDistantiaeVisus _abacusDistantiaeVisus;
 
@@ -23,7 +23,7 @@ namespace Yulinti.Dux.Exercitus {
 
         private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
 
-        public ResolutorCivisIctuum(
+        public ResolutorCivisIctuumVisae(
             ContextusCivisOstiorumLegibile contextus,
             IResolutorCivisDistantia resolutorCivisDistantia
         ) {
@@ -102,8 +102,8 @@ namespace Yulinti.Dux.Exercitus {
 
             float ratioDistantia = _abacusDistantiaeVisusAngli.ComputareRatioInversus(positioCivisCapitis, positioPuellaeResVisae);
             // angulusMaximaで0、angulusMinで1となるように逆補正を使う
-            float ratioAngulus0 = _abacusAnguliVisus0.ComputareRatio(directioCivisCapitis, directio);
-            float ratioAngulus1 = _abacusAnguliVisus1.ComputareRatio(directioCivisCapitis, directio);
+            float ratioAngulus0 = _abacusAnguliVisus0.ComputareRatioInversus(directioCivisCapitis, directio);
+            float ratioAngulus1 = _abacusAnguliVisus1.ComputareRatioInversus(directioCivisCapitis, directio);
 
             // anglulus0が近距離、anglulus1が遠距離の補正値。
             float ratio = DuxMath.Lerp(ratioAngulus1, ratioAngulus0, ratioDistantia);

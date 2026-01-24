@@ -8,7 +8,7 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class MilesCivisCustodiae {
         private readonly ContextusCivisOstiorumLegibile _contextus;
 
-        private readonly ResolutorCivisIctuum _resolutorCivisIctuum;
+        private readonly ResolutorCivisIctuumVisae _resolutorCivisIctuum;
         private readonly ResolutorCivisDistantia _resolutorCivisDistantia;
         private readonly ResolutorCivisNudusVisae _resolutorCivisNudusVisae;
         private readonly ResolutorCivisVisa _resolutorCivisVisa;
@@ -19,7 +19,7 @@ namespace Yulinti.Dux.Exercitus {
             _contextus = contextus;
 
             _resolutorCivisDistantia = new ResolutorCivisDistantia(contextus);
-            _resolutorCivisIctuum = new ResolutorCivisIctuum(contextus, _resolutorCivisDistantia);
+            _resolutorCivisIctuum = new ResolutorCivisIctuumVisae(contextus, _resolutorCivisDistantia);
             _resolutorCivisNudusVisae = new ResolutorCivisNudusVisae(contextus, _resolutorCivisDistantia);
             _resolutorCivisVisa = new ResolutorCivisVisa(contextus, _resolutorCivisIctuum, _resolutorCivisDistantia);
             _resolutorCivisSuspectae = new ResolutorCivisSuspectae(contextus, _resolutorCivisIctuum, _resolutorCivisDistantia);

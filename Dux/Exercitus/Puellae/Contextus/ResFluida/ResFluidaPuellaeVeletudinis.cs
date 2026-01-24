@@ -16,6 +16,11 @@ namespace Yulinti.Dux.Exercitus {
         // voltage
         private float _intentio;
 
+        // 静止音量
+        private float _sonusQuietes;
+        // 動作音量(速度で補正)
+        private float _sonusMotus;
+
         // 前面露出
         private bool _estNudusAnterior;
         // 背面露出
@@ -38,19 +43,25 @@ namespace Yulinti.Dux.Exercitus {
         public float Intentio => _intentio;
         public bool EstNudusAnterior => _estNudusAnterior;
         public bool EstNudusPosterior => _estNudusPosterior;
+        public float SonusQuietes => _sonusQuietes;
+        public float SonusMotus => _sonusMotus;
 
         public void RenovareValoris(
             float vigor,
             float patientia,
             float claritas,
             float aether,
-            float intentio
+            float intentio,
+            float sonusQuietes,
+            float sonusMotus
         ) {
             _vigor = DuxMath.Clamp(vigor, 0f, 1f);
             _patientia = DuxMath.Clamp(patientia, 0f, 1f);
             _claritas = DuxMath.Clamp(claritas, 0f, 1f);
             _aether = DuxMath.Clamp(aether, 0f, 1f);
             _intentio = DuxMath.Clamp(intentio, 0f, 1f);
+            _sonusQuietes = DuxMath.Clamp(sonusQuietes, 0f, 1f);
+            _sonusMotus = DuxMath.Clamp(sonusMotus, 0f, 1f);
         }
 
         public void RenovareNudusAnterior(bool estNudusAnterior) {
@@ -98,6 +109,8 @@ namespace Yulinti.Dux.Exercitus {
             _claritas = 0f;
             _aether = 0f;
             _intentio = 0f;
+            _sonusQuietes = 0f;
+            _sonusMotus = 0f;
         }
     }
 }

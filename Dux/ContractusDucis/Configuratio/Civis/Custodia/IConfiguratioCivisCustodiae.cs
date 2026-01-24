@@ -56,5 +56,16 @@ namespace Yulinti.Dux.ContractusDucis {
 
         // 聴認範囲 この範囲内で計算を行う。
         float DistantiaAuditaeActivum { get; }
+
+        // 距離による聴覚補正。
+        // PuellaeのSonus最大時、および0の時に音が届く距離を指定する。
+        float DistantiaAuditaeSoniMaxima { get; }
+        float DistantiaAuditaeSoniMin { get; }
+
+        // シグモイド関数設定: 距離による聴覚補正の中間距離。
+        // このレシオはSoniMaxima/SoniMinでレンジが変わるため、
+        // Mediusは0~1の比率を直接指定する。
+        float DistantiaAuditaeMedius { get; }
+        float PraeruptioDistantiaAuditaeSoni { get; }
     }
 }

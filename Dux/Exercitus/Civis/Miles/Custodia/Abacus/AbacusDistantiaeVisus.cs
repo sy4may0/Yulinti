@@ -1,6 +1,8 @@
 using Yulinti.Nucleus;
 using System.Numerics;
 
+// [TODO] AbacusDistantiaeにリファクタリング
+
 namespace Yulinti.Dux.Exercitus {
     // 距離によるレシオを計算するクラス。
     internal sealed class AbacusDistantiaeVisus {
