@@ -1,5 +1,4 @@
 using Yulinti.Dux.ContractusDucis;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using System;
 using System.Numerics;
 
@@ -9,7 +8,7 @@ namespace Yulinti.Dux.Exercitus {
     internal sealed class CarrusCivis : IOstiumCarrusCivis {
         private readonly ExecutorCivisAnimationis _exAnimationis;
         private readonly ExecutorCivisLoci _exLoci;
-        private readonly ExecutorCivisVeletudinisValoris _exVeletudinisValoris;
+        private readonly ExecutorCivisVeletudinis _exVeletudinis;
         private readonly ExecutorCivisMortis _exMortis;
 
         private readonly LacusOrdinatioCivis _lacusOrdinatioCivis;
@@ -18,12 +17,12 @@ namespace Yulinti.Dux.Exercitus {
             IOstiumCivisLegibile ostiumCivisLegibile,
             ExecutorCivisAnimationis exAnimationis,
             ExecutorCivisLoci exLoci,
-            ExecutorCivisVeletudinisValoris exVeletudinisValoris,
+            ExecutorCivisVeletudinis exVeletudinis,
             ExecutorCivisMortis exMortis
         ) {
             _exAnimationis = exAnimationis;
             _exLoci = exLoci;
-            _exVeletudinisValoris = exVeletudinisValoris;
+            _exVeletudinis = exVeletudinis;
             _exMortis = exMortis;
             _lacusOrdinatioCivis = new LacusOrdinatioCivis(ostiumCivisLegibile.Longitudo);
         }
@@ -31,7 +30,7 @@ namespace Yulinti.Dux.Exercitus {
         public void Primum(int idCivis) {
             _exAnimationis.Primum(idCivis);
             _exLoci.Primum(idCivis);
-            _exVeletudinisValoris.Primum(idCivis);
+            _exVeletudinis.Primum(idCivis);
             _exMortis.Primum(idCivis);
         }
 
@@ -43,7 +42,7 @@ namespace Yulinti.Dux.Exercitus {
         public void Initare(int idCivis) {
             _exAnimationis.Initare(idCivis);
             _exLoci.Initare(idCivis);
-            _exVeletudinisValoris.Initare(idCivis);
+            _exVeletudinis.Initare(idCivis);
             _exMortis.Initare(idCivis);
        }
 
@@ -59,8 +58,9 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         private void ConfirmareVeletudinisValoris(int idCivis) {
-            _exVeletudinisValoris.Confirmare(idCivis);
+            _exVeletudinis.Confirmare(idCivis);
             _lacusOrdinatioCivis.ColligereVeletudinisValoris(idCivis);
+            _lacusOrdinatioCivis.ColligereVeletudinisCondicionis(idCivis);
         }
 
         private void ConfirmareVeletudinisMortis(int idCivis) {
@@ -94,7 +94,7 @@ namespace Yulinti.Dux.Exercitus {
         public void Purgare(int idCivis) {
             _exAnimationis.Purgare(idCivis);
             _exLoci.Purgare(idCivis);
-            _exVeletudinisValoris.Purgare(idCivis);
+            _exVeletudinis.Purgare(idCivis);
             _exMortis.Purgare(idCivis);
             _lacusOrdinatioCivis.ColligereOmnia(idCivis);
         }
@@ -145,12 +145,13 @@ namespace Yulinti.Dux.Exercitus {
             float dtVitae = 0f,
             float dtVisus = 0f,
             float dtVisa = 0f,
+            float dtAuditus = 0f,
             float dtAudita = 0f,
             float dtSuspecta = 0f
         ) {
             if (_lacusOrdinatioCivis.EmittareVeletudinisValoris(idCivis, out var ordinatio)) {
-                ordinatio.Pono(dtVitae, dtVisus, dtVisa, dtAudita, dtSuspecta);
-                _exVeletudinisValoris.Executare(idCivis, ordinatio);
+                ordinatio.Pono(dtVitae, dtVisus, dtVisa, dtAuditus, dtAudita, dtSuspecta);
+                _exVeletudinis.Executare(idCivis, ordinatio);
             }
         }
 
@@ -161,6 +162,21 @@ namespace Yulinti.Dux.Exercitus {
             if (_lacusOrdinatioCivis.EmittareMortis(idCivis, out var ordinatio)) {
                 ordinatio.Pono(speciesMortis);
                 _exMortis.Executare(idCivis, ordinatio);
+            }
+        }
+
+        public void PostulareVeletudinisCondicionis(
+            int idCivis,
+            bool? estVigilantia = null,
+            bool? estDetectio = null,
+            bool? estDetectioSonora = null,
+            bool? estSuspecta = null,
+            bool? estSpectareNudusAnterior = null,
+            bool? estSpectareNudusPosterior = null
+        ) {
+            if (_lacusOrdinatioCivis.EmittareVeletudinisCondicionis(idCivis, out var ordinatio)) {
+                ordinatio.Pono(estVigilantia, estDetectio, estDetectioSonora, estSuspecta, estSpectareNudusAnterior, estSpectareNudusPosterior);
+                _exVeletudinis.Executare(idCivis, ordinatio);
             }
         }
     }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
+using Yulinti.Dux.ContractusDucis;
 namespace Yulinti.Rex {
     [CreateAssetMenu(fileName = "ConfiguratioPunctumViae", menuName = "Yulinti/Rex/ConfiguratioPunctumViae")]
     public sealed class ConfiguratioPunctumViae : ScriptableObject, IConfiguratioPunctumViae {

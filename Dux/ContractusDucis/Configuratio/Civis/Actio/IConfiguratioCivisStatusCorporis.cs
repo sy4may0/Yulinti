@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.ContractusDucis {
     public interface IConfiguratioCivisStatusCorporis {
@@ -12,12 +12,12 @@ namespace Yulinti.Dux.ContractusDucis {
 
         // 視力
         float Visus { get; }
-        // 視認範囲
+        // 視認範囲 -> 使ってない。使うなら倍率に変える。
         float VisusDistantia { get; }
 
         // 聴力
         float Auditus { get; }
-        // 聴認範囲
+        // 聴認範囲 -> 使ってない。使うなら倍率に変える。
         float AuditusDistantia { get; }
     }
 }

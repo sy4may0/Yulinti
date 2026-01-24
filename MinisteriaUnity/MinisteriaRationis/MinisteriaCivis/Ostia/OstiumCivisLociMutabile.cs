@@ -1,6 +1,7 @@
 using Yulinti.Dux.ContractusDucis;
 using System.Numerics;
 using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumCivisLociMutabile : IOstiumCivisLociMutabile {

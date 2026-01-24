@@ -1,4 +1,4 @@
-﻿namespace Yulinti.MinisteriaUnity.ContractusMinisterii {
+﻿namespace Yulinti.Dux.ContractusDucis {
     public enum IDPuellaeAnimationisStratum {
         // ファンダメンタル層は0固定としてくれ。
         Fundamentum = 0,

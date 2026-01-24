@@ -50,12 +50,13 @@ namespace Yulinti.Dux.Exercitus {
             builder.Register<ExecutorCivisAnimationis>(Lifetime.Singleton);
             builder.Register<ExecutorCivisLoci>(Lifetime.Singleton);
             builder.Register<ExecutorCivisMortis>(Lifetime.Singleton);
-            builder.Register<ExecutorCivisVeletudinisValoris>(Lifetime.Singleton);
+            builder.Register<ExecutorCivisVeletudinis>(Lifetime.Singleton);
 
             // Miles
             builder.Register<MilesPuellaeActionis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeCrinis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeFigurae>(Lifetime.Singleton);
+            builder.Register<MilesPuellaeVestitae>(Lifetime.Singleton);
             builder.Register<MilesCivisActionis>(Lifetime.Singleton);
             builder.Register<MilesCivisCustodiae>(Lifetime.Singleton);
 

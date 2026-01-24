@@ -1,7 +1,7 @@
 using Yulinti.Dux.ContractusDucis;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 using UnityEngine;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class PunctumViae {

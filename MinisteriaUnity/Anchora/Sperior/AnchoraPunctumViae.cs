@@ -2,6 +2,7 @@
 using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Nucleus;
 
+using Yulinti.Dux.ContractusDucis;
 namespace Yulinti.MinisteriaUnity.Anchora {
     public sealed class AnchoraPunctumViae : MonoBehaviour, IAnchora, IAnchoraPunctumViae {
         [SerializeField] private IDPunctumViaeTypi _idPunctumViaeTypi;

@@ -3,6 +3,7 @@ namespace Yulinti.Dux.Exercitus {
         private float _dtVitae;
         private float _dtVisus;
         private float _dtVisa;
+        private float _dtAuditus;
         private float _dtAudita;
         private float _dtSuspecta;
 
@@ -11,6 +12,7 @@ namespace Yulinti.Dux.Exercitus {
             _dtVitae = 0f;
             _dtVisus = 0f;
             _dtVisa = 0f;
+            _dtAuditus = 0f;
             _dtAudita = 0f;
             _dtSuspecta = 0f;
         }
@@ -18,6 +20,7 @@ namespace Yulinti.Dux.Exercitus {
         public float DtVitae => _dtVitae;
         public float DtVisus => _dtVisus;
         public float DtVisa => _dtVisa;
+        public float DtAuditus => _dtAuditus;
         public float DtAudita => _dtAudita;
         public float DtSuspecta => _dtSuspecta;
 
@@ -26,6 +29,7 @@ namespace Yulinti.Dux.Exercitus {
             _dtVitae = 0f;
             _dtVisus = 0f;
             _dtVisa = 0f;
+            _dtAuditus = 0f;
             _dtAudita = 0f;
             _dtSuspecta = 0f;
         }
@@ -34,6 +38,7 @@ namespace Yulinti.Dux.Exercitus {
             float dtVitae,
             float dtVisus,
             float dtVisa,
+            float dtAuditus,
             float dtAudita,
             float dtSuspecta
         ) {
@@ -41,6 +46,7 @@ namespace Yulinti.Dux.Exercitus {
             _dtVitae = dtVitae;
             _dtVisus = dtVisus;
             _dtVisa = dtVisa;
+            _dtAuditus = dtAuditus;
             _dtAudita = dtAudita;
             _dtSuspecta = dtSuspecta;
 

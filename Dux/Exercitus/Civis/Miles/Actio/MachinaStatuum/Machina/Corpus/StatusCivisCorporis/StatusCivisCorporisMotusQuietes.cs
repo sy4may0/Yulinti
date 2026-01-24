@@ -1,5 +1,4 @@
 using Yulinti.Dux.ContractusDucis;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using System;
 
 namespace Yulinti.Dux.Exercitus {
@@ -52,8 +51,9 @@ namespace Yulinti.Dux.Exercitus {
             contextusOstiorum.Carrus.PostulareMotus(idCivis, 0f, 0f, 0f, 0f);
             contextusOstiorum.Carrus.PostulareVeletudinisValoris(
                 idCivis,
-                dtVitae: -_configuratio.ConsumptioVitae * contextusOstiorum.Temporis.Intervallum,
-                dtVisus: _configuratio.Visus
+                dtVitae: _configuratio.ConsumptioVitae * contextusOstiorum.Temporis.Intervallum,
+                dtVisus: _configuratio.Visus,
+                dtAuditus: _configuratio.Auditus
             );
         }
     }

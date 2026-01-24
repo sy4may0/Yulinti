@@ -3,290 +3,85 @@ using Yulinti.Dux.ContractusDucis;
 using System;
 using System.Numerics;
 
-// AIさんへ。
-// distantiaCustodiaeMaximaのMaximaがかかっているのはDistantiaではなくてCustodiaeのほうです。
-// 警戒度が最大になる距離だから数値はdistantiaCustodiae > distantiaCustodiaeMaximaにならなければならない。
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class MilesCivisCustodiae {
         private readonly ContextusCivisOstiorumLegibile _contextus;
 
-        private readonly float[] _numerusIctuumCapitis;
-        private readonly float[] _numerusIctuumCorporis;
-        // 視野角オフセット値(0~1) -> どのくらい視界の中心にいるか。95度で0。0度で1。
-        private readonly float[] _angulusRationemCapitis;
-        private readonly float[] _angulusRationemCorporis;
+        private readonly ResolutorCivisIctuumVisae _resolutorCivisIctuum;
+        private readonly ResolutorCivisIctuumAuditae _resolutorCivisIctuumAuditae;
 
-        private const float cos95 = -0.087155744f;
-        private const float cos45 =  0.707106782f;
-
-        private const int LONGITUDOLUT = 256;
-        // 距離減衰パラメータ
-        // 距離減衰が上がり始める距離のratio(0~1)
-        private readonly float _ratioDistantiaCustodiaeAscensus;
-        // 距離減衰カーブLUT
-        private readonly SigmoidLUT _sigmoidLUTDistantiaCustodiae;
-
-        // 興味喪失パラメータ
-        // 減少経過時間(sec)
-        private readonly float[] _tempusStudiumAmittere;
-        // 興味を失うまでの時間のratio(0~1)
-        private readonly float _ratioTempusStudiumAmittere;
-        // 興味喪失カーブLUT
-        private readonly SigmoidLUT _sigmoidLUTTempusAmittere;
-
-
-        // enum配列キャッシュ
-        private readonly IDPuellaeResVisaeCapitis[] _cIDPuellaeResVisaeCapitis;
-        private readonly IDPuellaeResVisaePectoris[] _cIDPuellaeResVisaePectoris;
-        private readonly IDPuellaeResVisaeNatium[] _cIDPuellaeResVisaeNatium;
+        private readonly ResolutorCivisDistantia _resolutorCivisDistantia;
+        private readonly ResolutorCivisNudusVisae _resolutorCivisNudusVisae;
+        private readonly ResolutorCivisVisa _resolutorCivisVisa;
+        private readonly ResolutorCivisSuspectae _resolutorCivisSuspectae;
+        private readonly ResolutorCivisMutareCustodiae _resolutorCivisMutareCustodiae;
+        private readonly ResolutorCivisAuditae _resolutorCivisAuditae;
 
         public MilesCivisCustodiae(ContextusCivisOstiorumLegibile contextus) {
             _contextus = contextus;
-            _numerusIctuumCapitis = new float[contextus.Civis.Longitudo];
-            _numerusIctuumCorporis = new float[contextus.Civis.Longitudo];
-            _angulusRationemCapitis = new float[contextus.Civis.Longitudo];
-            _angulusRationemCorporis = new float[contextus.Civis.Longitudo];
-            _tempusStudiumAmittere = new float[contextus.Civis.Longitudo];
-            for (int i = 0; i < contextus.Civis.Longitudo; i++) {
-                _numerusIctuumCapitis[i] = 0;
-                _numerusIctuumCorporis[i] = 0;
-                _angulusRationemCapitis[i] = 0f;
-                _angulusRationemCorporis[i] = 0f;
-                _tempusStudiumAmittere[i] = 0f;
-            }
-            _cIDPuellaeResVisaeCapitis = (IDPuellaeResVisaeCapitis[])Enum.GetValues(typeof(IDPuellaeResVisaeCapitis));
-            _cIDPuellaeResVisaePectoris = (IDPuellaeResVisaePectoris[])Enum.GetValues(typeof(IDPuellaeResVisaePectoris));
-            _cIDPuellaeResVisaeNatium = (IDPuellaeResVisaeNatium[])Enum.GetValues(typeof(IDPuellaeResVisaeNatium));
 
-            // 距離減衰パラメータ初期化
-            _ratioDistantiaCustodiaeAscensus = DuxMath.Clamp(
-                DuxMath.InverseLeap(
-                    _contextus.Configuratio.Custodiae.DistantiaCustodiae,
-                    _contextus.Configuratio.Custodiae.DistantiaCustodiaeMaxima,
-                    _contextus.Configuratio.Custodiae.DistantiaCustodiaeAscensus
-                ),
-            0f, 1f);
-            _sigmoidLUTDistantiaCustodiae = new SigmoidLUT(
-                _contextus.Configuratio.Custodiae.PrecalculusDistantiaAscensus,
-                _ratioDistantiaCustodiaeAscensus,
-                LONGITUDOLUT
-            );
+            _resolutorCivisDistantia = new ResolutorCivisDistantia(contextus);
+            _resolutorCivisIctuum = new ResolutorCivisIctuumVisae(contextus, _resolutorCivisDistantia);
+            _resolutorCivisIctuumAuditae = new ResolutorCivisIctuumAuditae(contextus, _resolutorCivisDistantia);
 
-            // 興味喪失パラメータ初期化
-            _ratioTempusStudiumAmittere = DuxMath.Clamp(_contextus.Configuratio.Custodiae.TempusStudiumAmittereSec / _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec, 0f, 1f);
-            _sigmoidLUTTempusAmittere = new SigmoidLUT(
-                _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere,
-                _ratioTempusStudiumAmittere,
-                LONGITUDOLUT
-            );
-
+            _resolutorCivisNudusVisae = new ResolutorCivisNudusVisae(contextus, _resolutorCivisDistantia);
+            _resolutorCivisVisa = new ResolutorCivisVisa(contextus, _resolutorCivisIctuum, _resolutorCivisDistantia);
+            _resolutorCivisSuspectae = new ResolutorCivisSuspectae(contextus, _resolutorCivisIctuum, _resolutorCivisDistantia);
+            _resolutorCivisMutareCustodiae = new ResolutorCivisMutareCustodiae(contextus);
+            _resolutorCivisAuditae = new ResolutorCivisAuditae(contextus, _resolutorCivisIctuumAuditae, _resolutorCivisDistantia);
         }
 
-        private float ComputareVisus(
-            float visus,
-            float distantia,
-            float distantiaCustodiae,
-            float distantiaCustodiaeMaxima
+        public void Initare(
+            int idCivis
         ) {
-            // シグモイド関数でカーブを計算する。
-            float d = DuxMath.Clamp(DuxMath.InverseLeap(
-                distantiaCustodiae,
-                distantiaCustodiaeMaxima,
-                distantia
-            ), 0f, 1f);
-
-            float k = _sigmoidLUTDistantiaCustodiae[d];
-
-            return visus * k;
+            _resolutorCivisDistantia.Initare(idCivis);
+            _resolutorCivisNudusVisae.Initare(idCivis);
+            _resolutorCivisVisa.Initare(idCivis);
+            _resolutorCivisSuspectae.Initare(idCivis);
+            _resolutorCivisIctuum.Initare(idCivis);
+            _resolutorCivisIctuumAuditae.Initare(idCivis);
+            _resolutorCivisMutareCustodiae.Initare(idCivis);
+            _resolutorCivisAuditae.Initare(idCivis);
         }
 
-        private float ComputareDistantia(int idCivis) {
-            if (!_contextus.Civis.EstActivum(idCivis)) return float.MaxValue;
-            Vector3 positioPuellae = _contextus.PuellaeResVisae.LegoPositionemRadix();
-            Vector3 positioCivis = _contextus.Loci.Positio(idCivis);
-            return (positioCivis - positioPuellae).Length();
-        }
-
-        public void Ordinare(
-            int idCivis,
-            IResFluidaCivisLegibile resFluida
+        public void OrdinareCustodiae(
+            int idCivis, IResFluidaCivisLegibile resFluida
         ) {
-            float consumptio = ComputareConsumptioVisae(idCivis, resFluida);
+            // 視認範囲の解決
+            _resolutorCivisDistantia.Ordinare(idCivis);
+            // SpectareNudusの解決
+            _resolutorCivisNudusVisae.Ordinare(idCivis);
 
-            float numerusIctuum = 
-                _numerusIctuumCapitis[idCivis] * _angulusRationemCapitis[idCivis] + 
-                _numerusIctuumCorporis[idCivis] * _angulusRationemCorporis[idCivis];
+            // Nudus視認前後の挙動を解決
+            _resolutorCivisMutareCustodiae.OrdinareVisa(idCivis, resFluida);
 
-            // 視認数0で減少する。
-            if (numerusIctuum <= Numerus.Epsilon) {
-                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) return;
-
-                _contextus.Carrus.PostulareVeletudinisValoris(
-                    idCivis,
-                    dtVisa: consumptio
-                );
-                return;
-            }
-
-            float distantia = ComputareDistantia(idCivis);
-            // distantiaがDistantiaCustodiaeより大きい場合はVisaeを減少する。
-            if (distantia > _contextus.Configuratio.Custodiae.DistantiaCustodiae) {
-                if (resFluida.Veletudinis.Visa(idCivis) <= Numerus.Epsilon) return;
-
-                _contextus.Carrus.PostulareVeletudinisValoris(
-                    idCivis,
-                    dtVisa: consumptio
-                );
-                return;
-            }
-
-
-            float visus = resFluida.Veletudinis.Visus(idCivis);
-            float distantiaCustodiaeMaxima = _contextus.Configuratio.Custodiae.DistantiaCustodiaeMaxima;
-            float distantiaCustodiae = _contextus.Configuratio.Custodiae.DistantiaCustodiae;
-            float ratio = ComputareVisus(visus, distantia, distantiaCustodiae, distantiaCustodiaeMaxima);
-
-            // /100は固定補正値。
-            // 視認数 * ratioVirsus / 毎秒 * 視認度上昇倍率
-            float dtVisa = (numerusIctuum/100f) * ratio * _contextus.Temporis.Intervallum;
-            // 固定設定レシオを乗算する。
-            dtVisa *= _contextus.Configuratio.Custodiae.RatioVisus;
-            // PuellaeステートのClaritasを適用する。
-            dtVisa *= _contextus.ResFPuellae.Veletudinis.Claritas;
-            // 興味喪失時間をリセット
-            _tempusStudiumAmittere[idCivis] = 0f;
-
-
-            _contextus.Carrus.PostulareVeletudinisValoris(
-                idCivis,
-                dtVisa: dtVisa
-            );
+            // Visaの解決
+            _resolutorCivisVisa.Ordinare(idCivis, resFluida);
+            // Suspectaの解決
+            _resolutorCivisSuspectae.Ordinare(idCivis, resFluida);
+            // Auditaの解決
+            _resolutorCivisAuditae.Ordinare(idCivis, resFluida);
         }
 
-        // Detectio状態ではConsumptioVisaeDetectioSecで減少する。
-        // Vigilantia/通常時は興味喪失パラメータに従ってConsumptioVisaeSecで減少する。
-        private float ComputareConsumptioVisae(
-            int idCivis,
-            IResFluidaCivisLegibile resFluida
+        public void ResolvereIctuum(
+            int idCivis, IResFluidaCivisLegibile resFluida
         ) {
-            if (resFluida.Veletudinis.EstDetectio(idCivis)) {
-                _tempusStudiumAmittere[idCivis] = 0f;
-                return _contextus.Configuratio.Custodiae.ConsumptioVisaeDetectioSec * _contextus.Temporis.Intervallum;
-            } else {
-                _tempusStudiumAmittere[idCivis] += _contextus.Temporis.Intervallum;
-                // 経過時間を0~1に正規化
-                float t = DuxMath.Clamp(_tempusStudiumAmittere[idCivis] / _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec, 0f, 1f);
-                float ratio = _sigmoidLUTTempusAmittere[t];
-                return _contextus.Configuratio.Custodiae.ConsumptioVisaeSec * ratio * _contextus.Temporis.Intervallum;
-            }
+            // Puellae視認数を解決
+            _resolutorCivisIctuum.Resolvere(idCivis, resFluida);
+            // Auditaの解決
+            _resolutorCivisIctuumAuditae.Resolvere(idCivis, resFluida);
         }
 
-        public void ResolvereIctuum() {
-            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
-                _numerusIctuumCapitis[i] = 0;
-                _numerusIctuumCorporis[i] = 0;
-                float distantia = ComputareDistantia(i);
-                // 最大視認距離より遠いNPCは視認数を0とする。
-                if (distantia > _contextus.Configuratio.Custodiae.DistantiaCustodiae) continue;
-
-                Vector3 positioCivisCapitis = default;
-                Vector3 directioCivisCapitis = default;
-                if (
-                    _contextus.Visa.ConareLegoPositioCapitis(i, out positioCivisCapitis) && 
-                    _contextus.Visa.ConareLegoDirectioCapitis(i, out directioCivisCapitis)
-                ) {
-                } else {
-                    // ここしくじると気づけなさそうだからロギング。
-                    Memorator.MemorareErrorum(IDErrorum.MILIESCIVISCUSTODIAE_CONARELEGO_FAILED);
-                    positioCivisCapitis = _contextus.Loci.Positio(i);
-                    directioCivisCapitis = new Vector3(0f, 1f, 0f);
-                }
-
-                float summaAngulusRationemCapitis = 0f;
-                float summaAngulusRationemCorporis = 0f;
-
-                // 頭の視認数を取得。
-                foreach (IDPuellaeResVisaeCapitis idCapitis in _cIDPuellaeResVisaeCapitis) {
-                    if (_contextus.PuellaeResVisae.ConareLegoCapitis(idCapitis, out Vector3 positionem)) {
-                        if (_contextus.Visa.EstVisa(i, positionem)) {
-                            _numerusIctuumCapitis[i] += 1f;
-                            // 視野角における角度を計算しておく。
-                            summaAngulusRationemCapitis += ComputareAngulusRationem(
-                                positioCivisCapitis,
-                                directioCivisCapitis,
-                                positionem
-                            );
-                        }
-                    }
-                }
-
-                // 胸の視認数を取得。
-                foreach (IDPuellaeResVisaePectoris idPectoris in _cIDPuellaeResVisaePectoris) {
-                    if (_contextus.PuellaeResVisae.ConareLegoPectoris(idPectoris, out Vector3 positionem)) {
-                        if (_contextus.Visa.EstVisa(i, positionem)) {
-                            _numerusIctuumCorporis[i] += 1f;
-                            // 視野角における角度を計算しておく。
-                            summaAngulusRationemCorporis += ComputareAngulusRationem(
-                                positioCivisCapitis,
-                                directioCivisCapitis,
-                                positionem
-                            );
-                        }
-                    }
-                }
-
-                // ケツ視認数を取得。
-                foreach (IDPuellaeResVisaeNatium idNatium in _cIDPuellaeResVisaeNatium) {
-                    if (_contextus.PuellaeResVisae.ConareLegoNatium(idNatium, out Vector3 positionem)) {
-                        if (_contextus.Visa.EstVisa(i, positionem)) {
-                            _numerusIctuumCorporis[i] += 1f;
-                            // 視野角における角度を計算しておく。
-                            summaAngulusRationemCorporis += ComputareAngulusRationem(
-                                positioCivisCapitis,
-                                directioCivisCapitis,
-                                positionem
-                            );
-                        }
-                    }
-                }
-
-                // 視野角角度の平均値を計算する。↑後で合成してNumerusIctuumに反映する。
-                _angulusRationemCapitis[i] = summaAngulusRationemCapitis / _cIDPuellaeResVisaeCapitis.Length;
-                _angulusRationemCorporis[i] = summaAngulusRationemCorporis / (_cIDPuellaeResVisaePectoris.Length + _cIDPuellaeResVisaeNatium.Length);
-            }
-        }
-
-        // 頭の方向とNavmesh方向の角度を計算し、視野角オフセット値(0~1)を計算する。
-        // 視野範囲を95度円錐形として、そこから中心に向かって0 -> 1 
-        // 距離が近くなるほど視野範囲を45度に近づける。
-        public float ComputareAngulusRationem(
-            Vector3 positioCivisCapitis,
-            Vector3 directioCivisCapitis,
-            Vector3 positioPuellaeResVisae
+        public void ResolvereDetectio(
+            int idCivis, IResFluidaCivisLegibile resFluida
         ) {
-            Vector3 directio = positioPuellaeResVisae - positioCivisCapitis;
-            if (directio.LengthSquared() < Numerus.EpsilonSq) return 0f;
-            float distantia = directio.Length();
-
-            float d = Vector3.Dot(Vector3.Normalize(directioCivisCapitis), Vector3.Normalize(directio));
-
-            float dN = DuxMath.Clamp(
-                (_contextus.Configuratio.Custodiae.DistantiaCustodiae - distantia) / 
-                (_contextus.Configuratio.Custodiae.DistantiaCustodiae - _contextus.Configuratio.Custodiae.DistantiaCustodiaeMaxima),
-                0f,
-                1f
-            );
-
-            dN = dN * dN * (3f - 2f * dN); // smoothstep
-            float cosAngulus = 1f + (cos45 - 1f) * dN; // Lerp
-
-            float ratio = DuxMath.Clamp(
-                (d - cos95) / (cosAngulus - cos95),
-                0f,
-                1f
-            );
-            return ratio * ratio * (3f - 2f * ratio); // smoothstep
+            // Detectio, Vigilantiaの解決
+            _resolutorCivisMutareCustodiae.ResolvereDetectio(idCivis, resFluida);
+            // Suspectaの解決
+            _resolutorCivisMutareCustodiae.ResolvereSuspecta(idCivis, resFluida);
+            // DetectioSonoraの解決
+            _resolutorCivisMutareCustodiae.ResolvereDetectioSonora(idCivis, resFluida);
         }
     }
 }

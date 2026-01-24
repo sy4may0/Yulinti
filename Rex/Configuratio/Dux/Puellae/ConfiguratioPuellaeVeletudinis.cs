@@ -8,10 +8,12 @@ namespace Yulinti.Rex {
         [SerializeField] private float limenRefectaVigoris = 0.3f;
         [SerializeField] private float limenExhauritaPatientiae = 0.00001f;
         [SerializeField] private float limenRefectaPatientiae = 0.3f;
+        [SerializeField] private float velocitasSoniMaxima = 3.0f;
 
         public float LimenExhauritaVigoris => limenExhauritaVigoris;
         public float LimenRefectaVigoris => limenRefectaVigoris;
         public float LimenExhauritaPatientiae => limenExhauritaPatientiae;
         public float LimenRefectaPatientiae => limenRefectaPatientiae;
+        public float VelocitasSoniMaxima => velocitasSoniMaxima;
     }
 }

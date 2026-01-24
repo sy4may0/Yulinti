@@ -1,5 +1,4 @@
 using Yulinti.Dux.ContractusDucis;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class CenturioCivis : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisFixus, ICenturioPulsabilisTardus {
@@ -34,6 +33,7 @@ namespace Yulinti.Dux.Exercitus {
             _carrusCivis.Initare(idCivis);
             _carrusCivis.Primum(idCivis);
             _milesCivisActionis.Initare(idCivis, _resFluidaLegibile);
+            _milesCivisCustodiae.Initare(idCivis);
             _carrusCivis.ConfirmareIncipabilis(idCivis);
         }
 
@@ -55,14 +55,7 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
-        // !注意
-        // 処理対象整理とステートマシンのステート切り替えが同期しないことがある。
-        // MutareStatus()がステート遷移要求を返し、アニメーション適用時にコールバックで自身のステートを更新する。
-        // このコールバックが呼ばれる前にInitareServatumが実行されるとコールバック実行時にNoneステートに遷移する。
-        // この問題はInitareServatumでPurgereを実行することで解決するはずではあるが、確実ではない。
-        // したがって、Ordinatio()時に現在StateがnullならNPCをIncarnareする。
         public void Pulsus() {
-            // MilesCivisActionisの初期化。処理対象整理
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
                 // AdIncarnare/AdSpirituareが生成時にInvoke()されなかった場合に修復する。
                 RenovareDominare(i);
@@ -77,7 +70,7 @@ namespace Yulinti.Dux.Exercitus {
                 _milesCivisActionis.Ordinare(i, _resFluidaLegibile);
 
                 // 視認度Ordinatio実行
-                _milesCivisCustodiae.Ordinare(i, _resFluidaLegibile);
+                _milesCivisCustodiae.OrdinareCustodiae(i, _resFluidaLegibile);
 
                 // Carrus適用(Ordinatio実行)
                 _carrusCivis.Confirmare(i);
@@ -85,12 +78,19 @@ namespace Yulinti.Dux.Exercitus {
         }
 
         public void PulsusFixus() {
-            _milesCivisCustodiae.ResolvereIctuum();
+            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+                if (!_resFluidaLegibile.Veletudinis.EstDominare(i)) continue;
+
+                _milesCivisCustodiae.ResolvereIctuum(i, _resFluidaLegibile);
+            }
         }
 
         public void PulsusTardus() {
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
                 if (!_resFluidaLegibile.Veletudinis.EstDominare(i)) continue;
+
+                // Detectio判定の解決
+                _milesCivisCustodiae.ResolvereDetectio(i, _resFluidaLegibile);
 
                 _carrusCivis.ConfirmareTardus(i);
             }

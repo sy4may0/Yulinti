@@ -1,8 +1,9 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 using UnityEngine.InputSystem;
 using Yulinti.MinisteriaUnity.MinisteriaRationis;
 using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumInputMotus {

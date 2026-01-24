@@ -32,12 +32,37 @@ namespace Yulinti.Dux.Exercitus {
 
             float y = 1f / (1f + MathF.Exp(-praeruptio * (x - centrum)));
 
-            return InverseLeap(y0, y1, y);
+            return InverseLerp(y0, y1, y);
         }
 
-        public static float InverseLeap(float y0, float y1, float y) {
+        // 0~1にクランプしないLerp
+        public static float NLerp(float y0, float y1, float t) {
+            return y0 + (y1 - y0) * t;
+        }
+
+        // ClampするLerp
+        public static float Lerp(float y0, float y1, float t) {
+            return Clamp(y0 + (y1 - y0) * t, 0f, 1f);
+        }
+
+        // 0~1にクランプしないInverseLerp
+        public static float NInverseLerp(float y0, float y1, float y) {
             if (MathF.Abs(y1 - y0) < Numerus.Epsilon) return 0f;
             return (y - y0) / (y1 - y0);
+        }
+
+        // ClampするInverseLerp
+        public static float InverseLerp(float y0, float y1, float y) {
+            if (MathF.Abs(y1 - y0) < Numerus.Epsilon) return 0f;
+            return Clamp((y - y0) / (y1 - y0), 0f, 1f);
+        }
+
+        public static float Deg2Rad(float deg) {
+            return deg * Numerus.Deg2Rad;
+        }
+
+        public static float Rad2Deg(float rad) {
+            return rad * Numerus.Rad2Deg;
         }
     }
 
@@ -51,7 +76,9 @@ namespace Yulinti.Dux.Exercitus {
         public SigmoidLUT(
             float praeruptio,
             float centrum,
-            int longitudo
+            int longitudo,
+            // Y反転フラグ
+            bool inversus = false
         ) {
             _praeruptio = praeruptio;
             _centrum = centrum;
@@ -65,7 +92,14 @@ namespace Yulinti.Dux.Exercitus {
                 _lut[i] = DuxMath.SigmoidCaudaSinistra(i / (longitudo - 1f), centrum, praeruptio, y0, y1);
             }
 
+            if (inversus) {
+                for (int i = 0; i < longitudo; i++) {
+                    _lut[i] = 1f - _lut[i];
+                }
+            }
         }
+
+        public float[] LUT => _lut;
 
         public float this[float x] {
             get {

@@ -11,4 +11,12 @@ namespace Yulinti.Dux.ContractusDucis {
         Dexter,
         Sinister,
     }
+
+    public enum IDPuellaeResNudusAnterior {
+        Pectoris,
+        Catellus
+    }
+    public enum IDPuellaeResNudusPosterior {
+        Natium
+    }
 }

@@ -1,8 +1,8 @@
 using System;
 using Animancer;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 using Yulinti.Nucleus;
-
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumPuellaeAnimationes : IMinisteriumPulsabilis {

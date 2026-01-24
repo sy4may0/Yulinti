@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 using Yulinti.Nucleus;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCivisLoci {

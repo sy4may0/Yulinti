@@ -1,4 +1,4 @@
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.ContractusDucis {
     public interface IConfiguratioPuellaeStatusCorporis {
@@ -12,5 +12,7 @@ namespace Yulinti.Dux.ContractusDucis {
         float IncrementumAetherisSec { get; }
         float Intentio { get; }
         float Claritas { get; }
+        float SonusQuietes { get; }
+        float SonusMotus { get; }
     }
 }

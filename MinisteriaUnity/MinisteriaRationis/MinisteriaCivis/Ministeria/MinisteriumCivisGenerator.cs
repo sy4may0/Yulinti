@@ -1,8 +1,9 @@
 using Cysharp.Threading.Tasks;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 using UnityEngine;
 using Yulinti.Nucleus;
 using System.Threading;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class MinisteriumCivisGenerator : IMinisteriumIncipabilis, IMinisteriumLiberabilis {

@@ -9,7 +9,8 @@ namespace Yulinti.Dux.Exercitus {
         Veletudinis,
         FiguraGenus,
         FiguraPelvis,
-        Apparatus
+        Apparatus,
+        VeletudinisNudi
     }
     internal interface IOrdinatioPuellae {
         bool EstApplicandum { get; }

@@ -1,4 +1,3 @@
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.Exercitus {

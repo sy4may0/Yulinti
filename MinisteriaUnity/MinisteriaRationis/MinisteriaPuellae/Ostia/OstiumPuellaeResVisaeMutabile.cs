@@ -1,4 +1,5 @@
 using Yulinti.Dux.ContractusDucis;
+using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
     internal sealed class OstiumPuellaeResVisaeMutabile : IOstiumPuellaeResVisaeMutabile {
@@ -16,6 +17,14 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public void ActivareNatium() {
             _miPuellaeResVisae.ActivareNatium();
         }
+
+        public void ActivareNudusAnterior() {
+            _miPuellaeResVisae.ActivareNudusAnterior();
+        }
+        public void ActivareNudusPosterior() {
+            _miPuellaeResVisae.ActivareNudusPosterior();
+        }
+
         public void DeactivateCapitis() {
             _miPuellaeResVisae.DeactivateCapitis();
         }
@@ -25,17 +34,27 @@ namespace Yulinti.MinisteriaUnity.MinisteriaRationis {
         public void DeactivateNatium() {
             _miPuellaeResVisae.DeactivateNatium();
         }
+        public void DeactivateNudusAnterior() {
+            _miPuellaeResVisae.DeactivateNudusAnterior();
+        }
+        public void DeactivateNudusPosterior() {
+            _miPuellaeResVisae.DeactivateNudusPosterior();
+        }
 
         public void Activare() {
             ActivareCapitis();
             ActivarePectoris();
             ActivareNatium();
+            ActivareNudusAnterior();
+            ActivareNudusPosterior();
         }
 
         public void Deactivate() {
             DeactivateCapitis();
             DeactivatePectoris();
             DeactivateNatium();
+            DeactivateNudusAnterior();
+            DeactivateNudusPosterior();
         }
     }
 }

@@ -5,6 +5,8 @@ namespace Yulinti.Dux.Exercitus {
         private float _dtAetheris;
         private float _dtIntentio;
         private float _dtClaritas;
+        private float _dtSonusQuietes;
+        private float _dtSonusMotus;
 
         public OrdinatioPuellaeVeletudinis()
             : base(true, SpeciesOrdinatioPuellae.Veletudinis) {
@@ -13,6 +15,8 @@ namespace Yulinti.Dux.Exercitus {
             _dtAetheris = 0f;
             _dtIntentio = 0f;
             _dtClaritas = 0f;
+            _dtSonusQuietes = 0f;
+            _dtSonusMotus = 0f;
         }
 
         public float DtVigoris => _dtVigoris;
@@ -20,6 +24,8 @@ namespace Yulinti.Dux.Exercitus {
         public float DtAetheris => _dtAetheris;
         public float DtIntentio => _dtIntentio;
         public float DtClaritas => _dtClaritas;
+        public float DtSonusQuietes => _dtSonusQuietes;
+        public float DtSonusMotus => _dtSonusMotus;
 
         public override void Purgere() {
             _estApplicandum = false;
@@ -28,6 +34,8 @@ namespace Yulinti.Dux.Exercitus {
             _dtAetheris = 0f;
             _dtIntentio = 0f;
             _dtClaritas = 0f;
+            _dtSonusQuietes = 0f;
+            _dtSonusMotus = 0f;
         }
 
         public void Pono(
@@ -35,13 +43,17 @@ namespace Yulinti.Dux.Exercitus {
             float dtPatientiae,
             float dtAetheris,
             float dtIntentio,
-            float dtClaritas
+            float dtClaritas,
+            float dtSonusQuietes,
+            float dtSonusMotus
         ) {
             _dtVigoris = dtVigoris;
             _dtPatientiae = dtPatientiae;
             _dtAetheris = dtAetheris;
             _dtIntentio = dtIntentio;
             _dtClaritas = dtClaritas;
+            _dtSonusQuietes = dtSonusQuietes;
+            _dtSonusMotus = dtSonusMotus;
 
             _estApplicandum = true;
         }

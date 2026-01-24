@@ -7,12 +7,14 @@ namespace Yulinti.Dux.Exercitus {
         private readonly Stack<OrdinatioCivisNavmesh>[] _lacusNavmesh;
         private readonly Stack<OrdinatioCivisVeletudinisValoris>[] _lacusVeletudinisValoris;
         private readonly Stack<OrdinatioCivisMortis>[] _lacusMortis;
+        private readonly Stack<OrdinatioCivisVeletudinisCondicionis>[] _lacusVeletudinisCondicionis;
 
         private readonly DuxQueue<OrdinatioCivisAnimationis>[] _emissioAnimationis;
         private readonly DuxQueue<OrdinatioCivisMotus>[] _emissioMotus;
         private readonly DuxQueue<OrdinatioCivisNavmesh>[] _emissioNavmesh;
         private readonly DuxQueue<OrdinatioCivisVeletudinisValoris>[] _emissioVeletudinisValoris;
         private readonly DuxQueue<OrdinatioCivisMortis>[] _emissioMortis;
+        private readonly DuxQueue<OrdinatioCivisVeletudinisCondicionis>[] _emissioVeletudinisCondicionis;
 
         public LacusOrdinatioCivis(int longitudoCivis) {
             _lacusAnimationis = new Stack<OrdinatioCivisAnimationis>[longitudoCivis];
@@ -20,12 +22,14 @@ namespace Yulinti.Dux.Exercitus {
             _lacusNavmesh = new Stack<OrdinatioCivisNavmesh>[longitudoCivis];
             _lacusVeletudinisValoris = new Stack<OrdinatioCivisVeletudinisValoris>[longitudoCivis];
             _lacusMortis = new Stack<OrdinatioCivisMortis>[longitudoCivis];
+            _lacusVeletudinisCondicionis = new Stack<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
 
             _emissioAnimationis = new DuxQueue<OrdinatioCivisAnimationis>[longitudoCivis];
             _emissioMotus = new DuxQueue<OrdinatioCivisMotus>[longitudoCivis];
             _emissioNavmesh = new DuxQueue<OrdinatioCivisNavmesh>[longitudoCivis];
             _emissioVeletudinisValoris = new DuxQueue<OrdinatioCivisVeletudinisValoris>[longitudoCivis];
             _emissioMortis = new DuxQueue<OrdinatioCivisMortis>[longitudoCivis];
+            _emissioVeletudinisCondicionis = new DuxQueue<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
 
             for (int i = 0; i < longitudoCivis; i++) {
                 _lacusAnimationis[i] = new Stack<OrdinatioCivisAnimationis>(ConstansCivis.LongitudoOrdinatioAnimationis);
@@ -33,12 +37,14 @@ namespace Yulinti.Dux.Exercitus {
                 _lacusNavmesh[i] = new Stack<OrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
                 _lacusVeletudinisValoris[i] = new Stack<OrdinatioCivisVeletudinisValoris>(ConstansCivis.LongitudoOrdinatioVeletudinisValoris);
                 _lacusMortis[i] = new Stack<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
+                _lacusVeletudinisCondicionis[i] = new Stack<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
 
                 _emissioAnimationis[i] = new DuxQueue<OrdinatioCivisAnimationis>(ConstansCivis.LongitudoOrdinatioAnimationis);
                 _emissioMotus[i] = new DuxQueue<OrdinatioCivisMotus>(ConstansCivis.LongitudoOrdinatioMotus);
                 _emissioNavmesh[i] = new DuxQueue<OrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
                 _emissioVeletudinisValoris[i] = new DuxQueue<OrdinatioCivisVeletudinisValoris>(ConstansCivis.LongitudoOrdinatioVeletudinisValoris);
                 _emissioMortis[i] = new DuxQueue<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
+                _emissioVeletudinisCondicionis[i] = new DuxQueue<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
 
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioAnimationis; j++) {
                     _lacusAnimationis[i].Push(new OrdinatioCivisAnimationis(i));
@@ -54,6 +60,9 @@ namespace Yulinti.Dux.Exercitus {
                 }
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioMortis; j++) {
                     _lacusMortis[i].Push(new OrdinatioCivisMortis(i));
+                }
+                for (int j = 0; j < ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis; j++) {
+                    _lacusVeletudinisCondicionis[i].Push(new OrdinatioCivisVeletudinisCondicionis(i));
                 }
             }
         }
@@ -123,6 +132,19 @@ namespace Yulinti.Dux.Exercitus {
             return false;
         }
 
+        public bool EmittareVeletudinisCondicionis(int idCivis, out OrdinatioCivisVeletudinisCondicionis veletudinisCondicionis) {
+            if (_lacusVeletudinisCondicionis[idCivis].Count > 0) {
+                var r = _lacusVeletudinisCondicionis[idCivis].Pop();
+                if (_emissioVeletudinisCondicionis[idCivis].ConarePono(r)) {
+                    veletudinisCondicionis = r;
+                    veletudinisCondicionis.Initare();
+                    return true;
+                }
+            }
+            veletudinisCondicionis = null;
+            return false;
+        }
+
         public void ColligereAnimationis(int idCivis) {
             while (_emissioAnimationis[idCivis].ConareLego(out var r)) {
                 if (_lacusAnimationis[idCivis].Count < ConstansCivis.LongitudoOrdinatioAnimationis) {
@@ -178,12 +200,24 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
+        public void ColligereVeletudinisCondicionis(int idCivis) {
+            while (_emissioVeletudinisCondicionis[idCivis].ConareLego(out var r)) {
+                if (_lacusVeletudinisCondicionis[idCivis].Count < ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis) {
+                    _lacusVeletudinisCondicionis[idCivis].Push(r);
+                } else {
+                    r.Purgere();
+                    r.Liberare();
+                }
+            }
+        }
+
         public void ColligereOmnia(int idCivis) {
             ColligereAnimationis(idCivis);
             ColligereMotus(idCivis);
             ColligereNavmesh(idCivis);
             ColligereVeletudinisValoris(idCivis);
             ColligereMortis(idCivis);
+            ColligereVeletudinisCondicionis(idCivis);
         }
     }
 }

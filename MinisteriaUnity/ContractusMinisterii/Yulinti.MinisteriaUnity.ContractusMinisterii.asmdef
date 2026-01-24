@@ -3,6 +3,7 @@
   "rootNamespace": "Yulinti.MinisteriaUnity.ContractusMinisterii",
   "references": [
     "Yulinti.Nucleus",
+    "Yulinti.Dux.ContractusDucis",
     "Unity.InputSystem",
     "Kybernetik.Animancer",
     "Unity.Addressables",

@@ -1,11 +1,11 @@
 using Yulinti.Dux.ContractusDucis;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
 
 namespace Yulinti.Dux.Exercitus {
     internal sealed class CenturioPuellae : ICenturio, ICenturioIncipabilis, ICenturioPulsabilis, ICenturioPulsabilisTardus {
         private readonly MilesPuellaeActionis _milesPuellaeActionis;
         private readonly MilesPuellaeCrinis _milesPuellaeCrinis;
         private readonly MilesPuellaeFigurae _milesPuellaeFigurae;
+        private readonly MilesPuellaeVestitae _milesPuellaeVestitae;
 
         // Carrus
         private readonly CarrusPuellae _carrusPuellae;
@@ -18,12 +18,14 @@ namespace Yulinti.Dux.Exercitus {
             MilesPuellaeActionis milesPuellaeActionis,
             MilesPuellaeCrinis milesPuellaeCrinis,
             MilesPuellaeFigurae milesPuellaeFigurae,
+            MilesPuellaeVestitae milesPuellaeVestitae,
             IResFluidaPuellaeLegibile resFluidaLegibile,
             CarrusPuellae carrusPuellae
         ) {
             _milesPuellaeActionis = milesPuellaeActionis;
             _milesPuellaeCrinis = milesPuellaeCrinis;
             _milesPuellaeFigurae = milesPuellaeFigurae;
+            _milesPuellaeVestitae = milesPuellaeVestitae;
             _resFluidaLegibile = resFluidaLegibile;
             _carrusPuellae = carrusPuellae;
         }
@@ -33,21 +35,21 @@ namespace Yulinti.Dux.Exercitus {
             _carrusPuellae.Primum();
             _milesPuellaeActionis.Initare(_resFluidaLegibile);
             _milesPuellaeCrinis.Initare();
+            _milesPuellaeVestitae.Initare();
             _carrusPuellae.ConfirmareIncipabilis();
         }
 
         public void Pulsus() {
-            UnityEngine.Debug.Log("Pulsus: " + _resFluidaLegibile.Veletudinis.Claritas);
             // Carrus初期化実行
             _carrusPuellae.Primum();
 
             // Ordinatio計画
             _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);
             _milesPuellaeActionis.Ordinare(_resFluidaLegibile);
+            _milesPuellaeVestitae.Ordinare(_resFluidaLegibile);
 
             // Carrus適用(Ordinatio実行)
             _carrusPuellae.Confirmare();
-            UnityEngine.Debug.Log("Pulsus End: " + _resFluidaLegibile.Veletudinis.Claritas);
         }
 
         public void PulsusTardus() {
@@ -56,7 +58,6 @@ namespace Yulinti.Dux.Exercitus {
 
             // Carrus適用(Ordinatio実行)
             _carrusPuellae.ConfirmareTardus();
-            UnityEngine.Debug.Log("PulsusTardus: " + _resFluidaLegibile.Veletudinis.Claritas);
         }
 
     }

@@ -58,6 +58,10 @@ namespace Yulinti.MinisteriaUnity.Anchora {
         [SerializeField] private Transform _resVisaeNatiumDexter;
         [SerializeField] private Transform _resVisaeNatiumSinister;
 
+        [SerializeField] private Transform _resNudusPectoris;
+        [SerializeField] private Transform _resNudusCatellus;
+        [SerializeField] private Transform _resNudusNatium;
+
 
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
         public Animator Animator => _animator;
@@ -114,6 +118,11 @@ namespace Yulinti.MinisteriaUnity.Anchora {
         // ケツの視認ポイント
         public Transform ResVisaeNatiumDexter => _resVisaeNatiumDexter;
         public Transform ResVisaeNatiumSinister => _resVisaeNatiumSinister;
+
+        // 露出判定用ポイント
+        public Transform ResNudusPectoris => _resNudusPectoris;
+        public Transform ResNudusCatellus => _resNudusCatellus;
+        public Transform ResNudusNatium => _resNudusNatium;
 
         public bool Validare() {
             bool result = true;
@@ -276,6 +285,18 @@ namespace Yulinti.MinisteriaUnity.Anchora {
             }
             if (_resVisaeNatiumDexter == null || _resVisaeNatiumSinister == null) {
                 Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_BONE_VISAE_NATIUM_NULL);
+                result = false;
+            }
+            if (_resNudusPectoris == null) {
+                Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_BONE_NUDUS_PECTORIS_NULL);
+                result = false;
+            }
+            if (_resNudusCatellus == null) {
+                Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_BONE_NUDUS_CATELLUS_NULL);
+                result = false;
+            }
+            if (_resNudusNatium == null) {
+                Errorum.Fatal(IDErrorum.ANCHORAPUELLAE_BONE_NUDUS_NATIUM_NULL);
                 result = false;
             }
             return result;

@@ -1,6 +1,6 @@
 using System.Numerics;
 using Yulinti.Nucleus;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Dux.ContractusDucis;
 
 namespace Yulinti.Dux.ContractusDucis {
     public interface IPunctumViaeLegibile {

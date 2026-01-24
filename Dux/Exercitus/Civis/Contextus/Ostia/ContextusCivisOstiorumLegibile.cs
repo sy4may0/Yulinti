@@ -1,4 +1,6 @@
 using Yulinti.Dux.ContractusDucis;
+using System;
+
 namespace Yulinti.Dux.Exercitus {
     internal sealed class ContextusCivisOstiorumLegibile {
         private readonly IConfiguratioExercitusCivis _configuratio;
@@ -11,6 +13,9 @@ namespace Yulinti.Dux.Exercitus {
         private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
         private readonly IResFluidaPuellaeLegibile _resFPuellae;
         private readonly IOstiumCarrusCivis _carrus;
+
+        // 共通のランダムオブジェクト
+        private readonly Random _randomCommunis;
 
         public ContextusCivisOstiorumLegibile(
             IConfiguratioExercitusCivis configuratio,
@@ -34,6 +39,8 @@ namespace Yulinti.Dux.Exercitus {
             _puellaeResVisae = puellaeResVisae;
             _resFPuellae = resFPuellae;
             _carrus = carrus;
+
+            _randomCommunis = new Random();
         }
 
         public IConfiguratioExercitusCivis Configuratio => _configuratio;
@@ -46,5 +53,7 @@ namespace Yulinti.Dux.Exercitus {
         public IOstiumPuellaeResVisaeLegibile PuellaeResVisae => _puellaeResVisae;
         public IResFluidaPuellaeLegibile ResFPuellae => _resFPuellae;
         public IOstiumCarrusCivis Carrus => _carrus;
+
+        public Random RandomCommunis => _randomCommunis;
     }
 }
