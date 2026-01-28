@@ -23,7 +23,7 @@ namespace Yulinti.Rex {
         [Header("RatioConsumptioVigorisDetectioを解除するExhibitusレベル")]
         [SerializeField] private int limenRemissioExhibitus = 5;
         [Header("視認人数による最大倍率")]
-        [SerializeField] private float ratioNumerusCustodiaeMaxima = 30f;
+        [SerializeField] private float ratioNumerusCustodiaeMaxima = 3f;
 
         [Header("回復量(sec)")]
         [SerializeField] private float recuperatioVigorisSec = 0.15f;
