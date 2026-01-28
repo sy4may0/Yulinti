@@ -8,6 +8,7 @@ namespace Yulinti.Dux.Exercitus {
         private float _phantasmaAether;
         private float _phantasmaClaritas;
         private float _phantasmaIntentio;
+        private float _phantasmaDedecus;
         private float _phantasmaSonusQuietes;
         private float _phantasmaSonusMotus;
 
@@ -16,6 +17,7 @@ namespace Yulinti.Dux.Exercitus {
         private float _claritasMaxima;
         private float _aetherMaxima;
         private float _intentioMaxima;
+        private float _dedecusMaxima;
         private float _sonusQuietesMaxima;
         private float _sonusMotusMaxima;
 
@@ -25,6 +27,7 @@ namespace Yulinti.Dux.Exercitus {
             _phantasmaAether = 0f;
             _phantasmaClaritas = 0f;
             _phantasmaIntentio = 0f;
+            _phantasmaDedecus = 0f;
             _phantasmaSonusQuietes = 0f;
             _phantasmaSonusMotus = 0f;
 
@@ -34,6 +37,7 @@ namespace Yulinti.Dux.Exercitus {
             _claritasMaxima = 1f;
             _aetherMaxima = 1f;
             _intentioMaxima = 1f;
+            _dedecusMaxima = 1f;
             _sonusQuietesMaxima = 1f;
             _sonusMotusMaxima = 1f;
         }
@@ -43,6 +47,7 @@ namespace Yulinti.Dux.Exercitus {
         public float PhantasmaAether => _phantasmaAether;
         public float PhantasmaClaritas => _phantasmaClaritas;
         public float PhantasmaIntentio => _phantasmaIntentio;
+        public float PhantasmaDedecus => _phantasmaDedecus;
         public float PhantasmaSonusQuietes => _phantasmaSonusQuietes;
         public float PhantasmaSonusMotus => _phantasmaSonusMotus;
 
@@ -52,6 +57,7 @@ namespace Yulinti.Dux.Exercitus {
             float dtAether = 0f,
             float dtClaritas = 0f,
             float dtIntentio = 0f,
+            float dtDedecus = 0f,
             float dtSonusQuietes = 0f,
             float dtSonusMotus = 0f
         ) {
@@ -60,6 +66,7 @@ namespace Yulinti.Dux.Exercitus {
             _phantasmaAether = DuxMath.Clamp(_phantasmaAether + dtAether, 0f, _aetherMaxima);
             _phantasmaClaritas = DuxMath.Clamp(_phantasmaClaritas + dtClaritas, 0f, _claritasMaxima);
             _phantasmaIntentio = DuxMath.Clamp(_phantasmaIntentio + dtIntentio, 0f, _intentioMaxima);
+            _phantasmaDedecus = DuxMath.Clamp(_phantasmaDedecus + dtDedecus, 0f, _dedecusMaxima);
             _phantasmaSonusQuietes = DuxMath.Clamp(_phantasmaSonusQuietes + dtSonusQuietes, 0f, _sonusQuietesMaxima);
             _phantasmaSonusMotus = DuxMath.Clamp(_phantasmaSonusMotus + dtSonusMotus, 0f, _sonusMotusMaxima);
         }
@@ -70,6 +77,7 @@ namespace Yulinti.Dux.Exercitus {
             float aether,
             float claritas,
             float intentio,
+            float dedecus,
             float sonusQuietes,
             float sonusMotus
         ) {
@@ -78,6 +86,7 @@ namespace Yulinti.Dux.Exercitus {
             _phantasmaAether = DuxMath.Clamp(aether, 0f, _aetherMaxima);
             _phantasmaClaritas = DuxMath.Clamp(claritas, 0f, _claritasMaxima);
             _phantasmaIntentio = DuxMath.Clamp(intentio, 0f, _intentioMaxima);
+            _phantasmaDedecus = DuxMath.Clamp(dedecus, 0f, _dedecusMaxima);
             _phantasmaSonusQuietes = DuxMath.Clamp(sonusQuietes, 0f, _sonusQuietesMaxima);
             _phantasmaSonusMotus = DuxMath.Clamp(sonusMotus, 0f, _sonusMotusMaxima);
         }
@@ -113,6 +122,7 @@ namespace Yulinti.Dux.Exercitus {
                 vigor: 0f,
                 patientia: 0f,
                 aether: 0f,
+                dedecus: 0f,
                 claritas: 0f,
                 intentio: 0f,
                 sonusQuietes: 0f,
@@ -132,6 +142,7 @@ namespace Yulinti.Dux.Exercitus {
                 aether: _resFluidaVeletudinis.Aether,
                 claritas: 0f,
                 intentio: 0f,
+                dedecus: 0f,
                 sonusQuietes: 0f,
                 sonusMotus: 0f
             );
@@ -146,6 +157,7 @@ namespace Yulinti.Dux.Exercitus {
                 dtAether: veletudinis.DtAetheris,
                 dtClaritas: veletudinis.DtClaritas,
                 dtIntentio: veletudinis.DtIntentio,
+                dtDedecus: veletudinis.DtDedecus,
                 dtSonusQuietes: veletudinis.DtSonusQuietes,
                 dtSonusMotus: veletudinis.DtSonusMotus
             );
@@ -176,6 +188,7 @@ namespace Yulinti.Dux.Exercitus {
                 aether: _phantasma.PhantasmaAether,
                 claritas: _phantasma.PhantasmaClaritas,
                 intentio: _phantasma.PhantasmaIntentio,
+                dedecus: _phantasma.PhantasmaDedecus,
                 sonusQuietes: _phantasma.PhantasmaSonusQuietes,
                 sonusMotus: _phantasma.PhantasmaSonusMotus * ComputareSonusMotus() // 速度補正をかける。
             );
@@ -223,6 +236,7 @@ namespace Yulinti.Dux.Exercitus {
                 aether: 0f,
                 claritas: 0f,
                 intentio: 0f,
+                dedecus: 0f,
                 sonusQuietes: 0f,
                 sonusMotus: 0f
             );

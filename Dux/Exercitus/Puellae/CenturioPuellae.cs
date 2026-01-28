@@ -6,6 +6,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly MilesPuellaeCrinis _milesPuellaeCrinis;
         private readonly MilesPuellaeFigurae _milesPuellaeFigurae;
         private readonly MilesPuellaeVestitae _milesPuellaeVestitae;
+        private readonly MilesPuellaeVigoris _milesPuellaeVigoris;
 
         // Carrus
         private readonly CarrusPuellae _carrusPuellae;
@@ -19,6 +20,7 @@ namespace Yulinti.Dux.Exercitus {
             MilesPuellaeCrinis milesPuellaeCrinis,
             MilesPuellaeFigurae milesPuellaeFigurae,
             MilesPuellaeVestitae milesPuellaeVestitae,
+            MilesPuellaeVigoris milesPuellaeVigoris,
             IResFluidaPuellaeLegibile resFluidaLegibile,
             CarrusPuellae carrusPuellae
         ) {
@@ -26,6 +28,7 @@ namespace Yulinti.Dux.Exercitus {
             _milesPuellaeCrinis = milesPuellaeCrinis;
             _milesPuellaeFigurae = milesPuellaeFigurae;
             _milesPuellaeVestitae = milesPuellaeVestitae;
+            _milesPuellaeVigoris = milesPuellaeVigoris;
             _resFluidaLegibile = resFluidaLegibile;
             _carrusPuellae = carrusPuellae;
         }
@@ -36,6 +39,7 @@ namespace Yulinti.Dux.Exercitus {
             _milesPuellaeActionis.Initare(_resFluidaLegibile);
             _milesPuellaeCrinis.Initare();
             _milesPuellaeVestitae.Initare();
+            _milesPuellaeVigoris.Initare();
             _carrusPuellae.ConfirmareIncipabilis();
         }
 
@@ -55,6 +59,7 @@ namespace Yulinti.Dux.Exercitus {
         public void PulsusTardus() {
             // Ordinatio計画
             _milesPuellaeFigurae.Ordinare();
+            _milesPuellaeVigoris.Ordinare(_resFluidaLegibile);
 
             // Carrus適用(Ordinatio実行)
             _carrusPuellae.ConfirmareTardus();

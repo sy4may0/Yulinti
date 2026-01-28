@@ -9,6 +9,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly IOstiumPuellaeLociLegibile _loci;
         private readonly IOstiumPuellaeRelationisTerraeLegibile _relationisTerrae;
         private readonly IOstiumPuellaeOssisLegibile _ossis;
+        private readonly IResFluidaCivisLegibile _resFCivis;
         private readonly IOstiumCarrusPuellae _carrus;
 
         public ContextusPuellaeOstiorumLegibile(
@@ -19,6 +20,7 @@ namespace Yulinti.Dux.Exercitus {
             IOstiumPuellaeLociLegibile loci,
             IOstiumPuellaeRelationisTerraeLegibile relationisTerrae,
             IOstiumPuellaeOssisLegibile ossis,
+            IResFluidaCivisLegibile resFCivis,
             IOstiumCarrusPuellae carrus
         ) {
             _configuratio = configuratio;
@@ -28,6 +30,7 @@ namespace Yulinti.Dux.Exercitus {
             _loci = loci;
             _relationisTerrae = relationisTerrae;
             _ossis = ossis;
+            _resFCivis = resFCivis;
             _carrus = carrus;
         }
 
@@ -38,6 +41,7 @@ namespace Yulinti.Dux.Exercitus {
         public IOstiumPuellaeLociLegibile Loci => _loci;
         public IOstiumPuellaeRelationisTerraeLegibile RelationisTerrae => _relationisTerrae;
         public IOstiumPuellaeOssisLegibile Ossis => _ossis;
+        public IResFluidaCivisLegibile ResFCivis => _resFCivis;
         public IOstiumCarrusPuellae Carrus => _carrus;
     }
 }

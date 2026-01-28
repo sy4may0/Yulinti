@@ -69,12 +69,17 @@ namespace Yulinti.Dux.Exercitus {
             float sonusMotus = _contextus.ResFPuellae.Veletudinis.SonusMotus;
             float sonus = DuxMath.Clamp((sonusQuietes + sonusMotus) / 2f, 0f, 1f);
 
+            if (sonus <= Numerus.Epsilon) {
+                _auditaIctuum[idCivis] = 0f;
+                return;
+            }
+
             float distantiaMaxima = ComputareDistantiaSoni(sonus);
             float ratioDistantia = ComputareRatioDistantia(distantiaMaxima, distantiaPuellae);
 
             float auditus = resFluida.Veletudinis.Auditus(idCivis);
 
-            _auditaIctuum[idCivis] = ratioDistantia * auditus;
+            _auditaIctuum[idCivis] = ratioDistantia * auditus * sonus;
         }
     }
 }

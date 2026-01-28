@@ -15,6 +15,8 @@ namespace Yulinti.Dux.Exercitus {
         private float _aether;
         // voltage
         private float _intentio;
+        // shameness
+        private float _dedecus;
 
         // 静止音量
         private float _sonusQuietes;
@@ -30,8 +32,9 @@ namespace Yulinti.Dux.Exercitus {
             this._vigor = 1f;
             this._patientia = 1f;
             this._claritas = 1f;
-            this._aether = 1f;
-            this._intentio = 1f;
+            this._aether = 0f;
+            this._intentio = 0f;
+            this._dedecus = 0f;
         }
 
         public float Vigor => _vigor;
@@ -41,6 +44,7 @@ namespace Yulinti.Dux.Exercitus {
         public float Claritas => _claritas;
         public float Aether => _aether;
         public float Intentio => _intentio;
+        public float Dedecus => _dedecus;
         public bool EstNudusAnterior => _estNudusAnterior;
         public bool EstNudusPosterior => _estNudusPosterior;
         public float SonusQuietes => _sonusQuietes;
@@ -52,6 +56,7 @@ namespace Yulinti.Dux.Exercitus {
             float claritas,
             float aether,
             float intentio,
+            float dedecus,
             float sonusQuietes,
             float sonusMotus
         ) {
@@ -60,6 +65,7 @@ namespace Yulinti.Dux.Exercitus {
             _claritas = DuxMath.Clamp(claritas, 0f, 1f);
             _aether = DuxMath.Clamp(aether, 0f, 1f);
             _intentio = DuxMath.Clamp(intentio, 0f, 1f);
+            _dedecus = DuxMath.Clamp(dedecus, 0f, 1f);
             _sonusQuietes = DuxMath.Clamp(sonusQuietes, 0f, 1f);
             _sonusMotus = DuxMath.Clamp(sonusMotus, 0f, 1f);
         }
@@ -109,6 +115,7 @@ namespace Yulinti.Dux.Exercitus {
             _claritas = 0f;
             _aether = 0f;
             _intentio = 0f;
+            _dedecus = 0f;
             _sonusQuietes = 0f;
             _sonusMotus = 0f;
         }

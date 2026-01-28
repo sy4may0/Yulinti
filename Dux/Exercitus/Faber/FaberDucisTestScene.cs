@@ -12,6 +12,9 @@ namespace Yulinti.Dux.Exercitus {
             builder.Register<ResFluidaPuellaeVeletudinis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<ResFluidaPuellaePersonae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             builder.Register<ResFluidaPuellaeLegibile>(Lifetime.Singleton)
                 .AsSelf()
@@ -59,6 +62,7 @@ namespace Yulinti.Dux.Exercitus {
             builder.Register<MilesPuellaeVestitae>(Lifetime.Singleton);
             builder.Register<MilesCivisActionis>(Lifetime.Singleton);
             builder.Register<MilesCivisCustodiae>(Lifetime.Singleton);
+            builder.Register<MilesPuellaeVigoris>(Lifetime.Singleton);
 
             // Centurio
             builder.Register<CenturioPuellae>(Lifetime.Singleton)

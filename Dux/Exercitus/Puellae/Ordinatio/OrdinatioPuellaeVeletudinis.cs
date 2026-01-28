@@ -4,6 +4,7 @@ namespace Yulinti.Dux.Exercitus {
         private float _dtPatientiae;
         private float _dtAetheris;
         private float _dtIntentio;
+        private float _dtDedecus;
         private float _dtClaritas;
         private float _dtSonusQuietes;
         private float _dtSonusMotus;
@@ -14,6 +15,7 @@ namespace Yulinti.Dux.Exercitus {
             _dtPatientiae = 0f;
             _dtAetheris = 0f;
             _dtIntentio = 0f;
+            _dtDedecus = 0f;
             _dtClaritas = 0f;
             _dtSonusQuietes = 0f;
             _dtSonusMotus = 0f;
@@ -23,6 +25,7 @@ namespace Yulinti.Dux.Exercitus {
         public float DtPatientiae => _dtPatientiae;
         public float DtAetheris => _dtAetheris;
         public float DtIntentio => _dtIntentio;
+        public float DtDedecus => _dtDedecus;
         public float DtClaritas => _dtClaritas;
         public float DtSonusQuietes => _dtSonusQuietes;
         public float DtSonusMotus => _dtSonusMotus;
@@ -33,6 +36,7 @@ namespace Yulinti.Dux.Exercitus {
             _dtPatientiae = 0f;
             _dtAetheris = 0f;
             _dtIntentio = 0f;
+            _dtDedecus = 0f;
             _dtClaritas = 0f;
             _dtSonusQuietes = 0f;
             _dtSonusMotus = 0f;
@@ -43,6 +47,7 @@ namespace Yulinti.Dux.Exercitus {
             float dtPatientiae,
             float dtAetheris,
             float dtIntentio,
+            float dtDedecus,
             float dtClaritas,
             float dtSonusQuietes,
             float dtSonusMotus
@@ -51,6 +56,7 @@ namespace Yulinti.Dux.Exercitus {
             _dtPatientiae = dtPatientiae;
             _dtAetheris = dtAetheris;
             _dtIntentio = dtIntentio;
+            _dtDedecus = dtDedecus;
             _dtClaritas = dtClaritas;
             _dtSonusQuietes = dtSonusQuietes;
             _dtSonusMotus = dtSonusMotus;
