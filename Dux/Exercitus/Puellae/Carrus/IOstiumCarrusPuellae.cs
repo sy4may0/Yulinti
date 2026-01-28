@@ -46,6 +46,7 @@ namespace Yulinti.Dux.Exercitus {
             float dtPatientiae = 0f,
             float dtAetheris = 0f,
             float dtIntentio = 0f,
+            float dtDedecus = 0f,
             float dtClaritas = 0f,
             float dtSonusQuietes = 0f,
             float dtSonusMotus = 0f

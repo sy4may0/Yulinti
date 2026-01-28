@@ -7,6 +7,7 @@ namespace Yulinti.Dux.ContractusDucis {
         float Claritas { get; }
         float Aether { get; }
         float Intentio { get; }
+        float Dedecus { get; }
         float SonusQuietes { get; }
         float SonusMotus { get; }
         bool EstNudusAnterior { get; }

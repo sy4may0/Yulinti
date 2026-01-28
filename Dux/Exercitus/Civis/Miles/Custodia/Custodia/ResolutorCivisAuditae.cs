@@ -45,7 +45,6 @@ namespace Yulinti.Dux.Exercitus {
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
                 _modiActualis[i] = CustodiaCivisAuditaeModi.Consumptio;
                 _abacusStudiumAmittere[i] = new AbacusStudiumAmittere(
-                    contextus,
                     _contextus.Configuratio.Custodiae.TempusStudiumAmittereSec,
                     _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec,
                     _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere
@@ -206,7 +205,7 @@ namespace Yulinti.Dux.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _abacusStudiumAmittere[idCivis].Pulsus();
+            _abacusStudiumAmittere[idCivis].Pulsus(_contextus.Temporis.Intervallum);
             float ratio = _abacusStudiumAmittere[idCivis].ComputareRatio();
             float dtAudita = _contextus.Configuratio.Custodiae.ConsumptioAuditaeSec * ratio * _contextus.Temporis.Intervallum;
             _contextus.Carrus.PostulareVeletudinisValoris(
