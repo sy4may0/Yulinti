@@ -12,5 +12,11 @@ namespace Yulinti.Dux.Exercitus {
 
         public const int GradusMaximus = 10;
         public const int SensusMaximus = 10;
+
+        public static int FunctioAnimae(int gradus, int offset) {
+            // 必要経験値の伸びを計算する関数。
+            // x^2 + 4x + 4
+            return gradus * gradus + 4 * gradus + offset;
+        }
     }
 }

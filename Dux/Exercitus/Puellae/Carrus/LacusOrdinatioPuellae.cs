@@ -10,6 +10,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly Lacus<OrdinatioPuellaeNavmesh> _lacusNavmesh;
         private readonly Lacus<OrdinatioPuellaeVeletudinis> _lacusVeletudinis;
         private readonly Lacus<OrdinatioPuellaeVeletudinisNudi> _lacusVeletudinisNudi;
+        private readonly Lacus<OrdinatioPuellaePersonae> _lacusPersonae;
 
         private readonly DuxQueue<OrdinatioPuellaeAnimationis> _emissioAnimationis;
         private readonly DuxQueue<OrdinatioPuellaeCrinis> _emissioCrinis;
@@ -19,6 +20,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly DuxQueue<OrdinatioPuellaeNavmesh> _emissioNavmesh;
         private readonly DuxQueue<OrdinatioPuellaeVeletudinis> _emissioVeletudinis;
         private readonly DuxQueue<OrdinatioPuellaeVeletudinisNudi> _emissioVeletudinisNudi;
+        private readonly DuxQueue<OrdinatioPuellaePersonae> _emissioPersonae;
 
         public LacusOrdinatioPuellae() {
             _lacusAnimationis = new Lacus<OrdinatioPuellaeAnimationis>(
@@ -45,6 +47,7 @@ namespace Yulinti.Dux.Exercitus {
             _lacusVeletudinisNudi = new Lacus<OrdinatioPuellaeVeletudinisNudi>(
                 ConstansPuellae.LongitudoOrdinatioVeletudinisNudi
             );
+            _lacusPersonae = new Lacus<OrdinatioPuellaePersonae>(12);
 
             _emissioAnimationis = new DuxQueue<OrdinatioPuellaeAnimationis>(
                 ConstansPuellae.LongitudoOrdinatioAnimationis
@@ -69,6 +72,9 @@ namespace Yulinti.Dux.Exercitus {
             );
             _emissioVeletudinisNudi = new DuxQueue<OrdinatioPuellaeVeletudinisNudi>(
                 ConstansPuellae.LongitudoOrdinatioVeletudinisNudi
+            );
+            _emissioPersonae = new DuxQueue<OrdinatioPuellaePersonae>(
+                ConstansPuellae.LongitudoOrdinatioVeletudinis
             );
         }
 
@@ -200,6 +206,22 @@ namespace Yulinti.Dux.Exercitus {
             return false;
         }
 
+        public bool EmittarePersonae(out OrdinatioPuellaePersonae personae) {
+            if (_lacusPersonae.ConareLego(out var r)) {
+                if(_emissioPersonae.ConarePono(r)) {
+                    personae = r;
+                    personae.Initare();
+                    return true;
+                }
+                Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEPERSONAE_EMISSIO_QUEUE_FULL);
+                personae = null;
+                return false;
+            }
+            Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEPERSONAE_LACUS_EMPTY);
+            personae = null;
+            return false;
+        }
+
         public void ColligereAnimationis() {
             while(_emissioAnimationis.ConareLego(out var r)) {
                 if(!_lacusAnimationis.ConarePono(r)) {
@@ -280,6 +302,16 @@ namespace Yulinti.Dux.Exercitus {
             }
         }
 
+        public void ColligerePersonae() {
+            while(_emissioPersonae.ConareLego(out var r)) {
+                if(!_lacusPersonae.ConarePono(r)) {
+                    r.Purgere();
+                    r.Liberare();
+                    Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEPERSONAE_LACUS_FULL);
+                }
+            }
+        }
+
         public void ColligereOmnia() {
             ColligereAnimationis();
             ColligereCrinis();
@@ -289,6 +321,7 @@ namespace Yulinti.Dux.Exercitus {
             ColligereNavmesh();
             ColligereVeletudinis();
             ColligereVeletudinisNudi();
+            ColligerePersonae();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Yulinti.Dux.Exercitus {
         private readonly ExecutorPuellaeFigurae _exFigurae;
         private readonly ExecutorPuellaeLoci _exLoci;
         private readonly ExecutorPuellaeVeletudinis _exVeletudinis;
+        private readonly ExecutorPuellaePersonae _exPersonae;
         
         private readonly LacusOrdinatioPuellae _lacusOrdinatioPuellae;
 
@@ -19,13 +20,15 @@ namespace Yulinti.Dux.Exercitus {
             ExecutorPuellaeCrinis exCrinis,
             ExecutorPuellaeFigurae exFigurae,
             ExecutorPuellaeLoci exLoci,
-            ExecutorPuellaeVeletudinis exVeletudinis
+            ExecutorPuellaeVeletudinis exVeletudinis,
+            ExecutorPuellaePersonae exPersonae
         ) {
             _exAnimationis = exAnimationis;
             _exCrinis = exCrinis;
             _exFigurae = exFigurae;
             _exLoci = exLoci;
             _exVeletudinis = exVeletudinis;
+            _exPersonae = exPersonae;
             _lacusOrdinatioPuellae = new LacusOrdinatioPuellae();
         }
 
@@ -35,6 +38,7 @@ namespace Yulinti.Dux.Exercitus {
             _exFigurae.Primum();
             _exLoci.Primum();
             _exVeletudinis.Primum();
+            _exPersonae.Primum();
         }
 
         // Start()の一番最初に実行する。
@@ -44,6 +48,7 @@ namespace Yulinti.Dux.Exercitus {
             _exFigurae.Initare();
             _exLoci.Initare();
             _exVeletudinis.Initare();
+            _exPersonae.Initare();
         }
 
         private void ConfirmareAnimationis() {
@@ -69,6 +74,10 @@ namespace Yulinti.Dux.Exercitus {
             _lacusOrdinatioPuellae.ColligereVeletudinis();
             _lacusOrdinatioPuellae.ColligereVeletudinisNudi();
         }
+        private void ConfirmarePersonae() {
+            _exPersonae.Confirmare();
+            _lacusOrdinatioPuellae.ColligerePersonae();
+        }
 
         // Incipereの最後に実行 Start()で適用が必要なケースはここでやる。
         public void ConfirmareIncipabilis() {
@@ -93,6 +102,8 @@ namespace Yulinti.Dux.Exercitus {
             ConfirmareFigurae();
             // Veletudinisを適用
             ConfirmareVeletudinis();
+            // Personaeを適用
+            ConfirmarePersonae();
 
             _lacusOrdinatioPuellae.ColligereOmnia();
         }
@@ -103,6 +114,7 @@ namespace Yulinti.Dux.Exercitus {
             _exFigurae.Purgare();
             _exLoci.Purgare();
             _exVeletudinis.Purgare();
+            _exPersonae.Purgare();
             _lacusOrdinatioPuellae.ColligereOmnia();
         }
 
@@ -200,6 +212,35 @@ namespace Yulinti.Dux.Exercitus {
             if(_lacusOrdinatioPuellae.EmittareVeletudinisNudi(out var ordinatio)) {
                 ordinatio.Pono(estNudusAnterior, estNudusPosterior);
                 _exVeletudinis.Executare(ordinatio);
+            }
+        }
+
+        public void PostularePersonae(
+            int dtAnimaeLuxuriosus = 0,
+            int dtAnimaeExhibitus = 0,
+            int dtAnimaePerversus = 0,
+            int dtAnimaeQuaeritDolore = 0,
+            int dtAnimaePapillae = 0,
+            int dtAnimaeLandicae = 0,
+            int dtAnimaeVaginae = 0,
+            int dtAnimaeAni = 0,
+            int dtAnimaeAusculum = 0,
+            int dtAnimaeCorporis = 0
+        ) {
+            if(_lacusOrdinatioPuellae.EmittarePersonae(out var ordinatio)) {
+                ordinatio.Pono(
+                    dtAnimaeLuxuriosus,
+                    dtAnimaeExhibitus,
+                    dtAnimaePerversus,
+                    dtAnimaeQuaeritDolore,
+                    dtAnimaePapillae,
+                    dtAnimaeLandicae,
+                    dtAnimaeVaginae,
+                    dtAnimaeAni,
+                    dtAnimaeAusculum,
+                    dtAnimaeCorporis
+                );
+                _exPersonae.Executare(ordinatio);
             }
         }
     }

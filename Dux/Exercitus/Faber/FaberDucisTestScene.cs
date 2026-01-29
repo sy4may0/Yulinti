@@ -49,6 +49,7 @@ namespace Yulinti.Dux.Exercitus {
             builder.Register<ExecutorPuellaeFigurae>(Lifetime.Singleton);
             builder.Register<ExecutorPuellaeLoci>(Lifetime.Singleton);
             builder.Register<ExecutorPuellaeVeletudinis>(Lifetime.Singleton);
+            builder.Register<ExecutorPuellaePersonae>(Lifetime.Singleton);
 
             builder.Register<ExecutorCivisAnimationis>(Lifetime.Singleton);
             builder.Register<ExecutorCivisLoci>(Lifetime.Singleton);
