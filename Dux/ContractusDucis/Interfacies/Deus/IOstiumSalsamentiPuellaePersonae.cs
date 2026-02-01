@@ -1,5 +1,5 @@
 namespace Yulinti.Dux.ContractusDucis {
-    public interface IResFluidaPuellaePersonaeLegibile {
+    public interface IOstiumSalsamentiPuellaePersonae {
         int GradusLuxuriosus { get; }
         int AnimaLuxuriosus { get; }
         int GradusExhibitus { get; }
@@ -20,6 +20,6 @@ namespace Yulinti.Dux.ContractusDucis {
         int SensusAusculum { get; }
         int AnimaAusculum { get; }
         int SensusCorporis { get; }
-        int AnimaCorporis { get; }
+        int AnimaCorporis { get; }  
     }
 }
