@@ -97,12 +97,26 @@ namespace Yulinti.Deus {
             return true;
         }
 
+        // Turrisから実行。指定idのデータの削除フラグを立てる。
+        public void Liberare(int idDatumServatum) {
+            if (!VaridareID(idDatumServatum)) return;
+            if (_dataServata[idDatumServatum] == null) return;
+            _dataServata[idDatumServatum].Liberare();
+        }
+
+        // Turrisから実行。指定idのデータの更新フラグを立てる。
+        public void Renovere(int idDatumServatum) {
+            if (!VaridareID(idDatumServatum)) return;
+            if (_dataServata[idDatumServatum] == null) return;
+            _dataServata[idDatumServatum].Renovere();
+        }
+
         // Turrisから実行。新規データを作成。
         // すべてAddoし終わる前に呼ぶと上書きされるので注意。Arcessitorはコンストラクタで必ず全部Addoするように。
-        public bool Creare() {
+        public int Creare() {
             // 空きIDを探す。
             int idDatumServatum = LegereIDVacantem();
-            if (idDatumServatum == -1) return false;
+            if (idDatumServatum == -1) return -1;
 
             string jsonPath = Path.Combine(_DirPath, $"{idDatumServatum}.json");
             string tmpPath = Path.Combine(_DirPath, $"{idDatumServatum}.tmp");
@@ -118,7 +132,7 @@ namespace Yulinti.Deus {
             );
             _dataServata[idDatumServatum].Renovere();
 
-            return true;
+            return idDatumServatum;
         }
 
         // Arcessitorから実行。データを追加。

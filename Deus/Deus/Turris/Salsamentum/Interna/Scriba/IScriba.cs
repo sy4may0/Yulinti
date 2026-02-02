@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Yulinti.Deus {
-    public interface IScriba {
+    internal interface IScriba {
         void Scribere(
             string json,
             string jsonPath,
