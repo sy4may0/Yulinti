@@ -14,6 +14,8 @@ namespace Yulinti.Deus {
         protected override void Configure(IContainerBuilder builder) {
             // 全シーン共通のサービスを起動する
             builder.RegisterInstance<ITurrisMundus>(new TurrisMundus());
+            builder.RegisterInstance<ITurrisVitium>(new TurrisVitium());
+            builder.RegisterInstance<ITurrisSalsamenti>(new TurrisSalsamenti());
         }
     }
 }
