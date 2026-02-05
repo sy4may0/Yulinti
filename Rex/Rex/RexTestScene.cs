@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using VContainer;
 using VContainer.Unity;
-using Yulinti.MinisteriaUnity.Anchora;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.Dux.ContractusDucis;
-using Yulinti.Dux.Exercitus;
-using Yulinti.Velum.Indicium;
+using Yulinti.Unity.Anchora;
+using Yulinti.Unity.Contractus;
+using Yulinti.Unity.Ministeria;
+using Yulinti.Exercitus.Contractus;
+using Yulinti.Exercitus.Dux;
+using Yulinti.Unity.Velum.Indicium;
 
 namespace Yulinti.Rex {
     public sealed class RexTestScene : LifetimeScope {

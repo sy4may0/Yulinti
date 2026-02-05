@@ -1,6 +1,6 @@
 using UnityEngine;
 using VContainer;
-using Yulinti.Velum.ContractusVeli;
+using Yulinti.Unity.Velum.ContractusVeli;
 
 public sealed class VelumTestScene : MonoBehaviour {
     private IVelumIndicia _velumIndicia;

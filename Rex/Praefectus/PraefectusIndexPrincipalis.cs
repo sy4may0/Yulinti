@@ -1,5 +1,5 @@
 using VContainer.Unity;
-using Yulinti.Dux.ContractusDucis;
+using Yulinti.Exercitus.Contractus;
 using System;
 using UnityEngine;
 

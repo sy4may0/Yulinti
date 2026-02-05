@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Rex {
     [CreateAssetMenu(fileName = "ConfiguratioPuellae", menuName = "Yulinti/Rex/ConfiguratioPuellae")]

@@ -1,8 +1,8 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Unity.Contractus;
 using Animancer;
 
-using Yulinti.Dux.ContractusDucis;
+using Yulinti.Exercitus.Contractus;
 namespace Yulinti.Rex {
     public abstract class ConfiguratioCivisAnimationisBasis : ScriptableObject, IConfiguratioCivisAnimationisUnicae {
         [SerializeField] private IDCivisAnimationis id;

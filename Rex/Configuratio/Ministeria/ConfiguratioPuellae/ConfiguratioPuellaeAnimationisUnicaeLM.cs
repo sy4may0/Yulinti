@@ -1,6 +1,6 @@
 using Animancer;
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Rex {
     [CreateAssetMenu(fileName = "ConfiguratioPuellaeAnimationisUnicaeLM", menuName = "Yulinti/Rex/ConfiguratioPuellaeAnimationisUnicaeLM")]

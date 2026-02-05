@@ -1,0 +1,24 @@
+{
+    "name": "Yulinti.Unity.Ministeria",
+    "rootNamespace": "Yulinti.Unity.Ministeria",
+    "references": [
+        "Kybernetik.Animancer",
+        "VContainer",
+        "Unity.InputSystem",
+        "Yulinti.Nucleus",
+        "Yulinti.Unity.Contractus",
+        "Yulinti.Exercitus.Contractus",
+        "Unity.Addressables",
+        "Unity.ResourceManager",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

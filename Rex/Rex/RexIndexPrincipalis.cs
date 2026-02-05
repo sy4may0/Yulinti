@@ -1,9 +1,9 @@
 using VContainer;
 using VContainer.Unity;
 using UnityEngine;
-using Yulinti.MinisteriaUnity.Anchora;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
+using Yulinti.Unity.Anchora;
+using Yulinti.Unity.Contractus;
+using Yulinti.Unity.Ministeria;
 
 namespace Yulinti.Rex {
     public sealed class RexIndexPrincipalis : LifetimeScope {

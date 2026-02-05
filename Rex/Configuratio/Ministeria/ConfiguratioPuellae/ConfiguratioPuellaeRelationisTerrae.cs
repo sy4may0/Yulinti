@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Unity.Contractus;
 using Yulinti.Nucleus;
 
 namespace Yulinti.Rex {

@@ -1,6 +1,6 @@
 using UnityEngine;
-using Yulinti.Dux.ContractusDucis;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Exercitus.Contractus;
+using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Rex {
     public abstract class ConfiguratioPuellaeStatusCorporisBasis : ScriptableObject, IConfiguratioPuellaeStatusCorporis {

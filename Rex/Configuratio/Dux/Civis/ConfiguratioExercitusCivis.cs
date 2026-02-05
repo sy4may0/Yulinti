@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.Dux.ContractusDucis;
+using Yulinti.Exercitus.Contractus;
 
 namespace Yulinti.Rex {
     [CreateAssetMenu(fileName = "ConfiguratioExercitusCivis", menuName = "Yulinti/Rex/ConfiguratioExercitusCivis")]

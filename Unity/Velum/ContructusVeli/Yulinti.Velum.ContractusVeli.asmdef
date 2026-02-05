@@ -1,0 +1,18 @@
+{
+  "name": "Yulinti.Unity.Velum.ContractusVeli",
+  "rootNamespace": "Yulinti.Unity.Velum.ContractusVeli",
+  "references": [
+    "Yulinti.MinisteriaUnity.ContractusDucis",
+    "Yulinti.Nucleus"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
+

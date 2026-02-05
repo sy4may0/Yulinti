@@ -1,9 +1,9 @@
 using Animancer;
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Unity.Contractus;
 
 
-using Yulinti.Dux.ContractusDucis;
+using Yulinti.Exercitus.Contractus;
 namespace Yulinti.Rex {
     public abstract class ConfiguratioPuellaeAnimationisBasis : ScriptableObject, IConfiguratioPuellaeAnimationisUnicae {
         [SerializeField] private IDPuellaeAnimationis _id;

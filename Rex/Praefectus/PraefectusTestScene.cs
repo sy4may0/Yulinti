@@ -1,6 +1,6 @@
 using VContainer.Unity;
-using Yulinti.MinisteriaUnity.MinisteriaRationis;
-using Yulinti.Dux.Exercitus;
+using Yulinti.Unity.Ministeria;
+using Yulinti.Exercitus.Dux;
 using System;
 
 namespace Yulinti.Rex {

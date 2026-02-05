@@ -1,0 +1,17 @@
+{
+  "name": "Yulinti.Unity.Deus",
+  "rootNamespace": "Yulinti.Unity.Deus",
+  "references": [
+    "Yulinti.Exercitus.Contractus",
+    "VContainer"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

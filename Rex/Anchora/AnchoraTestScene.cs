@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Yulinti.MinisteriaUnity.Anchora;
+using Yulinti.Unity.Anchora;
 using Yulinti.Nucleus;
 
 namespace Yulinti.Rex {

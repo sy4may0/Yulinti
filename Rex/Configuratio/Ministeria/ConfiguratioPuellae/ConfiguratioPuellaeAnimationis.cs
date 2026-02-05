@@ -1,6 +1,6 @@
 using System.Linq;
 using UnityEngine;
-using Yulinti.MinisteriaUnity.ContractusMinisterii;
+using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Rex {
     [System.Serializable]
