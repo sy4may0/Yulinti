@@ -1,4 +1,4 @@
-using Yulinti.Nucleus;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     public interface ICenturio {

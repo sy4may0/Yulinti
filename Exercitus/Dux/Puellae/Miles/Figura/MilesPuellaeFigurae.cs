@@ -1,5 +1,6 @@
 using Yulinti.Exercitus.Contractus;
-using Yulinti.Nucleus;
+using Yulinti.Nucleus.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
 using System;
 
 namespace Yulinti.Exercitus.Dux {

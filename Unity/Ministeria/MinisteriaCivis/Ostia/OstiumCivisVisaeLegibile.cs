@@ -1,6 +1,7 @@
 using Yulinti.Exercitus.Contractus;
 using System.Numerics;
 using Yulinti.Unity.Contractus;
+using Yulinti.Unity.Instrumentarium;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class OstiumCivisVisaeLegibile : IOstiumCivisVisaeLegibile {

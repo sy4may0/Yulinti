@@ -52,7 +52,7 @@ namespace Yulinti.Exercitus.Dux {
             IResFluidaPuellaeLegibile resFluida
         ) {
             MotusPuellaeHorizontalis oh = InstrumentaPuellaeMotus.OrdinareMotusHorizontalis(
-                contextusOstiorum.InputMotus.LegoMotus,
+                contextusOstiorum.Introductionis.LegoMotus,
                 0f,
                 resFluida.Motus.VelocitasActualisHorizontalis,
                 _configuratio.Acceleratio, _configuratio.Deceleratio,

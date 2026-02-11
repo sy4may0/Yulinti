@@ -2,18 +2,19 @@ using VContainer.Unity;
 using Yulinti.Exercitus.Contractus;
 using System;
 using UnityEngine;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Regnum.Praefectus {
     public sealed class PraefectusIndexPrincipalis : IStartable, ITickable, IFixedTickable, ILateTickable, IDisposable {
         private ITurrisMundus _turrisMundus;
-        private IOstiumInputVelumLegibile _ostiumInputVelumLegibile;
+        private ITurrisIntroductionis _turrisIntroductionis;
 
         public PraefectusIndexPrincipalis(
             ITurrisMundus turrisMundus,
-            IOstiumInputVelumLegibile ostiumInputVelumLegibile
+            ITurrisIntroductionis turrisIntroductionis
         ) {
             _turrisMundus = turrisMundus;
-            _ostiumInputVelumLegibile = ostiumInputVelumLegibile;
+            _turrisIntroductionis = turrisIntroductionis;
         }
 
         public void Start() {
@@ -22,7 +23,7 @@ namespace Yulinti.Regnum.Praefectus {
 
         public void Tick() {
             // 仮構成。 Enterが押されたらTestSceneに遷移
-            if (_ostiumInputVelumLegibile.LegoClick) {
+            if (_turrisIntroductionis.LegoClick) {
                 _turrisMundus.AdMudum(IDMundi.MundusTestScene);
             }
         }

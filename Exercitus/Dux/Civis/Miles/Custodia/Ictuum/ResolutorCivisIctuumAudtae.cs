@@ -1,4 +1,4 @@
-using Yulinti.Nucleus;
+using Yulinti.Nucleus.Contractus;
 using Yulinti.Exercitus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {

@@ -1,6 +1,6 @@
 using System;
 using System.Numerics;
-using Yulinti.Nucleus;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal struct MotusPuellaeHorizontalis {

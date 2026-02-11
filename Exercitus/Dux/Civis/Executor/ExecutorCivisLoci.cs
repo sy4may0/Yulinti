@@ -53,13 +53,14 @@ namespace Yulinti.Exercitus.Dux {
         // - キュー初期化
         public void Initare(int idCivis) {
             _resFluidaMotus.Purgare(idCivis);
-            ErrorAut<IPunctumViaeLegibile> punctumViae = _ostiumPunctumViaeLegibile.LegoNatoriumTemere();
-            if (punctumViae.EstError()) {
+
+            IPunctumViaeLegibile punctumViae;
+            if (!_ostiumPunctumViaeLegibile.ConareLegoNatoriumTemere(out punctumViae)) {
                 Notarius.Memorare(LogTextus.ExecutorCivisLoci_EXECUTORCIVISLOCI_INITARE_TRANSPORTO_FAILED);
                 return;
             }
             _ostiumCivisLociMutabile.InitareMigrare(idCivis);
-            _ostiumCivisLociMutabile.Transporto(idCivis, punctumViae.Evolvo().Positio, Quaternion.Identity);
+            _ostiumCivisLociMutabile.Transporto(idCivis, punctumViae.Positio, Quaternion.Identity);
             _speciesActualis[idCivis] = SpeciesCivisLoci.Nihil;
             _queueMotus[idCivis].Purgere();
             _queueNavmesh[idCivis].Purgere();
@@ -124,8 +125,6 @@ namespace Yulinti.Exercitus.Dux {
                 _ostiumCivisLociMutabile.ActivareNavMesh(idCivis);
                 _speciesActualis[idCivis] = SpeciesCivisLoci.Navmesh;
             }
-            Notarius.Memorare(LogTextus.ExecutorCivisLoci_IncipereMigrare);
-            Notarius.MemorareParametrum("positio", navmesh.Positio);
             _ostiumCivisLociMutabile.IncipereMigrare(idCivis, navmesh.Positio);
             _ostiumCivisLociMutabile.PonoVelocitatem(idCivis, navmesh.VelocitasDesiderata);
             _ostiumCivisLociMutabile.PonoAccelerationem(idCivis, navmesh.Acceleratio);
@@ -179,13 +178,15 @@ namespace Yulinti.Exercitus.Dux {
         // - キュー初期化
         public void Purgare(int idCivis) {
             _ostiumCivisLociMutabile.InitareMigrare(idCivis);
-            ErrorAut<IPunctumViaeLegibile> punctumViae = _ostiumPunctumViaeLegibile.LegoCrematoriumTemere();
-            if (punctumViae.EstError()) {
+
+            IPunctumViaeLegibile punctumViae;
+            if (!_ostiumPunctumViaeLegibile.ConareLegoCrematoriumTemere(out punctumViae)) {
                 Notarius.Memorare(LogTextus.ExecutorCivisLoci_EXECUTORCIVISLOCI_PURGARE_TRANSPORTO_FAILED);
                 _ostiumCivisLociMutabile.Transporto(idCivis, new Vector3(0f, 0f, 0f), Quaternion.Identity);
             } else {
-                _ostiumCivisLociMutabile.Transporto(idCivis, punctumViae.Evolvo().Positio, Quaternion.Identity);
+                _ostiumCivisLociMutabile.Transporto(idCivis, punctumViae.Positio, Quaternion.Identity);
             }
+
             _resFluidaMotus.Purgare(idCivis);
             _speciesActualis[idCivis] = SpeciesCivisLoci.Nihil;
             _queueMotus[idCivis].Purgere();

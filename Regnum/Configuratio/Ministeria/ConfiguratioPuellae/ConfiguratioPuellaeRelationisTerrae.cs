@@ -1,6 +1,5 @@
 using UnityEngine;
 using Yulinti.Unity.Contractus;
-using Yulinti.Nucleus;
 
 namespace Yulinti.Regnum.Configuratio {
     [System.Serializable]

@@ -1,6 +1,7 @@
 using System.Numerics;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
+using Yulinti.Unity.Instrumentarium;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class PunctumViaeLegibile : IPunctumViaeLegibile {

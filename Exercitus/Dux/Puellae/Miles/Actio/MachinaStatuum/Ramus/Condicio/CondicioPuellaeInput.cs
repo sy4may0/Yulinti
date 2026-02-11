@@ -8,9 +8,7 @@ namespace Yulinti.Exercitus.Dux {
             IResFluidaPuellaeLegibile resFluida
         ) {
             float limenInputQuadratum = contextusOstiorum.Configuratio.Statuum.LimenInputQuadratum;
-            IOstiumInputMotusLegibile inputMotus = contextusOstiorum.InputMotus;
-
-            return inputMotus.LegoMotus.LengthSquared() >= limenInputQuadratum;
+            return contextusOstiorum.Introductionis.LegoMotus.LengthSquared() >= limenInputQuadratum;
         }
 
         // Incumboが押されているかどうかを判定する
@@ -18,7 +16,7 @@ namespace Yulinti.Exercitus.Dux {
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            return contextusOstiorum.InputMotus.LegoIncumbo;
+            return contextusOstiorum.Introductionis.LegoIncumbo;
         }
 
         // Cursusが押されているかどうかを判定する
@@ -26,7 +24,7 @@ namespace Yulinti.Exercitus.Dux {
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            return contextusOstiorum.InputMotus.LegoCursus;
+            return contextusOstiorum.Introductionis.LegoCursus;
         }
     }
 }

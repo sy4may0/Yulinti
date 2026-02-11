@@ -1,5 +1,5 @@
 using System;
-using Yulinti.Nucleus;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal static class DuxMath {

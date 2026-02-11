@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using Yulinti.Unity.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
-using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal enum CivisGenerationisStatus {
@@ -66,10 +65,6 @@ namespace Yulinti.Unity.Ministeria {
             _status = CivisGenerationisStatus.Termino;
         }
 
-        public NihilAut<IAnchoraCivis> Lego() {
-            if (_status != CivisGenerationisStatus.Paratus) return new NihilAut<IAnchoraCivis>(null);
-            return new NihilAut<IAnchoraCivis>(_anchora);
-        }
         public bool ConareLego(out IAnchoraCivis anchora) {
             if (_status != CivisGenerationisStatus.Paratus) {
                 anchora = null;
@@ -147,11 +142,6 @@ namespace Yulinti.Unity.Ministeria {
             for (int i = 0; i < _curatoris.Length; i++) {
                 _curatoris[i].Terminare();
             }
-        }
-
-        public NihilAut<IAnchoraCivis> Lego(int id) {
-            if (id < 0 || id >= _curatoris.Length) return new NihilAut<IAnchoraCivis>(null);
-            return _curatoris[id].Lego();
         }
 
         public bool ConareLego(int id, out IAnchoraCivis anchora) {

@@ -1,6 +1,6 @@
 using UnityEngine;
 using Yulinti.Exercitus.Contractus;
-using Yulinti.Nucleus;
+using Yulinti.Nucleus.Contractus;
 using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Unity.Ministeria {

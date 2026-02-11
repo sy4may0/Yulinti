@@ -79,7 +79,6 @@ namespace Yulinti.Nucleus.Contractus {
         public const string ExecutorCivisAnimationis_EXECUTORCIVISANIMATIONIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisAnimationis - ordinatio queue full";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_APPLICARE_MOTUS_NULL = "ExecutorCivisLoci - applicare motus null";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_APPLICARE_NAVMESH_NULL = "ExecutorCivisLoci - applicare navmesh null";
-        public const string ExecutorCivisLoci_IncipereMigrare = "ExecutorCivisLoci - incipere migrare";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_INITARE_TRANSPORTO_FAILED = "ExecutorCivisLoci - initare transporto failed";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_ORDINATIO_MOTUS_QUEUE_FULL = "ExecutorCivisLoci - ordinatio motus queue full";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_ORDINATIO_NAVMESH_QUEUE_FULL = "ExecutorCivisLoci - ordinatio navmesh queue full";
@@ -128,6 +127,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_LACUS_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinis lacus full";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_MISSING = "MachinaCivisStatuumCorporis - status missing";
         public const string MachinaPuellaeStatuumCorporis_MACHINAPUELLAESTATUUMCORPORIS_STATUS_MISSING = "MachinaPuellaeStatuumCorporis - status missing";
+        public const string MinisteriumCivisAnimationes_MINISTERIUICIVISANIMATIONES_ANCHORA_NULL = "MinisteriumCivisAnimationes - Anchora is null";
         public const string MinisteriumCivisGenerator_GENERATORCIVIS_TIMEOUT_INITIARE = "MinisteriumCivisGenerator - generatorcivis timeout initiare";
         public const string MinisteriumCivis_CIVIS_ADINCARNARE_ALREADY_SET = "MinisteriumCivis - civis adincarnare already set";
         public const string MinisteriumCivis_CIVIS_ADSPIRITUARE_ALREADY_SET = "MinisteriumCivis - civis adspirituare already set";

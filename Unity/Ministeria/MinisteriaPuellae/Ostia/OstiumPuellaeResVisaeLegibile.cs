@@ -3,6 +3,7 @@ using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using System.Numerics;
 using Yulinti.Unity.Contractus;
+using Yulinti.Unity.Instrumentarium;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class OstiumPuellaeResVisaeLegibile : IOstiumPuellaeResVisaeLegibile {

@@ -2,6 +2,7 @@ using Yulinti.Exercitus.Contractus;
 using System.Numerics;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Unity.Instrumentarium;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class OstiumCivisLociMutabile : IOstiumCivisLociMutabile {

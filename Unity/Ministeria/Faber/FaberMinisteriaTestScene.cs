@@ -19,10 +19,6 @@ namespace Yulinti.Unity.Ministeria {
             builder.Register<IOstiumCameraLegibile, OstiumCameraLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumCameraMutabile, OstiumCameraMutabile>(Lifetime.Singleton);
 
-            // Input
-            builder.Register<MinisteriumInputMotus>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<IOstiumInputMotusLegibile, OstiumInputMotusLegibile>(Lifetime.Singleton);
-
             // Puellae
             builder.Register<MinisteriumPuellaeLoci>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeAnimationes>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

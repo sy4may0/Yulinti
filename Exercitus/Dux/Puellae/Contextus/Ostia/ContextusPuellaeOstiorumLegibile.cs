@@ -3,9 +3,9 @@ using Yulinti.Exercitus.Contractus;
 namespace Yulinti.Exercitus.Dux {
     internal sealed class ContextusPuellaeOstiorumLegibile {
         private readonly IConfiguratioExercitusPuellae _configuratio;
+        private readonly ITurrisIntroductionis _turrisIntroductionis;
         private readonly IOstiumTemporisLegibile _temporis;
         private readonly IOstiumCameraLegibile _camera;
-        private readonly IOstiumInputMotusLegibile _inputMotus;
         private readonly IOstiumPuellaeLociLegibile _loci;
         private readonly IOstiumPuellaeRelationisTerraeLegibile _relationisTerrae;
         private readonly IOstiumPuellaeOssisLegibile _ossis;
@@ -14,9 +14,9 @@ namespace Yulinti.Exercitus.Dux {
 
         public ContextusPuellaeOstiorumLegibile(
             IConfiguratioExercitusPuellae configuratio,
+            ITurrisIntroductionis turrisIntroductionis,
             IOstiumTemporisLegibile temporis,
             IOstiumCameraLegibile camera,
-            IOstiumInputMotusLegibile inputMotus,
             IOstiumPuellaeLociLegibile loci,
             IOstiumPuellaeRelationisTerraeLegibile relationisTerrae,
             IOstiumPuellaeOssisLegibile ossis,
@@ -24,9 +24,9 @@ namespace Yulinti.Exercitus.Dux {
             IOstiumCarrusPuellae carrus
         ) {
             _configuratio = configuratio;
+            _turrisIntroductionis = turrisIntroductionis;
             _temporis = temporis;
             _camera = camera;
-            _inputMotus = inputMotus;
             _loci = loci;
             _relationisTerrae = relationisTerrae;
             _ossis = ossis;
@@ -35,9 +35,9 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         public IConfiguratioExercitusPuellae Configuratio => _configuratio;
+        public ITurrisIntroductionis Introductionis => _turrisIntroductionis;
         public IOstiumTemporisLegibile Temporis => _temporis;
         public IOstiumCameraLegibile Camera => _camera;
-        public IOstiumInputMotusLegibile InputMotus => _inputMotus;
         public IOstiumPuellaeLociLegibile Loci => _loci;
         public IOstiumPuellaeRelationisTerraeLegibile RelationisTerrae => _relationisTerrae;
         public IOstiumPuellaeOssisLegibile Ossis => _ossis;

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yulinti.Nucleus;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class FonsTemporis : IPulsabilis, IPulsabilisFixus {

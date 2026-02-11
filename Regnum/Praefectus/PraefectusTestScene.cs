@@ -2,6 +2,7 @@ using VContainer.Unity;
 using Yulinti.Unity.Ministeria;
 using Yulinti.Exercitus.Dux;
 using System;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Regnum.Praefectus {
     public sealed class PraefectusTestScene : IStartable, ITickable, IFixedTickable, ILateTickable, IDisposable {

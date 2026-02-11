@@ -1,0 +1,21 @@
+{
+  "name": "Yulinti.Unity.Turris",
+  "rootNamespace": "Yulinti.Unity.Turris",
+  "references": [
+    "Yulinti.Unity.Contractus",
+    "Yulinti.Unity.Instrumentarium",
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.Exercitus.Contractus",
+    "VContainer",
+    "Unity.InputSystem"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

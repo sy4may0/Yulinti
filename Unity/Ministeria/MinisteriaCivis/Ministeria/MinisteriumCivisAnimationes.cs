@@ -2,6 +2,8 @@ using System;
 using Animancer;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
@@ -25,9 +27,12 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         private void Initio(int id) {
-            NihilAut<IAnchoraCivis> anchora = _tabulaCivis.Lego(id);
-            AnimancerComponent animancer = anchora.Evolvo()
-                                           .Animancer;
+            IAnchoraCivis anchora;
+            if (!_tabulaCivis.ConareLego(id, out anchora)) {
+                Carnifex.Intermissio(LogTextus.MinisteriumCivisAnimationes_MINISTERIUICIVISANIMATIONES_ANCHORA_NULL);
+                return;
+            }
+            AnimancerComponent animancer = anchora.Animancer;
 
             for (int i = 0; i < Enum.GetValues(typeof(IDCivisAnimationisStratum)).Length; i++) {
                 if (i == (int)IDCivisAnimationisStratum.Fundamentum) {

@@ -1,5 +1,5 @@
 using Yulinti.Exercitus.Contractus;
-using Yulinti.Nucleus;
+using Yulinti.Nucleus.Contractus;
 using System.Numerics;
 
 namespace Yulinti.Exercitus.Dux {

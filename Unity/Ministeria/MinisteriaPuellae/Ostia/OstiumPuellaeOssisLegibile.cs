@@ -4,6 +4,7 @@ using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
+using Yulinti.Unity.Instrumentarium;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class OstiumPuellaeOssisLegibile : IOstiumPuellaeOssisLegibile {

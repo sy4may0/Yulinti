@@ -1,5 +1,4 @@
 using Animancer;
-using Yulinti.Nucleus;
 
 using Yulinti.Exercitus.Contractus;
 namespace Yulinti.Unity.Contractus {
