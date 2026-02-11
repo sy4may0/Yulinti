@@ -4,6 +4,8 @@ using System;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class MinisteriumCivis {
@@ -55,14 +57,14 @@ namespace Yulinti.Unity.Ministeria {
 
         public void PonoAdIncarnare(Action<int> adIncarnare) {
             if (_estPonoAdIncarnare) {
-                Errorum.Fatal(IDErrorum.CIVIS_ADINCARNARE_ALREADY_SET);
+                Carnifex.Intermissio(LogTextus.MinisteriumCivis_CIVIS_ADINCARNARE_ALREADY_SET);
             }
             _adIncarnare = adIncarnare;
             _estPonoAdIncarnare = true;
         }
         public void PonoAdSpirituare(Action<int> adSpirituare) {
             if (_estPonoAdSpirituare) {
-                Errorum.Fatal(IDErrorum.CIVIS_ADSPIRITUARE_ALREADY_SET);
+                Carnifex.Intermissio(LogTextus.MinisteriumCivis_CIVIS_ADSPIRITUARE_ALREADY_SET);
             }
             _adSpirituare = adSpirituare;
             _estPonoAdSpirituare = true;

@@ -1,5 +1,7 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 
 namespace Yulinti.Exercitus.Dux {
@@ -38,7 +40,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioPuellaeFiguraeGenus genus
         ) {
             if (!_queueFiguraeGenus.ConarePono(genus)) {
-                Memorator.MemorareErrorum(IDErrorum.MINIATERIUMPUELLAEFIGURA_GENUS_ORDINATIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.ExecutorPuellaeFigurae_MINIATERIUMPUELLAEFIGURA_GENUS_ORDINATIO_QUEUE_FULL);
                 return;
             }
         }
@@ -46,7 +48,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioPuellaeFiguraePelvis pelvis
         ) {
             if (!_queueFiguraePelvis.ConarePono(pelvis)) {
-                Memorator.MemorareErrorum(IDErrorum.MINIATERIUMPUELLAEFIGURA_PELVIS_ORDINATIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.ExecutorPuellaeFigurae_MINIATERIUMPUELLAEFIGURA_PELVIS_ORDINATIO_QUEUE_FULL);
                 return;
             }
         }

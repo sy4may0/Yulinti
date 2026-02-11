@@ -1,6 +1,8 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using System.Numerics;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal enum SpeciesCivisLoci {
@@ -53,7 +55,7 @@ namespace Yulinti.Exercitus.Dux {
             _resFluidaMotus.Purgare(idCivis);
             ErrorAut<IPunctumViaeLegibile> punctumViae = _ostiumPunctumViaeLegibile.LegoNatoriumTemere();
             if (punctumViae.EstError()) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISLOCI_INITARE_TRANSPORTO_FAILED);
+                Notarius.Memorare(LogTextus.ExecutorCivisLoci_EXECUTORCIVISLOCI_INITARE_TRANSPORTO_FAILED);
                 return;
             }
             _ostiumCivisLociMutabile.InitareMigrare(idCivis);
@@ -73,7 +75,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioCivisMotus motus
         ) {
             if (!_queueMotus[idCivis].ConarePono(motus)) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISLOCI_ORDINATIO_MOTUS_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.ExecutorCivisLoci_EXECUTORCIVISLOCI_ORDINATIO_MOTUS_QUEUE_FULL);
                 return;
             }
         }
@@ -83,7 +85,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioCivisNavmesh navmesh
         ) {
             if (!_queueNavmesh[idCivis].ConarePono(navmesh)) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISLOCI_ORDINATIO_NAVMESH_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.ExecutorCivisLoci_EXECUTORCIVISLOCI_ORDINATIO_NAVMESH_QUEUE_FULL);
                 return;
             }
         }
@@ -93,7 +95,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioCivisMotus motus
         ) {
             if (motus == null) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISLOCI_APPLICARE_MOTUS_NULL);
+                Notarius.Memorare(LogTextus.ExecutorCivisLoci_EXECUTORCIVISLOCI_APPLICARE_MOTUS_NULL);
                 return;
             }
             if (_speciesActualis[idCivis] != SpeciesCivisLoci.Motus) {
@@ -115,14 +117,15 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioCivisNavmesh navmesh
         ) {
             if (navmesh == null) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISLOCI_APPLICARE_NAVMESH_NULL);
+                Notarius.Memorare(LogTextus.ExecutorCivisLoci_EXECUTORCIVISLOCI_APPLICARE_NAVMESH_NULL);
                 return;
             }
             if (_speciesActualis[idCivis] != SpeciesCivisLoci.Navmesh) {
                 _ostiumCivisLociMutabile.ActivareNavMesh(idCivis);
                 _speciesActualis[idCivis] = SpeciesCivisLoci.Navmesh;
             }
-            UnityEngine.Debug.Log("IncipereMigrare: " + navmesh.Positio);
+            Notarius.Memorare(LogTextus.ExecutorCivisLoci_IncipereMigrare);
+            Notarius.MemorareParametrum("positio", navmesh.Positio);
             _ostiumCivisLociMutabile.IncipereMigrare(idCivis, navmesh.Positio);
             _ostiumCivisLociMutabile.PonoVelocitatem(idCivis, navmesh.VelocitasDesiderata);
             _ostiumCivisLociMutabile.PonoAccelerationem(idCivis, navmesh.Acceleratio);
@@ -178,7 +181,7 @@ namespace Yulinti.Exercitus.Dux {
             _ostiumCivisLociMutabile.InitareMigrare(idCivis);
             ErrorAut<IPunctumViaeLegibile> punctumViae = _ostiumPunctumViaeLegibile.LegoCrematoriumTemere();
             if (punctumViae.EstError()) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISLOCI_PURGARE_TRANSPORTO_FAILED);
+                Notarius.Memorare(LogTextus.ExecutorCivisLoci_EXECUTORCIVISLOCI_PURGARE_TRANSPORTO_FAILED);
                 _ostiumCivisLociMutabile.Transporto(idCivis, new Vector3(0f, 0f, 0f), Quaternion.Identity);
             } else {
                 _ostiumCivisLociMutabile.Transporto(idCivis, punctumViae.Evolvo().Positio, Quaternion.Identity);

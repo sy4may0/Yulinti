@@ -1,12 +1,14 @@
 using UnityEngine;
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class Temporis : ITemporis {
         private readonly FonsTemporis _fonsTemporis;
         public Temporis(FonsTemporis fonsTemporis) {
             if (fonsTemporis == null) {
-                Errorum.Fatal(IDErrorum.TEMPORIS_INSTANCE_NULL);
+                Carnifex.Intermissio(LogTextus.Temporis_TEMPORIS_INSTANCE_NULL);
             }
             _fonsTemporis = fonsTemporis;
         }

@@ -1,6 +1,8 @@
 using Yulinti.Nucleus;
 using System.Numerics;
 using System;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 // [TODO] AbacusAnguliにリファクタリング
 
@@ -23,11 +25,11 @@ namespace Yulinti.Exercitus.Dux {
         ) {
             if ( angulusMinRad >= angulusMediusRad ||
                 angulusMediusRad >= angulusMaximaRad ) {
-                Errorum.Fatal(IDErrorum.ABACUSANGULIVISUS_INVALID_ANGULUS);
+                Carnifex.Intermissio(LogTextus.AbacusAnguliVisus_ABACUSANGULIVISUS_INVALID_ANGULUS);
             }
             // π範囲内確認
             if (angulusMaximaRad >= MathF.PI ) {
-                Errorum.Fatal(IDErrorum.ABACUSANGULIVISUS_INVALID_ANGULUS);
+                Carnifex.Intermissio(LogTextus.AbacusAnguliVisus_ABACUSANGULIVISUS_INVALID_ANGULUS);
             }
             if (angulusMinRad <= 0f) {
                 angulusMinRad = Numerus.Epsilon;

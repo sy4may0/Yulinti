@@ -2,6 +2,8 @@ using System;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class AnimatioCivisContinuata : IAnimatioCivisContinuata {
@@ -11,7 +13,7 @@ namespace Yulinti.Unity.Ministeria {
 
         public AnimatioCivisContinuata(IConfiguratioCivisAnimationisContinuata config) {
             if (config.Animationes == null || config.Animationes.Length == 0) {
-                Errorum.Fatal(IDErrorum.CONFIGURATIOCIVISANIMATIONISCONTINUATA_CHILDREN_NULL_OR_EMPTY);
+                Carnifex.Intermissio(LogTextus.AnimatioCivisContinuata_CONFIGURATIOCIVISANIMATIONISCONTINUATA_CHILDREN_NULL_OR_EMPTY);
             }
             _id = config.Id;
             _stratum = config.Stratum;

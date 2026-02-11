@@ -1,6 +1,8 @@
 using Yulinti.Exercitus.Contractus;
 using System.Numerics;
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
 
@@ -57,7 +59,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioPuellaeMotus motus
         ) {
             if (!_queueMotus.ConarePono(motus)) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORPUELLAELOCI_ORDINATIO_MOTUS_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_MOTUS_QUEUE_FULL);
                 return;
             }
         }
@@ -66,7 +68,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioPuellaeNavmesh navmesh
         ) {
             if (!_queueNavmesh.ConarePono(navmesh)) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORPUELLAELOCI_ORDINATIO_NAVMESH_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_NAVMESH_QUEUE_FULL);
                 return;
             }
         }
@@ -75,7 +77,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioPuellaeMotus motus
         ) {
             if (motus == null) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORPUELLAELOCI_APPLICARE_MOTUS_NULL);
+                Notarius.Memorare(LogTextus.ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_APPLICARE_MOTUS_NULL);
                 return;
             }
             if (_speciesActualis != SpeciesPuellaeLoci.Motus) {
@@ -95,7 +97,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioPuellaeNavmesh navmesh
         ) {
             if (navmesh == null) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORPUELLAELOCI_APPLICARE_NAVMESH_NULL);
+                Notarius.Memorare(LogTextus.ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_APPLICARE_NAVMESH_NULL);
                 return;
             }
             if (_speciesActualis != SpeciesPuellaeLoci.Navmesh) {

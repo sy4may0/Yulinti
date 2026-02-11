@@ -2,6 +2,8 @@ using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using System.Numerics;
 using System;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class ResolutorCivisNudusVisae {
@@ -46,7 +48,7 @@ namespace Yulinti.Exercitus.Dux {
 
             Vector3 positioCivisCapitis = default;
             if (!_contextus.Visa.ConareLegoPositioCapitis(idCivis, out positioCivisCapitis)) {
-                Memorator.MemorareErrorum(IDErrorum.RESOLUTORCIVISNUDUSVISAE_CONARELEGO_FAILED);
+                Notarius.Memorare(LogTextus.ResolutorCivisNudusVisae_RESOLUTORCIVISNUDUSVISAE_CONARELEGO_FAILED);
                 return;
             } 
 

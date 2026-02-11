@@ -1,5 +1,7 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class FabricaStatusPuellaeCorporis {
@@ -15,7 +17,7 @@ namespace Yulinti.Exercitus.Dux {
                     case IDPuellaeStatusCorporisModiMotus.MotusLoci:
                         return new StatusPuellaeCorporisMotusLoci(configuratioStatuum, configuratioMotus);
                     default:
-                        Errorum.Fatal(IDErrorum.FABRICAPUELLAESTATUSCORPORIS_MODUS_NOT_FOUND);
+                        Carnifex.Intermissio(LogTextus.FabricaStatusPuellaeCorporis_FABRICAPUELLAESTATUSCORPORIS_MODUS_NOT_FOUND);
                         return null;
                 }
             // configuratioがNavmesh実装の場合 (Navmeshステートは未実装)
@@ -26,11 +28,11 @@ namespace Yulinti.Exercitus.Dux {
             //        case IDPuellaeStatusCorporisModiNavmesh.NavmeshLoci:
             //            return new StatusPuellaeCorporisNavmeshLoci(configuratioStatuum, configuratioNavmesh, osAnimationes);
             //        default:
-            //            Errorum.Fatal(IDErrorum.FABRICAPUELLAESTATUSCORPORIS_MODUS_NOT_FOUND);
+            //            Carnifex.Intermissio(LogTextus.FabricaStatusPuellaeCorporis_FABRICAPUELLAESTATUSCORPORIS_MODUS_NOT_FOUND);
             //            return null;
             //    }
             } else {
-                Errorum.Fatal(IDErrorum.FABRICAPUELLAESTATUSCORPORIS_INVALID_CONFIGURATION);
+                Carnifex.Intermissio(LogTextus.FabricaStatusPuellaeCorporis_FABRICAPUELLAESTATUSCORPORIS_INVALID_CONFIGURATION);
                 return null;
             }
         }

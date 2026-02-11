@@ -3,6 +3,8 @@ using Cysharp.Threading.Tasks;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class MinisteriumPuellaeCrinisAdiunctionis {
@@ -17,7 +19,7 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public void Muto(IDPuellaeCrinis idCrinis) {
-            MutoAsync(idCrinis).Forget(e => Memorator.MemorareException(e));
+            MutoAsync(idCrinis).Forget(e => Notarius.Memorare(e));
         }
 
         public async UniTask MutoAsync(IDPuellaeCrinis idCrinis) {
@@ -36,7 +38,7 @@ namespace Yulinti.Unity.Ministeria {
                 _crinisActualis = neo;
             } else {
                 neo.Deleto();
-                Memorator.MemorareErrorum(IDErrorum.MINISTERIUMPUELLAECRINISADIUNCTIONIS_INSTANTIATE_FAILED);
+                Notarius.Memorare(LogTextus.MinisteriumPuellaeCrinisAdiunctionis_MINISTERIUMPUELLAECRINISADIUNCTIONIS_INSTANTIATE_FAILED);
             }
 
             Transform radix = neo.OsRadix;

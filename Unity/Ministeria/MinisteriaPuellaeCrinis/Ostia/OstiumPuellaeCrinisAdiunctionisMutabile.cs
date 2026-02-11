@@ -1,6 +1,8 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class OstiumPuellaeCrinisAdiunctionisMutabile : IOstiumPuellaeCrinisAdiunctionisMutabile {
@@ -8,7 +10,7 @@ namespace Yulinti.Unity.Ministeria {
 
         public OstiumPuellaeCrinisAdiunctionisMutabile(MinisteriumPuellaeCrinisAdiunctionis miPuellaeCrinisAdiunctionis) {
             if (miPuellaeCrinisAdiunctionis == null) {
-                Errorum.Fatal(IDErrorum.OSTIUMPUELLAECRINISADIUNCTIONISMUTABILE_INSTANCE_NULL);
+                Carnifex.Intermissio(LogTextus.OstiumPuellaeCrinisAdiunctionisMutabile_OSTIUMPUELLAECRINISADIUNCTIONISMUTABILE_INSTANCE_NULL);
             }
             _miPuellaeCrinisAdiunctionis = miPuellaeCrinisAdiunctionis;
         }

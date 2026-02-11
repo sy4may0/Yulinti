@@ -2,6 +2,8 @@ using System;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class AnimatioPuellaeContinuata : IAnimatioPuellaeContinuata {
@@ -13,7 +15,7 @@ namespace Yulinti.Unity.Ministeria {
             IConfiguratioPuellaeAnimationisContinuata config
         ) {
             if (config.Animationes == null || config.Animationes.Length == 0) {
-                Errorum.Fatal(IDErrorum.CONFIGURATIOPUELLAEANIMATIONISCONTINUATA_CHILDREN_NULL_OR_EMPTY);
+                Carnifex.Intermissio(LogTextus.AnimatioPuellaeContinuata_CONFIGURATIOPUELLAEANIMATIONISCONTINUATA_CHILDREN_NULL_OR_EMPTY);
             }
             _id = config.Id;
             _stratum = config.Stratum;

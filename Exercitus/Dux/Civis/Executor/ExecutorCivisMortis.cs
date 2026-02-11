@@ -1,6 +1,8 @@
 using Yulinti.Nucleus;
 using Yulinti.Exercitus.Contractus;
 using System;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class ExecutorCivisMortis : IExecutorCivis {
@@ -39,7 +41,7 @@ namespace Yulinti.Exercitus.Dux {
 
         public void Executare(int idCivis, IOrdinatioCivisMortis mortis) {
             if (!_queueMortis[idCivis].ConarePono(mortis)) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISMORTIS_ORDINATIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.ExecutorCivisMortis_EXECUTORCIVISMORTIS_ORDINATIO_QUEUE_FULL);
                 return;
             }
         }

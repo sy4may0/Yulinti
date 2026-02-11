@@ -26,7 +26,7 @@ namespace Yulinti.Unity.Ministeria {
 
         private void Initio(int id) {
             NihilAut<IAnchoraCivis> anchora = _tabulaCivis.Lego(id);
-            AnimancerComponent animancer = anchora.Evolvo(IDErrorum.MINISTERIUMCIVISANIMATIONES_CONSTUCT_BEFORE_ANCHORA_INITIALIZATION)
+            AnimancerComponent animancer = anchora.Evolvo()
                                            .Animancer;
 
             for (int i = 0; i < Enum.GetValues(typeof(IDCivisAnimationisStratum)).Length; i++) {

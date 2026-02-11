@@ -4,6 +4,8 @@ using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using System;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class TabulaPuellaeFiguraeGenus {
@@ -19,7 +21,7 @@ namespace Yulinti.Unity.Ministeria {
 
             for (int i = 0; i < longitudo; i++) {
                 if (_figuraeIndexes[i] <= 0) {
-                    Errorum.Fatal(IDErrorum.TABULAPUELLAEFIGURAEGENUS_BLEND_SHAPE_NOT_FOUND);
+                    Carnifex.Intermissio(LogTextus.TabulaPuellaeFiguraeGenus_TABULAPUELLAEFIGURAEGENUS_BLEND_SHAPE_NOT_FOUND);
                 }
             }
         }

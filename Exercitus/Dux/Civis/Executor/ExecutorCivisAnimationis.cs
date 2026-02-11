@@ -1,5 +1,7 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class ExecutorCivisAnimationis : IExecutorCivis {
@@ -40,7 +42,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioCivisAnimationis animationis
         ) {
             if (!_queueAnimationis[idCivis].ConarePono(animationis)) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORCIVISANIMATIONIS_ORDINATIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.ExecutorCivisAnimationis_EXECUTORCIVISANIMATIONIS_ORDINATIO_QUEUE_FULL);
                 return;
             }
         }

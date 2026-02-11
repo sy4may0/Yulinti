@@ -11,68 +11,68 @@ namespace Yulinti.Unity.Ministeria {
             _miPunctumViae = miPunctumViae;
         }
 
-        public ErrorAut<IPunctumViaeLegibile> LegoTemere() {
-            PunctumViae punctumViae = _miPunctumViae.LegoTemere();
+        public bool ConareLegoTemere(out IPunctumViaeLegibile punctumViae) {
+            punctumViae = _miPunctumViae.LegoTemere();
             if (punctumViae == null) {
-                return ErrorAut<IPunctumViaeLegibile>.Error(IDErrorum.MINISTERIUMPUNCTUMVIAE_NO_ACTIVE_ADITRIUM);
+                return false;
             }
-            return ErrorAut<IPunctumViaeLegibile>.Successus(_miPunctumViae.LegoOstium(punctumViae.ID));
+            return true;
         }
 
-        public ErrorAut<IPunctumViaeLegibile> LegoVicinam(Vector3 positio) {
-            PunctumViae punctumViae = _miPunctumViae.LegoVicinam(InterpressNumericus.ToUnity(positio));
+        public bool ConareLegoVicinam(Vector3 positio, out IPunctumViaeLegibile punctumViae) {
+            punctumViae = _miPunctumViae.LegoVicinam(InterpressNumericus.ToUnity(positio));
             if (punctumViae == null) {
-                return ErrorAut<IPunctumViaeLegibile>.Error(IDErrorum.MINISTERIUMPUNCTUMVIAE_NO_ACTIVE_ADITRIUM);
+                return false;
             }
-            return ErrorAut<IPunctumViaeLegibile>.Successus(_miPunctumViae.LegoOstium(punctumViae.ID));
+            return true;
         }
 
-        public ErrorAut<IPunctumViaeLegibile> LegoCrematoriumTemere() {
-            PunctumViae punctumViae = _miPunctumViae.LegoCrematoriumTemere();
+        public bool ConareLegoCrematoriumTemere(out IPunctumViaeLegibile punctumViae) {
+            punctumViae = _miPunctumViae.LegoCrematoriumTemere();
             if (punctumViae == null) {
-                return ErrorAut<IPunctumViaeLegibile>.Error(IDErrorum.MINISTERIUMPUNCTUMVIAE_NO_ACTIVE_CREMATORIUM);
+                return false;
             }
-            return ErrorAut<IPunctumViaeLegibile>.Successus(_miPunctumViae.LegoOstium(punctumViae.ID));
+            return true;
         }
 
-        public ErrorAut<IPunctumViaeLegibile> LegoCrematoriumVicinam(Vector3 positio) {
-            PunctumViae punctumViae = _miPunctumViae.LegoCrematoriumVicinam(InterpressNumericus.ToUnity(positio));
+        public bool ConareLegoCrematoriumVicinam(Vector3 positio, out IPunctumViaeLegibile punctumViae) {
+            punctumViae = _miPunctumViae.LegoCrematoriumVicinam(InterpressNumericus.ToUnity(positio));
             if (punctumViae == null) {
-                return ErrorAut<IPunctumViaeLegibile>.Error(IDErrorum.MINISTERIUMPUNCTUMVIAE_NO_ACTIVE_CREMATORIUM);
+                return false;
             }
-            return ErrorAut<IPunctumViaeLegibile>.Successus(_miPunctumViae.LegoOstium(punctumViae.ID));
+            return true;
         }
 
-        public ErrorAut<IPunctumViaeLegibile> LegoNatoriumTemere() {
-            PunctumViae punctumViae = _miPunctumViae.LegoNatoriumTemere();
+        public bool ConareLegoNatoriumTemere(out IPunctumViaeLegibile punctumViae) {
+            punctumViae = _miPunctumViae.LegoNatoriumTemere();
             if (punctumViae == null) {
-                return ErrorAut<IPunctumViaeLegibile>.Error(IDErrorum.MINISTERIUMPUNCTUMVIAE_NO_ACTIVE_NATORIUM);
+                return false;
             }
-            return ErrorAut<IPunctumViaeLegibile>.Successus(_miPunctumViae.LegoOstium(punctumViae.ID));
+            return true;
         }
 
-        public ErrorAut<IPunctumViaeLegibile> LegoNatoriumVicinam(Vector3 positio) {
-            PunctumViae punctumViae = _miPunctumViae.LegoNatoriumVicinam(InterpressNumericus.ToUnity(positio));
+        public bool ConareLegoNatoriumVicinam(Vector3 positio, out IPunctumViaeLegibile punctumViae) {
+            punctumViae = _miPunctumViae.LegoNatoriumVicinam(InterpressNumericus.ToUnity(positio));
             if (punctumViae == null) {
-                return ErrorAut<IPunctumViaeLegibile>.Error(IDErrorum.MINISTERIUMPUNCTUMVIAE_NO_ACTIVE_NATORIUM);
+                return false;
             }
-            return ErrorAut<IPunctumViaeLegibile>.Successus(_miPunctumViae.LegoOstium(punctumViae.ID));
+            return true;
         }
 
-        public ErrorAut<IPunctumViaeLegibile> LegoTypumTemere(IDPunctumViaeTypi typus) {
-            PunctumViae punctumViae = _miPunctumViae.LegoTypumTemere(typus);
+        public bool ConareLegoTypumTemere(IDPunctumViaeTypi typus, out IPunctumViaeLegibile punctumViae) {
+            punctumViae = _miPunctumViae.LegoTypumTemere(typus);
             if (punctumViae == null) {
-                return ErrorAut<IPunctumViaeLegibile>.Error(IDErrorum.MINISTERIUMPUNCTUMVIAE_NO_ACTIVE_POINT);
+                return false;
             }
-            return ErrorAut<IPunctumViaeLegibile>.Successus(_miPunctumViae.LegoOstium(punctumViae.ID));
+            return true;
         }
 
-        public ErrorAut<IPunctumViaeLegibile> LegoTypumVicinam(IDPunctumViaeTypi typus, Vector3 positio) {
-            PunctumViae punctumViae = _miPunctumViae.LegoTypumVicinam(typus, InterpressNumericus.ToUnity(positio));
+        public bool ConareLegoTypumVicinam(IDPunctumViaeTypi typus, Vector3 positio, out IPunctumViaeLegibile punctumViae) {
+            punctumViae = _miPunctumViae.LegoTypumVicinam(typus, InterpressNumericus.ToUnity(positio));
             if (punctumViae == null) {
-                return ErrorAut<IPunctumViaeLegibile>.Error(IDErrorum.MINISTERIUMPUNCTUMVIAE_NO_ACTIVE_POINT);
+                return false;
             }
-            return ErrorAut<IPunctumViaeLegibile>.Successus(_miPunctumViae.LegoOstium(punctumViae.ID));
+            return true;
         }
     }
 }

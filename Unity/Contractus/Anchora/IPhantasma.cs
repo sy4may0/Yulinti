@@ -1,4 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 namespace Yulinti.Unity.Contractus {
     public interface IPhantasma {

@@ -1,4 +1,4 @@
-﻿namespace Yulinti.Exercitus.Contractus {
+namespace Yulinti.Exercitus.Contractus {
     public enum IDPunctumViaeTypi {
         None,
         Transitorium,

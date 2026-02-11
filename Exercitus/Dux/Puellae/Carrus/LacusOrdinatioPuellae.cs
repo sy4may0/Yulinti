@@ -1,4 +1,6 @@
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class LacusOrdinatioPuellae {
@@ -85,11 +87,11 @@ namespace Yulinti.Exercitus.Dux {
                     animationis.Initare();
                     return true;
                 }
-                Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEANIMATIONIS_EMISSIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEANIMATIONIS_EMISSIO_QUEUE_FULL);
                 animationis = null;
                 return false;
             }
-            Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEANIMATIONIS_LACUS_EMPTY);
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEANIMATIONIS_LACUS_EMPTY);
             animationis = null;
             return false;
         }
@@ -101,11 +103,11 @@ namespace Yulinti.Exercitus.Dux {
                     crinis.Initare();
                     return true;
                 }
-                Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAECRINIS_EMISSIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAECRINIS_EMISSIO_QUEUE_FULL);
                 crinis = null;
                 return false;
             }
-            Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAECRINIS_LACUS_EMPTY);
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAECRINIS_LACUS_EMPTY);
             crinis = null;
             return false;
         }
@@ -117,11 +119,11 @@ namespace Yulinti.Exercitus.Dux {
                     figuraeGenus.Initare();
                     return true;
                 }
-                Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEFIGURAEGENUS_EMISSIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEFIGURAEGENUS_EMISSIO_QUEUE_FULL);
                 figuraeGenus = null;
                 return false;
             }
-            Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEFIGURAEGENUS_LACUS_EMPTY);
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEFIGURAEGENUS_LACUS_EMPTY);
             figuraeGenus = null;
             return false;
         }
@@ -133,11 +135,11 @@ namespace Yulinti.Exercitus.Dux {
                     figuraePelvis.Initare();
                     return true;
                 }
-                Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEFIGURAEPELVIS_EMISSIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEFIGURAEPELVIS_EMISSIO_QUEUE_FULL);
                 figuraePelvis = null;
                 return false;
             }
-            Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEFIGURAEPELVIS_LACUS_EMPTY);
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEFIGURAEPELVIS_LACUS_EMPTY);
             figuraePelvis = null;
             return false;
         }
@@ -149,11 +151,11 @@ namespace Yulinti.Exercitus.Dux {
                     motus.Initare();
                     return true;
                 }
-                Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEMOTUS_EMISSIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEMOTUS_EMISSIO_QUEUE_FULL);
                 motus = null;
                 return false;
             }
-            Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEMOTUS_LACUS_EMPTY);
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEMOTUS_LACUS_EMPTY);
             motus = null;
             return false;
         }
@@ -165,11 +167,11 @@ namespace Yulinti.Exercitus.Dux {
                     navmesh.Initare();
                     return true;
                 }
-                Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAENAVMESH_EMISSIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAENAVMESH_EMISSIO_QUEUE_FULL);
                 navmesh = null;
                 return false;
             }
-            Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAENAVMESH_LACUS_EMPTY);
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAENAVMESH_LACUS_EMPTY);
             navmesh = null;
             return false;
         }
@@ -181,11 +183,11 @@ namespace Yulinti.Exercitus.Dux {
                     veletudinis.Initare();
                     return true;
                 }
-                Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEVELETUDINIS_EMISSIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_EMISSIO_QUEUE_FULL);
                 veletudinis = null;
                 return false;
             }
-            Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEVELETUDINIS_LACUS_EMPTY);
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_LACUS_EMPTY);
             veletudinis = null;
             return false;
         }
@@ -197,11 +199,11 @@ namespace Yulinti.Exercitus.Dux {
                     veletudinisNudi.Initare();
                     return true;
                 }
-                Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEVELETUDINISNUDI_EMISSIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISNUDI_EMISSIO_QUEUE_FULL);
                 veletudinisNudi = null;
                 return false;
             }
-            Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEVELETUDINISNUDI_LACUS_EMPTY);
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISNUDI_LACUS_EMPTY);
             veletudinisNudi = null;
             return false;
         }
@@ -213,11 +215,11 @@ namespace Yulinti.Exercitus.Dux {
                     personae.Initare();
                     return true;
                 }
-                Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEPERSONAE_EMISSIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEPERSONAE_EMISSIO_QUEUE_FULL);
                 personae = null;
                 return false;
             }
-            Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEPERSONAE_LACUS_EMPTY);
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEPERSONAE_LACUS_EMPTY);
             personae = null;
             return false;
         }
@@ -227,7 +229,7 @@ namespace Yulinti.Exercitus.Dux {
                 if(!_lacusAnimationis.ConarePono(r)) {
                     r.Purgere();
                     r.Liberare();
-                    Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEANIMATIONIS_LACUS_FULL);
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEANIMATIONIS_LACUS_FULL);
                 }
             }
         }
@@ -237,7 +239,7 @@ namespace Yulinti.Exercitus.Dux {
                 if(!_lacusCrinis.ConarePono(r)) {
                     r.Purgere();
                     r.Liberare();
-                    Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAECRINIS_LACUS_FULL);
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAECRINIS_LACUS_FULL);
                 }
             }
         }
@@ -247,7 +249,7 @@ namespace Yulinti.Exercitus.Dux {
                 if(!_lacusFiguraeGenus.ConarePono(r)) {
                     r.Purgere();
                     r.Liberare();
-                    Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEFIGURAEGENUS_LACUS_FULL);
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEFIGURAEGENUS_LACUS_FULL);
                 }
             }
         }
@@ -257,7 +259,7 @@ namespace Yulinti.Exercitus.Dux {
                 if(!_lacusFiguraePelvis.ConarePono(r)) {
                     r.Purgere();
                     r.Liberare();
-                    Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEFIGURAEPELVIS_LACUS_FULL);
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEFIGURAEPELVIS_LACUS_FULL);
                 }
             }
         }
@@ -267,7 +269,7 @@ namespace Yulinti.Exercitus.Dux {
                 if(!_lacusMotus.ConarePono(r)) {
                     r.Purgere();
                     r.Liberare();
-                    Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEMOTUS_LACUS_FULL);
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEMOTUS_LACUS_FULL);
                 }
             }
         }
@@ -277,7 +279,7 @@ namespace Yulinti.Exercitus.Dux {
                 if(!_lacusNavmesh.ConarePono(r)) {
                     r.Purgere();
                     r.Liberare();
-                    Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAENAVMESH_LACUS_FULL);
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAENAVMESH_LACUS_FULL);
                 }
             }
         }
@@ -287,7 +289,7 @@ namespace Yulinti.Exercitus.Dux {
                 if(!_lacusVeletudinis.ConarePono(r)) {
                     r.Purgere();
                     r.Liberare();
-                    Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEVELETUDINIS_LACUS_FULL);
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_LACUS_FULL);
                 }
             }
         }
@@ -297,7 +299,7 @@ namespace Yulinti.Exercitus.Dux {
                 if(!_lacusVeletudinisNudi.ConarePono(r)) {
                     r.Purgere();
                     r.Liberare();
-                    Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEVELETUDINISNUDI_LACUS_FULL);
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISNUDI_LACUS_FULL);
                 }
             }
         }
@@ -307,7 +309,7 @@ namespace Yulinti.Exercitus.Dux {
                 if(!_lacusPersonae.ConarePono(r)) {
                     r.Purgere();
                     r.Liberare();
-                    Memorator.MemorareErrorum(IDErrorum.ORDINATIOPUELLAEPERSONAE_LACUS_FULL);
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEPERSONAE_LACUS_FULL);
                 }
             }
         }

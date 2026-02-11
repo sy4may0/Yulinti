@@ -3,6 +3,8 @@ using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using System;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class TabulaPuellaeCrinis {
@@ -19,7 +21,7 @@ namespace Yulinti.Unity.Ministeria {
 
             for (int i = 0; i < longitudo; i++) {
                 if (_crines[i] == null) {
-                    Errorum.Fatal(IDErrorum.TABULAPUELLAECRINIS_ID_NOT_FOUND);
+                    Carnifex.Intermissio(LogTextus.TabulaPuellaeCrinis_TABULAPUELLAECRINIS_ID_NOT_FOUND);
                 }
             }
         }

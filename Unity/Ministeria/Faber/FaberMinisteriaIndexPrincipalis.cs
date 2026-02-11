@@ -12,7 +12,6 @@ namespace Yulinti.Unity.Ministeria {
 
             // Nuclei
             builder.Register<IOstiumTemporisLegibile, OstiumTemporisLegibile>(Lifetime.Singleton);
-            builder.Register<IOstiumErrorumLegibile, OstiumErrorumLegibile>(Lifetime.Singleton);
 
             //Input
             builder.Register<MinisteriumInputVelum>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

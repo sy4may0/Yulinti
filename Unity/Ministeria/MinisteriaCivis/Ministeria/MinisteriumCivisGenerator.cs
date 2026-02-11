@@ -4,6 +4,8 @@ using UnityEngine;
 using Yulinti.Nucleus;
 using System.Threading;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class MinisteriumCivisGenerator : IMinisteriumIncipabilis, IMinisteriumLiberabilis {
@@ -30,12 +32,12 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         private void Initiare() {
-            InitiareAsync().Forget(e => Memorator.MemorareException(e));
-            TempusExactumInitiareAsync().Forget(e => Memorator.MemorareException(e));
+            InitiareAsync().Forget(e => Notarius.Memorare(e));
+            TempusExactumInitiareAsync().Forget(e => Notarius.Memorare(e));
         }
 
         private void Generare() {
-            GenerareAsync().Forget(e => Memorator.MemorareException(e));
+            GenerareAsync().Forget(e => Notarius.Memorare(e));
         }
         
         private async UniTask InitiareAsync() {
@@ -80,7 +82,7 @@ namespace Yulinti.Unity.Ministeria {
         private async UniTask TempusExactumInitiareAsync() {
             await UniTask.Delay(30 * 1000);
             if (_estInitiare) {
-                Errorum.Fatal(IDErrorum.GENERATORCIVIS_TIMEOUT_INITIARE);
+                Carnifex.Intermissio(LogTextus.MinisteriumCivisGenerator_GENERATORCIVIS_TIMEOUT_INITIARE);
             }
         }
 

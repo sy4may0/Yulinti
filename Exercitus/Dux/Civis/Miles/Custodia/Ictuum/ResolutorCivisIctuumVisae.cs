@@ -2,6 +2,8 @@ using System.Numerics;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using System;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class ResolutorCivisIctuumVisae : IResolutorCivisIctuumVisae {
@@ -184,7 +186,7 @@ namespace Yulinti.Exercitus.Dux {
                 _contextus.Visa.ConareLegoPositioCapitis(idCivis, out positioCivisCapitis) && 
                 _contextus.Visa.ConareLegoDirectioCapitis(idCivis, out directioCivisCapitis)
             )) {
-                Memorator.MemorareErrorum(IDErrorum.RESOLUTORCIVISICTUUM_CONARELEGO_FAILED);
+                Notarius.Memorare(LogTextus.ResolutorCivisIctuumVisae_RESOLUTORCIVISICTUUM_CONARELEGO_FAILED);
                 _visaIctuumCapitis[idCivis] = 0f;
                 _visaIctuumCorporis[idCivis] = 0f;
                 return;

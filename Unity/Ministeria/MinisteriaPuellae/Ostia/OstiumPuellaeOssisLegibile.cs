@@ -2,6 +2,8 @@ using Yulinti.Unity.Ministeria;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class OstiumPuellaeOssisLegibile : IOstiumPuellaeOssisLegibile {
@@ -9,7 +11,7 @@ namespace Yulinti.Unity.Ministeria {
 
         public OstiumPuellaeOssisLegibile(MinisteriumPuellaeOssis miPuellaeOssis) {
             if (miPuellaeOssis == null) {
-                Errorum.Fatal(IDErrorum.OSTIUMPUELLAEOSSISLEGIBILE_INSTANCE_NULL);
+                Carnifex.Intermissio(LogTextus.OstiumPuellaeOssisLegibile_OSTIUMPUELLAEOSSISLEGIBILE_INSTANCE_NULL);
             }
             _miPuellaeOssis = miPuellaeOssis;
         }

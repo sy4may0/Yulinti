@@ -1,4 +1,6 @@
-﻿
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
+
 namespace Yulinti.Nucleus {
     public readonly struct NihilAut<T> {
         private readonly T _valor;
@@ -19,19 +21,11 @@ namespace Yulinti.Nucleus {
             if (_valor != null) {
                 return _valor;
             } else {
-                Errorum.Fatal("Unwrap(Evolvere) Failed. Unwrap nihil result. Result type: " + typeof(T).Name);
+                Notarius.MemorareParametrum("result_type", typeof(T).Name);
+                Carnifex.Intermissio(LogTextus.NihilAut_UnwrapFailed);
                 return default(T); // 繧ｳ繝ｳ繝代う繝ｫ逕ｨ縲・atal縺ｧ關ｽ縺｡繧九・
             }
         }
-        public T Evolvo(IDErrorum error) {
-            if (_valor != null) {
-                return _valor;
-            } else {
-                Errorum.Fatal(error);
-                return default(T); // 繧ｳ繝ｳ繝代う繝ｫ逕ｨ縲・atal縺ｧ關ｽ縺｡繧九・
-            }
-        }
-
         public T EvolvoAut(T defalta) {
             if (_valor != null) {
                 return _valor;
@@ -43,15 +37,13 @@ namespace Yulinti.Nucleus {
 
     public readonly struct ErrorAut<T> {
         private readonly T _valor;
-        private readonly IDErrorum _error;
         private readonly bool _estSuccessus;
 
-        public static ErrorAut<T> Successus(T v) => new ErrorAut<T>(v, default(IDErrorum), true);
-        public static ErrorAut<T> Error(IDErrorum e) => new ErrorAut<T>(default(T), e, false);
+        public static ErrorAut<T> Successus(T v) => new ErrorAut<T>(v, true);
+        public static ErrorAut<T> Error() => new ErrorAut<T>(default(T), false);
 
-        private ErrorAut(T valor, IDErrorum error, bool estSuccessus) {
+        private ErrorAut(T valor, bool estSuccessus) {
             _valor = valor;
-            _error = error;
             _estSuccessus = estSuccessus;
         }
 
@@ -63,24 +55,11 @@ namespace Yulinti.Nucleus {
             return !_estSuccessus;
         }
 
-        public IDErrorum ID() {
-            return _error;
-        }
-
         public T Evolvo() {
             if (EstSuccessus()) {
                 return _valor;
             } else {
-                Errorum.Fatal("Unwrap(Evolvere) Failed. Error: " + _error);
-                return default(T); // 繧ｳ繝ｳ繝代う繝ｫ逕ｨ縲・atal縺ｧ關ｽ縺｡繧九・
-            }
-        }
-
-        public T Evolvo(IDErrorum error) {
-            if (EstSuccessus()) {
-                return _valor;
-            } else {
-                Errorum.Fatal(error, _error);
+                Carnifex.Intermissio(LogTextus.ErrorAut_UnwrapFailed);
                 return default(T); // 繧ｳ繝ｳ繝代う繝ｫ逕ｨ縲・atal縺ｧ關ｽ縺｡繧九・
             }
         }
@@ -104,5 +83,4 @@ namespace Yulinti.Nucleus {
         }
     }
 }
-
 

@@ -3,13 +3,15 @@ using Yulinti.Unity.Ministeria;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class OstiumPuellaeAnimationesMutabile : IOstiumPuellaeAnimationesMutabile {
         private readonly MinisteriumPuellaeAnimationes _miPuellaeAnimationes;
         public OstiumPuellaeAnimationesMutabile(MinisteriumPuellaeAnimationes miPuellaeAnimationes) {
             if (miPuellaeAnimationes == null) {
-                Errorum.Fatal(IDErrorum.OSTIUMPUELLAEANIMATIONESMUTABILE_INSTANCE_NULL);
+                Carnifex.Intermissio(LogTextus.OstiumPuellaeAnimationesMutabile_OSTIUMPUELLAEANIMATIONESMUTABILE_INSTANCE_NULL);
             }
             _miPuellaeAnimationes = miPuellaeAnimationes;
         }

@@ -1,6 +1,8 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using System;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class MachinaCivisStatuumCorporis {
@@ -56,7 +58,7 @@ namespace Yulinti.Exercitus.Dux {
 
             foreach (IDCivisStatusCorporis id in Enum.GetValues(typeof(IDCivisStatusCorporis))) {
                 if (id != IDCivisStatusCorporis.None && statuum[(int)id] == null) {
-                    Errorum.Fatal(IDErrorum.MACHINACIVISSTATUUMCORPORIS_STATUS_MISSING);
+                    Carnifex.Intermissio(LogTextus.MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_MISSING);
                 }
             }
             return statuum;
@@ -71,9 +73,9 @@ namespace Yulinti.Exercitus.Dux {
             _idStatusProximus = IDCivisStatusCorporis.None;
 
             // ランダムにNatorium地点を取得してTransporto要求を生成
-            ErrorAut<IPunctumViaeLegibile> punctumViae = _contextusOstiorum.PunctumViae.LegoNatoriumTemere();
+            IPunctumViaeLegibile punctumViae;
 
-            if (punctumViae.EstError()) {
+            if (!_contextusOstiorum.PunctumViae.ConareLegoNatoriumTemere(out punctumViae)) {
                 _contextusOstiorum.Carrus.PostulareMortis(
                     _idCivis,
                     SpeciesOrdinationisCivisMortis.Spirituare
@@ -83,7 +85,7 @@ namespace Yulinti.Exercitus.Dux {
 
             _contextusOstiorum.Carrus.PostulareNavmesh(
                 _idCivis,
-                punctumViae.Evolvo().Positio,
+                punctumViae.Positio,
                 true,
                 0f, 0f, 0, 0f
             );

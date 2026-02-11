@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Yulinti.Unity.Contractus {
     public interface IAnchora {

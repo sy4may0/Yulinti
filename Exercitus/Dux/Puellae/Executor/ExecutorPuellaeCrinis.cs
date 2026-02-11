@@ -1,5 +1,7 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class ExecutorPuellaeCrinis : IExecutorPuellae {
@@ -29,7 +31,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioPuellaeCrinis crinis
         ) {
             if (!_queueCrinis.ConarePono(crinis)) {
-                Memorator.MemorareErrorum(IDErrorum.MINIATERIUMPUELLAECRINIS_ORDINATIO_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.ExecutorPuellaeCrinis_MINIATERIUMPUELLAECRINIS_ORDINATIO_QUEUE_FULL);
                 return;
             }
         }

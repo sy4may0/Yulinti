@@ -4,6 +4,9 @@ using System;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal enum CivisGenerationisStatus {
@@ -29,7 +32,7 @@ namespace Yulinti.Unity.Ministeria {
         public void Initiare() {
             if (_anchora.EstEns || _status != CivisGenerationisStatus.None) return;
             _status = CivisGenerationisStatus.Initio;
-            InitiareAsync().Forget(e => Memorator.MemorareException(e));
+            InitiareAsync().Forget(e => Notarius.Memorare(e));
         }
 
         // Manifestatio成功後は呼び出せない。エラーの場合はゲームを落とす。
@@ -44,7 +47,7 @@ namespace Yulinti.Unity.Ministeria {
                 if (!ex) {
                     _anchora.Deleto();
                     _status = CivisGenerationisStatus.None;
-                    Errorum.Fatal(IDErrorum.CIVIS_INSTANTIATE_FAILED);
+                    Carnifex.Intermissio(LogTextus.CuratorCivisGenerationis_CIVIS_INSTANTIATE_FAILED);
                 }
                 _status = CivisGenerationisStatus.Paratus;
 
@@ -52,7 +55,8 @@ namespace Yulinti.Unity.Ministeria {
                 _adInitium = null;
             } catch (Exception e) {
                 _status = CivisGenerationisStatus.None;
-                Errorum.Fatal(e);
+                Notarius.Memorare(e);
+                Carnifex.Intermissio(LogTextus.CuratorCivisGenerationis_InitException);
             }
         }
 
@@ -109,7 +113,7 @@ namespace Yulinti.Unity.Ministeria {
 
         public void VaridareAnchorae(IAnchoraCivis[] anchorae) {
             if (anchorae == null) {
-                Errorum.Fatal(IDErrorum.TABULACIVIS_ANCHORAE_NULL);
+                Carnifex.Intermissio(LogTextus.TabulaCivis_TABULACIVIS_ANCHORAE_NULL);
             }
 
             var s = new HashSet<IAnchoraCivis>(ComparatorReferentialis<IAnchoraCivis>.Instantia);
@@ -117,10 +121,10 @@ namespace Yulinti.Unity.Ministeria {
             for (int i = 0; i < anchorae.Length; i++) {
                 var a = anchorae[i];
                 if (a == null) {
-                    Errorum.Fatal(IDErrorum.TABULACIVIS_ANCHORA_NULL);
+                    Carnifex.Intermissio(LogTextus.TabulaCivis_TABULACIVIS_ANCHORA_NULL);
                 }
                 if (!s.Add(a)) {
-                    Errorum.Fatal(IDErrorum.TABULACIVIS_ANCHORA_DUPLICATE);
+                    Carnifex.Intermissio(LogTextus.TabulaCivis_TABULACIVIS_ANCHORA_DUPLICATE);
                 }
             }
         }

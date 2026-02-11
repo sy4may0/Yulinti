@@ -2,6 +2,8 @@ using Yulinti.Unity.Ministeria;
 using Yulinti.Nucleus;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class OstiumCameraMutabile : IOstiumCameraMutabile {
@@ -9,7 +11,7 @@ namespace Yulinti.Unity.Ministeria {
 
         public OstiumCameraMutabile(MinisteriumCamera miCamera) {
             if (miCamera == null) {
-                Errorum.Fatal(IDErrorum.OSTIUMCAMERAMUTABILE_INSTANCE_NULL);
+                Carnifex.Intermissio(LogTextus.OstiumCameraMutabile_OSTIUMCAMERAMUTABILE_INSTANCE_NULL);
             }
             _miCamera = miCamera;
         }

@@ -1,4 +1,4 @@
-﻿namespace Yulinti.Exercitus.Contractus {
+namespace Yulinti.Exercitus.Contractus {
     public enum IDPuellaeAnimationisStratum {
         // ファンダメンタル層は0固定としてくれ。
         Fundamentum = 0,

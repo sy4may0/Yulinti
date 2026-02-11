@@ -13,7 +13,6 @@ namespace Yulinti.Unity.Ministeria {
 
             // Nuclei
             builder.Register<IOstiumTemporisLegibile, OstiumTemporisLegibile>(Lifetime.Singleton);
-            builder.Register<IOstiumErrorumLegibile, OstiumErrorumLegibile>(Lifetime.Singleton);
 
             // Camera
             builder.Register<MinisteriumCamera>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

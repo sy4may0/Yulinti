@@ -1,0 +1,29 @@
+{
+  "name": "Yulinti.Regnum.Rex",
+  "rootNamespace": "Yulinti.Regnum.Rex",
+  "references": [
+    "Kybernetik.Animancer",
+    "VContainer",
+    "Yulinti.Nucleus",
+    "Yulinti.Nucleus.Contractus",
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.Exercitus.Contractus",
+    "Yulinti.Exercitus.Dux",
+    "Yulinti.Unity.Contractus",
+    "Yulinti.Unity.Ministeria",
+    "Yulinti.Unity.Anchora",
+    "Yulinti.Unity.Deus",
+    "Yulinti.Regnum.Praefectus",
+    "Yulinti.Regnum.Anchora",
+    "Yulinti.Regnum.Configuratio"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

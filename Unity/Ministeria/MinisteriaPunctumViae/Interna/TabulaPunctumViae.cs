@@ -9,6 +9,7 @@ namespace Yulinti.Unity.Ministeria {
         private readonly PunctumViae[] _crematorium;
         private readonly PunctumViae[] _natorium;
         private readonly PunctumViae[] _aditrium;
+        private readonly PunctumViaeLegibile[] _ostium;
 
         private readonly IPunctumViaeLegibile[] _punctaViaeLegibile;
 
@@ -19,6 +20,7 @@ namespace Yulinti.Unity.Ministeria {
             IDPunctumViaeTypi[] aditrium
         ) {
             _punctaViae = new PunctumViae[anchoraPunctumViae.Length];
+            _ostium = new PunctumViaeLegibile[anchoraPunctumViae.Length];
             Dictionary<IDPunctumViaeTypi, List<PunctumViae>> tabula = new Dictionary<IDPunctumViaeTypi, List<PunctumViae>>();
 
             HashSet<IDPunctumViaeTypi> c_set = new HashSet<IDPunctumViaeTypi>(crematorium);
@@ -27,7 +29,6 @@ namespace Yulinti.Unity.Ministeria {
             List<PunctumViae> c_list = new List<PunctumViae>();
             List<PunctumViae> n_list = new List<PunctumViae>();
             List<PunctumViae> a_list = new List<PunctumViae>();
-            List<IPunctumViaeLegibile> ostium_list = new List<IPunctumViaeLegibile>();
 
             for (int i = 0; i < anchoraPunctumViae.Length; i++) {
                 _punctaViae[i] = new PunctumViae(i, anchoraPunctumViae[i]);
@@ -46,7 +47,7 @@ namespace Yulinti.Unity.Ministeria {
                 if (a_set.Contains(a.Typus)) {
                     a_list.Add(_punctaViae[i]);
                 }
-                ostium_list.Add(new PunctumViaeLegibile(_punctaViae[i]));
+                _ostium[i] = new PunctumViaeLegibile(_punctaViae[i]);
             }
 
             _tabula = new Dictionary<IDPunctumViaeTypi, PunctumViae[]>(tabula.Count);
@@ -56,7 +57,6 @@ namespace Yulinti.Unity.Ministeria {
             _crematorium = c_list.ToArray();
             _natorium = n_list.ToArray();
             _aditrium = a_list.ToArray();
-            _punctaViaeLegibile = ostium_list.ToArray();
         }
 
         public PunctumViae[] Lego(IDPunctumViaeTypi typus) => _tabula[typus];
@@ -65,6 +65,7 @@ namespace Yulinti.Unity.Ministeria {
         public PunctumViae[] LegoCrematorium() => _crematorium;
         public PunctumViae[] LegoNatorium() => _natorium;
         public PunctumViae[] LegoAditrium() => _aditrium;
-        public IPunctumViaeLegibile LegoOstium(int indexis) => _punctaViaeLegibile[indexis];
+
+        public PunctumViaeLegibile LegoOstium(int indexis) => _ostium[indexis];
     }
 }

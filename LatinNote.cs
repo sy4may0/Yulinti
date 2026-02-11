@@ -1,4 +1,4 @@
-﻿// 繝ｩ繝・Φ隱柤ote 譬ｼ縺ｯChatGPT縺ｫ閨槭￠縲・
+// 繝ｩ繝・Φ隱柤ote 譬ｼ縺ｯChatGPT縺ｫ閨槭￠縲・
 // Main => Camera Princeps
 // Secondary => Camera Secundaria
 // Third => Camera Tertia

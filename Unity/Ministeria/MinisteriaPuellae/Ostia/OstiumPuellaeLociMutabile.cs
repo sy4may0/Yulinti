@@ -1,13 +1,15 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class OstiumPuellaeLociMutabile : IOstiumPuellaeLociMutabile {
         private readonly MinisteriumPuellaeLoci _miPuellaeLoci;
         public OstiumPuellaeLociMutabile(MinisteriumPuellaeLoci miPuellaeLoci) {
             if (miPuellaeLoci == null) {
-                Errorum.Fatal(IDErrorum.OSTIUMPUELLAELOCIMUTABILE_INSTANCE_NULL);
+                Carnifex.Intermissio(LogTextus.OstiumPuellaeLociMutabile_OSTIUMPUELLAELOCIMUTABILE_INSTANCE_NULL);
             }
             _miPuellaeLoci = miPuellaeLoci;
         }

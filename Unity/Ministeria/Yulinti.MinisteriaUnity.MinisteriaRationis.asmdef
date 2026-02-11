@@ -6,6 +6,8 @@
         "VContainer",
         "Unity.InputSystem",
         "Yulinti.Nucleus",
+        "Yulinti.Nucleus.Instrumentarium",
+        "Yulinti.Nucleus.Contractus",
         "Yulinti.Unity.Contractus",
         "Yulinti.Exercitus.Contractus",
         "Unity.Addressables",

@@ -1,5 +1,7 @@
 using Yulinti.Nucleus;
 using System.Numerics;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 // [TODO] AbacusDistantiaeにリファクタリング
 
@@ -24,7 +26,7 @@ namespace Yulinti.Exercitus.Dux {
         ) {
             if ( distantiaMin >= distantiaMedius ||
                 distantiaMedius >= distantiaMaxima ) {
-                Errorum.Fatal(IDErrorum.ABACUSDISTANTIAEVISUS_INVALID_DISTANTIA);
+                Carnifex.Intermissio(LogTextus.AbacusDistantiaeVisus_ABACUSDISTANTIAEVISUS_INVALID_DISTANTIA);
             }
 
             _distantiaMaxima = distantiaMaxima;

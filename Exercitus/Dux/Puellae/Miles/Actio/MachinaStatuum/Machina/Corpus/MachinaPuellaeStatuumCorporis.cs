@@ -1,6 +1,8 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using System;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class MachinaPuellaeStatuumCorporis {
@@ -50,7 +52,7 @@ namespace Yulinti.Exercitus.Dux {
 
             foreach (IDPuellaeStatusCorporis id in Enum.GetValues(typeof(IDPuellaeStatusCorporis))) {
                 if (id != IDPuellaeStatusCorporis.None && statuum[(int)id] == null) {
-                    Errorum.Fatal(IDErrorum.MACHINAPUELLAESTATUUMCORPORIS_STATUS_MISSING);
+                    Carnifex.Intermissio(LogTextus.MachinaPuellaeStatuumCorporis_MACHINAPUELLAESTATUUMCORPORIS_STATUS_MISSING);
                 }
             }
             return statuum;

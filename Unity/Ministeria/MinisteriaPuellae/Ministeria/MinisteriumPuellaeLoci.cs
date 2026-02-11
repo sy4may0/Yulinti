@@ -3,6 +3,8 @@ using UnityEngine.AI;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class MinisteriumPuellaeLoci {
@@ -25,7 +27,7 @@ namespace Yulinti.Unity.Ministeria {
             IConfiguratioPuellaeLoci configLoci
         ) {
             if (configLoci == null) {
-                Errorum.Fatal(IDErrorum.MINIATERIUMPUELLAELOCI_CONFIG_NULL);
+                Carnifex.Intermissio(LogTextus.MinisteriumPuellaeLoci_MINIATERIUMPUELLAELOCI_CONFIG_NULL);
             }
             _anchoraPuellae = anchoraPuellae;
             _configLoci = configLoci;

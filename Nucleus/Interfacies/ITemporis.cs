@@ -1,4 +1,4 @@
-﻿namespace Yulinti.Nucleus {
+namespace Yulinti.Nucleus {
     public interface IIncipabilis {
         void Incipere();
     }

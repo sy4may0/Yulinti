@@ -4,7 +4,9 @@
   "references": [
     "VContainer",
     "Yulinti.Exercitus.Contractus",
-    "Yulinti.Nucleus"
+    "Yulinti.Nucleus",
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.Nucleus.Contractus"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

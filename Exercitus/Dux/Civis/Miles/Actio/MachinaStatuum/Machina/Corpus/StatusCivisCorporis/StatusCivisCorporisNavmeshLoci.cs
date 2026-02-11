@@ -30,18 +30,19 @@ namespace Yulinti.Exercitus.Dux {
                 idCivis, _configuratio.IdAnimationisIntrare, adInitium, null, false
             );
 
-            ErrorAut<IPunctumViaeLegibile> punctumViae = contextusOstiorum.PunctumViae.LegoTypumTemere(
-                _configuratio.TypusPunctumViae
-            );
-            if (punctumViae.EstError()) {
+            IPunctumViaeLegibile punctumViae;
+
+            if (!contextusOstiorum.PunctumViae.ConareLegoTypumTemere(
+                _configuratio.TypusPunctumViae, out punctumViae)) {
                 contextusOstiorum.Carrus.PostulareMortis(
                     idCivis, SpeciesOrdinationisCivisMortis.Spirituare
                 );
+                return;
             }
 
             contextusOstiorum.Carrus.PostulareNavmesh(
                 idCivis,
-                punctumViae.Evolvo().Positio,
+                punctumViae.Positio,
                 false,
                 _configuratio.VelocitasDesiderata,
                 _configuratio.Acceleratio,

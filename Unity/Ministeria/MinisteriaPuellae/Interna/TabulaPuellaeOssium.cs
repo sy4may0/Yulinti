@@ -4,6 +4,8 @@ using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using System;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class TabulaPuellaeOssium {
@@ -30,7 +32,7 @@ namespace Yulinti.Unity.Ministeria {
 
             for (int i = 0; i < longitudo; i++) {
                 if (_ossa[i] == null) {
-                    Errorum.Fatal(IDErrorum.TABULAPUELLAEOSSIUM_BONE_NOT_FOUND);
+                    Carnifex.Intermissio(LogTextus.TabulaPuellaeOssium_TABULAPUELLAEOSSIUM_BONE_NOT_FOUND);
                 }
             }
         }

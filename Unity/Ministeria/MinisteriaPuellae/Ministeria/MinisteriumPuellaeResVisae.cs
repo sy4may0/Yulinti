@@ -3,6 +3,8 @@ using System;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class MinisteriumPuellaeResVisae {
@@ -50,32 +52,32 @@ namespace Yulinti.Unity.Ministeria {
             // validate
             for (int i = 0; i < longitudoCapitis; i++) {
                 if (_resVisaeCapitis[i] == null) {
-                    Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_CAPITIS);
+                    Carnifex.Intermissio(LogTextus.MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_CAPITIS);
                     return;
                 }
             }
             for (int i = 0; i < longitudoPectoris; i++) {
                 if (_resVisaePectoris[i] == null) {
-                    Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_PECTORIS);
+                    Carnifex.Intermissio(LogTextus.MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_PECTORIS);
                     return;
                 }
             }
             for (int i = 0; i < longitudoNatium; i++) {
                 if (_resVisaeNatium[i] == null) {
-                    Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_NATIUM);
+                    Carnifex.Intermissio(LogTextus.MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_NATIUM);
                     return;
                 }
             }
 
             for (int i = 0; i < longitudoNudusAnterior; i++) {
                 if (_resNudusAnterior[i] == null) {
-                    Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAE_UNINITIALIZED_RESNUDUS_ANTERIOR);
+                    Carnifex.Intermissio(LogTextus.MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESNUDUS_ANTERIOR);
                     return;
                 }
             }
             for (int i = 0; i < longitudoNudusPosterior; i++) {
                 if (_resNudusPosterior[i] == null) {
-                    Errorum.Fatal(IDErrorum.MINISTERIUMPUELLAE_UNINITIALIZED_RESNUDUS_POSTERIOR);
+                    Carnifex.Intermissio(LogTextus.MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESNUDUS_POSTERIOR);
                     return;
                 }
             }

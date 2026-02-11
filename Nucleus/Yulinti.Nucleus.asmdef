@@ -1,7 +1,10 @@
 {
   "name": "Yulinti.Nucleus",
   "rootNamespace": "Yulinti.Nucleus",
-  "references": [],
+  "references": [
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.Nucleus.Contractus"
+  ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

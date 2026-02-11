@@ -2,13 +2,15 @@ using Yulinti.Unity.Ministeria;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class OstiumPuellaeFiguraeGenusLegibile : IOstiumPuellaeFiguraeGenusLegibile {
         private readonly MinisteriumPuellaeFiguraeGenus _miPuellaeFiguraeGenus;
         public OstiumPuellaeFiguraeGenusLegibile(MinisteriumPuellaeFiguraeGenus miPuellaeFiguraeGenus) {
             if (miPuellaeFiguraeGenus == null) {
-                Errorum.Fatal(IDErrorum.OSTIUMPUELLAEFIGURAEGENUSLEGIBILE_INSTANCE_NULL);
+                Carnifex.Intermissio(LogTextus.OstiumPuellaeFiguraeGenusLegibile_OSTIUMPUELLAEFIGURAEGENUSLEGIBILE_INSTANCE_NULL);
             }
             _miPuellaeFiguraeGenus = miPuellaeFiguraeGenus;
         }

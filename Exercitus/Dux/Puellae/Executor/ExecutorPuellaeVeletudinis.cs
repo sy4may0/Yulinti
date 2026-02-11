@@ -1,5 +1,7 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class PhantasmaPuellaeVeletudinis {
@@ -167,7 +169,7 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioPuellaeVeletudinisNudi veletudinisNudi
         ) {
             if (!_queueVeletudinisNudi.ConarePono(veletudinisNudi)) {
-                Memorator.MemorareErrorum(IDErrorum.EXECUTORPUELLAEVELETUDINIS_ORDINATIO_VELETUDINISNUDI_QUEUE_FULL);
+                Notarius.Memorare(LogTextus.ExecutorPuellaeVeletudinis_EXECUTORPUELLAEVELETUDINIS_ORDINATIO_VELETUDINISNUDI_QUEUE_FULL);
                 return;
             }
         }

@@ -12,24 +12,24 @@ namespace Yulinti.Exercitus.Contractus {
 
     public interface IOstiumPunctumViaeLegibile {
         // ランダムにエントリーポイントを取得。
-        ErrorAut<IPunctumViaeLegibile> LegoTemere();
+        bool ConareLegoTemere(out IPunctumViaeLegibile punctumViae);
         // 最短エントリーポイントを取得。
-        ErrorAut<IPunctumViaeLegibile> LegoVicinam(Vector3 positio);
+        bool ConareLegoVicinam(Vector3 positio, out IPunctumViaeLegibile punctumViae);
 
         // ランダムにDespawn地点を取得。
-        ErrorAut<IPunctumViaeLegibile> LegoCrematoriumTemere();
+        bool ConareLegoCrematoriumTemere(out IPunctumViaeLegibile punctumViae);
         // 最短Despawn地点を取得。
-        ErrorAut<IPunctumViaeLegibile> LegoCrematoriumVicinam(Vector3 positio);
+        bool ConareLegoCrematoriumVicinam(Vector3 positio, out IPunctumViaeLegibile punctumViae);
 
         // ランダムNatorium地点を取得。
-        ErrorAut<IPunctumViaeLegibile> LegoNatoriumTemere();
+        bool ConareLegoNatoriumTemere(out IPunctumViaeLegibile punctumViae);
         // 最短Natorium地点を取得。
-        ErrorAut<IPunctumViaeLegibile> LegoNatoriumVicinam(Vector3 positio);
+        bool ConareLegoNatoriumVicinam(Vector3 positio, out IPunctumViaeLegibile punctumViae);
 
         // ランダムに指定IDの地点を取得。
-        ErrorAut<IPunctumViaeLegibile> LegoTypumTemere(IDPunctumViaeTypi typus);
+        bool ConareLegoTypumTemere(IDPunctumViaeTypi typus, out IPunctumViaeLegibile punctumViae);
         // 最短指定IDの地点を取得。
-        ErrorAut<IPunctumViaeLegibile> LegoTypumVicinam(IDPunctumViaeTypi typus, Vector3 positio);
+        bool ConareLegoTypumVicinam(IDPunctumViaeTypi typus, Vector3 positio, out IPunctumViaeLegibile punctumViae);
     }
 }
 

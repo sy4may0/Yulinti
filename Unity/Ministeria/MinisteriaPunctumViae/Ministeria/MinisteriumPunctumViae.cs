@@ -24,79 +24,85 @@ namespace Yulinti.Unity.Ministeria {
             _tabulaPunctumViae.LegoIndexis(id).Deactivare();
         }
 
-        public PunctumViae LegoTemere() {
+        public PunctumViaeLegibile LegoTemere() {
             PunctumViae[] punctaViae = _tabulaPunctumViae.LegoAditrium();
             PunctumViae exitus = SelegereCaecus(punctaViae);
             if (exitus == null) {
                 return null;
             }
-            return exitus;
+            PunctumViaeLegibile p = _tabulaPunctumViae.LegoOstium(exitus.ID);
+            return p;
         }
 
-        public PunctumViae LegoVicinam(Vector3 positio) {
+        public PunctumViaeLegibile LegoVicinam(Vector3 positio) {
             PunctumViae[] punctaViae = _tabulaPunctumViae.LegoAditrium();
             PunctumViae exitus = SelegereVicinam(punctaViae, positio);
             if (exitus == null) {
                 return null;
             }
-            return exitus;
+            PunctumViaeLegibile p = _tabulaPunctumViae.LegoOstium(exitus.ID);
+            return p;
         }
 
-        public PunctumViae LegoCrematoriumTemere() {
+        public PunctumViaeLegibile LegoCrematoriumTemere() {
             PunctumViae[] punctaViae = _tabulaPunctumViae.LegoCrematorium();
             PunctumViae exitus = SelegereCaecus(punctaViae);
             if (exitus == null) {
                 return null;
             }
-            return exitus;
+            PunctumViaeLegibile p = _tabulaPunctumViae.LegoOstium(exitus.ID);
+            return p;
         }
 
-        public PunctumViae LegoCrematoriumVicinam(Vector3 positio) {
+        public PunctumViaeLegibile LegoCrematoriumVicinam(Vector3 positio) {
             PunctumViae[] punctaViae = _tabulaPunctumViae.LegoCrematorium();
             PunctumViae exitus = SelegereVicinam(punctaViae, positio);
             if (exitus == null) {
                 return null;
             }
-            return exitus;
+            PunctumViaeLegibile p = _tabulaPunctumViae.LegoOstium(exitus.ID);
+            return p;
         }
 
-        public PunctumViae LegoNatoriumTemere() {
+        public PunctumViaeLegibile LegoNatoriumTemere() {
             PunctumViae[] punctaViae = _tabulaPunctumViae.LegoNatorium();
             PunctumViae exitus = SelegereCaecus(punctaViae);
             if (exitus == null) {
                 return null;
             }
-            return exitus;
+            PunctumViaeLegibile p = _tabulaPunctumViae.LegoOstium(exitus.ID);
+            return p;
         }
 
-        public PunctumViae LegoNatoriumVicinam(Vector3 positio) {
+        public PunctumViaeLegibile LegoNatoriumVicinam(Vector3 positio) {
             PunctumViae[] punctaViae = _tabulaPunctumViae.LegoNatorium();
             PunctumViae exitus = SelegereVicinam(punctaViae, positio);
             if (exitus == null) {
                 return null;
             }
-            return exitus;
+            PunctumViaeLegibile p = _tabulaPunctumViae.LegoOstium(exitus.ID);
+            return p;
         }
 
-        public PunctumViae LegoTypumTemere(IDPunctumViaeTypi typus) {
+        public PunctumViaeLegibile LegoTypumTemere(IDPunctumViaeTypi typus) {
             PunctumViae[] punctaViae = _tabulaPunctumViae.Lego(typus);
             PunctumViae exitus = SelegereCaecus(punctaViae);
             if (exitus == null) {
                 return null;
             }
-            return exitus;
+            PunctumViaeLegibile p = _tabulaPunctumViae.LegoOstium(exitus.ID);
+            return p;
         }
 
-        public PunctumViae LegoTypumVicinam(IDPunctumViaeTypi typus, Vector3 positio) {
+        public PunctumViaeLegibile LegoTypumVicinam(IDPunctumViaeTypi typus, Vector3 positio) {
             PunctumViae[] punctaViae = _tabulaPunctumViae.Lego(typus);
             PunctumViae exitus = SelegereVicinam(punctaViae, positio);
             if (exitus == null) {
                 return null;
             }
-            return exitus;
+            PunctumViaeLegibile p = _tabulaPunctumViae.LegoOstium(exitus.ID);
+            return p;
         }
-
-        internal IPunctumViaeLegibile LegoOstium(int indexis) => _tabulaPunctumViae.LegoOstium(indexis);
 
         private PunctumViae SelegereCaecus(PunctumViae[] punctaViae) {
             int c = 0;

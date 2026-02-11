@@ -1,5 +1,7 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class FabricaStatusCivisCorporis {
@@ -13,7 +15,7 @@ namespace Yulinti.Exercitus.Dux {
                     case IDCivisStatusCorporisModiMotus.MotusQuietus:
                         return new StatusCivisCorporisMotusQuietes(configuratioStatuum, configuratioMotus);
                     default:
-                        Errorum.Fatal(IDErrorum.FABRICACIVISSTATUSCORPORIS_MODUS_NOT_FOUND);
+                        Carnifex.Intermissio(LogTextus.FabricaStatusCivisCorporis_FABRICACIVISSTATUSCORPORIS_MODUS_NOT_FOUND);
                         return null;
                 }
             // configuratioがNavmesh実装の場合
@@ -22,11 +24,11 @@ namespace Yulinti.Exercitus.Dux {
                     case IDCivisStatusCorporisModiNavmesh.NavmeshLociTemere:
                         return new StatusCivisCorporisNavmeshLoci(configuratioStatuum, configuratioNavmesh);
                     default:
-                        Errorum.Fatal(IDErrorum.FABRICACIVISSTATUSCORPORIS_MODUS_NOT_FOUND);
+                        Carnifex.Intermissio(LogTextus.FabricaStatusCivisCorporis_FABRICACIVISSTATUSCORPORIS_MODUS_NOT_FOUND);
                         return null;
                 }
             } else {
-                Errorum.Fatal(IDErrorum.FABRICACIVISSTATUSCORPORIS_INVALID_CONFIGURATION);
+                Carnifex.Intermissio(LogTextus.FabricaStatusCivisCorporis_FABRICACIVISSTATUSCORPORIS_INVALID_CONFIGURATION);
                 return null;
             }
         }

@@ -2,6 +2,8 @@ using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using System;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class TabulaCivisAnimationumContinuata {
@@ -26,7 +28,7 @@ namespace Yulinti.Unity.Ministeria {
             // IDすべて(Noneを除く)に設定が必要
             for (int i = 1; i < longitudo; i++) {
                 if (_animationes[i] == null) {
-                    Errorum.Fatal(IDErrorum.TABULACIVISANIMATIONUMCONTINUATA_CONFIG_NOT_FOUND);
+                    Carnifex.Intermissio(LogTextus.TabulaCivisAnimationumContinuata_TABULACIVISANIMATIONUMCONTINUATA_CONFIG_NOT_FOUND);
                 }
             }
         }

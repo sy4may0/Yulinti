@@ -2,6 +2,8 @@ using UnityEngine;
 using Yulinti.Unity.Ministeria;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
+using Yulinti.Nucleus.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
@@ -17,7 +19,11 @@ namespace Yulinti.Unity.Ministeria {
             _leftFoot = anchoraPuellae.OsLeftFoot;
             _rightToe = anchoraPuellae.OsRightToe;
             _leftToe = anchoraPuellae.OsLeftToe;
-            _raycastStratum = config.RaycastStratum.Evolvo(IDErrorum.MINISTERIUMPUELLAERELATIONISTERRAE_RAYCAST_STRATUM_NULL);
+            _raycastStratum = config.RaycastStratum;
+
+            if (_raycastStratum == 0) {
+                Carnifex.Intermissio(LogTextus.MinisteriumPuellaeRelationisTerraE_RAYCAST_STRATUM_NULL);
+            }
         }
 
         private float LegoTerramPositionemY(

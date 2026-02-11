@@ -4,6 +4,8 @@ using Yulinti.Exercitus.Contractus;
 using UnityEngine;
 using Yulinti.Nucleus;
 using System;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class NewLuditorAnimationis : IPulsabilis {
@@ -27,7 +29,7 @@ namespace Yulinti.Unity.Ministeria {
             _layer = animancer.Layers[indexusLuditoris];
             if (_layer == null)
             {
-                Errorum.Fatal(IDErrorum.LUDITORANIMATIONIS_LAYER_NOT_FOUND);
+                Carnifex.Intermissio(LogTextus.NewLuditorAnimationis_LUDITORANIMATIONIS_LAYER_NOT_FOUND);
             }
             _indexusLuditoris = indexusLuditoris;
             _animatioCurrens = null;
