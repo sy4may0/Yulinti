@@ -1,0 +1,40 @@
+<?xml version="1.8" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+
+    <ui:VisualElement name="indexprincipalis" class="container indexprincipalis-container">
+        <ui:Button 
+            name="buttonLudusNovus" 
+            text="New Game" 
+            class="indexprincipalis-button indexprincipalis-button-ludus-novus"
+        />
+        <ui:Button
+            name="buttonPergeLudum"
+            text="Continue"
+            class="indexprincipalis-button indexprincipalis-button-perge-ludum"
+        />
+        <ui:Button
+            name="buttonOneraLudum"
+            text="Load Game" 
+            class="indexprincipalis-button indexprincipalis-button-onera-ludum"
+        />
+        <ui:Button
+            name="buttonOptiones"
+            text="Options"
+            class="indexprincipalis-button indexprincipalis-button-optiones"
+        />
+        <ui:Button
+            name="buttonExi"
+            text="Exit"
+            class="indexprincipalis-button indexprincipalis-button-exi"
+        />
+    </ui:VisualElement>
+
+    <ui:VisualElement name="selectorsalsamenti" class="container selectorsalsamenti-container">
+        <ui:Label text="Select a game to load"/>
+    </ui:VisualElement>
+
+    <ui:VisualElement name="optiones" class="container optiones-container">
+        <ui:Label text="Options"/>
+    </ui:VisualElement>
+
+</ui:UXML>

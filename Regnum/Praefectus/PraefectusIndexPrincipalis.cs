@@ -1,39 +1,33 @@
 using VContainer.Unity;
-using Yulinti.Exercitus.Contractus;
+using Yulinti.Unity.Contractus;
 using System;
 using UnityEngine;
 using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Regnum.Praefectus {
     public sealed class PraefectusIndexPrincipalis : IStartable, ITickable, IFixedTickable, ILateTickable, IDisposable {
-        private ITurrisMundus _turrisMundus;
-        private ITurrisIntroductionis _turrisIntroductionis;
+        private IOrator _orator;
 
         public PraefectusIndexPrincipalis(
-            ITurrisMundus turrisMundus,
-            ITurrisIntroductionis turrisIntroductionis
+            IOrator orator
         ) {
-            _turrisMundus = turrisMundus;
-            _turrisIntroductionis = turrisIntroductionis;
+            _orator = orator;
         }
 
         public void Start() {
-            // メニュー画面
+            _orator.Incipere();
         }
 
         public void Tick() {
-            // 仮構成。 Enterが押されたらTestSceneに遷移
-            if (_turrisIntroductionis.LegoClick) {
-                _turrisMundus.AdMudum(IDMundi.MundusTestScene);
-            }
+            _orator.Pulsus();
         }
 
         public void FixedTick() {
-            // メニュー画面
+            _orator.PulsusFixus();
         }
 
         public void LateTick() {
-            // メニュー画面
+            _orator.PulsusTardus();
         }
 
         public void Dispose() {

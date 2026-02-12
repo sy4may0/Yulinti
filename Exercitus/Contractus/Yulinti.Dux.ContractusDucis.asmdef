@@ -2,7 +2,7 @@
   "name": "Yulinti.Exercitus.Contractus",
   "rootNamespace": "Yulinti.Exercitus.Contractus",
   "references": [
-    "Yulinti.Nucleus"
+    "Yulinti.Nucleus.Contractus"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

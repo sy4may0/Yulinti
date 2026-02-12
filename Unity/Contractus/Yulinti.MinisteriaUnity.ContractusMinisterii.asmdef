@@ -2,7 +2,7 @@
   "name": "Yulinti.Unity.Contractus",
   "rootNamespace": "Yulinti.Unity.Contractus",
   "references": [
-    "Yulinti.Nucleus",
+    "Yulinti.Nucleus.Contractus",
     "Yulinti.Exercitus.Contractus",
     "Unity.InputSystem",
     "Kybernetik.Animancer",

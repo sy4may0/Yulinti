@@ -1,0 +1,45 @@
+.container {
+    flex-grow: 1;
+}
+
+.indexprincipalis-container {
+    justify-content: left;
+    align-items: left;
+}
+
+.selectorsalsamenti-container {
+    justify-content: left;
+    align-items: left;
+}
+
+.options-container {
+    justify-content: left;
+    align-items: left;
+}
+
+.indexprincipalis-button {
+    width: 200px;
+    height: 50px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.indexprincipalis-button-ludus-novus {
+    color:white;
+}
+
+.indexprincipalis-button-perge-ludum {
+    color:white;
+}
+
+.indexprincipalis-button-onera-ludum {
+    color:white;
+}
+
+.indexprincipalis-button-optiones {
+    color:white;
+}
+
+.indexprincipalis-button-exi {
+    color:gray;
+}

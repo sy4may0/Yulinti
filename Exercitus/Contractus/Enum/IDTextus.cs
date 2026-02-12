@@ -1,0 +1,9 @@
+namespace Yulinti.Exercitus.Contractus {
+    public enum IDTextus {
+        INDEXUS_PRINCIPALIS_LUDUS_NOVUS,
+        INDEXUS_PRINCIPALIS_PERGE_LUDUM,
+        INDEXUS_PRINCIPALIS_ONERA_LUDUM,
+        INDEXUS_PRINCIPALIS_OPTIONES,
+        INDEXUS_PRINCIPALIS_EXIT,
+    }
+}

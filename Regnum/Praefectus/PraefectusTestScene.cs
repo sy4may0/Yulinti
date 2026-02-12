@@ -1,6 +1,6 @@
 using VContainer.Unity;
-using Yulinti.Unity.Ministeria;
-using Yulinti.Exercitus.Dux;
+using Yulinti.Unity.Contractus;
+using Yulinti.Exercitus.Contractus;
 using System;
 using Yulinti.Nucleus.Contractus;
 

@@ -4,11 +4,9 @@
   "references": [
     "Kybernetik.Animancer",
     "VContainer",
-    "Yulinti.Nucleus",
     "Yulinti.Nucleus.Contractus",
     "Yulinti.Exercitus.Contractus",
-    "Yulinti.Exercitus.Dux",
-    "Yulinti.Unity.Ministeria"
+    "Yulinti.Unity.Contractus"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

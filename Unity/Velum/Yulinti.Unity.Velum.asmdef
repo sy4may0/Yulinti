@@ -1,11 +1,12 @@
 {
-  "name": "Yulinti.Unity.Velum.Indicium",
-  "rootNamespace": "Yulinti.Unity.Velum.Indicium",
+  "name": "Yulinti.Unity.Velum",
+  "rootNamespace": "Yulinti.Unity.Velum",
   "references": [
-    "VContainer",
+    "Yulinti.Unity.Contractus",
+    "Yulinti.Nucleus.Contractus",
+    "Yulinti.Nucleus.Instrumentarium",
     "Yulinti.Exercitus.Contractus",
-    "Yulinti.Unity.Velum.ContractusVeli",
-    "Yulinti.Nucleus"
+    "VContainer"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
