@@ -6,6 +6,7 @@ using Yulinti.Unity.Contractus;
 using Yulinti.Unity.Ministeria;
 using Yulinti.Unity.Velum;
 using Yulinti.Regnum.Praefectus;
+using Yulinti.Exercitus.Dux;
 
 namespace Yulinti.Regnum.Rex {
     public sealed class RexIndexPrincipalis : LifetimeScope {
@@ -15,6 +16,7 @@ namespace Yulinti.Regnum.Rex {
             builder.RegisterInstance<IAnchoraVelumIndexusPrincipalis>(_anchora);
 
             FaberMinisteriaIndexPrincipalis.Initio(builder);
+            FaberDucisIndexusPrincipalis.Initio(builder);
             FarberVelumIndexusPrincipalis.Initio(builder);
 
             builder.RegisterEntryPoint<PraefectusIndexPrincipalis>();

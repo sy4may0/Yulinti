@@ -19,5 +19,7 @@ namespace Yulinti.Exercitus.Contractus {
         bool LegoCancel { get; }
         // ナビゲーション入力
         bool LegoNavigate { get; }
+
+        void DebugEnabled();
     }
 }

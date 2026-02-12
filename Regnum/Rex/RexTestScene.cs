@@ -17,7 +17,6 @@ namespace Yulinti.Regnum.Rex {
         protected override void Configure(IContainerBuilder builder) {
             Debug.Log("RexTestScene Configure");
             builder.RegisterInstance<IAnchoraCamera>(_anchora.AnchoraCamera);
-            builder.RegisterInstance<IAnchoraInput>(_anchora.AnchoraInput);
             builder.RegisterInstance<IAnchoraPuellae>(_anchora.AnchoraPuellae);
             builder.RegisterInstance<IAnchoraPuellaeCrinis[]>(_anchora.AnchoraPuellaeCrinis);
             builder.RegisterInstance<IAnchoraPunctumViae[]>(_anchora.AnchoraPunctumViae);

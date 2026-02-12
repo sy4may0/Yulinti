@@ -7,14 +7,12 @@ namespace Yulinti.Regnum.Anchora {
     [System.Serializable]
     public sealed class AnchoraTestScene {
         [SerializeField] private AnchoraCamera _anchoraCamera;
-        [SerializeField] private AnchoraInput _anchoraInput;
         [SerializeField] private AnchoraPuellae _anchoraPuellae;
         [SerializeField] private AnchoraPuellaeCrinis[] _anchoraPuellaeCrinis;
         [SerializeField] private AnchoraPunctumViae[] _anchoraPunctumViae;
         [SerializeField] private AnchoraCivis[] _anchoraCivis;
 
         public AnchoraCamera AnchoraCamera => _anchoraCamera;
-        public AnchoraInput AnchoraInput => _anchoraInput;
         public AnchoraPuellae AnchoraPuellae => _anchoraPuellae;
         public AnchoraPuellaeCrinis[] AnchoraPuellaeCrinis => _anchoraPuellaeCrinis;
         public AnchoraPunctumViae[] AnchoraPunctumViae => _anchoraPunctumViae;
@@ -22,10 +20,6 @@ namespace Yulinti.Regnum.Anchora {
 
         public void Resolvo() {
             if (_anchoraCamera == null) {
-                Notarius.Memorare(LogTextus.AnchoraTestScene_REX_ANCHORA_NOT_SET);
-            }
-
-            if (_anchoraInput == null) {
                 Notarius.Memorare(LogTextus.AnchoraTestScene_REX_ANCHORA_NOT_SET);
             }
 
@@ -48,7 +42,6 @@ namespace Yulinti.Regnum.Anchora {
 
         public void Validare() {
             if (_anchoraCamera == null ||
-                _anchoraInput == null ||
                 _anchoraPuellae == null ||
                 _anchoraPuellaeCrinis == null ||
                 _anchoraPunctumViae == null ||
@@ -58,7 +51,6 @@ namespace Yulinti.Regnum.Anchora {
             }
 
             _anchoraCamera.Validare();
-            _anchoraInput.Validare();
             _anchoraPuellae.Validare();
 
             foreach (var item in _anchoraPuellaeCrinis) {

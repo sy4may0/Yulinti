@@ -8,6 +8,7 @@ using Yulinti.Unity.Turris;
 using Yulinti.Unity.Contractus;
 using Yulinti.Nucleus.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Regnum.Praefectus;
 
 namespace Yulinti.Regnum.Rex {
     public sealed class RexRadicis: LifetimeScope {
@@ -28,6 +29,8 @@ namespace Yulinti.Regnum.Rex {
             builder.RegisterInstance<IAnchoraInput>(_anchora);
 
             FaberTurris.Initio(builder);
+
+            builder.RegisterEntryPoint<PraefectusRadicis>();
         }
     }
 }

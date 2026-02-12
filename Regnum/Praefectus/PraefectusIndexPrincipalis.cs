@@ -3,6 +3,7 @@ using Yulinti.Unity.Contractus;
 using System;
 using UnityEngine;
 using Yulinti.Nucleus.Contractus;
+using Yulinti.Exercitus.Contractus;
 
 namespace Yulinti.Regnum.Praefectus {
     public sealed class PraefectusIndexPrincipalis : IStartable, ITickable, IFixedTickable, ILateTickable, IDisposable {

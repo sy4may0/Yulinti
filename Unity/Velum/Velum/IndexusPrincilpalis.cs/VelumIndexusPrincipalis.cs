@@ -41,7 +41,7 @@ namespace Yulinti.Unity.Velum {
         public void Initare() {
             _containerIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("indexprincipalis");
             _containerSelectorisSalsamenti = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("selectorsalsamenti");
-            _containerOptions = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("options");
+            _containerOptions = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("optiones");
 
             _buttonLudusNovus = _containerIndexusPrincipalis.Q<Button>("buttonLudusNovus");
             _buttonPergeLudum = _containerIndexusPrincipalis.Q<Button>("buttonPergeLudum");
@@ -60,8 +60,6 @@ namespace Yulinti.Unity.Velum {
             _buttonOneraLudum.clicked += AdPremereOneraLudum;
             _buttonOptiones.clicked += AdPremereOptiones;
             _buttonExi.clicked += AdPremereExi;
-
-            Deactivare();
         }
 
         public void Incipere() {

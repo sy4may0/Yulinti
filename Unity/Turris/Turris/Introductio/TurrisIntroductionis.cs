@@ -42,5 +42,16 @@ namespace Yulinti.Unity.Turris {
         public bool LegoSubmit => _submitInput?.action?.enabled == true && _submitInput.action.IsPressed();
         public bool LegoCancel => _cancelInput?.action?.enabled == true && _cancelInput.action.IsPressed();
         public bool LegoNavigate => _navigateInput?.action?.enabled == true && _navigateInput.action.IsPressed();
+
+        public void DebugEnabled() {
+            UnityEngine.Debug.Log($"_moveInput.action.enabled={_moveInput.action.enabled}");
+            UnityEngine.Debug.Log($"_sprintInput.action.enabled={_sprintInput.action.enabled}");
+            UnityEngine.Debug.Log($"_crouchInput.action.enabled={_crouchInput.action.enabled}");
+            UnityEngine.Debug.Log($"_clickInput.action.enabled={_clickInput.action.enabled}");
+            UnityEngine.Debug.Log($"_clickRightInput.action.enabled={_clickRightInput.action.enabled}");
+            UnityEngine.Debug.Log($"_submitInput.action.enabled={_submitInput.action.enabled}");
+            UnityEngine.Debug.Log($"_cancelInput.action.enabled={_cancelInput.action.enabled}");
+            UnityEngine.Debug.Log($"_navigateInput.action.enabled={_navigateInput.action.enabled}");
+        }
     }
 }

@@ -1,5 +1,8 @@
-<?xml version="1.8" encoding="utf-8"?>
-<ui:UXML xmlns:ui="UnityEngine.UIElements">
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+
+    <Style src="IndexPrincipalis.uss" />
 
     <ui:VisualElement name="indexprincipalis" class="container indexprincipalis-container">
         <ui:Button 

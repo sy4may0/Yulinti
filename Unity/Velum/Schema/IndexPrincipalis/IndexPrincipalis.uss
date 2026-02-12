@@ -3,18 +3,18 @@
 }
 
 .indexprincipalis-container {
-    justify-content: left;
-    align-items: left;
+    justify-content: center;
+    align-items: center;
 }
 
 .selectorsalsamenti-container {
-    justify-content: left;
-    align-items: left;
+    justify-content: center;
+    align-items: center;
 }
 
 .options-container {
-    justify-content: left;
-    align-items: left;
+    justify-content: center;
+    align-items: center;
 }
 
 .indexprincipalis-button {
