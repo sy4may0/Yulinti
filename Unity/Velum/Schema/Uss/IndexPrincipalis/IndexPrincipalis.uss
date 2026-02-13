@@ -1,45 +1,24 @@
-.container {
-    flex-grow: 1;
+.indexprincipalis-root {
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
 }
 
-.indexprincipalis-container {
-    justify-content: center;
-    align-items: center;
-}
+.indexprincipalis-panel {
+    width: 380px;
+    height: 100%;
 
-.selectorsalsamenti-container {
     justify-content: center;
-    align-items: center;
-}
+    align-items: flex-start;
 
-.options-container {
-    justify-content: center;
-    align-items: center;
+    padding-left: 20px;
+    flex-direction: column;
 }
 
 .indexprincipalis-button {
-    width: 200px;
-    height: 50px;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-.indexprincipalis-button-ludus-novus {
-    color:white;
-}
-
-.indexprincipalis-button-perge-ludum {
-    color:white;
-}
-
-.indexprincipalis-button-onera-ludum {
-    color:white;
-}
-
-.indexprincipalis-button-optiones {
-    color:white;
-}
-
-.indexprincipalis-button-exi {
-    color:gray;
+    height: 64px;
+    margin-bottom: 16px;
+    width: 260px;
+    font-size: 24px;
+    unity-text-align: middle-left;
 }
