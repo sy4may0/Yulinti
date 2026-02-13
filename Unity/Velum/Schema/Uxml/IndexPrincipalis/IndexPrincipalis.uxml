@@ -2,7 +2,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements"
          xmlns:uie="UnityEngine.UIElements">
 
-    <Style src="IndexPrincipalis.uss" />
+    <Style src="../../Uss/Globalis.uss" />
+    <Style src="../../Uss/IndexPrincipalis/IndexPrincipalis.uss" />
 
     <ui:VisualElement name="indexprincipalis" class="container indexprincipalis-container">
         <ui:Button 
