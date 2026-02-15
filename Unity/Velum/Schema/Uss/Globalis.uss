@@ -8,9 +8,9 @@
    ========================= */
 :root {
     /* ---- Base (透過前提で少し濃く調整) ---- */
-    --bg: rgba(28, 20, 26, 0.7);
-    --panel: rgba(38, 28, 36, 0.7);
-    --panel-2: rgba(47, 34, 48, 0.85);
+    --bg: rgba(28, 20, 26, 0.9);
+    --panel: rgba(38, 28, 36, 0.9);
+    --panel-2: rgba(47, 34, 48, 0.95);
 
     --text: #f3e9f2;
     --text-dim: #cbb7c7;
@@ -44,7 +44,11 @@
 /* =========================
    Container (全体の枠)
    ========================= */
+
 .container {
+    -unity-font-definition: url("project:/Assets/Resources/Fonts/Mplus/MPLUS2.asset");
+}
+.panel {
     background-color: var(--bg);
     color: var(--text);
 
@@ -58,7 +62,7 @@
 /* =========================
    Sub Container (ブロックカード)
    ========================= */
-.sub-container {
+.sub-panel {
     background-color: var(--panel);
 
     border-width: 1px;
@@ -73,13 +77,13 @@
    Warning Container
    例: class="sub-container warning"
    ========================= */
-.sub-container.warning {
+.sub-panel.warning {
     background-color: var(--warning-bg);
     border-color: var(--warning);
 }
 
-.sub-container.warning .label,
-.sub-container.warning Label {
+.sub-panel.warning .label,
+.sub-panel.warning Label {
     color: var(--warning);
 }
 
@@ -88,7 +92,7 @@
    ========================= */
 .label {
     color: var(--text);
-    unity-font-style: bold;
+    -unity-font-style: bold;
     font-size: var(--font-size);
     margin-bottom: 6px;
 }
@@ -96,13 +100,13 @@
 /* =========================
    TextField / Input Styling
    ========================= */
-.sub-container TextField,
-.container TextField {
+.sub-panel TextField,
+.panel TextField {
     margin-top: 6px;
 }
 
-.sub-container TextField .unity-text-field__input,
-.container TextField .unity-text-field__input {
+.sub-panel TextField .unity-text-field__input,
+.panel TextField .unity-text-field__input {
     background-color: var(--panel-2);
 
     border-width: 1px;
@@ -114,27 +118,31 @@
     min-height: 28px;
 }
 
-.sub-container TextField .unity-text-element,
-.container TextField .unity-text-element {
+.sub-panel TextField .unity-text-element,
+.panel TextField .unity-text-element {
     color: var(--text);
 }
 
-.sub-container TextField:focus-within .unity-text-field__input,
-.container TextField:focus-within .unity-text-field__input {
+.sub-panel TextField:focus .unity-text-field__input,
+.panel TextField:focus .unity-text-field__input {
     border-color: var(--accent);
 }
 
 /* =========================
    Buttons (Base)
    ========================= */
-button {
+.button {
     border-radius: var(--radius-sm);
     border-width: 1px;
-    padding: 7px 14px;
-    min-height: 30px;
+    padding: 10px 14px;
 
-    unity-font-style: bold;
     font-size: var(--font-size);
+    align-items: center;
+}
+
+.button .unity-text-element {
+    padding-top: 2px;
+    padding-bottom: 2px; /* p/g/y の切れ対策にもなる */
 }
 
 /* Submit Button (塗り) */
@@ -177,7 +185,6 @@ button {
     background-color: transparent;
     border-color: transparent;
     color: var(--accent);
-    padding: 6px 10px;
 }
 
 .button-ghost:hover, 
@@ -275,10 +282,10 @@ button {
 }
 
 .dropdown .unity-base-popup-field__arrow {
-    tint-color: var(--text-dim);
+    -unity-background-image-tint-color: var(--text-dim);
 }
 
-.dropdown:focus-within .unity-base-popup-field__input {
+.dropdown:focus .unity-base-popup-field__input {
     border-color: var(--accent);
 }
 
@@ -306,7 +313,7 @@ button {
 
 /* チェックマーク色 */
 .toggle .unity-toggle__checkmark {
-    tint-color: #20151d;
+    -unity-background-image-tint-color: #20151d;
 }
 
 /* ON時のボックス */
@@ -361,7 +368,7 @@ button {
     background-color: var(--accent-2);
 }
 
-.slider:focus-within .unity-slider__tracker {
+.slider:focus .unity-slider__tracker {
     border-color: var(--accent);
 }
 

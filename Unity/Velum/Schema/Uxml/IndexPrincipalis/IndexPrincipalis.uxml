@@ -6,41 +6,33 @@
     <Style src="../../Uss/IndexPrincipalis/IndexPrincipalis.uss" />
 
     <ui:VisualElement name="indexprincipalis-root" class="container indexprincipalis-root">
-      <ui:VisualElement name="indexprincipalis-panel" class="panel indexprincipalis-panel">
+      <ui:VisualElement name="indexprincipalis-panel" class="container indexprincipalis-panel">
+       
         <ui:Button 
             name="buttonLudusNovus" 
             text="New Game" 
-            class="button-ghost indexprincipalis-button indexprincipalis-button-ludus-novus"
+            class="button button-ghost indexprincipalis-button indexprincipalis-button-ludus-novus"
         />
         <ui:Button
             name="buttonPergeLudum"
             text="Continue"
-            class="button-ghost indexprincipalis-button indexprincipalis-button-perge-ludum"
+            class="button button-ghost indexprincipalis-button indexprincipalis-button-perge-ludum"
         />
         <ui:Button
             name="buttonOneraLudum"
             text="Load Game" 
-            class="button-ghost indexprincipalis-button indexprincipalis-button-onera-ludum"
+            class="button button-ghost indexprincipalis-button indexprincipalis-button-onera-ludum"
         />
         <ui:Button
             name="buttonOptiones"
             text="Options"
-            class="button-ghost indexprincipalis-button indexprincipalis-button-optiones"
+            class="button button-ghost indexprincipalis-button indexprincipalis-button-optiones"
         />
         <ui:Button
             name="buttonExi"
             text="Exit"
-            class="button-ghost indexprincipalis-button indexprincipalis-button-exi"
+            class="button button-ghost indexprincipalis-button indexprincipalis-button-exi"
         />
       </ui:VisualElement>
     </ui:VisualElement>
-
-    <ui:VisualElement name="selectorsalsamenti" class="container selectorsalsamenti-container">
-        <ui:Label text="Select a game to load"/>
-    </ui:VisualElement>
-
-    <ui:VisualElement name="optiones" class="container optiones-container">
-        <ui:Label text="Options"/>
-    </ui:VisualElement>
-
 </ui:UXML>

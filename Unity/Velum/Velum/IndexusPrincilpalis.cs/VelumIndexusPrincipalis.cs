@@ -20,6 +20,8 @@ namespace Yulinti.Unity.Velum {
         private VisualElement _containerSelectorisSalsamenti;
         private VisualElement _containerOptions;
 
+        private VisualElement _panelIndexusPrincipalis;
+
         private Button _buttonLudusNovus;
         private Button _buttonPergeLudum;
         private Button _buttonOneraLudum;
@@ -39,15 +41,16 @@ namespace Yulinti.Unity.Velum {
 
         // 各UI要素を初期化する。
         public void Initare() {
-            _containerIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("indexprincipalis");
+            _containerIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("indexprincipalis-root");
             _containerSelectorisSalsamenti = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("selectorsalsamenti");
             _containerOptions = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("optiones");
+            _panelIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("indexprincipalis-panel");
 
-            _buttonLudusNovus = _containerIndexusPrincipalis.Q<Button>("buttonLudusNovus");
-            _buttonPergeLudum = _containerIndexusPrincipalis.Q<Button>("buttonPergeLudum");
-            _buttonOneraLudum = _containerIndexusPrincipalis.Q<Button>("buttonOneraLudum");
-            _buttonOptiones = _containerIndexusPrincipalis.Q<Button>("buttonOptiones");
-            _buttonExi = _containerIndexusPrincipalis.Q<Button>("buttonExi");
+            _buttonLudusNovus = _panelIndexusPrincipalis.Q<Button>("buttonLudusNovus");
+            _buttonPergeLudum = _panelIndexusPrincipalis.Q<Button>("buttonPergeLudum");
+            _buttonOneraLudum = _panelIndexusPrincipalis.Q<Button>("buttonOneraLudum");
+            _buttonOptiones = _panelIndexusPrincipalis.Q<Button>("buttonOptiones");
+            _buttonExi = _panelIndexusPrincipalis.Q<Button>("buttonExi");
 
             _buttonLudusNovus.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS);
             _buttonPergeLudum.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_PERGE_LUDUM);
