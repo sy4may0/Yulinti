@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+
+    <Style src="../../Uss/Globalis.uss" />
+    <Style src="../../Uss/IndexPrincipalis/Salsamentum.uss" />
+
+    <ui:VisualElement name="salsamentum-root" class="container salsamentum-root">
+      <ui:VisualElement name="salsamentum-window" class="container salsamentum-window">
+        <ui:VisualElement name="salsamentum-header-panel" class="panel salsamentum-header-panel">
+          <ui:Label 
+            name="salsamentum-header-label" 
+            class="label salsamentum-header-label"
+            text="Salsamentum"
+          />
+        </ui:VisualElement>
+        
+        <ui:VisualElement name="salsamentum-content-panel" class="panel salsamentum-content-panel">
+          <ui:VisualElement name="salsamentum-list-view-panel" class="sub-panel salsamentum-list-view-panel">
+          </ui:VisualElement>
+          <ui:VisualElement name="salsamentum-button-panel" class="container salsamentum-button-panel">
+            <ui:Button name="salsamentum-button-load" class="button button-submit salsamentum-button" text="Load" />
+            <ui:Button name="salsamentum-button-delete" class="button button-submit salsamentum-button" text="Delete" />
+            <ui:Button name="salsamentum-button-cancel" class="button button-cancel salsamentum-button" text="Cancel" />
+          </ui:VisualElement>
+        </ui:VisualElement>
+      </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

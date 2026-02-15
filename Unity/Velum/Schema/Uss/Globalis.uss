@@ -25,15 +25,15 @@
     --warning: #e38aa2;
     --warning-bg: rgba(227, 138, 162, 0.08);
 
-    --radius-lg: 14px;
-    --radius-md: 10px;
-    --radius-sm: 8px;
+    --radius-lg: 0px;
+    --radius-md: 0px;
+    --radius-sm: 0px;
 
     --pad-lg: 18px;
     --pad-md: 12px;
     --pad-sm: 8px;
 
-    --font-size: 13px;
+    --font-size: 20px;
 
     /* ---- Extra ---- */
     --focus-ring: rgba(208, 122, 167, 0.35);
@@ -164,7 +164,7 @@
 
 /* Cancel Button (アウトライン) */
 .button-cancel {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.35);
     border-color: var(--border-strong);
     color: var(--text);
 }

@@ -52,6 +52,7 @@ namespace Yulinti.Unity.Turris {
         // catch不要
         public bool Seligere(int idSalsamentum) {
             _salsamentumActualis = _thesaurusSalsamenti.Lego(idSalsamentum);
+            if (!EstSeligere()) return false;
             return true;
         }
 
@@ -66,6 +67,7 @@ namespace Yulinti.Unity.Turris {
                     _salsamentumActualis = d;
                 }
             }
+            if (!EstSeligere()) return false;
             return true;
         }
 

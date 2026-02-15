@@ -13,6 +13,9 @@ namespace Yulinti.Exercitus.Dux {
         private readonly ICenturioPulsabilisTardus[] _centurioPulsabilisTardus;
         private readonly ICenturioPulsabilisTardusPrimum[] _centurioPulsabilisTardusPrimum;
 
+        private readonly ILegatusIncipabilis[] _legatusIncipabilis;
+        private readonly ILegatusPulsabilis[] _legatusPulsabilis;
+
         public DuxExercitus(
             IReadOnlyList<ICenturioIncipabilis> centurioIncipabilis,
             IReadOnlyList<ICenturioPulsabilis> centurioPulsabilis,
@@ -20,7 +23,10 @@ namespace Yulinti.Exercitus.Dux {
             IReadOnlyList<ICenturioPulsabilisFixus> centurioPulsabilisFixus,
             IReadOnlyList<ICenturioPulsabilisFixusPrimum> centurioPulsabilisFixusPrimum,
             IReadOnlyList<ICenturioPulsabilisTardus> centurioPulsabilisTardus,
-            IReadOnlyList<ICenturioPulsabilisTardusPrimum> centurioPulsabilisTardusPrimum
+            IReadOnlyList<ICenturioPulsabilisTardusPrimum> centurioPulsabilisTardusPrimum,
+
+            IReadOnlyList<ILegatusIncipabilis> legatusIncipabilis,
+            IReadOnlyList<ILegatusPulsabilis> legatusPulsabilis
         ) {
             _centurioIncipabilis = centurioIncipabilis.ToArray();
             _centurioPulsabilis = centurioPulsabilis.ToArray();
@@ -29,17 +35,26 @@ namespace Yulinti.Exercitus.Dux {
             _centurioPulsabilisFixusPrimum = centurioPulsabilisFixusPrimum.ToArray();
             _centurioPulsabilisTardus = centurioPulsabilisTardus.ToArray();
             _centurioPulsabilisTardusPrimum = centurioPulsabilisTardusPrimum.ToArray();
+
+            _legatusIncipabilis = legatusIncipabilis.ToArray();
+            _legatusPulsabilis = legatusPulsabilis.ToArray();
         }
 
         public void Incipere() {
             foreach (ICenturioIncipabilis centurio in _centurioIncipabilis) {
                 centurio.Incipere();
             }
+            foreach (ILegatusIncipabilis legatus in _legatusIncipabilis) {
+                legatus.Incipere();
+            }
         }
 
         public void Pulsus() {
             foreach (ICenturioPulsabilis centurio in _centurioPulsabilis) {
                 centurio.Pulsus();
+            }
+            foreach (ILegatusPulsabilis legatus in _legatusPulsabilis) {
+                legatus.Pulsus();
             }
         }
         public void PulsusPrimum() {

@@ -13,6 +13,7 @@ namespace Yulinti.Regnum.Rex {
         [SerializeField] private AnchoraVelumIndexusPrincipalis _anchora;
 
         protected override void Configure(IContainerBuilder builder) {
+            UnityEngine.Debug.Log("RexIndexPrincipalis Configure");
             builder.RegisterInstance<IAnchoraVelumIndexusPrincipalis>(_anchora);
 
             FaberMinisteriaIndexPrincipalis.Initio(builder);

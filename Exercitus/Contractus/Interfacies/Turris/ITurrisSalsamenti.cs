@@ -26,6 +26,7 @@ namespace Yulinti.Exercitus.Contractus {
         void Liberare(int idSalsamentum);
         // 指定IDのSalsamentumの更新フラグを立てる。
         void Renovere(int idSalsamentum);
+        // Salsamentumを再選択
 
         // ランタイムIF。
         // 指定IDのSalsamentumのDTOを更新。

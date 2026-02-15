@@ -1,24 +1,14 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Unity.Contractus;
 using UnityEngine.UIElements;
+using System;
 
 namespace Yulinti.Unity.Velum {
-    internal enum StatusIndexusPrincipalis {
-        None,
-        IndexusPrincipalis,
-        SelectorisSalsamenti,
-        Optiones,
-    }
-
     internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumIncipabilis {
         private readonly IAnchoraVelumIndexusPrincipalis _anchoraVelumIndexusPrincipalis;
-        private readonly ILegatusIndexusPrincipalis _legatusIndexusPrincipalis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
-        private StatusIndexusPrincipalis _statusIndexusPrincipalis;
 
         private VisualElement _containerIndexusPrincipalis;
-        private VisualElement _containerSelectorisSalsamenti;
-        private VisualElement _containerOptions;
 
         private VisualElement _panelIndexusPrincipalis;
 
@@ -28,22 +18,29 @@ namespace Yulinti.Unity.Velum {
         private Button _buttonOptiones;
         private Button _buttonExi;
 
+        private Action _onLudusNovus;
+        private Action _onPergeLudum;
+        private Action _onOneraLudum;
+        private Action _onOptiones;
+        private Action _onExi;
+
         public VelumIndexusPrincipalis(
             IAnchoraVelumIndexusPrincipalis anchoraVelumIndexusPrincipalis,
-            ILegatusIndexusPrincipalis legatusIndexusPrincipalis,
             ITurrisInterpretationis turrisInterpretationis
         ) {
             _anchoraVelumIndexusPrincipalis = anchoraVelumIndexusPrincipalis;
-            _legatusIndexusPrincipalis = legatusIndexusPrincipalis;
             _turrisInterpretationis = turrisInterpretationis;
-            _statusIndexusPrincipalis = StatusIndexusPrincipalis.None;
+
+            _onLudusNovus = null;
+            _onPergeLudum = null;
+            _onOneraLudum = null;
+            _onOptiones = null;
+            _onExi = null;
         }
 
         // 各UI要素を初期化する。
         public void Initare() {
             _containerIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("indexprincipalis-root");
-            _containerSelectorisSalsamenti = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("selectorsalsamenti");
-            _containerOptions = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("optiones");
             _panelIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("indexprincipalis-panel");
 
             _buttonLudusNovus = _panelIndexusPrincipalis.Q<Button>("buttonLudusNovus");
@@ -57,12 +54,13 @@ namespace Yulinti.Unity.Velum {
             _buttonOneraLudum.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_ONERA_LUDUM);
             _buttonOptiones.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_OPTIONES);
             _buttonExi.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_EXIT);
-
-            _buttonLudusNovus.clicked += AdPremereLudusNovus;
-            _buttonPergeLudum.clicked += AdPremerePergeLudum;
-            _buttonOneraLudum.clicked += AdPremereOneraLudum;
-            _buttonOptiones.clicked += AdPremereOptiones;
-            _buttonExi.clicked += AdPremereExi;
+            
+            _containerIndexusPrincipalis.RegisterCallback<NavigationMoveEvent>(e => {
+                UnityEngine.Debug.Log($"NavMove dir={e.direction} move={e.move} target={((VisualElement)e.target).name}");
+            });
+            _containerIndexusPrincipalis.RegisterCallback<FocusInEvent>(e => {
+                UnityEngine.Debug.Log($"FocusIn target={((VisualElement)e.target).name}");
+            });
         }
 
         public void Incipere() {
@@ -71,27 +69,20 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void Activare() {
-            DemittereIndexusPrincipalis();
+            _containerIndexusPrincipalis.style.display = DisplayStyle.Flex;
+            _buttonLudusNovus.Focus();
         }
 
         public void Deactivare() {
             _containerIndexusPrincipalis.style.display = DisplayStyle.None;
-            _containerSelectorisSalsamenti.style.display = DisplayStyle.None;
-            _containerOptions.style.display = DisplayStyle.None;
-            _statusIndexusPrincipalis = StatusIndexusPrincipalis.None;
         }
 
         public void DemittereIndexusPrincipalis() {
-            Demittere(StatusIndexusPrincipalis.IndexusPrincipalis);
-            _buttonLudusNovus.Focus();
+            Activare();
         }
 
-        public void DemittereSelectorisSalsamenti() {
-            Demittere(StatusIndexusPrincipalis.SelectorisSalsamenti);
-        }
-
-        public void DemittereOptiones() {
-            Demittere(StatusIndexusPrincipalis.Optiones);
+        public void TollereIndexusPrincipalis() {
+            Deactivare();
         }
 
         public void ActivareButton(ButtonIndexusPrincipalis buttonIndexusPrincipalis) {
@@ -134,53 +125,34 @@ namespace Yulinti.Unity.Velum {
             }
         }
 
-        private void Demittere(StatusIndexusPrincipalis status) {
-            if (_statusIndexusPrincipalis == status) {
-                return;
-            }
-            switch (status) {
-                case StatusIndexusPrincipalis.IndexusPrincipalis:
-                    _containerIndexusPrincipalis.style.display = DisplayStyle.Flex;
-                    _containerSelectorisSalsamenti.style.display = DisplayStyle.None;
-                    _containerOptions.style.display = DisplayStyle.None;
-                    break;
-                case StatusIndexusPrincipalis.SelectorisSalsamenti:
-                    _containerIndexusPrincipalis.style.display = DisplayStyle.None;
-                    _containerSelectorisSalsamenti.style.display = DisplayStyle.Flex;
-                    _containerOptions.style.display = DisplayStyle.None;
-                    break;
-                case StatusIndexusPrincipalis.Optiones:
-                    _containerIndexusPrincipalis.style.display = DisplayStyle.None;
-                    _containerSelectorisSalsamenti.style.display = DisplayStyle.None;
-                    _containerOptions.style.display = DisplayStyle.Flex;
-                    break;
-                case StatusIndexusPrincipalis.None:
-                    _containerIndexusPrincipalis.style.display = DisplayStyle.None;
-                    _containerSelectorisSalsamenti.style.display = DisplayStyle.None;
-                    _containerOptions.style.display = DisplayStyle.None;
-                    break;
-            }
-            _statusIndexusPrincipalis = status;
+        public void AdPremereLudusNovus(Action ae) {
+            if (_onLudusNovus != null) _buttonLudusNovus.clicked -= _onLudusNovus;
+            _onLudusNovus = ae;
+            if (_onLudusNovus != null) _buttonLudusNovus.clicked += _onLudusNovus;
         }
 
-        private void AdPremereLudusNovus() {
-            _legatusIndexusPrincipalis.PostulareLudusNovus();
+        public void AdPremerePergeLudum(Action ae) {
+            if (_onPergeLudum != null) _buttonPergeLudum.clicked -= _onPergeLudum;
+            _onPergeLudum = ae;
+            if (_onPergeLudum != null) _buttonPergeLudum.clicked += _onPergeLudum;
         }
 
-        private void AdPremerePergeLudum() {
-            _legatusIndexusPrincipalis.PostularePergeLudum();
+        public void AdPremereOneraLudum(Action ae) {
+            if (_onOneraLudum != null) _buttonOneraLudum.clicked -= _onOneraLudum;
+            _onOneraLudum = ae;
+            if (_onOneraLudum != null) _buttonOneraLudum.clicked += _onOneraLudum;
         }
 
-        private void AdPremereOneraLudum() {
-            _legatusIndexusPrincipalis.PostulareOneraLudum();
+        public void AdPremereOptiones(Action ae) {
+            if (_onOptiones != null) _buttonOptiones.clicked -= _onOptiones;
+            _onOptiones = ae;
+            if (_onOptiones != null) _buttonOptiones.clicked += _onOptiones;
         }
 
-        private void AdPremereOptiones() {
-            _legatusIndexusPrincipalis.PostulareOptiones();
-        }
-
-        private void AdPremereExi() {
-            _legatusIndexusPrincipalis.PostulareExi();
+        public void AdPremereExi(Action ae) {
+            if (_onExi != null) _buttonExi.clicked -= _onExi;
+            _onExi = ae;
+            if (_onExi != null) _buttonExi.clicked += _onExi;
         }
     }
 }

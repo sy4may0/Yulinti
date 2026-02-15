@@ -27,9 +27,25 @@
 .indexprincipalis-button {
     height: 48px;
     width: 260px;
-    font-size: 38px;
+    font-size: 34px;
     color: #ffAAff;
     padding-top: 24px;
     padding-bottom: 24px;
     -unity-text-align: middle-left;
+    margin-bottom: 1px;
+}
+
+.button-ghost:hover, 
+.button-ghost:focus {
+    background-color: transparent;
+    border-color: transparent;
+    border-bottom-width: 2px;
+    border-bottom-color: #f3e9f2;
+    border-radius: 0px;
+    color: #f3e9f2;
+    margin-bottom: 0px;
+}
+
+.button-ghost:active {
+    opacity: 0.9;
 }

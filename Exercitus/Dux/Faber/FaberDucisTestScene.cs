@@ -73,11 +73,6 @@ namespace Yulinti.Exercitus.Dux {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            // Legatus
-            builder.Register<LegatusIndexusPrincipalis>(Lifetime.Singleton)
-                .AsSelf()
-                .AsImplementedInterfaces();
-
             // DuxExercitus
             builder.Register<IDuxExercitus, DuxExercitus>(Lifetime.Singleton);
         }
