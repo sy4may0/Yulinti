@@ -1,8 +1,12 @@
 namespace Yulinti.Unity.Turris {
     internal static class ConstansTurris {
-        public const int MaximusNumerusDatumServatum = 100;
-        public const int VersioSalsamentum = 1;
+        // 最大セーブデータ数
+        public const int LongitudoDataServanda = 50;
+        // オートセーブローテーションサイズ
+        public const int LongitudoDataServandaAutomaticus = 5;
+        // セーブ処理のタイムアウト
+        public const int TempusPraeteriitSec = 5;
+        // セーブデータディレクトリパス(Application.persistentDataPath + DirPathSalsamentum)
         public const string DirPathSalsamentum = "Salsamentum";
-        public const string DirPathSalsamentumInvalid = "SalsamentumInvalid";
     }
 }

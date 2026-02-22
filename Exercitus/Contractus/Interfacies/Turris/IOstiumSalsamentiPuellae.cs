@@ -1,5 +1,5 @@
 namespace Yulinti.Exercitus.Contractus {
-    public interface IOstiumSalsamentiPuellaePersonae {
+    public interface IOstiumSalsamentiPuellae {
         int GradusLuxuriosus { get; }
         int AnimaLuxuriosus { get; }
         int GradusExhibitus { get; }

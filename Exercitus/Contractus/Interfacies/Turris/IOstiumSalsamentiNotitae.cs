@@ -1,10 +1,10 @@
 using System;
 
 namespace Yulinti.Exercitus.Contractus {
-    public interface IOstiumSalsamenti {
+    public interface IOstiumSalsamentiNotitiae {
         Guid Id { get; }
         DateTime Timestamp { get; }
-        IOstiumSalsamentiPuellae Puellae { get; }
+        IOstiumSalsamentiPuellaeNotitiae PuellaeNotitiae { get; }
         bool EstActivum { get; }
     }
 }

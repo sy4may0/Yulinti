@@ -1,117 +1,126 @@
 using Yulinti.Exercitus.Contractus;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Collections.Generic;
+using System.IO;
+using Yulinti.Thesaurus;
+using UnityEngine;
 using System;
+
 
 namespace Yulinti.Unity.Turris {
     internal sealed class TurrisSalsamenti : ITurrisSalsamenti {
-        private readonly ThesaurusSalsamenti _thesaurusSalsamenti;
-        private readonly Arcessitor _arcessitor;
+        private readonly ILuditorDataServanda<SalsamentumNotitiaeDto, SalsamentumDto> _luditorDataServanda;
+        private readonly OstiumSalsamenti _ostiumSalsamentiActualis;
+        private readonly OstiumSalsamentiNotitiae _ostiumSalsamentiNotitiaeActualis;
 
-        private IOstiumSalsamenti _salsamentumActualis;
+        // キャッシュ。
+        private List<IOstiumSalsamentiNotitiae> _notitiaManualis = new List<IOstiumSalsamentiNotitiae>();
+        private List<IOstiumSalsamentiNotitiae> _notitiaAutomaticus = new List<IOstiumSalsamentiNotitiae>();
 
-        // Dirtyフラグ。
-        private bool _estApplicandum;
-        // 保存中フラグ
-        private bool _estServando;
-
-        // catch必要だけどコンストラクタだから落としていい。
         public TurrisSalsamenti() {
-            _thesaurusSalsamenti = new ThesaurusSalsamenti();
-            IScriba scriba = new ScribaOrdinarius();
-            _arcessitor = new Arcessitor(scriba, _thesaurusSalsamenti);
-            _estApplicandum = false;
-            _estServando = false;
+            _ostiumSalsamentiActualis = new OstiumSalsamenti();
+            _ostiumSalsamentiNotitiaeActualis = new OstiumSalsamentiNotitiae();
+
+            string dirPath = Path.Combine(Application.persistentDataPath, ConstansTurris.DirPathSalsamentum);
+            _luditorDataServanda = FabricaLuditorDataServanda.Creare<SalsamentumNotitiaeDto, SalsamentumDto>(
+                dirPath,
+                ConstansTurris.LongitudoDataServandaAutomaticus,
+                ConstansTurris.TempusPraeteriitSec
+            );
+
+            // キャッシュを構成。
+            _notitiaManualis = new List<IOstiumSalsamentiNotitiae>(ConstansTurris.LongitudoDataServanda);
+            _notitiaAutomaticus = new List<IOstiumSalsamentiNotitiae>(ConstansTurris.LongitudoDataServandaAutomaticus);
         }
 
-        // catch不要
-        public int Longitudo => _thesaurusSalsamenti.Longitudo;
-        // catch不要
-        public long Revisio => _thesaurusSalsamenti.Revisio;
-
-        // catch不要
-        public int IDSalsamentumActualis => EstSeligere() ? _salsamentumActualis.IdDatumServatum : -1;
-        // catch不要
-        public IOstiumSalsamenti SalsamentumActualis => EstSeligere() ? _salsamentumActualis : null;
-
-        // catch不要
-        public bool Creare() {
-            int idSalsamentum = _thesaurusSalsamenti.Creare();
-            if (idSalsamentum == -1) return false;
-            _salsamentumActualis = _thesaurusSalsamenti.Lego(idSalsamentum);
-            _estApplicandum = true;
-            return true;
-        }
-
-        // catch不要
-        private bool EstSeligere() {
-            if (_salsamentumActualis == null) return false;
-            return true;
-        }
-
-        // catch不要
-        public bool Seligere(int idSalsamentum) {
-            _salsamentumActualis = _thesaurusSalsamenti.Lego(idSalsamentum);
-            if (!EstSeligere()) return false;
-            return true;
-        }
-
-        // catch不要
-        public bool SeligereNovissimum() {
-            long revisio = 0;
-            for(int i = 0; i < Longitudo; i++) {
-                var d = _thesaurusSalsamenti.Lego(i);
-                if (d == null) continue;
-                if (d.Revisio > revisio) {
-                    revisio = d.Revisio;
-                    _salsamentumActualis = d;
-                }
-            }
-            if (!EstSeligere()) return false;
-            return true;
-        }
-
-        // catch不要
-        public IOstiumSalsamenti Lego(int idSalsamentum) {
-            return _thesaurusSalsamenti.Lego(idSalsamentum);
-        }
-
-        // catch不要
-        public void Liberare(int idSalsamentum) {
-            _thesaurusSalsamenti.Liberare(idSalsamentum);
-            _estApplicandum = true;
-        }
-
-        // catch不要
-        public void Renovere(int idSalsamentum) {
-            _thesaurusSalsamenti.Renovere(idSalsamentum);
-            _estApplicandum = true;
-        }
-
-        // catch不要
-        public void Renovere(IResFluidaPuellaePersonaeLegibile resFluida) {
-            if (!EstSeligere()) return;
-            int idSalsamentum = _salsamentumActualis.IdDatumServatum;
-            _thesaurusSalsamenti.RenoverePuellaePersonae(idSalsamentum, resFluida);
-            _estApplicandum = true;
-        }
-
-        // catch必要
-        public async Task ServareAsync(CancellationToken ct) {
-            if (!_estApplicandum) return;
-
-            if (_estServando) throw new InvalidOperationException("セーブデータの保存中です。");
-
-            _estApplicandum = false;
-            _estServando = true;
-            try {
-            // 実行前にフラグを落とす。失敗時はリカバリしない。
-                await _arcessitor.ServareAsync(ct);
-            } catch {
-                throw;
-            } finally {
-                _estServando = false;
+        private void PurgareNotitiaManualis() {
+            foreach (IOstiumSalsamentiNotitiae notitia in _notitiaManualis) {
+                // Purgareはキャストが必要。
+                ((OstiumSalsamentiNotitiae)notitia).Purgare();
             }
         }
+
+        private void PurgareNotitiaAutomaticus() {
+            foreach (IOstiumSalsamentiNotitiae notitia in _notitiaAutomaticus) {
+                // Purgareはキャストが必要。
+                ((OstiumSalsamentiNotitiae)notitia).Purgare();
+            }
+        }
+
+        // P1 Notitiaの全取得
+        public async Task<IReadOnlyList<IOstiumSalsamentiNotitiae>> ArcessereNotitiamManualem(CancellationToken ct = default) {
+            PurgareNotitiaManualis();
+
+            IReadOnlyList<Guid> idManudalis = await _luditorDataServanda.TabulaManualis(ct);
+            int i = 0;
+            foreach (Guid id in idManudalis) {
+                IDataNotitia<SalsamentumNotitiaeDto> notitia = await _luditorDataServanda.ArcessereNotitiam(id, ct);
+                if (notitia == null) continue;
+                // Renovareはキャストが必要。
+                ((OstiumSalsamentiNotitiae)_notitiaManualis[i]).Renovare(id, notitia.Timestamp, notitia.Notitia);
+                i++;
+            }
+
+            return _notitiaManualis;
+        }
+
+        // P1 Notitiaの全取得(Automaticus)
+        public async Task<IReadOnlyList<IOstiumSalsamentiNotitiae>> ArcessereNotitiamAutomaticam(CancellationToken ct = default) {
+            PurgareNotitiaAutomaticus();
+
+            IReadOnlyList<Guid> idAutomaticus = await _luditorDataServanda.TabulaAutomaticus(ct);
+            int i = 0;
+            foreach (Guid id in idAutomaticus) {
+                IDataNotitia<SalsamentumNotitiaeDto> notitia = await _luditorDataServanda.ArcessereNotitiam(id, ct);
+                if (notitia == null) continue;
+                // Renovareはキャストが必要。
+                ((OstiumSalsamentiNotitiae)_notitiaAutomaticus[i]).Renovare(id, notitia.Timestamp, notitia.Notitia);
+                i++;
+            }
+            return _notitiaAutomaticus;
+        }
+
+        // P2 Load セーブデータを取得してキャッシュ。
+        public async Task Arcessere(Guid id, CancellationToken ct = default) {
+            IDataNotitia<SalsamentumNotitiaeDto> notitia = await _luditorDataServanda.ArcessereNotitiam(id, ct);
+            IDataServanda<SalsamentumDto> servanda = await _luditorDataServanda.Arcessere(id, ct);
+            if (notitia == null) throw new Exception("No Notitia");
+            if (servanda == null) throw new Exception("No Servanda");
+            // Renovareはキャストが必要。
+            ((OstiumSalsamentiNotitiae)_ostiumSalsamentiNotitiaeActualis).Renovare(id, notitia.Timestamp, notitia.Notitia);
+            ((OstiumSalsamenti)_ostiumSalsamentiActualis).Renovare(id, servanda.Timestamp, servanda.Data);
+        }
+
+        /// <summary> P3 削除したらリロードしないとNotitiaは更新されないよ。 </summary>
+        public async Task Deleto(Guid id, CancellationToken ct = default) {
+            await _luditorDataServanda.Deleto(id, ct);
+        }
+
+        /// <summary> P2-Ex1 これを実行した時点で新セーブデータがロードされるよ。 </summary>
+        public async Task<Guid> Creare(CancellationToken ct = default) {
+            OstiumSalsamentiNotitiae notitia = new OstiumSalsamentiNotitiae();
+            OstiumSalsamenti salsamenti = new OstiumSalsamenti();
+
+            Guid id = await _luditorDataServanda.CreareManualis(
+                notitia.SalsamentumNotitiaeDto,
+                salsamenti.SalsamentumDto,
+                ct
+            );
+
+            await Arcessere(id, ct);
+            return id;
+        }
+
+        // P2-Ex2 最新セーブデータをロード
+        public async Task ArcessereNovissimus(CancellationToken ct = default) {
+            Guid? id = await _luditorDataServanda.LegoNovissimus(ct);
+            if (id == null) throw new Exception("No Save Data");
+            await Arcessere(id.Value, ct);
+        }
+
+        // Thesaurusに以下の改修を入れよう。
+        // Longitudoを返すメソッド。
+        // Novissimusがあるか返すメソッド。
     }
 }

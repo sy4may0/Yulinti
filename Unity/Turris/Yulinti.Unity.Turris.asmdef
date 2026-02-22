@@ -7,7 +7,10 @@
     "Yulinti.Nucleus.Instrumentarium",
     "Yulinti.Exercitus.Contractus",
     "VContainer",
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "Unity.Newtonsoft.Json",
+    "Yulinti.Thesaurus",
+    "UniTask"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

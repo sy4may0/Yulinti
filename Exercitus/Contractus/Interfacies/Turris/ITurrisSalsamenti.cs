@@ -1,38 +1,23 @@
-using System.Threading;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
+using System;
 
 namespace Yulinti.Exercitus.Contractus {
     public interface ITurrisSalsamenti {
-        int Longitudo { get; }
-        long Revisio { get; }
-        
-        // 現在選択されているSalsamentumを返す。
-        int IDSalsamentumActualis { get; }
-        IOstiumSalsamenti SalsamentumActualis { get; }
+        // 管理Utilたち。
+        // P1 Notitiaの全取得
+        Task<IReadOnlyList<IOstiumSalsamentiNotitiae>> ArcessereNotitiamManualem(CancellationToken ct = default);
+        Task<IReadOnlyList<IOstiumSalsamentiNotitiae>> ArcessereNotitiamAutomaticam(CancellationToken ct = default);
 
-        // ゲーム開始用IF。
-        // 新規Salsamentumを作成。NewGameで実行する。
-        bool Creare();
-        // 指定IDのSalsamentumを選択。LoadGameで実行する。
-        bool Seligere(int idSalsamentum);
-        // Revisionが最新のSalsamentumを選択。ContinueGameで実行する。
-        bool SeligereNovissimum();
+        // P2 Load セーブデータを取得してキャッシュ。
+        Task Arcessere(Guid id, CancellationToken ct = default);
+        // P3 セーブデータ削除
+        Task Deleto(Guid id, CancellationToken ct = default);
 
-        // 操作用IF。
-        // 指定IDのSalsamentumを取得。UIでセーブデータリストとか出す際に使う。
-        IOstiumSalsamenti Lego(int idSalsamentum);
-        // 更新用IF。
-        // 指定IDのSalsamentumの削除フラグを立てる。
-        void Liberare(int idSalsamentum);
-        // 指定IDのSalsamentumの更新フラグを立てる。
-        void Renovere(int idSalsamentum);
-        // Salsamentumを再選択
-
-        // ランタイムIF。
-        // 指定IDのSalsamentumのDTOを更新。
-        void Renovere(IResFluidaPuellaePersonaeLegibile resFluida);
-        // 更新されたDTOをファイルに反映、または削除。
-        // Creare, Liberare, Renovereがフレーム内で呼ばれていたらLateUpdateで実行するべき。
-        Task ServareAsync(CancellationToken ct);
+        // P2-Ex1 新規セーブデータ作成
+        Task<Guid> Creare(CancellationToken ct = default);
+        // P2-Ex2 最新セーブデータをロード
+        Task ArcessereNovissimus(CancellationToken ct = default);
     }
 }
