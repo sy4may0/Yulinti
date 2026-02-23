@@ -15,6 +15,7 @@ namespace Yulinti.Exercitus.Dux {
 
         private readonly ILegatusIncipabilis[] _legatusIncipabilis;
         private readonly ILegatusPulsabilis[] _legatusPulsabilis;
+        private readonly ILegatusLiberabilis[] _legatusLiberabilis;
 
         public DuxExercitus(
             IReadOnlyList<ICenturioIncipabilis> centurioIncipabilis,
@@ -26,7 +27,8 @@ namespace Yulinti.Exercitus.Dux {
             IReadOnlyList<ICenturioPulsabilisTardusPrimum> centurioPulsabilisTardusPrimum,
 
             IReadOnlyList<ILegatusIncipabilis> legatusIncipabilis,
-            IReadOnlyList<ILegatusPulsabilis> legatusPulsabilis
+            IReadOnlyList<ILegatusPulsabilis> legatusPulsabilis,
+            IReadOnlyList<ILegatusLiberabilis> legatusLiberabilis
         ) {
             _centurioIncipabilis = centurioIncipabilis.ToArray();
             _centurioPulsabilis = centurioPulsabilis.ToArray();
@@ -38,6 +40,7 @@ namespace Yulinti.Exercitus.Dux {
 
             _legatusIncipabilis = legatusIncipabilis.ToArray();
             _legatusPulsabilis = legatusPulsabilis.ToArray();
+            _legatusLiberabilis = legatusLiberabilis.ToArray();
         }
 
         public void Incipere() {
@@ -84,6 +87,12 @@ namespace Yulinti.Exercitus.Dux {
         public void PulsusTardusPrimum() {
             foreach (ICenturioPulsabilisTardusPrimum centurio in _centurioPulsabilisTardusPrimum) {
                 centurio.PulsusTardusPrimum();
+            }
+        }
+
+        public void Liberare() {
+            foreach (ILegatusLiberabilis legatus in _legatusLiberabilis) {
+                legatus.Liberare();
             }
         }
     }

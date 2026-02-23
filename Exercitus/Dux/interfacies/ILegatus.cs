@@ -10,4 +10,7 @@ namespace Yulinti.Exercitus.Dux {
 
     public interface ILegatusPulsabilis : IPulsabilis {
     }
+
+    public interface ILegatusLiberabilis : ILiberabilis {
+    }
 }

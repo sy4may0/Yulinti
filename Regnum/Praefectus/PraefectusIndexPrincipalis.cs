@@ -42,6 +42,7 @@ namespace Yulinti.Regnum.Praefectus {
         }
 
         public void Dispose() {
+            _duxExercitus.Liberare();
         }
     }
 }

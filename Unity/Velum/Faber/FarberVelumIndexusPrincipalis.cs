@@ -10,6 +10,10 @@ namespace Yulinti.Unity.Velum {
                 .AsImplementedInterfaces()
                 .AsSelf();
 
+            builder.Register<VelumSalsamenti>(Lifetime.Singleton)
+                .AsImplementedInterfaces()
+                .AsSelf();
+
             builder.Register<IOrator, Orator>(Lifetime.Singleton);
         }
     }

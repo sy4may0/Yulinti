@@ -34,6 +34,7 @@
     --pad-sm: 8px;
 
     --font-size: 20px;
+    --font-size-paragraph: 14px;
 
     /* ---- Extra ---- */
     --focus-ring: rgba(208, 122, 167, 0.35);
@@ -98,6 +99,40 @@
 }
 
 /* =========================
+   Text
+   ========================= */
+.paragraph {
+    color: var(--text);
+    font-size: var(--font-size-paragraph);
+    margin-bottom: 4px;
+}
+
+/* =========================
+   Divider (水平線 / hr)
+   class="divider" で文字色に合わせた区切り線
+   ========================= */
+.divider {
+    height: 1px;
+    min-height: 1px;
+    background-color: var(--border);
+    margin-top: var(--pad-md);
+    margin-bottom: var(--pad-md);
+}
+
+/* 薄い線（補助的な区切り） */
+.divider.dim {
+    background-color: var(--border);
+    opacity: 0.7;
+}
+
+/* 濃い線（強調） */
+.divider.strong {
+    height: 2px;
+    min-height: 2px;
+    background-color: var(--border-strong);
+}
+
+/* =========================
    TextField / Input Styling
    ========================= */
 .sub-panel TextField,
@@ -149,7 +184,7 @@
 .button-submit {
     background-color: var(--accent);
     border-color: var(--accent);
-    color: #20151d;
+    color: var(--text);
 }
 
 .button-submit:hover, 
@@ -184,7 +219,7 @@
 .button-ghost {
     background-color: transparent;
     border-color: transparent;
-    color: var(--accent);
+    color: var(--text-dim);
 }
 
 .button-ghost:hover, 
@@ -379,13 +414,21 @@
 .scrollview {
     margin-top: 8px;
 
-    background-color: var(--panel);
     border-width: 1px;
     border-color: var(--border);
     border-radius: var(--radius-md);
 
     padding: 6px;
 }
+
+.scrollview-panel {
+    background-color: var(--panel);
+}
+
+.scrollview-tp {
+    background-color: transparent;
+}
+
 
 /* スクロールバー（縦横共通に寄せる） */
 .scrollview .unity-scroll-bar {

@@ -8,17 +8,20 @@ namespace Yulinti.Unity.Velum {
         private readonly IVelumPalsabilis[] _velumPalsabilis;
         private readonly IVelumPalsabilisFixus[] _velumPalsabilisFixus;
         private readonly IVelumPalsabilisTardus[] _velumPalsabilisTardus;
+        private readonly IVelumLiberabilis[] _velumLiberabilis;
 
         public Orator(
             IReadOnlyList<IVelumIncipabilis> velumIncipabilis,
             IReadOnlyList<IVelumPalsabilis> velumPalsabilis,
             IReadOnlyList<IVelumPalsabilisFixus> velumPalsabilisFixus,
-            IReadOnlyList<IVelumPalsabilisTardus> velumPalsabilisTardus
+            IReadOnlyList<IVelumPalsabilisTardus> velumPalsabilisTardus,
+            IReadOnlyList<IVelumLiberabilis> velumLiberabilis
         ) {
             _velumIncipabilis = velumIncipabilis.ToArray();
             _velumPalsabilis = velumPalsabilis.ToArray();
             _velumPalsabilisFixus = velumPalsabilisFixus.ToArray();
             _velumPalsabilisTardus = velumPalsabilisTardus.ToArray();
+            _velumLiberabilis = velumLiberabilis.ToArray();
         }
 
         public void Incipere() {
@@ -42,6 +45,12 @@ namespace Yulinti.Unity.Velum {
         public void PulsusTardus() {
             foreach (IVelumPalsabilisTardus velum in _velumPalsabilisTardus) {
                 velum.PulsusTardus();
+            }
+        }
+
+        public void Liberare() {
+            foreach (IVelumLiberabilis velum in _velumLiberabilis) {
+                velum.Liberare();
             }
         }
     }

@@ -31,7 +31,9 @@ namespace Yulinti.Unity.Turris {
         }
 
         // 内部からのデータ更新
-        public void Renovare(IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae) {
+        public void Renovare(Guid id, IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae) {
+            _id = id;
+            _timestamp = DateTime.Now;
             _puellaeNotitiae.Renovare(resFluidaPuellaePersonae);
             _estActivum = true;
         }

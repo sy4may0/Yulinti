@@ -18,4 +18,7 @@ namespace Yulinti.Unity.Velum {
 
     internal interface IVelumPalsabilisTardus : IPulsabilisTardus {
     }
+
+    internal interface IVelumLiberabilis : ILiberabilis {
+    }
 }

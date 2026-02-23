@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using System;
 
 namespace Yulinti.Unity.Velum {
-    internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumIncipabilis {
+    internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumIncipabilis, IVelumLiberabilis {
         private readonly IAnchoraVelumIndexusPrincipalis _anchoraVelumIndexusPrincipalis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
 
@@ -54,13 +54,6 @@ namespace Yulinti.Unity.Velum {
             _buttonOneraLudum.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_ONERA_LUDUM);
             _buttonOptiones.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_OPTIONES);
             _buttonExi.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_EXIT);
-            
-            _containerIndexusPrincipalis.RegisterCallback<NavigationMoveEvent>(e => {
-                UnityEngine.Debug.Log($"NavMove dir={e.direction} move={e.move} target={((VisualElement)e.target).name}");
-            });
-            _containerIndexusPrincipalis.RegisterCallback<FocusInEvent>(e => {
-                UnityEngine.Debug.Log($"FocusIn target={((VisualElement)e.target).name}");
-            });
         }
 
         public void Incipere() {
@@ -153,6 +146,20 @@ namespace Yulinti.Unity.Velum {
             if (_onExi != null) _buttonExi.clicked -= _onExi;
             _onExi = ae;
             if (_onExi != null) _buttonExi.clicked += _onExi;
+        }
+
+        public void Liberare() {
+            if (_onLudusNovus != null) _buttonLudusNovus.clicked -= _onLudusNovus;
+            _onLudusNovus = null;
+            if (_onPergeLudum != null) _buttonPergeLudum.clicked -= _onPergeLudum;
+            _onPergeLudum = null;
+            if (_onOneraLudum != null) _buttonOneraLudum.clicked -= _onOneraLudum;
+            _onOneraLudum = null;
+            if (_onOptiones != null) _buttonOptiones.clicked -= _onOptiones;
+            _onOptiones = null;
+            if (_onExi != null) _buttonExi.clicked -= _onExi;
+            _onExi = null;
+            Deactivare();
         }
     }
 }

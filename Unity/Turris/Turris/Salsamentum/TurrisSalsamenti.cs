@@ -9,7 +9,7 @@ using System;
 
 
 namespace Yulinti.Unity.Turris {
-    internal sealed class TurrisSalsamenti : ITurrisSalsamenti {
+    internal sealed class TurrisSalsamenti : ITurrisSalsamenti, ITurrisSalsamentiLegibile {
         private readonly ILuditorDataServanda<SalsamentumNotitiaeDto, SalsamentumDto> _luditorDataServanda;
         private readonly OstiumSalsamenti _ostiumSalsamentiActualis;
         private readonly OstiumSalsamentiNotitiae _ostiumSalsamentiNotitiaeActualis;
@@ -48,16 +48,35 @@ namespace Yulinti.Unity.Turris {
             }
         }
 
+        public async Task<int> LongitudoManualis(CancellationToken ct = default) {
+            return await _luditorDataServanda.LongitudoManualis(ct);
+        }
+
+        public int LongitudoManualisMaxima { get; } = ConstansTurris.LongitudoDataServanda;
+
+        public async Task<int> LongitudoAutomaticus(CancellationToken ct = default) {
+            return await _luditorDataServanda.LongitudoAutomaticus(ct);
+        }
+
+        public int LongitudoAutomaticusMaxima { get; } = ConstansTurris.LongitudoDataServandaAutomaticus;
+
+        public async Task<bool> EstNovissimus(CancellationToken ct = default) {
+            return await _luditorDataServanda.EstNovissimus(ct);
+        }
+
         // P1 Notitiaの全取得
         public async Task<IReadOnlyList<IOstiumSalsamentiNotitiae>> ArcessereNotitiamManualem(CancellationToken ct = default) {
             PurgareNotitiaManualis();
 
-            IReadOnlyList<Guid> idManudalis = await _luditorDataServanda.TabulaManualis(ct);
+            IReadOnlyList<Guid> idManualis = await _luditorDataServanda.TabulaManualis(ct);
             int i = 0;
-            foreach (Guid id in idManudalis) {
+            foreach (Guid id in idManualis) {
+                // 最大数以上はロードしない。
+                if (i >= LongitudoManualisMaxima) break;
                 IDataNotitia<SalsamentumNotitiaeDto> notitia = await _luditorDataServanda.ArcessereNotitiam(id, ct);
                 if (notitia == null) continue;
                 // Renovareはキャストが必要。
+                if (i >= _notitiaManualis.Count) _notitiaManualis.Add(new OstiumSalsamentiNotitiae());
                 ((OstiumSalsamentiNotitiae)_notitiaManualis[i]).Renovare(id, notitia.Timestamp, notitia.Notitia);
                 i++;
             }
@@ -72,9 +91,12 @@ namespace Yulinti.Unity.Turris {
             IReadOnlyList<Guid> idAutomaticus = await _luditorDataServanda.TabulaAutomaticus(ct);
             int i = 0;
             foreach (Guid id in idAutomaticus) {
+                // 最大数以上はロードしない。
+                if (i >= LongitudoAutomaticusMaxima) break;
                 IDataNotitia<SalsamentumNotitiaeDto> notitia = await _luditorDataServanda.ArcessereNotitiam(id, ct);
                 if (notitia == null) continue;
                 // Renovareはキャストが必要。
+                if (i >= _notitiaAutomaticus.Count) _notitiaAutomaticus.Add(new OstiumSalsamentiNotitiae());
                 ((OstiumSalsamentiNotitiae)_notitiaAutomaticus[i]).Renovare(id, notitia.Timestamp, notitia.Notitia);
                 i++;
             }
@@ -113,14 +135,49 @@ namespace Yulinti.Unity.Turris {
         }
 
         // P2-Ex2 最新セーブデータをロード
-        public async Task ArcessereNovissimus(CancellationToken ct = default) {
+        public async Task<Guid> ArcessereNovissimus(CancellationToken ct = default) {
             Guid? id = await _luditorDataServanda.LegoNovissimus(ct);
             if (id == null) throw new Exception("No Save Data");
             await Arcessere(id.Value, ct);
+            return id.Value;
         }
 
-        // Thesaurusに以下の改修を入れよう。
-        // Longitudoを返すメソッド。
-        // Novissimusがあるか返すメソッド。
+        // P5 セーブデータをセーブ。
+        public async Task<Guid> Servare(
+            Guid id,
+            IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae,
+            CancellationToken ct = default
+        ) {
+            _ostiumSalsamentiActualis.Renovare(id, resFluidaPuellaePersonae);
+            _ostiumSalsamentiNotitiaeActualis.Renovare(id, resFluidaPuellaePersonae);
+            Guid idServanda = await _luditorDataServanda.Servare(
+                id,
+                _ostiumSalsamentiNotitiaeActualis.SalsamentumNotitiaeDto,
+                _ostiumSalsamentiActualis.SalsamentumDto,
+                ct
+            );
+
+            return idServanda;
+        }
+
+        // P5-ex オートセーブデータをセーブ。
+        public async Task<Guid> ServareAutomaticus(
+            IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae,
+            CancellationToken ct = default
+        ) {
+            // この時点でidは取れていない。
+            _ostiumSalsamentiActualis.Renovare(_ostiumSalsamentiActualis.Id, resFluidaPuellaePersonae);
+            _ostiumSalsamentiNotitiaeActualis.Renovare(_ostiumSalsamentiNotitiaeActualis.Id, resFluidaPuellaePersonae);
+            Guid idServanda = await _luditorDataServanda.CreareAutomaticus(
+                _ostiumSalsamentiNotitiaeActualis.SalsamentumNotitiaeDto,
+                _ostiumSalsamentiActualis.SalsamentumDto,
+                ct
+            );
+            // この時点でidは取れている。
+            _ostiumSalsamentiActualis.Renovare(idServanda, resFluidaPuellaePersonae);
+            _ostiumSalsamentiNotitiaeActualis.Renovare(idServanda, resFluidaPuellaePersonae);
+
+            return idServanda;
+        }
     }
 }
