@@ -92,22 +92,37 @@ namespace Yulinti.Unity.Velum {
             _containerSalsamenti.style.display = DisplayStyle.None;
         }
 
-        public void DemittereSalsamenti() {
-            _ = ArcessereNotitiae();
-        }
-
         public void TollereSalsamenti() {
             Deactivare();
         }
 
-        private async Task ArcessereNotitiae() {
-            try {
-                _notitiaManualis = await _turrisSalsamentiLegibile.ArcessereNotitiamManualem(_cancellationTokenSource.Token);
-                _notitiaAutomaticus = await _turrisSalsamentiLegibile.ArcessereNotitiamAutomaticam(_cancellationTokenSource.Token);
+        public void DemittereSalsamenti() {
+            Activare();
+        }
 
-                Activare();
-            } catch (Exception e) {
-                Carnifex.Intermissio(e);
+        public void RenovareTablaeManualis(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaManualis) {
+            var templateItem = _scrollManualis.Q<VisualElement>("salsamentum-list-manualis-item");
+            if (templateItem == null) {
+                return;
+            }
+
+            for (int i = 0; i < notitiaManualis.Count; i++) {
+                var newItem = _anchoraVelumSalsamenti.FormaSalsamentumItem.CloneTree();
+                newItem.style.display = DisplayStyle.Flex;
+                _scrollManualis.Add(newItem);
+            }
+        }
+
+        public void RenovareTablaeAutomaticus(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaAutomaticus) {
+            var templateItem = _scrollAutomaticus.Q<VisualElement>("salsamentum-list-automaticus-item");
+            if (templateItem == null) {
+                return;
+            }
+
+            for (int i = 0; i < notitiaAutomaticus.Count; i++) {
+                var newItem = _anchoraVelumSalsamenti.FormaSalsamentumItem.CloneTree();
+                newItem.style.display = DisplayStyle.Flex;
+                _scrollAutomaticus.Add(newItem);
             }
         }
 

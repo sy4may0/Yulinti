@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+  <ui:VisualElement name="forma-salsamentum-item" class="sub-panel salsamentum-list-item salsamentum-list-manualis-item" style="display: none;">
+    <ui:VisualElement name="forma-salsamentum-item-header" class="salsamentum-list-item-header salsamentum-list-manualis-item-header">
+      <ui:Label name="forma-salsamentum-item-label" class="label salsamentum-list-item-label salsamentum-list-manualis-item-label" text="SaveData1" />
+      <ui:Label name="forma-salsamentum-item-timestamp" class="paragraph salsamentum-list-item-timestamp salsamentum-list-manualis-item-timestamp" text="2026-02-23 10:00:00" />
+    </ui:VisualElement>
+    <ui:VisualElement name="forma-salsamentum-item-divider" class="divider salsamentum-list-item-divider salsamentum-list-manualis-item-divider" />
+    <ui:Label name="forma-salsamentum-item-info" class="paragraph salsamentum-list-item-info salsamentum-list-manualis-item-info" text="レベル: 19 武器レベル: 20 進捗率: 30% トロフィー獲得率: 5%" />
+  </ui:VisualElement>
+</ui:UXML>
