@@ -7,10 +7,10 @@ using UnityEngine.UIElements;
 namespace Yulinti.Regnum.Anchora {
     public class AnchoraVelumSalsamenti : MonoBehaviour, IAnchoraVelumSalsamenti {
         [SerializeField] private UIDocument _uiDocument;
-        [SerializeField] private VisualTreeAsset _formaSalsamentumItem;
+        [SerializeField] private VisualTreeAsset _formaArticulusSalsamenti;
 
         public UIDocument UIDocument => _uiDocument;
-        public VisualTreeAsset FormaSalsamentumItem => _formaSalsamentumItem;
+        public VisualTreeAsset FormaArticulusSalsamenti => _formaArticulusSalsamenti;
 
         public bool Validare() {
             if (_uiDocument == null) {
@@ -18,8 +18,8 @@ namespace Yulinti.Regnum.Anchora {
                 return false;
             }
 
-            if (_formaSalsamentumItem == null) {
-                Carnifex.Intermissio(LogTextus.AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_FORMASALSAMENTUMITEM_NULL);
+            if (_formaArticulusSalsamenti == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_FORMAARTICULUSSALSAMENTI_NULL);
                 return false;
             }
 

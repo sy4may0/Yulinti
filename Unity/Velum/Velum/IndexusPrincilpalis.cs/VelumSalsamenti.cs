@@ -101,29 +101,51 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void RenovareTablaeManualis(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaManualis) {
-            var templateItem = _scrollManualis.Q<VisualElement>("salsamentum-list-manualis-item");
-            if (templateItem == null) {
+            VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.CloneTree();
+            if (articulus == null) {
                 return;
             }
 
             for (int i = 0; i < notitiaManualis.Count; i++) {
-                var newItem = _anchoraVelumSalsamenti.FormaSalsamentumItem.CloneTree();
-                newItem.style.display = DisplayStyle.Flex;
-                _scrollManualis.Add(newItem);
+                AppricareArticulus(notitiaManualis[i], "manualis", articulus);
+                articulus.style.display = DisplayStyle.Flex;
+                _scrollManualis.Add(articulus);
             }
         }
 
         public void RenovareTablaeAutomaticus(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaAutomaticus) {
-            var templateItem = _scrollAutomaticus.Q<VisualElement>("salsamentum-list-automaticus-item");
-            if (templateItem == null) {
+            VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.CloneTree();
+            if (articulus == null) {
                 return;
             }
 
             for (int i = 0; i < notitiaAutomaticus.Count; i++) {
-                var newItem = _anchoraVelumSalsamenti.FormaSalsamentumItem.CloneTree();
-                newItem.style.display = DisplayStyle.Flex;
-                _scrollAutomaticus.Add(newItem);
+                AppricareArticulus(notitiaAutomaticus[i], "automaticus", articulus);
+                articulus.style.display = DisplayStyle.Flex;
+                _scrollAutomaticus.Add(articulus);
             }
+        }
+
+        // テンプレートから生成したアイテムのクラスやnameを設定する。
+        private void AppricareArticulus(
+            IOstiumSalsamentiNotitiae notitia,
+            string className, VisualElement articulus
+        ) {
+            VisualElement header = articulus.Q<VisualElement>("forma-salsamentum-item-header");
+            Label label = header.Q<Label>("forma-salsamentum-item-label");
+            Label timestamp = header.Q<Label>("forma-salsamentum-item-timestamp");
+            VisualElement divider = articulus.Q<VisualElement>("forma-salsamentum-item-divider");
+            Label info = articulus.Q<Label>("forma-salsamentum-item-info");
+
+            //　すべてにクラス名を付加
+            articulus.AddToClassList(className);
+            header.AddToClassList(className);
+            label.AddToClassList(className);
+            timestamp.AddToClassList(className);
+            divider.AddToClassList(className);
+            info.AddToClassList(className);
+
+            // [TODO] 各種値を適用
         }
 
         public void ActivareButton(ButtonSalsamenti buttonSalsamenti) {
