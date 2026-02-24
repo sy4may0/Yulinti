@@ -1,11 +1,13 @@
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Unity.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 using UnityEngine.UIElements;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace Yulinti.Unity.Velum {
     internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumIncipabilis, IVelumLiberabilis {
@@ -26,9 +28,9 @@ namespace Yulinti.Unity.Velum {
         private Label _labelManualis;
         private Label _labelAutomaticus;
         // Manualisスクロールビュー
-        private ScrollView _scrollManualis;
+        private ListView _listManualis;
         // Automaticusスクロールビュー
-        private ScrollView _scrollAutomaticus;
+        private ListView _listAutomaticus;
         // ボタンロード
         private Button _buttonOneraLudum;
         // ボタン削除
@@ -39,6 +41,13 @@ namespace Yulinti.Unity.Velum {
         private Action<Guid> _onOneraLudum;
         private Action<Guid> _onDeletoLudum;
         private Action _onExi;
+
+        private Guid _focusGuid;
+
+        // IReadOnlyListをListに変換するためのバッファ。
+        // ListViewがIReadOnlyListをサポートしていないため。
+        private List<IOstiumSalsamentiNotitiae> _bufNotitiaManualis;
+        private List<IOstiumSalsamentiNotitiae> _bufNotitiaAutomaticus;
 
         public VelumSalsamenti(
             IAnchoraVelumSalsamenti anchoraVelumSalsamenti,
@@ -51,9 +60,14 @@ namespace Yulinti.Unity.Velum {
 
             _cancellationTokenSource = new CancellationTokenSource();
 
+            _bufNotitiaManualis = new List<IOstiumSalsamentiNotitiae>();
+            _bufNotitiaAutomaticus = new List<IOstiumSalsamentiNotitiae>();
+
             _onOneraLudum = null;
             _onDeletoLudum = null;
             _onExi = null;
+
+            _focusGuid = Guid.Empty;
         }
 
         public void Initare() {
@@ -61,8 +75,8 @@ namespace Yulinti.Unity.Velum {
             _labelSalsamenti = _containerSalsamenti.Q<Label>("salsamentum-header-label");
             _labelManualis = _containerSalsamenti.Q<Label>("salsamentum-list-manualis-label");
             _labelAutomaticus = _containerSalsamenti.Q<Label>("salsamentum-list-automaticus-label");
-            _scrollManualis = _containerSalsamenti.Q<ScrollView>("salsamentum-scroll-view-manualis");
-            _scrollAutomaticus = _containerSalsamenti.Q<ScrollView>("salsamentum-scroll-view-automaticus");
+            _listManualis = _containerSalsamenti.Q<ListView>("salsamentum-scroll-view-manualis");
+            _listAutomaticus = _containerSalsamenti.Q<ListView>("salsamentum-scroll-view-automaticus");
             _buttonOneraLudum = _containerSalsamenti.Q<Button>("salsamentum-button-onera-ludum");
             _buttonDeletoLudum = _containerSalsamenti.Q<Button>("salsamentum-button-deleto-ludum");
             _buttonExi = _containerSalsamenti.Q<Button>("salsamentum-button-exi");
@@ -77,6 +91,69 @@ namespace Yulinti.Unity.Velum {
             _buttonOneraLudum.clicked += premereOneraLudum;
             _buttonDeletoLudum.clicked += premereDeletoLudum;
             _buttonExi.clicked += premereExi;
+
+            InitareListManualis();
+            InitareListAutomaticus();
+        }
+
+        private void InitareListManualis() {
+            _listManualis.selectionType = SelectionType.Single;
+
+            _listManualis.makeItem = () => {
+                VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.CloneTree();
+                if (articulus == null) {
+                    Carnifex.Intermissio(LogTextus.VelumSalsamenti_RENOVARETABEAMANUALIS_ARTICULUS_NULL);
+                }
+                articulus.style.display = DisplayStyle.Flex;
+                articulus.focusable = true;
+                articulus.tabIndex = 0;
+                articulus.pickingMode = PickingMode.Position;
+                return articulus;
+            };
+
+            _listManualis.bindItem = (ve, index) => {
+                IOstiumSalsamentiNotitiae notitia = (IOstiumSalsamentiNotitiae)_listManualis.itemsSource[index];
+                AppricareArticulus(index, notitia, "manualis", ve);
+            };
+
+            _listManualis.selectionChanged += selected => {
+                foreach (var obj in selected) {
+                    if (obj is IOstiumSalsamentiNotitiae notitia && notitia.Id is Guid guid) {
+                        _focusGuid = guid;
+                        break;
+                    }
+                }
+            };
+        }
+
+        private void InitareListAutomaticus() {
+            _listAutomaticus.selectionType = SelectionType.Single;
+
+            _listAutomaticus.makeItem = () => {
+                VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.CloneTree();
+                if (articulus == null) {
+                    Carnifex.Intermissio(LogTextus.VelumSalsamenti_RENOVARETABEAAUTOMATICUS_ARTICULUS_NULL);
+                }
+                articulus.style.display = DisplayStyle.Flex;
+                articulus.focusable = true;
+                articulus.tabIndex = 0;
+                articulus.pickingMode = PickingMode.Position;
+                return articulus;
+            };
+
+            _listAutomaticus.bindItem = (ve, index) => {
+                IOstiumSalsamentiNotitiae notitia = (IOstiumSalsamentiNotitiae)_listAutomaticus.itemsSource[index];
+                AppricareArticulus(index, notitia, "automaticus", ve);
+            };
+
+            _listAutomaticus.selectionChanged += selected => {
+                foreach (var obj in selected) {
+                    if (obj is IOstiumSalsamentiNotitiae notitia && notitia.Id is Guid guid) {
+                        _focusGuid = guid;
+                        break;
+                    }
+                }
+            };
         }
 
         public void Incipere() {
@@ -101,35 +178,28 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void RenovareTablaeManualis(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaManualis) {
-            VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.CloneTree();
-            if (articulus == null) {
-                return;
-            }
+            // IReadOnlyにした意味無くね？そうでもないか。
+            _bufNotitiaManualis.Clear();
+            _bufNotitiaManualis.AddRange(notitiaManualis);
 
-            for (int i = 0; i < notitiaManualis.Count; i++) {
-                AppricareArticulus(notitiaManualis[i], "manualis", articulus);
-                articulus.style.display = DisplayStyle.Flex;
-                _scrollManualis.Add(articulus);
-            }
+            _listManualis.itemsSource = _bufNotitiaManualis;
+            _listManualis.Rebuild();
         }
 
         public void RenovareTablaeAutomaticus(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaAutomaticus) {
-            VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.CloneTree();
-            if (articulus == null) {
-                return;
-            }
+            _bufNotitiaAutomaticus.Clear();
+            _bufNotitiaAutomaticus.AddRange(notitiaAutomaticus);
 
-            for (int i = 0; i < notitiaAutomaticus.Count; i++) {
-                AppricareArticulus(notitiaAutomaticus[i], "automaticus", articulus);
-                articulus.style.display = DisplayStyle.Flex;
-                _scrollAutomaticus.Add(articulus);
-            }
+            _listAutomaticus.itemsSource = _bufNotitiaAutomaticus;
+            _listAutomaticus.Rebuild();
         }
 
         // テンプレートから生成したアイテムのクラスやnameを設定する。
         private void AppricareArticulus(
+            int index,
             IOstiumSalsamentiNotitiae notitia,
-            string className, VisualElement articulus
+            string className,
+            VisualElement articulus
         ) {
             VisualElement header = articulus.Q<VisualElement>("forma-salsamentum-item-header");
             Label label = header.Q<Label>("forma-salsamentum-item-label");
@@ -145,7 +215,34 @@ namespace Yulinti.Unity.Velum {
             divider.AddToClassList(className);
             info.AddToClassList(className);
 
-            // [TODO] 各種値を適用
+            // ヘッダーに表示するテキストを設定
+            label.text = _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_LIST_MANUALIS_ITEM_LABEL) + " " + index;
+            timestamp.text = notitia.Timestamp.ToString("yyyy-MM-dd HH:mm:ss");
+
+            StringBuilder infoTextus = new StringBuilder();
+            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_LUXURIOSUS));
+            infoTextus.AppendLine(" ");
+            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
+            infoTextus.AppendLine(notitia.PuellaeNotitiae.GradusLuxuriosus.ToString());
+            infoTextus.AppendLine("/");
+            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_EXHIBITUS));
+            infoTextus.AppendLine(" ");
+            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
+            infoTextus.AppendLine(notitia.PuellaeNotitiae.GradusExhibitus.ToString());
+            infoTextus.AppendLine("/");
+            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PERVERSUS));
+            infoTextus.AppendLine(" ");
+            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
+            infoTextus.AppendLine(notitia.PuellaeNotitiae.GradusPerversus.ToString());
+            infoTextus.AppendLine("/");
+            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_QUAERIT_DOLOR));
+            infoTextus.AppendLine(" ");
+            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
+            infoTextus.AppendLine(notitia.PuellaeNotitiae.GradusQuaeritDolore.ToString());
+            info.text = infoTextus.ToString();
+
+            // GUIDをカードに設定
+            articulus.userData = notitia.Id;
         }
 
         public void ActivareButton(ButtonSalsamenti buttonSalsamenti) {

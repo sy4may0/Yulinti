@@ -19,7 +19,7 @@
           <ui:VisualElement name="salsamentum-list-container" class="container salsamentum-list-container">
             <ui:VisualElement name="salsamentum-list-manualis" class="container salsamentum-list-manualis salsamentum-list-container-child">
               <ui:Label name="salsamentum-list-manualis-label" class="label salsamentum-list-manualis-label" text="Manualis" />
-              <ui:ScrollView name="salsamentum-scroll-view-manualis" class="scrollview scrollview-tp salsamentum-scroll-view salsamentum-scroll-view-manualis">
+              <ui:ListView name="salsamentum-scroll-view-manualis" class="scrollview scrollview-tp salsamentum-scroll-view salsamentum-scroll-view-manualis">
                 <ui:VisualElement name="salsamentum-list-manualis-item" class="sub-panel salsamentum-list-item salsamentum-list-manualis-item" style="display: none;">
                   <ui:VisualElement name="salsamentum-list-manualis-item-header" class="salsamentum-list-item-header salsamentum-list-manualis-item-header">
                     <ui:Label name="salsamentum-list-manualis-item-label" class="label salsamentum-list-item-label salsamentum-list-manualis-item-label" text="SaveData1" />
@@ -28,11 +28,11 @@
                   <ui:VisualElement name="salsamentum-list-manualis-item-divider" class="divider salsamentum-list-item-divider salsamentum-list-manualis-item-divider" />
                   <ui:Label name="salsamentum-list-manualis-item-info" class="paragraph salsamentum-list-item-info salsamentum-list-manualis-item-info" text="レベル: 19 武器レベル: 20 進捗率: 30% トロフィー獲得率: 5%" />
                 </ui:VisualElement>
-              </ui:ScrollView>
+              </ui:ListView>
             </ui:VisualElement>
             <ui:VisualElement name="salsamentum-list-automaticus" class="container salsamentum-list-automaticus salsamentum-list-container-child">
               <ui:Label name="salsamentum-list-automaticus-label" class="label salsamentum-list-automaticus-label" text="Automaticus" />
-              <ui:ScrollView name="salsamentum-scroll-view-automaticus" class="scrollview scrollview-tp salsamentum-scroll-view salsamentum-scroll-view-automaticus">
+              <ui:ListView name="salsamentum-scroll-view-automaticus" class="scrollview scrollview-tp salsamentum-scroll-view salsamentum-scroll-view-automaticus">
                 <ui:VisualElement name="salsamentum-list-automaticus-item" class="sub-panel salsamentum-list-item salsamentum-list-automaticus-item" style="display: none;">
                   <ui:VisualElement name="salsamentum-list-automaticus-item-header" class="salsamentum-list-item-header salsamentum-list-automaticus-item-header">
                     <ui:Label name="salsamentum-list-automaticus-item-label" class="label salsamentum-list-item-label salsamentum-list-automaticus-item-label" text="AutoSaveData1" />
@@ -41,7 +41,7 @@
                   <ui:VisualElement name="salsamentum-list-automaticus-item-divider" class="divider salsamentum-list-item-divider salsamentum-list-automaticus-item-divider" />
                   <ui:Label name="salsamentum-list-automaticus-item-info" class="paragraph salsamentum-list-item-info salsamentum-list-automaticus-item-info" text="レベル: 19 武器レベル: 20 進捗率: 30% トロフィー獲得率: 5%" />
                 </ui:VisualElement>
-              </ui:ScrollView>
+              </ui:ListView>
             </ui:VisualElement>
           </ui:VisualElement>
 
