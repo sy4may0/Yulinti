@@ -89,7 +89,7 @@ namespace Yulinti.Unity.Velum {
             _listManualis.selectionType = SelectionType.Single;
 
             _listManualis.makeItem = () => {
-                VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.CloneTree();
+                VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.Instantiate();
                 if (articulus == null) {
                     Carnifex.Intermissio(LogTextus.VelumSalsamenti_RENOVARETABEAMANUALIS_ARTICULUS_NULL);
                 }
@@ -133,7 +133,7 @@ namespace Yulinti.Unity.Velum {
             _listAutomaticus.selectionType = SelectionType.Single;
 
             _listAutomaticus.makeItem = () => {
-                VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.CloneTree();
+                VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.Instantiate();
                 if (articulus == null) {
                     Carnifex.Intermissio(LogTextus.VelumSalsamenti_RENOVARETABEAAUTOMATICUS_ARTICULUS_NULL);
                 }

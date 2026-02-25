@@ -20,4 +20,17 @@ namespace Yulinti.Nucleus.Contractus {
         void Intermissio(string textus);
         void Intermissio(Exception exception);
     }
+
+    public interface ICarnifex {
+        // 警告メッセージ表示
+        void Notare(string textus);
+
+        // エラーメッセージ表示
+        void Error(string textus);
+        void Error(Exception exception);
+
+        // エラー終了
+        void Intermissio(string textus);
+        void Intermissio(Exception exception);
+    }
 }

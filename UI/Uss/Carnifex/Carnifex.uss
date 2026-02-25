@@ -1,0 +1,65 @@
+/* =========================================================
+   Carnifex (Inspector UI) - Erroris / Intermissionis / Notati
+   ========================================================= */
+
+/* =========================
+   Erroris / Intermissionis
+   - 画面中央に縦長パネル、ラベル左寄せ・コンテンツ右寄せ・ボタン右寄せ
+   ========================= */
+
+/* 画面中央に縦長長方形で表示 */
+.carnifex-erroris-root,
+.carnifex-intermissionis-root {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.carnifex-erroris-panel,
+.carnifex-intermissionis-panel {
+    width: 360px;
+    min-height: 240px;
+    max-width: 90%;
+    align-self: center;
+}
+
+/* 要素を左寄せ、文字を左寄せ */
+.carnifex-erroris-label,
+.carnifex-intermissionis-label {
+    align-self: flex-start;
+    -unity-text-align: upper-left;
+}
+
+/* 要素を右寄せ */
+.carnifex-erroris-content-label,
+.carnifex-intermissionis-content-label {
+    align-self: flex-end;
+    -unity-text-align: upper-right;
+}
+
+/* ボタンコンテナを右寄せ */
+.carnifex-erroris-button-content,
+.carnifex-intermissionis-button-content {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+/* =========================
+   Notati
+   - root 100%、パネルは画面右上詰め
+   ========================= */
+
+.carnifex-notati-root {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.carnifex-notati-panel {
+    align-self: flex-end;
+    margin-top: 0;
+    margin-right: 0;
+}

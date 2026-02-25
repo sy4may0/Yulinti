@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+
+    <Style src="../../Uss/Globalis.uss" />
+    <Style src="../../Uss/Carnifex/Carnifex.uss" />
+
+    <ui:VisualElement name="carnifex-intermissionis-root" class="container carnifex-intermissionis-root">
+        <ui:VisualElement name="carnifex-intermissionis-panel" class="panel carnifex-intermissionis-panel">
+          <ui:VisualElement name="carnifex-intermissionis-header-panel" class="sub-panel warning carnifex-intermissionis-header-panel">
+            <ui:Label name="carnifex-intermissionis-label" class="label carnifex-intermissionis-label" text="Intermission" />
+            <ui:VisualElement name="carnifex-intermissionis-content-panel" class="panel carnifex-intermissionis-content-panel">
+                <ui:TextField name="carnifex-intermissionis-content-textarea" class="sub-panel carnifex-intermissionis-content-textarea" multiline="true" rows="10" />
+                <ui:Label name="carnifex-intermissionis-content-label" class="paragraph carnifex-intermissionis-content-label" text="Content" />
+            </ui:VisualElement>
+          </ui:VisualElement>
+          <ui:VisualElement name="carnifex-intermissionis-button-container" class="container carnifex-intermissionis-button-container carnifex-intermissionis-button-content">
+              <ui:Button name="carnifex-intermissionis-button-copy-error" class="button button-submit carnifex-intermissionis-button" text="Copy Error" />
+              <ui:Button name="carnifex-intermissionis-button-exit" class="button button-cancel carnifex-intermissionis-button" text="Exit" />
+          </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

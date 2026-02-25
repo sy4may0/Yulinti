@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+    
+    <Style src="../../Uss/Globalis.uss" />
+    <Style src="../../Uss/Carnifex/Carnifex.uss" />
+
+    <ui:VisualElement name="carnifex-erroris-root" class="container carnifex-erroris-root">
+        <ui:VisualElement name="carnifex-erroris-panel" class="panel carnifex-erroris-panel">
+          <ui:VisualElement name="carnifex-erroris-header-panel" class="sub-panel warning carnifex-erroris-header-panel">
+            <ui:Label name="carnifex-erroris-label" class="label carnifex-erroris-label" text="Intermission" />
+            <ui:VisualElement name="carnifex-erroris-content-panel" class="panel carnifex-erroris-content-panel">
+                <ui:TextField name="carnifex-erroris-content-textarea" class="sub-panel carnifex-erroris-content-textarea" multiline="true" rows="10" />
+                <ui:Label name="carnifex-erroris-content-label" class="paragraph carnifex-erroris-content-label" text="Content" />
+            </ui:VisualElement>
+          </ui:VisualElement>
+          <ui:VisualElement name="carnifex-erroris-button-container" class="container carnifex-erroris-button-container carnifex-erroris-button-content">
+              <ui:Button name="carnifex-erroris-button-copy-error" class="button button-submit carnifex-erroris-button" text="Copy Error" />
+              <ui:Button name="carnifex-erroris-button-exit" class="button button-cancel carnifex-erroris-button" text="OK" />
+          </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

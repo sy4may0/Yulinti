@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+
+    <Style src="../../Uss/Globalis.uss" />
+    <Style src="../../Uss/Carnifex/Carnifex.uss" />
+
+    <ui:VisualElement name="carnifex-notati-root" class="container carnifex-notati-root">
+        <ui:VisualElement name="carnifex-notati-panel" class="sub-panel warning carnifex-notati-panel">
+            <ui:Label name="carnifex-notati-label" class="paragraph carnifex-notati-label" text="Notatio" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
