@@ -75,6 +75,9 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_FORMAARTICULUSSALSAMENTI_NULL = "AnchoraVelumSalsamenti - forma articulus salsamenti null";
         public const string VelumSalsamenti_RENOVARETABEAMANUALIS_ARTICULUS_NULL = "VelumSalsamenti - renovare tablae manualis articulus null";
         public const string VelumSalsamenti_RENOVARETABEAAUTOMATICUS_ARTICULUS_NULL = "VelumSalsamenti - renovare tablae automaticus articulus null";
+        public const string AnchoraVelumRadicis_ANCHORAVELUMRADICIS_UINOTATI_NULL = "AnchoraVelumRadicis - uidocument notati null";
+        public const string AnchoraVelumRadicis_ANCHORAVELUMRADICIS_UIERRORIS_NULL = "AnchoraVelumRadicis - uidocument erroris null";
+        public const string AnchoraVelumRadicis_ANCHORAVELUMRADICIS_UIINTERMISSIONIS_NULL = "AnchoraVelumRadicis - uidocument intermissionis null";
         public const string AnimatioCivisContinuata_CONFIGURATIOCIVISANIMATIONISCONTINUATA_CHILDREN_NULL_OR_EMPTY = "AnimatioCivisContinuata - configuratiocivisanimationiscontinuata children null or empty";
         public const string AnimatioPuellaeContinuata_CONFIGURATIOPUELLAEANIMATIONISCONTINUATA_CHILDREN_NULL_OR_EMPTY = "AnimatioPuellaeContinuata - configuratiopuellaeanimationiscontinuata children null or empty";
         public const string CuratorCivisGenerationis_CIVIS_INSTANTIATE_FAILED = "CuratorCivisGenerationis - civis instantiate failed";
