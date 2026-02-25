@@ -9,8 +9,10 @@ namespace Yulinti.Exercitus.Dux {
     internal sealed class LegatusIndexusPrincipalis : ILegatus, ILegatusIncipabilis, ILegatusLiberabilis {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumIndexusPrincipalis _velumIndexusPrincipalis;
-        private readonly IVelumSalsamenti _velumSalsamenti;
         private readonly ITurrisSalsamenti _turrisSalsamenti;
+
+        // 下位Legatus
+        private readonly LegatusSalsamenti _legatusSalsamenti;
 
         private readonly CancellationTokenSource _cancellationTokenSource;
 
@@ -21,16 +23,23 @@ namespace Yulinti.Exercitus.Dux {
         private Action _aeAdPremereOptiones;
         private Action _aeAdPremereExi;
 
+        // LegatusSalsamentiのDemittereへのコールバック
+        private Action _aeAdReditumSalsamenti;
+
+        private bool _potestPergeLudum;
+        private bool _potestOneraLudum;
+        private bool _estProcessusButton;
+
         public LegatusIndexusPrincipalis(
             ITurrisMundus turrisMundus,
             IVelumIndexusPrincipalis velumIndexusPrincipalis,
-            IVelumSalsamenti velumSalsamenti,
-            ITurrisSalsamenti turrisSalsamenti
+            ITurrisSalsamenti turrisSalsamenti,
+            LegatusSalsamenti legatusSalsamenti
         ) {
             _turrisMundus = turrisMundus;
             _velumIndexusPrincipalis = velumIndexusPrincipalis;
-            _velumSalsamenti = velumSalsamenti;
             _turrisSalsamenti = turrisSalsamenti;
+            _legatusSalsamenti = legatusSalsamenti;
 
             _aeAdPremereLudusNovus = AdPremereLudusNovus;
             _aeAdPremerePergeLudum = AdPremerePergeLudum;
@@ -38,10 +47,13 @@ namespace Yulinti.Exercitus.Dux {
             _aeAdPremereOptiones = AdPremereOptiones;
             _aeAdPremereExi = AdPremereExi;
 
+            _aeAdReditumSalsamenti = AdReditumSalsamenti;
+
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
         public void Incipere() {
+            _velumIndexusPrincipalis.Initare();
             // Fire-and-forget。Task.Runは使わない＝呼び出し元（Unityメインスレッド）のコンテキストで継続が動くようにする。
             _ = Demittere();
         }
@@ -65,60 +77,182 @@ namespace Yulinti.Exercitus.Dux {
                 _velumIndexusPrincipalis.AdPremereExi(_aeAdPremereExi);
 
                 // データが無ければロードボタンを無効。
-                if (longitudoManualis <= 0 && longitudoAutomaticus <= 0) {
-                    _velumIndexusPrincipalis.DeactivateButton(ButtonIndexusPrincipalis.OneraLudum);
-                }
+                _potestOneraLudum = longitudoManualis > 0 || longitudoAutomaticus > 0;
 
                 // 最新セーブデータが無ければContinueを無効化。
-                if (!estNovissimus) {
-                    _velumIndexusPrincipalis.DeactivateButton(ButtonIndexusPrincipalis.PergeLudum);
-                }
+                _potestPergeLudum = estNovissimus;
+                ApplicareStatusButton();
+            // これをキャンセルは異常のため、OperationCanceledExceptionはCarnifexで落とす。
+            } catch (Exception e) {
+                Carnifex.Intermissio(e);
+            }
+        }
+
+        // SalsamentiからCancelでタイトルに戻った際に実行する関数。
+        private void AdReditumSalsamenti() {
+            _ = ReditumSalsamenti();
+        }
+
+        // Salsamentiでセーブデータが更新されるため、ボタンの状態を更新する。
+        private async Task ReditumSalsamenti() {
+            try {
+                // LongitudoとNovissimusを取得。
+                int longitudoManualis = await _turrisSalsamenti.LongitudoManualis(_cancellationTokenSource.Token);
+                int longitudoAutomaticus = await _turrisSalsamenti.LongitudoAutomaticus(_cancellationTokenSource.Token);
+                bool estNovissimus = await _turrisSalsamenti.EstNovissimus(_cancellationTokenSource.Token);
+
+                // データが無ければロードボタンを無効。
+                _potestOneraLudum = longitudoManualis > 0 || longitudoAutomaticus > 0;
+
+                // 最新セーブデータが無ければContinueを無効化。
+                _potestPergeLudum = estNovissimus;
+                ApplicareStatusButton();
+            } catch (OperationCanceledException) {
+                //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             }
         }
 
         private void AdPremereLudusNovus() {
-            _ = LudusNovus();
+            _ = PremereLudusNovus();
         }
 
-        private async Task LudusNovus() {
+        private async Task PremereLudusNovus() {
+            if (!ConariIncipereProcessumButton()) {
+                return;
+            }
             try {
                 _ = await _turrisSalsamenti.Creare(_cancellationTokenSource.Token);
                 _turrisMundus.AdMudum(IDMundi.MundusTestScene);
+            } catch (OperationCanceledException) {
+                //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
+            } finally {
+                FinireProcessumButton();
             }
         }
 
         private void AdPremerePergeLudum() {
-            _ = PergeLudum();
+            _ = PremerePergeLudum();
         }
 
-        private async Task PergeLudum() {
+        private async Task PremerePergeLudum() {
+            if (!ConariIncipereProcessumButton()) {
+                return;
+            }
             try {
                 _ = await _turrisSalsamenti.ArcessereNovissimus(_cancellationTokenSource.Token);
                 _turrisMundus.AdMudum(IDMundi.MundusTestScene);
+            } catch (OperationCanceledException) {
+                //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
+            } finally {
+                FinireProcessumButton();
             }
         }
 
         private void AdPremereOneraLudum() {
-            //Salsamentumを開く。
-            _velumSalsamenti.DemittereSalsamenti();
+            _ = PremereOneraLudum();
+        }
+
+        private async Task PremereOneraLudum() {
+            if (!ConariIncipereProcessumButton()) {
+                return;
+            }
+            try {
+                //Salsamentumを開く。
+                await _legatusSalsamenti.Demittere(_aeAdReditumSalsamenti);
+            } catch (OperationCanceledException) {
+                //キャンセルしてよい。何もしない。
+            } catch (Exception e) {
+                Carnifex.Intermissio(e);
+            } finally {
+                FinireProcessumButton();
+            }
         }
 
         private void AdPremereOptiones() {
-            Notarius.Memorare("未実装: PostulareOptiones");
+            PremereOptiones();
+        }
+
+        private void PremereOptiones() {
+            if (!ConariIncipereProcessumButton()) {
+                return;
+            }
+            try {
+                Notarius.Memorare("未実装: PostulareOptiones");
+            } catch (Exception e) {
+                Carnifex.Intermissio(e);
+            } finally {
+                FinireProcessumButton();
+            }
         }
 
         private void AdPremereExi() {
-            Notarius.Memorare("未実装: PostulareExi");
+            PremereExi();
+        }
+
+        private void PremereExi() {
+            if (!ConariIncipereProcessumButton()) {
+                return;
+            }
+            try {
+                Notarius.Memorare("未実装: PostulareExi");
+            } catch (Exception e) {
+                Carnifex.Intermissio(e);
+            } finally {
+                FinireProcessumButton();
+            }
         }
 
         public void Liberare() {
             _cancellationTokenSource.Cancel();
+        }
+
+        // ボタンの処理を開始する。
+        // 処理中の場合は全ボタンを非活性化する。
+        private bool ConariIncipereProcessumButton() {
+            if (_estProcessusButton) {
+                return false;
+            }
+            _estProcessusButton = true;
+            DeactivareButtons();
+            return true;
+        }
+
+        private void FinireProcessumButton() {
+            ApplicareStatusButton();
+            _estProcessusButton = false;
+        }
+
+        // ボタンの状態を反映する。
+        private void ApplicareStatusButton() {
+            ActivareButtons();
+            if (!_potestPergeLudum) {
+                _velumIndexusPrincipalis.DeactivareButton(ButtonIndexusPrincipalis.PergeLudum);
+            }
+            if (!_potestOneraLudum) {
+                _velumIndexusPrincipalis.DeactivareButton(ButtonIndexusPrincipalis.OneraLudum);
+            }
+        }
+
+        private void ActivareButtons() {
+            _velumIndexusPrincipalis.ActivareButton(ButtonIndexusPrincipalis.LudusNovus);
+            _velumIndexusPrincipalis.ActivareButton(ButtonIndexusPrincipalis.PergeLudum);
+            _velumIndexusPrincipalis.ActivareButton(ButtonIndexusPrincipalis.OneraLudum);
+            _velumIndexusPrincipalis.ActivareButton(ButtonIndexusPrincipalis.Optiones);
+            _velumIndexusPrincipalis.ActivareButton(ButtonIndexusPrincipalis.Exi);
+        }
+
+        private void DeactivareButtons() {
+            _velumIndexusPrincipalis.DeactivareButton(ButtonIndexusPrincipalis.LudusNovus);
+            _velumIndexusPrincipalis.DeactivareButton(ButtonIndexusPrincipalis.PergeLudum);
+            _velumIndexusPrincipalis.DeactivareButton(ButtonIndexusPrincipalis.OneraLudum);
+            _velumIndexusPrincipalis.DeactivareButton(ButtonIndexusPrincipalis.Optiones);
+            _velumIndexusPrincipalis.DeactivareButton(ButtonIndexusPrincipalis.Exi);
         }
     }
 }

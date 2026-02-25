@@ -5,19 +5,12 @@ using Yulinti.Nucleus.Contractus;
 using UnityEngine.UIElements;
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Text;
 
 namespace Yulinti.Unity.Velum {
-    internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumIncipabilis, IVelumLiberabilis {
+    internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumLiberabilis {
         private readonly IAnchoraVelumSalsamenti _anchoraVelumSalsamenti;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
-        private readonly ITurrisSalsamentiLegibile _turrisSalsamentiLegibile;
-        private readonly CancellationTokenSource _cancellationTokenSource;
-
-        private IReadOnlyList<IOstiumSalsamentiNotitiae> _notitiaManualis;
-        private IReadOnlyList<IOstiumSalsamentiNotitiae> _notitiaAutomaticus;
 
         private VisualElement _containerSalsamenti;
 
@@ -51,14 +44,10 @@ namespace Yulinti.Unity.Velum {
 
         public VelumSalsamenti(
             IAnchoraVelumSalsamenti anchoraVelumSalsamenti,
-            ITurrisInterpretationis turrisInterpretationis,
-            ITurrisSalsamentiLegibile turrisSalsamentiLegibile
+            ITurrisInterpretationis turrisInterpretationis
         ) {
             _anchoraVelumSalsamenti = anchoraVelumSalsamenti;
             _turrisInterpretationis = turrisInterpretationis;
-            _turrisSalsamentiLegibile = turrisSalsamentiLegibile;
-
-            _cancellationTokenSource = new CancellationTokenSource();
 
             _bufNotitiaManualis = new List<IOstiumSalsamentiNotitiae>();
             _bufNotitiaAutomaticus = new List<IOstiumSalsamentiNotitiae>();
@@ -117,11 +106,25 @@ namespace Yulinti.Unity.Velum {
             };
 
             _listManualis.selectionChanged += selected => {
+                bool estSelectus = false;
                 foreach (var obj in selected) {
                     if (obj is IOstiumSalsamentiNotitiae notitia && notitia.Id is Guid guid) {
+                        estSelectus = true;
                         _focusGuid = guid;
+                        if (_focusGuid != Guid.Empty) {
+                            ActivareButton(ButtonSalsamenti.OneraLudum);
+                            ActivareButton(ButtonSalsamenti.DeletoLudum);
+                        } else {
+                            DeactivareButton(ButtonSalsamenti.OneraLudum);
+                            DeactivareButton(ButtonSalsamenti.DeletoLudum);
+                        }
                         break;
                     }
+                }
+                if (!estSelectus) {
+                    _focusGuid = Guid.Empty;
+                    DeactivareButton(ButtonSalsamenti.OneraLudum);
+                    DeactivareButton(ButtonSalsamenti.DeletoLudum);
                 }
             };
         }
@@ -147,18 +150,27 @@ namespace Yulinti.Unity.Velum {
             };
 
             _listAutomaticus.selectionChanged += selected => {
+                bool estSelectus = false;
                 foreach (var obj in selected) {
                     if (obj is IOstiumSalsamentiNotitiae notitia && notitia.Id is Guid guid) {
+                        estSelectus = true;
                         _focusGuid = guid;
+                        if (_focusGuid != Guid.Empty) {
+                            ActivareButton(ButtonSalsamenti.OneraLudum);
+                            ActivareButton(ButtonSalsamenti.DeletoLudum);
+                        } else {
+                            DeactivareButton(ButtonSalsamenti.OneraLudum);
+                            DeactivareButton(ButtonSalsamenti.DeletoLudum);
+                        }
                         break;
                     }
                 }
+                if (!estSelectus) {
+                    _focusGuid = Guid.Empty;
+                    DeactivareButton(ButtonSalsamenti.OneraLudum);
+                    DeactivareButton(ButtonSalsamenti.DeletoLudum);
+                }
             };
-        }
-
-        public void Incipere() {
-            Initare();
-            Deactivare();
         }
 
         public void Activare() {
@@ -170,11 +182,47 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void TollereSalsamenti() {
+            DeactivareButton(ButtonSalsamenti.OneraLudum);
+            DeactivareButton(ButtonSalsamenti.DeletoLudum);
+            DeactivareButton(ButtonSalsamenti.Exi);
+
+            _onOneraLudum = null;
+            _onDeletoLudum = null;
+            _onExi = null;
+
+            _focusGuid = Guid.Empty;
+            _listManualis.ClearSelection();
+            _listAutomaticus.ClearSelection();
+
+            _listManualis.itemsSource = null;
+            _listAutomaticus.itemsSource = null;
+
+            _buttonExi.Blur();
             Deactivare();
         }
 
         public void DemittereSalsamenti() {
+            _onOneraLudum = null;
+            _onDeletoLudum = null;
+            _onExi = null;
+
+            _focusGuid = Guid.Empty;
+            _listManualis.ClearSelection();
+            _listAutomaticus.ClearSelection();
+
+            _bufNotitiaManualis.Clear();
+            _bufNotitiaAutomaticus.Clear();
+            _listManualis.itemsSource = _bufNotitiaManualis;
+            _listAutomaticus.itemsSource = _bufNotitiaAutomaticus;
+            _listManualis.Rebuild();
+            _listAutomaticus.Rebuild();
+
+            DeactivareButton(ButtonSalsamenti.OneraLudum);
+            DeactivareButton(ButtonSalsamenti.DeletoLudum);
+            ActivareButton(ButtonSalsamenti.Exi);
+
             Activare();
+            _buttonExi.Focus();
         }
 
         public void RenovareTablaeManualis(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaManualis) {
@@ -259,7 +307,7 @@ namespace Yulinti.Unity.Velum {
             }
         }
 
-        public void DeactivateButton(ButtonSalsamenti buttonSalsamenti) {
+        public void DeactivareButton(ButtonSalsamenti buttonSalsamenti) {
             switch (buttonSalsamenti) {
                 case ButtonSalsamenti.OneraLudum:
                     _buttonOneraLudum.SetEnabled(false);
@@ -279,9 +327,11 @@ namespace Yulinti.Unity.Velum {
 
         private void premereOneraLudum() {
             // ここでフォーカスGuidを取得して、_onOneraLudumを呼び出す。
-            // 仮作成
-            Guid guid = Guid.NewGuid();
-            _onOneraLudum?.Invoke(guid);
+            if (_focusGuid == Guid.Empty) {
+                // [TODO] エラーメッセージを画面に表示する。
+                return;
+            }
+            _onOneraLudum?.Invoke(_focusGuid);
         }
 
         public void AdPremereDeletoLudum(Action<Guid> ae) {
@@ -290,9 +340,11 @@ namespace Yulinti.Unity.Velum {
 
         private void premereDeletoLudum() {
             // ここでフォーカスGuidを取得して、_onDeletoLudumを呼び出す。
-            // 仮作成
-            Guid guid = Guid.NewGuid();
-            _onDeletoLudum?.Invoke(guid);
+            if (_focusGuid == Guid.Empty) {
+                // [TODO] エラーメッセージを画面に表示する。
+                return;
+            }
+            _onDeletoLudum?.Invoke(_focusGuid);
         }
 
         public void AdPremereExi(Action ae) {
@@ -304,11 +356,7 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void Liberare() {
-            _cancellationTokenSource.Cancel();
-            _onOneraLudum = null;
-            _onDeletoLudum = null;
-            _onExi = null;
-            Deactivare();
+            TollereSalsamenti();
         }
     }
 }

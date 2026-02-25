@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using System;
 
 namespace Yulinti.Unity.Velum {
-    internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumIncipabilis, IVelumLiberabilis {
+    internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumLiberabilis {
         private readonly IAnchoraVelumIndexusPrincipalis _anchoraVelumIndexusPrincipalis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
 
@@ -56,14 +56,8 @@ namespace Yulinti.Unity.Velum {
             _buttonExi.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_EXIT);
         }
 
-        public void Incipere() {
-            Initare();
-            Activare();
-        }
-
         public void Activare() {
             _containerIndexusPrincipalis.style.display = DisplayStyle.Flex;
-            _buttonLudusNovus.Focus();
         }
 
         public void Deactivare() {
@@ -71,10 +65,28 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void DemittereIndexusPrincipalis() {
+            ExuereCallbacks();
+            ActivareButton(ButtonIndexusPrincipalis.LudusNovus);
+            ActivareButton(ButtonIndexusPrincipalis.PergeLudum);
+            ActivareButton(ButtonIndexusPrincipalis.OneraLudum);
+            ActivareButton(ButtonIndexusPrincipalis.Optiones);
+            ActivareButton(ButtonIndexusPrincipalis.Exi);
             Activare();
+            _buttonLudusNovus.Focus();
         }
 
         public void TollereIndexusPrincipalis() {
+            ExuereCallbacks();
+            DeactivareButton(ButtonIndexusPrincipalis.LudusNovus);
+            DeactivareButton(ButtonIndexusPrincipalis.PergeLudum);
+            DeactivareButton(ButtonIndexusPrincipalis.OneraLudum);
+            DeactivareButton(ButtonIndexusPrincipalis.Optiones);
+            DeactivareButton(ButtonIndexusPrincipalis.Exi);
+            _buttonLudusNovus.Blur();
+            _buttonPergeLudum.Blur();
+            _buttonOneraLudum.Blur();
+            _buttonOptiones.Blur();
+            _buttonExi.Blur();
             Deactivare();
         }
 
@@ -98,7 +110,7 @@ namespace Yulinti.Unity.Velum {
             }
         }
 
-        public void DeactivateButton(ButtonIndexusPrincipalis buttonIndexusPrincipalis) {
+        public void DeactivareButton(ButtonIndexusPrincipalis buttonIndexusPrincipalis) {
             switch (buttonIndexusPrincipalis) {
                 case ButtonIndexusPrincipalis.LudusNovus:
                     _buttonLudusNovus.SetEnabled(false);
@@ -149,17 +161,34 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void Liberare() {
-            if (_onLudusNovus != null) _buttonLudusNovus.clicked -= _onLudusNovus;
+            TollereIndexusPrincipalis();
+        }
+
+        private void ExuereCallbacks() {
+            if (_onLudusNovus != null) {
+                _buttonLudusNovus.clicked -= _onLudusNovus;
+            }
             _onLudusNovus = null;
-            if (_onPergeLudum != null) _buttonPergeLudum.clicked -= _onPergeLudum;
+
+            if (_onPergeLudum != null) {
+                _buttonPergeLudum.clicked -= _onPergeLudum;
+            }
             _onPergeLudum = null;
-            if (_onOneraLudum != null) _buttonOneraLudum.clicked -= _onOneraLudum;
+
+            if (_onOneraLudum != null) {
+                _buttonOneraLudum.clicked -= _onOneraLudum;
+            }
             _onOneraLudum = null;
-            if (_onOptiones != null) _buttonOptiones.clicked -= _onOptiones;
+
+            if (_onOptiones != null) {
+                _buttonOptiones.clicked -= _onOptiones;
+            }
             _onOptiones = null;
-            if (_onExi != null) _buttonExi.clicked -= _onExi;
+
+            if (_onExi != null) {
+                _buttonExi.clicked -= _onExi;
+            }
             _onExi = null;
-            Deactivare();
         }
     }
 }
