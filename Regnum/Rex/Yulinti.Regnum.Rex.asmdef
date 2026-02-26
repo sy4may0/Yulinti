@@ -4,6 +4,7 @@
   "references": [
     "Kybernetik.Animancer",
     "VContainer",
+    "UniTask",
     "Unity.InputSystem",
     "Yulinti.Nucleus",
     "Yulinti.Nucleus.Contractus",

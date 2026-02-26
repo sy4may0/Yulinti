@@ -11,15 +11,11 @@ namespace Yulinti.Regnum.Rex {
         }
 
         public void Error(string textus) {
-#if UNITY_EDITOR
             UnityEngine.Debug.LogError(textus);
-#endif
         }
 
         public void Error(Exception exception) {
-#if UNITY_EDITOR
             UnityEngine.Debug.LogException(exception);
-#endif
         }
         
         public void Intermissio(string textus) {
