@@ -1,0 +1,91 @@
+---
+description: Yulintiのコーディングルール
+alwaysApply: true
+---
+
+## namespace説明
+
+このプロジェクトは以下のnamespaceがあります。それぞれいくつか制限があります。
+
+## Yulinti.Nucleus
+
+- コアライブラリ群です。
+- 全体で使用するStaticクラス、メソッドを置きます。
+- 全体で使用する共通インターフェースを置きます。
+- 全体で使用する定数を置きます。
+- 内部のクラスはUnity非依存である必要があります。
+
+## Yulinti.Regnum
+- コンポジションルート関連を置きます。
+- 内部のクラスはUnityに依存可能です。
+
+### Yulinti.Regnum.Rex
+
+- コンポジションルートになります。
+- 起点となるVContainerのLifeTimeScopeクラスを置きます。
+
+### Yulinti.Regnum.Praefectus
+
+- Rexから起動されるVContainerのTickerクラスを置きます。
+
+### Yulinti.Regnum.Configuratio
+
+- Yulinti.Exercitus.Contractusが提供するConfigインターフェースを実装します。
+- Yulinti.Unity.Contractusが提供するConfigインターフェースを実装します。
+
+### Yulinti.Regnum.Anchora
+
+- Yulinti.Unity.Contractusが提供するAnchoraインターフェースを実装します。
+- AnchoraはUnityシーン内のオブジェクトに割り当てるMonoBehaviourクラスです。
+- AnchoraはGameObjectのTransformやコンポーネントなどをインスペクタで登録し、C#コードからアクセスするために使用します。
+
+## Yulinti.Unity
+
+- Unity依存の各種処理を実行します。(インフラ層)
+- 内部のクラスはUnityに依存可能です。
+
+### Yulinti.Unity.Contractus
+
+- インターフェースやEnumを置きます。
+- Yulinti.Unity内ネームスペース間の契約として扱います。
+- Yulinti.UnityとYulinti.Regnum間の契約として扱います。
+
+### Yulinti.Unity.Instrumentarium
+
+- Unity依存の各種ユーティリティクラスを置きます。
+
+### Yulinti.Unity.Ministeria
+
+- Yulinti.Exercitus.Contractusが提供するIOstiumインターフェースを実装します。
+- Unity依存の各種ロジックを実行するクラスを置きます。
+- 基本的にはAnchoraからUnityコンポーネントにアクセスし、操作を行います。
+
+### Yulinti.Unity.Turris
+
+- Yulinti.Exercitus.Contractusが提供するITurrisインターフェースを実装します。
+- Unity依存の各種ロジックを実行するクラスを置きます。
+- Ministeriaと異なる点は、ここで用意したクラスがDontDestroyOnLoadのRexから初期化される点です。
+- AnchoraからUnityコンポーネントにアクセスするか、Unity提供のIFを使い操作を行います。
+
+### Yulinti.Unity.Velum
+
+- Yulinti.Exercitus.Contractusが提供するIVelumインターフェースを実装します。
+- Unity依存のUI操作を実行するクラスを置きます。
+- Ministeriaと異なる点は、ここで用意したクラスがUI操作に限定される点です。
+- AnchoraからUIコンポーネントにアクセスし、操作を行います。
+
+## Yulinti.Exercitus
+
+- ゲーム内ロジックを実装します。(ドメイン層)
+- 内部のクラスはUnity非依存である必要があります。
+
+### Yulinti.Exercitus.Contractus
+
+- Yulinti.RegnumやYulinti.Unityに提供する操作インターフェースを置きます。
+- Yulinti.RegnumやYulinti.Unityに提供するEnumを置きます。
+
+### Yulinti.Exercitus.Dux
+
+- ゲーム内のロジックを実装します。
+- 基本的にはYulinti.Unityで実装されたインターフェースにアクセスし、値を操作したり計算を実行したりするクラスを置きます。
+

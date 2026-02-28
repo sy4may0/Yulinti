@@ -1,0 +1,517 @@
+/* =========================================================
+   Dark Glass Theme (Unified USS)
+   - container / sub-container: alpha 0.7 透過
+   ========================================================= */
+
+/* =========================
+   Theme Tokens (Variables)
+   ========================= */
+:root {
+    /* ---- Base (透過前提で少し濃く調整) ---- */
+    --bg: rgba(28, 20, 26, 0.9);
+    --panel: rgba(38, 28, 36, 0.9);
+    --panel-2: rgba(47, 34, 48, 0.95);
+
+    --text: #f3e9f2;
+    --text-dim: #cbb7c7;
+
+    /* 透過UIは境界線が重要 */
+    --border: rgba(140, 110, 130, 0.35);
+    --border-strong: rgba(180, 130, 160, 0.45);
+
+    --accent: #d07aa7;
+    --accent-2: #b85a8f;
+
+    --warning: #e38aa2;
+    --warning-bg: rgba(227, 138, 162, 0.08);
+
+    --radius-lg: 0px;
+    --radius-md: 0px;
+    --radius-sm: 0px;
+
+    --pad-lg: 18px;
+    --pad-md: 12px;
+    --pad-sm: 8px;
+
+    --font-size: 22px;
+    --font-size-h1: 36px;
+    --font-size-h2: 32px;
+    --font-size-paragraph: 22px;
+    --font-size-paragraph-small: 16px;
+
+    --font-main: url("project:/Assets/Resources/Fonts/ZenMaru/ZenMaruGothic-Regular.asset");
+    --font-bold: url("project:/Assets/Resources/Fonts/ZenMaru/ZenMaruGothic-Bold.asset");
+    --font-medium: url("project:/Assets/Resources/Fonts/ZenMaru/ZenMaruGothic-Medium.asset");
+    --font-light: url("project:/Assets/Resources/Fonts/ZenMaru/ZenMaruGothic-Light.asset");
+
+    /* ---- Extra ---- */
+    --focus-ring: rgba(208, 122, 167, 0.35);
+    --hover-bg: rgba(208, 122, 167, 0.08);
+    --select-bg: rgba(208, 122, 167, 0.18);
+}
+
+/* =========================
+   Container (全体の枠)
+   ========================= */
+
+.container {
+    -unity-font-definition: var(--font-main);
+}
+.panel {
+    background-color: var(--bg);
+    color: var(--text);
+
+    padding: var(--pad-lg);
+
+    border-width: 1px;
+    border-color: var(--border);
+    border-radius: var(--radius-lg);
+}
+
+/* =========================
+   Sub Container (ブロックカード)
+   ========================= */
+.sub-panel {
+    background-color: var(--panel);
+
+    border-width: 1px;
+    border-color: var(--border);
+    border-radius: var(--radius-md);
+
+    padding: var(--pad-md);
+    margin-top: 10px;
+}
+
+/* =========================
+   Warning Container
+   例: class="sub-container warning"
+   ========================= */
+.sub-panel.warning {
+    background-color: var(--warning-bg);
+    border-color: var(--warning);
+}
+
+.sub-panel.warning .label,
+.sub-panel.warning Label {
+    color: var(--warning);
+}
+
+/* =========================
+   Label
+   ========================= */
+.label, .label-h1, .label-h2 {
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.label {
+    font-size: var(--font-size);
+    -unity-font-style: var(--font-bold);
+}
+
+.label-h1 {
+    font-size: var(--font-size-h1);
+    -unity-font-style: var(--font-bold);
+}
+
+.label-h2 {
+    font-size: var(--font-size-h2);
+    -unity-font-style: var(--font-bold);
+}
+
+/* =========================
+   Text
+   ========================= */
+.paragraph, .paragraph-small {
+    color: var(--text);
+    margin-bottom: 4px;
+}
+.paragraph {
+    font-size: var(--font-size-paragraph);
+    -unity-font-style: var(--font-main);
+}
+.paragraph-small {
+    font-size: var(--font-size-paragraph-small);
+    -unity-font-style: var(--font-main);
+}
+/* =========================
+   Divider (水平線 / hr)
+   class="divider" で文字色に合わせた区切り線
+   ========================= */
+.divider {
+    height: 1px;
+    min-height: 1px;
+    background-color: var(--border);
+    margin-top: var(--pad-md);
+    margin-bottom: var(--pad-md);
+}
+
+/* 薄い線（補助的な区切り） */
+.divider.dim {
+    background-color: var(--border);
+    opacity: 0.7;
+}
+
+/* 濃い線（強調） */
+.divider.strong {
+    height: 2px;
+    min-height: 2px;
+    background-color: var(--border-strong);
+}
+
+/* =========================
+   TextField / Input Styling
+   ========================= */
+.sub-panel TextField,
+.panel TextField {
+    margin-top: 6px;
+}
+
+.sub-panel TextField .unity-text-field__input,
+.panel TextField .unity-text-field__input {
+    background-color: var(--panel-2);
+
+    border-width: 1px;
+    border-color: var(--border);
+    border-radius: var(--radius-sm);
+
+    color: var(--text);
+    padding: 6px 10px;
+    min-height: 28px;
+}
+
+.sub-panel TextField .unity-text-element,
+.panel TextField .unity-text-element {
+    color: var(--text);
+}
+
+.sub-panel TextField:focus .unity-text-field__input,
+.panel TextField:focus .unity-text-field__input {
+    border-color: var(--accent);
+}
+
+/* =========================
+   Buttons (Base)
+   ========================= */
+.button {
+    border-radius: var(--radius-sm);
+    border-width: 1px;
+    padding: 10px 14px;
+
+    font-size: var(--font-size);
+    -unity-font-style: var(--font-medium);
+    align-items: center;
+}
+
+.button .unity-text-element {
+    padding-top: 2px;
+    padding-bottom: 2px; /* p/g/y の切れ対策にもなる */
+}
+
+/* Submit Button (塗り) */
+.button-submit {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--text);
+}
+
+.button-submit:hover, 
+.button-submit:focus {
+    background-color: var(--accent-2);
+    border-color: var(--accent-2);
+}
+
+.button-submit:active {
+    opacity: 0.9;
+}
+
+/* Cancel Button (アウトライン) */
+.button-cancel {
+    background-color: rgba(0, 0, 0, 0.35);
+    border-color: var(--border-strong);
+    color: var(--text);
+}
+
+.button-cancel:hover, 
+.button-cancel:focus {
+    border-color: var(--accent);
+    color: var(--text);
+    background-color: var(--hover-bg);
+}
+
+.button-cancel:active {
+    opacity: 0.9;
+}
+
+/* Ghost Button (テキスト寄り / 透過) */
+.button-ghost {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--text-dim);
+}
+
+.button-ghost:hover, 
+.button-ghost:focus {
+    background-color: var(--hover-bg);
+    border-color: var(--border);
+    color: var(--text);
+}
+
+.button-ghost:active {
+    opacity: 0.9;
+}
+
+.button-submit.unity-disabled, 
+.button-cancel.unity-disabled {
+    background-color: var(--warning-bg);
+    border-color: var(--warning-bg);
+    color: var(--text-dim);
+    opacity: 0.75;
+}
+
+.button-submit.unity-disabled:hover, .button-submit.unity-disabled:focus,
+.button-cancel.unity-disabled:hover, .button-cancel.unity-disabled:focus,
+.button-submit.unity-disabled:active, .button-cancel.unity-disabled:active 
+{
+    background-color: var(--warning-bg);
+    border-color: var(--warning-bg);
+    color: var(--text-dim);
+    opacity: 0.75;
+}
+
+.button-ghost.unity-disabled {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--text-dim);
+    opacity: 0.7;
+}
+.button-ghost.unity-disabled:hover, 
+.button-ghost.unity-disabled:focus,
+.button-ghost.unity-disabled:active 
+{
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--text-dim);
+    opacity: 0.7;
+}
+
+/* =========================
+   RadioButton
+   ========================= */
+.radiobutton {
+    margin-top: 6px;
+    color: var(--text);
+}
+
+.radiobutton .unity-radio-button__text {
+    color: var(--text);
+}
+
+.radiobutton .unity-radio-button__outer-circle {
+    border-color: var(--border-strong);
+}
+
+.radiobutton:checked .unity-radio-button__inner-circle {
+    background-color: var(--accent);
+}
+
+.radiobutton:hover .unity-radio-button__outer-circle, 
+.radiobutton:focus .unity-radio-button__outer-circle {
+    border-color: var(--accent);
+}
+
+/* =========================
+   DropdownField
+   ========================= */
+.dropdown {
+    margin-top: 6px;
+}
+
+.dropdown .unity-base-popup-field__input {
+    background-color: var(--panel-2);
+
+    border-width: 1px;
+    border-color: var(--border);
+    border-radius: var(--radius-sm);
+
+    padding: 6px 10px;
+    min-height: 28px;
+}
+
+.dropdown .unity-base-popup-field__text {
+    color: var(--text);
+}
+
+.dropdown .unity-base-popup-field__arrow {
+    -unity-background-image-tint-color: var(--text-dim);
+}
+
+.dropdown:focus .unity-base-popup-field__input {
+    border-color: var(--accent);
+}
+
+/* =========================
+   Toggle (checkbox)
+   Class: .toggle
+   ========================= */
+.toggle {
+    margin-top: 6px;
+    color: var(--text);
+}
+
+/* ラベル */
+.toggle .unity-toggle__text {
+    color: var(--text);
+}
+
+/* ボックス */
+.toggle .unity-toggle__checkmark-background {
+    background-color: rgba(0, 0, 0, 0.18);
+    border-width: 1px;
+    border-color: var(--border-strong);
+    border-radius: 4px;
+}
+
+/* チェックマーク色 */
+.toggle .unity-toggle__checkmark {
+    -unity-background-image-tint-color: #20151d;
+}
+
+/* ON時のボックス */
+.toggle:checked .unity-toggle__checkmark-background {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* hover */
+.toggle:hover .unity-toggle__checkmark-background, 
+.toggle:focus .unity-toggle__checkmark-background {
+    border-color: var(--accent);
+}
+
+/* =========================
+   Slider
+   Class: .slider
+   ========================= */
+.slider {
+    margin-top: 8px;
+}
+
+/* スライダー全体の高さを少し太く */
+.slider .unity-slider__tracker {
+    min-height: 6px;
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0.18);
+    border-width: 1px;
+    border-color: var(--border);
+}
+
+/* 進捗（左側） */
+.slider .unity-slider__dragger-border,
+.slider .unity-slider__dragger {
+    /* dragger自体は別で定義 */
+}
+
+/* つまみ */
+.slider .unity-slider__dragger {
+    width: 16px;
+    height: 16px;
+
+    border-radius: 999px;
+    background-color: var(--accent);
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.25);
+}
+
+/* hover/focusで“光る”感じ */
+.slider:hover .unity-slider__dragger, 
+.slider:focus .unity-slider__dragger {
+    background-color: var(--accent-2);
+}
+
+.slider:focus .unity-slider__tracker {
+    border-color: var(--accent);
+}
+
+/* =========================
+   ScrollView
+   Class: .scrollview
+   ========================= */
+.scrollview {
+    margin-top: 8px;
+
+    border-width: 1px;
+    border-color: var(--border);
+    border-radius: var(--radius-md);
+
+    padding: 6px;
+}
+
+.scrollview-panel {
+    background-color: var(--panel);
+}
+
+.scrollview-tp {
+    background-color: transparent;
+}
+
+
+/* スクロールバー（縦横共通に寄せる） */
+.scrollview .unity-scroll-bar {
+    background-color: rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+    margin: 4px;
+}
+
+/* つまみ */
+.scrollview .unity-scroll-bar__dragger {
+    background-color: rgba(208, 122, 167, 0.55);
+    border-radius: 999px;
+}
+
+.scrollview .unity-scroll-bar__dragger:hover, 
+.scrollview .unity-scroll-bar__dragger:focus {
+    background-color: rgba(208, 122, 167, 0.75);
+}
+
+/* =========================
+   ListView
+   Class: .listview
+   （item側はバインド生成時に class="listview-item" 推奨）
+   ========================= */
+.listview {
+    margin-top: 8px;
+
+    background-color: var(--panel);
+    border-width: 1px;
+    border-color: var(--border);
+    border-radius: var(--radius-md);
+
+    padding: 6px;
+}
+
+/* アイテム共通 */
+.listview-item {
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    color: var(--text);
+}
+
+/* hover */
+.listview-item:hover, 
+.listview-item:focus {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* 選択状態（ListViewの選択は擬似クラスが効かない場合があるので
+   選択時にこのクラスを付ける運用が一番確実） */
+.listview-item.selected {
+    background-color: var(--select-bg);
+    border-width: 1px;
+    border-color: rgba(208, 122, 167, 0.35);
+}
+
+/* 文字を少し薄い行が欲しい時（任意） */
+.listview-item.dim {
+    color: var(--text-dim);
+}

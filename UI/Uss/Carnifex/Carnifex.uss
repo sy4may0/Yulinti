@@ -1,0 +1,100 @@
+/* =========================================================
+   Carnifex (Inspector UI) - Erroris / Intermissionis / Notati
+   ========================================================= */
+
+/* =========================
+   Erroris / Intermissionis
+   - 画面中央に縦長パネル、ラベル左寄せ・コンテンツ右寄せ・ボタン右寄せ
+   ========================= */
+
+/* 画面中央に縦長長方形で表示 */
+.carnifex-erroris-root,
+.carnifex-intermissionis-root {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.carnifex-erroris-panel,
+.carnifex-intermissionis-panel {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 52px;
+    padding-right: 52px;
+}
+
+.carnifex-erroris-header-panel,
+.carnifex-intermissionis-header-panel {
+    align-self: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.carnifex-erroris-panel,
+.carnifex-intermissionis-panel {
+    min-width: 40%;
+    min-height: 80%;
+    max-width: 90%;
+    align-self: center;
+}
+
+/* 要素を左寄せ、文字を左寄せ */
+.carnifex-erroris-label,
+.carnifex-intermissionis-label {
+    align-self: flex-start;
+    -unity-text-align: upper-left;
+}
+
+.carnifex-erroris-content-panel,
+.carnifex-intermissionis-content-panel {
+    align-self: center;
+    width: 100%;
+    height: 100%;
+}
+
+.carnifex-erroris-content-text,
+.carnifex-intermissionis-content-text {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+
+/* 要素を右寄せ */
+.carnifex-erroris-content-label,
+.carnifex-intermissionis-content-label {
+    align-self: flex-end;
+    -unity-text-align: upper-right;
+    height: 20%;
+}
+
+/* ボタンコンテナを右寄せ */
+.carnifex-erroris-button-content,
+.carnifex-intermissionis-button-content {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+/* =========================
+   Notati
+   - root 100%、パネルは画面右上詰め
+   ========================= */
+
+.carnifex-notati-root {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.carnifex-notati-panel {
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-right: 10px;
+    min-width: 280px;
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Yulinti.Nucleus.Contractus",
+  "rootNamespace": "Yulinti.Nucleus.Contractus",
+  "references": [],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

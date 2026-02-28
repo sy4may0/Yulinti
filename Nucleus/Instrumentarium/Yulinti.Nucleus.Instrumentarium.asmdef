@@ -1,0 +1,16 @@
+{
+  "name": "Yulinti.Nucleus.Instrumentarium",
+  "rootNamespace": "Yulinti.Nucleus.Instrumentarium",
+  "references": [
+    "Yulinti.Nucleus.Contractus"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

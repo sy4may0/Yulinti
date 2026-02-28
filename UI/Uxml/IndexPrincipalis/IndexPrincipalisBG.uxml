@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+
+    <Style src="../../Uss/Globalis.uss" />
+    <Style src="../../Uss/IndexPrincipalis/IndexPrincipalisBG.uss" />
+
+    <ui:VisualElement name="indexprincipalis-bg" class="container indexprincipalis-bg">
+        <ui:Image 
+            name="indexprincipalis-background" 
+            class="image indexprincipalis-background" 
+            style="--unity-image: url('project:/Assets/Resources/Images/title_bg.png');"
+        />
+    </ui:VisualElement>
+</ui:UXML>

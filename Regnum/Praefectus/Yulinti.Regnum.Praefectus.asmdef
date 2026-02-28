@@ -1,0 +1,20 @@
+{
+  "name": "Yulinti.Regnum.Praefectus",
+  "rootNamespace": "Yulinti.Regnum.Praefectus",
+  "references": [
+    "Kybernetik.Animancer",
+    "VContainer",
+    "Yulinti.Nucleus.Contractus",
+    "Yulinti.Exercitus.Contractus",
+    "Yulinti.Unity.Contractus"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,26 @@
+{
+    "name": "Yulinti.Unity.Instrumentarium",
+    "rootNamespace": "Yulinti.Unity.Instrumentarium",
+    "references": [
+        "Kybernetik.Animancer",
+        "VContainer",
+        "Unity.InputSystem",
+        "Yulinti.Nucleus",
+        "Yulinti.Nucleus.Instrumentarium",
+        "Yulinti.Nucleus.Contractus",
+        "Yulinti.Unity.Contractus",
+        "Yulinti.Exercitus.Contractus",
+        "Unity.Addressables",
+        "Unity.ResourceManager",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

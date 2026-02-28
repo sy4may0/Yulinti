@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+
+    <Style src="../../Uss/Globalis.uss" />
+    <Style src="../../Uss/IndexPrincipalis/IndexPrincipalis.uss" />
+
+    <ui:VisualElement name="indexprincipalis-root" class="container indexprincipalis-root">
+      <ui:VisualElement name="indexprincipalis-panel" class="container indexprincipalis-panel">
+       
+        <ui:Button 
+            name="buttonLudusNovus" 
+            text="New Game" 
+            class="button button-ghost indexprincipalis-button indexprincipalis-button-ludus-novus"
+        />
+        <ui:Button
+            name="buttonPergeLudum"
+            text="Continue"
+            class="button button-ghost indexprincipalis-button indexprincipalis-button-perge-ludum"
+        />
+        <ui:Button
+            name="buttonOneraLudum"
+            text="Load Game" 
+            class="button button-ghost indexprincipalis-button indexprincipalis-button-onera-ludum"
+        />
+        <ui:Button
+            name="buttonOptiones"
+            text="Options"
+            class="button button-ghost indexprincipalis-button indexprincipalis-button-optiones"
+        />
+        <ui:Button
+            name="buttonExi"
+            text="Exit"
+            class="button button-ghost indexprincipalis-button indexprincipalis-button-exi"
+        />
+      </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
