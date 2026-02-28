@@ -7,16 +7,19 @@
 
     <ui:VisualElement name="carnifex-intermissionis-root" class="container carnifex-intermissionis-root">
         <ui:VisualElement name="carnifex-intermissionis-panel" class="panel carnifex-intermissionis-panel">
+          <ui:Label name="carnifex-intermissionis-label" class="label carnifex-intermissionis-label" text="重大な問題が発生しました。ゲームを終了します。" />
           <ui:VisualElement name="carnifex-intermissionis-header-panel" class="sub-panel warning carnifex-intermissionis-header-panel">
-            <ui:Label name="carnifex-intermissionis-label" class="label carnifex-intermissionis-label" text="Intermission" />
+            <ui:Label name="carnifex-intermissionis-content-label" class="label carnifex-intermissionis-header-label" text="エラー内容" />
             <ui:VisualElement name="carnifex-intermissionis-content-panel" class="panel carnifex-intermissionis-content-panel">
-                <ui:TextField name="carnifex-intermissionis-content-textarea" class="sub-panel carnifex-intermissionis-content-textarea" multiline="true" rows="10" />
-                <ui:Label name="carnifex-intermissionis-content-label" class="paragraph carnifex-intermissionis-content-label" text="Content" />
+              <ui:Label name="carnifex-intermissionis-content-textarea" class="paragraph carnifex-intermissionis-content-text" text="TestException" />
+              <ui:Label name="carnifex-intermissionis-content-textarea" class="paragraph carnifex-intermissionis-content-text" text="Message: AAAAAAAAA" />
+              <ui:Label name="carnifex-intermissionis-content-textarea" class="paragraph carnifex-intermissionis-content-text" text="Stack Trace: AAAAAAAAA" />
             </ui:VisualElement>
+            <ui:Label name="carnifex-intermissionis-content-label" class="paragraph carnifex-intermissionis-content-label" text="エラー内容をコピーして問い合わせフォームに送付してください。" />
           </ui:VisualElement>
           <ui:VisualElement name="carnifex-intermissionis-button-container" class="container carnifex-intermissionis-button-container carnifex-intermissionis-button-content">
               <ui:Button name="carnifex-intermissionis-button-copy-error" class="button button-submit carnifex-intermissionis-button" text="Copy Error" />
-              <ui:Button name="carnifex-intermissionis-button-exit" class="button button-cancel carnifex-intermissionis-button" text="Exit" />
+              <ui:Button name="carnifex-intermissionis-button-exit" class="button button-cancel carnifex-intermissionis-button" text="OK" />
           </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

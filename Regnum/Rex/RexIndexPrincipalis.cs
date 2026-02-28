@@ -20,7 +20,7 @@ namespace Yulinti.Regnum.Rex {
 
             FaberMinisteriaIndexPrincipalis.Initio(builder);
             FaberDucisIndexusPrincipalis.Initio(builder);
-            FarberVelumIndexusPrincipalis.Initio(builder);
+            FaberVelumIndexusPrincipalis.Initio(builder);
 
             builder.RegisterEntryPoint<PraefectusIndexPrincipalis>();
         }

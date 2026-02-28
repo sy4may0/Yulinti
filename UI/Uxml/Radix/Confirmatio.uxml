@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+
+    <!-- YES / NOの確認を行うモーダルウィンドウ -->
+
+    <Style src="../../Uss/Globalis.uss" />
+    <Style src="../../Uss/Radix/FenestraModalis.uss" />
+
+    <ui:VisualElement name="confirmatio-root" class="container confirmatio-root">
+        <ui:VisualElement name="confirmatio-panel" class="panel confirmatio-panel">
+            <ui:Label name="confirmatio-titulus" class="label-h2 confirmatio-titulus" text="CONFIRMATIO" />
+            <ui:VisualElement name="confirmatio-header-panel" class="sub-panel confirmatio-header-panel">
+                <ui:Label name="confirmatio-textus" class="paragraph confirmatio-textus" text="Hoc est textus temporarius. AAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEEEEEE" />
+            </ui:VisualElement>
+            <ui:VisualElement name="confirmatio-button-container" class="container confirmatio-button-container">
+                <ui:Button name="confirmatio-button-non" class="button button-cancel confirmatio-button" text="Non" />
+                <ui:Button name="confirmatio-button-ita" class="button button-submit confirmatio-button" text="Ita" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -5,6 +5,7 @@ namespace Yulinti.Exercitus.Dux {
     public interface ILegatus {
     }
 
+    // 内部Tick
     public interface ILegatusIncipabilis : IIncipabilis {
     }
 
@@ -12,5 +13,15 @@ namespace Yulinti.Exercitus.Dux {
     }
 
     public interface ILegatusLiberabilis : ILiberabilis {
+    }
+
+    // DontDestroyOnLoadのTick
+    public interface ILegatusIncipabilisRadicis : IIncipabilis {
+    }
+
+    public interface ILegatusPulsabilisRadicis : IPulsabilis {
+    }
+
+    public interface ILegatusLiberabilisRadicis : ILiberabilis {
     }
 }

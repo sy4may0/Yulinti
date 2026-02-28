@@ -33,8 +33,16 @@
     --pad-md: 12px;
     --pad-sm: 8px;
 
-    --font-size: 20px;
-    --font-size-paragraph: 14px;
+    --font-size: 22px;
+    --font-size-h1: 36px;
+    --font-size-h2: 32px;
+    --font-size-paragraph: 22px;
+    --font-size-paragraph-small: 16px;
+
+    --font-main: url("project:/Assets/Resources/Fonts/ZenMaru/ZenMaruGothic-Regular.asset");
+    --font-bold: url("project:/Assets/Resources/Fonts/ZenMaru/ZenMaruGothic-Bold.asset");
+    --font-medium: url("project:/Assets/Resources/Fonts/ZenMaru/ZenMaruGothic-Medium.asset");
+    --font-light: url("project:/Assets/Resources/Fonts/ZenMaru/ZenMaruGothic-Light.asset");
 
     /* ---- Extra ---- */
     --focus-ring: rgba(208, 122, 167, 0.35);
@@ -47,7 +55,7 @@
    ========================= */
 
 .container {
-    -unity-font-definition: url("project:/Assets/Resources/Fonts/Mplus/MPLUS2.asset");
+    -unity-font-definition: var(--font-main);
 }
 .panel {
     background-color: var(--bg);
@@ -91,22 +99,41 @@
 /* =========================
    Label
    ========================= */
-.label {
+.label, .label-h1, .label-h2 {
     color: var(--text);
-    -unity-font-style: bold;
-    font-size: var(--font-size);
     margin-bottom: 6px;
+}
+
+.label {
+    font-size: var(--font-size);
+    -unity-font-style: var(--font-bold);
+}
+
+.label-h1 {
+    font-size: var(--font-size-h1);
+    -unity-font-style: var(--font-bold);
+}
+
+.label-h2 {
+    font-size: var(--font-size-h2);
+    -unity-font-style: var(--font-bold);
 }
 
 /* =========================
    Text
    ========================= */
-.paragraph {
+.paragraph, .paragraph-small {
     color: var(--text);
-    font-size: var(--font-size-paragraph);
     margin-bottom: 4px;
 }
-
+.paragraph {
+    font-size: var(--font-size-paragraph);
+    -unity-font-style: var(--font-main);
+}
+.paragraph-small {
+    font-size: var(--font-size-paragraph-small);
+    -unity-font-style: var(--font-main);
+}
 /* =========================
    Divider (水平線 / hr)
    class="divider" で文字色に合わせた区切り線
@@ -172,6 +199,7 @@
     padding: 10px 14px;
 
     font-size: var(--font-size);
+    -unity-font-style: var(--font-medium);
     align-items: center;
 }
 
@@ -255,7 +283,6 @@
     background-color: transparent;
     border-color: transparent;
     color: var(--text-dim);
-    padding: 6px 10px;
     opacity: 0.7;
 }
 .button-ghost.unity-disabled:hover, 
@@ -265,7 +292,6 @@
     background-color: transparent;
     border-color: transparent;
     color: var(--text-dim);
-    padding: 6px 10px;
     opacity: 0.7;
 }
 

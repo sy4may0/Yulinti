@@ -16,6 +16,12 @@ namespace Yulinti.Unity.Turris {
                 { IDTextus.INDEXUS_PRINCIPALIS_OPTIONES, "Options" },
                 { IDTextus.INDEXUS_PRINCIPALIS_EXIT, "Exit" },
 
+                // タイトル画面確認
+                { IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_TITULUS, "新規ゲーム" },
+                { IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_TEXTUS, "新規セーブデータを作成してゲームを開始します。" },
+                { IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_BUTTON_ITA, "新規ゲーム" },
+                { IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_BUTTON_NON, "キャンセル" },
+
                 // セーブ画面
                 { IDTextus.SALSAMENTUM_HEADER_LABEL, "Save Data" },
                 { IDTextus.SALSAMENTUM_BUTTON_ONERA_LUDUM, "LOAD" },
@@ -25,6 +31,12 @@ namespace Yulinti.Unity.Turris {
                 { IDTextus.SALSAMENTUM_LIST_AUTOMATICUS_LABEL, "オートセーブ" },
                 { IDTextus.SALSAMENTUM_LIST_MANUALIS_ITEM_LABEL, "Save Data" },
                 { IDTextus.SALSAMENTUM_LIST_AUTOMATICUS_ITEM_LABEL, "Auto Save Data" },
+
+                // セーブ画面確認
+                { IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_TITULUS, "セーブデータ削除" },
+                { IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_TEXTUS, "選択したセーブデータを削除します。よろしいですか？" },
+                { IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_BUTTON_ITA, "削除" },
+                { IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_BUTTON_NON, "キャンセル" },
 
                 // PuellaePersonae
                 { IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX, "Level." },

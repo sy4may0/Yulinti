@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEditor;
 
 namespace Yulinti.Unity.Velum {
     internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumLiberabilis {
@@ -81,6 +82,8 @@ namespace Yulinti.Unity.Velum {
             _buttonDeletoLudum.clicked += premereDeletoLudum;
             _buttonExi.clicked += premereExi;
 
+            _listManualis.fixedItemHeight = 120;
+
             InitareListManualis();
             InitareListAutomaticus();
         }
@@ -89,7 +92,8 @@ namespace Yulinti.Unity.Velum {
             _listManualis.selectionType = SelectionType.Single;
 
             _listManualis.makeItem = () => {
-                VisualElement articulus = _anchoraVelumSalsamenti.FormaArticulusSalsamenti.Instantiate();
+                VisualElement articulus = new VisualElement();
+                _anchoraVelumSalsamenti.FormaArticulusSalsamenti.CloneTree(articulus);
                 if (articulus == null) {
                     Carnifex.Intermissio(LogTextus.VelumSalsamenti_RENOVARETABEAMANUALIS_ARTICULUS_NULL);
                 }
@@ -268,25 +272,25 @@ namespace Yulinti.Unity.Velum {
             timestamp.text = notitia.Timestamp.ToString("yyyy-MM-dd HH:mm:ss");
 
             StringBuilder infoTextus = new StringBuilder();
-            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_LUXURIOSUS));
-            infoTextus.AppendLine(" ");
-            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
-            infoTextus.AppendLine(notitia.PuellaeNotitiae.GradusLuxuriosus.ToString());
-            infoTextus.AppendLine("/");
-            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_EXHIBITUS));
-            infoTextus.AppendLine(" ");
-            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
-            infoTextus.AppendLine(notitia.PuellaeNotitiae.GradusExhibitus.ToString());
-            infoTextus.AppendLine("/");
-            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PERVERSUS));
-            infoTextus.AppendLine(" ");
-            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
-            infoTextus.AppendLine(notitia.PuellaeNotitiae.GradusPerversus.ToString());
-            infoTextus.AppendLine("/");
-            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_QUAERIT_DOLOR));
-            infoTextus.AppendLine(" ");
-            infoTextus.AppendLine(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
-            infoTextus.AppendLine(notitia.PuellaeNotitiae.GradusQuaeritDolore.ToString());
+            infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_LUXURIOSUS));
+            infoTextus.Append(" ");
+            infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
+            infoTextus.Append(notitia.PuellaeNotitiae.GradusLuxuriosus.ToString());
+            infoTextus.Append(" / ");
+            infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_EXHIBITUS));
+            infoTextus.Append(" ");
+            infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
+            infoTextus.Append(notitia.PuellaeNotitiae.GradusExhibitus.ToString());
+            infoTextus.Append(" / ");
+            infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PERVERSUS));
+            infoTextus.Append(" ");
+            infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
+            infoTextus.Append(notitia.PuellaeNotitiae.GradusPerversus.ToString());
+            infoTextus.Append(" / ");
+            infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_QUAERIT_DOLOR));
+            infoTextus.Append(" ");
+            infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
+            infoTextus.Append(notitia.PuellaeNotitiae.GradusQuaeritDolore.ToString());
             info.text = infoTextus.ToString();
 
             // GUIDをカードに設定

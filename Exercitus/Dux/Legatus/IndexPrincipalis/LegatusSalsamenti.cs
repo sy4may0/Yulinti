@@ -10,6 +10,8 @@ namespace Yulinti.Exercitus.Dux {
     internal sealed class LegatusSalsamenti : ILegatus, ILegatusIncipabilis, ILegatusLiberabilis {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumSalsamenti _velumSalsamenti;
+        private readonly ILegatusConfirmationis _legatusConfirmationis;
+        private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ITurrisSalsamenti _turrisSalsamenti;
 
         private CancellationTokenSource _cancellationTokenSource;
@@ -27,11 +29,15 @@ namespace Yulinti.Exercitus.Dux {
         public LegatusSalsamenti(
             ITurrisMundus turrisMundus,
             IVelumSalsamenti velumSalsamenti,
-            ITurrisSalsamenti turrisSalsamenti
+            ITurrisSalsamenti turrisSalsamenti,
+            ILegatusConfirmationis legatusConfirmationis,
+            ITurrisInterpretationis turrisInterpretationis
         ) {
             _turrisMundus = turrisMundus;
             _velumSalsamenti = velumSalsamenti;
             _turrisSalsamenti = turrisSalsamenti;
+            _legatusConfirmationis = legatusConfirmationis;
+            _turrisInterpretationis = turrisInterpretationis;
 
             _aeAdPremereOneraLudum = AdPremereOneraLudum;
             _aeAdPremereDeletoLudum = AdPremereDeletoLudum;
@@ -89,10 +95,12 @@ namespace Yulinti.Exercitus.Dux {
             if (!ConariIncipereProcessumButton()) {
                 return;
             }
+
             try {
                 if (!ConariAcquirereCancellationToken(out CancellationToken cancellationToken)) {
                     return;
                 }
+
                 await _turrisSalsamenti.Arcessere(id, cancellationToken);
                 _turrisMundus.AdMudum(IDMundi.MundusTestScene);
             } catch (OperationCanceledException) {
@@ -116,6 +124,19 @@ namespace Yulinti.Exercitus.Dux {
                 if (!ConariAcquirereCancellationToken(out CancellationToken cancellationToken)) {
                     return;
                 }
+                bool estConfirmationis = await _legatusConfirmationis.DemittereAsync(
+                    _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_TITULUS),
+                    _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_TEXTUS),
+                    _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_BUTTON_ITA),
+                    _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_BUTTON_NON),
+                    null,
+                    null,
+                    cancellationToken
+                );
+
+                if (!estConfirmationis) {
+                    return;
+                }
 
                 await _turrisSalsamenti.Deleto(id, cancellationToken);
                 // リストをリロード
@@ -132,6 +153,7 @@ namespace Yulinti.Exercitus.Dux {
                 Carnifex.Intermissio(e);
             } finally {
                 FinireProcessumButton();
+                UnityEngine.Debug.Log("PremereDeletoLudum: FinireProcessumButton");
             }
         }
 

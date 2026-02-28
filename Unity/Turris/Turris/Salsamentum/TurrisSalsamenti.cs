@@ -81,6 +81,11 @@ namespace Yulinti.Unity.Turris {
                 i++;
             }
 
+            // 削除分を処理する。
+            if (_notitiaManualis.Count > i) {
+                _notitiaManualis.RemoveRange(i, _notitiaManualis.Count - i);
+            }
+
             return _notitiaManualis;
         }
 
@@ -100,6 +105,12 @@ namespace Yulinti.Unity.Turris {
                 ((OstiumSalsamentiNotitiae)_notitiaAutomaticus[i]).Renovare(id, notitia.Timestamp, notitia.Notitia);
                 i++;
             }
+
+            // 削除分を処理する。
+            if (_notitiaAutomaticus.Count > i) {
+                _notitiaAutomaticus.RemoveRange(i, _notitiaAutomaticus.Count - i);
+            }
+
             return _notitiaAutomaticus;
         }
 

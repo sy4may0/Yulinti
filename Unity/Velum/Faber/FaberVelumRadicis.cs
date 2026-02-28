@@ -1,0 +1,18 @@
+using VContainer;
+using VContainer.Unity;
+using Yulinti.Unity.Contractus;
+
+namespace Yulinti.Unity.Velum {
+    public static class FaberVelumRadicis {
+        public static void Initio(IContainerBuilder builder) {
+            builder.Register<VelumConfirmationis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<VelumMonitionis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<IOratorRadicis, OratorRadicis>(Lifetime.Singleton);
+        }
+    }
+}

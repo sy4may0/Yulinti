@@ -4,7 +4,7 @@ using Yulinti.Exercitus.Contractus;
 using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Unity.Velum {
-    public static class FarberVelumIndexusPrincipalis {
+    public static class FaberVelumIndexusPrincipalis {
         public static void Initio(IContainerBuilder builder) {
             builder.Register<VelumIndexusPrincipalis>(Lifetime.Singleton)
                 .AsImplementedInterfaces()

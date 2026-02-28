@@ -7,12 +7,15 @@
 
     <ui:VisualElement name="carnifex-erroris-root" class="container carnifex-erroris-root">
         <ui:VisualElement name="carnifex-erroris-panel" class="panel carnifex-erroris-panel">
+          <ui:Label name="carnifex-erroris-label" class="label carnifex-erroris-label" text="エラーが発生しました。" />
           <ui:VisualElement name="carnifex-erroris-header-panel" class="sub-panel warning carnifex-erroris-header-panel">
-            <ui:Label name="carnifex-erroris-label" class="label carnifex-erroris-label" text="Intermission" />
+            <ui:Label name="carnifex-erroris-content-label" class="label carnifex-erroris-header-label" text="エラー内容" />
             <ui:VisualElement name="carnifex-erroris-content-panel" class="panel carnifex-erroris-content-panel">
-                <ui:TextField name="carnifex-erroris-content-textarea" class="sub-panel carnifex-erroris-content-textarea" multiline="true" rows="10" />
-                <ui:Label name="carnifex-erroris-content-label" class="paragraph carnifex-erroris-content-label" text="Content" />
+              <ui:Label name="carnifex-erroris-content-textarea" class="paragraph carnifex-erroris-content-text" text="TestException" />
+              <ui:Label name="carnifex-erroris-content-textarea" class="paragraph carnifex-erroris-content-text" text="Message: AAAAAAAAA" />
+              <ui:Label name="carnifex-erroris-content-textarea" class="paragraph carnifex-erroris-content-text" text="Stack Trace: AAAAAAAAA" />
             </ui:VisualElement>
+            <ui:Label name="carnifex-erroris-content-label" class="paragraph carnifex-erroris-content-label" text="エラー内容をコピーして問い合わせフォームに送付してください。" />
           </ui:VisualElement>
           <ui:VisualElement name="carnifex-erroris-button-container" class="container carnifex-erroris-button-container carnifex-erroris-button-content">
               <ui:Button name="carnifex-erroris-button-copy-error" class="button button-submit carnifex-erroris-button" text="Copy Error" />

@@ -1,0 +1,40 @@
+.confirmatio-root,
+.monitio-root {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirmatio-panel,
+.monitio-panel {
+    width: 50%;
+}
+
+.confirmatio-header-panel,
+.monitio-header-panel {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    
+}
+
+/* ラベルの文字が折り返されるようにする */
+.confirmatio-label,
+.monitio-label {
+    white-space: pre-wrap;
+}
+
+.confirmatio-button-container,
+.monitio-button-container {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.confirmatio-button,
+.monitio-button {
+    min-width: 128px;
+}

@@ -21,4 +21,20 @@ namespace Yulinti.Unity.Velum {
 
     internal interface IVelumLiberabilis : ILiberabilis {
     }
+
+    // DontDestroyOnLoadのTick
+    internal interface IVelumIncipabilisRadicis : IIncipabilis {
+    }
+
+    internal interface IVelumPulsabilisRadicis : IPulsabilis {
+    }
+
+    internal interface IVelumPulsabilisFixusRadicis : IPulsabilisFixus {
+    }
+    
+    internal interface IVelumPulsabilisTardusRadicis : IPulsabilisTardus {
+    }
+
+    internal interface IVelumLiberabilisRadicis : ILiberabilis {
+    }
 }

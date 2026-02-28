@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ui:UXML xmlns:ui="UnityEngine.UIElements"
          xmlns:uie="UnityEngine.UIElements">
-  <ui:VisualElement class="sub-panel salsamentum-list-item">
+  <ui:VisualElement name="forma-salsamentum-item-root" class="sub-panel salsamentum-list-item">
     <ui:VisualElement name="forma-salsamentum-item-header" class="salsamentum-list-item-header">
       <ui:Label name="forma-salsamentum-item-label" class="label salsamentum-list-item-label " text="SaveData1" />
       <ui:Label name="forma-salsamentum-item-timestamp" class="paragraph salsamentum-list-item-timestamp" text="2026-02-23 10:00:00" />

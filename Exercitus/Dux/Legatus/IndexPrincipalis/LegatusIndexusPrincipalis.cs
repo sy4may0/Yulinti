@@ -9,6 +9,8 @@ namespace Yulinti.Exercitus.Dux {
     internal sealed class LegatusIndexusPrincipalis : ILegatus, ILegatusIncipabilis, ILegatusLiberabilis {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumIndexusPrincipalis _velumIndexusPrincipalis;
+        private readonly ILegatusConfirmationis _legatusConfirmationis;
+        private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ITurrisSalsamenti _turrisSalsamenti;
 
         // 下位Legatus
@@ -33,12 +35,16 @@ namespace Yulinti.Exercitus.Dux {
         public LegatusIndexusPrincipalis(
             ITurrisMundus turrisMundus,
             IVelumIndexusPrincipalis velumIndexusPrincipalis,
+            ITurrisInterpretationis turrisInterpretationis,
             ITurrisSalsamenti turrisSalsamenti,
+            ILegatusConfirmationis legatusConfirmationis,
             LegatusSalsamenti legatusSalsamenti
         ) {
             _turrisMundus = turrisMundus;
             _velumIndexusPrincipalis = velumIndexusPrincipalis;
+            _turrisInterpretationis = turrisInterpretationis;
             _turrisSalsamenti = turrisSalsamenti;
+            _legatusConfirmationis = legatusConfirmationis;
             _legatusSalsamenti = legatusSalsamenti;
 
             _aeAdPremereLudusNovus = AdPremereLudusNovus;
@@ -123,6 +129,20 @@ namespace Yulinti.Exercitus.Dux {
                 return;
             }
             try {
+                bool estConfirmationis = await _legatusConfirmationis.DemittereAsync(
+                    _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_TITULUS),
+                    _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_TEXTUS),
+                    _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_BUTTON_ITA),
+                    _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_BUTTON_NON),
+                    null,
+                    null,
+                    _cancellationTokenSource.Token
+                );
+
+                if (!estConfirmationis) {
+                    return;
+                }
+
                 _ = await _turrisSalsamenti.Creare(_cancellationTokenSource.Token);
                 _turrisMundus.AdMudum(IDMundi.MundusTestScene);
             } catch (OperationCanceledException) {
