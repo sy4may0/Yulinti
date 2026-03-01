@@ -70,6 +70,11 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraPuellae_MINISTERIUMPUELLAEANIMATIONES_ANIMANCER_NULL = "AnchoraPuellae - ministeriumpuellaeanimationes animancer null";
         public const string AnchoraTestScene_REX_ANCHORA_NOT_SET = "AnchoraTestScene - rex anchora not set";
         public const string AnchoraTestScene_REX_ANCHORA_RESOLVE_FAILED = "AnchoraTestScene - rex anchora resolve failed";
+        public const string AnchoraPortus_ANCHORAPORTUS_ANCHORACAMERA_NULL = "AnchoraPortus - anchora camera null";
+        public const string AnchoraPortus_ANCHORAPORTUS_ANCHORAPUELLAE_NULL = "AnchoraPortus - anchora puellae null";
+        public const string AnchoraPortus_ANCHORAPORTUS_ANCHORAPUELLAECRINIS_NULL = "AnchoraPortus - anchora puellae crinis null";
+        public const string AnchoraPortus_ANCHORAPORTUS_RESOLVE_FAILED = "AnchoraPortus - anchora portus resolve failed";
+        public const string AnchoraPortus_ANCHORAPORTUS_VALIDARE_FAILED = "AnchoraPortus - anchora portus validare failed";
         public const string AnchoraVelumIndexusPrincipalis_ANCHORAVELUMINDEXUSPRINCIPALIS_UIDOCUMENT_NULL = "AnchoraVelumIndexusPrincipalis - uidocument null";
         public const string AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_UIDOCUMENT_NULL = "AnchoraVelumSalsamenti - uidocument null";
         public const string AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_FORMAARTICULUSSALSAMENTI_NULL = "AnchoraVelumSalsamenti - forma articulus salsamenti null";
@@ -146,6 +151,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_CAPITIS = "MinisteriumPuellaeResVisae - ministeriumpuellae uninitialized resvisae capitis";
         public const string MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_NATIUM = "MinisteriumPuellaeResVisae - ministeriumpuellae uninitialized resvisae natium";
         public const string MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_PECTORIS = "MinisteriumPuellaeResVisae - ministeriumpuellae uninitialized resvisae pectoris";
+        public const string MinisteriumPuellaeAnimationes_MINISTERIUMPUELLAEANIMATIONES_ANIMATION_NOT_SET = "MinisteriumPuellaeAnimationes - animation not set";
         public const string ModeratorErrorum_Fatal = "ModeratorErrorum - fatal";
         public const string NewLuditorAnimationis_LUDITORANIMATIONIS_LAYER_NOT_FOUND = "NewLuditorAnimationis - luditoranimationis layer not found";
         public const string NihilAut_UnwrapFailed = "NihilAut - unwrap failed";

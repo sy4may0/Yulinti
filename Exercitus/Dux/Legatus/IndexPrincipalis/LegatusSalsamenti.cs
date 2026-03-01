@@ -14,6 +14,8 @@ namespace Yulinti.Exercitus.Dux {
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ITurrisSalsamenti _turrisSalsamenti;
 
+        private readonly CuratorVela _curatorVela;
+
         private CancellationTokenSource _cancellationTokenSource;
 
         // Dux -> Velumへのコールバック
@@ -31,13 +33,15 @@ namespace Yulinti.Exercitus.Dux {
             IVelumSalsamenti velumSalsamenti,
             ITurrisSalsamenti turrisSalsamenti,
             ILegatusConfirmationis legatusConfirmationis,
-            ITurrisInterpretationis turrisInterpretationis
+            ITurrisInterpretationis turrisInterpretationis,
+            CuratorVela curatorVela
         ) {
             _turrisMundus = turrisMundus;
             _velumSalsamenti = velumSalsamenti;
             _turrisSalsamenti = turrisSalsamenti;
             _legatusConfirmationis = legatusConfirmationis;
             _turrisInterpretationis = turrisInterpretationis;
+            _curatorVela = curatorVela;
 
             _aeAdPremereOneraLudum = AdPremereOneraLudum;
             _aeAdPremereDeletoLudum = AdPremereDeletoLudum;
@@ -102,7 +106,8 @@ namespace Yulinti.Exercitus.Dux {
                 }
 
                 await _turrisSalsamenti.Arcessere(id, cancellationToken);
-                _turrisMundus.AdMudum(IDMundi.MundusTestScene);
+                _curatorVela.TollereVelaOmnium();
+                _turrisMundus.AdMudum(IDMundi.MundusPortus);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {

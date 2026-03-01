@@ -9,7 +9,7 @@ using System.Text;
 using UnityEditor;
 
 namespace Yulinti.Unity.Velum {
-    internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumLiberabilis {
+    internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumSalsamenti _anchoraVelumSalsamenti;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
 
@@ -360,6 +360,10 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void Liberare() {
+            TollereSalsamenti();
+        }
+
+        public void TollereFinem() {
             TollereSalsamenti();
         }
     }

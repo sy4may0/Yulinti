@@ -70,6 +70,7 @@ namespace Yulinti.Exercitus.Dux {
                 adFinem: null,
                 estCogere: true
             );
+            // 初期地点に移動
         }
 
         public void Ordinare(

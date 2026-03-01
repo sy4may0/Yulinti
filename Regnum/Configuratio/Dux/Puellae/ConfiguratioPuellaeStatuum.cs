@@ -15,6 +15,9 @@ namespace Yulinti.Regnum.Configuratio {
         [SerializeField] private IDPuellaeAnimationisContinuata idAnimationisPraedefinitus;
         [SerializeField] private ConfiguratioPuellaeStatusCorporisBasis[] statuumCorporis;
         [SerializeField] private ConfiguratioPuellaeStatusPartis[] statuumPartium;
+        [SerializeField] private float xIncipalis = 0.0f;
+        [SerializeField] private float zIncipalis = 0.0f;
+
 
         public float LimenInputQuadratum => limenInputQuadratum;
         public float TempusLevigatumRotationis => tempusLevigatumRotationis;
@@ -26,5 +29,8 @@ namespace Yulinti.Regnum.Configuratio {
         public IDPuellaeAnimationisContinuata IdAnimationisPraedefinitus => idAnimationisPraedefinitus;
         public IConfiguratioPuellaeStatusCorporis[] StatuumCorporis => statuumCorporis;
         public IConfiguratioPuellaeStatusPartis[] StatuumPartium => statuumPartium;
+
+        public float XIncipalis => xIncipalis;
+        public float ZIncipalis => zIncipalis;
     }
 }

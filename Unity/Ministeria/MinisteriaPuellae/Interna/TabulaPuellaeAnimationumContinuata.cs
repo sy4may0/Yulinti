@@ -24,9 +24,11 @@ namespace Yulinti.Unity.Ministeria {
                 _animationes[(int)c.Id] = new AnimatioPuellaeContinuata(c);
             }
 
-            // IDすべて(Noneを除く)に設定が必要
-            for (int i = 1; i < longitudo; i++) {
-                if (_animationes[i] == null) {
+            // IDすべて(Noneを除く)に設定が必要 <- NG
+            // confgのリストで渡されたものだけ初期化されているか確認。それ以外はnullでいい。
+            foreach (IConfiguratioPuellaeAnimationisContinuata c in config) {
+                int idEnum = (int)c.Id;
+                if (_animationes[idEnum] == null) {
                     Carnifex.Intermissio(LogTextus.TabulaPuellaeAnimationumContinuata_TABULAPUELLAEANIMATIONUMCONTINUATA_CONFIG_NOT_FOUND);
                 }
             }

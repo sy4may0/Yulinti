@@ -13,7 +13,7 @@ namespace Yulinti.Exercitus.Contractus {
         NihilCorporis,
         NihilPartis,
         StandardBase,
-        Crouch
+        Crouch,
     }
 
     // これはContinuataに対応する。
@@ -28,5 +28,6 @@ namespace Yulinti.Exercitus.Contractus {
 
         // Pars
         NihilPartis
+
     }
 }

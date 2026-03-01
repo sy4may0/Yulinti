@@ -12,5 +12,9 @@ namespace Yulinti.Exercitus.Contractus {
         IDPuellaeAnimationisContinuata IdAnimationisPraedefinitus { get; }
         IConfiguratioPuellaeStatusCorporis[] StatuumCorporis { get; }
         IConfiguratioPuellaeStatusPartis[] StatuumPartium { get; }
+
+        // 初期地点X,Z YはNavmeshから取得する。
+        float XIncipalis { get; }
+        float ZIncipalis { get; }
    }
 }

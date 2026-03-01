@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using System;
 
 namespace Yulinti.Unity.Velum {
-    internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumLiberabilis {
+    internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumIndexusPrincipalis _anchoraVelumIndexusPrincipalis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
 
@@ -189,6 +189,10 @@ namespace Yulinti.Unity.Velum {
                 _buttonExi.clicked -= _onExi;
             }
             _onExi = null;
+        }
+
+        public void TollereFinem() {
+            TollereIndexusPrincipalis();
         }
     }
 }
