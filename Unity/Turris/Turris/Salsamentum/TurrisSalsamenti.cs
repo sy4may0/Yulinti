@@ -190,5 +190,20 @@ namespace Yulinti.Unity.Turris {
 
             return idServanda;
         }
+
+        public IOstiumSalsamenti Actualis => _ostiumSalsamentiActualis;
+
+        /// <summary> セーブデータが存在するかどうかを確認する。 </summary>
+        /// <param name="actualis">セーブデータ</param>
+        /// <returns>セーブデータが存在するかどうか</returns>
+        /// <remarks>セーブデータが存在しない場合はデフォルトセーブデータを返す。</remarks>
+        public bool ConareActualis(out IOstiumSalsamenti actualis) {
+            if (_ostiumSalsamentiActualis.EstActivum) {
+                actualis = _ostiumSalsamentiActualis;
+                return true;
+            }
+            actualis = _ostiumSalsamentiActualis;
+            return false;
+        }
     }
 }

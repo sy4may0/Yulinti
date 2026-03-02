@@ -88,6 +88,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string CuratorCivisGenerationis_InitException = "CuratorCivisGenerationis - init exception";
         public const string ErrorAut_UnwrapFailed = "ErrorAut - unwrap failed";
         public const string Errorum_Fatal = "Errorum - fatal";
+        public const string MilesPuellaeVigoris_MILSEPUELLAEVIGORIS_SALSAMENTUM_ACTUALIS_NULL = "MilesPuellaeVigoris - salsamentum actualis null";
         public const string ExecutorCivisAnimationis_EXECUTORCIVISANIMATIONIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisAnimationis - ordinatio queue full";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_APPLICARE_MOTUS_NULL = "ExecutorCivisLoci - applicare motus null";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_APPLICARE_NAVMESH_NULL = "ExecutorCivisLoci - applicare navmesh null";

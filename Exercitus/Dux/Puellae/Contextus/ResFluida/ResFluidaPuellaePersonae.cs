@@ -1,5 +1,9 @@
 using Yulinti.Exercitus.Contractus;
 namespace Yulinti.Exercitus.Dux {
+    // このクラスは特殊: Exercitus内に限りWrite-Onlyになる。
+    // ILesFluidaPuellaePersonaeLegibileはランタイムで使用してはならない。値は参照できない。
+    // シーン内のキャッシュ値として機能し、リザルト画面でSalsamentumに反映する。
+    // 各種値取得はSalsamentumから取得すること。
     internal interface IResolutorPuellaeAnimae {
         int ResolvereGradusLuxuriosus(int animaLuxuriosus);
         int ResolvereGradusExhibitus(int animaExhibitus);
