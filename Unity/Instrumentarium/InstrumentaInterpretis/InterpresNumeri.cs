@@ -6,7 +6,7 @@ using UVec2 = UnityEngine.Vector2;
 using UQuat = UnityEngine.Quaternion;
 
 namespace Yulinti.Unity.Instrumentarium {
-    public static class InterpressNumericus {
+    public static class InterpresNumeri {
         public static NVec3 ToNumerics(UVec3 vector) {
             return new NVec3(vector.x, vector.y, vector.z);
         }

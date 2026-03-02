@@ -18,12 +18,11 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public void PonoPositionem(System.Numerics.Vector3 pos) {
-            _miCamera.PonoPositionem(InterpressNumericus.ToUnity(pos));
+            _miCamera.PonoPositionem(InterpresNumeri.ToUnity(pos));
         }
         public void PonoRotationem(System.Numerics.Quaternion rot) {
-            _miCamera.PonoRotationem(InterpressNumericus.ToUnity(rot));
+            _miCamera.PonoRotationem(InterpresNumeri.ToUnity(rot));
         }
     }
 }
-
 

@@ -23,7 +23,7 @@ namespace Yulinti.Unity.Ministeria {
                 positionem = default;
                 return false;
             }
-            positionem = InterpressNumericus.ToNumerics(_miPuellaeResVisae.LegoCapitis(idCapitis));
+            positionem = InterpresNumeri.ToNumerics(_miPuellaeResVisae.LegoCapitis(idCapitis));
             return true;
         }
         public bool ConareLegoPectoris(IDPuellaeResVisaePectoris idPectoris, out Vector3 positionem) {
@@ -31,7 +31,7 @@ namespace Yulinti.Unity.Ministeria {
                 positionem = default;
                 return false;
             }
-            positionem = InterpressNumericus.ToNumerics(_miPuellaeResVisae.LegoPectoris(idPectoris));
+            positionem = InterpresNumeri.ToNumerics(_miPuellaeResVisae.LegoPectoris(idPectoris));
             return true;
         }
         public bool ConareLegoNatium(IDPuellaeResVisaeNatium idNatium, out Vector3 positionem) {
@@ -39,7 +39,7 @@ namespace Yulinti.Unity.Ministeria {
                 positionem = default;
                 return false;
             }
-            positionem = InterpressNumericus.ToNumerics(_miPuellaeResVisae.LegoNatium(idNatium));
+            positionem = InterpresNumeri.ToNumerics(_miPuellaeResVisae.LegoNatium(idNatium));
             return true;
         }
         public bool ConareLegoNudusAnterior(IDPuellaeResNudusAnterior idNudusAnterior, out Vector3 positionem) {
@@ -47,7 +47,7 @@ namespace Yulinti.Unity.Ministeria {
                 positionem = default;
                 return false;
             }
-            positionem = InterpressNumericus.ToNumerics(_miPuellaeResVisae.LegoNudusAnterior(idNudusAnterior));
+            positionem = InterpresNumeri.ToNumerics(_miPuellaeResVisae.LegoNudusAnterior(idNudusAnterior));
             return true;
         }
         public bool ConareLegoNudusPosterior(IDPuellaeResNudusPosterior idNudusPosterior, out Vector3 positionem) {
@@ -55,7 +55,7 @@ namespace Yulinti.Unity.Ministeria {
                 positionem = default;
                 return false;
             }
-            positionem = InterpressNumericus.ToNumerics(_miPuellaeResVisae.LegoNudusPosterior(idNudusPosterior));
+            positionem = InterpresNumeri.ToNumerics(_miPuellaeResVisae.LegoNudusPosterior(idNudusPosterior));
             return true;
         }
         public bool ConareLegoNudusAnteriorDirectio(IDPuellaeResNudusAnterior idNudusAnterior, out Vector3 directio) {
@@ -63,7 +63,7 @@ namespace Yulinti.Unity.Ministeria {
                 directio = default;
                 return false;
             }
-            directio = InterpressNumericus.ToNumerics(_miPuellaeResVisae.LegoNudusAnteriorDirectio(idNudusAnterior));
+            directio = InterpresNumeri.ToNumerics(_miPuellaeResVisae.LegoNudusAnteriorDirectio(idNudusAnterior));
             return true;
         }
         public bool ConareLegoNudusPosteriorDirectio(IDPuellaeResNudusPosterior idNudusPosterior, out Vector3 directio) {
@@ -71,12 +71,12 @@ namespace Yulinti.Unity.Ministeria {
                 directio = default;
                 return false;
             }
-            directio = InterpressNumericus.ToNumerics(_miPuellaeResVisae.LegoNudusPosteriorDirectio(idNudusPosterior));
+            directio = InterpresNumeri.ToNumerics(_miPuellaeResVisae.LegoNudusPosteriorDirectio(idNudusPosterior));
             return true;
         }
 
         public Vector3 LegoPositionemRadix() {
-            return InterpressNumericus.ToNumerics(_miPuellaeResVisae.LegoPositionemRadix());
+            return InterpresNumeri.ToNumerics(_miPuellaeResVisae.LegoPositionemRadix());
         }
     }
 }

@@ -52,11 +52,11 @@ namespace Yulinti.Unity.Ministeria {
         }
         public Vector3 Positio(int id) {
             if (!VerificareID(id)) return new Vector3(0f, 0f, 0f);
-            return InterpressNumericus.ToNumerics(_miCivisLoci.Positio(id));
+            return InterpresNumeri.ToNumerics(_miCivisLoci.Positio(id));
         }
         public Quaternion Rotatio(int id) {
             if (!VerificareID(id)) return new Quaternion(0f, 0f, 0f, 1f);
-            return InterpressNumericus.ToNumerics(_miCivisLoci.Rotatio(id));
+            return InterpresNumeri.ToNumerics(_miCivisLoci.Rotatio(id));
         }
     }
 }

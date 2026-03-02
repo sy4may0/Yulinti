@@ -71,6 +71,10 @@ namespace Yulinti.Exercitus.Dux {
                 estCogere: true
             );
             // 初期地点に移動
+            _contextusOstiorum.Carrus.PostulareNavmeshInitii(
+                _contextusOstiorum.Configuratio.Statuum.PositioIncipalis,
+                _contextusOstiorum.Configuratio.Statuum.RotatioIncipalis
+            );
         }
 
         public void Ordinare(

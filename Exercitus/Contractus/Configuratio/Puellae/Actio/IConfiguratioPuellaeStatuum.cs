@@ -13,8 +13,8 @@ namespace Yulinti.Exercitus.Contractus {
         IConfiguratioPuellaeStatusCorporis[] StatuumCorporis { get; }
         IConfiguratioPuellaeStatusPartis[] StatuumPartium { get; }
 
-        // 初期地点X,Z YはNavmeshから取得する。
-        float XIncipalis { get; }
-        float ZIncipalis { get; }
+        // 初期位置設定
+        System.Numerics.Vector3 PositioIncipalis { get; }
+        System.Numerics.Quaternion RotatioIncipalis { get; }
    }
 }

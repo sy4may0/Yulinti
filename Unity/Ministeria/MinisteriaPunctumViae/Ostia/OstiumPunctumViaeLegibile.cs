@@ -21,7 +21,7 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public bool ConareLegoVicinam(Vector3 positio, out IPunctumViaeLegibile punctumViae) {
-            punctumViae = _miPunctumViae.LegoVicinam(InterpressNumericus.ToUnity(positio));
+            punctumViae = _miPunctumViae.LegoVicinam(InterpresNumeri.ToUnity(positio));
             if (punctumViae == null) {
                 return false;
             }
@@ -37,7 +37,7 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public bool ConareLegoCrematoriumVicinam(Vector3 positio, out IPunctumViaeLegibile punctumViae) {
-            punctumViae = _miPunctumViae.LegoCrematoriumVicinam(InterpressNumericus.ToUnity(positio));
+            punctumViae = _miPunctumViae.LegoCrematoriumVicinam(InterpresNumeri.ToUnity(positio));
             if (punctumViae == null) {
                 return false;
             }
@@ -53,7 +53,7 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public bool ConareLegoNatoriumVicinam(Vector3 positio, out IPunctumViaeLegibile punctumViae) {
-            punctumViae = _miPunctumViae.LegoNatoriumVicinam(InterpressNumericus.ToUnity(positio));
+            punctumViae = _miPunctumViae.LegoNatoriumVicinam(InterpresNumeri.ToUnity(positio));
             if (punctumViae == null) {
                 return false;
             }
@@ -69,7 +69,7 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public bool ConareLegoTypumVicinam(IDPunctumViaeTypi typus, Vector3 positio, out IPunctumViaeLegibile punctumViae) {
-            punctumViae = _miPunctumViae.LegoTypumVicinam(typus, InterpressNumericus.ToUnity(positio));
+            punctumViae = _miPunctumViae.LegoTypumVicinam(typus, InterpresNumeri.ToUnity(positio));
             if (punctumViae == null) {
                 return false;
             }

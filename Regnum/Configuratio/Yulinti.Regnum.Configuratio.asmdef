@@ -6,7 +6,8 @@
     "VContainer",
     "Yulinti.Nucleus",
     "Yulinti.Exercitus.Contractus",
-    "Yulinti.Unity.Contractus"
+    "Yulinti.Unity.Contractus",
+    "Yulinti.Unity.Instrumentarium"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

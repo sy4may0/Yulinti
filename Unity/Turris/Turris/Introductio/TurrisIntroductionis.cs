@@ -32,7 +32,7 @@ namespace Yulinti.Unity.Turris {
         }
 
         public System.Numerics.Vector2 LegoMotus => _moveInput?.action?.enabled == true 
-            ? InterpressNumericus.ToNumerics(_moveInput.action.ReadValue<Vector2>()) :
+            ? InterpresNumeri.ToNumerics(_moveInput.action.ReadValue<Vector2>()) :
             new System.Numerics.Vector2(0f, 0f);
         public bool LegoCursus => _sprintInput?.action?.enabled == true && _sprintInput.action.IsPressed();
         public bool LegoIncumbo => _crouchInput?.action?.enabled == true && _crouchInput.action.IsPressed();

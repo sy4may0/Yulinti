@@ -1,6 +1,7 @@
 using UnityEngine;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Unity.Instrumentarium;
 
 namespace Yulinti.Regnum.Configuratio {
     [System.Serializable]
@@ -15,8 +16,8 @@ namespace Yulinti.Regnum.Configuratio {
         [SerializeField] private IDPuellaeAnimationisContinuata idAnimationisPraedefinitus;
         [SerializeField] private ConfiguratioPuellaeStatusCorporisBasis[] statuumCorporis;
         [SerializeField] private ConfiguratioPuellaeStatusPartis[] statuumPartium;
-        [SerializeField] private float xIncipalis = 0.0f;
-        [SerializeField] private float zIncipalis = 0.0f;
+        [SerializeField] private UnityEngine.Vector3 positioIncipalis;
+        [SerializeField] private UnityEngine.Quaternion rotatioIncipalis;
 
 
         public float LimenInputQuadratum => limenInputQuadratum;
@@ -30,7 +31,7 @@ namespace Yulinti.Regnum.Configuratio {
         public IConfiguratioPuellaeStatusCorporis[] StatuumCorporis => statuumCorporis;
         public IConfiguratioPuellaeStatusPartis[] StatuumPartium => statuumPartium;
 
-        public float XIncipalis => xIncipalis;
-        public float ZIncipalis => zIncipalis;
+        public System.Numerics.Vector3 PositioIncipalis => InterpresNumeri.ToNumerics(positioIncipalis);
+        public System.Numerics.Quaternion RotatioIncipalis => InterpresNumeri.ToNumerics(rotatioIncipalis);
     }
 }

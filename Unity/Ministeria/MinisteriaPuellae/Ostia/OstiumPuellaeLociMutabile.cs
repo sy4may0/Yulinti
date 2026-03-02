@@ -19,10 +19,10 @@ namespace Yulinti.Unity.Ministeria {
         public void ActivareMotus() => _miPuellaeLoci.ActivareMotus();
         public bool ActivareNavMesh() => _miPuellaeLoci.ActivareNavMesh();
         public bool Transporto(System.Numerics.Vector3 positio, System.Numerics.Quaternion rotatio) =>
-            _miPuellaeLoci.Transporto(InterpressNumericus.ToUnity(positio), InterpressNumericus.ToUnity(rotatio));
+            _miPuellaeLoci.Transporto(InterpresNumeri.ToUnity(positio), InterpresNumeri.ToUnity(rotatio));
         public void InitareMigrare() => _miPuellaeLoci.InitareMigrare();
         public void IncipereMigrare(System.Numerics.Vector3 positio) =>
-            _miPuellaeLoci.IncipereMigrare(InterpressNumericus.ToUnity(positio));
+            _miPuellaeLoci.IncipereMigrare(InterpresNumeri.ToUnity(positio));
         public void PonoVelocitatem(float velocitatem) => _miPuellaeLoci.PonoVelocitatem(velocitatem);
         public void PonoAccelerationem(float accelerationem) => _miPuellaeLoci.PonoAccelerationem(accelerationem);
         public void PonoVelocitatemRotationis(int velocitatemRotationisDeg) =>
@@ -46,4 +46,3 @@ namespace Yulinti.Unity.Ministeria {
         }
     }
 }
-

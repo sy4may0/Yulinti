@@ -17,10 +17,9 @@ namespace Yulinti.Unity.Ministeria {
             _miCamera = miCamera;
         }
 
-        public System.Numerics.Quaternion RotatioVerticalis => InterpressNumericus.ToNumerics(_miCamera.RotatioVerticalis);
-        public System.Numerics.Vector3 DexterXZ => InterpressNumericus.ToNumerics(_miCamera.DexterXZ);
-        public System.Numerics.Vector3 AnteriorXZ => InterpressNumericus.ToNumerics(_miCamera.AnteriorXZ);
+        public System.Numerics.Quaternion RotatioVerticalis => InterpresNumeri.ToNumerics(_miCamera.RotatioVerticalis);
+        public System.Numerics.Vector3 DexterXZ => InterpresNumeri.ToNumerics(_miCamera.DexterXZ);
+        public System.Numerics.Vector3 AnteriorXZ => InterpresNumeri.ToNumerics(_miCamera.AnteriorXZ);
     }
 }
-
 

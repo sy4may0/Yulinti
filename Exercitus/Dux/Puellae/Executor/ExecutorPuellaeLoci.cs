@@ -20,6 +20,7 @@ namespace Yulinti.Exercitus.Dux {
 
         private DuxQueue<IOrdinatioPuellaeMotus> _queueMotus;
         private DuxQueue<IOrdinatioPuellaeNavmesh> _queueNavmesh;
+        private DuxQueue<IOrdinatioPuellaeNavmeshInitii> _queueNavmeshInitii;
         private SpeciesPuellaeLoci _speciesActualis;
 
         public ExecutorPuellaeLoci(
@@ -35,6 +36,7 @@ namespace Yulinti.Exercitus.Dux {
 
             _queueMotus = new DuxQueue<IOrdinatioPuellaeMotus>(ConstansPuellae.LongitudoOrdinatioMotus);
             _queueNavmesh = new DuxQueue<IOrdinatioPuellaeNavmesh>(ConstansPuellae.LongitudoOrdinatioNavmesh);
+            _queueNavmeshInitii = new DuxQueue<IOrdinatioPuellaeNavmeshInitii>(ConstansPuellae.LongitudoOrdinatioNavmesh);
             _speciesActualis = SpeciesPuellaeLoci.Nihil;
         }
 
@@ -48,11 +50,13 @@ namespace Yulinti.Exercitus.Dux {
             _speciesActualis = SpeciesPuellaeLoci.Nihil;
             _queueMotus.Purgere();
             _queueNavmesh.Purgere();
+            _queueNavmeshInitii.Purgere();
         }
 
         public void Primum() {
             _queueMotus.Purgere();
             _queueNavmesh.Purgere();
+            _queueNavmeshInitii.Purgere();
         }
 
         public void Executare(
@@ -68,6 +72,15 @@ namespace Yulinti.Exercitus.Dux {
             IOrdinatioPuellaeNavmesh navmesh
         ) {
             if (!_queueNavmesh.ConarePono(navmesh)) {
+                Notarius.Memorare(LogTextus.ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_NAVMESH_QUEUE_FULL);
+                return;
+            }
+        }
+
+        public void Executare(
+            IOrdinatioPuellaeNavmeshInitii navmeshInitii
+        ) {
+            if (!_queueNavmeshInitii.ConarePono(navmeshInitii)) {
                 Notarius.Memorare(LogTextus.ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_NAVMESH_QUEUE_FULL);
                 return;
             }
@@ -111,8 +124,28 @@ namespace Yulinti.Exercitus.Dux {
             _ostiumPuellaeLociMutabile.PonoDistantiaDeaccelerationis(navmesh.DistantiaDeaccelerationis);
         }
 
+        private void ApplicareNavmeshInitii(
+            IOrdinatioPuellaeNavmeshInitii navmeshInitii
+        ) {
+            if (navmeshInitii == null) {
+                Notarius.Memorare(LogTextus.ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_APPLICARE_NAVMESH_NULL);
+                return;
+            }
+            if (_speciesActualis != SpeciesPuellaeLoci.Navmesh) {
+                _ostiumPuellaeLociMutabile.ActivareNavMesh();
+                _speciesActualis = SpeciesPuellaeLoci.Navmesh;
+            }
+            // OrdinatioのPositioにWarpする。
+            _ostiumPuellaeLociMutabile.Transporto(navmeshInitii.Positio, navmeshInitii.Rotatio);
+        }
+
         public void Confirmare() {
-            if (_queueMotus.Capacitas == 0 && _queueNavmesh.Capacitas == 0) return;
+            if (_queueMotus.Capacitas == 0 && _queueNavmesh.Capacitas == 0 && _queueNavmeshInitii.Capacitas == 0) return;
+
+            while (_queueNavmeshInitii.ConareLego(out var ni)) {
+                ApplicareNavmeshInitii(ni);
+            }
+
             // Motusを優先する。かつ、Motusは最後に投入されたOrdinatioのみ反映する。
             // 最後に投入されたMotusを取得する。
             IOrdinatioPuellaeMotus motus = null;
@@ -140,6 +173,7 @@ namespace Yulinti.Exercitus.Dux {
 
             _queueMotus.Purgere();
             _queueNavmesh.Purgere();
+            _queueNavmeshInitii.Purgere();
         }
 
         public void Purgare() {
@@ -152,6 +186,7 @@ namespace Yulinti.Exercitus.Dux {
             _speciesActualis = SpeciesPuellaeLoci.Nihil;
             _queueMotus.Purgere();
             _queueNavmesh.Purgere();
+            _queueNavmeshInitii.Purgere();
         }
     }
 }

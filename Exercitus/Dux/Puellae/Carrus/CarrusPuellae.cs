@@ -68,6 +68,7 @@ namespace Yulinti.Exercitus.Dux {
             _exLoci.Confirmare();
             _lacusOrdinatioPuellae.ColligereMotus();
             _lacusOrdinatioPuellae.ColligereNavmesh();
+            _lacusOrdinatioPuellae.ColligereNavmeshInitii();
         }
         private void ConfirmareVeletudinis() {
             _exVeletudinis.Confirmare();
@@ -84,6 +85,8 @@ namespace Yulinti.Exercitus.Dux {
             ConfirmareAnimationis();
             ConfirmareCrinis();
             ConfirmareVeletudinis();
+            // 最後にLoci適用(初期ポイントに移動する。)
+            ConfirmareLoci();
         }
 
         // Pulsusの最後に実行
@@ -181,6 +184,16 @@ namespace Yulinti.Exercitus.Dux {
         ){
             if(_lacusOrdinatioPuellae.EmittareNavmesh(out var ordinatio)) {
                 ordinatio.Pono(positio, velocitasDesiderata, accelerationem, velocitasRotationis, distantiaDeaccelerationis);
+                _exLoci.Executare(ordinatio);
+            }
+        }
+
+        public void PostulareNavmeshInitii(
+            Vector3 positio,
+            Quaternion rotatio
+        ){
+            if(_lacusOrdinatioPuellae.EmittareNavmeshInitii(out var ordinatio)) {
+                ordinatio.Pono(positio, rotatio);
                 _exLoci.Executare(ordinatio);
             }
         }

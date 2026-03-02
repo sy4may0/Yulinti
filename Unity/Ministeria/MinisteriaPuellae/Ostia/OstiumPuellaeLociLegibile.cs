@@ -23,8 +23,7 @@ namespace Yulinti.Unity.Ministeria {
         public bool EstMigrare() => _miPuellaeLoci.EstMigrare();
         public float VelocitasHorizontalisActualis() => _miPuellaeLoci.VelocitasHorizontalisActualis();
         public float RotatioYActualis() => _miPuellaeLoci.RotatioYActualis();
-        public System.Numerics.Vector3 Positio() => InterpressNumericus.ToNumerics(_miPuellaeLoci.Positio());
-        public System.Numerics.Quaternion Rotatio() => InterpressNumericus.ToNumerics(_miPuellaeLoci.Rotatio());
+        public System.Numerics.Vector3 Positio() => InterpresNumeri.ToNumerics(_miPuellaeLoci.Positio());
+        public System.Numerics.Quaternion Rotatio() => InterpresNumeri.ToNumerics(_miPuellaeLoci.Rotatio());
     }
 }
-

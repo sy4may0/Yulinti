@@ -33,8 +33,8 @@ namespace Yulinti.Unity.Ministeria {
         public bool Transporto(int id, Vector3 positio, Quaternion rotatio) {
             if (!VerificareID(id)) return false;
             return _miCivisLoci.Transporto(id, 
-                InterpressNumericus.ToUnity(positio),
-                InterpressNumericus.ToUnity(rotatio)
+                InterpresNumeri.ToUnity(positio),
+                InterpresNumeri.ToUnity(rotatio)
             );
         }
         public void InitareMigrare(int id) {
@@ -43,7 +43,7 @@ namespace Yulinti.Unity.Ministeria {
         }
         public void IncipereMigrare(int id, Vector3 positio) {
             if (!VerificareID(id)) return;
-            _miCivisLoci.IncipereMigrare(id, InterpressNumericus.ToUnity(positio));
+            _miCivisLoci.IncipereMigrare(id, InterpresNumeri.ToUnity(positio));
         }
         public void PonoVelocitatem(int id, float velocitatem) {
             if (!VerificareID(id)) return;
