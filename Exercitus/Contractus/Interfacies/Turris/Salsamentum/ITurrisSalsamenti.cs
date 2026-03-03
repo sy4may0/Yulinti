@@ -13,9 +13,6 @@ namespace Yulinti.Exercitus.Contractus {
 
         Task<bool> EstNovissimus(CancellationToken ct = default);
 
-        IOstiumSalsamenti Actualis { get; }
-        bool ConareActualis(out IOstiumSalsamenti actualis);
-
         // 管理Utilたち。
         // P1 Notitiaの全取得
         Task<IReadOnlyList<IOstiumSalsamentiNotitiae>> ArcessereNotitiamManualem(CancellationToken ct = default);

@@ -10,6 +10,9 @@ namespace Yulinti.Exercitus.Contractus {
         Task<int> LongitudoAutomaticus(CancellationToken ct = default);
         int LongitudoAutomaticusMaxima { get; }
 
+        IOstiumSalsamenti Actualis { get; }
+        bool ConareActualis(out IOstiumSalsamenti actualis);
+
         Task<bool> EstNovissimus(CancellationToken ct = default);
 
         Task<IReadOnlyList<IOstiumSalsamentiNotitiae>> ArcessereNotitiamManualem(CancellationToken ct = default);
