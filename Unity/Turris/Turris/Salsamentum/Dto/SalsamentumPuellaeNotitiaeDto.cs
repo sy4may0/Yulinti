@@ -19,11 +19,11 @@ namespace Yulinti.Unity.Turris {
             GradusQuaeritDolore = 1;
         }
 
-        public void Renovare(IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae) {
-            GradusLuxuriosus = resFluidaPuellaePersonae.GradusLuxuriosus;
-            GradusExhibitus = resFluidaPuellaePersonae.GradusExhibitus;
-            GradusPerversus = resFluidaPuellaePersonae.GradusPerversus;
-            GradusQuaeritDolore = resFluidaPuellaePersonae.GradusQuaeritDolore;
+        public void Renovare(IPhantasmaPuellaePersonae phantasmaPuellaePersonae) {
+            GradusLuxuriosus = phantasmaPuellaePersonae.GradusLuxuriosus;
+            GradusExhibitus = phantasmaPuellaePersonae.GradusExhibitus;
+            GradusPerversus = phantasmaPuellaePersonae.GradusPerversus;
+            GradusQuaeritDolore = phantasmaPuellaePersonae.GradusQuaeritDolore;
         }
     }
 }

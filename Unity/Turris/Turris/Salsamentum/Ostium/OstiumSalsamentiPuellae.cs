@@ -35,8 +35,8 @@ namespace Yulinti.Unity.Turris {
         }
 
         // 内部からのデータ更新
-        public void Renovare(IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae) {
-            _puellaeDto.Renovare(resFluidaPuellaePersonae);
+        public void Renovare(IPhantasmaPuellaePersonae phantasmaPuellaePersonae) {
+            _puellaeDto.Renovare(phantasmaPuellaePersonae);
         }
     }
 }

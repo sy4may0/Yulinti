@@ -68,27 +68,27 @@ namespace Yulinti.Unity.Turris {
             AnimaCorporis = 0;
         }
 
-        public void Renovare(IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae) {
-            GradusLuxuriosus = resFluidaPuellaePersonae.GradusLuxuriosus;
-            AnimaLuxuriosus = resFluidaPuellaePersonae.AnimaLuxuriosus;
-            GradusExhibitus = resFluidaPuellaePersonae.GradusExhibitus;
-            AnimaExhibitus = resFluidaPuellaePersonae.AnimaExhibitus;
-            GradusPerversus = resFluidaPuellaePersonae.GradusPerversus;
-            AnimaPerversus = resFluidaPuellaePersonae.AnimaPerversus;
-            GradusQuaeritDolore = resFluidaPuellaePersonae.GradusQuaeritDolore;
-            AnimaQuaeritDolore = resFluidaPuellaePersonae.AnimaQuaeritDolore;
-            SensusPapillae = resFluidaPuellaePersonae.SensusPapillae;
-            AnimaPapillae = resFluidaPuellaePersonae.AnimaPapillae;
-            SensusLandicae = resFluidaPuellaePersonae.SensusLandicae;
-            AnimaLandicae = resFluidaPuellaePersonae.AnimaLandicae;
-            SensusVaginae = resFluidaPuellaePersonae.SensusVaginae;
-            AnimaVaginae = resFluidaPuellaePersonae.AnimaVaginae;
-            SensusAni = resFluidaPuellaePersonae.SensusAni;
-            AnimaAni = resFluidaPuellaePersonae.AnimaAni;
-            SensusAusculum = resFluidaPuellaePersonae.SensusAusculum;
-            AnimaAusculum = resFluidaPuellaePersonae.AnimaAusculum;
-            SensusCorporis = resFluidaPuellaePersonae.SensusCorporis;
-            AnimaCorporis = resFluidaPuellaePersonae.AnimaCorporis;
+        public void Renovare(IPhantasmaPuellaePersonae phantasmaPuellaePersonae) {
+            GradusLuxuriosus = phantasmaPuellaePersonae.GradusLuxuriosus;
+            AnimaLuxuriosus = phantasmaPuellaePersonae.AnimaLuxuriosus;
+            GradusExhibitus = phantasmaPuellaePersonae.GradusExhibitus;
+            AnimaExhibitus = phantasmaPuellaePersonae.AnimaExhibitus;
+            GradusPerversus = phantasmaPuellaePersonae.GradusPerversus;
+            AnimaPerversus = phantasmaPuellaePersonae.AnimaPerversus;
+            GradusQuaeritDolore = phantasmaPuellaePersonae.GradusQuaeritDolore;
+            AnimaQuaeritDolore = phantasmaPuellaePersonae.AnimaQuaeritDolore;
+            SensusPapillae = phantasmaPuellaePersonae.SensusPapillae;
+            AnimaPapillae = phantasmaPuellaePersonae.AnimaPapillae;
+            SensusLandicae = phantasmaPuellaePersonae.SensusLandicae;
+            AnimaLandicae = phantasmaPuellaePersonae.AnimaLandicae;
+            SensusVaginae = phantasmaPuellaePersonae.SensusVaginae;
+            AnimaVaginae = phantasmaPuellaePersonae.AnimaVaginae;
+            SensusAni = phantasmaPuellaePersonae.SensusAni;
+            AnimaAni = phantasmaPuellaePersonae.AnimaAni;
+            SensusAusculum = phantasmaPuellaePersonae.SensusAusculum;
+            AnimaAusculum = phantasmaPuellaePersonae.AnimaAusculum;
+            SensusCorporis = phantasmaPuellaePersonae.SensusCorporis;
+            AnimaCorporis = phantasmaPuellaePersonae.AnimaCorporis;
         }
     }
 }

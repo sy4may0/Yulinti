@@ -11,9 +11,11 @@ using Yulinti.Exercitus.Dux;
 using Yulinti.Nucleus.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Regnum.Praefectus;
+using Yulinti.Regnum.Configuratio;
 
 namespace Yulinti.Regnum.Rex {
     public sealed class RexRadicis: LifetimeScope {
+        [SerializeField] private ConfiguratioTurris _configuratioTurris;
         [SerializeField] private AnchoraInput _anchora;
         [SerializeField] private AnchoraVelumRadicis _anchoraVelumRadicis;
 
@@ -32,6 +34,9 @@ namespace Yulinti.Regnum.Rex {
         protected override void Configure(IContainerBuilder builder) {
             builder.RegisterInstance<IAnchoraInput>(_anchora);
             builder.RegisterInstance<IAnchoraVelumRadicis>(_anchoraVelumRadicis);
+
+            builder.RegisterInstance<IConfiguratioTurris>(_configuratioTurris);
+            builder.RegisterInstance<IConfiguratioTurrisPhantasma>(_configuratioTurris.Phantasma);
 
             FaberTurris.Initio(builder);
             FaberDucisRadicis.Initio(builder);

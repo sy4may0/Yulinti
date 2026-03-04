@@ -33,13 +33,13 @@ namespace Yulinti.Exercitus.Contractus {
         // P5 セーブデータをセーブ。
         Task<Guid> Servare(
             Guid id,
-            IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae,
+            IPhantasmaPuellaePersonae phantasmaPuellaePersonae,
             CancellationToken ct = default
         );
 
         // P5-ex オートセーブデータをセーブ。
         Task<Guid> ServareAutomaticus(
-            IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae,
+            IPhantasmaPuellaePersonae phantasmaPuellaePersonae,
             CancellationToken ct = default
         );
     }

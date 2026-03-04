@@ -156,11 +156,11 @@ namespace Yulinti.Unity.Turris {
         // P5 セーブデータをセーブ。
         public async Task<Guid> Servare(
             Guid id,
-            IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae,
+            IPhantasmaPuellaePersonae phantasmaPuellaePersonae,
             CancellationToken ct = default
         ) {
-            _ostiumSalsamentiActualis.Renovare(id, resFluidaPuellaePersonae);
-            _ostiumSalsamentiNotitiaeActualis.Renovare(id, resFluidaPuellaePersonae);
+            _ostiumSalsamentiActualis.Renovare(id, phantasmaPuellaePersonae);
+            _ostiumSalsamentiNotitiaeActualis.Renovare(id, phantasmaPuellaePersonae);
             Guid idServanda = await _luditorDataServanda.Servare(
                 id,
                 _ostiumSalsamentiNotitiaeActualis.SalsamentumNotitiaeDto,
@@ -173,20 +173,20 @@ namespace Yulinti.Unity.Turris {
 
         // P5-ex オートセーブデータをセーブ。
         public async Task<Guid> ServareAutomaticus(
-            IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae,
+            IPhantasmaPuellaePersonae phantasmaPuellaePersonae,
             CancellationToken ct = default
         ) {
             // この時点でidは取れていない。
-            _ostiumSalsamentiActualis.Renovare(_ostiumSalsamentiActualis.Id, resFluidaPuellaePersonae);
-            _ostiumSalsamentiNotitiaeActualis.Renovare(_ostiumSalsamentiNotitiaeActualis.Id, resFluidaPuellaePersonae);
+            _ostiumSalsamentiActualis.Renovare(_ostiumSalsamentiActualis.Id, phantasmaPuellaePersonae);
+            _ostiumSalsamentiNotitiaeActualis.Renovare(_ostiumSalsamentiNotitiaeActualis.Id, phantasmaPuellaePersonae);
             Guid idServanda = await _luditorDataServanda.CreareAutomaticus(
                 _ostiumSalsamentiNotitiaeActualis.SalsamentumNotitiaeDto,
                 _ostiumSalsamentiActualis.SalsamentumDto,
                 ct
             );
             // この時点でidは取れている。
-            _ostiumSalsamentiActualis.Renovare(idServanda, resFluidaPuellaePersonae);
-            _ostiumSalsamentiNotitiaeActualis.Renovare(idServanda, resFluidaPuellaePersonae);
+            _ostiumSalsamentiActualis.Renovare(idServanda, phantasmaPuellaePersonae);
+            _ostiumSalsamentiNotitiaeActualis.Renovare(idServanda, phantasmaPuellaePersonae);
 
             return idServanda;
         }
