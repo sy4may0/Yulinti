@@ -107,7 +107,7 @@ namespace Yulinti.Exercitus.Dux {
 
                 await _turrisSalsamenti.Arcessere(id, cancellationToken);
                 _curatorVela.TollereVelaOmnium();
-                _turrisMundus.AdMudum(IDMundi.MundusPortus);
+                _turrisMundus.AdMudum(IDMundi.MundusTestScene);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
