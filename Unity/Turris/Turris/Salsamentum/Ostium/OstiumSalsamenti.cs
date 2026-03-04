@@ -6,18 +6,18 @@ namespace Yulinti.Unity.Turris {
         private Guid _id;
         private DateTime _timestamp;
         private SalsamentumDto _salsamentumDto;
-        private OstiumSalsamentiPuellae _puellae;
+        private OstiumSalsamentiPuellaePersonae _puellaePersonae;
         private bool _estActivum;
 
         public Guid Id => _id;
         public DateTime Timestamp => _timestamp;
-        public IOstiumSalsamentiPuellae Puellae => _puellae;
+        public IOstiumSalsamentiPuellaePersonae PuellaePersonae => _puellaePersonae;
 
         public OstiumSalsamenti() {
             _id = new Guid();
             _timestamp = DateTime.MinValue;
             _salsamentumDto = new SalsamentumDto();
-            _puellae = new OstiumSalsamentiPuellae(_salsamentumDto.Puellae);
+            _puellaePersonae = new OstiumSalsamentiPuellaePersonae(_salsamentumDto.PuellaePersonae);
             _estActivum = false;
         }
 
@@ -26,7 +26,7 @@ namespace Yulinti.Unity.Turris {
             _id = id;
             _timestamp = timestamp;
             _salsamentumDto = salsamentumDto;
-            _puellae.Renovare(_salsamentumDto.Puellae);
+            _puellaePersonae.Renovare(_salsamentumDto.PuellaePersonae);
             _estActivum = true;
         }
 
@@ -34,7 +34,7 @@ namespace Yulinti.Unity.Turris {
         public void Renovare(Guid id, IPhantasmaPuellaePersonae phantasmaPuellaePersonae) {
             _id = id;
             _timestamp = DateTime.Now;
-            _puellae.Renovare(phantasmaPuellaePersonae);
+            _puellaePersonae.Renovare(phantasmaPuellaePersonae);
             _estActivum = true;
         }
 

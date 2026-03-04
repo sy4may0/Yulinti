@@ -77,7 +77,7 @@ namespace Yulinti.Unity.Turris {
         public int SensusCorporis => _sensusCorporis;
         public int AnimaCorporis => _animaCorporis;
 
-        public void Initare(IOstiumSalsamentiPuellae ostiumSalsamentiPuellae) {
+        public void Initare(IOstiumSalsamentiPuellaePersonae ostiumSalsamentiPuellae) {
             _gradusLuxuriosus = ostiumSalsamentiPuellae.GradusLuxuriosus;
             _animaLuxuriosus = ostiumSalsamentiPuellae.AnimaLuxuriosus;
             _gradusExhibitus = ostiumSalsamentiPuellae.GradusExhibitus;

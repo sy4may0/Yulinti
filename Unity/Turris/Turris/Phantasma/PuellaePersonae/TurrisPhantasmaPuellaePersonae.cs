@@ -10,7 +10,7 @@ namespace Yulinti.Unity.Turris {
             _phantasmaPuellaePersonae = new PhantasmaPuellaePersonae(resolutorPuellaePersonae);
         }
 
-        public void Initare(IOstiumSalsamentiPuellae ostiumSalsamentiPuellae) {
+        public void Initare(IOstiumSalsamentiPuellaePersonae ostiumSalsamentiPuellae) {
             _phantasmaPuellaePersonae.Initare(ostiumSalsamentiPuellae);
         }
 

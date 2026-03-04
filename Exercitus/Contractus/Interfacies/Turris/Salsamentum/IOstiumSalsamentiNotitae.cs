@@ -4,7 +4,7 @@ namespace Yulinti.Exercitus.Contractus {
     public interface IOstiumSalsamentiNotitiae {
         Guid Id { get; }
         DateTime Timestamp { get; }
-        IOstiumSalsamentiPuellaeNotitiae PuellaeNotitiae { get; }
+        IOstiumSalsamentiPuellaePersonaeNotitiae PuellaePersonaeNotitiae { get; }
         bool EstActivum { get; }
     }
 }

@@ -5,7 +5,7 @@ namespace Yulinti.Exercitus.Contractus {
     // turrisSalsamenti.Servare(p)
     // turrisPhantasmaPuellaePersonae.Initare(turrisSalsamentiLegibile.Actualis())
     public interface ITurrisPhantasmaPuellaePersonae {
-        void Initare(IOstiumSalsamentiPuellae ostiumSalsamentiPuellae);
+        void Initare(IOstiumSalsamentiPuellaePersonae ostiumSalsamentiPuellae);
         void AddeAnimamGradus(IDGradusPuellaePersonae idGradusPuellaePersonae, int anima);
         void AddeAnimamSensus(IDSensusPuellaePersonae idSensusPuellaePersonae, int anima);
         IPhantasmaPuellaePersonae Legere();

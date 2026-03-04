@@ -106,7 +106,7 @@ namespace Yulinti.Exercitus.Dux {
                     Carnifex.Error(LogTextus.MilesPuellaeVigoris_MILSEPUELLAEVIGORIS_SALSAMENTUM_ACTUALIS_NULL);
                     c *= _contextus.Configuratio.Veletudo.RatioConsumptioVigorisDetectio;
                 } else {
-                    if (actualis.Puellae.GradusExhibitus < _contextus.Configuratio.Veletudo.LimenRemissioExhibitus) {
+                    if (actualis.PuellaePersonae.GradusExhibitus < _contextus.Configuratio.Veletudo.LimenRemissioExhibitus) {
                         c *= _contextus.Configuratio.Veletudo.RatioConsumptioVigorisDetectio;
                     }
                 }

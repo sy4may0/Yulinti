@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using Yulinti.Exercitus.Contractus;
 
 namespace Yulinti.Unity.Turris {
-    internal sealed class SalsamentumPuellaeNotitiaeDto {
+    internal sealed class SalsamentumPuellaePersonaeNotitiaeDto {
         [JsonProperty("gradus_luxuriosus")]
         public int GradusLuxuriosus { get; set; }
         [JsonProperty("gradus_exhibitus")]
@@ -12,7 +12,7 @@ namespace Yulinti.Unity.Turris {
         [JsonProperty("gradus_quaerit_dolore")]
         public int GradusQuaeritDolore { get; set; }
 
-        public SalsamentumPuellaeNotitiaeDto() {
+        public SalsamentumPuellaePersonaeNotitiaeDto() {
             GradusLuxuriosus = 1;
             GradusExhibitus = 1;
             GradusPerversus = 1;

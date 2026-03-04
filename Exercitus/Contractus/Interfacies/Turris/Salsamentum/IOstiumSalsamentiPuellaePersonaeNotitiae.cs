@@ -1,7 +1,7 @@
 using System;
 
 namespace Yulinti.Exercitus.Contractus {
-    public interface IOstiumSalsamentiPuellaeNotitiae {
+    public interface IOstiumSalsamentiPuellaePersonaeNotitiae {
         int GradusLuxuriosus { get; }
         int GradusExhibitus { get; }
         int GradusPerversus { get; }

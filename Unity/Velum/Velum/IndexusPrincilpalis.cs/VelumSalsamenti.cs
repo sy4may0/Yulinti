@@ -275,22 +275,22 @@ namespace Yulinti.Unity.Velum {
             infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_LUXURIOSUS));
             infoTextus.Append(" ");
             infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
-            infoTextus.Append(notitia.PuellaeNotitiae.GradusLuxuriosus.ToString());
+            infoTextus.Append(notitia.PuellaePersonaeNotitiae.GradusLuxuriosus.ToString());
             infoTextus.Append(" / ");
             infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_EXHIBITUS));
             infoTextus.Append(" ");
             infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
-            infoTextus.Append(notitia.PuellaeNotitiae.GradusExhibitus.ToString());
+            infoTextus.Append(notitia.PuellaePersonaeNotitiae.GradusExhibitus.ToString());
             infoTextus.Append(" / ");
             infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PERVERSUS));
             infoTextus.Append(" ");
             infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
-            infoTextus.Append(notitia.PuellaeNotitiae.GradusPerversus.ToString());
+            infoTextus.Append(notitia.PuellaePersonaeNotitiae.GradusPerversus.ToString());
             infoTextus.Append(" / ");
             infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_QUAERIT_DOLOR));
             infoTextus.Append(" ");
             infoTextus.Append(_turrisInterpretationis.LegoTextus(IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX));
-            infoTextus.Append(notitia.PuellaeNotitiae.GradusQuaeritDolore.ToString());
+            infoTextus.Append(notitia.PuellaePersonaeNotitiae.GradusQuaeritDolore.ToString());
             info.text = infoTextus.ToString();
 
             // GUIDをカードに設定
