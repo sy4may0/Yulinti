@@ -5,7 +5,7 @@
 }
 
 .indexprincipalis-panel {
-    width: 380px;
+    width: 100%;
     height: 100%;
 
     justify-content: flex-start;
@@ -16,36 +16,18 @@
     flex-direction: column;
 }
 
-.indexprincipalis-label {
-    height: 24px;
-    margin-left: 15px;
-    font-size: 24px;
-    color: #ffffff;
-    -unity-text-align: middle-left;
-}
+.indexprincipalis-bg {
+    position: absolute;
+    width: 540px;
+    left: 0;
+    top: 0;
+    bottom: 0;
 
-.indexprincipalis-button {
-    height: 48px;
-    width: 260px;
-    font-size: 34px;
-    color: #ffAAff;
-    padding-top: 24px;
-    padding-bottom: 24px;
-    -unity-text-align: middle-left;
-    margin-bottom: 1px;
-}
-
-.button-ghost:hover, 
-.button-ghost:focus {
-    background-color: transparent;
-    border-color: transparent;
-    border-bottom-width: 2px;
-    border-bottom-color: #f3e9f2;
-    border-radius: 0px;
-    color: #f3e9f2;
-    margin-bottom: 0px;
-}
-
-.button-ghost:active {
+    background-image: url('project:/Assets/Resources/Images/panel-grd.png');
     opacity: 0.9;
+}
+
+
+.indexprincipalis-button .button-label {
+    font-size: 48px;
 }

@@ -53,8 +53,9 @@ namespace Yulinti.Exercitus.Dux {
                 );
             }
 
-            foreach (IDPuellaeStatusCorporis id in Enum.GetValues(typeof(IDPuellaeStatusCorporis))) {
-                if (id != IDPuellaeStatusCorporis.None && statuum[(int)id] == null) {
+            foreach (IConfiguratioPuellaeStatusCorporis conf in configurationemCorporis) {
+                int id = (int)conf.Id;
+                if (statuum[id] == null) {
                     Carnifex.Intermissio(LogTextus.MachinaPuellaeStatuumCorporis_MACHINAPUELLAESTATUUMCORPORIS_STATUS_MISSING);
                 }
             }
@@ -97,6 +98,11 @@ namespace Yulinti.Exercitus.Dux {
                 resFluida
             );
             if (idStatusProximus == IDPuellaeStatusCorporis.None) return;
+            // 次のステートが存在しない場合はエラーを出力して処理をスキップ
+            if (_statuum[(int)idStatusProximus] == null) {
+                Notarius.Memorare(LogTextus.MachinaPuellaeStatuumCorporis_MACHINAPUELLAESTATUUMCORPORIS_STATUS_MISSING);
+                return;
+            }
 
             _idStatusProximus = idStatusProximus;
             _statusCorporisActualis.Exire(_contextusOstiorum, resFluida, null);

@@ -4,6 +4,17 @@
     height: 100%;
 }
 
+.portus-bg {
+    position: absolute;
+    width: 480px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    background-image: url('project:/Assets/Resources/Images/panel-grd.png');
+    opacity: 0.9;
+}
+
 .portus-panel {
     width: 380px;
     height: 100%;
@@ -11,7 +22,32 @@
     justify-content: flex-start;
     align-items: flex-start;
 
-    padding-right: 48px;
-    padding-top: 48px;
+    padding-left: 48px;
+    padding-top: 64px;
     flex-direction: column;
+}
+
+
+.portus-button .button-label {
+    font-size: 42px;
+}
+
+.portus-button-profectio .button-label {
+    color: #cbb7c7;
+    font-size: 54px;
+}
+
+.portus-button-profectio .indicator {
+    background-color: #cbb7c7;
+}
+
+.portus-button-optiones .button-label,
+.portus-button-exi .button-label {
+    color: #b85a8f;
+    font-size: 36px;
+}
+
+.portus-button-optiones .indicator,
+.portus-button-exi .indicator {
+    background-color: #b85a8f;
 }

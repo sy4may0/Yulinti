@@ -1,7 +1,7 @@
 using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Contractus {
-    public interface IOrator : IIncipabilis, IPulsabilis, IPulsabilisFixus, IPulsabilisTardus {
+    public interface IOrator : IIncipabilis, IPulsabilis, IPulsabilisFixus, IPulsabilisTardus, ILiberabilis {
     }
 
     // DontDestroyOnLoadのOrator

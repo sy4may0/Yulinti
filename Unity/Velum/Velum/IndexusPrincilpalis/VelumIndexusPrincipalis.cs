@@ -17,6 +17,11 @@ namespace Yulinti.Unity.Velum {
         private Button _buttonOneraLudum;
         private Button _buttonOptiones;
         private Button _buttonExi;
+        private Label _labelLudusNovus;
+        private Label _labelPergeLudum;
+        private Label _labelOneraLudum;
+        private Label _labelOptiones;
+        private Label _labelExi;
 
         private Action _onLudusNovus;
         private Action _onPergeLudum;
@@ -48,12 +53,17 @@ namespace Yulinti.Unity.Velum {
             _buttonOneraLudum = _panelIndexusPrincipalis.Q<Button>("buttonOneraLudum");
             _buttonOptiones = _panelIndexusPrincipalis.Q<Button>("buttonOptiones");
             _buttonExi = _panelIndexusPrincipalis.Q<Button>("buttonExi");
+            _labelLudusNovus = _panelIndexusPrincipalis.Q<Label>("indexprincipalis-button-ludus-novus-label");
+            _labelPergeLudum = _panelIndexusPrincipalis.Q<Label>("indexprincipalis-button-perge-ludum-label");
+            _labelOneraLudum = _panelIndexusPrincipalis.Q<Label>("indexprincipalis-button-onera-ludum-label");
+            _labelOptiones = _panelIndexusPrincipalis.Q<Label>("indexprincipalis-button-optiones-label");
+            _labelExi = _panelIndexusPrincipalis.Q<Label>("indexprincipalis-button-exi-label");
 
-            _buttonLudusNovus.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS);
-            _buttonPergeLudum.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_PERGE_LUDUM);
-            _buttonOneraLudum.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_ONERA_LUDUM);
-            _buttonOptiones.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_OPTIONES);
-            _buttonExi.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_EXIT);
+            _labelLudusNovus.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS);
+            _labelPergeLudum.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_PERGE_LUDUM);
+            _labelOneraLudum.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_ONERA_LUDUM);
+            _labelOptiones.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_OPTIONES);
+            _labelExi.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_EXIT);
         }
 
         public void Activare() {
@@ -66,27 +76,12 @@ namespace Yulinti.Unity.Velum {
 
         public void DemittereIndexusPrincipalis() {
             ExuereCallbacks();
-            ActivareButton(ButtonIndexusPrincipalis.LudusNovus);
-            ActivareButton(ButtonIndexusPrincipalis.PergeLudum);
-            ActivareButton(ButtonIndexusPrincipalis.OneraLudum);
-            ActivareButton(ButtonIndexusPrincipalis.Optiones);
-            ActivareButton(ButtonIndexusPrincipalis.Exi);
             Activare();
             _buttonLudusNovus.Focus();
         }
 
         public void TollereIndexusPrincipalis() {
             ExuereCallbacks();
-            DeactivareButton(ButtonIndexusPrincipalis.LudusNovus);
-            DeactivareButton(ButtonIndexusPrincipalis.PergeLudum);
-            DeactivareButton(ButtonIndexusPrincipalis.OneraLudum);
-            DeactivareButton(ButtonIndexusPrincipalis.Optiones);
-            DeactivareButton(ButtonIndexusPrincipalis.Exi);
-            _buttonLudusNovus.Blur();
-            _buttonPergeLudum.Blur();
-            _buttonOneraLudum.Blur();
-            _buttonOptiones.Blur();
-            _buttonExi.Blur();
             Deactivare();
         }
 

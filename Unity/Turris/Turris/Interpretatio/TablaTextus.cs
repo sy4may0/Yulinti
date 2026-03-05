@@ -38,6 +38,19 @@ namespace Yulinti.Unity.Turris {
                 { IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_BUTTON_ITA, "削除" },
                 { IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_BUTTON_NON, "キャンセル" },
 
+                // 出撃画面
+                { IDTextus.PORTUS_BUTTON_PROFECTIO, "しゅつげき!!" },
+                { IDTextus.PORTUS_BUTTON_CONSTRUCTIO, "お着替え" },
+                { IDTextus.PORTUS_BUTTON_TABERNA, "通販" },
+                { IDTextus.PORTUS_BUTTON_OPTIONES, "オプション" },
+                { IDTextus.PORTUS_BUTTON_EXI, "ゲーム終了" },
+
+                // Portus:タイトルに戻る確認
+                { IDTextus.PORTUS_BUTTON_EXI_TITULUS, "ゲーム終了" },
+                { IDTextus.PORTUS_BUTTON_EXI_TEXTUS, "ゲームを終了し、タイトル画面に戻ります。よろしいですか？" },
+                { IDTextus.PORTUS_BUTTON_EXI_BUTTON_ITA, "ゲーム終了" },
+                { IDTextus.PORTUS_BUTTON_EXI_BUTTON_NON, "キャンセル" },
+
                 // PuellaePersonae
                 { IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX, "Level." },
                 { IDTextus.PUELLAEPERSONAE_ANIMA_PREFIX, "Exp." },
