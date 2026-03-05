@@ -1,0 +1,17 @@
+.portus-root {
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.portus-panel {
+    width: 380px;
+    height: 100%;
+
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding-right: 48px;
+    padding-top: 48px;
+    flex-direction: column;
+}

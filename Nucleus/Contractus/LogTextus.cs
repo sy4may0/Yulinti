@@ -75,6 +75,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraPortus_ANCHORAPORTUS_ANCHORAPUELLAECRINIS_NULL = "AnchoraPortus - anchora puellae crinis null";
         public const string AnchoraPortus_ANCHORAPORTUS_RESOLVE_FAILED = "AnchoraPortus - anchora portus resolve failed";
         public const string AnchoraPortus_ANCHORAPORTUS_VALIDARE_FAILED = "AnchoraPortus - anchora portus validare failed";
+        public const string AnchoraVelumPortus_ANCHORAVELUMPORTUS_UIDOCUMENT_NULL = "AnchoraVelumPortus - uidocument null";
         public const string AnchoraVelumIndexusPrincipalis_ANCHORAVELUMINDEXUSPRINCIPALIS_UIDOCUMENT_NULL = "AnchoraVelumIndexusPrincipalis - uidocument null";
         public const string AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_UIDOCUMENT_NULL = "AnchoraVelumSalsamenti - uidocument null";
         public const string AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_FORMAARTICULUSSALSAMENTI_NULL = "AnchoraVelumSalsamenti - forma articulus salsamenti null";
