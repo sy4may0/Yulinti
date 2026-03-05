@@ -29,8 +29,11 @@ namespace Yulinti.Exercitus.Dux {
                 _contextusOstiorum
             );
 
-            _statusCorporisActualis = _statuum[(int)IDPuellaeStatusCorporis.Quies];
-            _idStatusActualis = IDPuellaeStatusCorporis.Quies;
+            // 初期ステートを設定
+            _statusCorporisActualis = _statuum[
+                (int)_contextusOstiorum.Configuratio.Statuum.IDStatusCorporisIncipalis
+            ];
+            _idStatusActualis = _contextusOstiorum.Configuratio.Statuum.IDStatusCorporisIncipalis;
             _idStatusProximus = IDPuellaeStatusCorporis.None;
 
             _adMutareStatus = AdMutareStatus;
@@ -59,8 +62,11 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         public void Initare(IResFluidaPuellaeLegibile resFluida) {
-            _statusCorporisActualis = _statuum[(int)IDPuellaeStatusCorporis.Quies];
-            _idStatusActualis = IDPuellaeStatusCorporis.Quies;
+            // 初期ステートを設定
+            _statusCorporisActualis = _statuum[
+                (int)_contextusOstiorum.Configuratio.Statuum.IDStatusCorporisIncipalis
+            ];
+            _idStatusActualis = _contextusOstiorum.Configuratio.Statuum.IDStatusCorporisIncipalis;
             _idStatusProximus = IDPuellaeStatusCorporis.None;
             _statusCorporisActualis.Intrare(_contextusOstiorum, resFluida, null);
             // ベースアニメーションを適用

@@ -16,5 +16,8 @@ namespace Yulinti.Exercitus.Contractus {
         // 初期位置設定
         System.Numerics.Vector3 PositioIncipalis { get; }
         System.Numerics.Quaternion RotatioIncipalis { get; }
+
+        // 初期ステート
+        IDPuellaeStatusCorporis IDStatusCorporisIncipalis { get; }
    }
 }
