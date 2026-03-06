@@ -30,4 +30,11 @@ namespace Yulinti.Exercitus.Contractus {
         NihilPartis
 
     }
+
+    public enum NewIDPuellaeAnimationis {
+        Nihil,
+        Basis,
+        StasisBasis,
+        Incumbo,
+    }
 }

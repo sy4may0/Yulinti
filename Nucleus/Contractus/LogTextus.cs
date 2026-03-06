@@ -157,6 +157,14 @@ namespace Yulinti.Nucleus.Contractus {
         public const string MinisteriumPuellaeAnimationes_MINISTERIUMPUELLAEANIMATIONES_ANIMATION_NOT_SET = "MinisteriumPuellaeAnimationes - animation not set";
         public const string ModeratorErrorum_Fatal = "ModeratorErrorum - fatal";
         public const string NewLuditorAnimationis_LUDITORANIMATIONIS_LAYER_NOT_FOUND = "NewLuditorAnimationis - luditoranimationis layer not found";
+        public const string LusorAnimationis_LUSORANIMATIONIS_ANIMANCER_NULL = "LusorAnimationis - lusoranimationis animancer null";
+        public const string LusorAnimationis_LUSORANIMATIONIS_INDEXUS_LUSORIS_OUT_OF_RANGE = "LusorAnimationis - lusoranimationis indexus lusoris out of range";
+        public const string LusorAnimationis_LUSORANIMATIONIS_LAYER_NOT_FOUND = "LusorAnimationis - lusoranimationis layer not found";
+        public const string LusorAnimationis_LUSORANIMATIONIS_PLAY_ANIMATION_FAILED = "LusorAnimationis - lusoranimationis play animation failed";
+        public const string LusorAnimationis_LUSORANIMATIONIS_ONUS_NULL = "LusorAnimationis - lusoranimationis onus null";
+        public const string LusorAnimationis_LUSORANIMATIONIS_BASE_STOP_NOT_ALLOWED = "LusorAnimationis - lusoranimationis base stop not allowed";
+        public const string LusorAnimationis_LUSORANIMATIONIS_BASE_CONTEMPORARE_NOT_ALLOWED = "LusorAnimationis - lusoranimationis base contemporare not allowed";
+        public const string LusorAnimationis_LUSORANIMATIONIS_LEGERE_SIMULATANEUM_ALLOWED_ONLY_BASE = "LusorAnimationis - lusoranimationis legere simulataneum allowed only base layer";
         public const string NihilAut_UnwrapFailed = "NihilAut - unwrap failed";
         public const string OstiumCameraLegibile_OSTIUMCAMERALEGIBILE_INSTANCE_NULL = "OstiumCameraLegibile - instance null";
         public const string OstiumCameraMutabile_OSTIUMCAMERAMUTABILE_INSTANCE_NULL = "OstiumCameraMutabile - instance null";
@@ -182,6 +190,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string TabulaCivis_TABULACIVIS_ANCHORA_DUPLICATE = "TabulaCivis - anchora duplicate";
         public const string TabulaCivis_TABULACIVIS_ANCHORA_NULL = "TabulaCivis - anchora null";
         public const string TabulaPuellaeAnimationumContinuata_TABULAPUELLAEANIMATIONUMCONTINUATA_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationumContinuata - config not found";
+        public const string TabulaPuellaeAnimationum_TABULAPUELLAEANIMATIONUM_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationum - config not found";
         public const string TabulaPuellaeCrinis_TABULAPUELLAECRINIS_ID_NOT_FOUND = "TabulaPuellaeCrinis - id not found";
         public const string TabulaPuellaeFiguraeGenus_TABULAPUELLAEFIGURAEGENUS_BLEND_SHAPE_NOT_FOUND = "TabulaPuellaeFiguraeGenus - blend shape not found";
         public const string TabulaPuellaeFiguraePelvis_TABULAPUELLAEFIGURAEPELVIS_BLEND_SHAPE_NOT_FOUND = "TabulaPuellaeFiguraePelvis - blend shape not found";
