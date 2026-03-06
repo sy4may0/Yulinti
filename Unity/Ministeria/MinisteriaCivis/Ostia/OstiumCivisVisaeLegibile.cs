@@ -12,7 +12,7 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public bool EstVisa(int idCivis, Vector3 positio) {
-            return _miCivisVisae.EstVisa(idCivis, InterpressNumericus.ToUnity(positio));
+            return _miCivisVisae.EstVisa(idCivis, InterpresNumeri.ToUnity(positio));
         }
 
         public bool ConareLegoPositioCapitis(int idCivis, out Vector3 positio) {
@@ -20,7 +20,7 @@ namespace Yulinti.Unity.Ministeria {
                 positio = new Vector3(0f, 0f, 0f);
                 return false;
             }
-            positio = InterpressNumericus.ToNumerics(positioP);
+            positio = InterpresNumeri.ToNumerics(positioP);
             return true;
         }
 
@@ -29,7 +29,7 @@ namespace Yulinti.Unity.Ministeria {
                 directio = new Vector3(0f, 0f, 0f);
                 return false;
             }
-            directio = InterpressNumericus.ToNumerics(directioP);
+            directio = InterpresNumeri.ToNumerics(directioP);
             return true;
         }
     }

@@ -7,32 +7,43 @@
 
     <ui:VisualElement name="indexprincipalis-root" class="container indexprincipalis-root">
       <ui:VisualElement name="indexprincipalis-panel" class="container indexprincipalis-panel">
+        <ui:VisualElement name="indexprincipalis-bg" class="container indexprincipalis-bg" />
        
         <ui:Button 
             name="buttonLudusNovus" 
-            text="New Game" 
-            class="button button-ghost indexprincipalis-button indexprincipalis-button-ludus-novus"
-        />
+            class="button button-indicator indexprincipalis-button indexprincipalis-button-ludus-novus"
+        >
+            <ui:VisualElement name="indexprincipalis-button-ludus-novus-indicator" class="indicator indexprincipalis-button-ludus-novus-indicator" />
+            <ui:Label name="indexprincipalis-button-ludus-novus-label" class="label-h2 button-label indexprincipalis-button-ludus-novus-label" text="New Game" />
+        </ui:Button>
         <ui:Button
             name="buttonPergeLudum"
-            text="Continue"
-            class="button button-ghost indexprincipalis-button indexprincipalis-button-perge-ludum"
-        />
+            class="button button-indicator indexprincipalis-button indexprincipalis-button-perge-ludum"
+        >
+            <ui:VisualElement name="indexprincipalis-button-perge-ludum-indicator" class="indicator indexprincipalis-button-perge-ludum-indicator" />
+            <ui:Label name="indexprincipalis-button-perge-ludum-label" class="label-h2 button-label indexprincipalis-button-perge-ludum-label" text="Continue" />
+        </ui:Button>
         <ui:Button
             name="buttonOneraLudum"
-            text="Load Game" 
-            class="button button-ghost indexprincipalis-button indexprincipalis-button-onera-ludum"
-        />
+            class="button button-indicator indexprincipalis-button indexprincipalis-button-onera-ludum"
+        >
+            <ui:VisualElement name="indexprincipalis-button-onera-ludum-indicator" class="indicator indexprincipalis-button-onera-ludum-indicator" />
+            <ui:Label name="indexprincipalis-button-onera-ludum-label" class="label-h2 button-label indexprincipalis-button-onera-ludum-label" text="Load Game" />
+        </ui:Button>
         <ui:Button
             name="buttonOptiones"
-            text="Options"
-            class="button button-ghost indexprincipalis-button indexprincipalis-button-optiones"
-        />
+            class="button button-indicator indexprincipalis-button indexprincipalis-button-optiones"
+        >
+            <ui:VisualElement name="indexprincipalis-button-optiones-indicator" class="indicator indexprincipalis-button-optiones-indicator" />
+            <ui:Label name="indexprincipalis-button-optiones-label" class="label-h2 button-label indexprincipalis-button-optiones-label" text="Options" />
+        </ui:Button>
         <ui:Button
             name="buttonExi"
-            text="Exit"
-            class="button button-ghost indexprincipalis-button indexprincipalis-button-exi"
-        />
+            class="button button-indicator indexprincipalis-button indexprincipalis-button-exi"
+        >
+            <ui:VisualElement name="indexprincipalis-button-exi-indicator" class="indicator indexprincipalis-button-exi-indicator" />
+            <ui:Label name="indexprincipalis-button-exi-label" class="label-h2 button-label indexprincipalis-button-exi-label" text="Exit" />
+        </ui:Button>
       </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

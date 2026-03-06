@@ -12,6 +12,8 @@ namespace Yulinti.Exercitus.Dux {
         private readonly Dictionary<IDPuellaeStatusCorporis, IRamusPuellaeCorporis[][]> _tabula;
         private readonly Random _random;
 
+        // !!!!!! LINQを使っている !!!!!!!!!!
+        // Updateループでは呼ぶな。Awakeのコンストラクタ以外で使わない。
         public ResolutorPuellaeRamorumCorporis(
             ContextusPuellaeOstiorumLegibile contextusOstiorum
         ) {

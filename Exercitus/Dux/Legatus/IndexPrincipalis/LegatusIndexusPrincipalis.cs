@@ -13,6 +13,8 @@ namespace Yulinti.Exercitus.Dux {
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ITurrisSalsamenti _turrisSalsamenti;
 
+        private readonly CuratorVela _curatorVela;
+
         // 下位Legatus
         private readonly LegatusSalsamenti _legatusSalsamenti;
 
@@ -38,7 +40,8 @@ namespace Yulinti.Exercitus.Dux {
             ITurrisInterpretationis turrisInterpretationis,
             ITurrisSalsamenti turrisSalsamenti,
             ILegatusConfirmationis legatusConfirmationis,
-            LegatusSalsamenti legatusSalsamenti
+            LegatusSalsamenti legatusSalsamenti,
+            CuratorVela curatorVela
         ) {
             _turrisMundus = turrisMundus;
             _velumIndexusPrincipalis = velumIndexusPrincipalis;
@@ -46,6 +49,7 @@ namespace Yulinti.Exercitus.Dux {
             _turrisSalsamenti = turrisSalsamenti;
             _legatusConfirmationis = legatusConfirmationis;
             _legatusSalsamenti = legatusSalsamenti;
+            _curatorVela = curatorVela;
 
             _aeAdPremereLudusNovus = AdPremereLudusNovus;
             _aeAdPremerePergeLudum = AdPremerePergeLudum;
@@ -144,7 +148,9 @@ namespace Yulinti.Exercitus.Dux {
                 }
 
                 _ = await _turrisSalsamenti.Creare(_cancellationTokenSource.Token);
-                _turrisMundus.AdMudum(IDMundi.MundusTestScene);
+                // UIを消す
+                _curatorVela.TollereVelaOmnium();
+                _turrisMundus.AdMudum(IDMundi.MundusPortus);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
@@ -164,7 +170,8 @@ namespace Yulinti.Exercitus.Dux {
             }
             try {
                 _ = await _turrisSalsamenti.ArcessereNovissimus(_cancellationTokenSource.Token);
-                _turrisMundus.AdMudum(IDMundi.MundusTestScene);
+                _curatorVela.TollereVelaOmnium();
+                _turrisMundus.AdMudum(IDMundi.MundusPortus);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {

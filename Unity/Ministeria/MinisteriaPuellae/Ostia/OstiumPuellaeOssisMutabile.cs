@@ -17,15 +17,14 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public void PonoPositionem(IDPuellaeOssis idOssis, System.Numerics.Vector3 positio) {
-            _miPuellaeOssis.PonoPositionem(idOssis, InterpressNumericus.ToUnity(positio));
+            _miPuellaeOssis.PonoPositionem(idOssis, InterpresNumeri.ToUnity(positio));
         }
         public void PonoRotationem(IDPuellaeOssis idOssis, System.Numerics.Quaternion rotatio) {
-            _miPuellaeOssis.PonoRotationem(idOssis, InterpressNumericus.ToUnity(rotatio));
+            _miPuellaeOssis.PonoRotationem(idOssis, InterpresNumeri.ToUnity(rotatio));
         }
         public void PonoScalam(IDPuellaeOssis idOssis, System.Numerics.Vector3 scala) {
-            _miPuellaeOssis.PonoScalam(idOssis, InterpressNumericus.ToUnity(scala));
+            _miPuellaeOssis.PonoScalam(idOssis, InterpresNumeri.ToUnity(scala));
         }
     }
 }
-
 

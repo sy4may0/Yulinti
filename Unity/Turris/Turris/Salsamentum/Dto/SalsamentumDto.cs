@@ -2,11 +2,11 @@ using Newtonsoft.Json;
 
 namespace Yulinti.Unity.Turris {
     internal sealed class SalsamentumDto {
-        [JsonProperty("puellae")]
-        public SalsamentumPuellaeDto Puellae { get; set; }
+        [JsonProperty("puellae_personae")]
+        public SalsamentumPuellaePersonaeDto PuellaePersonae { get; set; }
 
         public SalsamentumDto() {
-            Puellae = new SalsamentumPuellaeDto();
+            PuellaePersonae = new SalsamentumPuellaePersonaeDto();
         }
     }
 }

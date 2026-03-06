@@ -29,8 +29,11 @@ namespace Yulinti.Exercitus.Dux {
                 _contextusOstiorum
             );
 
-            _statusCorporisActualis = _statuum[(int)IDPuellaeStatusCorporis.Quies];
-            _idStatusActualis = IDPuellaeStatusCorporis.Quies;
+            // 初期ステートを設定
+            _statusCorporisActualis = _statuum[
+                (int)_contextusOstiorum.Configuratio.Statuum.IDStatusCorporisIncipalis
+            ];
+            _idStatusActualis = _contextusOstiorum.Configuratio.Statuum.IDStatusCorporisIncipalis;
             _idStatusProximus = IDPuellaeStatusCorporis.None;
 
             _adMutareStatus = AdMutareStatus;
@@ -50,8 +53,9 @@ namespace Yulinti.Exercitus.Dux {
                 );
             }
 
-            foreach (IDPuellaeStatusCorporis id in Enum.GetValues(typeof(IDPuellaeStatusCorporis))) {
-                if (id != IDPuellaeStatusCorporis.None && statuum[(int)id] == null) {
+            foreach (IConfiguratioPuellaeStatusCorporis conf in configurationemCorporis) {
+                int id = (int)conf.Id;
+                if (statuum[id] == null) {
                     Carnifex.Intermissio(LogTextus.MachinaPuellaeStatuumCorporis_MACHINAPUELLAESTATUUMCORPORIS_STATUS_MISSING);
                 }
             }
@@ -59,8 +63,11 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         public void Initare(IResFluidaPuellaeLegibile resFluida) {
-            _statusCorporisActualis = _statuum[(int)IDPuellaeStatusCorporis.Quies];
-            _idStatusActualis = IDPuellaeStatusCorporis.Quies;
+            // 初期ステートを設定
+            _statusCorporisActualis = _statuum[
+                (int)_contextusOstiorum.Configuratio.Statuum.IDStatusCorporisIncipalis
+            ];
+            _idStatusActualis = _contextusOstiorum.Configuratio.Statuum.IDStatusCorporisIncipalis;
             _idStatusProximus = IDPuellaeStatusCorporis.None;
             _statusCorporisActualis.Intrare(_contextusOstiorum, resFluida, null);
             // ベースアニメーションを適用
@@ -69,6 +76,11 @@ namespace Yulinti.Exercitus.Dux {
                 adInitium: null,
                 adFinem: null,
                 estCogere: true
+            );
+            // 初期地点に移動
+            _contextusOstiorum.Carrus.PostulareNavmeshInitii(
+                _contextusOstiorum.Configuratio.Statuum.PositioIncipalis,
+                _contextusOstiorum.Configuratio.Statuum.RotatioIncipalis
             );
         }
 
@@ -86,6 +98,11 @@ namespace Yulinti.Exercitus.Dux {
                 resFluida
             );
             if (idStatusProximus == IDPuellaeStatusCorporis.None) return;
+            // 次のステートが存在しない場合はエラーを出力して処理をスキップ
+            if (_statuum[(int)idStatusProximus] == null) {
+                Notarius.Memorare(LogTextus.MachinaPuellaeStatuumCorporis_MACHINAPUELLAESTATUUMCORPORIS_STATUS_MISSING);
+                return;
+            }
 
             _idStatusProximus = idStatusProximus;
             _statusCorporisActualis.Exire(_contextusOstiorum, resFluida, null);

@@ -4,6 +4,7 @@ namespace Yulinti.Exercitus.Dux {
     internal sealed class ContextusPuellaeOstiorumLegibile {
         private readonly IConfiguratioExercitusPuellae _configuratio;
         private readonly ITurrisIntroductionis _turrisIntroductionis;
+        private readonly ITurrisSalsamentiLegibile _turrisSalsamenti;
         private readonly IOstiumTemporisLegibile _temporis;
         private readonly IOstiumCameraLegibile _camera;
         private readonly IOstiumPuellaeLociLegibile _loci;
@@ -15,6 +16,7 @@ namespace Yulinti.Exercitus.Dux {
         public ContextusPuellaeOstiorumLegibile(
             IConfiguratioExercitusPuellae configuratio,
             ITurrisIntroductionis turrisIntroductionis,
+            ITurrisSalsamentiLegibile turrisSalsamenti,
             IOstiumTemporisLegibile temporis,
             IOstiumCameraLegibile camera,
             IOstiumPuellaeLociLegibile loci,
@@ -25,6 +27,7 @@ namespace Yulinti.Exercitus.Dux {
         ) {
             _configuratio = configuratio;
             _turrisIntroductionis = turrisIntroductionis;
+            _turrisSalsamenti = turrisSalsamenti;
             _temporis = temporis;
             _camera = camera;
             _loci = loci;
@@ -36,6 +39,7 @@ namespace Yulinti.Exercitus.Dux {
 
         public IConfiguratioExercitusPuellae Configuratio => _configuratio;
         public ITurrisIntroductionis Introductionis => _turrisIntroductionis;
+        public ITurrisSalsamentiLegibile Salsamentum => _turrisSalsamenti;
         public IOstiumTemporisLegibile Temporis => _temporis;
         public IOstiumCameraLegibile Camera => _camera;
         public IOstiumPuellaeLociLegibile Loci => _loci;

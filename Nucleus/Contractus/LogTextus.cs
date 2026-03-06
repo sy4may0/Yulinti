@@ -70,6 +70,12 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraPuellae_MINISTERIUMPUELLAEANIMATIONES_ANIMANCER_NULL = "AnchoraPuellae - ministeriumpuellaeanimationes animancer null";
         public const string AnchoraTestScene_REX_ANCHORA_NOT_SET = "AnchoraTestScene - rex anchora not set";
         public const string AnchoraTestScene_REX_ANCHORA_RESOLVE_FAILED = "AnchoraTestScene - rex anchora resolve failed";
+        public const string AnchoraPortus_ANCHORAPORTUS_ANCHORACAMERA_NULL = "AnchoraPortus - anchora camera null";
+        public const string AnchoraPortus_ANCHORAPORTUS_ANCHORAPUELLAE_NULL = "AnchoraPortus - anchora puellae null";
+        public const string AnchoraPortus_ANCHORAPORTUS_ANCHORAPUELLAECRINIS_NULL = "AnchoraPortus - anchora puellae crinis null";
+        public const string AnchoraPortus_ANCHORAPORTUS_RESOLVE_FAILED = "AnchoraPortus - anchora portus resolve failed";
+        public const string AnchoraPortus_ANCHORAPORTUS_VALIDARE_FAILED = "AnchoraPortus - anchora portus validare failed";
+        public const string AnchoraVelumPortus_ANCHORAVELUMPORTUS_UIDOCUMENT_NULL = "AnchoraVelumPortus - uidocument null";
         public const string AnchoraVelumIndexusPrincipalis_ANCHORAVELUMINDEXUSPRINCIPALIS_UIDOCUMENT_NULL = "AnchoraVelumIndexusPrincipalis - uidocument null";
         public const string AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_UIDOCUMENT_NULL = "AnchoraVelumSalsamenti - uidocument null";
         public const string AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_FORMAARTICULUSSALSAMENTI_NULL = "AnchoraVelumSalsamenti - forma articulus salsamenti null";
@@ -83,6 +89,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string CuratorCivisGenerationis_InitException = "CuratorCivisGenerationis - init exception";
         public const string ErrorAut_UnwrapFailed = "ErrorAut - unwrap failed";
         public const string Errorum_Fatal = "Errorum - fatal";
+        public const string MilesPuellaeVigoris_MILSEPUELLAEVIGORIS_SALSAMENTUM_ACTUALIS_NULL = "MilesPuellaeVigoris - salsamentum actualis null";
         public const string ExecutorCivisAnimationis_EXECUTORCIVISANIMATIONIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisAnimationis - ordinatio queue full";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_APPLICARE_MOTUS_NULL = "ExecutorCivisLoci - applicare motus null";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_APPLICARE_NAVMESH_NULL = "ExecutorCivisLoci - applicare navmesh null";
@@ -134,6 +141,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_LACUS_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinis lacus full";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_MISSING = "MachinaCivisStatuumCorporis - status missing";
         public const string MachinaPuellaeStatuumCorporis_MACHINAPUELLAESTATUUMCORPORIS_STATUS_MISSING = "MachinaPuellaeStatuumCorporis - status missing";
+        public const string MachinaPuellaeStatuumCorporis_MACHINAPUELLAESTATUUMCORPORIS_STATUS_NOT_FOUND = "MachinaPuellaeStatuumCorporis - status not found";
         public const string MinisteriumCivisAnimationes_MINISTERIUICIVISANIMATIONES_ANCHORA_NULL = "MinisteriumCivisAnimationes - Anchora is null";
         public const string MinisteriumCivisGenerator_GENERATORCIVIS_TIMEOUT_INITIARE = "MinisteriumCivisGenerator - generatorcivis timeout initiare";
         public const string MinisteriumCivis_CIVIS_ADINCARNARE_ALREADY_SET = "MinisteriumCivis - civis adincarnare already set";
@@ -146,8 +154,17 @@ namespace Yulinti.Nucleus.Contractus {
         public const string MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_CAPITIS = "MinisteriumPuellaeResVisae - ministeriumpuellae uninitialized resvisae capitis";
         public const string MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_NATIUM = "MinisteriumPuellaeResVisae - ministeriumpuellae uninitialized resvisae natium";
         public const string MinisteriumPuellaeResVisae_MINISTERIUMPUELLAE_UNINITIALIZED_RESVISAE_PECTORIS = "MinisteriumPuellaeResVisae - ministeriumpuellae uninitialized resvisae pectoris";
+        public const string MinisteriumPuellaeAnimationes_MINISTERIUMPUELLAEANIMATIONES_ANIMATION_NOT_SET = "MinisteriumPuellaeAnimationes - animation not set";
         public const string ModeratorErrorum_Fatal = "ModeratorErrorum - fatal";
         public const string NewLuditorAnimationis_LUDITORANIMATIONIS_LAYER_NOT_FOUND = "NewLuditorAnimationis - luditoranimationis layer not found";
+        public const string LusorAnimationis_LUSORANIMATIONIS_ANIMANCER_NULL = "LusorAnimationis - lusoranimationis animancer null";
+        public const string LusorAnimationis_LUSORANIMATIONIS_INDEXUS_LUSORIS_OUT_OF_RANGE = "LusorAnimationis - lusoranimationis indexus lusoris out of range";
+        public const string LusorAnimationis_LUSORANIMATIONIS_LAYER_NOT_FOUND = "LusorAnimationis - lusoranimationis layer not found";
+        public const string LusorAnimationis_LUSORANIMATIONIS_PLAY_ANIMATION_FAILED = "LusorAnimationis - lusoranimationis play animation failed";
+        public const string LusorAnimationis_LUSORANIMATIONIS_ONUS_NULL = "LusorAnimationis - lusoranimationis onus null";
+        public const string LusorAnimationis_LUSORANIMATIONIS_BASE_STOP_NOT_ALLOWED = "LusorAnimationis - lusoranimationis base stop not allowed";
+        public const string LusorAnimationis_LUSORANIMATIONIS_BASE_CONTEMPORARE_NOT_ALLOWED = "LusorAnimationis - lusoranimationis base contemporare not allowed";
+        public const string LusorAnimationis_LUSORANIMATIONIS_LEGERE_SIMULATANEUM_ALLOWED_ONLY_BASE = "LusorAnimationis - lusoranimationis legere simulataneum allowed only base layer";
         public const string NihilAut_UnwrapFailed = "NihilAut - unwrap failed";
         public const string OstiumCameraLegibile_OSTIUMCAMERALEGIBILE_INSTANCE_NULL = "OstiumCameraLegibile - instance null";
         public const string OstiumCameraMutabile_OSTIUMCAMERAMUTABILE_INSTANCE_NULL = "OstiumCameraMutabile - instance null";
@@ -173,6 +190,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string TabulaCivis_TABULACIVIS_ANCHORA_DUPLICATE = "TabulaCivis - anchora duplicate";
         public const string TabulaCivis_TABULACIVIS_ANCHORA_NULL = "TabulaCivis - anchora null";
         public const string TabulaPuellaeAnimationumContinuata_TABULAPUELLAEANIMATIONUMCONTINUATA_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationumContinuata - config not found";
+        public const string TabulaPuellaeAnimationum_TABULAPUELLAEANIMATIONUM_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationum - config not found";
         public const string TabulaPuellaeCrinis_TABULAPUELLAECRINIS_ID_NOT_FOUND = "TabulaPuellaeCrinis - id not found";
         public const string TabulaPuellaeFiguraeGenus_TABULAPUELLAEFIGURAEGENUS_BLEND_SHAPE_NOT_FOUND = "TabulaPuellaeFiguraeGenus - blend shape not found";
         public const string TabulaPuellaeFiguraePelvis_TABULAPUELLAEFIGURAEPELVIS_BLEND_SHAPE_NOT_FOUND = "TabulaPuellaeFiguraePelvis - blend shape not found";

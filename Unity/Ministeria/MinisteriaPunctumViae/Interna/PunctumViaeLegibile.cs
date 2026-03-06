@@ -13,7 +13,7 @@ namespace Yulinti.Unity.Ministeria {
 
         public int ID => _punctumViae.ID;
         public IDPunctumViaeTypi Typus => _punctumViae.Typus;
-        public Vector3 Positio => InterpressNumericus.ToNumerics(_punctumViae.Positio);
+        public Vector3 Positio => InterpresNumeri.ToNumerics(_punctumViae.Positio);
         public bool EstActivum => _punctumViae.EstActivum;
     }
 }

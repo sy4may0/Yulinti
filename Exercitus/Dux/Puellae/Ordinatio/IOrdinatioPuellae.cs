@@ -5,13 +5,15 @@ namespace Yulinti.Exercitus.Dux {
         Nihil,
         ActioMotus,
         ActioNavmesh,
+        ActioNavmeshInitii,
         ActioAnimationis,
         Veletudinis,
         FiguraGenus,
         FiguraPelvis,
         Apparatus,
         VeletudinisNudi,
-        Personae
+        Personae,
+        PersonaeInitii
     }
     internal interface IOrdinatioPuellae {
         bool EstApplicandum { get; }

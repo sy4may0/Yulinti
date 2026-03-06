@@ -1,61 +1,5 @@
 using Yulinti.Exercitus.Contractus;
 namespace Yulinti.Exercitus.Dux {
-    internal sealed class ResolutorPuellaeAnimae : IResolutorPuellaeAnimae {
-        // 各Gradusに対応する必要経験値のテーブル
-        private readonly int[] _tabulaGradusAnimae;
-
-        public ResolutorPuellaeAnimae(IConfiguratioPuellaePersonae config) {
-            _tabulaGradusAnimae = new int[config.GradusMaximus + 1];
-            for (int i = 0; i <= config.GradusMaximus; i++) {
-                _tabulaGradusAnimae[i] = 
-                    ConstansPuellae.FunctioAnimae(i, config.OffsetAnimae)
-                    * config.CofficiensAnimae;
-            }
-        }
-
-        // animaからGradusを解決する
-        // tabula[i] <= anima < tabula[i+1]
-        private int ResolvereGradus(int anima) {
-            for (int i = _tabulaGradusAnimae.Length - 1; i >= 0; i--) {
-                if (anima >= _tabulaGradusAnimae[i]) {
-                    return i;
-                }
-            }
-            return 0;
-        }
-
-        public int ResolvereGradusLuxuriosus(int animaLuxuriosus) {
-            return ResolvereGradus(animaLuxuriosus);
-        }
-        public int ResolvereGradusExhibitus(int animaExhibitus) {
-            return ResolvereGradus(animaExhibitus);
-        }
-        public int ResolvereGradusPerversus(int animaPerversus) {
-            return ResolvereGradus(animaPerversus);
-        }
-        public int ResolvereGradusQuaeritDolore(int animaQuaeritDolore) {
-            return ResolvereGradus(animaQuaeritDolore);
-        }
-        public int ResolvereSensusPapillae(int animaPapillae) {
-            return ResolvereGradus(animaPapillae);
-        }
-        public int ResolvereSensusLandicae(int animaLandicae) {
-            return ResolvereGradus(animaLandicae);
-        }
-        public int ResolvereSensusVaginae(int animaVaginae) {
-            return ResolvereGradus(animaVaginae);
-        }
-        public int ResolvereSensusAni(int animaAni) {
-            return ResolvereGradus(animaAni);
-        }
-        public int ResolvereSensusAusculum(int animaAusculum) {
-            return ResolvereGradus(animaAusculum);
-        }
-        public int ResolvereSensusCorporis(int animaCorporis) {
-            return ResolvereGradus(animaCorporis);
-        }
-    }
-
     internal sealed class PhantasmaDtAnimae {
         private int _phantasmaDtAnimaeLuxuriosus;
         private int _phantasmaDtAnimaeExhibitus;
@@ -116,30 +60,6 @@ namespace Yulinti.Exercitus.Dux {
             _phantasmaDtAnimaeCorporis = _phantasmaDtAnimaeCorporis + dtAnimaeCorporis;
         }
 
-        public void Pono(
-            int dtAnimaeLuxuriosus,
-            int dtAnimaeExhibitus,
-            int dtAnimaePerversus,
-            int dtAnimaeQuaeritDolore,
-            int dtAnimaePapillae,
-            int dtAnimaeLandicae,
-            int dtAnimaeVaginae,
-            int dtAnimaeAni,
-            int dtAnimaeAusculum,
-            int dtAnimaeCorporis
-        ) {
-            _phantasmaDtAnimaeLuxuriosus = dtAnimaeLuxuriosus;
-            _phantasmaDtAnimaeExhibitus = dtAnimaeExhibitus;
-            _phantasmaDtAnimaePerversus = dtAnimaePerversus;
-            _phantasmaDtAnimaeQuaeritDolore = dtAnimaeQuaeritDolore;
-            _phantasmaDtAnimaePapillae = dtAnimaePapillae;
-            _phantasmaDtAnimaeLandicae = dtAnimaeLandicae;
-            _phantasmaDtAnimaeVaginae = dtAnimaeVaginae;
-            _phantasmaDtAnimaeAni = dtAnimaeAni;
-            _phantasmaDtAnimaeAusculum = dtAnimaeAusculum;
-            _phantasmaDtAnimaeCorporis = dtAnimaeCorporis;
-        }
-
         public void Purgere() {
             _phantasmaDtAnimaeLuxuriosus = 0;
             _phantasmaDtAnimaeExhibitus = 0;
@@ -156,53 +76,23 @@ namespace Yulinti.Exercitus.Dux {
 
     // このExecutorはシーン開始時に初期化、シーン完了時のリザルト処理でConfirmareを実行する。
     internal sealed class ExecutorPuellaePersonae : IExecutorPuellae {
-        private readonly ResFluidaPuellaePersonae _resFluidaPuellaePersonae;
-        private readonly IResolutorPuellaeAnimae _resolutorPuellaeAnimae;
+        private readonly ITurrisPhantasmaPuellaePersonae _turrisPhantasmaPuellaePersonae;
         private readonly PhantasmaDtAnimae _phantasmaDtAnimae;
 
         private bool _estConfirmare;
 
-        public ExecutorPuellaePersonae(
-            IConfiguratioExercitusPuellae configuratioExercitusPuellae,
-            ResFluidaPuellaePersonae resFluidaPuellaePersonae
-        ) {
-            _resFluidaPuellaePersonae = resFluidaPuellaePersonae;
-            _resolutorPuellaeAnimae = new ResolutorPuellaeAnimae(configuratioExercitusPuellae.Personae);
+        public ExecutorPuellaePersonae(ITurrisPhantasmaPuellaePersonae turrisPhantasmaPuellaePersonae) {
+            _turrisPhantasmaPuellaePersonae = turrisPhantasmaPuellaePersonae;
             _phantasmaDtAnimae = new PhantasmaDtAnimae();
+            _estConfirmare = false;
         }
 
         public void Initare() {
-            _resFluidaPuellaePersonae.Purgare();
-            //[TODO] セーブデータからresFluidaをロードする。
-            _phantasmaDtAnimae.Pono(
-                dtAnimaeLuxuriosus: _resFluidaPuellaePersonae.AnimaLuxuriosus,
-                dtAnimaeExhibitus: _resFluidaPuellaePersonae.AnimaExhibitus,
-                dtAnimaePerversus: _resFluidaPuellaePersonae.AnimaPerversus,
-                dtAnimaeQuaeritDolore: _resFluidaPuellaePersonae.AnimaQuaeritDolore,
-                dtAnimaePapillae: _resFluidaPuellaePersonae.AnimaPapillae,
-                dtAnimaeLandicae: _resFluidaPuellaePersonae.AnimaLandicae,
-                dtAnimaeVaginae: _resFluidaPuellaePersonae.AnimaVaginae,
-                dtAnimaeAni: _resFluidaPuellaePersonae.AnimaAni,
-                dtAnimaeAusculum: _resFluidaPuellaePersonae.AnimaAusculum,
-                dtAnimaeCorporis: _resFluidaPuellaePersonae.AnimaCorporis
-            );
-            _estConfirmare = false;
+            Purgare();
         }
 
         public void Primum() {
-            _phantasmaDtAnimae.Pono(
-                dtAnimaeLuxuriosus: _resFluidaPuellaePersonae.AnimaLuxuriosus,
-                dtAnimaeExhibitus: _resFluidaPuellaePersonae.AnimaExhibitus,
-                dtAnimaePerversus: _resFluidaPuellaePersonae.AnimaPerversus,
-                dtAnimaeQuaeritDolore: _resFluidaPuellaePersonae.AnimaQuaeritDolore,
-                dtAnimaePapillae: _resFluidaPuellaePersonae.AnimaPapillae,
-                dtAnimaeLandicae: _resFluidaPuellaePersonae.AnimaLandicae,
-                dtAnimaeVaginae: _resFluidaPuellaePersonae.AnimaVaginae,
-                dtAnimaeAni: _resFluidaPuellaePersonae.AnimaAni,
-                dtAnimaeAusculum: _resFluidaPuellaePersonae.AnimaAusculum,
-                dtAnimaeCorporis: _resFluidaPuellaePersonae.AnimaCorporis
-            );
-            _estConfirmare = false;
+            Purgare();
         }
 
         public void Executare(
@@ -228,21 +118,47 @@ namespace Yulinti.Exercitus.Dux {
             if (!_estConfirmare) {
                 return;
             }
-            _resFluidaPuellaePersonae.RenovareAnimaGradus(
-                animaLuxuriosus: _phantasmaDtAnimae.PhantasmaDtAnimaeLuxuriosus,
-                animaExhibitus: _phantasmaDtAnimae.PhantasmaDtAnimaeExhibitus,
-                animaPerversus: _phantasmaDtAnimae.PhantasmaDtAnimaePerversus,
-                animaQuaeritDolore: _phantasmaDtAnimae.PhantasmaDtAnimaeQuaeritDolore
+            _turrisPhantasmaPuellaePersonae.AddeAnimamGradus(
+                IDGradusPuellaePersonae.Luxuriosus,
+                _phantasmaDtAnimae.PhantasmaDtAnimaeLuxuriosus
             );
-            _resFluidaPuellaePersonae.RenovareAnimaSensus(
-                animaPapillae: _phantasmaDtAnimae.PhantasmaDtAnimaePapillae,
-                animaLandicae: _phantasmaDtAnimae.PhantasmaDtAnimaeLandicae,
-                animaVaginae: _phantasmaDtAnimae.PhantasmaDtAnimaeVaginae,
-                animaAni: _phantasmaDtAnimae.PhantasmaDtAnimaeAni,
-                animaAusculum: _phantasmaDtAnimae.PhantasmaDtAnimaeAusculum,
-                animaCorporis: _phantasmaDtAnimae.PhantasmaDtAnimaeCorporis
+            _turrisPhantasmaPuellaePersonae.AddeAnimamGradus(
+                IDGradusPuellaePersonae.Exhibitus,
+                _phantasmaDtAnimae.PhantasmaDtAnimaeExhibitus
             );
-            // セーブデータに保存する。
+            _turrisPhantasmaPuellaePersonae.AddeAnimamGradus(
+                IDGradusPuellaePersonae.Perversus,
+                _phantasmaDtAnimae.PhantasmaDtAnimaePerversus
+            );
+            _turrisPhantasmaPuellaePersonae.AddeAnimamGradus(
+                IDGradusPuellaePersonae.QuaeritDolore,
+                _phantasmaDtAnimae.PhantasmaDtAnimaeQuaeritDolore
+            );
+            _turrisPhantasmaPuellaePersonae.AddeAnimamSensus(
+                IDSensusPuellaePersonae.Papillae,
+                _phantasmaDtAnimae.PhantasmaDtAnimaePapillae
+            );
+            _turrisPhantasmaPuellaePersonae.AddeAnimamSensus(
+                IDSensusPuellaePersonae.Landicae,
+                _phantasmaDtAnimae.PhantasmaDtAnimaeLandicae
+            );
+            _turrisPhantasmaPuellaePersonae.AddeAnimamSensus(
+                IDSensusPuellaePersonae.Vaginae,
+                _phantasmaDtAnimae.PhantasmaDtAnimaeVaginae
+            );
+            _turrisPhantasmaPuellaePersonae.AddeAnimamSensus(
+                IDSensusPuellaePersonae.Ani,
+                _phantasmaDtAnimae.PhantasmaDtAnimaeAni
+            );
+            _turrisPhantasmaPuellaePersonae.AddeAnimamSensus(
+                IDSensusPuellaePersonae.Ausculum,
+                _phantasmaDtAnimae.PhantasmaDtAnimaeAusculum
+            );
+            _turrisPhantasmaPuellaePersonae.AddeAnimamSensus(
+                IDSensusPuellaePersonae.Corporis,
+                _phantasmaDtAnimae.PhantasmaDtAnimaeCorporis
+            );
+            Purgare();
         }
 
         public void Purgare() {

@@ -9,6 +9,7 @@ namespace Yulinti.Unity.Turris {
             SceneManager.LoadScene(mundus switch {
                 IDMundi.MundusTestScene => "SampleScene",
                 IDMundi.MundusMenu => "MenuScene",
+                IDMundi.MundusPortus => "PortusScene",
                 _ => throw new System.Exception("Invalid IDMundi")
             });
         }

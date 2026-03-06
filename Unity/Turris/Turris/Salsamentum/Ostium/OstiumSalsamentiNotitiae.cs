@@ -6,18 +6,18 @@ namespace Yulinti.Unity.Turris {
         private Guid _id;
         private DateTime _timestamp;
         private SalsamentumNotitiaeDto _salsamentumNotitiaeDto;
-        private OstiumSalsamentiPuellaeNotitiae _puellaeNotitiae;
+        private OstiumSalsamentiPuellaePersonaeNotitiae _puellaePersonaeNotitiae;
         private bool _estActivum;
 
         public Guid Id => _id;
         public DateTime Timestamp => _timestamp;
-        public IOstiumSalsamentiPuellaeNotitiae PuellaeNotitiae => _puellaeNotitiae;
+        public IOstiumSalsamentiPuellaePersonaeNotitiae PuellaePersonaeNotitiae => _puellaePersonaeNotitiae;
 
         public OstiumSalsamentiNotitiae() {
             _id = Guid.Empty;
             _timestamp = DateTime.MinValue;
             _salsamentumNotitiaeDto = new SalsamentumNotitiaeDto();
-            _puellaeNotitiae = new OstiumSalsamentiPuellaeNotitiae(_salsamentumNotitiaeDto.PuellaeNotitiae);
+            _puellaePersonaeNotitiae = new OstiumSalsamentiPuellaePersonaeNotitiae(_salsamentumNotitiaeDto.PuellaePersonaeNotitiae);
             _estActivum = false;
         }
 
@@ -26,15 +26,15 @@ namespace Yulinti.Unity.Turris {
             _id = id;
             _timestamp = timestamp;
             _salsamentumNotitiaeDto = salsamentumNotitiaeDto;
-            _puellaeNotitiae.Renovare(_salsamentumNotitiaeDto.PuellaeNotitiae);
+            _puellaePersonaeNotitiae.Renovare(_salsamentumNotitiaeDto.PuellaePersonaeNotitiae);
             _estActivum = true;
         }
 
         // 内部からのデータ更新
-        public void Renovare(Guid id, IResFluidaPuellaePersonaeLegibile resFluidaPuellaePersonae) {
+        public void Renovare(Guid id, IPhantasmaPuellaePersonae phantasmaPuellaePersonae) {
             _id = id;
             _timestamp = DateTime.Now;
-            _puellaeNotitiae.Renovare(resFluidaPuellaePersonae);
+            _puellaePersonaeNotitiae.Renovare(phantasmaPuellaePersonae);
             _estActivum = true;
         }
 

@@ -13,7 +13,7 @@ namespace Yulinti.Exercitus.Contractus {
         NihilCorporis,
         NihilPartis,
         StandardBase,
-        Crouch
+        Crouch,
     }
 
     // これはContinuataに対応する。
@@ -28,5 +28,13 @@ namespace Yulinti.Exercitus.Contractus {
 
         // Pars
         NihilPartis
+
+    }
+
+    public enum NewIDPuellaeAnimationis {
+        Nihil,
+        Basis,
+        StasisBasis,
+        Incumbo,
     }
 }

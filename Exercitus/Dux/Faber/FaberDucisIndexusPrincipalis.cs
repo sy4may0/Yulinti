@@ -13,6 +13,8 @@ namespace Yulinti.Exercitus.Dux {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            builder.Register<CuratorVela>(Lifetime.Singleton);
+
             // DuxExercitus
             builder.Register<IDuxExercitus, DuxExercitus>(Lifetime.Singleton);
         }

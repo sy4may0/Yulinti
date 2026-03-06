@@ -18,12 +18,11 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public System.Numerics.Vector3 LegoPositionem(IDPuellaeOssis idOssis) => 
-            InterpressNumericus.ToNumerics(_miPuellaeOssis.LegoPositionem(idOssis));
+            InterpresNumeri.ToNumerics(_miPuellaeOssis.LegoPositionem(idOssis));
         public System.Numerics.Quaternion LegoRotationem(IDPuellaeOssis idOssis) =>
-            InterpressNumericus.ToNumerics(_miPuellaeOssis.LegoRotationem(idOssis));
+            InterpresNumeri.ToNumerics(_miPuellaeOssis.LegoRotationem(idOssis));
         public System.Numerics.Vector3 LegoScalam(IDPuellaeOssis idOssis) =>
-            InterpressNumericus.ToNumerics(_miPuellaeOssis.LegoScalam(idOssis));
+            InterpresNumeri.ToNumerics(_miPuellaeOssis.LegoScalam(idOssis));
     }
 }
-
 

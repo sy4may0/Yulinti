@@ -41,6 +41,11 @@ namespace Yulinti.Exercitus.Dux {
             float distantiaDeaccelerationis
         );
 
+        void PostulareNavmeshInitii(
+            Vector3 positio,
+            Quaternion rotatio
+        );
+
         void PostulareVeletudinis(
             float dtVigoris = 0f,
             float dtPatientiae = 0f,

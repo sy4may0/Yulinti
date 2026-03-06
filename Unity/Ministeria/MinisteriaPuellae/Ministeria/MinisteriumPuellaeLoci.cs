@@ -61,6 +61,8 @@ namespace Yulinti.Unity.Ministeria {
         public void ActivareMotus() {
             if (EstActivumMotus()) return;
             if (!ConareLegoNavMesh(out NavMeshAgent navMeshAgent)) return;
+            // 最初に位置合わせする。(transformをnextpositionに移動するように動くため、位置が最初にずれると良くない。)
+            navMeshAgent.nextPosition = navMeshAgent.transform.position;
             navMeshAgent.isStopped = true;
             navMeshAgent.updateRotation = false;
             navMeshAgent.updatePosition = false;
@@ -213,6 +215,8 @@ namespace Yulinti.Unity.Ministeria {
 
             navMeshAgent.transform.rotation = rotatio;
             navMeshAgent.Move(motusHorizontalis);
+            // NavmeshのMoveはupdatePosition=falseで効かない。ActivareMotus時はtransformを動かす。
+            navMeshAgent.transform.position = navMeshAgent.nextPosition;
 
             _rotationisYActualis = navMeshAgent.transform.rotation.eulerAngles.y;
         }

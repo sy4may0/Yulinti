@@ -12,5 +12,12 @@ namespace Yulinti.Exercitus.Contractus {
         IDPuellaeAnimationisContinuata IdAnimationisPraedefinitus { get; }
         IConfiguratioPuellaeStatusCorporis[] StatuumCorporis { get; }
         IConfiguratioPuellaeStatusPartis[] StatuumPartium { get; }
+
+        // 初期位置設定
+        System.Numerics.Vector3 PositioIncipalis { get; }
+        System.Numerics.Quaternion RotatioIncipalis { get; }
+
+        // 初期ステート
+        IDPuellaeStatusCorporis IDStatusCorporisIncipalis { get; }
    }
 }

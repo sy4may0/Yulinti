@@ -3,6 +3,8 @@ using Animancer;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Nucleus;
 using Yulinti.Unity.Contractus;
+using Yulinti.Nucleus.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.Unity.Ministeria {
     internal sealed class MinisteriumPuellaeAnimationes : IMinisteriumPulsabilis {
@@ -27,7 +29,12 @@ namespace Yulinti.Unity.Ministeria {
             IDPuellaeAnimationisContinuata idContinuata,
             Action adInitium = null, Action adFinem = null
         ) {
+            UnityEngine.Debug.Log($"Postulare: {idContinuata}");
             IAnimatioPuellaeContinuata animatio = _tabulaContinuata.Lego(idContinuata);
+            if (animatio == null) {
+                Carnifex.Error(LogTextus.MinisteriumPuellaeAnimationes_MINISTERIUMPUELLAEANIMATIONES_ANIMATION_NOT_SET);
+                return;
+            }
             animatio.PonoAdInitium(adInitium);
             animatio.PonoAdFinem(adFinem);
 

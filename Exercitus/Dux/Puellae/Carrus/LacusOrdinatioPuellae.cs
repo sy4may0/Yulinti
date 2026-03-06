@@ -10,6 +10,7 @@ namespace Yulinti.Exercitus.Dux {
         private readonly Lacus<OrdinatioPuellaeFiguraePelvis> _lacusFiguraePelvis;
         private readonly Lacus<OrdinatioPuellaeMotus> _lacusMotus;
         private readonly Lacus<OrdinatioPuellaeNavmesh> _lacusNavmesh;
+        private readonly Lacus<OrdinatioPuellaeNavmeshInitii> _lacusNavmeshInitii;
         private readonly Lacus<OrdinatioPuellaeVeletudinis> _lacusVeletudinis;
         private readonly Lacus<OrdinatioPuellaeVeletudinisNudi> _lacusVeletudinisNudi;
         private readonly Lacus<OrdinatioPuellaePersonae> _lacusPersonae;
@@ -20,6 +21,7 @@ namespace Yulinti.Exercitus.Dux {
         private readonly DuxQueue<OrdinatioPuellaeFiguraePelvis> _emissioFiguraePelvis;
         private readonly DuxQueue<OrdinatioPuellaeMotus> _emissioMotus;
         private readonly DuxQueue<OrdinatioPuellaeNavmesh> _emissioNavmesh;
+        private readonly DuxQueue<OrdinatioPuellaeNavmeshInitii> _emissioNavmeshInitii;
         private readonly DuxQueue<OrdinatioPuellaeVeletudinis> _emissioVeletudinis;
         private readonly DuxQueue<OrdinatioPuellaeVeletudinisNudi> _emissioVeletudinisNudi;
         private readonly DuxQueue<OrdinatioPuellaePersonae> _emissioPersonae;
@@ -41,6 +43,9 @@ namespace Yulinti.Exercitus.Dux {
                 ConstansPuellae.LongitudoOrdinatioMotus
             );
             _lacusNavmesh = new Lacus<OrdinatioPuellaeNavmesh>(
+                ConstansPuellae.LongitudoOrdinatioNavmesh
+            );
+            _lacusNavmeshInitii = new Lacus<OrdinatioPuellaeNavmeshInitii>(
                 ConstansPuellae.LongitudoOrdinatioNavmesh
             );
             _lacusVeletudinis = new Lacus<OrdinatioPuellaeVeletudinis>(
@@ -67,6 +72,9 @@ namespace Yulinti.Exercitus.Dux {
                 ConstansPuellae.LongitudoOrdinatioMotus
             );
             _emissioNavmesh = new DuxQueue<OrdinatioPuellaeNavmesh>(
+                ConstansPuellae.LongitudoOrdinatioNavmesh
+            );
+            _emissioNavmeshInitii = new DuxQueue<OrdinatioPuellaeNavmeshInitii>(
                 ConstansPuellae.LongitudoOrdinatioNavmesh
             );
             _emissioVeletudinis = new DuxQueue<OrdinatioPuellaeVeletudinis>(
@@ -173,6 +181,22 @@ namespace Yulinti.Exercitus.Dux {
             }
             Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAENAVMESH_LACUS_EMPTY);
             navmesh = null;
+            return false;
+        }
+
+        public bool EmittareNavmeshInitii(out OrdinatioPuellaeNavmeshInitii navmeshInitii) {
+            if (_lacusNavmeshInitii.ConareLego(out var r)) {
+                if(_emissioNavmeshInitii.ConarePono(r)) {
+                    navmeshInitii = r;
+                    navmeshInitii.Initare();
+                    return true;
+                }
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAENAVMESH_EMISSIO_QUEUE_FULL);
+                navmeshInitii = null;
+                return false;
+            }
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAENAVMESH_LACUS_EMPTY);
+            navmeshInitii = null;
             return false;
         }
 
@@ -284,6 +308,16 @@ namespace Yulinti.Exercitus.Dux {
             }
         }
 
+        public void ColligereNavmeshInitii() {
+            while(_emissioNavmeshInitii.ConareLego(out var r)) {
+                if(!_lacusNavmeshInitii.ConarePono(r)) {
+                    r.Purgere();
+                    r.Liberare();
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAENAVMESH_LACUS_FULL);
+                }
+            }
+        }
+
         public void ColligereVeletudinis() {
             while(_emissioVeletudinis.ConareLego(out var r)) {
                 if(!_lacusVeletudinis.ConarePono(r)) {
@@ -321,6 +355,7 @@ namespace Yulinti.Exercitus.Dux {
             ColligereFiguraePelvis();
             ColligereMotus();
             ColligereNavmesh();
+            ColligereNavmeshInitii();
             ColligereVeletudinis();
             ColligereVeletudinisNudi();
             ColligerePersonae();

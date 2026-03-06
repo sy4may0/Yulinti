@@ -1,4 +1,6 @@
 using Yulinti.Exercitus.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal struct NumerusCustodiae {
@@ -97,10 +99,18 @@ namespace Yulinti.Exercitus.Dux {
                     _contextus.Configuratio.Veletudo.ConsumptioVigorisMinimaDetectio,
                     _contextus.Configuratio.Veletudo.ConsumptioVigorisMaximaDetectio
                 );
+
                 // 低レベル時はDetectioで高速死亡する。
-                if (resFluida.Persona.GradusExhibitus < _contextus.Configuratio.Veletudo.LimenRemissioExhibitus) {
+                // セーブデータが無い場合(異常)もデフォルト高速死亡
+                if (!_contextus.Salsamentum.ConareActualis(out IOstiumSalsamenti actualis)) {
+                    Carnifex.Error(LogTextus.MilesPuellaeVigoris_MILSEPUELLAEVIGORIS_SALSAMENTUM_ACTUALIS_NULL);
                     c *= _contextus.Configuratio.Veletudo.RatioConsumptioVigorisDetectio;
+                } else {
+                    if (actualis.PuellaePersonae.GradusExhibitus < _contextus.Configuratio.Veletudo.LimenRemissioExhibitus) {
+                        c *= _contextus.Configuratio.Veletudo.RatioConsumptioVigorisDetectio;
+                    }
                 }
+
                 _contextus.Carrus.PostulareVeletudinis(
                     dtVigoris: c * _contextus.Temporis.Intervallum
                 );

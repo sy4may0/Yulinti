@@ -295,6 +295,44 @@
     opacity: 0.7;
 }
 
+.button-indicator {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--accent);
+    padding: 0px;
+    width: 360px;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.button-indicator .indicator {
+    position: absolute;
+    left: 7px;
+    width: 7px;
+    top: 0px;
+    bottom: 0px;
+    background-color: var(--accent);
+    opacity: 0.3;
+
+    transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.button-indicator:hover .indicator,
+.button-indicator:focus .indicator {
+    opacity: 1;
+}
+
+.button-indicator:focus .indicator {
+    opacity: 1;
+    left: 0px;
+    width: 14px;
+}
+
+.button-indicator Label {
+    color: var(--accent);
+    padding: 0px 0px;
+    margin-left: 24px;
+}
 /* =========================
    RadioButton
    ========================= */

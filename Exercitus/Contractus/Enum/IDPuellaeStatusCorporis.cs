@@ -5,7 +5,10 @@ namespace Yulinti.Exercitus.Contractus {
         Ambulatio,            // Walk
         Cursus,               // Run
         Incumbo,              // Crouch
-        IncumboAmbulationem  // CrouchWalk
+        IncumboAmbulationem,  // CrouchWalk
+
+        // 特殊ステート Portus用
+        StasisPortus
     }
 
     public enum IDPuellaeStatusCorporisModiMotus {
