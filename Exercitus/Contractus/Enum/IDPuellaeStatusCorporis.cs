@@ -7,7 +7,10 @@ namespace Yulinti.Exercitus.Contractus {
         IncumboAmbulationem,  // CrouchWalk
 
         // 特殊ステート Portus用
-        StasisPortus
+        StasisPortus,
+
+        // 特殊ステート Nihil用
+        Nihil = 999999
     }
 
     public enum IDPuellaeStatusCorporisModiMotus {

@@ -13,7 +13,7 @@ namespace Yulinti.Regnum.Configuratio {
         [SerializeField] private float acceleratioGravitatis = -9.81f;
         [SerializeField] private float velocitasContactus = -9.81f;
         [SerializeField] private float velocitasVerticalisMax = -50.0f;
-        [SerializeField] private IDPuellaeAnimationisContinuata idAnimationisPraedefinitus;
+        [SerializeField] private IDPuellaeAnimationis idAnimationisPraedefinitus;
         [SerializeField] private ConfiguratioPuellaeStatusCorporisBasis[] statuumCorporis;
         [SerializeField] private ConfiguratioPuellaeStatusPartis[] statuumPartium;
         [SerializeField] private UnityEngine.Vector3 positioIncipalis;
@@ -29,7 +29,7 @@ namespace Yulinti.Regnum.Configuratio {
         public float AcceleratioGravitatis => acceleratioGravitatis;
         public float VelocitasContactus => velocitasContactus;
         public float VelocitasVerticalisMax => velocitasVerticalisMax;
-        public IDPuellaeAnimationisContinuata IdAnimationisPraedefinitus => idAnimationisPraedefinitus;
+        public IDPuellaeAnimationis IdAnimationisPraedefinitus => idAnimationisPraedefinitus;
         public IConfiguratioPuellaeStatusCorporis[] StatuumCorporis => statuumCorporis;
         public IConfiguratioPuellaeStatusPartis[] StatuumPartium => statuumPartium;
 

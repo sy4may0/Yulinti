@@ -6,23 +6,9 @@ namespace Yulinti.Exercitus.Contractus {
         Pars = 2
     }
 
-    // これはContinuataに対応する。
-    public enum IDPuellaeAnimationisContinuata {
-        None,
-        // Fundamenti
-        StandardBase,
-
-        // Corpus
-        NihilCorporis,
-        Crouch,
-
-        // Pars
-        NihilPartis
-
-    }
-
     public enum IDPuellaeAnimationis {
         Nihil,
+        Desinere,
         Basis,
         StasisBasis,
         Incumbo,

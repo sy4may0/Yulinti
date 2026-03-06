@@ -3,42 +3,30 @@ using System;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class OrdinatioPuellaeAnimationis : OrdinatioPuellae, IOrdinatioPuellaeAnimationis {
-        private IDPuellaeAnimationisContinuata _idAnimationis;
-        private Action _adInitium;
-        private Action _adFinem;
-        private bool _estCogere;
+        private IDPuellaeAnimationisStratum _stratum;
+        private IDPuellaeAnimationis _idAnimationis;
 
         public OrdinatioPuellaeAnimationis()
             : base(true, SpeciesOrdinatioPuellae.ActioAnimationis) {
+            _stratum = default;
             _idAnimationis = default;
-            _adInitium = null;
-            _adFinem = null;
-            _estCogere = false;
         }
 
-        public IDPuellaeAnimationisContinuata IdAnimationis => _idAnimationis;
-        public Action AdInitium => _adInitium;
-        public Action AdFinem => _adFinem;
-        public bool EstCogere => _estCogere;
+        public IDPuellaeAnimationisStratum Stratum => _stratum;
+        public IDPuellaeAnimationis IdAnimationis => _idAnimationis;
 
         public override void Purgere() {
             _estApplicandum = false;
+            _stratum = default;
             _idAnimationis = default;
-            _adInitium = null;
-            _adFinem = null;
-            _estCogere = false;
         }
 
         public void Pono(
-            IDPuellaeAnimationisContinuata idAnimationis,
-            Action adInitium = null,
-            Action adFinem = null,
-            bool estCogere = false
+            IDPuellaeAnimationisStratum stratum,
+            IDPuellaeAnimationis idAnimationis
         ) {
+            _stratum = stratum;
             _idAnimationis = idAnimationis;
-            _adInitium = adInitium;
-            _adFinem = adFinem;
-            _estCogere = estCogere;
 
             _estApplicandum = true;
         }

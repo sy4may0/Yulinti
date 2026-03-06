@@ -22,7 +22,6 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         public void Initare() {
-            //_ostiumPuellaeAnimationisMutabile.Purgere();
             _queueAnimationis.Purgere();
         }
 
@@ -42,25 +41,19 @@ namespace Yulinti.Exercitus.Dux {
         private void ApplicareAnimationis(
             IOrdinatioPuellaeAnimationis animationis
         ) {
-            // TODO 最後に直す。
-            //if (animationis.EstCogere) {
-            //    _ostiumPuellaeAnimationisMutabile.Cogere(animationis.IdAnimationis, animationis.AdInitium, animationis.AdFinem);
-            //} else {
-            //    _ostiumPuellaeAnimationisMutabile.Postulare(animationis.IdAnimationis, animationis.AdInitium, animationis.AdFinem);
-            //}
+            _ostiumPuellaeAnimationisMutabile.Exhibere(animationis.Stratum, animationis.IdAnimationis);
         }
 
         public void Confirmare() {
             while (_queueAnimationis.ConareLego(out IOrdinatioPuellaeAnimationis animationis)) {
                 ApplicareAnimationis(animationis);
             }
-            //_ostiumPuellaeAnimationisMutabile.InjicereVelocitatem(
-            //    _ostiumPuellaeLociLegibile.VelocitasHorizontalisActualis()
-            //);
+            _ostiumPuellaeAnimationisMutabile.InjicereVelocitatem(
+                _ostiumPuellaeLociLegibile.VelocitasHorizontalisActualis()
+            );
         }
 
         public void Purgare() {
-            //_ostiumPuellaeAnimationisMutabile.Purgere();
             _queueAnimationis.Purgere();
         }
     }

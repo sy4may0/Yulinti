@@ -28,6 +28,7 @@ namespace Yulinti.Unity.Ministeria {
 
             for (int i = 0; i < longitudo; i++) {
                 if (i == (int)IDPuellaeAnimationis.Nihil) continue;
+                if (i == (int)IDPuellaeAnimationis.Desinere) continue;
                 if (_animationes[i] == null) {
                     Carnifex.Intermissio(LogTextus.TabulaPuellaeAnimationum_TABULAPUELLAEANIMATIONUM_CONFIG_NOT_FOUND);
                 }

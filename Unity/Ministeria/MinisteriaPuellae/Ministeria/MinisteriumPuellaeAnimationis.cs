@@ -39,8 +39,12 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public void Exhibere(IDPuellaeAnimationisStratum stratum, IDPuellaeAnimationis id) {
-            // Nihilはアニメーション無し指定とする仕様。(Desinereと同義)
+            // Nihilはアニメーション操作を行わない。
             if (id == IDPuellaeAnimationis.Nihil) {
+                id = IDPuellaeAnimationis.Desinere;
+            }
+            // Desinereはアニメーション終了を指定。
+            if (id == IDPuellaeAnimationis.Desinere) {
                 Desinere(stratum);
                 return;
             }

@@ -6,6 +6,11 @@ namespace Yulinti.Exercitus.Contractus {
         IDPuellaeAnimationis IdAnimationisIntrare { get; }
         IDPuellaeAnimationis IdAnimationis { get; }
         IDPuellaeAnimationis IdAnimationisExire { get; }
+        bool EstInterdicta { get; }
+        bool EstInterdictaIntrare { get; }
+        bool EstInterdictaExire { get; }
+
+        IDPuellaeStatusCorporis IdStatusProximusAutomaticus { get; }
 
         float ConsumptioVigorisSec { get; }
         float ConsumptioPatientiaeSec { get; }

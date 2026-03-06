@@ -9,7 +9,7 @@ namespace Yulinti.Exercitus.Contractus {
         float AcceleratioGravitatis { get; }
         float VelocitasContactus { get; }
         float VelocitasVerticalisMax { get; }
-        IDPuellaeAnimationisContinuata IdAnimationisPraedefinitus { get; }
+        IDPuellaeAnimationis IdAnimationisPraedefinitus { get; }
         IConfiguratioPuellaeStatusCorporis[] StatuumCorporis { get; }
         IConfiguratioPuellaeStatusPartis[] StatuumPartium { get; }
 
