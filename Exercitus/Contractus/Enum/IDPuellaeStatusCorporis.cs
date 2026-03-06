@@ -1,6 +1,5 @@
 namespace Yulinti.Exercitus.Contractus {
     public enum IDPuellaeStatusCorporis {
-        None,
         Quies,                // Idle
         Ambulatio,            // Walk
         Cursus,               // Run

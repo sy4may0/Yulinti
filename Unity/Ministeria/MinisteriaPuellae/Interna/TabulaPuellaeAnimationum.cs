@@ -6,14 +6,14 @@ using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
-    internal sealed class NewTabulaPuellaeAnimationum {
+    internal sealed class TabulaPuellaeAnimationum {
         private readonly OnusAnimationis[] _animationes;
 
-        public NewTabulaPuellaeAnimationum(NewIConfiguratioPuellaeAnimationis[] config) {
-            int longitudo = Enum.GetValues(typeof(NewIDPuellaeAnimationis)).Length;
+        public TabulaPuellaeAnimationum(IConfiguratioPuellaeAnimationis[] config) {
+            int longitudo = Enum.GetValues(typeof(IDPuellaeAnimationis)).Length;
             _animationes = new OnusAnimationis[longitudo];
 
-            foreach (NewIConfiguratioPuellaeAnimationis c in config) {
+            foreach (IConfiguratioPuellaeAnimationis c in config) {
                 if (c == null) {
                     Carnifex.Intermissio(LogTextus.TabulaPuellaeAnimationum_TABULAPUELLAEANIMATIONUM_CONFIG_NOT_FOUND);
                 }
@@ -27,13 +27,13 @@ namespace Yulinti.Unity.Ministeria {
             }
 
             for (int i = 0; i < longitudo; i++) {
-                if (i == (int)NewIDPuellaeAnimationis.Nihil) continue;
+                if (i == (int)IDPuellaeAnimationis.Nihil) continue;
                 if (_animationes[i] == null) {
                     Carnifex.Intermissio(LogTextus.TabulaPuellaeAnimationum_TABULAPUELLAEANIMATIONUM_CONFIG_NOT_FOUND);
                 }
             }
         }
 
-        public OnusAnimationis Legere(NewIDPuellaeAnimationis id) => _animationes[(int)id];
+        public OnusAnimationis Legere(IDPuellaeAnimationis id) => _animationes[(int)id];
     }
 }

@@ -2,10 +2,10 @@ using Yulinti.Exercitus.Contractus;
 using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Unity.Ministeria {
-    public sealed class NewOstiumPuellaeAnimationisMutabile : NewIOstiumPuellaeAnimationisMutabile {
-        private readonly NewMinisteriumPuellaeAnimationis _ministeriumPuellaeAnimationis;
+    public sealed class OstiumPuellaeAnimationisMutabile : IOstiumPuellaeAnimationisMutabile {
+        private readonly MinisteriumPuellaeAnimationis _ministeriumPuellaeAnimationis;
 
-        public NewOstiumPuellaeAnimationisMutabile(NewMinisteriumPuellaeAnimationis ministeriumPuellaeAnimationis) {
+        public OstiumPuellaeAnimationisMutabile(MinisteriumPuellaeAnimationis ministeriumPuellaeAnimationis) {
             _ministeriumPuellaeAnimationis = ministeriumPuellaeAnimationis;
         }
 
@@ -18,7 +18,7 @@ namespace Yulinti.Unity.Ministeria {
         public bool EstExhibensIterans(IDPuellaeAnimationisStratum stratum) {
             return _ministeriumPuellaeAnimationis.EstExhibensIterans(stratum);
         }
-        public void Exhibere(IDPuellaeAnimationisStratum stratum, NewIDPuellaeAnimationis id) {
+        public void Exhibere(IDPuellaeAnimationisStratum stratum, IDPuellaeAnimationis id) {
             _ministeriumPuellaeAnimationis.Exhibere(stratum, id);
         }
         public void Desinere(IDPuellaeAnimationisStratum stratum) {

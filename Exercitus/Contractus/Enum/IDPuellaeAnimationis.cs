@@ -6,16 +6,6 @@ namespace Yulinti.Exercitus.Contractus {
         Pars = 2
     }
 
-    // これはUnicaeに対応する。
-    // 1Clip = 1ID
-    public enum IDPuellaeAnimationis {
-        None,
-        NihilCorporis,
-        NihilPartis,
-        StandardBase,
-        Crouch,
-    }
-
     // これはContinuataに対応する。
     public enum IDPuellaeAnimationisContinuata {
         None,
@@ -31,7 +21,7 @@ namespace Yulinti.Exercitus.Contractus {
 
     }
 
-    public enum NewIDPuellaeAnimationis {
+    public enum IDPuellaeAnimationis {
         Nihil,
         Basis,
         StasisBasis,

@@ -3,9 +3,9 @@ using Yulinti.Exercitus.Contractus;
 namespace Yulinti.Exercitus.Contractus {
     public interface IConfiguratioPuellaeStatusCorporis {
         IDPuellaeStatusCorporis Id { get; }
-        IDPuellaeAnimationisContinuata IdAnimationisIntrare { get; }
-        IDPuellaeAnimationisContinuata IdAnimationisExire { get; }
-        bool LudereExire { get; }
+        IDPuellaeAnimationis IdAnimationisIntrare { get; }
+        IDPuellaeAnimationis IdAnimationis { get; }
+        IDPuellaeAnimationis IdAnimationisExire { get; }
 
         float ConsumptioVigorisSec { get; }
         float ConsumptioPatientiaeSec { get; }

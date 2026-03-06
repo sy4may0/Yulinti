@@ -5,9 +5,9 @@ using Yulinti.Unity.Contractus;
 namespace Yulinti.Regnum.Configuratio {
     public abstract class ConfiguratioPuellaeStatusCorporisBasis : ScriptableObject, IConfiguratioPuellaeStatusCorporis {
         [SerializeField] private IDPuellaeStatusCorporis id;
-        [SerializeField] private IDPuellaeAnimationisContinuata idAnimationisIntrare;
-        [SerializeField] private IDPuellaeAnimationisContinuata idAnimationisExire;
-        [SerializeField] private bool ludereExire;
+        [SerializeField] private IDPuellaeAnimationis idAnimationisIntrare;
+        [SerializeField] private IDPuellaeAnimationis idAnimationis;
+        [SerializeField] private IDPuellaeAnimationis idAnimationisExire;
         [SerializeField] private float consumptioVigorisSec;
         [SerializeField] private float consumptioPatientiaeSec;
         [SerializeField] private float incrementumAetherisSec;
@@ -17,9 +17,9 @@ namespace Yulinti.Regnum.Configuratio {
         [SerializeField] private float sonusMotus;
 
         public IDPuellaeStatusCorporis Id => id;
-        public IDPuellaeAnimationisContinuata IdAnimationisIntrare => idAnimationisIntrare;
-        public IDPuellaeAnimationisContinuata IdAnimationisExire => idAnimationisExire;
-        public bool LudereExire => ludereExire;
+        public IDPuellaeAnimationis IdAnimationisIntrare => idAnimationisIntrare;
+        public IDPuellaeAnimationis IdAnimationis => idAnimationis;
+        public IDPuellaeAnimationis IdAnimationisExire => idAnimationisExire;
 
         public float ConsumptioVigorisSec => consumptioVigorisSec;
         public float ConsumptioPatientiaeSec => consumptioPatientiaeSec;

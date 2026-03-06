@@ -6,23 +6,23 @@ using Yulinti.Nucleus.Contractus;
 namespace Yulinti.Exercitus.Dux {
     internal sealed class ExecutorPuellaeAnimationis : IExecutorPuellae {
         private readonly IOstiumPuellaeLociLegibile _ostiumPuellaeLociLegibile;
-        private readonly IOstiumPuellaeAnimationesMutabile _ostiumPuellaeAnimationesMutabile;
+        private readonly IOstiumPuellaeAnimationisMutabile _ostiumPuellaeAnimationisMutabile;
 
         private DuxQueue<IOrdinatioPuellaeAnimationis> _queueAnimationis;
 
         public ExecutorPuellaeAnimationis(
             IOstiumPuellaeLociLegibile ostiumPuellaeLociLegibile,
-            IOstiumPuellaeAnimationesMutabile ostiumPuellaeAnimationesMutabile
+            IOstiumPuellaeAnimationisMutabile ostiumPuellaeAnimationisMutabile
         ) {
             _ostiumPuellaeLociLegibile = ostiumPuellaeLociLegibile;
-            _ostiumPuellaeAnimationesMutabile = ostiumPuellaeAnimationesMutabile;
+            _ostiumPuellaeAnimationisMutabile = ostiumPuellaeAnimationisMutabile;
             _queueAnimationis = new DuxQueue<IOrdinatioPuellaeAnimationis>(
                 ConstansPuellae.LongitudoOrdinatioAnimationis
             );
         }
 
         public void Initare() {
-            _ostiumPuellaeAnimationesMutabile.Purgere();
+            //_ostiumPuellaeAnimationisMutabile.Purgere();
             _queueAnimationis.Purgere();
         }
 
@@ -42,24 +42,25 @@ namespace Yulinti.Exercitus.Dux {
         private void ApplicareAnimationis(
             IOrdinatioPuellaeAnimationis animationis
         ) {
-            if (animationis.EstCogere) {
-                _ostiumPuellaeAnimationesMutabile.Cogere(animationis.IdAnimationis, animationis.AdInitium, animationis.AdFinem);
-            } else {
-                _ostiumPuellaeAnimationesMutabile.Postulare(animationis.IdAnimationis, animationis.AdInitium, animationis.AdFinem);
-            }
+            // TODO 最後に直す。
+            //if (animationis.EstCogere) {
+            //    _ostiumPuellaeAnimationisMutabile.Cogere(animationis.IdAnimationis, animationis.AdInitium, animationis.AdFinem);
+            //} else {
+            //    _ostiumPuellaeAnimationisMutabile.Postulare(animationis.IdAnimationis, animationis.AdInitium, animationis.AdFinem);
+            //}
         }
 
         public void Confirmare() {
             while (_queueAnimationis.ConareLego(out IOrdinatioPuellaeAnimationis animationis)) {
                 ApplicareAnimationis(animationis);
             }
-            _ostiumPuellaeAnimationesMutabile.InjicereVelocitatem(
-                _ostiumPuellaeLociLegibile.VelocitasHorizontalisActualis()
-            );
+            //_ostiumPuellaeAnimationisMutabile.InjicereVelocitatem(
+            //    _ostiumPuellaeLociLegibile.VelocitasHorizontalisActualis()
+            //);
         }
 
         public void Purgare() {
-            _ostiumPuellaeAnimationesMutabile.Purgere();
+            //_ostiumPuellaeAnimationisMutabile.Purgere();
             _queueAnimationis.Purgere();
         }
     }

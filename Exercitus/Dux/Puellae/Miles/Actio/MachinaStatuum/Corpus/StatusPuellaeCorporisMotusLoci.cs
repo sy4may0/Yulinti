@@ -15,36 +15,32 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         public IDPuellaeStatusCorporis Id => _configuratio.Id;
-        public IDPuellaeStatusCorporisModiMotus IdModiMotus => _configuratio.IdModiMotus;
-        public IDPuellaeAnimationisContinuata IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
-        public IDPuellaeAnimationisContinuata IdAnimationisExire => _configuratio.IdAnimationisExire;
+        public IDPuellaeAnimationis IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
+        public IDPuellaeAnimationis IdAnimationis => _configuratio.IdAnimationis;
+        public IDPuellaeAnimationis IdAnimationisExire => _configuratio.IdAnimationisExire;
 
         public void Intrare(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
-            IResFluidaPuellaeLegibile resFluida,
-            Action adInitium
+            IResFluidaPuellaeLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.PostulareAnimationis(
-                _configuratio.IdAnimationisIntrare,
-                adInitium,
-                null,
-                false
-            );
+            //contextusOstiorum.Carrus.PostulareAnimationis(
+            //    _configuratio.IdAnimationisIntrare,
+            //    adInitium,
+            //    null,
+            //    false
+            //);
         }
         
         public void Exire(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
-            IResFluidaPuellaeLegibile resFluida,
-            Action adFinem
+            IResFluidaPuellaeLegibile resFluida
         ) {
-            if (_configuratio.LudereExire) {
-                contextusOstiorum.Carrus.PostulareAnimationis(
-                    _configuratio.IdAnimationisExire,
-                    null,
-                    adFinem,
-                    false
-                );
-            }
+            //contextusOstiorum.Carrus.PostulareAnimationis(
+            //    _configuratio.IdAnimationisExire,
+            //    null,
+            //    adFinem,
+            //    false
+            //);
         }
 
         public void Ordinare(

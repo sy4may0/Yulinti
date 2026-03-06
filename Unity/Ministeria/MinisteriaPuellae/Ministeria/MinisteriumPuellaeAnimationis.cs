@@ -5,16 +5,16 @@ using Yulinti.Nucleus.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.Unity.Ministeria {
-    public sealed class NewMinisteriumPuellaeAnimationis : IMinisteriumPulsabilis {
-        private readonly NewTabulaPuellaeAnimationum _tabulaPuellaeAnimationum;
+    public sealed class MinisteriumPuellaeAnimationis : IMinisteriumPulsabilis {
+        private readonly TabulaPuellaeAnimationum _tabulaPuellaeAnimationum;
         private readonly LusorAnimationis[] _lusoris;
         private readonly int _longitudoStratum;
 
-        public NewMinisteriumPuellaeAnimationis(
-            NewIConfiguratioPuellaeAnimationum config,
+        public MinisteriumPuellaeAnimationis(
+            IConfiguratioPuellaeAnimationum config,
             IAnchoraPuellae anchora
         ) {
-            _tabulaPuellaeAnimationum = new NewTabulaPuellaeAnimationum(config.Animationes);
+            _tabulaPuellaeAnimationum = new TabulaPuellaeAnimationum(config.Animationes);
             _longitudoStratum = Enum.GetValues(typeof(IDPuellaeAnimationisStratum)).Length;
             _lusoris = new LusorAnimationis[_longitudoStratum];
 
@@ -38,9 +38,9 @@ namespace Yulinti.Unity.Ministeria {
             return _lusoris[(int)stratum].StatusLusoris == IDStatusLusoris.Iterans;
         }
 
-        public void Exhibere(IDPuellaeAnimationisStratum stratum, NewIDPuellaeAnimationis id) {
+        public void Exhibere(IDPuellaeAnimationisStratum stratum, IDPuellaeAnimationis id) {
             // Nihilはアニメーション無し指定とする仕様。(Desinereと同義)
-            if (id == NewIDPuellaeAnimationis.Nihil) {
+            if (id == IDPuellaeAnimationis.Nihil) {
                 Desinere(stratum);
                 return;
             }
