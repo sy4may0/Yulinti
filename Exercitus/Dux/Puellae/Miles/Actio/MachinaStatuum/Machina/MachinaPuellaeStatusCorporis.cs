@@ -165,8 +165,6 @@ namespace Yulinti.Exercitus.Dux {
                 sa.IdAnimationisTransere == IDPuellaeAnimationis.Desinere
             ) {
                 if (sa.IdAnimationisTransere == IDPuellaeAnimationis.Desinere) {
-                    MutareExiensDesinere(resFluida);
-                } else {
                     MutareExiens(resFluida);
                 }
             }
@@ -189,10 +187,9 @@ namespace Yulinti.Exercitus.Dux {
             sa.Transere(_contextusOstiorum, resFluida);
 
             // AnimationisTransereがNihilなら、即時MutareExiens。
+            // TransereDsinereはDesinereループ可能。
             // それ以外ならTranseoフェーズに入る。
-            if (sa.IdAnimationisTransere == IDPuellaeAnimationis.Nihil ||
-                sa.IdAnimationisTransere == IDPuellaeAnimationis.Desinere
-            ) {
+            if (sa.IdAnimationisTransere == IDPuellaeAnimationis.Nihil) {
                 MutareExiens(resFluida);
             }
         }
