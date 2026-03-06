@@ -175,7 +175,10 @@ namespace Yulinti.Exercitus.Dux {
             while (_queueMonitionis.TryDequeue(out OnusMonitionis onus)) {
                 onus.Tcs.TrySetCanceled(_cancellationTokenSource.Token);
             }
-            _semaphoreMonitionis.Dispose();
+            // SemaphoreSlim は Dispose しない。ワーカーがまだ WaitAsync 内にいる可能性があり、
+            // 破棄済みセマフォを参照すると ArgumentNullException が出るため。GC に任せる。
+            // このやり方はDontDestroyOnLoad出発のクラスでのみやれる。シーン内で同じことが起きたら
+            // SemaphoreSlimをDisposeする方法を考えるべき。
             _cancellationTokenSource.Dispose();
         }
     }

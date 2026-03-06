@@ -16,31 +16,43 @@ namespace Yulinti.Exercitus.Dux {
 
         public IDPuellaeStatusCorporis Id => _configuratio.Id;
         public IDPuellaeAnimationis IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
-        public IDPuellaeAnimationis IdAnimationis => _configuratio.IdAnimationis;
+        public IDPuellaeAnimationis IdAnimationisTransere => _configuratio.IdAnimationisTransere;
         public IDPuellaeAnimationis IdAnimationisExire => _configuratio.IdAnimationisExire;
+
+        public bool EstInterdictaIntrare => _configuratio.EstInterdictaIntrare;
+        public bool EstInterdictaTransere => _configuratio.EstInterdictaTransere;
+        public bool EstInterdictaExire => _configuratio.EstInterdictaExire;
+
+        public IDPuellaeStatusCorporis IdStatusProximusAutomaticus => _configuratio.IdStatusProximusAutomaticus;
 
         public void Intrare(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            //contextusOstiorum.Carrus.PostulareAnimationis(
-            //    _configuratio.IdAnimationisIntrare,
-            //    adInitium,
-            //    null,
-            //    false
-            //);
+            contextusOstiorum.Carrus.PostulareAnimationis(
+                IDPuellaeAnimationisStratum.Corpus,
+                IdAnimationisIntrare
+            );
+        }
+
+        public void Transere(
+            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            IResFluidaPuellaeLegibile resFluida
+        ) {
+            contextusOstiorum.Carrus.PostulareAnimationis(
+                IDPuellaeAnimationisStratum.Corpus,
+                IdAnimationisTransere
+            );
         }
         
         public void Exire(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            //contextusOstiorum.Carrus.PostulareAnimationis(
-            //    _configuratio.IdAnimationisExire,
-            //    null,
-            //    adFinem,
-            //    false
-            //);
+            contextusOstiorum.Carrus.PostulareAnimationis(
+                IDPuellaeAnimationisStratum.Corpus,
+                IdAnimationisExire
+            );
         }
 
         public void Ordinare(

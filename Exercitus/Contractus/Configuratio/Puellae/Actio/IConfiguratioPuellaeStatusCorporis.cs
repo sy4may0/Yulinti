@@ -4,10 +4,10 @@ namespace Yulinti.Exercitus.Contractus {
     public interface IConfiguratioPuellaeStatusCorporis {
         IDPuellaeStatusCorporis Id { get; }
         IDPuellaeAnimationis IdAnimationisIntrare { get; }
-        IDPuellaeAnimationis IdAnimationis { get; }
+        IDPuellaeAnimationis IdAnimationisTransere { get; }
         IDPuellaeAnimationis IdAnimationisExire { get; }
         bool EstInterdictaIntrare { get; }
-        bool EstInterdicta { get; }
+        bool EstInterdictaTransere { get; }
         bool EstInterdictaExire { get; }
 
         IDPuellaeStatusCorporis IdStatusProximusAutomaticus { get; }

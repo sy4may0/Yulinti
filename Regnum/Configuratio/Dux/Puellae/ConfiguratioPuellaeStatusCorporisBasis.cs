@@ -6,10 +6,10 @@ namespace Yulinti.Regnum.Configuratio {
     public abstract class ConfiguratioPuellaeStatusCorporisBasis : ScriptableObject, IConfiguratioPuellaeStatusCorporis {
         [SerializeField] private IDPuellaeStatusCorporis id;
         [SerializeField] private IDPuellaeAnimationis idAnimationisIntrare;
-        [SerializeField] private IDPuellaeAnimationis idAnimationis;
+        [SerializeField] private IDPuellaeAnimationis idAnimationisTransere;
         [SerializeField] private IDPuellaeAnimationis idAnimationisExire;
         [SerializeField] private bool estInterdictaIntrare;
-        [SerializeField] private bool estInterdicta;
+        [SerializeField] private bool estInterdictaTransere;
         [SerializeField] private bool estInterdictaExire;
         [SerializeField] private IDPuellaeStatusCorporis idStatusProximusAutomaticus;
         [SerializeField] private float consumptioVigorisSec;
@@ -22,10 +22,10 @@ namespace Yulinti.Regnum.Configuratio {
 
         public IDPuellaeStatusCorporis Id => id;
         public IDPuellaeAnimationis IdAnimationisIntrare => idAnimationisIntrare;
-        public IDPuellaeAnimationis IdAnimationis => idAnimationis;
+        public IDPuellaeAnimationis IdAnimationisTransere => idAnimationisTransere;
         public IDPuellaeAnimationis IdAnimationisExire => idAnimationisExire;
         public bool EstInterdictaIntrare => estInterdictaIntrare;
-        public bool EstInterdicta => estInterdicta;
+        public bool EstInterdictaTransere => estInterdictaTransere;
         public bool EstInterdictaExire => estInterdictaExire;
 
         public IDPuellaeStatusCorporis IdStatusProximusAutomaticus => idStatusProximusAutomaticus;
