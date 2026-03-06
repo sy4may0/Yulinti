@@ -8,8 +8,8 @@ namespace Yulinti.Regnum.Configuratio {
         [SerializeField] private IDPuellaeAnimationis idAnimationisIntrare;
         [SerializeField] private IDPuellaeAnimationis idAnimationis;
         [SerializeField] private IDPuellaeAnimationis idAnimationisExire;
-        [SerializeField] private bool estInterdicta;
         [SerializeField] private bool estInterdictaIntrare;
+        [SerializeField] private bool estInterdicta;
         [SerializeField] private bool estInterdictaExire;
         [SerializeField] private IDPuellaeStatusCorporis idStatusProximusAutomaticus;
         [SerializeField] private float consumptioVigorisSec;
@@ -24,8 +24,8 @@ namespace Yulinti.Regnum.Configuratio {
         public IDPuellaeAnimationis IdAnimationisIntrare => idAnimationisIntrare;
         public IDPuellaeAnimationis IdAnimationis => idAnimationis;
         public IDPuellaeAnimationis IdAnimationisExire => idAnimationisExire;
-        public bool EstInterdicta => estInterdicta;
         public bool EstInterdictaIntrare => estInterdictaIntrare;
+        public bool EstInterdicta => estInterdicta;
         public bool EstInterdictaExire => estInterdictaExire;
 
         public IDPuellaeStatusCorporis IdStatusProximusAutomaticus => idStatusProximusAutomaticus;
