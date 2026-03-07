@@ -141,6 +141,8 @@ namespace Yulinti.Nucleus.Contractus {
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_LACUS_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinis lacus full";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_MISSING = "MachinaCivisStatuumCorporis - status missing";
         public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_STATUS_NOT_FOUND = "MachinaPuellaeStatusCorporis - status not found";
+        public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISINTRARE_DESINERE_INVALID = "MachinaPuellaeStatusCorporis - idanimationisintrare desinere invalid";
+        public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID = "MachinaPuellaeStatusCorporis - idanimationisexire desinere invalid";
         public const string MinisteriumCivisAnimationes_MINISTERIUICIVISANIMATIONES_ANCHORA_NULL = "MinisteriumCivisAnimationes - Anchora is null";
         public const string MinisteriumCivisGenerator_GENERATORCIVIS_TIMEOUT_INITIARE = "MinisteriumCivisGenerator - generatorcivis timeout initiare";
         public const string MinisteriumCivis_CIVIS_ADINCARNARE_ALREADY_SET = "MinisteriumCivis - civis adincarnare already set";

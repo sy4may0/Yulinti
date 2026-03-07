@@ -39,9 +39,10 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         public void Exhibere(IDPuellaeAnimationisStratum stratum, IDPuellaeAnimationis id) {
+            UnityEngine.Debug.Log($"Exhibere: {stratum}, {id}");
             // Nihilはアニメーション操作を行わない。
             if (id == IDPuellaeAnimationis.Nihil) {
-                id = IDPuellaeAnimationis.Desinere;
+                return;
             }
             // Desinereはアニメーション終了を指定。
             if (id == IDPuellaeAnimationis.Desinere) {

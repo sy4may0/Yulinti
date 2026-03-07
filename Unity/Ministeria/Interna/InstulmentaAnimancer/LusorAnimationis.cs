@@ -123,6 +123,13 @@ namespace Yulinti.Unity.Ministeria {
                 Notarius.Memorare(LogTextus.LusorAnimationis_LUSORANIMATIONIS_ONUS_NULL);
                 return;
             }
+            // 同じITransitionがすでに再生中なら、何もしない。
+            if (
+                _animatioCurrens != null && 
+                ReferenceEquals(_animatioCurrens.Animatio, onus.Animatio)
+            ) {
+                return;
+            }
 
             PurgereOnEnd();
 
