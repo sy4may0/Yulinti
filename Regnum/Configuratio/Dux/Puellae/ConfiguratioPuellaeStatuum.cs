@@ -19,6 +19,7 @@ namespace Yulinti.Regnum.Configuratio {
         [SerializeField] private UnityEngine.Vector3 positioIncipalis;
         [SerializeField] private UnityEngine.Quaternion rotatioIncipalis;
         [SerializeField] private IDPuellaeStatusCorporis idStatusCorporisIncipalis = IDPuellaeStatusCorporis.Quies;
+        [SerializeField] private float limenVelocitatisIntransQuietes = 0.01f;
 
 
 
@@ -37,5 +38,6 @@ namespace Yulinti.Regnum.Configuratio {
         public System.Numerics.Quaternion RotatioIncipalis => InterpresNumeri.ToNumerics(rotatioIncipalis);
 
         public IDPuellaeStatusCorporis IDStatusCorporisIncipalis => idStatusCorporisIncipalis;
+        public float LimenVelocitatisIntransQuietes => limenVelocitatisIntransQuietes;
     }
 }

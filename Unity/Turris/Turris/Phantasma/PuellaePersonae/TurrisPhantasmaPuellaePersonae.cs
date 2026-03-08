@@ -2,6 +2,9 @@ using Yulinti.Exercitus.Contractus;
 using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Unity.Turris {
+    // PuellaePersonae の Anima 加算窓口。
+    // Gradus/Sensus の算出自体は ResolutorPuellaePersonae が担当し、
+    // Legere() で取得した PhantasmaPuellaePersonae に対して Normare() を呼ぶと確定する。
     public sealed class TurrisPhantasmaPuellaePersonae : ITurrisPhantasmaPuellaePersonae {
         private readonly PhantasmaPuellaePersonae _phantasmaPuellaePersonae;
 

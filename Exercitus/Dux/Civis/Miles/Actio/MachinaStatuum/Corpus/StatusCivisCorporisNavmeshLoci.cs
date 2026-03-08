@@ -1,6 +1,4 @@
 using Yulinti.Exercitus.Contractus;
-using System;
-using Yulinti.Nucleus;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class StatusCivisCorporisNavmeshLoci : IStatusCivisCorporis {
@@ -17,25 +15,36 @@ namespace Yulinti.Exercitus.Dux {
 
         public IDCivisStatusCorporis Id => _configuratio.Id;
         public IDCivisStatusCorporisModiNavmesh IdModiNavmesh => _configuratio.IdModiNavmesh;
-        public IDCivisAnimationisContinuata IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
-        public IDCivisAnimationisContinuata IdAnimationisExire => _configuratio.IdAnimationisExire;
+        public IDCivisAnimationis IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
+        public IDCivisAnimationis IdAnimationisTransere => _configuratio.IdAnimationisTransere;
+        public IDCivisAnimationis IdAnimationisExire => _configuratio.IdAnimationisExire;
+
+        public bool EstInterdictaIntrare => _configuratio.EstInterdictaIntrare;
+        public bool EstInterdictaTransere => _configuratio.EstInterdictaTransere;
+        public bool EstInterdictaExire => _configuratio.EstInterdictaExire;
+
+        public IDCivisStatusCorporis IDStatusProximusAutomaticus => _configuratio.IDStatusProximusAutomaticus;
 
         public void Intrare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
-            IResFluidaCivisLegibile resFluida,
-            Action adInitium
+            IResFluidaCivisLegibile resFluida
         ) {
             contextusOstiorum.Carrus.PostulareAnimationis(
-                idCivis, _configuratio.IdAnimationisIntrare, adInitium, null, false
+                idCivis,
+                IDCivisAnimationisStratum.Corpus,
+                IdAnimationisIntrare
             );
 
-            IPunctumViaeLegibile punctumViae;
-
-            if (!contextusOstiorum.PunctumViae.ConareLegoTypumTemere(
-                _configuratio.TypusPunctumViae, out punctumViae)) {
+            if (
+                !contextusOstiorum.PunctumViae.ConareLegoTypumTemere(
+                    _configuratio.TypusPunctumViae,
+                    out IPunctumViaeLegibile punctumViae
+                )
+            ) {
                 contextusOstiorum.Carrus.PostulareMortis(
-                    idCivis, SpeciesOrdinationisCivisMortis.Spirituare
+                    idCivis,
+                    SpeciesOrdinationisCivisMortis.Spirituare
                 );
                 return;
             }
@@ -51,14 +60,27 @@ namespace Yulinti.Exercitus.Dux {
             );
         }
 
+        public void Transere(
+            int idCivis,
+            ContextusCivisOstiorumLegibile contextusOstiorum,
+            IResFluidaCivisLegibile resFluida
+        ) {
+            contextusOstiorum.Carrus.PostulareAnimationis(
+                idCivis,
+                IDCivisAnimationisStratum.Corpus,
+                IdAnimationisTransere
+            );
+        }
+
         public void Exire(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
-            IResFluidaCivisLegibile resFluida,
-            Action adFinem
+            IResFluidaCivisLegibile resFluida
         ) {
             contextusOstiorum.Carrus.PostulareAnimationis(
-                idCivis, _configuratio.IdAnimationisExire, null, adFinem, false
+                idCivis,
+                IDCivisAnimationisStratum.Corpus,
+                IdAnimationisExire
             );
         }
 

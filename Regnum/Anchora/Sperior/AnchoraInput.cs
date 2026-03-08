@@ -18,6 +18,9 @@ namespace Yulinti.Regnum.Anchora {
         [SerializeField] private InputActionReference _cancel;
         [SerializeField] private InputActionReference _navigate;
 
+        // Action Input
+        [SerializeField] private InputActionReference _spectaculumCorporis;
+
         public InputActionReference MoveInput => _moveInput;
         public InputActionReference SprintInput => _sprintInput;
         public InputActionReference CrouchInput => _crouchInput;
@@ -27,6 +30,8 @@ namespace Yulinti.Regnum.Anchora {
         public InputActionReference SubmitInput => _submit;
         public InputActionReference CancelInput => _cancel;
         public InputActionReference NavigateInput => _navigate;
+
+        public InputActionReference SpectaculumCorporisInput => _spectaculumCorporis;
 
         public Vector3 Positio => transform.position;
         public Quaternion Rotatio => transform.rotation;
@@ -64,6 +69,10 @@ namespace Yulinti.Regnum.Anchora {
             }
             if (_navigate == null) {
                 Carnifex.Intermissio(LogTextus.AnchoraInput_ANCHORAINPUT_NAVIGATEINPUT_NULL);
+                result = false;
+            }
+            if (_spectaculumCorporis == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraInput_ANCHORAINPUT_SPECTACULUMCORPORISINPUT_NULL);
                 result = false;
             }
             return result;

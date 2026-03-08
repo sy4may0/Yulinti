@@ -1,47 +1,32 @@
 using Yulinti.Exercitus.Contractus;
-using System;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class OrdinatioCivisAnimationis : OrdinatioCivis, IOrdinatioCivisAnimationis {
-        private IDCivisAnimationisContinuata _idAnimationis;
-        private Action _adInitium;
-        private Action _adFinem;
-        private bool _estCogere;
+        private IDCivisAnimationisStratum _stratum;
+        private IDCivisAnimationis _idAnimationis;
 
         public OrdinatioCivisAnimationis(int idCivis)
             : base(idCivis, true, SpeciesOrdinatioCivis.ActioAnimationis) {
+            _stratum = default;
             _idAnimationis = default;
-            _adInitium = null;
-            _adFinem = null;
-            _estCogere = false;
         }
 
-        public IDCivisAnimationisContinuata IdAnimationis => _idAnimationis;
-        public Action AdInitium => _adInitium;
-        public Action AdFinem => _adFinem;
-        public bool EstCogere => _estCogere;
+        public IDCivisAnimationisStratum Stratum => _stratum;
+        public IDCivisAnimationis IdAnimationis => _idAnimationis;
 
         public override void Purgere() {
             _estApplicandum = false;
-
+            _stratum = default;
             _idAnimationis = default;
-            _adInitium = null;
-            _adFinem = null;
-            _estCogere = false;
         }
 
         public void Pono(
-            IDCivisAnimationisContinuata idAnimationis,
-            Action adInitium = null,
-            Action adFinem = null,
-            bool estCogere = false
+            IDCivisAnimationisStratum stratum,
+            IDCivisAnimationis idAnimationis
         ) {
             _estApplicandum = true;
-
+            _stratum = stratum;
             _idAnimationis = idAnimationis;
-            _adInitium = adInitium;
-            _adFinem = adFinem;
-            _estCogere = estCogere;
         }
     }
 }

@@ -20,6 +20,10 @@ namespace Yulinti.Exercitus.Contractus {
         // ナビゲーション入力
         bool LegoNavigate { get; }
 
+        // Action //
+        // エモートアクション入力
+        bool LegoSpectaculumCorporis { get; }
+
         void DebugEnabled();
     }
 }

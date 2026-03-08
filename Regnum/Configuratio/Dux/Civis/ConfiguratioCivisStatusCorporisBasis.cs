@@ -5,9 +5,13 @@ using Yulinti.Unity.Contractus;
 namespace Yulinti.Regnum.Configuratio {
     public abstract class ConfiguratioCivisStatusCorporisBasis : ScriptableObject, IConfiguratioCivisStatusCorporis {
         [SerializeField] private IDCivisStatusCorporis id;
-        [SerializeField] private IDCivisAnimationisContinuata idAnimationisIntrare;
-        [SerializeField] private IDCivisAnimationisContinuata idAnimationisExire;
-        [SerializeField] private bool ludereExire;
+        [SerializeField] private IDCivisAnimationis idAnimationisIntrare;
+        [SerializeField] private IDCivisAnimationis idAnimationisTransere;
+        [SerializeField] private IDCivisAnimationis idAnimationisExire;
+        [SerializeField] private bool estInterdictaIntrare;
+        [SerializeField] private bool estInterdictaTransere;
+        [SerializeField] private bool estInterdictaExire;
+        [SerializeField] private IDCivisStatusCorporis idStatusProximusAutomaticus;
 
         [SerializeField] private float consumptioVitae;
         [SerializeField] private float visus;
@@ -16,9 +20,14 @@ namespace Yulinti.Regnum.Configuratio {
         [SerializeField] private float auditusDistantia;
 
         public IDCivisStatusCorporis Id => id;
-        public IDCivisAnimationisContinuata IdAnimationisIntrare => idAnimationisIntrare;
-        public IDCivisAnimationisContinuata IdAnimationisExire => idAnimationisExire;
-        public bool LudereExire => ludereExire;
+        public IDCivisAnimationis IdAnimationisIntrare => idAnimationisIntrare;
+        public IDCivisAnimationis IdAnimationisTransere => idAnimationisTransere;
+        public IDCivisAnimationis IdAnimationisExire => idAnimationisExire;
+        public bool EstInterdictaIntrare => estInterdictaIntrare;
+        public bool EstInterdictaTransere => estInterdictaTransere;
+        public bool EstInterdictaExire => estInterdictaExire;
+
+        public IDCivisStatusCorporis IDStatusProximusAutomaticus => idStatusProximusAutomaticus;
 
         public float ConsumptioVitae => consumptioVitae;
         public float Visus => visus;

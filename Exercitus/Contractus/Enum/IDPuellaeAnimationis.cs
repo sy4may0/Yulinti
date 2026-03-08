@@ -9,8 +9,15 @@ namespace Yulinti.Exercitus.Contractus {
     public enum IDPuellaeAnimationis {
         Nihil,
         Desinere,
-        Basis,
-        StasisBasis,
-        Incumbo,
+
+        // 基本アニメーション
+        Basis,         // Idle/Walk/Runミキサー
+        StasisBasis,   //Idle固定
+        Incumbo,       // しゃがみ
+
+        // ポーズアニメーション
+        SpectaculumFormosa01Int,  // Formosaポーズ01-In
+        SpectaculumFormosa01Tra,  // Formosaポーズ01
+        SpectaculumFormosa01Exi   // Formosaポーズ01-Exit
     }
 }

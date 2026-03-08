@@ -9,6 +9,13 @@ namespace Yulinti.Exercitus.Contractus {
         // 特殊ステート Portus用
         StasisPortus,
 
+        // エモートステート
+        // エモートは必ずPosituraIncipalisからスタートする。
+        // エモート入力 -> PosituraIncipalisに入る。
+        // PosituraIncipalisは速度0に減速、規定以下まで減速したらエモートステートに遷移する。
+        SpectaculumIncipalis,    // エモート入る前の準備ステート。
+        SpectaculumFormosa01,    // Formosaポーズ01
+
         // 特殊ステート Nihil用
         Nihil = 999999
     }

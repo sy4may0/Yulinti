@@ -30,7 +30,7 @@ namespace Yulinti.Regnum.Rex {
             builder.RegisterInstance<IConfiguratioPuellaeLoci>(_configuratio.Puellae.Loci);
             builder.RegisterInstance<IConfiguratioCivis>(_configuratio.Civis);
             builder.RegisterInstance<IConfiguratioCivisLoci>(_configuratio.Civis.Loci);
-            builder.RegisterInstance<IConfiguratioCivisAnimationis>(_configuratio.Civis.Animatio);
+            builder.RegisterInstance<IConfiguratioCivisAnimationum>(_configuratio.Civis.Animatio);
             builder.RegisterInstance<IConfiguratioCivisGenerator>(_configuratio.Civis.Generator);
             builder.RegisterInstance<IConfiguratioCivisVisae>(_configuratio.Civis.Visa);
             builder.RegisterInstance<IConfiguratioPunctumViae>(_configuratio.PunctumViae);

@@ -26,5 +26,13 @@ namespace Yulinti.Exercitus.Dux {
         ) {
             return contextusOstiorum.Introductionis.LegoCursus;
         }
+
+        // SpectaculumCorporisが押されていかどうを判定すめ
+        public static bool EstSpectaculumCorporis(
+            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            IResFluidaPuellaeLegibile resFluida
+        ) {
+            return contextusOstiorum.Introductionis.LegoSpectaculumCorporis;
+        }
     }
 }

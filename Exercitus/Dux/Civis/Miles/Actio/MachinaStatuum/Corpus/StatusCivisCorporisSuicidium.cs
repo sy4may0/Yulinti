@@ -1,28 +1,37 @@
 using Yulinti.Exercitus.Contractus;
-using System;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class StatusCivisCorporisSuicidium : IStatusCivisCorporis {
         public IDCivisStatusCorporis Id => IDCivisStatusCorporis.Suicidium;
-        public IDCivisAnimationisContinuata IdAnimationisIntrare => IDCivisAnimationisContinuata.NihilCorporis;
-        public IDCivisAnimationisContinuata IdAnimationisExire => IDCivisAnimationisContinuata.NihilCorporis;
+        public IDCivisAnimationis IdAnimationisIntrare => IDCivisAnimationis.Nihil;
+        public IDCivisAnimationis IdAnimationisTransere => IDCivisAnimationis.Nihil;
+        public IDCivisAnimationis IdAnimationisExire => IDCivisAnimationis.Nihil;
+
+        public bool EstInterdictaIntrare => false;
+        public bool EstInterdictaTransere => false;
+        public bool EstInterdictaExire => false;
+
+        public IDCivisStatusCorporis IDStatusProximusAutomaticus => IDCivisStatusCorporis.Suicidium;
 
         public void Intrare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
-            IResFluidaCivisLegibile resFluida,
-            Action adInitium
+            IResFluidaCivisLegibile resFluida
         ) {
-            adInitium?.Invoke();
+        }
+
+        public void Transere(
+            int idCivis,
+            ContextusCivisOstiorumLegibile contextusOstiorum,
+            IResFluidaCivisLegibile resFluida
+        ) {
         }
 
         public void Exire(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
-            IResFluidaCivisLegibile resFluida,
-            Action adFinem
+            IResFluidaCivisLegibile resFluida
         ) {
-            adFinem?.Invoke();
         }
 
         public void Ordinare(

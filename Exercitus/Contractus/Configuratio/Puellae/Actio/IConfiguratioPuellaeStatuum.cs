@@ -19,5 +19,8 @@ namespace Yulinti.Exercitus.Contractus {
 
         // 初期ステート
         IDPuellaeStatusCorporis IDStatusCorporisIncipalis { get; }
+
+        // エモートステートなど、停止を判定するときに使う閾値。
+        float LimenVelocitatisIntransQuietes { get; }
    }
 }

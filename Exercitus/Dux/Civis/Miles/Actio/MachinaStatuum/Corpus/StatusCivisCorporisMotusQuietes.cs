@@ -1,5 +1,4 @@
 using Yulinti.Exercitus.Contractus;
-using System;
 
 namespace Yulinti.Exercitus.Dux {
     internal sealed class StatusCivisCorporisMotusQuietes : IStatusCivisCorporis {
@@ -16,31 +15,50 @@ namespace Yulinti.Exercitus.Dux {
 
         public IDCivisStatusCorporis Id => _configuratio.Id;
         public IDCivisStatusCorporisModiMotus IdModiMotus => _configuratio.IdModiMotus;
-        public IDCivisAnimationisContinuata IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
-        public IDCivisAnimationisContinuata IdAnimationisExire => _configuratio.IdAnimationisExire;
+        public IDCivisAnimationis IdAnimationisIntrare => _configuratio.IdAnimationisIntrare;
+        public IDCivisAnimationis IdAnimationisTransere => _configuratio.IdAnimationisTransere;
+        public IDCivisAnimationis IdAnimationisExire => _configuratio.IdAnimationisExire;
+
+        public bool EstInterdictaIntrare => _configuratio.EstInterdictaIntrare;
+        public bool EstInterdictaTransere => _configuratio.EstInterdictaTransere;
+        public bool EstInterdictaExire => _configuratio.EstInterdictaExire;
+
+        public IDCivisStatusCorporis IDStatusProximusAutomaticus => _configuratio.IDStatusProximusAutomaticus;
 
         public void Intrare(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
-            IResFluidaCivisLegibile resFluida,
-            Action adInitium
+            IResFluidaCivisLegibile resFluida
         ) {
             contextusOstiorum.Carrus.PostulareAnimationis(
-                idCivis, _configuratio.IdAnimationisIntrare, adInitium, null, false
+                idCivis,
+                IDCivisAnimationisStratum.Corpus,
+                IdAnimationisIntrare
+            );
+        }
+
+        public void Transere(
+            int idCivis,
+            ContextusCivisOstiorumLegibile contextusOstiorum,
+            IResFluidaCivisLegibile resFluida
+        ) {
+            contextusOstiorum.Carrus.PostulareAnimationis(
+                idCivis,
+                IDCivisAnimationisStratum.Corpus,
+                IdAnimationisTransere
             );
         }
 
         public void Exire(
             int idCivis,
             ContextusCivisOstiorumLegibile contextusOstiorum,
-            IResFluidaCivisLegibile resFluida,
-            Action adFinem
+            IResFluidaCivisLegibile resFluida
         ) {
-            if (_configuratio.LudereExire) {
-                contextusOstiorum.Carrus.PostulareAnimationis(
-                    idCivis, _configuratio.IdAnimationisExire, null, adFinem, false
-                );
-            }
+            contextusOstiorum.Carrus.PostulareAnimationis(
+                idCivis,
+                IDCivisAnimationisStratum.Corpus,
+                IdAnimationisExire
+            );
        }
 
         public void Ordinare(

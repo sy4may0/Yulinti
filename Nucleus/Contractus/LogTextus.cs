@@ -20,6 +20,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraInput_ANCHORAINPUT_NAVIGATEINPUT_NULL = "AnchoraInput - navigateinput null";
         public const string AnchoraInput_ANCHORAINPUT_SPRINTINPUT_NULL = "AnchoraInput - sprintinput null";
         public const string AnchoraInput_ANCHORAINPUT_SUBMITINPUT_NULL = "AnchoraInput - submitinput null";
+        public const string AnchoraInput_ANCHORAINPUT_SPECTACULUMCORPORISINPUT_NULL = "AnchoraInput - spectaculumcorporisinput null";
         public const string AnchoraPuellaeCrinis_ANCHORAPUELLAE_CRINIS_INFERIOR_ANCHOR_NULL = "AnchoraPuellaeCrinis - inferior anchor null";
         public const string AnchoraPuellaeCrinis_ANCHORAPUELLAE_CRINIS_INSTANCE_NULL = "AnchoraPuellaeCrinis - instance null";
         public const string AnchoraPuellaeCrinis_ANCHORAPUELLAE_CRINIS_INSTANTIATE_FAILED = "AnchoraPuellaeCrinis - instantiate failed";
@@ -140,6 +141,9 @@ namespace Yulinti.Nucleus.Contractus {
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_LACUS_EMPTY = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinis lacus empty";
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_LACUS_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinis lacus full";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_MISSING = "MachinaCivisStatuumCorporis - status missing";
+        public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_NOT_FOUND = "MachinaCivisStatuumCorporis - status not found";
+        public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_IDANIMATIONISINTRARE_DESINERE_INVALID = "MachinaCivisStatuumCorporis - idanimationisintrare desinere invalid";
+        public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID = "MachinaCivisStatuumCorporis - idanimationisexire desinere invalid";
         public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_STATUS_NOT_FOUND = "MachinaPuellaeStatusCorporis - status not found";
         public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISINTRARE_DESINERE_INVALID = "MachinaPuellaeStatusCorporis - idanimationisintrare desinere invalid";
         public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID = "MachinaPuellaeStatusCorporis - idanimationisexire desinere invalid";

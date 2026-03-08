@@ -28,7 +28,7 @@ namespace Yulinti.Exercitus.Dux {
 
             // 各StatusCorporisごとにRamusをグループ化
             foreach (IDCivisStatusCorporis status in Enum.GetValues(typeof(IDCivisStatusCorporis))) {
-                if (status == IDCivisStatusCorporis.None) continue;
+                if (status == IDCivisStatusCorporis.Nihil) continue;
 
                 // 該当するStatusActualisのRamusを抽出し、Prioritasでグループ化
                 var ramiPG = _rami
@@ -54,7 +54,7 @@ namespace Yulinti.Exercitus.Dux {
         ) {
             // 該当するStatusActualisのテーブルが存在しない場合はNoneを返す
             if (!_tabula.ContainsKey(idStatusActualis)) {
-                return IDCivisStatusCorporis.None;
+                return IDCivisStatusCorporis.Nihil;
             }
 
             // Prioritas順（外側のループ）→同一Prioritas内（内側のループ）の順で条件をチェック
@@ -64,12 +64,12 @@ namespace Yulinti.Exercitus.Dux {
                     idCivis,
                     resFluida
                 );
-                if (idStatusProximus != IDCivisStatusCorporis.None) {
+                if (idStatusProximus != IDCivisStatusCorporis.Nihil) {
                     return idStatusProximus;
                 }
             }
 
-            return IDCivisStatusCorporis.None;
+            return IDCivisStatusCorporis.Nihil;
         }
 
         // ランダムにRamusを選択する
@@ -93,7 +93,7 @@ namespace Yulinti.Exercitus.Dux {
                 }
             }
             if (selecta == null) {
-                return IDCivisStatusCorporis.None;
+                return IDCivisStatusCorporis.Nihil;
             }
             return selecta.IdStatusProximus;
         }

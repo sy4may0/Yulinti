@@ -24,13 +24,19 @@ namespace Yulinti.Exercitus.Dux {
                 new RamusPuellaeCorporisAmbulatioAdCursus(),
                 new RamusPuellaeCorporisAmbulatioAdIncumboAmbulationem(),
                 new RamusPuellaeCorporisAmbulatioAdQuies(),
+                new RamusPuellaeCorporisAmbulatioAdSpectaculumIncipalis(),
                 new RamusPuellaeCorporisCursusAdAmbulatio(),
+                new RamusPuellaeCorporisCursusAdSpectaculumIncipalis(),
                 new RamusPuellaeCorporisIncumboAdIncumboAmbulationem(),
                 new RamusPuellaeCorporisIncumboAdQuies(),
                 new RamusPuellaeCorporisIncumboAmbulationemAdAmbulatio(),
                 new RamusPuellaeCorporisIncumboAmbulationemAdIncumbo(),
                 new RamusPuellaeCorporisQuiesAdAmbulatio(),
                 new RamusPuellaeCorporisQuiesAdIncumbo(),
+                new RamusPuellaeCorporisQuiesAdSpectaculumIncipalis(),
+                new RamusPuellaeCorporisSpectaculumIncipalisAdQuietes(),
+                new RamusPuellaeCorporisSpectaculumIncipalisAdSpectaculum(),
+                new RamusPuellaeCorporisSpectaculumFormosa01AdQuietes(),
             };
 
             _tabula = new Dictionary<IDPuellaeStatusCorporis, IRamusPuellaeCorporis[][]>();
@@ -101,7 +107,7 @@ namespace Yulinti.Exercitus.Dux {
             if (selecta == null) {
                 return IDPuellaeStatusCorporis.Nihil;
             }
-            return selecta.IdStatusProximus;
+            return selecta.IdStatusProximus(_contextusOstiorum, resFluida);
         }
     }
 }

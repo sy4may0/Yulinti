@@ -1,6 +1,6 @@
 namespace Yulinti.Exercitus.Contractus {
     public enum IDCivisStatusCorporis {
-        None,
+        Nihil,
         MigrareAditorium,
         MigrareCrematorium,
         Suicidium

@@ -3,7 +3,7 @@ using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
-    internal enum PhasisMachinaPuellaeStatusCorporis {
+    internal enum PhasisMachinaCivisStatusCorporis {
         Incipalis,
         Intrans,
         Transeo,
@@ -11,74 +11,83 @@ namespace Yulinti.Exercitus.Dux {
         Exiens
     }
 
-    internal sealed class MachinaPuellaeStatusCorporis {
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
-        private readonly TabulaPuellaeStatuum _tabulaPuellaeStatuum;
-        private readonly IConfiguratioPuellaeStatuum _configuratioStatuum;
-        private readonly ResolutorPuellaeRamorumCorporis _resolutorRamorumCorporis;
+    internal sealed class MachinaCivisStatuumCorporis {
+        private readonly int _idCivis;
+        private readonly ContextusCivisOstiorumLegibile _contextusOstiorum;
+        private readonly TabulaCivisStatuum _tabulaCivisStatuum;
+        private readonly IConfiguratioCivisStatuum _configuratioStatuum;
+        private readonly ResolutorCivisRamorumCorporis _resolutorRamorumCorporis;
 
-        private PhasisMachinaPuellaeStatusCorporis _phasisActualis;
+        private PhasisMachinaCivisStatusCorporis _phasisActualis;
 
-        private IDPuellaeStatusCorporis _idStatusActualis;
-        private IDPuellaeStatusCorporis _idStatusProximus;
+        private IDCivisStatusCorporis _idStatusActualis;
+        private IDCivisStatusCorporis _idStatusProximus;
 
-        public MachinaPuellaeStatusCorporis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
-            IConfiguratioPuellaeStatuum configuratioStatuum
+        public MachinaCivisStatuumCorporis(
+            int idCivis,
+            ContextusCivisOstiorumLegibile contextusOstiorum,
+            IConfiguratioCivisStatuum configuratioStatuum
         ) {
+            _idCivis = idCivis;
             _contextusOstiorum = contextusOstiorum;
             _configuratioStatuum = configuratioStatuum;
-            _tabulaPuellaeStatuum = new TabulaPuellaeStatuum(_configuratioStatuum);
-            _resolutorRamorumCorporis = new ResolutorPuellaeRamorumCorporis(_contextusOstiorum);
+            _tabulaCivisStatuum = new TabulaCivisStatuum(_configuratioStatuum);
+            _resolutorRamorumCorporis = new ResolutorCivisRamorumCorporis(_contextusOstiorum);
 
-            _phasisActualis = PhasisMachinaPuellaeStatusCorporis.Incipalis;
-            _idStatusActualis = IDPuellaeStatusCorporis.Nihil;
-            _idStatusProximus = IDPuellaeStatusCorporis.Nihil;
+            _phasisActualis = PhasisMachinaCivisStatusCorporis.Incipalis;
+            _idStatusActualis = IDCivisStatusCorporis.Nihil;
+            _idStatusProximus = IDCivisStatusCorporis.Nihil;
+        }
+
+        public void Initare(IResFluidaCivisLegibile resFluida) {
+            _phasisActualis = PhasisMachinaCivisStatusCorporis.Incipalis;
+            _idStatusActualis = IDCivisStatusCorporis.Nihil;
+            _idStatusProximus = IDCivisStatusCorporis.Nihil;
         }
 
         private bool EstExhibensCorpus() {
-            return _contextusOstiorum.Animationis.EstExhibens(IDPuellaeAnimationisStratum.Corpus);
+            return _contextusOstiorum.Animationes.EstExhibens(_idCivis, IDCivisAnimationisStratum.Corpus);
         }
 
         private bool EstExhibensAutIteransCorpus() {
             return
-                _contextusOstiorum.Animationis.EstExhibens(IDPuellaeAnimationisStratum.Corpus) ||
-                _contextusOstiorum.Animationis.EstExhibensIterans(IDPuellaeAnimationisStratum.Corpus);
+                _contextusOstiorum.Animationes.EstExhibens(_idCivis, IDCivisAnimationisStratum.Corpus) ||
+                _contextusOstiorum.Animationes.EstExhibensIterans(_idCivis, IDCivisAnimationisStratum.Corpus);
         }
 
         private bool EstDesinensCorpus() {
-            return _contextusOstiorum.Animationis.EstDesinens(IDPuellaeAnimationisStratum.Corpus);
+            return _contextusOstiorum.Animationes.EstDesinens(_idCivis, IDCivisAnimationisStratum.Corpus);
         }
 
-        private IStatusPuellaeCorporis LegereStatusActualis() {
-            if (_idStatusActualis == IDPuellaeStatusCorporis.Nihil) {
+        private IStatusCivisCorporis LegereStatusActualis() {
+            if (_idStatusActualis == IDCivisStatusCorporis.Nihil) {
                 return null;
             }
-            return _tabulaPuellaeStatuum.Legere(_idStatusActualis);
+            return _tabulaCivisStatuum.Legere(_idStatusActualis);
         }
 
-        private IStatusPuellaeCorporis LegereStatusProximus() {
-            if (_idStatusProximus == IDPuellaeStatusCorporis.Nihil) {
+        private IStatusCivisCorporis LegereStatusProximus() {
+            if (_idStatusProximus == IDCivisStatusCorporis.Nihil) {
                 return null;
             }
-            return _tabulaPuellaeStatuum.Legere(_idStatusProximus);
+            return _tabulaCivisStatuum.Legere(_idStatusProximus);
         }
 
         private void Incipere(
-            IResFluidaPuellaeLegibile resFluida
+            IResFluidaCivisLegibile resFluida
         ) {
-            if (_idStatusProximus != IDPuellaeStatusCorporis.Nihil) {
+            if (_idStatusProximus != IDCivisStatusCorporis.Nihil) {
                 MutareIntrans(resFluida);
                 return;
             }
 
-            if (_idStatusActualis != IDPuellaeStatusCorporis.Nihil) {
-                IStatusPuellaeCorporis statusActualis = LegereStatusActualis();
+            if (_idStatusActualis != IDCivisStatusCorporis.Nihil) {
+                IStatusCivisCorporis statusActualis = LegereStatusActualis();
                 if (statusActualis == null) {
-                    Notarius.Memorare(LogTextus.MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_STATUS_NOT_FOUND);
+                    Notarius.Memorare(LogTextus.MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_NOT_FOUND);
                     _idStatusProximus = _configuratioStatuum.IDStatusCorporisIncipalis;
                 } else {
-                    _idStatusProximus = statusActualis.IdStatusProximusAutomaticus;
+                    _idStatusProximus = statusActualis.IDStatusProximusAutomaticus;
                 }
 
                 MutareIntrans(resFluida);
@@ -90,15 +99,15 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         private void Intrare(
-            IResFluidaPuellaeLegibile resFluida
+            IResFluidaCivisLegibile resFluida
         ) {
-            IStatusPuellaeCorporis statusActualis = LegereStatusActualis();
+            IStatusCivisCorporis statusActualis = LegereStatusActualis();
             if (statusActualis == null) {
                 MutareIncipalisCumPurgere();
                 return;
             }
 
-            bool habetProximum = _idStatusProximus != IDPuellaeStatusCorporis.Nihil;
+            bool habetProximum = _idStatusProximus != IDCivisStatusCorporis.Nihil;
             bool estExhibens = EstExhibensCorpus();
             bool estDesinens = EstDesinensCorpus();
 
@@ -144,15 +153,15 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         private void Transere(
-            IResFluidaPuellaeLegibile resFluida
+            IResFluidaCivisLegibile resFluida
         ) {
-            IStatusPuellaeCorporis statusActualis = LegereStatusActualis();
+            IStatusCivisCorporis statusActualis = LegereStatusActualis();
             if (statusActualis == null) {
                 MutareIncipalisCumPurgere();
                 return;
             }
 
-            bool habetProximum = _idStatusProximus != IDPuellaeStatusCorporis.Nihil;
+            bool habetProximum = _idStatusProximus != IDCivisStatusCorporis.Nihil;
             bool estExhibensAutIterans = EstExhibensAutIteransCorpus();
             bool estDesinens = EstDesinensCorpus();
 
@@ -190,15 +199,15 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         private void TransereDesinere(
-            IResFluidaPuellaeLegibile resFluida
+            IResFluidaCivisLegibile resFluida
         ) {
-            IStatusPuellaeCorporis statusActualis = LegereStatusActualis();
+            IStatusCivisCorporis statusActualis = LegereStatusActualis();
             if (statusActualis == null) {
                 MutareIncipalisCumPurgere();
                 return;
             }
 
-            if (_idStatusProximus == IDPuellaeStatusCorporis.Nihil) {
+            if (_idStatusProximus == IDCivisStatusCorporis.Nihil) {
                 return;
             }
 
@@ -211,15 +220,15 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         private void Exiens(
-            IResFluidaPuellaeLegibile resFluida
+            IResFluidaCivisLegibile resFluida
         ) {
-            IStatusPuellaeCorporis statusActualis = LegereStatusActualis();
+            IStatusCivisCorporis statusActualis = LegereStatusActualis();
             if (statusActualis == null) {
                 MutareIncipalisCumPurgere();
                 return;
             }
 
-            bool habetProximum = _idStatusProximus != IDPuellaeStatusCorporis.Nihil;
+            bool habetProximum = _idStatusProximus != IDCivisStatusCorporis.Nihil;
             bool estExhibens = EstExhibensCorpus();
             bool estDesinens = EstDesinensCorpus();
 
@@ -249,160 +258,165 @@ namespace Yulinti.Exercitus.Dux {
 
         // 実際に現在ステートを切り替えるのはここだけ。
         private void MutareIntrans(
-            IResFluidaPuellaeLegibile resFluida
+            IResFluidaCivisLegibile resFluida
         ) {
             _idStatusActualis = _idStatusProximus;
-            _idStatusProximus = IDPuellaeStatusCorporis.Nihil;
-            _phasisActualis = PhasisMachinaPuellaeStatusCorporis.Intrans;
+            _idStatusProximus = IDCivisStatusCorporis.Nihil;
+            _phasisActualis = PhasisMachinaCivisStatusCorporis.Intrans;
 
-            IStatusPuellaeCorporis statusActualis = LegereStatusActualis();
+            IStatusCivisCorporis statusActualis = LegereStatusActualis();
             if (statusActualis == null) {
                 MutareIncipalisCumPurgere();
                 return;
             }
 
-            statusActualis.Intrare(_contextusOstiorum, resFluida);
+            statusActualis.Intrare(_idCivis, _contextusOstiorum, resFluida);
 
             // Intrare / Exire に Desinere は許可しない。
-            if (statusActualis.IdAnimationisIntrare == IDPuellaeAnimationis.Desinere) {
-                Notarius.Memorare(LogTextus.MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISINTRARE_DESINERE_INVALID);
+            if (statusActualis.IdAnimationisIntrare == IDCivisAnimationis.Desinere) {
+                Notarius.Memorare(LogTextus.MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_IDANIMATIONISINTRARE_DESINERE_INVALID);
                 MutareTranseo(resFluida);
                 return;
             }
 
-            if (statusActualis.IdAnimationisIntrare == IDPuellaeAnimationis.Nihil) {
+            if (statusActualis.IdAnimationisIntrare == IDCivisAnimationis.Nihil) {
                 MutareTranseo(resFluida);
                 return;
             }
         }
 
         private void MutareTranseo(
-            IResFluidaPuellaeLegibile resFluida
+            IResFluidaCivisLegibile resFluida
         ) {
-            _phasisActualis = PhasisMachinaPuellaeStatusCorporis.Transeo;
+            _phasisActualis = PhasisMachinaCivisStatusCorporis.Transeo;
 
-            IStatusPuellaeCorporis statusActualis = LegereStatusActualis();
+            IStatusCivisCorporis statusActualis = LegereStatusActualis();
             if (statusActualis == null) {
                 MutareIncipalisCumPurgere();
                 return;
             }
 
-            statusActualis.Transere(_contextusOstiorum, resFluida);
+            statusActualis.Transere(_idCivis, _contextusOstiorum, resFluida);
 
             // Transere は以下のように扱う。
             // Nihil     : フェーズを即スキップして Exiens
             // Desinere : 停止維持フェーズへ
             // それ以外  : Transeo のままアニメーション監視
-            if (statusActualis.IdAnimationisTransere == IDPuellaeAnimationis.Nihil) {
+            if (statusActualis.IdAnimationisTransere == IDCivisAnimationis.Nihil) {
                 MutareExiens(resFluida);
                 return;
             }
 
-            if (statusActualis.IdAnimationisTransere == IDPuellaeAnimationis.Desinere) {
+            if (statusActualis.IdAnimationisTransere == IDCivisAnimationis.Desinere) {
                 MutareTranseoDesinere(resFluida);
                 return;
             }
         }
 
         private void MutareTranseoDesinere(
-            IResFluidaPuellaeLegibile resFluida
+            IResFluidaCivisLegibile resFluida
         ) {
-            _phasisActualis = PhasisMachinaPuellaeStatusCorporis.TranseoDesinere;
+            _phasisActualis = PhasisMachinaCivisStatusCorporis.TranseoDesinere;
 
-            IStatusPuellaeCorporis statusActualis = LegereStatusActualis();
+            IStatusCivisCorporis statusActualis = LegereStatusActualis();
             if (statusActualis == null) {
                 MutareIncipalisCumPurgere();
                 return;
             }
 
-            statusActualis.Transere(_contextusOstiorum, resFluida);
+            statusActualis.Transere(_idCivis, _contextusOstiorum, resFluida);
 
-            if (statusActualis.IdAnimationisTransere == IDPuellaeAnimationis.Nihil) {
+            if (statusActualis.IdAnimationisTransere == IDCivisAnimationis.Nihil) {
                 MutareExiens(resFluida);
                 return;
             }
 
-            if (statusActualis.IdAnimationisTransere != IDPuellaeAnimationis.Desinere) {
+            if (statusActualis.IdAnimationisTransere != IDCivisAnimationis.Desinere) {
                 MutareTranseo(resFluida);
                 return;
             }
         }
-        private void MutareExiens(
-            IResFluidaPuellaeLegibile resFluida
-        ) {
-            _phasisActualis = PhasisMachinaPuellaeStatusCorporis.Exiens;
 
-            IStatusPuellaeCorporis statusActualis = LegereStatusActualis();
+        private void MutareExiens(
+            IResFluidaCivisLegibile resFluida
+        ) {
+            _phasisActualis = PhasisMachinaCivisStatusCorporis.Exiens;
+
+            IStatusCivisCorporis statusActualis = LegereStatusActualis();
             if (statusActualis == null) {
                 MutareIncipalisCumPurgere();
                 return;
             }
 
-            statusActualis.Exire(_contextusOstiorum, resFluida);
+            statusActualis.Exire(_idCivis, _contextusOstiorum, resFluida);
 
-            if (statusActualis.IdAnimationisExire == IDPuellaeAnimationis.Desinere) {
-                Notarius.Memorare(LogTextus.MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID);
+            if (statusActualis.IdAnimationisExire == IDCivisAnimationis.Desinere) {
+                Notarius.Memorare(LogTextus.MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID);
                 MutareIncipalis(resFluida);
                 return;
             }
 
-            if (statusActualis.IdAnimationisExire == IDPuellaeAnimationis.Nihil) {
+            if (statusActualis.IdAnimationisExire == IDCivisAnimationis.Nihil) {
                 MutareIncipalis(resFluida);
                 return;
             }
         }
 
         private void MutareIncipalis(
-            IResFluidaPuellaeLegibile resFluida
+            IResFluidaCivisLegibile resFluida
         ) {
-            _phasisActualis = PhasisMachinaPuellaeStatusCorporis.Incipalis;
+            _phasisActualis = PhasisMachinaCivisStatusCorporis.Incipalis;
         }
 
         private void MutareIncipalisCumPurgere() {
-            _idStatusActualis = IDPuellaeStatusCorporis.Nihil;
-            _idStatusProximus = IDPuellaeStatusCorporis.Nihil;
-            _phasisActualis = PhasisMachinaPuellaeStatusCorporis.Incipalis;
+            _idStatusActualis = IDCivisStatusCorporis.Nihil;
+            _idStatusProximus = IDCivisStatusCorporis.Nihil;
+            _phasisActualis = PhasisMachinaCivisStatusCorporis.Incipalis;
         }
 
-        public void Mutare(IResFluidaPuellaeLegibile resFluida) {
+        public void Mutare(IResFluidaCivisLegibile resFluida) {
             // 予約済みなら上書きしない。
-            if (_idStatusProximus != IDPuellaeStatusCorporis.Nihil) {
+            if (_idStatusProximus != IDCivisStatusCorporis.Nihil) {
                 return;
             }
 
-            _idStatusProximus = _resolutorRamorumCorporis.Resolvere(_idStatusActualis, resFluida);
+            _idStatusProximus = _resolutorRamorumCorporis.Resolvere(
+                _idStatusActualis,
+                _idCivis,
+                resFluida
+            );
         }
 
-        public void ConfirmareMutare(IResFluidaPuellaeLegibile resFluida) {
-            if (_phasisActualis == PhasisMachinaPuellaeStatusCorporis.Incipalis) {
+        public void ConfirmareMutare(IResFluidaCivisLegibile resFluida) {
+            if (_phasisActualis == PhasisMachinaCivisStatusCorporis.Incipalis) {
                 Incipere(resFluida);
                 return;
             }
-            if (_phasisActualis == PhasisMachinaPuellaeStatusCorporis.Intrans) {
+            if (_phasisActualis == PhasisMachinaCivisStatusCorporis.Intrans) {
                 Intrare(resFluida);
                 return;
             }
-            if (_phasisActualis == PhasisMachinaPuellaeStatusCorporis.Transeo) {
+            if (_phasisActualis == PhasisMachinaCivisStatusCorporis.Transeo) {
                 Transere(resFluida);
                 return;
             }
-            if (_phasisActualis == PhasisMachinaPuellaeStatusCorporis.TranseoDesinere) {
+            if (_phasisActualis == PhasisMachinaCivisStatusCorporis.TranseoDesinere) {
                 TransereDesinere(resFluida);
                 return;
             }
-            if (_phasisActualis == PhasisMachinaPuellaeStatusCorporis.Exiens) {
+            if (_phasisActualis == PhasisMachinaCivisStatusCorporis.Exiens) {
                 Exiens(resFluida);
                 return;
             }
         }
 
-        public void Ordinare(IResFluidaPuellaeLegibile resFluida) {
-            IStatusPuellaeCorporis statusActualis = LegereStatusActualis();
+        public void Ordinare(IResFluidaCivisLegibile resFluida) {
+            IStatusCivisCorporis statusActualis = LegereStatusActualis();
             if (statusActualis == null) {
                 return;
             }
 
-            statusActualis.Ordinare(_contextusOstiorum, resFluida);
+            statusActualis.Ordinare(_idCivis, _contextusOstiorum, resFluida);
         }
     }
 }

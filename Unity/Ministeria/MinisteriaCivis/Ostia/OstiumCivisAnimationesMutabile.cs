@@ -1,4 +1,3 @@
-using System;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Unity.Contractus;
 
@@ -12,30 +11,40 @@ namespace Yulinti.Unity.Ministeria {
 
         public int[] IDs => _miCivisAnimationes.IDs;
         public int Longitudo => _miCivisAnimationes.Longitudo;
-        public void Purgere(int id) {
-            if (id < 0 || id >= _miCivisAnimationes.Longitudo) return;
-            _miCivisAnimationes.Purgere(id);
+
+        public bool EstExhibens(int id, IDCivisAnimationisStratum stratum) {
+            if (id < 0 || id >= _miCivisAnimationes.Longitudo) return false;
+            return _miCivisAnimationes.EstExhibens(id, stratum);
         }
 
-        public bool EstActivum(int id) {
+        public bool EstDesinens(int id, IDCivisAnimationisStratum stratum) {
             if (id < 0 || id >= _miCivisAnimationes.Longitudo) return false;
-            return _miCivisAnimationes.EstActivum(id);
+            return _miCivisAnimationes.EstDesinens(id, stratum);
         }
-        public void Postulare(int id, IDCivisAnimationisContinuata idAnimationis, Action adInitium, Action adFinem) {
+
+        public bool EstExhibensIterans(int id, IDCivisAnimationisStratum stratum) {
+            if (id < 0 || id >= _miCivisAnimationes.Longitudo) return false;
+            return _miCivisAnimationes.EstExhibensIterans(id, stratum);
+        }
+
+        public void Exhibere(int id, IDCivisAnimationisStratum stratum, IDCivisAnimationis idAnimationis) {
             if (id < 0 || id >= _miCivisAnimationes.Longitudo) return;
-            _miCivisAnimationes.Postulare(id, idAnimationis, adInitium, adFinem);
+            _miCivisAnimationes.Exhibere(id, stratum, idAnimationis);
         }
-        public void Cogere(int id, IDCivisAnimationisContinuata idAnimationis, Action adInitium, Action adFinem) {
+
+        public void Desinere(int id, IDCivisAnimationisStratum stratum) {
             if (id < 0 || id >= _miCivisAnimationes.Longitudo) return;
-            _miCivisAnimationes.Cogere(id, idAnimationis, adInitium, adFinem);
+            _miCivisAnimationes.Desinere(id, stratum);
         }
-        public void TemporareLuditores(int id) {
-            if (id < 0 || id >= _miCivisAnimationes.Longitudo) return;
-            _miCivisAnimationes.TemporareLuditores(id);
-        }
+
         public void InjicereVelocitatem(int id, float vel) {
             if (id < 0 || id >= _miCivisAnimationes.Longitudo) return;
             _miCivisAnimationes.InjicereVelocitatem(id, vel);
+        }
+
+        public void Purgere(int id, IDCivisAnimationisStratum stratum) {
+            if (id < 0 || id >= _miCivisAnimationes.Longitudo) return;
+            _miCivisAnimationes.Purgere(id, stratum);
         }
     }
 }
