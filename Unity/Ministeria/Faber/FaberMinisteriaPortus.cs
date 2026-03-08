@@ -21,13 +21,14 @@ namespace Yulinti.Unity.Ministeria {
 
             // Puellae
             builder.Register<MinisteriumPuellaeLoci>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<MinisteriumPuellaeAnimationes>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<MinisteriumPuellaeAnimationis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeFiguraeGenus>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeFiguraePelvis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeOssis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeRelationisTerrae>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeResVisae>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<IOstiumPuellaeAnimationesMutabile, OstiumPuellaeAnimationesMutabile>(Lifetime.Singleton);
+            builder.Register<IOstiumPuellaeAnimationisMutabile, OstiumPuellaeAnimationisMutabile>(Lifetime.Singleton);
+            builder.Register<IOstiumPuellaeAnimationisLegibile, OstiumPuellaeAnimationisLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumPuellaeFiguraeGenusLegibile, OstiumPuellaeFiguraeGenusLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumPuellaeFiguraeGenusMutabile, OstiumPuellaeFiguraeGenusMutabile>(Lifetime.Singleton);
             builder.Register<IOstiumPuellaeFiguraePelvisLegibile, OstiumPuellaeFiguraePelvisLegibile>(Lifetime.Singleton);

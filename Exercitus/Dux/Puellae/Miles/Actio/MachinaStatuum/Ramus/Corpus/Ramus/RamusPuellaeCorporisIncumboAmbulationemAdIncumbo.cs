@@ -3,7 +3,12 @@ using Yulinti.Exercitus.Contractus;
 namespace Yulinti.Exercitus.Dux {
     internal sealed class RamusPuellaeCorporisIncumboAmbulationemAdIncumbo : IRamusPuellaeCorporis {
         public IDPuellaeStatusCorporis IdStatusActualis => IDPuellaeStatusCorporis.IncumboAmbulationem;
-        public IDPuellaeStatusCorporis IdStatusProximus => IDPuellaeStatusCorporis.Incumbo;
+        public IDPuellaeStatusCorporis IdStatusProximus(
+            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            IResFluidaPuellaeLegibile resFluida
+        ) {
+            return IDPuellaeStatusCorporis.Incumbo;
+        }
         public int Prioritas => 1000;
         public bool Condicio(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,

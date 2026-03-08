@@ -9,7 +9,7 @@ namespace Yulinti.Exercitus.Contractus {
         float AcceleratioGravitatis { get; }
         float VelocitasContactus { get; }
         float VelocitasVerticalisMax { get; }
-        IDPuellaeAnimationisContinuata IdAnimationisPraedefinitus { get; }
+        IDPuellaeAnimationis IdAnimationisPraedefinitus { get; }
         IConfiguratioPuellaeStatusCorporis[] StatuumCorporis { get; }
         IConfiguratioPuellaeStatusPartis[] StatuumPartium { get; }
 
@@ -19,5 +19,8 @@ namespace Yulinti.Exercitus.Contractus {
 
         // 初期ステート
         IDPuellaeStatusCorporis IDStatusCorporisIncipalis { get; }
+
+        // エモートステートなど、停止を判定するときに使う閾値。
+        float LimenVelocitatisIntransQuietes { get; }
    }
 }

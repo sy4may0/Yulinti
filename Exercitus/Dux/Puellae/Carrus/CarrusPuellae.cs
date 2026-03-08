@@ -122,13 +122,11 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         public void PostulareAnimationis(
-            IDPuellaeAnimationisContinuata idAnimationis,
-            Action adInitium = null,
-            Action adFinem = null,
-            bool estCogere = false
+            IDPuellaeAnimationisStratum stratum,
+            IDPuellaeAnimationis idAnimationis
         ){
             if(_lacusOrdinatioPuellae.EmittareAnimationis(out var ordinatio)) {
-                ordinatio.Pono(idAnimationis, adInitium, adFinem, estCogere);
+                ordinatio.Pono(stratum, idAnimationis);
                 _exAnimationis.Executare(ordinatio);
             }
         }

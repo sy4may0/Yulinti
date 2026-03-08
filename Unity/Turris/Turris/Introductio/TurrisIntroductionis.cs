@@ -18,6 +18,9 @@ namespace Yulinti.Unity.Turris {
         private readonly InputActionReference _cancelInput;
         private readonly InputActionReference _navigateInput;
 
+        //// Action ////
+        private readonly InputActionReference _spectaculumCorporisInput;
+
         public TurrisIntroductionis(IAnchoraInput anchoraInput) {
             _moveInput = anchoraInput.MoveInput;
             _sprintInput = anchoraInput.SprintInput;
@@ -28,6 +31,8 @@ namespace Yulinti.Unity.Turris {
             _submitInput = anchoraInput.SubmitInput;
             _cancelInput = anchoraInput.CancelInput;
             _navigateInput = anchoraInput.NavigateInput;
+
+            _spectaculumCorporisInput = anchoraInput.SpectaculumCorporisInput;
 
         }
 
@@ -42,6 +47,8 @@ namespace Yulinti.Unity.Turris {
         public bool LegoSubmit => _submitInput?.action?.enabled == true && _submitInput.action.IsPressed();
         public bool LegoCancel => _cancelInput?.action?.enabled == true && _cancelInput.action.IsPressed();
         public bool LegoNavigate => _navigateInput?.action?.enabled == true && _navigateInput.action.IsPressed();
+
+        public bool LegoSpectaculumCorporis => _spectaculumCorporisInput?.action?.enabled == true && _spectaculumCorporisInput.action.IsPressed();
 
         public void DebugEnabled() {
             UnityEngine.Debug.Log($"_moveInput.action.enabled={_moveInput.action.enabled}");

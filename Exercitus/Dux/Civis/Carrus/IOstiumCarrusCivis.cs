@@ -1,15 +1,12 @@
 using Yulinti.Exercitus.Contractus;
-using System;
 using System.Numerics;
 
 namespace Yulinti.Exercitus.Dux {
     internal interface IOstiumCarrusCivis {
         void PostulareAnimationis(
             int idCivis,
-            IDCivisAnimationisContinuata idAnimationis,
-            Action adInitium,
-            Action adFinem,
-            bool estCogere
+            IDCivisAnimationisStratum stratum,
+            IDCivisAnimationis idAnimationis
         );
 
         void PostulareMotus(

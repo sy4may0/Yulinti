@@ -7,21 +7,8 @@ namespace Yulinti.Exercitus.Contractus {
     }
 
     public enum IDCivisAnimationis {
-        None,
-        NihilCorporis,
-        NihilPartis,
-        StandardBase
-    }
-
-    public enum IDCivisAnimationisContinuata {
-        None,
-        // Fundamenti
-        StandardBase,
-
-        // Corpus
-        NihilCorporis,
-
-        // Pars
-        NihilPartis
+        Nihil,
+        Desinere,
+        Basis
     }
 }

@@ -12,6 +12,9 @@ namespace Yulinti.Exercitus.Dux {
             builder.Register<ResFluidaPuellaeVeletudinis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<ResFluidaPuellaeSpectaculi>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             builder.Register<ResFluidaPuellaeLegibile>(Lifetime.Singleton)
                 .AsSelf()

@@ -8,12 +8,12 @@ namespace Yulinti.Exercitus.Dux {
         private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
         private readonly IRamusPuellaeCorporis[] _rami;
         // キー: IDPuellaeStatusCorporisActualis
-        // 値: ジャグ配列 [Prioritas順のインデックス][同一Prioritasを持つRamus配列]
+        // 値: ジャグ配列[Prioritas順のインデックス][同一Prioritasを持つRamus配列]
         private readonly Dictionary<IDPuellaeStatusCorporis, IRamusPuellaeCorporis[][]> _tabula;
         private readonly Random _random;
 
-        // !!!!!! LINQを使っている !!!!!!!!!!
-        // Updateループでは呼ぶな。Awakeのコンストラクタ以外で使わない。
+        // !!!!!! LINQを使ってぁ !!!!!!!!!!
+        // Updateループでは呼ぶな
         public ResolutorPuellaeRamorumCorporis(
             ContextusPuellaeOstiorumLegibile contextusOstiorum
         ) {
@@ -24,27 +24,33 @@ namespace Yulinti.Exercitus.Dux {
                 new RamusPuellaeCorporisAmbulatioAdCursus(),
                 new RamusPuellaeCorporisAmbulatioAdIncumboAmbulationem(),
                 new RamusPuellaeCorporisAmbulatioAdQuies(),
+                new RamusPuellaeCorporisAmbulatioAdSpectaculumIncipalis(),
                 new RamusPuellaeCorporisCursusAdAmbulatio(),
+                new RamusPuellaeCorporisCursusAdSpectaculumIncipalis(),
                 new RamusPuellaeCorporisIncumboAdIncumboAmbulationem(),
                 new RamusPuellaeCorporisIncumboAdQuies(),
                 new RamusPuellaeCorporisIncumboAmbulationemAdAmbulatio(),
                 new RamusPuellaeCorporisIncumboAmbulationemAdIncumbo(),
                 new RamusPuellaeCorporisQuiesAdAmbulatio(),
                 new RamusPuellaeCorporisQuiesAdIncumbo(),
+                new RamusPuellaeCorporisQuiesAdSpectaculumIncipalis(),
+                new RamusPuellaeCorporisSpectaculumIncipalisAdQuietes(),
+                new RamusPuellaeCorporisSpectaculumIncipalisAdSpectaculum(),
+                new RamusPuellaeCorporisSpectaculumFormosa01AdQuietes(),
             };
 
             _tabula = new Dictionary<IDPuellaeStatusCorporis, IRamusPuellaeCorporis[][]>();
             
             // 各StatusCorporisごとにRamusをグループ化
             foreach (IDPuellaeStatusCorporis status in Enum.GetValues(typeof(IDPuellaeStatusCorporis))) {
-                if (status == IDPuellaeStatusCorporis.None) continue;
+                if (status == IDPuellaeStatusCorporis.Nihil) continue;
                 
-                // 該当するStatusActualisのRamusを抽出し、Prioritasでグループ化
+                // 該当するStatusActualisのRamusを抽出しPrioritasでグループ化
                 var ramiPG = _rami
                     .Where(r => r.IdStatusActualis == status)
                     .GroupBy(r => r.Prioritas)
-                    .OrderBy(g => g.Key)  // Prioritas昇順
-                    .Select(g => g.ToArray())  // 各グループを配列に変換
+                    .OrderBy(g => g.Key)  // Prioritas順
+                    .Select(g => g.ToArray())  // ループを配列に変換
                     .ToArray();
                 
                 if (ramiPG.Length > 0) {
@@ -54,29 +60,29 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         // 次の状態を決定する
-        // IDPuellaeStatusCorporisActualisに対応するRamusから、Prioritas順に条件をチェックし、最初にマッチしたものを返す
-        // マッチしない場合はNoneを返す
+        // IDPuellaeStatusCorporisActualisに対応するRamusからPrioritas順の条件をチェックし最初にマッチしたものを返す
+        // マッチしない場合はNihilを返す
         public IDPuellaeStatusCorporis Resolvere(
             IDPuellaeStatusCorporis idStatusActualis,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            // 該当するStatusActualisのテーブルが存在しない場合はNoneを返す
+            // 該当するStatusActualisのテーブルが存在しない場合はNihilを返す
             if (!_tabula.ContainsKey(idStatusActualis)) {
-                return IDPuellaeStatusCorporis.None;
+                return IDPuellaeStatusCorporis.Nihil;
             }
 
-            // Prioritas順（外側のループ）→同一Prioritas内（内側のループ）の順で条件をチェック
+            // Prioritas順の外側のループ（同一Prioritas内のループ）条件をチェック
             foreach (var ramiPG in _tabula[idStatusActualis]) {
                 IDPuellaeStatusCorporis idStatusProximus = selegereCaecus(
                     ramiPG,
                     resFluida
                 );
-                if (idStatusProximus != IDPuellaeStatusCorporis.None) {
+                if (idStatusProximus != IDPuellaeStatusCorporis.Nihil) {
                     return idStatusProximus;
                 }
             }
 
-            return IDPuellaeStatusCorporis.None;
+            return IDPuellaeStatusCorporis.Nihil;
         }
 
         // ランダムにRamusを選択する
@@ -99,9 +105,9 @@ namespace Yulinti.Exercitus.Dux {
                 }
             }
             if (selecta == null) {
-                return IDPuellaeStatusCorporis.None;
+                return IDPuellaeStatusCorporis.Nihil;
             }
-            return selecta.IdStatusProximus;
+            return selecta.IdStatusProximus(_contextusOstiorum, resFluida);
         }
     }
 }

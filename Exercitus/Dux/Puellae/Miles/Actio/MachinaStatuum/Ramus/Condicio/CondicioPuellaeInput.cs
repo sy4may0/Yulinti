@@ -2,7 +2,7 @@ using Yulinti.Exercitus.Contractus;
 
 namespace Yulinti.Exercitus.Dux {
     internal static class CondicioPuellaeInput {
-        // 移動入力があるかどうかを判定する
+        // 移動E力があるかどうを判定すめ
         public static bool EstMotus(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
@@ -11,7 +11,7 @@ namespace Yulinti.Exercitus.Dux {
             return contextusOstiorum.Introductionis.LegoMotus.LengthSquared() >= limenInputQuadratum;
         }
 
-        // Incumboが押されているかどうかを判定する
+        // Incumboが押されていかどうを判定すめ
         public static bool EstIncumbo(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
@@ -19,12 +19,20 @@ namespace Yulinti.Exercitus.Dux {
             return contextusOstiorum.Introductionis.LegoIncumbo;
         }
 
-        // Cursusが押されているかどうかを判定する
+        // Cursusが押されていかどうを判定すめ
         public static bool EstCursus(
             ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
             return contextusOstiorum.Introductionis.LegoCursus;
+        }
+
+        // SpectaculumCorporisが押されていかどうを判定すめ
+        public static bool EstSpectaculumCorporis(
+            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            IResFluidaPuellaeLegibile resFluida
+        ) {
+            return contextusOstiorum.Introductionis.LegoSpectaculumCorporis;
         }
     }
 }

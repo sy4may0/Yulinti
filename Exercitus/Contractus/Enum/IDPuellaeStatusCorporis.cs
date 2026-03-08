@@ -1,6 +1,5 @@
 namespace Yulinti.Exercitus.Contractus {
     public enum IDPuellaeStatusCorporis {
-        None,
         Quies,                // Idle
         Ambulatio,            // Walk
         Cursus,               // Run
@@ -8,7 +7,17 @@ namespace Yulinti.Exercitus.Contractus {
         IncumboAmbulationem,  // CrouchWalk
 
         // 特殊ステート Portus用
-        StasisPortus
+        StasisPortus,
+
+        // エモートステート
+        // エモートは必ずPosituraIncipalisからスタートする。
+        // エモート入力 -> PosituraIncipalisに入る。
+        // PosituraIncipalisは速度0に減速、規定以下まで減速したらエモートステートに遷移する。
+        SpectaculumIncipalis,    // エモート入る前の準備ステート。
+        SpectaculumFormosa01,    // Formosaポーズ01
+
+        // 特殊ステート Nihil用
+        Nihil = 999999
     }
 
     public enum IDPuellaeStatusCorporisModiMotus {

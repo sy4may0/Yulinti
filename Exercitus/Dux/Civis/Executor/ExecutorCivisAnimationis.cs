@@ -29,7 +29,9 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         public void Initare(int idCivis) {
-            _ostiumCivisAnimationesMutabile.Purgere(idCivis);
+            foreach (IDCivisAnimationisStratum stratum in System.Enum.GetValues(typeof(IDCivisAnimationisStratum))) {
+                _ostiumCivisAnimationesMutabile.Purgere(idCivis, stratum);
+            }
             _queueAnimationis[idCivis].Purgere();
         }
 
@@ -51,11 +53,7 @@ namespace Yulinti.Exercitus.Dux {
             int idCivis,
             IOrdinatioCivisAnimationis animationis
         ) {
-            if (animationis.EstCogere) {
-                _ostiumCivisAnimationesMutabile.Cogere(idCivis, animationis.IdAnimationis, animationis.AdInitium, animationis.AdFinem);
-            } else {
-                _ostiumCivisAnimationesMutabile.Postulare(idCivis, animationis.IdAnimationis, animationis.AdInitium, animationis.AdFinem);
-            }
+            _ostiumCivisAnimationesMutabile.Exhibere(idCivis, animationis.Stratum, animationis.IdAnimationis);
         }
 
         public void Confirmare(int idCivis) {
@@ -69,7 +67,9 @@ namespace Yulinti.Exercitus.Dux {
         }
 
         public void Purgare(int idCivis) {
-            _ostiumCivisAnimationesMutabile.Purgere(idCivis);
+            foreach (IDCivisAnimationisStratum stratum in System.Enum.GetValues(typeof(IDCivisAnimationisStratum))) {
+                _ostiumCivisAnimationesMutabile.Purgere(idCivis, stratum);
+            }
             _queueAnimationis[idCivis].Purgere();
         }
     }

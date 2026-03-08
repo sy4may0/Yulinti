@@ -3,9 +3,14 @@ using Yulinti.Exercitus.Contractus;
 namespace Yulinti.Exercitus.Contractus {
     public interface IConfiguratioCivisStatusCorporis {
         IDCivisStatusCorporis Id { get; }
-        IDCivisAnimationisContinuata IdAnimationisIntrare { get; }
-        IDCivisAnimationisContinuata IdAnimationisExire { get; }
-        bool LudereExire { get; }
+        IDCivisAnimationis IdAnimationisIntrare { get; }
+        IDCivisAnimationis IdAnimationisTransere { get; }
+        IDCivisAnimationis IdAnimationisExire { get; }
+        bool EstInterdictaIntrare { get; }
+        bool EstInterdictaTransere { get; }
+        bool EstInterdictaExire { get; }
+
+        IDCivisStatusCorporis IDStatusProximusAutomaticus { get; }
 
         // ライフタイム消費量
         float ConsumptioVitae { get; }

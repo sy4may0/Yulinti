@@ -1,28 +1,21 @@
 using Animancer;
 using UnityEngine;
+using Yulinti.Exercitus.Contractus;
 using Yulinti.Unity.Contractus;
 
-
-using Yulinti.Exercitus.Contractus;
 namespace Yulinti.Regnum.Configuratio {
-    public abstract class ConfiguratioPuellaeAnimationisBasis : ScriptableObject, IConfiguratioPuellaeAnimationisUnicae {
-        [SerializeField] private IDPuellaeAnimationis _id;
-        [SerializeField] private float _tempusEvanescentiae = 0.4f;
-        [SerializeField] private Easing.Function _lenitio = Easing.Function.Linear;
-        [SerializeField] private bool _estSimultaneum = false;
-        [SerializeField] private bool _estImpeditivus = false;
-        [SerializeField] private bool _estCircularis = true;
-        [SerializeField] private bool _estObsignatus = false;
-        [SerializeField] private bool _estTerminare = false;
+    public abstract class ConfiguratioPuellaeAnimationisBasis : ScriptableObject, IConfiguratioPuellaeAnimationis {
+        [SerializeField] private IDPuellaeAnimationis id;
+        [SerializeField] private float tempusEvanescentiae;
+        [SerializeField] private Easing.Function lenitio;
+        [SerializeField] private bool estSimulataneum;
+        [SerializeField] private bool estIterans;
 
-        public IDPuellaeAnimationis Id => _id;
+        public IDPuellaeAnimationis Id => id;
         public abstract ITransition Animatio { get; }
-        public float TempusEvanescentiae => _tempusEvanescentiae;
-        public Easing.Function Lenitio => _lenitio;
-        public bool EstSimultaneum => _estSimultaneum;
-        public bool EstImpeditivus => _estImpeditivus;
-        public bool EstCircularis => _estCircularis;
-        public bool EstObsignatus => _estObsignatus;
-        public bool EstTerminare => _estTerminare;
+        public float TempusEvanescentiae => tempusEvanescentiae;
+        public Easing.Function Lenitio => lenitio;
+        public bool EstSimulataneum => estSimulataneum;
+        public bool EstIterans => estIterans;
     }
 }

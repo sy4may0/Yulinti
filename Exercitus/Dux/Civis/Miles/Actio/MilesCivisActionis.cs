@@ -13,7 +13,8 @@ namespace Yulinti.Exercitus.Dux {
             for (int i = 0; i < contextusOstiorum.Civis.Longitudo; i++) {
                 _machinaCorporis[i] = new MachinaCivisStatuumCorporis(
                     i,
-                    contextusOstiorum
+                    contextusOstiorum,
+                    contextusOstiorum.Configuratio.Statuum
                 );
             }
         }
@@ -24,11 +25,13 @@ namespace Yulinti.Exercitus.Dux {
         ) {
             _contextusOstiorum.Carrus.PostulareAnimationis(
                 idCivis,
-                _contextusOstiorum.Configuratio.Statuum.IdAnimationisPraedefinitus,
-                null,
-                null,
-                true
+                IDCivisAnimationisStratum.Fundamentum,
+                _contextusOstiorum.Configuratio.Statuum.IdAnimationisPraedefinitus
             );
+
+            // 初期位置へ移動（Puellae同様、MachinaではなくMiles側で要求する）。
+            PostulareNavmeshIncipalis(idCivis);
+
             _machinaCorporis[idCivis].Initare(resFluida);
         }
 
@@ -43,7 +46,28 @@ namespace Yulinti.Exercitus.Dux {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _machinaCorporis[idCivis].MutareStatus(resFluida);
+            _machinaCorporis[idCivis].Mutare(resFluida);
+            _machinaCorporis[idCivis].ConfirmareMutare(resFluida);
+        }
+
+        private void PostulareNavmeshIncipalis(int idCivis) {
+            if (!_contextusOstiorum.PunctumViae.ConareLegoNatoriumTemere(out IPunctumViaeLegibile punctumViae)) {
+                _contextusOstiorum.Carrus.PostulareMortis(
+                    idCivis,
+                    SpeciesOrdinationisCivisMortis.Spirituare
+                );
+                return;
+            }
+
+            _contextusOstiorum.Carrus.PostulareNavmesh(
+                idCivis,
+                punctumViae.Positio,
+                true,
+                0f,
+                0f,
+                0,
+                0f
+            );
         }
     }
 }

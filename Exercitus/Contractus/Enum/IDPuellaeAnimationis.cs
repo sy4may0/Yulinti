@@ -6,35 +6,18 @@ namespace Yulinti.Exercitus.Contractus {
         Pars = 2
     }
 
-    // これはUnicaeに対応する。
-    // 1Clip = 1ID
     public enum IDPuellaeAnimationis {
-        None,
-        NihilCorporis,
-        NihilPartis,
-        StandardBase,
-        Crouch,
-    }
-
-    // これはContinuataに対応する。
-    public enum IDPuellaeAnimationisContinuata {
-        None,
-        // Fundamenti
-        StandardBase,
-
-        // Corpus
-        NihilCorporis,
-        Crouch,
-
-        // Pars
-        NihilPartis
-
-    }
-
-    public enum NewIDPuellaeAnimationis {
         Nihil,
-        Basis,
-        StasisBasis,
-        Incumbo,
+        Desinere,
+
+        // 基本アニメーション
+        Basis,         // Idle/Walk/Runミキサー
+        StasisBasis,   //Idle固定
+        Incumbo,       // しゃがみ
+
+        // ポーズアニメーション
+        SpectaculumFormosa01Int,  // Formosaポーズ01-In
+        SpectaculumFormosa01Tra,  // Formosaポーズ01
+        SpectaculumFormosa01Exi   // Formosaポーズ01-Exit
     }
 }

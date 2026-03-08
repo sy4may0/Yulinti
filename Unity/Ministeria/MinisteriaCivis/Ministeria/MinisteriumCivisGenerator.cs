@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Yulinti.Exercitus.Contractus;
 using UnityEngine;
@@ -32,46 +33,52 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         private void Initiare() {
-            InitiareAsync().Forget(e => Notarius.Memorare(e));
-            TempusExactumInitiareAsync().Forget(e => Notarius.Memorare(e));
+            InitiareAsync().Forget();
+            TempusExactumInitiareAsync().Forget();
         }
 
         private void Generare() {
-            GenerareAsync().Forget(e => Notarius.Memorare(e));
+            GenerareAsync().Forget();
         }
         
         private async UniTask InitiareAsync() {
-            _estInitiare = true;
-            while (_estInitiare) {
-                // 10ms
-                await UniTask.Delay(10);
-                if (_miCivis.LongitudoActivum >= _configuratio.PopulatioInitialis) {
-                    break;
+            try {
+                _estInitiare = true;
+                while (_estInitiare) {
+                    await UniTask.Delay(10);
+                    if (_miCivis.LongitudoActivum >= _configuratio.PopulatioInitialis) {
+                        break;
+                    }
+                    _miCivis.Incarnare(_miCivis.LegoIDIntactus());
                 }
-
-                // LegoIDIntactusはエラーなら-1を返す。Incarnareは-1を無視する。
-                _miCivis.Incarnare(_miCivis.LegoIDIntactus());
+                _estInitiare = false;
             }
-            _estInitiare = false;
+            catch (OperationCanceledException) { }
+            catch (Exception e) {
+                Notarius.Memorare(e);
+            }
         }
 
         private async UniTask GenerareAsync() {
-            _estGenerare = true;
-            while (_estGenerare) {
-                // 10ms
-                int d = Random.Range(
-                    _configuratio.IntervallumMinimus * 1000,
-                    _configuratio.IntervallumMaximus * 1000
-                );
-                await UniTask.Delay(d, cancellationToken: _cancellationTokenSource.Token);
-                if (_miCivis.LongitudoActivum >= _configuratio.PopulatioMaxima) {
-                    continue;
+            try {
+                _estGenerare = true;
+                while (_estGenerare) {
+                    int d = UnityEngine.Random.Range(
+                        _configuratio.IntervallumMinimus * 1000,
+                        _configuratio.IntervallumMaximus * 1000
+                    );
+                    await UniTask.Delay(d, cancellationToken: _cancellationTokenSource.Token);
+                    if (_miCivis.LongitudoActivum >= _configuratio.PopulatioMaxima) {
+                        continue;
+                    }
+                    _miCivis.Incarnare(_miCivis.LegoIDIntactus());
                 }
-
-                // LegoIDIntactusはエラーなら-1を返す。Incarnareは-1を無視する。
-                _miCivis.Incarnare(_miCivis.LegoIDIntactus());
+                _estGenerare = false;
             }
-            _estGenerare = false;
+            catch (OperationCanceledException) { }
+            catch (Exception e) {
+                Notarius.Memorare(e);
+            }
         }
 
         public void Terminare() {
@@ -80,9 +87,15 @@ namespace Yulinti.Unity.Ministeria {
         }
 
         private async UniTask TempusExactumInitiareAsync() {
-            await UniTask.Delay(30 * 1000);
-            if (_estInitiare) {
-                Carnifex.Intermissio(LogTextus.MinisteriumCivisGenerator_GENERATORCIVIS_TIMEOUT_INITIARE);
+            try {
+                await UniTask.Delay(30 * 1000);
+                if (_estInitiare) {
+                    Carnifex.Intermissio(LogTextus.MinisteriumCivisGenerator_GENERATORCIVIS_TIMEOUT_INITIARE);
+                }
+            }
+            catch (OperationCanceledException) { }
+            catch (Exception e) {
+                Notarius.Memorare(e);
             }
         }
 

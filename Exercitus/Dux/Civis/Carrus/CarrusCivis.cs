@@ -99,15 +99,9 @@ namespace Yulinti.Exercitus.Dux {
             _lacusOrdinatioCivis.ColligereOmnia(idCivis);
         }
 
-        public void PostulareAnimationis(
-            int idCivis,
-            IDCivisAnimationisContinuata idAnimationis,
-            Action adInitium = null,
-            Action adFinem = null,
-            bool estCogere = false
-        ) {
+        public void PostulareAnimationis(int idCivis, IDCivisAnimationisStratum stratum, IDCivisAnimationis idAnimationis) {
             if (_lacusOrdinatioCivis.EmittareAnimationis(idCivis, out var ordinatio)) {
-                ordinatio.Pono(idAnimationis, adInitium, adFinem, estCogere);
+                ordinatio.Pono(stratum, idAnimationis);
                 _exAnimationis.Executare(idCivis, ordinatio);
             }
         }

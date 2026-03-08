@@ -5,10 +5,8 @@ using System.Numerics;
 namespace Yulinti.Exercitus.Dux {
     internal interface IOstiumCarrusPuellae {
         void PostulareAnimationis(
-            IDPuellaeAnimationisContinuata idAnimationis,
-            Action adInitium,
-            Action adFinem,
-            bool estCogere
+            IDPuellaeAnimationisStratum stratum,
+            IDPuellaeAnimationis idAnimationis
         );
 
         void PostulareCrinis(

@@ -123,6 +123,13 @@ namespace Yulinti.Unity.Ministeria {
                 Notarius.Memorare(LogTextus.LusorAnimationis_LUSORANIMATIONIS_ONUS_NULL);
                 return;
             }
+            // 同じITransitionがすでに再生中なら、何もしない。
+            if (
+                _animatioCurrens != null && 
+                ReferenceEquals(_animatioCurrens.Animatio, onus.Animatio)
+            ) {
+                return;
+            }
 
             PurgereOnEnd();
 
@@ -144,15 +151,27 @@ namespace Yulinti.Unity.Ministeria {
                 _statusLusoris = IDStatusLusoris.Iterans;
             } else {
                 if (_statusCurrens.Events(this, out AnimancerEvent.Sequence events)) {
-                    events.OnEnd = _adFinem;
+                    events.Add(
+                        Animancer.AnimancerEvent.AlmostOne,
+                        _adFinem
+                    );
                 }
                 _statusLusoris = IDStatusLusoris.Semel;
             }
         }
 
         public void Desinere() {
-            if (_animatioCurrens == null) return;
-            if (_statusCurrens == null) return;
+            // _adFinemが動いた場合再生あり(アニメーションの終了フレームが再生状態)で_statusCurrensがnullになる。
+            // だからここで_statusCurrensがnullであることをガードすると、_adFinemの最終フレーム再生を止められない。
+            // よって、ここではガードしないでそのまんまStartFadeを呼ぶ。おそらくこのメソッドは冪等だから大丈夫だろ。
+            // ガードするならLayerからステートを再取得して、アニメーションが存在しないか確認する。やり方は知らねぇよ。
+            float tempusEvanescentiae = 0.3f;
+            Easing.Function lenitio = Easing.Function.CubicInOut;
+
+            if (_animatioCurrens != null) {
+                tempusEvanescentiae = _animatioCurrens.TempusEvanescentiae;
+                lenitio = _animatioCurrens.Lenitio;
+            }
 
             // Basisは停止できない。
             if (_simulatrumBasis) {
@@ -162,8 +181,8 @@ namespace Yulinti.Unity.Ministeria {
 
             PurgereOnEnd();
 
-            _layer.StartFade(0f, _animatioCurrens.TempusEvanescentiae);
-            _layer.FadeGroup.SetEasing(_animatioCurrens.Lenitio);
+            _layer.StartFade(0f, tempusEvanescentiae);
+            _layer.FadeGroup.SetEasing(lenitio);
 
             _animatioCurrens = null;
             _statusCurrens = null;

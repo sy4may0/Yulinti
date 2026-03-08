@@ -8,6 +8,7 @@ namespace Yulinti.Exercitus.Dux {
         private readonly IOstiumTemporisLegibile _temporis;
         private readonly IOstiumCameraLegibile _camera;
         private readonly IOstiumPuellaeLociLegibile _loci;
+        private readonly IOstiumPuellaeAnimationisLegibile _animationis;
         private readonly IOstiumPuellaeRelationisTerraeLegibile _relationisTerrae;
         private readonly IOstiumPuellaeOssisLegibile _ossis;
         private readonly IResFluidaCivisLegibile _resFCivis;
@@ -20,6 +21,7 @@ namespace Yulinti.Exercitus.Dux {
             IOstiumTemporisLegibile temporis,
             IOstiumCameraLegibile camera,
             IOstiumPuellaeLociLegibile loci,
+            IOstiumPuellaeAnimationisLegibile animationis,
             IOstiumPuellaeRelationisTerraeLegibile relationisTerrae,
             IOstiumPuellaeOssisLegibile ossis,
             IResFluidaCivisLegibile resFCivis,
@@ -30,6 +32,7 @@ namespace Yulinti.Exercitus.Dux {
             _turrisSalsamenti = turrisSalsamenti;
             _temporis = temporis;
             _camera = camera;
+            _animationis = animationis;
             _loci = loci;
             _relationisTerrae = relationisTerrae;
             _ossis = ossis;
@@ -43,6 +46,7 @@ namespace Yulinti.Exercitus.Dux {
         public IOstiumTemporisLegibile Temporis => _temporis;
         public IOstiumCameraLegibile Camera => _camera;
         public IOstiumPuellaeLociLegibile Loci => _loci;
+        public IOstiumPuellaeAnimationisLegibile Animationis => _animationis;
         public IOstiumPuellaeRelationisTerraeLegibile RelationisTerrae => _relationisTerrae;
         public IOstiumPuellaeOssisLegibile Ossis => _ossis;
         public IResFluidaCivisLegibile ResFCivis => _resFCivis;

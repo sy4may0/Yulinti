@@ -6,12 +6,12 @@ namespace Yulinti.Regnum.Configuratio {
     public sealed class ConfiguratioPuellae : ScriptableObject, IConfiguratioPuellae {
         [SerializeField] ConfiguratioPuellaeRelationis relatio;
         [SerializeField] ConfiguratioPuellaeFigurae figura;
-        [SerializeField] ConfiguratioPuellaeAnimationis animatio;
+        [SerializeField] ConfiguratioPuellaeAnimationum animatio;
         [SerializeField] ConfiguratioPuellaeLoci loci;
 
         public IConfiguratioPuellaeRelationis Relatio => relatio;
         public IConfiguratioPuellaeFigurae Figura => figura;
-        public IConfiguratioPuellaeAnimationis Animatio => animatio;
+        public IConfiguratioPuellaeAnimationum Animatio => animatio;
         public IConfiguratioPuellaeLoci Loci => loci;
     }
 }

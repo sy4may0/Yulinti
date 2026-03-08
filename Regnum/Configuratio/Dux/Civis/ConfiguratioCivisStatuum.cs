@@ -5,10 +5,12 @@ using Yulinti.Unity.Contractus;
 namespace Yulinti.Regnum.Configuratio {
     [System.Serializable]
     public class ConfiguratioCivisStatuum : IConfiguratioCivisStatuum {
-        [SerializeField] private IDCivisAnimationisContinuata idAnimationisPraedefinitus;
+        [SerializeField] private IDCivisAnimationis idAnimationisPraedefinitus;
+        [SerializeField] private IDCivisStatusCorporis idStatusCorporisIncipalis = IDCivisStatusCorporis.MigrareAditorium;
         [SerializeField] private ConfiguratioCivisStatusCorporisBasis[] statuumCorporis;
 
-        public IDCivisAnimationisContinuata IdAnimationisPraedefinitus => idAnimationisPraedefinitus;
+        public IDCivisAnimationis IdAnimationisPraedefinitus => idAnimationisPraedefinitus;
+        public IDCivisStatusCorporis IDStatusCorporisIncipalis => idStatusCorporisIncipalis;
         public IConfiguratioCivisStatusCorporis[] StatuumCorporis => statuumCorporis;
     }
 }

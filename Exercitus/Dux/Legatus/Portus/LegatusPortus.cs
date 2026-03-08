@@ -74,7 +74,10 @@ namespace Yulinti.Exercitus.Dux {
 
         private Task PremereProfectio() {
             Notarius.Memorare("未実装: PostulareProfectio");
-            // 未実装
+            // 仮。本来はマップ選択画面で選択してから、シーン移動。
+            _curatorVela.TollereVelaOmnium();
+            _turrisMundus.AdMudum(IDMundi.MundusTestScene);
+ 
             return Task.CompletedTask;
         }
 
