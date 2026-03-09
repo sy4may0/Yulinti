@@ -14,6 +14,9 @@ namespace Yulinti.Unity.Turris {
             builder.Register<TurrisPhantasmaPuellaePersonae>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<TurrisSoniVeli>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
         }
     }
 }

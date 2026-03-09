@@ -12,6 +12,7 @@ namespace Yulinti.Unity.Velum {
     internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumSalsamenti _anchoraVelumSalsamenti;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
+        private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private VisualElement _containerSalsamenti;
 
@@ -45,10 +46,12 @@ namespace Yulinti.Unity.Velum {
 
         public VelumSalsamenti(
             IAnchoraVelumSalsamenti anchoraVelumSalsamenti,
-            ITurrisInterpretationis turrisInterpretationis
+            ITurrisInterpretationis turrisInterpretationis,
+            ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumSalsamenti = anchoraVelumSalsamenti;
             _turrisInterpretationis = turrisInterpretationis;
+            _applicatorSoniVeli = applicatorSoniVeli;
 
             _bufNotitiaManualis = new List<IOstiumSalsamentiNotitiae>();
             _bufNotitiaAutomaticus = new List<IOstiumSalsamentiNotitiae>();
@@ -78,14 +81,12 @@ namespace Yulinti.Unity.Velum {
             _buttonDeletoLudum.text = _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_BUTTON_DELETO_LUDUM);
             _buttonExi.text = _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_BUTTON_CANCEL);
 
-            _buttonOneraLudum.clicked += premereOneraLudum;
-            _buttonDeletoLudum.clicked += premereDeletoLudum;
-            _buttonExi.clicked += premereExi;
-
             _listManualis.fixedItemHeight = 120;
 
             InitareListManualis();
             InitareListAutomaticus();
+
+            ActivareCB();
         }
 
         private void InitareListManualis() {
@@ -190,10 +191,6 @@ namespace Yulinti.Unity.Velum {
             DeactivareButton(ButtonSalsamenti.DeletoLudum);
             DeactivareButton(ButtonSalsamenti.Exi);
 
-            _onOneraLudum = null;
-            _onDeletoLudum = null;
-            _onExi = null;
-
             _focusGuid = Guid.Empty;
             _listManualis.ClearSelection();
             _listAutomaticus.ClearSelection();
@@ -206,10 +203,6 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void DemittereSalsamenti() {
-            _onOneraLudum = null;
-            _onDeletoLudum = null;
-            _onExi = null;
-
             _focusGuid = Guid.Empty;
             _listManualis.ClearSelection();
             _listAutomaticus.ClearSelection();
@@ -360,7 +353,25 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void Liberare() {
+            DeactivareCB();
             TollereSalsamenti();
+        }
+
+        private void ActivareCB() {
+            _applicatorSoniVeli.Applicare(_containerSalsamenti);
+            _buttonOneraLudum.clicked -= premereOneraLudum;
+            _buttonOneraLudum.clicked += premereOneraLudum;
+            _buttonDeletoLudum.clicked -= premereDeletoLudum;
+            _buttonDeletoLudum.clicked += premereDeletoLudum;
+            _buttonExi.clicked -= premereExi;
+            _buttonExi.clicked += premereExi;
+        }
+
+        private void DeactivareCB() {
+            _applicatorSoniVeli.Purgere(_containerSalsamenti);
+            _buttonOneraLudum.clicked -= premereOneraLudum;
+            _buttonDeletoLudum.clicked -= premereDeletoLudum;
+            _buttonExi.clicked -= premereExi;
         }
 
         public void TollereFinem() {

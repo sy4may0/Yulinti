@@ -6,6 +6,7 @@ using System;
 namespace Yulinti.Unity.Velum {
     internal sealed class VelumMonitionis : IVelumMonitionis, IVelum, IVelumLiberabilisRadicis {
         private readonly IAnchoraVelumRadicis _anchoraVelumRadicis;
+        private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private UIDocument _uiMonitionis;
 
@@ -16,9 +17,11 @@ namespace Yulinti.Unity.Velum {
         private Action _onIta;
 
         public VelumMonitionis(
-            IAnchoraVelumRadicis anchoraVelumRadicis
+            IAnchoraVelumRadicis anchoraVelumRadicis,
+            ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumRadicis = anchoraVelumRadicis;
+            _applicatorSoniVeli = applicatorSoniVeli;
         }
 
         public void Initare() {
@@ -28,9 +31,7 @@ namespace Yulinti.Unity.Velum {
             _buttonIta = _uiMonitionis.rootVisualElement.Q<Button>("monitio-button-ita");
 
             _onIta = null;
-
-            _buttonIta.clicked += premereIta;
-
+            ActivareCB();
             Deactivare();
         }
 
@@ -43,7 +44,6 @@ namespace Yulinti.Unity.Velum {
         public void Deactivare() {
             _uiMonitionis.rootVisualElement.style.display = DisplayStyle.None;
             _buttonIta.SetEnabled(false);
-            _onIta = null;
         }
 
         public void DemittereMonitionis(
@@ -57,13 +57,23 @@ namespace Yulinti.Unity.Velum {
             _buttonIta.text = buttonIta;
 
             _onIta = adPremereIta;
-
             Activare();
         }
 
         public void TollereMonitionis() {
             _onIta = null;
             Deactivare();
+        }
+
+        private void ActivareCB() {
+            _applicatorSoniVeli.Applicare(_uiMonitionis.rootVisualElement);
+            _buttonIta.clicked -= premereIta;
+            _buttonIta.clicked += premereIta;
+        }
+
+        private void DeactivareCB() {
+            _applicatorSoniVeli.Purgere(_uiMonitionis.rootVisualElement);
+            _buttonIta.clicked -= premereIta;
         }
 
         private void premereIta() {
@@ -74,6 +84,7 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void Liberare() {
+            DeactivareCB();
             TollereMonitionis();
         }
     }

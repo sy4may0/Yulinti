@@ -18,7 +18,7 @@ namespace Yulinti.Exercitus.Contractus {
         // キャンセル入力
         bool LegoCancel { get; }
         // ナビゲーション入力
-        bool LegoNavigate { get; }
+        System.Numerics.Vector2 LegoNavigate { get; }
 
         // Action //
         // エモートアクション入力

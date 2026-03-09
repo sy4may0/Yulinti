@@ -7,6 +7,7 @@ namespace Yulinti.Unity.Velum {
     internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumIndexusPrincipalis _anchoraVelumIndexusPrincipalis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
+        private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private VisualElement _containerIndexusPrincipalis;
 
@@ -31,10 +32,12 @@ namespace Yulinti.Unity.Velum {
 
         public VelumIndexusPrincipalis(
             IAnchoraVelumIndexusPrincipalis anchoraVelumIndexusPrincipalis,
-            ITurrisInterpretationis turrisInterpretationis
+            ITurrisInterpretationis turrisInterpretationis,
+            ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumIndexusPrincipalis = anchoraVelumIndexusPrincipalis;
             _turrisInterpretationis = turrisInterpretationis;
+            _applicatorSoniVeli = applicatorSoniVeli;
 
             _onLudusNovus = null;
             _onPergeLudum = null;
@@ -64,10 +67,13 @@ namespace Yulinti.Unity.Velum {
             _labelOneraLudum.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_ONERA_LUDUM);
             _labelOptiones.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_OPTIONES);
             _labelExi.text = _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_EXIT);
+
+            ActivareCB();
         }
 
         public void Activare() {
             _containerIndexusPrincipalis.style.display = DisplayStyle.Flex;
+            _buttonLudusNovus.Focus();
         }
 
         public void Deactivare() {
@@ -75,13 +81,10 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void DemittereIndexusPrincipalis() {
-            ExuereCallbacks();
             Activare();
-            _buttonLudusNovus.Focus();
         }
 
         public void TollereIndexusPrincipalis() {
-            ExuereCallbacks();
             Deactivare();
         }
 
@@ -126,64 +129,71 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void AdPremereLudusNovus(Action ae) {
-            if (_onLudusNovus != null) _buttonLudusNovus.clicked -= _onLudusNovus;
             _onLudusNovus = ae;
-            if (_onLudusNovus != null) _buttonLudusNovus.clicked += _onLudusNovus;
         }
 
         public void AdPremerePergeLudum(Action ae) {
-            if (_onPergeLudum != null) _buttonPergeLudum.clicked -= _onPergeLudum;
             _onPergeLudum = ae;
-            if (_onPergeLudum != null) _buttonPergeLudum.clicked += _onPergeLudum;
         }
 
         public void AdPremereOneraLudum(Action ae) {
-            if (_onOneraLudum != null) _buttonOneraLudum.clicked -= _onOneraLudum;
             _onOneraLudum = ae;
-            if (_onOneraLudum != null) _buttonOneraLudum.clicked += _onOneraLudum;
         }
 
         public void AdPremereOptiones(Action ae) {
-            if (_onOptiones != null) _buttonOptiones.clicked -= _onOptiones;
             _onOptiones = ae;
-            if (_onOptiones != null) _buttonOptiones.clicked += _onOptiones;
         }
 
         public void AdPremereExi(Action ae) {
-            if (_onExi != null) _buttonExi.clicked -= _onExi;
             _onExi = ae;
-            if (_onExi != null) _buttonExi.clicked += _onExi;
+        }
+
+        private void premereLudusNovus() {
+            _onLudusNovus?.Invoke();
+        }
+
+        private void premerePergeLudum() {
+            _onPergeLudum?.Invoke();
+        }
+
+        private void premereOneraLudum() {
+            _onOneraLudum?.Invoke();
+        }
+
+        private void premereOptiones() {
+            _onOptiones?.Invoke();
+        }
+
+        private void premereExi() {
+            _onExi?.Invoke();
         }
 
         public void Liberare() {
+            DeactivareCB();
             TollereIndexusPrincipalis();
         }
 
-        private void ExuereCallbacks() {
-            if (_onLudusNovus != null) {
-                _buttonLudusNovus.clicked -= _onLudusNovus;
-            }
-            _onLudusNovus = null;
+        private void ActivareCB() {
+            _applicatorSoniVeli.Applicare(_panelIndexusPrincipalis);
+            _buttonLudusNovus.clicked -= premereLudusNovus;
+            _buttonLudusNovus.clicked += premereLudusNovus;
+            _buttonPergeLudum.clicked -= premerePergeLudum;
+            _buttonPergeLudum.clicked += premerePergeLudum;
+            _buttonOneraLudum.clicked -= premereOneraLudum;
+            _buttonOneraLudum.clicked += premereOneraLudum;
+            _buttonOptiones.clicked -= premereOptiones;
+            _buttonOptiones.clicked += premereOptiones;
+            _buttonExi.clicked -= premereExi;
+            _buttonExi.clicked += premereExi;
+        }
 
-            if (_onPergeLudum != null) {
-                _buttonPergeLudum.clicked -= _onPergeLudum;
-            }
-            _onPergeLudum = null;
-
-            if (_onOneraLudum != null) {
-                _buttonOneraLudum.clicked -= _onOneraLudum;
-            }
-            _onOneraLudum = null;
-
-            if (_onOptiones != null) {
-                _buttonOptiones.clicked -= _onOptiones;
-            }
-            _onOptiones = null;
-
-            if (_onExi != null) {
-                _buttonExi.clicked -= _onExi;
-            }
-            _onExi = null;
+        private void DeactivareCB() {
+            _applicatorSoniVeli.Purgere(_panelIndexusPrincipalis);
+            _buttonLudusNovus.clicked -= premereLudusNovus;
+            _buttonPergeLudum.clicked -= premerePergeLudum;
+            _buttonOneraLudum.clicked -= premereOneraLudum;
+            _buttonOptiones.clicked -= premereOptiones;
+            _buttonExi.clicked -= premereExi;
         }
 
         public void TollereFinem() {

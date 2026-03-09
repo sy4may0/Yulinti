@@ -6,6 +6,10 @@ using Yulinti.Unity.Contractus;
 namespace Yulinti.Unity.Velum {
     public static class FaberVelumIndexusPrincipalis {
         public static void Initio(IContainerBuilder builder) {
+            builder.Register<ApplicatorSoniVeli>(Lifetime.Singleton)
+                .AsImplementedInterfaces()
+                .AsSelf();
+
             builder.Register<VelumIndexusPrincipalis>(Lifetime.Singleton)
                 .AsImplementedInterfaces()
                 .AsSelf();

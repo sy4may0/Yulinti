@@ -11,35 +11,35 @@
        
         <ui:Button 
             name="buttonLudusNovus" 
-            class="button button-indicator indexprincipalis-button indexprincipalis-button-ludus-novus"
+            class="button button-indicator indexprincipalis-button indexprincipalis-button-ludus-novus sonus-c-submittere sonus-f-supervolare"
         >
             <ui:VisualElement name="indexprincipalis-button-ludus-novus-indicator" class="indicator indexprincipalis-button-ludus-novus-indicator" />
             <ui:Label name="indexprincipalis-button-ludus-novus-label" class="label-h2 button-label indexprincipalis-button-ludus-novus-label" text="New Game" />
         </ui:Button>
         <ui:Button
             name="buttonPergeLudum"
-            class="button button-indicator indexprincipalis-button indexprincipalis-button-perge-ludum"
+            class="button button-indicator indexprincipalis-button indexprincipalis-button-perge-ludum sonus-c-submittere sonus-f-supervolare"
         >
             <ui:VisualElement name="indexprincipalis-button-perge-ludum-indicator" class="indicator indexprincipalis-button-perge-ludum-indicator" />
             <ui:Label name="indexprincipalis-button-perge-ludum-label" class="label-h2 button-label indexprincipalis-button-perge-ludum-label" text="Continue" />
         </ui:Button>
         <ui:Button
             name="buttonOneraLudum"
-            class="button button-indicator indexprincipalis-button indexprincipalis-button-onera-ludum"
+            class="button button-indicator indexprincipalis-button indexprincipalis-button-onera-ludum sonus-c-submittere sonus-f-supervolare"
         >
             <ui:VisualElement name="indexprincipalis-button-onera-ludum-indicator" class="indicator indexprincipalis-button-onera-ludum-indicator" />
             <ui:Label name="indexprincipalis-button-onera-ludum-label" class="label-h2 button-label indexprincipalis-button-onera-ludum-label" text="Load Game" />
         </ui:Button>
         <ui:Button
             name="buttonOptiones"
-            class="button button-indicator indexprincipalis-button indexprincipalis-button-optiones"
+            class="button button-indicator indexprincipalis-button indexprincipalis-button-optiones sonus-c-submittere sonus-f-supervolare"
         >
             <ui:VisualElement name="indexprincipalis-button-optiones-indicator" class="indicator indexprincipalis-button-optiones-indicator" />
             <ui:Label name="indexprincipalis-button-optiones-label" class="label-h2 button-label indexprincipalis-button-optiones-label" text="Options" />
         </ui:Button>
         <ui:Button
             name="buttonExi"
-            class="button button-indicator indexprincipalis-button indexprincipalis-button-exi"
+            class="button button-indicator indexprincipalis-button indexprincipalis-button-exi sonus-c-exire sonus-f-supervolare"
         >
             <ui:VisualElement name="indexprincipalis-button-exi-indicator" class="indicator indexprincipalis-button-exi-indicator" />
             <ui:Label name="indexprincipalis-button-exi-label" class="label-h2 button-label indexprincipalis-button-exi-label" text="Exit" />

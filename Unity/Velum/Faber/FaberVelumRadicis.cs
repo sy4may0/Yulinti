@@ -5,6 +5,10 @@ using Yulinti.Unity.Contractus;
 namespace Yulinti.Unity.Velum {
     public static class FaberVelumRadicis {
         public static void Initio(IContainerBuilder builder) {
+            builder.Register<ApplicatorSoniVeli>(Lifetime.Singleton)
+                .AsImplementedInterfaces()
+                .AsSelf();
+
             builder.Register<VelumConfirmationis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
