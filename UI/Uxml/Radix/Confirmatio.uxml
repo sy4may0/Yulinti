@@ -14,8 +14,8 @@
                 <ui:Label name="confirmatio-textus" class="paragraph confirmatio-textus" text="Hoc est textus temporarius. AAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEEEEEE" />
             </ui:VisualElement>
             <ui:VisualElement name="confirmatio-button-container" class="container confirmatio-button-container">
-                <ui:Button name="confirmatio-button-non" class="button button-cancel confirmatio-button" text="Non" />
-                <ui:Button name="confirmatio-button-ita" class="button button-submit confirmatio-button" text="Ita" />
+                <ui:Button name="confirmatio-button-non" class="button button-cancel confirmatio-button sonus-c-exire sonus-f-supervolare" text="Non" />
+                <ui:Button name="confirmatio-button-ita" class="button button-submit confirmatio-button sonus-c-submittere sonus-f-supervolare" text="Ita" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

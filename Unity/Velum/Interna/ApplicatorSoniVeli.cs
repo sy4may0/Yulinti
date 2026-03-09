@@ -2,6 +2,7 @@ using System;
 using UnityEngine.UIElements;
 using Yulinti.Exercitus.Contractus;
 using Yulinti.Unity.Contractus;
+using System.Collections.Generic;
 
 namespace Yulinti.Unity.Velum {
     internal class ApplicatorSoniVeli {
@@ -11,6 +12,7 @@ namespace Yulinti.Unity.Velum {
         public const string C_Supervolare = "sonus-f-supervolare";
         public const string C_SiNon = "sonus-c-si-non";
         public const string C_Cursor = "sonus-t-cursor";
+        public const string C_SupervolareList = "sonus-f-supervolare-list";
 
         private readonly ITurrisSoniVeli _turrisSoniVeli;
 
@@ -20,6 +22,7 @@ namespace Yulinti.Unity.Velum {
         private EventCallback<FocusInEvent> _sonareSupervolare;
         private EventCallback<ChangeEvent<bool>> _sonareSiNon;
         private EventCallback<ChangeEvent<float>> _sonareCursor;
+        private Action<IEnumerable<object>> _sonareSupervolareList;
 
         public ApplicatorSoniVeli(ITurrisSoniVeli turrisSoniVeli) {
             _turrisSoniVeli = turrisSoniVeli;
@@ -30,6 +33,7 @@ namespace Yulinti.Unity.Velum {
             _sonareSupervolare = SonareSupervolare;
             _sonareSiNon = SonareSiNon;
             _sonareCursor = SonareCursor;
+            _sonareSupervolareList = SonareSupervolareList;
         }
 
         private void SonareSubmittere() {
@@ -54,6 +58,9 @@ namespace Yulinti.Unity.Velum {
         }
         private void SonareCursor(ChangeEvent<float> e) {
             _turrisSoniVeli.Sonare(IDSonusVeli.Cursor);
+        }
+        private void SonareSupervolareList(IEnumerable<object> _) {
+            _turrisSoniVeli.Sonare(IDSonusVeli.Supervolare);
         }
 
         // UI要素で、特定のクラスを持っている要素に、SEを適用する。
@@ -84,6 +91,11 @@ namespace Yulinti.Unity.Velum {
                     if (slider.ClassListContains(C_Cursor))
                         slider.RegisterValueChangedCallback(_sonareCursor);
                 }
+
+                if (ve is ListView listView) {
+                    if (listView.ClassListContains(C_SupervolareList))
+                        listView.selectionChanged += _sonareSupervolareList;
+                }
             }
         }
 
@@ -108,6 +120,10 @@ namespace Yulinti.Unity.Velum {
                 if (ve is Slider slider) {
                     if (slider.ClassListContains(C_Cursor))
                         slider.UnregisterValueChangedCallback(_sonareCursor);
+                }
+                if (ve is ListView listView) {
+                    if (listView.ClassListContains(C_SupervolareList))
+                        listView.selectionChanged -= _sonareSupervolareList;
                 }
             }
         }

@@ -14,7 +14,7 @@
                 <ui:Label name="monitio-textus" class="paragraph monitio-textus" text="Hoc est textus temporarius." />
             </ui:VisualElement>
             <ui:VisualElement name="monitio-button-container" class="container monitio-button-container">
-                <ui:Button name="monitio-button-ita" class="button button-submit monitio-button" text="Ita" />
+                <ui:Button name="monitio-button-ita" class="button button-submit monitio-button sonus-c-submittere sonus-f-supervolare" text="Ita" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
