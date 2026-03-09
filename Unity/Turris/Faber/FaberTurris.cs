@@ -1,6 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 using Yulinti.Exercitus.Contractus;
+using Yulinti.Unity.Contractus;
 
 namespace Yulinti.Unity.Turris {
     public static class FaberTurris {
@@ -17,6 +18,8 @@ namespace Yulinti.Unity.Turris {
             builder.Register<TurrisSoniVeli>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+
+            builder.Register<IMonsAltus, MonsAltus>(Lifetime.Singleton);
         }
     }
 }

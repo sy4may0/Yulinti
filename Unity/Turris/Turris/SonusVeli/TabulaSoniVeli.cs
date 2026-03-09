@@ -11,9 +11,8 @@ namespace Yulinti.Unity.Turris {
         public TabulaSoniVeli(IConfiguratioSonorumVeli configuratioSonorumVeli) {
             int longitudo = Enum.GetValues(typeof(IDSonusVeli)).Length;
             _sonorumVeli = new SonusVeli[longitudo];
-            for (int i = 0; i < longitudo; i++) {
-                IConfiguratioSoniVeli configuratioSoniVeli = configuratioSonorumVeli.SonorumVeli[i];
-                _sonorumVeli[i] = new SonusVeli(configuratioSoniVeli);
+            foreach (IConfiguratioSoniVeli configuratioSoniVeli in configuratioSonorumVeli.SonorumVeli) {
+                _sonorumVeli[(int)configuratioSoniVeli.Id] = new SonusVeli(configuratioSoniVeli);
             }
 
             for (int i = 0; i < longitudo; i++) {

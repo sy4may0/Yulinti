@@ -7,6 +7,7 @@ namespace Yulinti.Unity.Velum {
     internal sealed class VelumPortus : IVelum, IVelumPortus, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumPortus _anchoraVelumPortus;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
+        private readonly ITurrisSoniVeli _turrisSoniVeli;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private VisualElement _containerPortus;
@@ -32,10 +33,12 @@ namespace Yulinti.Unity.Velum {
         public VelumPortus(
             IAnchoraVelumPortus anchoraVelumPortus,
             ITurrisInterpretationis turrisInterpretationis,
+            ITurrisSoniVeli turrisSoniVeli,
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumPortus = anchoraVelumPortus;
             _turrisInterpretationis = turrisInterpretationis;
+            _turrisSoniVeli = turrisSoniVeli;
             _applicatorSoniVeli = applicatorSoniVeli;
 
             _onProfectio = null;
@@ -172,6 +175,7 @@ namespace Yulinti.Unity.Velum {
         }
 
         private void ActivareCB() {
+            _applicatorSoniVeli.ApplicareRadix(_anchoraVelumPortus.UIDocument);
             _applicatorSoniVeli.Applicare(_panelPortus);
             _buttonProfectio.clicked -= premereProfectio;
             _buttonProfectio.clicked += premereProfectio;
@@ -186,6 +190,7 @@ namespace Yulinti.Unity.Velum {
         }
 
         private void DeactivareCB() {
+            _applicatorSoniVeli.PurgereRadix(_anchoraVelumPortus.UIDocument);
             _applicatorSoniVeli.Purgere(_panelPortus);
             _buttonProfectio.clicked -= premereProfectio;
             _buttonConstructio.clicked -= premereConstructio;

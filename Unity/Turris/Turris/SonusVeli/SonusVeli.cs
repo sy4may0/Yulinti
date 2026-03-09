@@ -8,6 +8,7 @@ namespace Yulinti.Unity.Turris {
         private readonly AudioClip _sonus;
         private readonly float _visSoniBasis;
         private readonly float _tempusRefrigerationis;
+        private readonly int _prioritas;
 
         private float _tempusSonareProximum;
 
@@ -15,6 +16,8 @@ namespace Yulinti.Unity.Turris {
             _sonus = configuratioSoniVeli.Sonus;
             _visSoniBasis = configuratioSoniVeli.VisSoniBasis;
             _tempusRefrigerationis = configuratioSoniVeli.TempusRefrigerationis;
+            _prioritas = configuratioSoniVeli.Prioritas;
+
             _tempusSonareProximum = 0f;
 
             if (_sonus == null) {
@@ -25,6 +28,10 @@ namespace Yulinti.Unity.Turris {
         public bool EstSonarabilis() {
             if (Time.time < _tempusSonareProximum) return false;
             return true;
+        }
+
+        public int Prioritas() {
+            return _prioritas;
         }
 
         public void Sonare(AudioSource audioSource) {

@@ -7,6 +7,7 @@ namespace Yulinti.Unity.Velum {
     internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumIndexusPrincipalis _anchoraVelumIndexusPrincipalis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
+        private readonly ITurrisSoniVeli _turrisSoniVeli;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private VisualElement _containerIndexusPrincipalis;
@@ -33,10 +34,12 @@ namespace Yulinti.Unity.Velum {
         public VelumIndexusPrincipalis(
             IAnchoraVelumIndexusPrincipalis anchoraVelumIndexusPrincipalis,
             ITurrisInterpretationis turrisInterpretationis,
+            ITurrisSoniVeli turrisSoniVeli,
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumIndexusPrincipalis = anchoraVelumIndexusPrincipalis;
             _turrisInterpretationis = turrisInterpretationis;
+            _turrisSoniVeli = turrisSoniVeli;
             _applicatorSoniVeli = applicatorSoniVeli;
 
             _onLudusNovus = null;
@@ -174,6 +177,7 @@ namespace Yulinti.Unity.Velum {
         }
 
         private void ActivareCB() {
+            _applicatorSoniVeli.ApplicareRadix(_anchoraVelumIndexusPrincipalis.UIDocument);
             _applicatorSoniVeli.Applicare(_panelIndexusPrincipalis);
             _buttonLudusNovus.clicked -= premereLudusNovus;
             _buttonLudusNovus.clicked += premereLudusNovus;
@@ -188,6 +192,7 @@ namespace Yulinti.Unity.Velum {
         }
 
         private void DeactivareCB() {
+            _applicatorSoniVeli.PurgereRadix(_anchoraVelumIndexusPrincipalis.UIDocument);
             _applicatorSoniVeli.Purgere(_panelIndexusPrincipalis);
             _buttonLudusNovus.clicked -= premereLudusNovus;
             _buttonPergeLudum.clicked -= premerePergeLudum;

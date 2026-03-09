@@ -5,43 +5,151 @@
     <Style src="../../Uss/Globalis.uss" />
     <Style src="../../Uss/Portus/Portus.uss" />
 
-    <ui:VisualElement name="portus-root" class="container portus-root">
-        <ui:VisualElement name="portus-panel" class="container portus-panel">
-        <ui:VisualElement name="portus-bg" class="container portus-bg" />
+    <ui:VisualElement
+        name="portus-root"
+        class="
+            container
+            portus-root
+        "
+    >
+        <ui:VisualElement
+            name="portus-panel"
+            class="
+                container
+                portus-panel
+            "
+        >
+        <ui:VisualElement
+            name="portus-bg"
+            class="
+                container
+                portus-bg
+            "
+        />
           <ui:Button 
             name="portus-button-profectio" 
-            class="button-indicator portus-button portus-button-profectio sonus-c-submittere sonus-f-supervolare"
+            class="
+                button-indicator
+                portus-button
+                portus-button-profectio
+            "
           >
-            <ui:VisualElement name="portus-button-profectio-indicator" class="indicator portus-button-profectio-indicator" />
-            <ui:Label name="portus-button-profectio-label" class="label-h2 button-label portus-button-profectio-label" text="Profectio" />
+            <ui:VisualElement
+                name="portus-button-profectio-indicator"
+                class="
+                    indicator
+                    portus-button-profectio-indicator
+                "
+            />
+            <ui:Label
+                name="portus-button-profectio-label"
+                class="
+                    label-h2
+                    button-label
+                    portus-button-profectio-label
+                "
+                text="Profectio"
+            />
           </ui:Button>
           <ui:Button
             name="portus-button-constructio"
-            class="button-indicator portus-button portus-button-constructio sonus-c-submittere sonus-f-supervolare"
+            class="
+                button-indicator
+                portus-button
+                portus-button-constructio
+            "
           >
-            <ui:VisualElement name="portus-button-constructio-indicator" class="indicator portus-button-constructio-indicator" />
-            <ui:Label name="portus-button-constructio-label" class="label-h2 button-label portus-button-constructio-label" text="Constructio" />
+            <ui:VisualElement
+                name="portus-button-constructio-indicator"
+                class="
+                    indicator
+                    portus-button-constructio-indicator
+                "
+            />
+            <ui:Label
+                name="portus-button-constructio-label"
+                class="
+                    label-h2
+                    button-label
+                    portus-button-constructio-label
+                "
+                text="Constructio"
+            />
           </ui:Button>
           <ui:Button
             name="portus-button-taberna"
-            class="button-indicator portus-button portus-button-taberna sonus-c-submittere sonus-f-supervolare"
+            class="
+                button-indicator
+                portus-button
+                portus-button-taberna
+            "
           >
-            <ui:VisualElement name="portus-button-taberna-indicator" class="indicator portus-button-taberna-indicator" />
-            <ui:Label name="portus-button-taberna-label" class="label-h2 button-label portus-button-taberna-label" text="Taberna" />
+            <ui:VisualElement
+                name="portus-button-taberna-indicator"
+                class="
+                    indicator
+                    portus-button-taberna-indicator
+                "
+            />
+            <ui:Label
+                name="portus-button-taberna-label"
+                class="
+                    label-h2
+                    button-label
+                    portus-button-taberna-label
+                "
+                text="Taberna"
+            />
           </ui:Button>
           <ui:Button
             name="portus-button-optiones"
-            class="button-indicator portus-button portus-button-optiones sonus-c-submittere sonus-f-supervolare"
+            class="
+                button-indicator
+                portus-button
+                portus-button-optiones
+            "
           >
-            <ui:VisualElement name="portus-button-optiones-indicator" class="indicator portus-button-optiones-indicator" />
-            <ui:Label name="portus-button-optiones-label" class="label-h2 button-label portus-button-optiones-label" text="Optiones" />
+            <ui:VisualElement
+                name="portus-button-optiones-indicator"
+                class="
+                    indicator
+                    portus-button-optiones-indicator
+                "
+            />
+            <ui:Label
+                name="portus-button-optiones-label"
+                class="
+                    label-h2
+                    button-label
+                    portus-button-optiones-label
+                "
+                text="Optiones"
+            />
           </ui:Button>
           <ui:Button
             name="portus-button-exi"
-            class="button-indicator portus-button portus-button-exi sonus-c-exire sonus-f-supervolare"
+            class="
+                button-indicator
+                portus-button
+                portus-button-exi
+            "
           >
-            <ui:VisualElement name="portus-button-exi-indicator" class="indicator portus-button-exi-indicator" />
-            <ui:Label name="portus-button-exi-label" class="label-h2 button-label portus-button-exi-label" text="Exi" />
+            <ui:VisualElement
+                name="portus-button-exi-indicator"
+                class="
+                    indicator
+                    portus-button-exi-indicator
+                "
+            />
+            <ui:Label
+                name="portus-button-exi-label"
+                class="
+                    label-h2
+                    button-label
+                    portus-button-exi-label
+                "
+                text="Exi"
+            />
           </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>

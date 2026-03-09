@@ -6,6 +6,7 @@ using System;
 namespace Yulinti.Unity.Velum {
     internal sealed class VelumMonitionis : IVelumMonitionis, IVelum, IVelumLiberabilisRadicis {
         private readonly IAnchoraVelumRadicis _anchoraVelumRadicis;
+        private readonly ITurrisSoniVeli _turrisSoniVeli;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private UIDocument _uiMonitionis;
@@ -18,9 +19,11 @@ namespace Yulinti.Unity.Velum {
 
         public VelumMonitionis(
             IAnchoraVelumRadicis anchoraVelumRadicis,
+            ITurrisSoniVeli turrisSoniVeli,
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumRadicis = anchoraVelumRadicis;
+            _turrisSoniVeli = turrisSoniVeli;
             _applicatorSoniVeli = applicatorSoniVeli;
         }
 
@@ -58,6 +61,7 @@ namespace Yulinti.Unity.Velum {
 
             _onIta = adPremereIta;
             Activare();
+            _turrisSoniVeli.Sonare(IDSonusVeli.Demittere);
         }
 
         public void TollereMonitionis() {
@@ -66,12 +70,14 @@ namespace Yulinti.Unity.Velum {
         }
 
         private void ActivareCB() {
+            _applicatorSoniVeli.ApplicareRadix(_uiMonitionis);
             _applicatorSoniVeli.Applicare(_uiMonitionis.rootVisualElement);
             _buttonIta.clicked -= premereIta;
             _buttonIta.clicked += premereIta;
         }
 
         private void DeactivareCB() {
+            _applicatorSoniVeli.PurgereRadix(_uiMonitionis);
             _applicatorSoniVeli.Purgere(_uiMonitionis.rootVisualElement);
             _buttonIta.clicked -= premereIta;
         }

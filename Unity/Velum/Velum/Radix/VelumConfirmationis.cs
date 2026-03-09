@@ -6,6 +6,7 @@ using System;
 namespace Yulinti.Unity.Velum {
     internal sealed class VelumConfirmationis : IVelumConfirmationis, IVelum, IVelumLiberabilisRadicis {
         private readonly IAnchoraVelumRadicis _anchoraVelumRadicis;
+        private readonly ITurrisSoniVeli _turrisSoniVeli;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private UIDocument _uiConfirmationis;
@@ -20,9 +21,11 @@ namespace Yulinti.Unity.Velum {
 
         public VelumConfirmationis(
             IAnchoraVelumRadicis anchoraVelumRadicis,
+            ITurrisSoniVeli turrisSoniVeli,
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumRadicis = anchoraVelumRadicis;
+            _turrisSoniVeli = turrisSoniVeli;
             _applicatorSoniVeli = applicatorSoniVeli;
         }
 
@@ -68,16 +71,17 @@ namespace Yulinti.Unity.Velum {
             _onIta = adPremereIta;
             _onNon = adPremereNon;
             Activare();
+            _turrisSoniVeli.Sonare(IDSonusVeli.Demittere);
         }
 
         public void TollereConfirmationis() {
             _onIta = null;
             _onNon = null;
             Deactivare();
- 
         }
 
         private void ActivareCB() {
+            _applicatorSoniVeli.ApplicareRadix(_uiConfirmationis);
             _applicatorSoniVeli.Applicare(_uiConfirmationis.rootVisualElement);
             _buttonIta.clicked -= premereIta;
             _buttonIta.clicked += premereIta;
@@ -86,6 +90,7 @@ namespace Yulinti.Unity.Velum {
         }
 
         private void DeactivareCB() {
+            _applicatorSoniVeli.PurgereRadix(_uiConfirmationis);
             _applicatorSoniVeli.Purgere(_uiConfirmationis.rootVisualElement);
             _buttonIta.clicked -= premereIta;
             _buttonNon.clicked -= premereNon;

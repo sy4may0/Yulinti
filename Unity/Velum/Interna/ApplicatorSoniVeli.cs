@@ -19,10 +19,11 @@ namespace Yulinti.Unity.Velum {
         private Action _sonareSubmittere;
         private Action _sonareSubmittereAdditum;
         private Action _sonareExire;
-        private EventCallback<FocusInEvent> _sonareSupervolare;
+        private EventCallback<FocusEvent> _sonareSupervolare;
         private EventCallback<ChangeEvent<bool>> _sonareSiNon;
         private EventCallback<ChangeEvent<float>> _sonareCursor;
         private Action<IEnumerable<object>> _sonareSupervolareList;
+        private EventCallback<NavigationMoveEvent> _sonareSupervolareNav;
 
         public ApplicatorSoniVeli(ITurrisSoniVeli turrisSoniVeli) {
             _turrisSoniVeli = turrisSoniVeli;
@@ -34,9 +35,12 @@ namespace Yulinti.Unity.Velum {
             _sonareSiNon = SonareSiNon;
             _sonareCursor = SonareCursor;
             _sonareSupervolareList = SonareSupervolareList;
+            _sonareSupervolareNav = SonareSupervolareNav;
         }
 
         private void SonareSubmittere() {
+            int framecount = UnityEngine.Time.frameCount;
+            UnityEngine.Debug.Log($"SonareSubmittere: {framecount}");
             _turrisSoniVeli.Sonare(IDSonusVeli.Submittere);
         }
         private void SonareSubmittereAdditum() {
@@ -45,7 +49,9 @@ namespace Yulinti.Unity.Velum {
         private void SonareExire() {
             _turrisSoniVeli.Sonare(IDSonusVeli.Exire);
         }
-        private void SonareSupervolare(FocusInEvent e) {
+        private void SonareSupervolare(FocusEvent e) {
+            int framecount = UnityEngine.Time.frameCount;
+            UnityEngine.Debug.Log($"SonareSupervolare: {framecount}");
             _turrisSoniVeli.Sonare(IDSonusVeli.Supervolare);
         }
         private void SonareSiNon(ChangeEvent<bool> e) {
@@ -61,6 +67,14 @@ namespace Yulinti.Unity.Velum {
         }
         private void SonareSupervolareList(IEnumerable<object> _) {
             _turrisSoniVeli.Sonare(IDSonusVeli.Supervolare);
+        }
+
+        private void SonareSupervolareNav(NavigationMoveEvent e) {
+            _turrisSoniVeli.Sonare(IDSonusVeli.Supervolare);
+        }
+
+        public void ApplicareRadix(UIDocument uiDocument) {
+            uiDocument.rootVisualElement.RegisterCallback<NavigationMoveEvent>(_sonareSupervolareNav);
         }
 
         // UI要素で、特定のクラスを持っている要素に、SEを適用する。
@@ -79,7 +93,7 @@ namespace Yulinti.Unity.Velum {
                 }
                 if (ve.focusable) {
                     if (ve.ClassListContains(C_Supervolare))
-                        ve.RegisterCallback<FocusInEvent>(_sonareSupervolare);
+                        ve.RegisterCallback<FocusEvent>(_sonareSupervolare);
                 }
         
                 if (ve is Toggle toggle) {
@@ -99,6 +113,10 @@ namespace Yulinti.Unity.Velum {
             }
         }
 
+        public void PurgereRadix(UIDocument uiDocument) {
+            uiDocument.rootVisualElement.UnregisterCallback<NavigationMoveEvent>(_sonareSupervolareNav);
+        }
+
         public void Purgere(VisualElement root) {
             foreach (var ve in root.Query<VisualElement>().ToList()) {
                 if (ve is Button button) {
@@ -111,7 +129,7 @@ namespace Yulinti.Unity.Velum {
                 }
                 if (ve.focusable) {
                     if (ve.ClassListContains(C_Supervolare))
-                        ve.UnregisterCallback<FocusInEvent>(_sonareSupervolare);
+                        ve.UnregisterCallback<FocusEvent>(_sonareSupervolare);
                 }
                 if (ve is Toggle toggle) {
                     if (toggle.ClassListContains(C_SiNon))

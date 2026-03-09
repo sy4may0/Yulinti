@@ -12,6 +12,7 @@ namespace Yulinti.Unity.Velum {
     internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumSalsamenti _anchoraVelumSalsamenti;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
+        private readonly ITurrisSoniVeli _turrisSoniVeli;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private VisualElement _containerSalsamenti;
@@ -47,10 +48,12 @@ namespace Yulinti.Unity.Velum {
         public VelumSalsamenti(
             IAnchoraVelumSalsamenti anchoraVelumSalsamenti,
             ITurrisInterpretationis turrisInterpretationis,
+            ITurrisSoniVeli turrisSoniVeli,
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumSalsamenti = anchoraVelumSalsamenti;
             _turrisInterpretationis = turrisInterpretationis;
+            _turrisSoniVeli = turrisSoniVeli;
             _applicatorSoniVeli = applicatorSoniVeli;
 
             _bufNotitiaManualis = new List<IOstiumSalsamentiNotitiae>();
@@ -220,6 +223,7 @@ namespace Yulinti.Unity.Velum {
 
             Activare();
             _buttonExi.Focus();
+            _turrisSoniVeli.Sonare(IDSonusVeli.Demittere);
         }
 
         public void RenovareTablaeManualis(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaManualis) {
@@ -358,6 +362,7 @@ namespace Yulinti.Unity.Velum {
         }
 
         private void ActivareCB() {
+            _applicatorSoniVeli.ApplicareRadix(_anchoraVelumSalsamenti.UIDocument);
             _applicatorSoniVeli.Applicare(_containerSalsamenti);
             _buttonOneraLudum.clicked -= premereOneraLudum;
             _buttonOneraLudum.clicked += premereOneraLudum;
@@ -368,6 +373,7 @@ namespace Yulinti.Unity.Velum {
         }
 
         private void DeactivareCB() {
+            _applicatorSoniVeli.PurgereRadix(_anchoraVelumSalsamenti.UIDocument);
             _applicatorSoniVeli.Purgere(_containerSalsamenti);
             _buttonOneraLudum.clicked -= premereOneraLudum;
             _buttonDeletoLudum.clicked -= premereDeletoLudum;
