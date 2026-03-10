@@ -15,16 +15,16 @@ namespace Yulinti.Exercitus.Dux {
         private readonly Lacus<OrdinatioPuellaeVeletudinisNudi> _lacusVeletudinisNudi;
         private readonly Lacus<OrdinatioPuellaePersonae> _lacusPersonae;
 
-        private readonly DuxQueue<OrdinatioPuellaeAnimationis> _emissioAnimationis;
-        private readonly DuxQueue<OrdinatioPuellaeCrinis> _emissioCrinis;
-        private readonly DuxQueue<OrdinatioPuellaeFiguraeGenus> _emissioFiguraeGenus;
-        private readonly DuxQueue<OrdinatioPuellaeFiguraePelvis> _emissioFiguraePelvis;
-        private readonly DuxQueue<OrdinatioPuellaeMotus> _emissioMotus;
-        private readonly DuxQueue<OrdinatioPuellaeNavmesh> _emissioNavmesh;
-        private readonly DuxQueue<OrdinatioPuellaeNavmeshInitii> _emissioNavmeshInitii;
-        private readonly DuxQueue<OrdinatioPuellaeVeletudinis> _emissioVeletudinis;
-        private readonly DuxQueue<OrdinatioPuellaeVeletudinisNudi> _emissioVeletudinisNudi;
-        private readonly DuxQueue<OrdinatioPuellaePersonae> _emissioPersonae;
+        private readonly Ordo<OrdinatioPuellaeAnimationis> _emissioAnimationis;
+        private readonly Ordo<OrdinatioPuellaeCrinis> _emissioCrinis;
+        private readonly Ordo<OrdinatioPuellaeFiguraeGenus> _emissioFiguraeGenus;
+        private readonly Ordo<OrdinatioPuellaeFiguraePelvis> _emissioFiguraePelvis;
+        private readonly Ordo<OrdinatioPuellaeMotus> _emissioMotus;
+        private readonly Ordo<OrdinatioPuellaeNavmesh> _emissioNavmesh;
+        private readonly Ordo<OrdinatioPuellaeNavmeshInitii> _emissioNavmeshInitii;
+        private readonly Ordo<OrdinatioPuellaeVeletudinis> _emissioVeletudinis;
+        private readonly Ordo<OrdinatioPuellaeVeletudinisNudi> _emissioVeletudinisNudi;
+        private readonly Ordo<OrdinatioPuellaePersonae> _emissioPersonae;
 
         public LacusOrdinatioPuellae() {
             _lacusAnimationis = new Lacus<OrdinatioPuellaeAnimationis>(
@@ -56,34 +56,34 @@ namespace Yulinti.Exercitus.Dux {
             );
             _lacusPersonae = new Lacus<OrdinatioPuellaePersonae>(12);
 
-            _emissioAnimationis = new DuxQueue<OrdinatioPuellaeAnimationis>(
+            _emissioAnimationis = new Ordo<OrdinatioPuellaeAnimationis>(
                 ConstansPuellae.LongitudoOrdinatioAnimationis
             );
-            _emissioCrinis = new DuxQueue<OrdinatioPuellaeCrinis>(
+            _emissioCrinis = new Ordo<OrdinatioPuellaeCrinis>(
                 ConstansPuellae.LongitudoOrdinatioCrinis
             );
-            _emissioFiguraeGenus = new DuxQueue<OrdinatioPuellaeFiguraeGenus>(
+            _emissioFiguraeGenus = new Ordo<OrdinatioPuellaeFiguraeGenus>(
                 ConstansPuellae.LongitudoOrdinatioFiguraeGenus
             );
-            _emissioFiguraePelvis = new DuxQueue<OrdinatioPuellaeFiguraePelvis>(
+            _emissioFiguraePelvis = new Ordo<OrdinatioPuellaeFiguraePelvis>(
                 ConstansPuellae.LongitudoOrdinatioFiguraePelvis
             );
-            _emissioMotus = new DuxQueue<OrdinatioPuellaeMotus>(
+            _emissioMotus = new Ordo<OrdinatioPuellaeMotus>(
                 ConstansPuellae.LongitudoOrdinatioMotus
             );
-            _emissioNavmesh = new DuxQueue<OrdinatioPuellaeNavmesh>(
+            _emissioNavmesh = new Ordo<OrdinatioPuellaeNavmesh>(
                 ConstansPuellae.LongitudoOrdinatioNavmesh
             );
-            _emissioNavmeshInitii = new DuxQueue<OrdinatioPuellaeNavmeshInitii>(
+            _emissioNavmeshInitii = new Ordo<OrdinatioPuellaeNavmeshInitii>(
                 ConstansPuellae.LongitudoOrdinatioNavmesh
             );
-            _emissioVeletudinis = new DuxQueue<OrdinatioPuellaeVeletudinis>(
+            _emissioVeletudinis = new Ordo<OrdinatioPuellaeVeletudinis>(
                 ConstansPuellae.LongitudoOrdinatioVeletudinis
             );
-            _emissioVeletudinisNudi = new DuxQueue<OrdinatioPuellaeVeletudinisNudi>(
+            _emissioVeletudinisNudi = new Ordo<OrdinatioPuellaeVeletudinisNudi>(
                 ConstansPuellae.LongitudoOrdinatioVeletudinisNudi
             );
-            _emissioPersonae = new DuxQueue<OrdinatioPuellaePersonae>(
+            _emissioPersonae = new Ordo<OrdinatioPuellaePersonae>(
                 ConstansPuellae.LongitudoOrdinatioVeletudinis
             );
         }

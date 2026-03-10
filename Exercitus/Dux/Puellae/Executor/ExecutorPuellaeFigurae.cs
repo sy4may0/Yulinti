@@ -9,8 +9,8 @@ namespace Yulinti.Exercitus.Dux {
         private readonly IOstiumPuellaeFiguraeGenusMutabile _ostiumPuellaeFiguraeGenusMutabile;
         private readonly IOstiumPuellaeFiguraePelvisMutabile _ostiumPuellaeFiguraePelvisMutabile;
 
-        private DuxQueue<IOrdinatioPuellaeFiguraeGenus> _queueFiguraeGenus;
-        private DuxQueue<IOrdinatioPuellaeFiguraePelvis> _queueFiguraePelvis;
+        private Ordo<IOrdinatioPuellaeFiguraeGenus> _queueFiguraeGenus;
+        private Ordo<IOrdinatioPuellaeFiguraePelvis> _queueFiguraePelvis;
 
         public ExecutorPuellaeFigurae(
             IOstiumPuellaeFiguraeGenusMutabile ostiumPuellaeFiguraeGenusMutabile,
@@ -18,10 +18,10 @@ namespace Yulinti.Exercitus.Dux {
         ) {
             _ostiumPuellaeFiguraeGenusMutabile = ostiumPuellaeFiguraeGenusMutabile;
             _ostiumPuellaeFiguraePelvisMutabile = ostiumPuellaeFiguraePelvisMutabile;
-            _queueFiguraeGenus = new DuxQueue<IOrdinatioPuellaeFiguraeGenus>(
+            _queueFiguraeGenus = new Ordo<IOrdinatioPuellaeFiguraeGenus>(
                 ConstansPuellae.LongitudoOrdinatioFiguraeGenus
             );
-            _queueFiguraePelvis = new DuxQueue<IOrdinatioPuellaeFiguraePelvis>(
+            _queueFiguraePelvis = new Ordo<IOrdinatioPuellaeFiguraePelvis>(
                 ConstansPuellae.LongitudoOrdinatioFiguraePelvis
             );
         }

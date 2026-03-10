@@ -101,7 +101,7 @@ namespace Yulinti.Exercitus.Dux {
         private readonly ResFluidaPuellaeVeletudinis _resFluidaVeletudinis;
         private readonly IOstiumPuellaeResVisaeMutabile _ostiumPuellaeResVisaeMutabile;
 
-        private readonly DuxQueue<IOrdinatioPuellaeVeletudinisNudi> _queueVeletudinisNudi;
+        private readonly Ordo<IOrdinatioPuellaeVeletudinisNudi> _queueVeletudinisNudi;
         private readonly PhantasmaPuellaeVeletudinis _phantasma;
 
         public ExecutorPuellaeVeletudinis(
@@ -115,7 +115,7 @@ namespace Yulinti.Exercitus.Dux {
             _ostiumPuellaeResVisaeMutabile = ostiumPuellaeResVisaeMutabile;
             _ostiumPuellaeLociLegibile = ostiumPuellaeLociLegibile;
             _phantasma = new PhantasmaPuellaeVeletudinis();
-            _queueVeletudinisNudi = new DuxQueue<IOrdinatioPuellaeVeletudinisNudi>(ConstansPuellae.LongitudoOrdinatioVeletudinisNudi);
+            _queueVeletudinisNudi = new Ordo<IOrdinatioPuellaeVeletudinisNudi>(ConstansPuellae.LongitudoOrdinatioVeletudinisNudi);
         }
 
         public void Initare() {
