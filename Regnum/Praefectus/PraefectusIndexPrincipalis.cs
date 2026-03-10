@@ -3,6 +3,7 @@ using Yulinti.Unity.Contractus;
 using System;
 using UnityEngine;
 using Yulinti.Nucleus.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Exercitus.Contractus;
 
 namespace Yulinti.Regnum.Praefectus {
@@ -24,6 +25,7 @@ namespace Yulinti.Regnum.Praefectus {
         }
 
         public void Tick() {
+            UnityEngine.Debug.Log("IndexPrincipalis Tick");
             _orator.Pulsus();
             _duxExercitus.PulsusPrimum();
             _duxExercitus.Pulsus();
@@ -42,7 +44,16 @@ namespace Yulinti.Regnum.Praefectus {
         }
 
         public void Dispose() {
-            _duxExercitus.Liberare();
+            try {
+                _duxExercitus.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
+            try {
+                _orator.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
         }
     }
 }

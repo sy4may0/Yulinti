@@ -3,6 +3,7 @@ using Yulinti.Unity.Contractus;
 using Yulinti.Exercitus.Contractus;
 using System;
 using Yulinti.Nucleus.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.Regnum.Praefectus {
     public sealed class PraefectusTestScene : IStartable, ITickable, IFixedTickable, ILateTickable, IDisposable {
@@ -44,8 +45,16 @@ namespace Yulinti.Regnum.Praefectus {
         }
 
         public void Dispose() {
-            _ministeria.Liberare();
-            _ducisExercitus.Liberare();
+            try {
+                _ministeria.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
+            try {
+                _ducisExercitus.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 using VContainer.Unity;
 using Yulinti.Unity.Contractus;
 using Yulinti.Nucleus.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Exercitus.Contractus;
 using System;
 
@@ -42,8 +43,16 @@ namespace Yulinti.Regnum.Praefectus {
         }
 
         public void Dispose() {
-            _ducisExercitus.Liberare();
-            _monsAltus.Liberare();
+            try {
+                _ducisExercitus.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
+            try {
+                _monsAltus.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
         }
     }
 }

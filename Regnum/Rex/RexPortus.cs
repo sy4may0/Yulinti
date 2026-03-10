@@ -41,5 +41,10 @@ namespace Yulinti.Regnum.Rex {
             builder.RegisterEntryPoint<PraefectusPortus>();
 
         }
+
+        protected override void OnDestroy() {
+            Debug.Log("RexPortus OnDestroy");
+            base.OnDestroy();
+        }
     }
 }

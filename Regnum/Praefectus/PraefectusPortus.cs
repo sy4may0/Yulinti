@@ -3,6 +3,7 @@ using Yulinti.Unity.Contractus;
 using Yulinti.Exercitus.Contractus;
 using System;
 using Yulinti.Nucleus.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.Regnum.Praefectus {
     public sealed class PraefectusPortus : IStartable, ITickable, IFixedTickable, ILateTickable, IDisposable {
@@ -26,6 +27,7 @@ namespace Yulinti.Regnum.Praefectus {
         }
 
         public void Tick() {
+            UnityEngine.Debug.Log("Portus Tick");
             _ministeria.PulsusPrimum();
             _ducisExercitus.PulsusPrimum();
             _ministeria.Pulsus();
@@ -47,9 +49,23 @@ namespace Yulinti.Regnum.Praefectus {
         }
 
         public void Dispose() {
-            _ministeria.Liberare();
-            _ducisExercitus.Liberare();
-            _orator.Liberare();
+            try {
+                _ministeria.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
+
+            try {
+                _ducisExercitus.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
+
+            try {
+                _orator.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
         }
     }
 }

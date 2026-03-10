@@ -108,6 +108,7 @@ namespace Yulinti.Unity.Velum {
 
                 if (ve is ListView listView) {
                     if (listView.ClassListContains(C_SupervolareList))
+                        UnityEngine.Debug.Log("ApplicareSupervolareList");
                         listView.selectionChanged += _sonareSupervolareList;
                 }
             }

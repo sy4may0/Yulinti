@@ -130,6 +130,7 @@ namespace Yulinti.Exercitus.Dux {
                     onus.Titulus, onus.Textus, onus.ButtonIta,
                     AdPremereItaInvolutus
                 );
+                _turrisSoniVeli.Sonare(IDSonusVeli.Demittere);
 
                 // UIが閉じる（= 押される）まで待つ
                 await tcs.Task;
