@@ -17,8 +17,8 @@ namespace Yulinti.Exercitus.Dux {
         private readonly IOstiumPunctumViaeLegibile _ostiumPunctumViaeLegibile;
         private readonly ResFluidaCivisMotus _resFluidaMotus;
 
-        private DuxQueue<IOrdinatioCivisMotus>[] _queueMotus;
-        private DuxQueue<IOrdinatioCivisNavmesh>[] _queueNavmesh;
+        private Ordo<IOrdinatioCivisMotus>[] _queueMotus;
+        private Ordo<IOrdinatioCivisNavmesh>[] _queueNavmesh;
         private SpeciesCivisLoci[] _speciesActualis;
 
         public ExecutorCivisLoci(
@@ -35,13 +35,13 @@ namespace Yulinti.Exercitus.Dux {
             _ostiumPunctumViaeLegibile = ostiumPunctumViaeLegibile;
             _resFluidaMotus = resFluidaMotus;
 
-            _queueMotus = new DuxQueue<IOrdinatioCivisMotus>[ostiumCivisLegibile.Longitudo];
-            _queueNavmesh = new DuxQueue<IOrdinatioCivisNavmesh>[ostiumCivisLegibile.Longitudo];
+            _queueMotus = new Ordo<IOrdinatioCivisMotus>[ostiumCivisLegibile.Longitudo];
+            _queueNavmesh = new Ordo<IOrdinatioCivisNavmesh>[ostiumCivisLegibile.Longitudo];
             _speciesActualis = new SpeciesCivisLoci[ostiumCivisLegibile.Longitudo];
 
             for (int i = 0; i < ostiumCivisLegibile.Longitudo; i++) {
-                _queueMotus[i] = new DuxQueue<IOrdinatioCivisMotus>(ConstansCivis.LongitudoOrdinatioMotus);
-                _queueNavmesh[i] = new DuxQueue<IOrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
+                _queueMotus[i] = new Ordo<IOrdinatioCivisMotus>(ConstansCivis.LongitudoOrdinatioMotus);
+                _queueNavmesh[i] = new Ordo<IOrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
                 _speciesActualis[i] = SpeciesCivisLoci.Nihil;
             }
         }

@@ -8,7 +8,7 @@ namespace Yulinti.Exercitus.Dux {
         private readonly IOstiumPuellaeLociLegibile _ostiumPuellaeLociLegibile;
         private readonly IOstiumPuellaeAnimationisMutabile _ostiumPuellaeAnimationisMutabile;
 
-        private DuxQueue<IOrdinatioPuellaeAnimationis> _queueAnimationis;
+        private Ordo<IOrdinatioPuellaeAnimationis> _queueAnimationis;
 
         public ExecutorPuellaeAnimationis(
             IOstiumPuellaeLociLegibile ostiumPuellaeLociLegibile,
@@ -16,7 +16,7 @@ namespace Yulinti.Exercitus.Dux {
         ) {
             _ostiumPuellaeLociLegibile = ostiumPuellaeLociLegibile;
             _ostiumPuellaeAnimationisMutabile = ostiumPuellaeAnimationisMutabile;
-            _queueAnimationis = new DuxQueue<IOrdinatioPuellaeAnimationis>(
+            _queueAnimationis = new Ordo<IOrdinatioPuellaeAnimationis>(
                 ConstansPuellae.LongitudoOrdinatioAnimationis
             );
         }
