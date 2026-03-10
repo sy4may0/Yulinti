@@ -11,6 +11,7 @@ namespace Yulinti.Exercitus.Dux {
         public string Titulus { get; }
         public string Textus { get; }
         public string ButtonIta { get; }
+        public IDSonusVeli SonusIta { get; }
         public Action AdPremereIta { get; }
         public TaskCompletionSource<bool> Tcs { get; }
         public CancellationToken Ct { get; }
@@ -20,6 +21,7 @@ namespace Yulinti.Exercitus.Dux {
             string textus,
             string buttonIta,
             Action adPremereIta,
+            IDSonusVeli sonusIta,
             TaskCompletionSource<bool> tcs,
             CancellationToken ct
         ) {
@@ -27,6 +29,7 @@ namespace Yulinti.Exercitus.Dux {
             Textus = textus;
             ButtonIta = buttonIta;
             AdPremereIta = adPremereIta;
+            SonusIta = sonusIta;
             Tcs = tcs;
             Ct = ct;
         }
@@ -34,6 +37,7 @@ namespace Yulinti.Exercitus.Dux {
 
     internal sealed class LegatusMonitionis : ILegatus, ILegatusMonitionis, ILegatusIncipabilisRadicis, ILegatusLiberabilisRadicis {
         private readonly IVelumMonitionis _velumMonitionis;
+        private readonly ITurrisSoniVeli _turrisSoniVeli;
 
         private readonly ConcurrentQueue<OnusMonitionis> _queueMonitionis;
         private readonly SemaphoreSlim _semaphoreMonitionis;
@@ -46,8 +50,12 @@ namespace Yulinti.Exercitus.Dux {
         // 現在ワーカーが扱っている onus（任意：ログ等に使う）
         private OnusMonitionis _onusOperarius;
 
-        internal LegatusMonitionis(IVelumMonitionis velumMonitionis) {
+        internal LegatusMonitionis(
+            IVelumMonitionis velumMonitionis,
+            ITurrisSoniVeli turrisSoniVeli
+        ) {
             _velumMonitionis = velumMonitionis;
+            _turrisSoniVeli = turrisSoniVeli;
 
             _queueMonitionis = new ConcurrentQueue<OnusMonitionis>();
 
@@ -110,7 +118,10 @@ namespace Yulinti.Exercitus.Dux {
                 // ボタン押下時：ユーザーコールバックを呼んでから “閉じた” を通知
                 void AdPremereItaInvolutus() {
                     if (Interlocked.Exchange(ref istPremere, 1) != 0) return;
-                    try { onus.AdPremereIta?.Invoke(); }
+                    try { 
+                        _turrisSoniVeli.Sonare(onus.SonusIta);
+                        onus.AdPremereIta?.Invoke();
+                    }
                     finally { tcs.TrySetResult(true); }
                 }
 
@@ -143,9 +154,10 @@ namespace Yulinti.Exercitus.Dux {
             string titulus,
             string textus,
             string buttonIta,
+            IDSonusVeli sonusIta = IDSonusVeli.Submittere,
             Action adPremereIta = null
         ) {
-            _ = DemittereAsync(titulus, textus, buttonIta, adPremereIta);
+            _ = DemittereAsync(titulus, textus, buttonIta, adPremereIta, sonusIta);
         }
 
         public Task DemittereAsync(
@@ -153,6 +165,7 @@ namespace Yulinti.Exercitus.Dux {
             string textus,
             string buttonIta,
             Action adPremereIta = null,
+            IDSonusVeli sonusIta = IDSonusVeli.Submittere,
             CancellationToken cancellationToken = default
         ) {
             // 遅延起動（Incipere を呼び忘れても動くように）
@@ -160,7 +173,7 @@ namespace Yulinti.Exercitus.Dux {
 
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             OnusMonitionis onus = new OnusMonitionis(
-                titulus, textus, buttonIta, adPremereIta, tcs, cancellationToken
+                titulus, textus, buttonIta, adPremereIta, sonusIta, tcs, cancellationToken
             );
             _queueMonitionis.Enqueue(onus);
             _semaphoreMonitionis.Release();

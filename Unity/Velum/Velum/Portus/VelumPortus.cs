@@ -7,7 +7,6 @@ namespace Yulinti.Unity.Velum {
     internal sealed class VelumPortus : IVelum, IVelumPortus, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumPortus _anchoraVelumPortus;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
-        private readonly ITurrisSoniVeli _turrisSoniVeli;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private VisualElement _containerPortus;
@@ -38,7 +37,6 @@ namespace Yulinti.Unity.Velum {
         ) {
             _anchoraVelumPortus = anchoraVelumPortus;
             _turrisInterpretationis = turrisInterpretationis;
-            _turrisSoniVeli = turrisSoniVeli;
             _applicatorSoniVeli = applicatorSoniVeli;
 
             _onProfectio = null;

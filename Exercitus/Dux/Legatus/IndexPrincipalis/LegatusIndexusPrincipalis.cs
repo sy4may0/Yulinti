@@ -12,6 +12,7 @@ namespace Yulinti.Exercitus.Dux {
         private readonly ILegatusConfirmationis _legatusConfirmationis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ITurrisSalsamenti _turrisSalsamenti;
+        private readonly ITurrisSoniVeli _turrisSoniVeli;
 
         private readonly CuratorVela _curatorVela;
 
@@ -37,6 +38,7 @@ namespace Yulinti.Exercitus.Dux {
         public LegatusIndexusPrincipalis(
             ITurrisMundus turrisMundus,
             IVelumIndexusPrincipalis velumIndexusPrincipalis,
+            ITurrisSoniVeli turrisSoniVeli,
             ITurrisInterpretationis turrisInterpretationis,
             ITurrisSalsamenti turrisSalsamenti,
             ILegatusConfirmationis legatusConfirmationis,
@@ -45,6 +47,7 @@ namespace Yulinti.Exercitus.Dux {
         ) {
             _turrisMundus = turrisMundus;
             _velumIndexusPrincipalis = velumIndexusPrincipalis;
+            _turrisSoniVeli = turrisSoniVeli;
             _turrisInterpretationis = turrisInterpretationis;
             _turrisSalsamenti = turrisSalsamenti;
             _legatusConfirmationis = legatusConfirmationis;
@@ -140,6 +143,8 @@ namespace Yulinti.Exercitus.Dux {
                     _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_BUTTON_NON),
                     null,
                     null,
+                    IDSonusVeli.SubmittereAdditum,
+                    IDSonusVeli.Exire,
                     _cancellationTokenSource.Token
                 );
 
@@ -170,6 +175,7 @@ namespace Yulinti.Exercitus.Dux {
             }
             try {
                 _ = await _turrisSalsamenti.ArcessereNovissimus(_cancellationTokenSource.Token);
+                _turrisSoniVeli.Sonare(IDSonusVeli.SubmittereAdditum);
                 _curatorVela.TollereVelaOmnium();
                 _turrisMundus.AdMudum(IDMundi.MundusPortus);
             } catch (OperationCanceledException) {

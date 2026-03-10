@@ -124,6 +124,8 @@ namespace Yulinti.Exercitus.Dux {
                     _turrisInterpretationis.LegoTextus(IDTextus.PORTUS_BUTTON_EXI_BUTTON_NON),
                     null,
                     null,
+                    IDSonusVeli.Submittere,
+                    IDSonusVeli.Exire,
                     _cancellationTokenSource.Token
                 );
 

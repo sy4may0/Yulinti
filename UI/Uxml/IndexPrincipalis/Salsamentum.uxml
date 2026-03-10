@@ -117,7 +117,6 @@
                 button
                 button-submit
                 salsamentum-button
-                sonus-c-submittere
               "
               text="Load"
             />
@@ -127,7 +126,6 @@
                 button
                 button-submit
                 salsamentum-button
-                sonus-c-submittere
               "
               text="Delete"
             />
@@ -137,7 +135,6 @@
                 button
                 button-cancel
                 salsamentum-button
-                sonus-c-exire
               "
               text="Cancel"
             />

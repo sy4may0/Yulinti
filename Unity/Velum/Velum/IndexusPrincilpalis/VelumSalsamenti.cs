@@ -12,7 +12,6 @@ namespace Yulinti.Unity.Velum {
     internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumSalsamenti _anchoraVelumSalsamenti;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
-        private readonly ITurrisSoniVeli _turrisSoniVeli;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private VisualElement _containerSalsamenti;
@@ -53,7 +52,6 @@ namespace Yulinti.Unity.Velum {
         ) {
             _anchoraVelumSalsamenti = anchoraVelumSalsamenti;
             _turrisInterpretationis = turrisInterpretationis;
-            _turrisSoniVeli = turrisSoniVeli;
             _applicatorSoniVeli = applicatorSoniVeli;
 
             _bufNotitiaManualis = new List<IOstiumSalsamentiNotitiae>();
@@ -223,7 +221,6 @@ namespace Yulinti.Unity.Velum {
 
             Activare();
             _buttonExi.Focus();
-            _turrisSoniVeli.Sonare(IDSonusVeli.Demittere);
         }
 
         public void RenovareTablaeManualis(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaManualis) {

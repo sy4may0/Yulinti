@@ -6,7 +6,6 @@ using System;
 namespace Yulinti.Unity.Velum {
     internal sealed class VelumConfirmationis : IVelumConfirmationis, IVelum, IVelumLiberabilisRadicis {
         private readonly IAnchoraVelumRadicis _anchoraVelumRadicis;
-        private readonly ITurrisSoniVeli _turrisSoniVeli;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private UIDocument _uiConfirmationis;
@@ -25,7 +24,6 @@ namespace Yulinti.Unity.Velum {
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumRadicis = anchoraVelumRadicis;
-            _turrisSoniVeli = turrisSoniVeli;
             _applicatorSoniVeli = applicatorSoniVeli;
         }
 
@@ -71,7 +69,6 @@ namespace Yulinti.Unity.Velum {
             _onIta = adPremereIta;
             _onNon = adPremereNon;
             Activare();
-            _turrisSoniVeli.Sonare(IDSonusVeli.Demittere);
         }
 
         public void TollereConfirmationis() {

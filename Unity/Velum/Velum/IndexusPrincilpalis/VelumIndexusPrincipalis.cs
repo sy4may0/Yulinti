@@ -7,7 +7,6 @@ namespace Yulinti.Unity.Velum {
     internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumIndexusPrincipalis _anchoraVelumIndexusPrincipalis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
-        private readonly ITurrisSoniVeli _turrisSoniVeli;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private VisualElement _containerIndexusPrincipalis;
@@ -34,12 +33,10 @@ namespace Yulinti.Unity.Velum {
         public VelumIndexusPrincipalis(
             IAnchoraVelumIndexusPrincipalis anchoraVelumIndexusPrincipalis,
             ITurrisInterpretationis turrisInterpretationis,
-            ITurrisSoniVeli turrisSoniVeli,
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumIndexusPrincipalis = anchoraVelumIndexusPrincipalis;
             _turrisInterpretationis = turrisInterpretationis;
-            _turrisSoniVeli = turrisSoniVeli;
             _applicatorSoniVeli = applicatorSoniVeli;
 
             _onLudusNovus = null;

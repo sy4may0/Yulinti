@@ -58,7 +58,6 @@
                         button
                         button-cancel
                         confirmatio-button
-                        sonus-c-exire
                     "
                     text="Non"
                 />
@@ -68,7 +67,6 @@
                         button
                         button-submit
                         confirmatio-button
-                        sonus-c-submittere
                     "
                     text="Ita"
                 />
