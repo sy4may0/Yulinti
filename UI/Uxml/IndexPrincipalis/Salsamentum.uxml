@@ -5,32 +5,139 @@
     <Style src="../../Uss/Globalis.uss" />
     <Style src="../../Uss/IndexPrincipalis/Salsamentum.uss" />
 
-    <ui:VisualElement name="salsamentum-root" class="container salsamentum-root">
-      <ui:VisualElement name="salsamentum-window" class="container salsamentum-window">
-        <ui:VisualElement name="salsamentum-header-panel" class="panel salsamentum-header-panel">
+    <ui:VisualElement
+      name="salsamentum-root"
+      class="
+        container
+        salsamentum-root
+      "
+    >
+      <ui:VisualElement
+        name="salsamentum-window"
+        class="
+          container
+          salsamentum-window
+        "
+      >
+        <ui:VisualElement
+          name="salsamentum-header-panel"
+          class="
+            panel
+            salsamentum-header-panel
+          "
+        >
           <ui:Label 
             name="salsamentum-header-label" 
-            class="label salsamentum-header-label"
+            class="
+              label
+              salsamentum-header-label
+            "
             text="Salsamentum"
           />
         </ui:VisualElement>
 
-        <ui:VisualElement name="salsamentum-content-panel" class="panel salsamentum-content-panel">
-          <ui:VisualElement name="salsamentum-list-container" class="container salsamentum-list-container">
-            <ui:VisualElement name="salsamentum-list-manualis" class="container salsamentum-list-manualis salsamentum-list-container-child">
-              <ui:Label name="salsamentum-list-manualis-label" class="label salsamentum-list-manualis-label" text="Manualis" />
-              <ui:ListView name="salsamentum-scroll-view-manualis" class="scrollview scrollview-tp salsamentum-scroll-view salsamentum-scroll-view-manualis" />
+        <ui:VisualElement
+          name="salsamentum-content-panel"
+          class="
+            panel
+            salsamentum-content-panel
+          "
+        >
+          <ui:VisualElement
+            name="salsamentum-list-container"
+            class="
+              container
+              salsamentum-list-container
+            "
+          >
+            <ui:VisualElement
+              name="salsamentum-list-manualis"
+              class="
+                container
+                salsamentum-list-manualis
+                salsamentum-list-container-child
+              "
+            >
+              <ui:Label
+                name="salsamentum-list-manualis-label"
+                class="
+                  label
+                  salsamentum-list-manualis-label
+                "
+                text="Manualis"
+              />
+              <ui:ListView
+                name="salsamentum-scroll-view-manualis"
+                class="
+                  scrollview
+                  scrollview-tp
+                  salsumentum-scroll-view
+                  salsumentum-scroll-view-manualis
+                "
+              />
             </ui:VisualElement>
-            <ui:VisualElement name="salsamentum-list-automaticus" class="container salsamentum-list-automaticus salsamentum-list-container-child">
-              <ui:Label name="salsamentum-list-automaticus-label" class="label salsamentum-list-automaticus-label" text="Automaticus" />
-              <ui:ListView name="salsamentum-scroll-view-automaticus" class="scrollview scrollview-tp salsamentum-scroll-view salsamentum-scroll-view-automaticus" />
+            <ui:VisualElement
+              name="salsamentum-list-automaticus"
+              class="
+                container
+                salsamentum-list-automaticus
+                salsamentum-list-container-child
+              "
+            >
+              <ui:Label
+                name="salsamentum-list-automaticus-label"
+                class="
+                  label
+                  salsamentum-list-automaticus-label
+                "
+                text="Automaticus"
+              />
+              <ui:ListView
+                name="salsamentum-scroll-view-automaticus"
+                class="
+                  scrollview
+                  scrollview-tp
+                  salsamentum-scroll-view
+                  salsamentum-scroll-view-automaticus
+                "
+              />
             </ui:VisualElement>
           </ui:VisualElement>
 
-          <ui:VisualElement name="salsamentum-button-panel" class="container salsamentum-button-panel">
-            <ui:Button name="salsamentum-button-onera-ludum" class="button button-submit salsamentum-button" text="Load" />
-            <ui:Button name="salsamentum-button-deleto-ludum" class="button button-submit salsamentum-button" text="Delete" />
-            <ui:Button name="salsamentum-button-exi" class="button button-cancel salsamentum-button" text="Cancel" />
+          <ui:VisualElement
+            name="salsamentum-button-panel"
+            class="
+              container
+              salsamentum-button-panel
+            "
+          >
+            <ui:Button
+              name="salsamentum-button-onera-ludum"
+              class="
+                button
+                button-submit
+                salsamentum-button
+              "
+              text="Load"
+            />
+            <ui:Button
+              name="salsamentum-button-deleto-ludum"
+              class="
+                button
+                button-submit
+                salsamentum-button
+              "
+              text="Delete"
+            />
+            <ui:Button
+              name="salsamentum-button-exi"
+              class="
+                button
+                button-cancel
+                salsamentum-button
+              "
+              text="Cancel"
+            />
           </ui:VisualElement>
         </ui:VisualElement>
       </ui:VisualElement>

@@ -18,6 +18,7 @@ namespace Yulinti.Regnum.Rex {
         [SerializeField] private ConfiguratioTurris _configuratioTurris;
         [SerializeField] private AnchoraInput _anchora;
         [SerializeField] private AnchoraVelumRadicis _anchoraVelumRadicis;
+        [SerializeField] private AnchoraSoniVeli _anchoraSoniVeli;
 
         private readonly IInspector _inspector = new Inspector();
         private readonly ICarnifex _carnifex = new CarnifexBasis();
@@ -34,9 +35,11 @@ namespace Yulinti.Regnum.Rex {
         protected override void Configure(IContainerBuilder builder) {
             builder.RegisterInstance<IAnchoraInput>(_anchora);
             builder.RegisterInstance<IAnchoraVelumRadicis>(_anchoraVelumRadicis);
+            builder.RegisterInstance<IAnchoraSoniVeli>(_anchoraSoniVeli);
 
             builder.RegisterInstance<IConfiguratioTurris>(_configuratioTurris);
             builder.RegisterInstance<IConfiguratioTurrisPhantasma>(_configuratioTurris.Phantasma);
+            builder.RegisterInstance<IConfiguratioSonorumVeli>(_configuratioTurris.SonorumVeli);
 
             FaberTurris.Initio(builder);
             FaberDucisRadicis.Initio(builder);

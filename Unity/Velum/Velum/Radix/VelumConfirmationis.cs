@@ -6,6 +6,7 @@ using System;
 namespace Yulinti.Unity.Velum {
     internal sealed class VelumConfirmationis : IVelumConfirmationis, IVelum, IVelumLiberabilisRadicis {
         private readonly IAnchoraVelumRadicis _anchoraVelumRadicis;
+        private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private UIDocument _uiConfirmationis;
 
@@ -18,9 +19,12 @@ namespace Yulinti.Unity.Velum {
         private Action _onNon;
 
         public VelumConfirmationis(
-            IAnchoraVelumRadicis anchoraVelumRadicis
+            IAnchoraVelumRadicis anchoraVelumRadicis,
+            ITurrisSoniVeli turrisSoniVeli,
+            ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumRadicis = anchoraVelumRadicis;
+            _applicatorSoniVeli = applicatorSoniVeli;
         }
 
         public void Initare() {
@@ -32,10 +36,7 @@ namespace Yulinti.Unity.Velum {
 
             _onIta = null;
             _onNon = null;
-
-            _buttonIta.clicked += premereIta;
-            _buttonNon.clicked += premereNon;
-
+            ActivareCB();
             Deactivare();
         }
 
@@ -50,9 +51,7 @@ namespace Yulinti.Unity.Velum {
             _uiConfirmationis.rootVisualElement.style.display = DisplayStyle.None;
             _buttonIta.SetEnabled(false);
             _buttonNon.SetEnabled(false);
-            _onIta = null;
-            _onNon = null;
-        }
+       }
 
         public void DemittereConfirmationis(
             string titulus,
@@ -69,13 +68,31 @@ namespace Yulinti.Unity.Velum {
 
             _onIta = adPremereIta;
             _onNon = adPremereNon;
-
             Activare();
         }
 
         public void TollereConfirmationis() {
+            _onIta = null;
+            _onNon = null;
             Deactivare();
         }
+
+        private void ActivareCB() {
+            _applicatorSoniVeli.ApplicareRadix(_uiConfirmationis);
+            _applicatorSoniVeli.Applicare(_uiConfirmationis.rootVisualElement);
+            _buttonIta.clicked -= premereIta;
+            _buttonIta.clicked += premereIta;
+            _buttonNon.clicked -= premereNon;
+            _buttonNon.clicked += premereNon;
+        }
+
+        private void DeactivareCB() {
+            _applicatorSoniVeli.PurgereRadix(_uiConfirmationis);
+            _applicatorSoniVeli.Purgere(_uiConfirmationis.rootVisualElement);
+            _buttonIta.clicked -= premereIta;
+            _buttonNon.clicked -= premereNon;
+        }
+
 
         private void premereIta() {
             // まずボタンを全部無効
@@ -100,6 +117,7 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void Liberare() {
+            DeactivareCB();
             TollereConfirmationis();
         }
     }

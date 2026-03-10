@@ -12,6 +12,8 @@ namespace Yulinti.Exercitus.Dux {
         public string Textus { get; }
         public string ButtonIta { get; }
         public string ButtonNon { get; }
+        public IDSonusVeli SonusIta { get; }
+        public IDSonusVeli SonusNon { get; }
         public Action AdPremereIta { get; }
         public Action AdPremereNon { get; }
 
@@ -25,6 +27,8 @@ namespace Yulinti.Exercitus.Dux {
             string buttonNon,
             Action adPremereIta,
             Action adPremereNon,
+            IDSonusVeli sonusIta,
+            IDSonusVeli sonusNon,
             TaskCompletionSource<bool> tcs,
             CancellationToken ct
         ) {
@@ -34,6 +38,8 @@ namespace Yulinti.Exercitus.Dux {
             ButtonNon = buttonNon;
             AdPremereIta = adPremereIta;
             AdPremereNon = adPremereNon;
+            SonusIta = sonusIta;
+            SonusNon = sonusNon;
             Tcs = tcs;
             Ct = ct;
         }
@@ -41,6 +47,7 @@ namespace Yulinti.Exercitus.Dux {
 
     internal sealed class LegatusConfirmationis : ILegatus, ILegatusConfirmationis, ILegatusIncipabilisRadicis, ILegatusLiberabilisRadicis {
         private readonly IVelumConfirmationis _velumConfirmationis;
+        private readonly ITurrisSoniVeli _turrisSoniVeli;
 
         private readonly ConcurrentQueue<OnusConfirmationis> _queueConfirmationis;
         private readonly SemaphoreSlim _semaphoreConfirmationis;
@@ -53,8 +60,12 @@ namespace Yulinti.Exercitus.Dux {
         // 現在ワーカーが扱っている onus（任意：ログ等に使う）
         private OnusConfirmationis _onusOperarius;
 
-        internal LegatusConfirmationis(IVelumConfirmationis velumConfirmationis) {
+        internal LegatusConfirmationis(
+            IVelumConfirmationis velumConfirmationis,
+            ITurrisSoniVeli turrisSoniVeli
+        ) {
             _velumConfirmationis = velumConfirmationis;
+            _turrisSoniVeli = turrisSoniVeli;
 
             _queueConfirmationis = new ConcurrentQueue<OnusConfirmationis>();
 
@@ -116,13 +127,19 @@ namespace Yulinti.Exercitus.Dux {
                 // ボタン押下時：ユーザーコールバックを呼んでから “閉じた” を通知
                 void AdPremereItaInvolutus() {
                     if (Interlocked.Exchange(ref istPremere, 1) != 0) return;
-                    try { onus.AdPremereIta?.Invoke(); }
+                    try { 
+                        _turrisSoniVeli.Sonare(onus.SonusIta);
+                        onus.AdPremereIta?.Invoke();
+                    }
                     finally { tcs.TrySetResult(true); }
                 }
 
                 void AdPremereNonInvolutus() {
                     if (Interlocked.Exchange(ref istPremere, 1) != 0) return;
-                    try { onus.AdPremereNon?.Invoke(); }
+                    try { 
+                        _turrisSoniVeli.Sonare(onus.SonusNon);
+                        onus.AdPremereNon?.Invoke();
+                    }
                     finally { tcs.TrySetResult(false); }
                 }
 
@@ -165,9 +182,16 @@ namespace Yulinti.Exercitus.Dux {
             string buttonNon,
             Action adPremereIta = null,
             Action adPremereNon = null,
+            IDSonusVeli sonusIta = IDSonusVeli.Submittere,
+            IDSonusVeli sonusNon = IDSonusVeli.Exire,
             CancellationToken cancellationToken = default
         ) {
-            _ = DemittereAsync(titulus, textus, buttonIta, buttonNon, adPremereIta, adPremereNon, cancellationToken);
+            _ = DemittereAsync(
+                titulus, textus, buttonIta, buttonNon, 
+                adPremereIta, adPremereNon, 
+                sonusIta, sonusNon,
+                cancellationToken
+            );
         }
 
         public Task<bool> DemittereAsync(
@@ -177,6 +201,8 @@ namespace Yulinti.Exercitus.Dux {
             string buttonNon,
             Action adPremereIta = null,
             Action adPremereNon = null,
+            IDSonusVeli sonusIta = IDSonusVeli.Submittere,
+            IDSonusVeli sonusNon = IDSonusVeli.Exire,
             CancellationToken cancellationToken = default
         ) {
             // 遅延起動 (Incipere を呼び忘れても動くように)
@@ -184,7 +210,10 @@ namespace Yulinti.Exercitus.Dux {
 
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             OnusConfirmationis onus = new OnusConfirmationis(
-                titulus, textus, buttonIta, buttonNon, adPremereIta, adPremereNon, tcs, cancellationToken
+                titulus, textus, buttonIta, buttonNon, 
+                adPremereIta, adPremereNon, 
+                sonusIta, sonusNon,
+                tcs, cancellationToken
             );
             _queueConfirmationis.Enqueue(onus);
             _semaphoreConfirmationis.Release();

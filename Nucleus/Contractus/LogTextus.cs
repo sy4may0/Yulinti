@@ -84,6 +84,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string VelumSalsamenti_RENOVARETABEAAUTOMATICUS_ARTICULUS_NULL = "VelumSalsamenti - renovare tablae automaticus articulus null";
         public const string AnchoraVelumRadicis_ANCHORAVELUMRADICIS_UICONFIRMATIONIS_NULL = "AnchoraVelumRadicis - uidocument confirmationis null";
         public const string AnchoraVelumRadicis_ANCHORAVELUMRADICIS_UIMONITIONIS_NULL = "AnchoraVelumRadicis - uidocument monitionis null";
+        public const string AnchoraSoniVeli_ANCHORASONIVELI_FONSSONIVELI_NULL = "AnchoraSoniVeli - fons soni veli null";
         public const string AnimatioCivisContinuata_CONFIGURATIOCIVISANIMATIONISCONTINUATA_CHILDREN_NULL_OR_EMPTY = "AnimatioCivisContinuata - configuratiocivisanimationiscontinuata children null or empty";
         public const string AnimatioPuellaeContinuata_CONFIGURATIOPUELLAEANIMATIONISCONTINUATA_CHILDREN_NULL_OR_EMPTY = "AnimatioPuellaeContinuata - configuratiopuellaeanimationiscontinuata children null or empty";
         public const string CuratorCivisGenerationis_CIVIS_INSTANTIATE_FAILED = "CuratorCivisGenerationis - civis instantiate failed";
@@ -200,6 +201,8 @@ namespace Yulinti.Nucleus.Contractus {
         public const string TabulaPuellaeFiguraeGenus_TABULAPUELLAEFIGURAEGENUS_BLEND_SHAPE_NOT_FOUND = "TabulaPuellaeFiguraeGenus - blend shape not found";
         public const string TabulaPuellaeFiguraePelvis_TABULAPUELLAEFIGURAEPELVIS_BLEND_SHAPE_NOT_FOUND = "TabulaPuellaeFiguraePelvis - blend shape not found";
         public const string TabulaPuellaeOssium_TABULAPUELLAEOSSIUM_BONE_NOT_FOUND = "TabulaPuellaeOssium - bone not found";
+        public const string TabulaSoniVeli_TABULASONIVELI_SONUS_NOT_FOUND = "TabulaSoniVeli - sonus not found";
+        public const string SonusVeli_SONUSVELI_SONUS_NULL = "SonusVeli - sonus null";
         public const string Temporis_TEMPORIS_INSTANCE_NULL = "Temporis - instance null";
     }
 }

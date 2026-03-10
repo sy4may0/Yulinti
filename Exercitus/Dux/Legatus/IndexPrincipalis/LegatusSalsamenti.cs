@@ -13,6 +13,7 @@ namespace Yulinti.Exercitus.Dux {
         private readonly ILegatusConfirmationis _legatusConfirmationis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ITurrisSalsamenti _turrisSalsamenti;
+        private readonly ITurrisSoniVeli _turrisSoniVeli;
 
         private readonly CuratorVela _curatorVela;
 
@@ -34,6 +35,7 @@ namespace Yulinti.Exercitus.Dux {
             ITurrisSalsamenti turrisSalsamenti,
             ILegatusConfirmationis legatusConfirmationis,
             ITurrisInterpretationis turrisInterpretationis,
+            ITurrisSoniVeli turrisSoniVeli,
             CuratorVela curatorVela
         ) {
             _turrisMundus = turrisMundus;
@@ -41,6 +43,7 @@ namespace Yulinti.Exercitus.Dux {
             _turrisSalsamenti = turrisSalsamenti;
             _legatusConfirmationis = legatusConfirmationis;
             _turrisInterpretationis = turrisInterpretationis;
+            _turrisSoniVeli = turrisSoniVeli;
             _curatorVela = curatorVela;
 
             _aeAdPremereOneraLudum = AdPremereOneraLudum;
@@ -75,6 +78,9 @@ namespace Yulinti.Exercitus.Dux {
                 // UIにNotitiaを表示
                 _velumSalsamenti.RenovareTablaeManualis(notitiaManualis);
                 _velumSalsamenti.RenovareTablaeAutomaticus(notitiaAutomaticus);
+
+                // 表示SE
+                _turrisSoniVeli.Sonare(IDSonusVeli.Demittere);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
@@ -107,7 +113,8 @@ namespace Yulinti.Exercitus.Dux {
 
                 await _turrisSalsamenti.Arcessere(id, cancellationToken);
                 _curatorVela.TollereVelaOmnium();
-                _turrisMundus.AdMudum(IDMundi.MundusTestScene);
+                _turrisSoniVeli.Sonare(IDSonusVeli.SubmittereAdditum);
+                _turrisMundus.AdMudum(IDMundi.MundusPortus);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
@@ -136,6 +143,8 @@ namespace Yulinti.Exercitus.Dux {
                     _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_BUTTON_NON),
                     null,
                     null,
+                    IDSonusVeli.Submittere,
+                    IDSonusVeli.Exire,
                     cancellationToken
                 );
 
@@ -176,6 +185,7 @@ namespace Yulinti.Exercitus.Dux {
             } finally {
                 FinireProcessumButton();
                 try {
+                    _turrisSoniVeli.Sonare(IDSonusVeli.Exire);
                     Tollere();
                 } catch (Exception e) {
                     Carnifex.Intermissio(e);

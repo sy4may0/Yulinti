@@ -8,6 +8,7 @@ namespace Yulinti.Exercitus.Contractus {
             string titulus,
             string textus,
             string buttonIta,
+            IDSonusVeli sonusIta = IDSonusVeli.Submittere,
             Action adPremereIta = null
         );
 
@@ -16,6 +17,7 @@ namespace Yulinti.Exercitus.Contractus {
             string textus,
             string buttonIta,
             Action adPremereIta = null,
+            IDSonusVeli sonusIta = IDSonusVeli.Submittere,
             CancellationToken cancellationToken = default
         );
     }

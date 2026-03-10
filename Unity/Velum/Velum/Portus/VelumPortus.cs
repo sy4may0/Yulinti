@@ -7,6 +7,7 @@ namespace Yulinti.Unity.Velum {
     internal sealed class VelumPortus : IVelum, IVelumPortus, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumPortus _anchoraVelumPortus;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
+        private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
         private VisualElement _containerPortus;
         private VisualElement _panelPortus;
@@ -30,10 +31,13 @@ namespace Yulinti.Unity.Velum {
 
         public VelumPortus(
             IAnchoraVelumPortus anchoraVelumPortus,
-            ITurrisInterpretationis turrisInterpretationis
+            ITurrisInterpretationis turrisInterpretationis,
+            ITurrisSoniVeli turrisSoniVeli,
+            ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumPortus = anchoraVelumPortus;
             _turrisInterpretationis = turrisInterpretationis;
+            _applicatorSoniVeli = applicatorSoniVeli;
 
             _onProfectio = null;
             _onConstructio = null;
@@ -62,6 +66,8 @@ namespace Yulinti.Unity.Velum {
             _labelTaberna.text = _turrisInterpretationis.LegoTextus(IDTextus.PORTUS_BUTTON_TABERNA);
             _labelOptiones.text = _turrisInterpretationis.LegoTextus(IDTextus.PORTUS_BUTTON_OPTIONES);
             _labelExi.text = _turrisInterpretationis.LegoTextus(IDTextus.PORTUS_BUTTON_EXI);
+
+            ActivareCB();
         }
 
         public void Activare() {
@@ -73,13 +79,11 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void DemitterePortus() {
-            ExuereCallbacks();
             Activare();
             _buttonProfectio.Focus();
         }
 
         public void TollerePortus() {
-            ExuereCallbacks();
             Deactivare();
         }
 
@@ -124,60 +128,73 @@ namespace Yulinti.Unity.Velum {
         }
 
         public void AdPremereProfectio(Action ae) {
-            if (_onProfectio != null) _buttonProfectio.clicked -= _onProfectio;
             _onProfectio = ae;
-            if (_onProfectio != null) _buttonProfectio.clicked += _onProfectio;
         }
 
         public void AdPremereConstructio(Action ae) {
-            if (_onConstructio != null) _buttonConstructio.clicked -= _onConstructio;
             _onConstructio = ae;
-            if (_onConstructio != null) _buttonConstructio.clicked += _onConstructio;
         }
 
         public void AdPremereTaberna(Action ae) {
-            if (_onTaberna != null) _buttonTaberna.clicked -= _onTaberna;
             _onTaberna = ae;
-            if (_onTaberna != null) _buttonTaberna.clicked += _onTaberna;
         }
 
         public void AdPremereOptiones(Action ae) {
-            if (_onOptiones != null) _buttonOptiones.clicked -= _onOptiones;
             _onOptiones = ae;
-            if (_onOptiones != null) _buttonOptiones.clicked += _onOptiones;
         }
 
         public void AdPremereExi(Action ae) {
-            if (_onExi != null) _buttonExi.clicked -= _onExi;
             _onExi = ae;
-            if (_onExi != null) _buttonExi.clicked += _onExi;
+        }
+
+        private void premereProfectio() {
+            _onProfectio?.Invoke();
+        }
+
+        private void premereConstructio() {
+            _onConstructio?.Invoke();
+        }
+
+        private void premereTaberna() {
+            _onTaberna?.Invoke();
+        }
+
+        private void premereOptiones() {
+            _onOptiones?.Invoke();
+        }
+
+        private void premereExi() {
+            _onExi?.Invoke();
         }
 
         public void Liberare() {
+            DeactivareCB();
             TollerePortus();
         }
 
-        private void ExuereCallbacks() {
-            if (_onProfectio != null) {
-                _buttonProfectio.clicked -= _onProfectio;
-            }
-            _onProfectio = null;
-            if (_onConstructio != null) {
-                _buttonConstructio.clicked -= _onConstructio;
-            }
-            _onConstructio = null;
-            if (_onTaberna != null) {
-                _buttonTaberna.clicked -= _onTaberna;
-            }
-            _onTaberna = null;
-            if (_onOptiones != null) {
-                _buttonOptiones.clicked -= _onOptiones;
-            }
-            _onOptiones = null;
-            if (_onExi != null) {
-                _buttonExi.clicked -= _onExi;
-            }
-            _onExi = null;
+        private void ActivareCB() {
+            _applicatorSoniVeli.ApplicareRadix(_anchoraVelumPortus.UIDocument);
+            _applicatorSoniVeli.Applicare(_panelPortus);
+            _buttonProfectio.clicked -= premereProfectio;
+            _buttonProfectio.clicked += premereProfectio;
+            _buttonConstructio.clicked -= premereConstructio;
+            _buttonConstructio.clicked += premereConstructio;
+            _buttonTaberna.clicked -= premereTaberna;
+            _buttonTaberna.clicked += premereTaberna;
+            _buttonOptiones.clicked -= premereOptiones;
+            _buttonOptiones.clicked += premereOptiones;
+            _buttonExi.clicked -= premereExi;
+            _buttonExi.clicked += premereExi;
+        }
+
+        private void DeactivareCB() {
+            _applicatorSoniVeli.PurgereRadix(_anchoraVelumPortus.UIDocument);
+            _applicatorSoniVeli.Purgere(_panelPortus);
+            _buttonProfectio.clicked -= premereProfectio;
+            _buttonConstructio.clicked -= premereConstructio;
+            _buttonTaberna.clicked -= premereTaberna;
+            _buttonOptiones.clicked -= premereOptiones;
+            _buttonExi.clicked -= premereExi;
         }
         
         public void TollereFinem() {

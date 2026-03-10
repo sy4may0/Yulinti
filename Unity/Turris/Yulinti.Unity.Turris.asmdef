@@ -5,6 +5,7 @@
     "Yulinti.Unity.Contractus",
     "Yulinti.Unity.Instrumentarium",
     "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.Nucleus.Contractus",
     "Yulinti.Exercitus.Contractus",
     "VContainer",
     "Unity.InputSystem",
