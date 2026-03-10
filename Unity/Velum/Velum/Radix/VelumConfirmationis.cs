@@ -20,7 +20,6 @@ namespace Yulinti.Unity.Velum {
 
         public VelumConfirmationis(
             IAnchoraVelumRadicis anchoraVelumRadicis,
-            ITurrisSoniVeli turrisSoniVeli,
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumRadicis = anchoraVelumRadicis;

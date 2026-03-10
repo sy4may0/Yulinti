@@ -32,7 +32,6 @@ namespace Yulinti.Unity.Velum {
         public VelumPortus(
             IAnchoraVelumPortus anchoraVelumPortus,
             ITurrisInterpretationis turrisInterpretationis,
-            ITurrisSoniVeli turrisSoniVeli,
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumPortus = anchoraVelumPortus;

@@ -47,7 +47,6 @@ namespace Yulinti.Unity.Velum {
         public VelumSalsamenti(
             IAnchoraVelumSalsamenti anchoraVelumSalsamenti,
             ITurrisInterpretationis turrisInterpretationis,
-            ITurrisSoniVeli turrisSoniVeli,
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumSalsamenti = anchoraVelumSalsamenti;

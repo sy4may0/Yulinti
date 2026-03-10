@@ -18,7 +18,6 @@ namespace Yulinti.Unity.Velum {
 
         public VelumMonitionis(
             IAnchoraVelumRadicis anchoraVelumRadicis,
-            ITurrisSoniVeli turrisSoniVeli,
             ApplicatorSoniVeli applicatorSoniVeli
         ) {
             _anchoraVelumRadicis = anchoraVelumRadicis;
