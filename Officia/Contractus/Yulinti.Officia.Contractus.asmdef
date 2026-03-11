@@ -1,0 +1,23 @@
+{
+  "name": "Yulinti.Officia.Contractus",
+  "rootNamespace": "Yulinti.Officia.Contractus",
+  "references": [
+    "Yulinti.Nucleus.Contractus",
+    "Yulinti.ImperiumDelegatum.Contractus",
+    "Unity.InputSystem",
+    "Kybernetik.Animancer",
+    "Unity.Addressables",
+    "Unity.ResourceManager",
+    "UniTask"
+ 
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

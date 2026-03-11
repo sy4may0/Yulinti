@@ -1,0 +1,12 @@
+using VContainer;
+using VContainer.Unity;
+using Yulinti.ImperiumDelegatum.Contractus;
+
+namespace Yulinti.ImperiumDelegatum.Exercitus {
+    public static class FaberDucisIndexusPrincipalis {
+        public static void Initio(IContainerBuilder builder) {
+            // DuxExercitus
+            builder.Register<IDuxExercitus, DuxExercitus>(Lifetime.Singleton);
+        }
+    }
+}

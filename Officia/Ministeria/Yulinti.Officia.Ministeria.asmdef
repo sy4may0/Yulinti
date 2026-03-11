@@ -1,0 +1,27 @@
+{
+    "name": "Yulinti.Officia.Ministeria",
+    "rootNamespace": "Yulinti.Officia.Ministeria",
+    "references": [
+        "Kybernetik.Animancer",
+        "VContainer",
+        "Unity.InputSystem",
+        "Yulinti.Nucleus",
+        "Yulinti.Nucleus.Instrumentarium",
+        "Yulinti.Officia.Instrumentarium",
+        "Yulinti.Nucleus.Contractus",
+        "Yulinti.Officia.Contractus",
+        "Yulinti.ImperiumDelegatum.Contractus",
+        "Unity.Addressables",
+        "Unity.ResourceManager",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

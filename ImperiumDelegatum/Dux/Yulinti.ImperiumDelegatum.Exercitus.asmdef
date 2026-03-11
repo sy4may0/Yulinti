@@ -1,0 +1,20 @@
+{
+  "name": "Yulinti.ImperiumDelegatum.Exercitus",
+  "rootNamespace": "Yulinti.ImperiumDelegatum.Exercitus",
+  "references": [
+    "VContainer",
+    "Yulinti.ImperiumDelegatum.Contractus",
+    "Yulinti.Nucleus",
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.Nucleus.Contractus"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Yulinti.Officia.Velum",
+  "rootNamespace": "Yulinti.Officia.Velum",
+  "references": [
+    "Yulinti.Officia.Contractus",
+    "Yulinti.Nucleus.Contractus",
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.ImperiumDelegatum.Contractus",
+    "Yulinti.Auctoritas.Contractus",
+    "VContainer"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

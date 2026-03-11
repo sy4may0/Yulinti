@@ -1,0 +1,16 @@
+{
+  "name": "Yulinti.ImperiumDelegatum.Contractus",
+  "rootNamespace": "Yulinti.ImperiumDelegatum.Contractus",
+  "references": [
+    "Yulinti.Nucleus.Contractus"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

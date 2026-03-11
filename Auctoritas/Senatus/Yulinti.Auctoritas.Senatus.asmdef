@@ -1,0 +1,20 @@
+{
+  "name": "Yulinti.Auctoritas.Senatus",
+  "rootNamespace": "Yulinti.Auctoritas.Senatus",
+  "references": [
+    "VContainer",
+    "Yulinti.ImperiumDelegatum.Contractus",
+    "Yulinti.Auctoritas.Contractus",
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.Nucleus.Contractus"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Yulinti.Officia.Turris",
+  "rootNamespace": "Yulinti.Officia.Turris",
+  "references": [
+    "Yulinti.Officia.Contractus",
+    "Yulinti.Officia.Instrumentarium",
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.Nucleus.Contractus",
+    "Yulinti.ImperiumDelegatum.Contractus",
+    "VContainer",
+    "Unity.InputSystem",
+    "Unity.Newtonsoft.Json",
+    "Yulinti.Thesaurus",
+    "UniTask"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

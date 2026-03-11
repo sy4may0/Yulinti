@@ -1,0 +1,31 @@
+{
+  "name": "Yulinti.Imperium.Augustus",
+  "rootNamespace": "Yulinti.Imperium.Augustus",
+  "references": [
+    "Kybernetik.Animancer",
+    "VContainer",
+    "UniTask",
+    "Unity.InputSystem",
+    "Yulinti.Nucleus",
+    "Yulinti.Nucleus.Contractus",
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.ImperiumDelegatum.Contractus",
+    "Yulinti.ImperiumDelegatum.Exercitus",
+    "Yulinti.Officia.Contractus",
+    "Yulinti.Officia.Ministeria",
+    "Yulinti.Officia.Turris",
+    "Yulinti.Officia.Velum",
+    "Yulinti.Imperium.Praefectus",
+    "Yulinti.Imperium.Anchora",
+    "Yulinti.Imperium.Configuratio"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
