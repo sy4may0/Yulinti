@@ -1,0 +1,22 @@
+{
+  "name": "Yulinti.ImperiumMaius.Praefectus",
+  "rootNamespace": "Yulinti.ImperiumMaius.Praefectus",
+  "references": [
+    "Kybernetik.Animancer",
+    "VContainer",
+    "Yulinti.Nucleus.Contractus",
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.ImperiumDelegatum.Contractus",
+    "Yulinti.Auctoritas.Contractus",
+    "Yulinti.Officia.Contractus"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -15,6 +15,8 @@ namespace Yulinti.Officia.Velum {
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
+        private UIDocument _uiSalsamenti;
+
         private VisualElement _containerSalsamenti;
 
         // ヘッダーラベル
@@ -65,7 +67,8 @@ namespace Yulinti.Officia.Velum {
         }
 
         public void Incipere() {
-            _containerSalsamenti = _anchoraVelumSalsamenti.UIDocument.rootVisualElement.Q<VisualElement>("salsamentum-root");
+            _uiSalsamenti = _anchoraVelumSalsamenti.UIDocument;
+            _containerSalsamenti = _uiSalsamenti.rootVisualElement.Q<VisualElement>("salsamentum-root");
             _labelSalsamenti = _containerSalsamenti.Q<Label>("salsamentum-header-label");
             _labelManualis = _containerSalsamenti.Q<Label>("salsamentum-list-manualis-label");
             _labelAutomaticus = _containerSalsamenti.Q<Label>("salsamentum-list-automaticus-label");
@@ -354,6 +357,9 @@ namespace Yulinti.Officia.Velum {
         }
 
         public void Liberare() {
+            if (_uiSalsamenti == null || _uiSalsamenti.rootVisualElement == null) {
+                return;
+            }
             DeactivareCB();
             TollereSalsamenti();
         }

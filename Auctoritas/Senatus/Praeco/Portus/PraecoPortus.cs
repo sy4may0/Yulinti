@@ -76,7 +76,7 @@ namespace Yulinti.Auctoritas.Senatus {
             Notarius.Memorare("未実装: PostulareProfectio");
             // 仮。本来はマップ選択画面で選択してから、シーン移動。
             _curatorVela.TollereVelaOmnium();
-            _turrisMundus.AdMudum(IDMundi.MundusTestScene);
+            _turrisMundus.AdMundum(IDMundi.MundusTestScene);
  
             return Task.CompletedTask;
         }
@@ -134,7 +134,7 @@ namespace Yulinti.Auctoritas.Senatus {
                 }
 
                 _curatorVela.TollereVelaOmnium();
-                _turrisMundus.AdMudum(IDMundi.MundusMenu);
+                _turrisMundus.AdMundum(IDMundi.MundusMenu);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {

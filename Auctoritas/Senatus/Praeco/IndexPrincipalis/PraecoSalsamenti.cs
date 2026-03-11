@@ -114,7 +114,7 @@ namespace Yulinti.Auctoritas.Senatus {
                 await _turrisSalsamenti.Arcessere(id, cancellationToken);
                 _curatorVela.TollereVelaOmnium();
                 _turrisSoniVeli.Sonare(IDSonusVeli.SubmittereAdditum);
-                _turrisMundus.AdMudum(IDMundi.MundusPortus);
+                _turrisMundus.AdMundum(IDMundi.MundusPortus);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {

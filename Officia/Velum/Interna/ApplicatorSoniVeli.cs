@@ -115,10 +115,16 @@ namespace Yulinti.Officia.Velum {
         }
 
         public void PurgereRadix(UIDocument uiDocument) {
+            if (uiDocument == null || uiDocument.rootVisualElement == null) {
+                return;
+            }
             uiDocument.rootVisualElement.UnregisterCallback<NavigationMoveEvent>(_sonareSupervolareNav);
         }
 
         public void Purgere(VisualElement root) {
+            if (root == null) {
+                return;
+            }
             foreach (var ve in root.Query<VisualElement>().ToList()) {
                 if (ve is Button button) {
                     if (button.ClassListContains(C_Submittere))

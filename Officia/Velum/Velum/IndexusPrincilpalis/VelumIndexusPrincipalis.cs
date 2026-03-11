@@ -10,6 +10,8 @@ namespace Yulinti.Officia.Velum {
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
+        private UIDocument _uiIndexusPrincipalis;
+
         private VisualElement _containerIndexusPrincipalis;
 
         private VisualElement _panelIndexusPrincipalis;
@@ -49,8 +51,9 @@ namespace Yulinti.Officia.Velum {
 
         // 各UI要素を初期化する。
         public void Incipere() {
-            _containerIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("indexprincipalis-root");
-            _panelIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("indexprincipalis-panel");
+            _uiIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument;
+            _containerIndexusPrincipalis = _uiIndexusPrincipalis.rootVisualElement.Q<VisualElement>("indexprincipalis-root");
+            _panelIndexusPrincipalis = _uiIndexusPrincipalis.rootVisualElement.Q<VisualElement>("indexprincipalis-panel");
 
             _buttonLudusNovus = _panelIndexusPrincipalis.Q<Button>("buttonLudusNovus");
             _buttonPergeLudum = _panelIndexusPrincipalis.Q<Button>("buttonPergeLudum");
@@ -170,12 +173,15 @@ namespace Yulinti.Officia.Velum {
         }
 
         public void Liberare() {
+            if (_uiIndexusPrincipalis == null || _uiIndexusPrincipalis.rootVisualElement == null) {
+                return;
+            }
             DeactivareCB();
             TollereIndexusPrincipalis();
         }
 
         private void ActivareCB() {
-            _applicatorSoniVeli.ApplicareRadix(_anchoraVelumIndexusPrincipalis.UIDocument);
+            _applicatorSoniVeli.ApplicareRadix(_uiIndexusPrincipalis);
             _applicatorSoniVeli.Applicare(_panelIndexusPrincipalis);
             _buttonLudusNovus.clicked -= premereLudusNovus;
             _buttonLudusNovus.clicked += premereLudusNovus;
@@ -190,7 +196,7 @@ namespace Yulinti.Officia.Velum {
         }
 
         private void DeactivareCB() {
-            _applicatorSoniVeli.PurgereRadix(_anchoraVelumIndexusPrincipalis.UIDocument);
+            _applicatorSoniVeli.PurgereRadix(_uiIndexusPrincipalis);
             _applicatorSoniVeli.Purgere(_panelIndexusPrincipalis);
             _buttonLudusNovus.clicked -= premereLudusNovus;
             _buttonPergeLudum.clicked -= premerePergeLudum;

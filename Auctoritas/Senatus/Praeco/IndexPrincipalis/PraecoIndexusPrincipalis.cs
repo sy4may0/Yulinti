@@ -155,7 +155,7 @@ namespace Yulinti.Auctoritas.Senatus {
                 _ = await _turrisSalsamenti.Creare(_cancellationTokenSource.Token);
                 // UIを消す
                 _curatorVela.TollereVelaOmnium();
-                _turrisMundus.AdMudum(IDMundi.MundusPortus);
+                _turrisMundus.AdMundum(IDMundi.MundusPortus);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
@@ -177,7 +177,7 @@ namespace Yulinti.Auctoritas.Senatus {
                 _ = await _turrisSalsamenti.ArcessereNovissimus(_cancellationTokenSource.Token);
                 _turrisSoniVeli.Sonare(IDSonusVeli.SubmittereAdditum);
                 _curatorVela.TollereVelaOmnium();
-                _turrisMundus.AdMudum(IDMundi.MundusPortus);
+                _turrisMundus.AdMundum(IDMundi.MundusPortus);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {

@@ -6,15 +6,26 @@ using Yulinti.Officia.Contractus;
 namespace Yulinti.Officia.Turris {
     public static class FaberTurris {
         public static void Initio(IContainerBuilder builder) {
-            builder.Register<ITurrisMundus, TurrisMundus>(Lifetime.Singleton);
-            builder.Register<ITurrisIntroductionis, TurrisIntroductionis>(Lifetime.Singleton);
-            builder.Register<ITurrisInterpretationis, TurrisInterpretationis>(Lifetime.Singleton);
+            builder.Register<TurrisMundus>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            
+            builder.Register<TurrisIntroductionis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<TurrisInterpretationis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
             builder.Register<TurrisSalsamenti>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+
             builder.Register<TurrisPhantasmaPuellaePersonae>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+
             builder.Register<TurrisSoniVeli>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();

@@ -3,6 +3,5 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         IConfiguratioPuellaeStatuum Statuum { get; }
         IConfiguratioPuellaeActionisSecundarius ActionisSecundarius { get; }
         IConfiguratioPuellaeVeletudinis Veletudo { get; }
-        IConfiguratioPuellaePersonae Personae { get; }
     }
 }

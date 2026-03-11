@@ -10,6 +10,8 @@ namespace Yulinti.Officia.Velum {
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
+        private UIDocument _uiPortus;
+
         private VisualElement _containerPortus;
         private VisualElement _panelPortus;
 
@@ -39,6 +41,7 @@ namespace Yulinti.Officia.Velum {
             _turrisInterpretationis = turrisInterpretationis;
             _applicatorSoniVeli = applicatorSoniVeli;
 
+            _uiPortus = _anchoraVelumPortus.UIDocument;
             _onProfectio = null;
             _onConstructio = null;
             _onTaberna = null;
@@ -47,8 +50,10 @@ namespace Yulinti.Officia.Velum {
         }
 
         public void Incipere() {
-            _containerPortus = _anchoraVelumPortus.UIDocument.rootVisualElement.Q<VisualElement>("portus-root");
-            _panelPortus = _anchoraVelumPortus.UIDocument.rootVisualElement.Q<VisualElement>("portus-panel");
+            _uiPortus = _anchoraVelumPortus.UIDocument;
+
+            _containerPortus = _uiPortus.rootVisualElement.Q<VisualElement>("portus-root");
+            _panelPortus = _uiPortus.rootVisualElement.Q<VisualElement>("portus-panel");
 
             _buttonProfectio = _panelPortus.Q<Button>("portus-button-profectio");
             _buttonConstructio = _panelPortus.Q<Button>("portus-button-constructio");
@@ -168,12 +173,15 @@ namespace Yulinti.Officia.Velum {
         }
 
         public void Liberare() {
+            if (_uiPortus == null || _uiPortus.rootVisualElement == null) {
+                return;
+            }
             DeactivareCB();
             TollerePortus();
         }
 
         private void ActivareCB() {
-            _applicatorSoniVeli.ApplicareRadix(_anchoraVelumPortus.UIDocument);
+            _applicatorSoniVeli.ApplicareRadix(_uiPortus);
             _applicatorSoniVeli.Applicare(_panelPortus);
             _buttonProfectio.clicked -= premereProfectio;
             _buttonProfectio.clicked += premereProfectio;
@@ -188,7 +196,7 @@ namespace Yulinti.Officia.Velum {
         }
 
         private void DeactivareCB() {
-            _applicatorSoniVeli.PurgereRadix(_anchoraVelumPortus.UIDocument);
+            _applicatorSoniVeli.PurgereRadix(_uiPortus);
             _applicatorSoniVeli.Purgere(_panelPortus);
             _buttonProfectio.clicked -= premereProfectio;
             _buttonConstructio.clicked -= premereConstructio;

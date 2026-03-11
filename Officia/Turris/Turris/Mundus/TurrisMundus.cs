@@ -1,11 +1,16 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 using UnityEngine.SceneManagement;
 namespace Yulinti.Officia.Turris {
-    public sealed class TurrisMundus : ITurrisMundus {
+    public sealed class TurrisMundus : ITurrisMundus, ITurrisIncipabilis {
         public TurrisMundus() {
         }
 
-        public void AdMudum(IDMundi mundus) {
+        // メニューからの遷移はここで行う。
+        public void Incipere() {
+            AdMundum(IDMundi.MundusMenu);
+        }
+
+        public void AdMundum(IDMundi mundus) {
             SceneManager.LoadScene(mundus switch {
                 IDMundi.MundusTestScene => "SampleScene",
                 IDMundi.MundusMenu => "MenuScene",

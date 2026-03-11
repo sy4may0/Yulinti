@@ -117,6 +117,9 @@ namespace Yulinti.Officia.Velum {
         }
 
         public void Liberare() {
+            if (_uiConfirmationis == null || _uiConfirmationis.rootVisualElement == null) {
+                return;
+            }
             DeactivareCB();
             TollereConfirmationis();
         }

@@ -87,6 +87,9 @@ namespace Yulinti.Officia.Velum {
         }
 
         public void Liberare() {
+            if (_uiMonitionis == null || _uiMonitionis.rootVisualElement == null) {
+                return;
+            }
             DeactivareCB();
             TollereMonitionis();
         }
