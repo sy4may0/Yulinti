@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class LacusOrdinatioCivis {
@@ -9,12 +10,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Stack<OrdinatioCivisMortis>[] _lacusMortis;
         private readonly Stack<OrdinatioCivisVeletudinisCondicionis>[] _lacusVeletudinisCondicionis;
 
-        private readonly DuxQueue<OrdinatioCivisAnimationis>[] _emissioAnimationis;
-        private readonly DuxQueue<OrdinatioCivisMotus>[] _emissioMotus;
-        private readonly DuxQueue<OrdinatioCivisNavmesh>[] _emissioNavmesh;
-        private readonly DuxQueue<OrdinatioCivisVeletudinisValoris>[] _emissioVeletudinisValoris;
-        private readonly DuxQueue<OrdinatioCivisMortis>[] _emissioMortis;
-        private readonly DuxQueue<OrdinatioCivisVeletudinisCondicionis>[] _emissioVeletudinisCondicionis;
+        private readonly Ordo<OrdinatioCivisAnimationis>[] _emissioAnimationis;
+        private readonly Ordo<OrdinatioCivisMotus>[] _emissioMotus;
+        private readonly Ordo<OrdinatioCivisNavmesh>[] _emissioNavmesh;
+        private readonly Ordo<OrdinatioCivisVeletudinisValoris>[] _emissioVeletudinisValoris;
+        private readonly Ordo<OrdinatioCivisMortis>[] _emissioMortis;
+        private readonly Ordo<OrdinatioCivisVeletudinisCondicionis>[] _emissioVeletudinisCondicionis;
 
         public LacusOrdinatioCivis(int longitudoCivis) {
             _lacusAnimationis = new Stack<OrdinatioCivisAnimationis>[longitudoCivis];
@@ -24,12 +25,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _lacusMortis = new Stack<OrdinatioCivisMortis>[longitudoCivis];
             _lacusVeletudinisCondicionis = new Stack<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
 
-            _emissioAnimationis = new DuxQueue<OrdinatioCivisAnimationis>[longitudoCivis];
-            _emissioMotus = new DuxQueue<OrdinatioCivisMotus>[longitudoCivis];
-            _emissioNavmesh = new DuxQueue<OrdinatioCivisNavmesh>[longitudoCivis];
-            _emissioVeletudinisValoris = new DuxQueue<OrdinatioCivisVeletudinisValoris>[longitudoCivis];
-            _emissioMortis = new DuxQueue<OrdinatioCivisMortis>[longitudoCivis];
-            _emissioVeletudinisCondicionis = new DuxQueue<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
+            _emissioAnimationis = new Ordo<OrdinatioCivisAnimationis>[longitudoCivis];
+            _emissioMotus = new Ordo<OrdinatioCivisMotus>[longitudoCivis];
+            _emissioNavmesh = new Ordo<OrdinatioCivisNavmesh>[longitudoCivis];
+            _emissioVeletudinisValoris = new Ordo<OrdinatioCivisVeletudinisValoris>[longitudoCivis];
+            _emissioMortis = new Ordo<OrdinatioCivisMortis>[longitudoCivis];
+            _emissioVeletudinisCondicionis = new Ordo<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
 
             for (int i = 0; i < longitudoCivis; i++) {
                 _lacusAnimationis[i] = new Stack<OrdinatioCivisAnimationis>(ConstansCivis.LongitudoOrdinatioAnimationis);
@@ -39,12 +40,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _lacusMortis[i] = new Stack<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
                 _lacusVeletudinisCondicionis[i] = new Stack<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
 
-                _emissioAnimationis[i] = new DuxQueue<OrdinatioCivisAnimationis>(ConstansCivis.LongitudoOrdinatioAnimationis);
-                _emissioMotus[i] = new DuxQueue<OrdinatioCivisMotus>(ConstansCivis.LongitudoOrdinatioMotus);
-                _emissioNavmesh[i] = new DuxQueue<OrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
-                _emissioVeletudinisValoris[i] = new DuxQueue<OrdinatioCivisVeletudinisValoris>(ConstansCivis.LongitudoOrdinatioVeletudinisValoris);
-                _emissioMortis[i] = new DuxQueue<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
-                _emissioVeletudinisCondicionis[i] = new DuxQueue<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
+                _emissioAnimationis[i] = new Ordo<OrdinatioCivisAnimationis>(ConstansCivis.LongitudoOrdinatioAnimationis);
+                _emissioMotus[i] = new Ordo<OrdinatioCivisMotus>(ConstansCivis.LongitudoOrdinatioMotus);
+                _emissioNavmesh[i] = new Ordo<OrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
+                _emissioVeletudinisValoris[i] = new Ordo<OrdinatioCivisVeletudinisValoris>(ConstansCivis.LongitudoOrdinatioVeletudinisValoris);
+                _emissioMortis[i] = new Ordo<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
+                _emissioVeletudinisCondicionis[i] = new Ordo<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
 
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioAnimationis; j++) {
                     _lacusAnimationis[i].Push(new OrdinatioCivisAnimationis(i));

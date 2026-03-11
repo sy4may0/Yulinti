@@ -41,5 +41,10 @@ namespace Yulinti.Imperium.Augustus {
             // [TODO] PraefectusTestSceneは共通。Testを外してBasisにしていい。
             builder.RegisterEntryPoint<PraefectusPraetorio>();
         }
+
+        protected override void OnDestroy() {
+            Debug.Log("RexPortus OnDestroy");
+            base.OnDestroy();
+        }
     }
 }

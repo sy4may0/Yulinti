@@ -8,7 +8,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumCivisLociLegibile _ostiumCivisLociLegibile;
         private readonly IOstiumCivisAnimationesMutabile _ostiumCivisAnimationesMutabile;
 
-        private DuxQueue<IOrdinatioCivisAnimationis>[] _queueAnimationis;
+        private Ordo<IOrdinatioCivisAnimationis>[] _queueAnimationis;
 
         public ExecutorCivisAnimationis(
             IOstiumCivisLegibile ostiumCivisLegibile,
@@ -18,11 +18,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _ostiumCivisLociLegibile = ostiumCivisLociLegibile;
             _ostiumCivisAnimationesMutabile = ostiumCivisAnimationesMutabile;
 
-            _queueAnimationis = new DuxQueue<IOrdinatioCivisAnimationis>[
+            _queueAnimationis = new Ordo<IOrdinatioCivisAnimationis>[
                 ostiumCivisLegibile.Longitudo
             ];
             for (int i = 0; i < ostiumCivisLegibile.Longitudo; i++) {
-                _queueAnimationis[i] = new DuxQueue<IOrdinatioCivisAnimationis>(
+                _queueAnimationis[i] = new Ordo<IOrdinatioCivisAnimationis>(
                     ConstansCivis.LongitudoOrdinatioAnimationis
                 );
             }

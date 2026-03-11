@@ -9,7 +9,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumCivisLegibile _ostiumCivisLegibile;
         private readonly IOstiumCivisMutabile _ostiumCivisMutabile;
 
-        private DuxQueue<IOrdinatioCivisMortis>[] _queueMortis;
+        private Ordo<IOrdinatioCivisMortis>[] _queueMortis;
 
         public ExecutorCivisMortis(
             IOstiumCivisLegibile ostiumCivisLegibile,
@@ -17,9 +17,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             _ostiumCivisLegibile = ostiumCivisLegibile;
             _ostiumCivisMutabile = ostiumCivisMutabile;
-            _queueMortis = new DuxQueue<IOrdinatioCivisMortis>[ostiumCivisLegibile.Longitudo];
+            _queueMortis = new Ordo<IOrdinatioCivisMortis>[ostiumCivisLegibile.Longitudo];
             for (int i = 0; i < ostiumCivisLegibile.Longitudo; i++) {
-                _queueMortis[i] = new DuxQueue<IOrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
+                _queueMortis[i] = new Ordo<IOrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
             }
         }
 

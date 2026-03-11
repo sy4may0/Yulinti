@@ -18,9 +18,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumTemporisLegibile _ostiumTemporisLegibile;
         private readonly ResFluidaPuellaeMotus _resFluidaMotus;
 
-        private DuxQueue<IOrdinatioPuellaeMotus> _queueMotus;
-        private DuxQueue<IOrdinatioPuellaeNavmesh> _queueNavmesh;
-        private DuxQueue<IOrdinatioPuellaeNavmeshInitii> _queueNavmeshInitii;
+        private Ordo<IOrdinatioPuellaeMotus> _queueMotus;
+        private Ordo<IOrdinatioPuellaeNavmesh> _queueNavmesh;
+        private Ordo<IOrdinatioPuellaeNavmeshInitii> _queueNavmeshInitii;
         private SpeciesPuellaeLoci _speciesActualis;
 
         public ExecutorPuellaeLoci(
@@ -34,9 +34,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _ostiumTemporisLegibile = ostiumTemporisLegibile;
             _resFluidaMotus = resFluidaMotus;
 
-            _queueMotus = new DuxQueue<IOrdinatioPuellaeMotus>(ConstansPuellae.LongitudoOrdinatioMotus);
-            _queueNavmesh = new DuxQueue<IOrdinatioPuellaeNavmesh>(ConstansPuellae.LongitudoOrdinatioNavmesh);
-            _queueNavmeshInitii = new DuxQueue<IOrdinatioPuellaeNavmeshInitii>(ConstansPuellae.LongitudoOrdinatioNavmesh);
+            _queueMotus = new Ordo<IOrdinatioPuellaeMotus>(ConstansPuellae.LongitudoOrdinatioMotus);
+            _queueNavmesh = new Ordo<IOrdinatioPuellaeNavmesh>(ConstansPuellae.LongitudoOrdinatioNavmesh);
+            _queueNavmeshInitii = new Ordo<IOrdinatioPuellaeNavmeshInitii>(ConstansPuellae.LongitudoOrdinatioNavmesh);
             _speciesActualis = SpeciesPuellaeLoci.Nihil;
         }
 

@@ -7,13 +7,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ExecutorPuellaeCrinis : IExecutorPuellae {
         private readonly IOstiumPuellaeCrinisAdiunctionisMutabile _ostiumPuellaeCrinisAdiunctionisMutabile;
 
-        private DuxQueue<IOrdinatioPuellaeCrinis> _queueCrinis;
+        private Ordo<IOrdinatioPuellaeCrinis> _queueCrinis;
 
         public ExecutorPuellaeCrinis(
             IOstiumPuellaeCrinisAdiunctionisMutabile ostiumPuellaeCrinisAdiunctionisMutabile
         ) {
             _ostiumPuellaeCrinisAdiunctionisMutabile = ostiumPuellaeCrinisAdiunctionisMutabile;
-            _queueCrinis = new DuxQueue<IOrdinatioPuellaeCrinis>(
+            _queueCrinis = new Ordo<IOrdinatioPuellaeCrinis>(
                 ConstansPuellae.LongitudoOrdinatioCrinis
             );
         }

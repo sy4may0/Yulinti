@@ -149,6 +149,7 @@ namespace Yulinti.Auctoritas.Senatus {
                     AdPremereItaInvolutus,
                     AdPremereNonInvolutus
                 );
+                _turrisSoniVeli.Sonare(IDSonusVeli.Demittere);
 
                 // UIが閉じる（= どちらか押される）まで待つ
                 await tcs.Task;
