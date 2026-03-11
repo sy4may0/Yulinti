@@ -1,10 +1,10 @@
 using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Officia.Contractus {
-    public interface IOrator : IIncipabilis, IPulsabilis, IPulsabilisFixus, IPulsabilisTardus, ILiberabilis {
+    public interface IOrator : IIncipabilis, ILiberabilis {
     }
 
     // DontDestroyOnLoadのOrator
-    public interface IOratorRadicis : IIncipabilis, IPulsabilis, IPulsabilisFixus, IPulsabilisTardus, ILiberabilis {
+    public interface IOratorRadicis : IIncipabilis, ILiberabilis {
     }
 }

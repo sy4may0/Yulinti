@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal sealed class DuxExercitus : IDuxExercitus {
+    internal sealed class Legatus : ILegatus {
         private readonly ICenturioIncipabilis[] _centurioIncipabilis;
         private readonly ICenturioPulsabilis[] _centurioPulsabilis;
         private readonly ICenturioPulsabilisPrimum[] _centurioPulsabilisPrimum;
@@ -14,7 +14,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly ICenturioPulsabilisTardusPrimum[] _centurioPulsabilisTardusPrimum;
         private readonly ICenturioLiberabilis[] _centurioLiberabilis;
 
-        public DuxExercitus(
+        public Legatus(
             IReadOnlyList<ICenturioIncipabilis> centurioIncipabilis,
             IReadOnlyList<ICenturioPulsabilis> centurioPulsabilis,
             IReadOnlyList<ICenturioPulsabilisPrimum> centurioPulsabilisPrimum,

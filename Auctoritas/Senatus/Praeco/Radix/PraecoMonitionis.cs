@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 using Yulinti.Nucleus.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 
-namespace Yulinti.ImperiumDelegatum.Exercitus {
+namespace Yulinti.Auctoritas.Senatus {
     internal class OnusMonitionis {
         public string Titulus { get; }
         public string Textus { get; }
@@ -70,7 +70,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Incipere() {
-            _velumMonitionis.Initare();
             IncipereOperariusMonitionis(); // 常駐ワーカー起動
         }
 

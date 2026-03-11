@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace Yulinti.ImperiumDelegatum.Exercitus {
+namespace Yulinti.Auctoritas.Senatus {
     internal sealed class PraecoSalsamenti : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumSalsamenti _velumSalsamenti;
@@ -55,7 +55,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Incipere() {
-            _velumSalsamenti.Initare();
             Tollere();
         }
 

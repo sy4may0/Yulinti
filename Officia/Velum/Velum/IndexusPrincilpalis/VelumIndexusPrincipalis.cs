@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using System;
 
 namespace Yulinti.Officia.Velum {
-    internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumLiberabilis, IVelumTerminabilis {
+    internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumIncipabilis, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumIndexusPrincipalis _anchoraVelumIndexusPrincipalis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
@@ -48,7 +48,7 @@ namespace Yulinti.Officia.Velum {
         }
 
         // 各UI要素を初期化する。
-        public void Initare() {
+        public void Incipere() {
             _containerIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("indexprincipalis-root");
             _panelIndexusPrincipalis = _anchoraVelumIndexusPrincipalis.UIDocument.rootVisualElement.Q<VisualElement>("indexprincipalis-panel");
 

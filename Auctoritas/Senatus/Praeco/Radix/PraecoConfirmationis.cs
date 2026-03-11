@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 using Yulinti.Nucleus.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 
-namespace Yulinti.ImperiumDelegatum.Exercitus {
+namespace Yulinti.Auctoritas.Senatus {
     internal class OnusConfirmationis {
         public string Titulus { get; }
         public string Textus { get; }
@@ -80,7 +80,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Incipere() {
-            _velumConfirmationis.Initare();
             IncipereOperariusConfirmationis(); // 常駐ワーカー起動
         }
 

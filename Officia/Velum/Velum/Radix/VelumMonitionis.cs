@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using System;
 
 namespace Yulinti.Officia.Velum {
-    internal sealed class VelumMonitionis : IVelumMonitionis, IVelum, IVelumLiberabilisRadicis {
+    internal sealed class VelumMonitionis : IVelumMonitionis, IVelum, IVelumIncipabilisRadicis, IVelumLiberabilisRadicis {
         private readonly IAnchoraVelumRadicis _anchoraVelumRadicis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
@@ -25,7 +25,7 @@ namespace Yulinti.Officia.Velum {
             _applicatorSoniVeli = applicatorSoniVeli;
         }
 
-        public void Initare() {
+        public void Incipere() {
             _uiMonitionis = _anchoraVelumRadicis.UIMonitionis;
             _labelTitulus = _uiMonitionis.rootVisualElement.Q<Label>("monitio-titulus");
             _labelTextus = _uiMonitionis.rootVisualElement.Q<Label>("monitio-textus");

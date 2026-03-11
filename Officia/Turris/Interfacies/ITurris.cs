@@ -4,7 +4,12 @@ namespace Yulinti.Officia.Turris {
     public interface ITurrisIncipabilis : IIncipabilis {
     }
 
-    // TurrisはTardusのみ。
+    public interface ITurrisPulsabilis : IPulsabilis {
+    }
+
+    public interface ITurrisPulsabilisFixus : IPulsabilisFixus {
+    }
+
     public interface ITurrisPulsabilisTardus : IPulsabilisTardus {
     }
 

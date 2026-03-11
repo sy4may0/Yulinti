@@ -10,7 +10,7 @@ using System.Text;
 using UnityEditor;
 
 namespace Yulinti.Officia.Velum {
-    internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumLiberabilis, IVelumTerminabilis {
+    internal sealed class VelumSalsamenti : IVelumSalsamenti, IVelum, IVelumIncipabilis, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumSalsamenti _anchoraVelumSalsamenti;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
@@ -64,7 +64,7 @@ namespace Yulinti.Officia.Velum {
             _focusGuid = Guid.Empty;
         }
 
-        public void Initare() {
+        public void Incipere() {
             _containerSalsamenti = _anchoraVelumSalsamenti.UIDocument.rootVisualElement.Q<VisualElement>("salsamentum-root");
             _labelSalsamenti = _containerSalsamenti.Q<Label>("salsamentum-header-label");
             _labelManualis = _containerSalsamenti.Q<Label>("salsamentum-list-manualis-label");

@@ -2,8 +2,6 @@ using System;
 
 namespace Yulinti.Auctoritas.Contractus {
     public interface IVelumPortus {
-        void Initare();
-
         // タイトルUIを表示
         void DemitterePortus();
         // タイトルUIを非表示
