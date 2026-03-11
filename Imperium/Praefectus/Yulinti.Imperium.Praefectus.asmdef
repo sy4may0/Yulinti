@@ -6,6 +6,7 @@
     "VContainer",
     "Yulinti.Nucleus.Contractus",
     "Yulinti.ImperiumDelegatum.Contractus",
+    "Yulinti.Auctoritas.Contractus",
     "Yulinti.Officia.Contractus"
   ],
   "includePlatforms": [],

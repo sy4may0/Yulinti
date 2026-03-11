@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Yulinti.ImperiumDelegatum.Exercitus {
+namespace Yulinti.Auctoritas.Senatus {
     internal sealed class PraecoIndexusPrincipalis : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumIndexusPrincipalis _velumIndexusPrincipalis;
@@ -67,7 +67,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Incipere() {
-            _velumIndexusPrincipalis.Initare();
             // Fire-and-forget。Task.Runは使わない＝呼び出し元（Unityメインスレッド）のコンテキストで継続が動くようにする。
             _ = Demittere();
         }

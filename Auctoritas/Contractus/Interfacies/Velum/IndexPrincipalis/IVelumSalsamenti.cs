@@ -4,8 +4,6 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.Auctoritas.Contractus {
     public interface IVelumSalsamenti {
-        void Initare();
-
         // UIを表示
         void DemittereSalsamenti();
         // UIを非表示

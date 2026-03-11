@@ -5,8 +5,8 @@ using Yulinti.ImperiumDelegatum.Contractus;
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     public static class FaberDucisIndexusPrincipalis {
         public static void Initio(IContainerBuilder builder) {
-            // DuxExercitus
-            builder.Register<IDuxExercitus, DuxExercitus>(Lifetime.Singleton);
+            // Legatus
+            builder.Register<ILegatus, Legatus>(Lifetime.Singleton);
         }
     }
 }

@@ -73,8 +73,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            // DuxExercitus
-            builder.Register<IDuxExercitus, DuxExercitus>(Lifetime.Singleton);
+            // Legatus
+            builder.Register<ILegatus, Legatus>(Lifetime.Singleton);
         }
     }
 }

@@ -11,6 +11,8 @@
     "Yulinti.Nucleus.Instrumentarium",
     "Yulinti.ImperiumDelegatum.Contractus",
     "Yulinti.ImperiumDelegatum.Exercitus",
+    "Yulinti.Auctoritas.Contractus",
+    "Yulinti.Auctoritas.Senatus",
     "Yulinti.Officia.Contractus",
     "Yulinti.Officia.Ministeria",
     "Yulinti.Officia.Turris",

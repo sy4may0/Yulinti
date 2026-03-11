@@ -2,7 +2,6 @@ using System;
 
 namespace Yulinti.Auctoritas.Contractus {
     public interface IVelumConfirmationis {
-        void Initare();
         void DemittereConfirmationis(
             string titulus,
             string textus,

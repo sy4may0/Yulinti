@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using System;
 
 namespace Yulinti.Officia.Velum {
-    internal sealed class VelumPortus : IVelum, IVelumPortus, IVelumLiberabilis, IVelumTerminabilis {
+    internal sealed class VelumPortus : IVelum, IVelumPortus, IVelumIncipabilis, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumPortus _anchoraVelumPortus;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
@@ -46,7 +46,7 @@ namespace Yulinti.Officia.Velum {
             _onExi = null;
         }
 
-        public void Initare() {
+        public void Incipere() {
             _containerPortus = _anchoraVelumPortus.UIDocument.rootVisualElement.Q<VisualElement>("portus-root");
             _panelPortus = _anchoraVelumPortus.UIDocument.rootVisualElement.Q<VisualElement>("portus-panel");
 

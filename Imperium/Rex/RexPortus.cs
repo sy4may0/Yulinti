@@ -3,12 +3,13 @@ using VContainer;
 using VContainer.Unity;
 using Yulinti.Imperium.Anchora;
 using Yulinti.Imperium.Configuratio;
-using Yulinti.Officia.Contractus;
 using Yulinti.ImperiumDelegatum.Exercitus;
-using Yulinti.Officia.Ministeria;
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Imperium.Praefectus;
+using Yulinti.Officia.Contractus;
+using Yulinti.Officia.Ministeria;
 using Yulinti.Officia.Velum;
+using Yulinti.Auctoritas.Senatus;
+using Yulinti.Imperium.Praefectus;
 
 namespace Yulinti.Imperium.Augustus {
     public sealed class RexPortus : LifetimeScope {
@@ -32,14 +33,13 @@ namespace Yulinti.Imperium.Augustus {
 
             builder.RegisterInstance<IConfiguratioExercitusPuellae>(_configuratio.ExercitusPuellae);
 
+            FaberVelumPortus.Initio(builder);
+            FaberSenatusPortus.Initio(builder);
             FaberMinisteriaPortus.Initio(builder);
             FaberDucisPortus.Initio(builder);
-            FaberVelumPortus.Initio(builder);
-
 
             // [TODO] PraefectusTestSceneは共通。Testを外してBasisにしていい。
-            builder.RegisterEntryPoint<PraefectusPortus>();
-
+            builder.RegisterEntryPoint<PraefectusPraetorio>();
         }
     }
 }

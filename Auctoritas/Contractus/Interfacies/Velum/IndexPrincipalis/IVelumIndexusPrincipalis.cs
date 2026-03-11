@@ -2,8 +2,6 @@ using System;
 
 namespace Yulinti.Auctoritas.Contractus {
     public interface IVelumIndexusPrincipalis {
-        void Initare();
-
         // タイトルUIを表示
         void DemittereIndexusPrincipalis();
         // タイトルUIを非表示

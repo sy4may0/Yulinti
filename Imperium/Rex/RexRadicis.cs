@@ -8,6 +8,7 @@ using Yulinti.Officia.Turris;
 using Yulinti.Officia.Contractus;
 using Yulinti.Officia.Velum;
 using Yulinti.ImperiumDelegatum.Exercitus;
+using Yulinti.Auctoritas.Senatus;
 using Yulinti.Nucleus.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Imperium.Praefectus;
@@ -41,10 +42,12 @@ namespace Yulinti.Imperium.Augustus {
             builder.RegisterInstance<IConfiguratioTurrisPhantasma>(_configuratioTurris.Phantasma);
             builder.RegisterInstance<IConfiguratioSonorumVeli>(_configuratioTurris.SonorumVeli);
 
-            FaberTurris.Initio(builder);
+            // Faber
             FaberVelumRadicis.Initio(builder);
+            FaberSenatusRadicis.Initio(builder);
+            FaberTurris.Initio(builder);
 
-            builder.RegisterEntryPoint<PraefectusRadicis>();
+            builder.RegisterEntryPoint<PraefectusPraetorioRadicis>();
         }
     }
 }

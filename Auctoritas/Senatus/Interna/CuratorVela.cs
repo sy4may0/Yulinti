@@ -6,7 +6,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Auctoritas.Contractus;
 using System.Collections.Generic;
 
-namespace Yulinti.ImperiumDelegatum.Exercitus {
+namespace Yulinti.Auctoritas.Senatus {
     internal sealed class CuratorVela { 
         private readonly IReadOnlyList<IVelumTerminabilis> _velumTerminabilis;
 

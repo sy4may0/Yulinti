@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using System;
 
 namespace Yulinti.Officia.Velum {
-    internal sealed class VelumConfirmationis : IVelumConfirmationis, IVelum, IVelumLiberabilisRadicis {
+    internal sealed class VelumConfirmationis : IVelumConfirmationis, IVelum, IVelumIncipabilisRadicis, IVelumLiberabilisRadicis {
         private readonly IAnchoraVelumRadicis _anchoraVelumRadicis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
 
@@ -27,7 +27,7 @@ namespace Yulinti.Officia.Velum {
             _applicatorSoniVeli = applicatorSoniVeli;
         }
 
-        public void Initare() {
+        public void Incipere() {
             _uiConfirmationis = _anchoraVelumRadicis.UIConfirmationis;
             _labelTitulus = _uiConfirmationis.rootVisualElement.Q<Label>("confirmatio-titulus");
             _labelTextus = _uiConfirmationis.rootVisualElement.Q<Label>("confirmatio-textus");

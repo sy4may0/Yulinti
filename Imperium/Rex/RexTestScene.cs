@@ -6,6 +6,8 @@ using Yulinti.Imperium.Praefectus;
 using Yulinti.Imperium.Configuratio;
 using Yulinti.Officia.Contractus;
 using Yulinti.Officia.Ministeria;
+using Yulinti.Officia.Velum;
+using Yulinti.Auctoritas.Senatus;
 using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.ImperiumDelegatum.Exercitus;
 
@@ -38,10 +40,12 @@ namespace Yulinti.Imperium.Augustus {
             builder.RegisterInstance<IConfiguratioExercitusPuellae>(_configuratio.ExercitusPuellae);
             builder.RegisterInstance<IConfiguratioExercitusCivis>(_configuratio.ExercitusCivis);
 
+            FaberVelumTestScene.Initio(builder);
+            FaberSenatusTestScene.Initio(builder);
             FaberMinisteriaTestScene.Initio(builder);
             FaberDucisTestScene.Initio(builder);
 
-            builder.RegisterEntryPoint<PraefectusTestScene>();
+            builder.RegisterEntryPoint<PraefectusPraetorio>();
         }
 
         private void Start() {
