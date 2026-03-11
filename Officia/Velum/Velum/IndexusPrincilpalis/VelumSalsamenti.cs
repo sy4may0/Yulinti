@@ -359,8 +359,8 @@ namespace Yulinti.Officia.Velum {
         }
 
         private void ActivareCB() {
-            _applicatorSoniVeli.ApplicareRadix(_anchoraVelumSalsamenti.UIDocument);
             _applicatorSoniVeli.Applicare(_containerSalsamenti);
+            _applicatorSoniVeli.ApplicareRadix(_anchoraVelumSalsamenti.UIDocument);
             _buttonOneraLudum.clicked -= premereOneraLudum;
             _buttonOneraLudum.clicked += premereOneraLudum;
             _buttonDeletoLudum.clicked -= premereDeletoLudum;

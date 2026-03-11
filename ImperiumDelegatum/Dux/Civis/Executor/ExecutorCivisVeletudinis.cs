@@ -102,7 +102,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumCivisLegibile _ostiumCivisLegibile;
         private readonly ResFluidaCivisVeletudinis _resFluidaVeletudinis;
 
-        private readonly DuxQueue<IOrdinatioCivisVeletudinisCondicionis>[] _queueVeletudinisCondicionis;
+        private readonly Ordo<IOrdinatioCivisVeletudinisCondicionis>[] _queueVeletudinisCondicionis;
         private readonly PhantasmaCivisVeletudinis _phantasma;
 
         public ExecutorCivisVeletudinis(
@@ -114,9 +114,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resFluidaVeletudinis = resFluidaVeletudinis;
             _ostiumCivisLegibile = ostiumCivisLegibile;
             _phantasma = new PhantasmaCivisVeletudinis(resFluidaVeletudinis.Longitudo);
-            _queueVeletudinisCondicionis = new DuxQueue<IOrdinatioCivisVeletudinisCondicionis>[_ostiumCivisLegibile.Longitudo];
+            _queueVeletudinisCondicionis = new Ordo<IOrdinatioCivisVeletudinisCondicionis>[_ostiumCivisLegibile.Longitudo];
             for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
-                _queueVeletudinisCondicionis[i] = new DuxQueue<IOrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
+                _queueVeletudinisCondicionis[i] = new Ordo<IOrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
             }
         }
 

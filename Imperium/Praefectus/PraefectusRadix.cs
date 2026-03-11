@@ -1,7 +1,8 @@
 using VContainer.Unity;
 using Yulinti.Officia.Contractus;
 using Yulinti.Nucleus.Contractus;
-using Yulinti.ImperiumDelegatum.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Exercitus.Contractus;
 using System;
 
 namespace Yulinti.Imperium.Praefectus {
@@ -42,8 +43,16 @@ namespace Yulinti.Imperium.Praefectus {
         }
 
         public void Dispose() {
-            _ducisExercitus.Liberare();
-            _monsAltus.Liberare();
+            try {
+                _ducisExercitus.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
+            try {
+                _monsAltus.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
         }
     }
 }

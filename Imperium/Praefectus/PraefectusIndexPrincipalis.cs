@@ -3,7 +3,8 @@ using Yulinti.Officia.Contractus;
 using System;
 using UnityEngine;
 using Yulinti.Nucleus.Contractus;
-using Yulinti.ImperiumDelegatum.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Exercitus.Contractus;
 
 namespace Yulinti.Imperium.Praefectus {
     public sealed class PraefectusIndexPrincipalis : IStartable, ITickable, IFixedTickable, ILateTickable, IDisposable {
@@ -24,6 +25,7 @@ namespace Yulinti.Imperium.Praefectus {
         }
 
         public void Tick() {
+            UnityEngine.Debug.Log("IndexPrincipalis Tick");
             _orator.Pulsus();
             _duxExercitus.PulsusPrimum();
             _duxExercitus.Pulsus();
@@ -42,7 +44,16 @@ namespace Yulinti.Imperium.Praefectus {
         }
 
         public void Dispose() {
-            _duxExercitus.Liberare();
+            try {
+                _duxExercitus.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
+            try {
+                _orator.Liberare();
+            } catch (Exception e) {
+                Carnifex.Error(e);
+            }
         }
     }
 }

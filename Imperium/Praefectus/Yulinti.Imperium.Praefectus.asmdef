@@ -5,8 +5,9 @@
     "Kybernetik.Animancer",
     "VContainer",
     "Yulinti.Nucleus.Contractus",
-    "Yulinti.ImperiumDelegatum.Contractus",
-    "Yulinti.Officia.Contractus"
+    "Yulinti.Nucleus.Instrumentarium",
+    "Yulinti.Exercitus.Contractus",
+    "Yulinti.Unity.Contractus"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
