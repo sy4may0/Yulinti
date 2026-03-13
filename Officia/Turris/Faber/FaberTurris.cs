@@ -6,6 +6,13 @@ using Yulinti.Officia.Contractus;
 namespace Yulinti.Officia.Turris {
     public static class FaberTurris {
         public static void Initio(IContainerBuilder builder) {
+            builder.Register<SignumCancellationisRadcis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<TurrisSignumCancellationis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
             builder.Register<TurrisMundus>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
