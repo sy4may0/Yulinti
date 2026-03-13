@@ -20,7 +20,7 @@ namespace Yulinti.Auctoritas.Senatus {
         // 下位Praeco
         private readonly PraecoSalsamenti _legatusSalsamenti;
 
-        private readonly CancellationTokenSource _cancellationTokenSource;
+        private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
 
         // Dux -> Velumへのコールバック
         private Action _aeAdPremereLudusNovus;
@@ -44,7 +44,8 @@ namespace Yulinti.Auctoritas.Senatus {
             ITurrisSalsamenti turrisSalsamenti,
             IPraecoConfirmationis legatusConfirmationis,
             PraecoSalsamenti legatusSalsamenti,
-            CuratorVela curatorVela
+            CuratorVela curatorVela,
+            IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
         ) {
             _turrisMundus = turrisMundus;
             _velumIndexusPrincipalis = velumIndexusPrincipalis;
@@ -54,6 +55,7 @@ namespace Yulinti.Auctoritas.Senatus {
             _legatusConfirmationis = legatusConfirmationis;
             _legatusSalsamenti = legatusSalsamenti;
             _curatorVela = curatorVela;
+            _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
 
             _aeAdPremereLudusNovus = AdPremereLudusNovus;
             _aeAdPremerePergeLudum = AdPremerePergeLudum;
@@ -63,7 +65,6 @@ namespace Yulinti.Auctoritas.Senatus {
 
             _aeAdReditumSalsamenti = AdReditumSalsamenti;
 
-            _cancellationTokenSource = new CancellationTokenSource();
         }
 
         public void Incipere() {
@@ -76,9 +77,9 @@ namespace Yulinti.Auctoritas.Senatus {
             // ここがasync起点。try/catchで囲う。
             try {
                 // LongitudoとNovissimusを取得。
-                int longitudoManualis = await _turrisSalsamenti.LongitudoManualis(_cancellationTokenSource.Token);
-                int longitudoAutomaticus = await _turrisSalsamenti.LongitudoAutomaticus(_cancellationTokenSource.Token);
-                bool estNovissimus = await _turrisSalsamenti.EstNovissimus(_cancellationTokenSource.Token);
+                int longitudoManualis = await _turrisSalsamenti.LongitudoManualis(_ostiumSignumCancellationisLegibile.Signum);
+                int longitudoAutomaticus = await _turrisSalsamenti.LongitudoAutomaticus(_ostiumSignumCancellationisLegibile.Signum);
+                bool estNovissimus = await _turrisSalsamenti.EstNovissimus(_ostiumSignumCancellationisLegibile.Signum);
 
                 // UIを表示
                 _velumIndexusPrincipalis.DemittereIndexusPrincipalis();
@@ -110,9 +111,9 @@ namespace Yulinti.Auctoritas.Senatus {
         private async Task ReditumSalsamenti() {
             try {
                 // LongitudoとNovissimusを取得。
-                int longitudoManualis = await _turrisSalsamenti.LongitudoManualis(_cancellationTokenSource.Token);
-                int longitudoAutomaticus = await _turrisSalsamenti.LongitudoAutomaticus(_cancellationTokenSource.Token);
-                bool estNovissimus = await _turrisSalsamenti.EstNovissimus(_cancellationTokenSource.Token);
+                int longitudoManualis = await _turrisSalsamenti.LongitudoManualis(_ostiumSignumCancellationisLegibile.Signum);
+                int longitudoAutomaticus = await _turrisSalsamenti.LongitudoAutomaticus(_ostiumSignumCancellationisLegibile.Signum);
+                bool estNovissimus = await _turrisSalsamenti.EstNovissimus(_ostiumSignumCancellationisLegibile.Signum);
 
                 // データが無ければロードボタンを無効。
                 _potestOneraLudum = longitudoManualis > 0 || longitudoAutomaticus > 0;
@@ -145,14 +146,14 @@ namespace Yulinti.Auctoritas.Senatus {
                     null,
                     IDSonusVeli.SubmittereAdditum,
                     IDSonusVeli.Exire,
-                    _cancellationTokenSource.Token
+                    _ostiumSignumCancellationisLegibile.Signum
                 );
 
                 if (!estConfirmationis) {
                     return;
                 }
 
-                _ = await _turrisSalsamenti.Creare(_cancellationTokenSource.Token);
+                _ = await _turrisSalsamenti.Creare(_ostiumSignumCancellationisLegibile.Signum);
                 // UIを消す
                 _curatorVela.TollereVelaOmnium();
                 _turrisMundus.AdMundum(IDMundi.MundusPortus);
@@ -174,7 +175,7 @@ namespace Yulinti.Auctoritas.Senatus {
                 return;
             }
             try {
-                _ = await _turrisSalsamenti.ArcessereNovissimus(_cancellationTokenSource.Token);
+                _ = await _turrisSalsamenti.ArcessereNovissimus(_ostiumSignumCancellationisLegibile.Signum);
                 _turrisSoniVeli.Sonare(IDSonusVeli.SubmittereAdditum);
                 _curatorVela.TollereVelaOmnium();
                 _turrisMundus.AdMundum(IDMundi.MundusPortus);
@@ -241,9 +242,7 @@ namespace Yulinti.Auctoritas.Senatus {
             }
         }
 
-        public void Liberare() {
-            _cancellationTokenSource.Cancel();
-        }
+        public void Liberare() { }
 
         // ボタンの処理を開始する。
         // 処理中の場合は全ボタンを非活性化する。
