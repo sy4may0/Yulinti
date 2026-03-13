@@ -46,17 +46,19 @@ namespace Yulinti.Auctoritas.Senatus {
         // ワーカー起動済みかガード
         private int _istOperariusMonitionis;
 
-        private readonly CancellationTokenSource _cancellationTokenSource;
+        private readonly ITurrisSignumCancellationis _turrisSignumCancellationis;
 
         // 現在ワーカーが扱っている onus（任意：ログ等に使う）
         private OnusMonitionis _onusOperarius;
 
         internal PraecoMonitionis(
             IVelumMonitionis velumMonitionis,
-            ITurrisSoniVeli turrisSoniVeli
+            ITurrisSoniVeli turrisSoniVeli,
+            ITurrisSignumCancellationis turrisSignumCancellationis
         ) {
             _velumMonitionis = velumMonitionis;
             _turrisSoniVeli = turrisSoniVeli;
+            _turrisSignumCancellationis = turrisSignumCancellationis;
 
             _queueMonitionis = new ConcurrentQueue<OnusMonitionis>();
 
@@ -65,7 +67,6 @@ namespace Yulinti.Auctoritas.Senatus {
 
             _istOperariusMonitionis = 0;
 
-            _cancellationTokenSource = new CancellationTokenSource();
             _onusOperarius = null;
         }
 
@@ -78,7 +79,7 @@ namespace Yulinti.Auctoritas.Senatus {
                 return;
             }
 
-            _ = IterareOperariusMonitionis(_cancellationTokenSource.Token);
+            _ = IterareOperariusMonitionis(_turrisSignumCancellationis.Signum);
         }
 
         private async Task IterareOperariusMonitionis(CancellationToken cancellationToken) {
@@ -183,17 +184,15 @@ namespace Yulinti.Auctoritas.Senatus {
         }
 
         public void Liberare() {
-            _cancellationTokenSource.Cancel();
-            _onusOperarius?.Tcs.TrySetCanceled(_cancellationTokenSource.Token);
+            _onusOperarius?.Tcs.TrySetCanceled(_turrisSignumCancellationis.Signum);
 
             while (_queueMonitionis.TryDequeue(out OnusMonitionis onus)) {
-                onus.Tcs.TrySetCanceled(_cancellationTokenSource.Token);
+                onus.Tcs.TrySetCanceled(_turrisSignumCancellationis.Signum);
             }
             // SemaphoreSlim は Dispose しない。ワーカーがまだ WaitAsync 内にいる可能性があり、
             // 破棄済みセマフォを参照すると ArgumentNullException が出るため。GC に任せる。
             // このやり方はDontDestroyOnLoad出発のクラスでのみやれる。シーン内で同じことが起きたら
             // SemaphoreSlimをDisposeする方法を考えるべき。
-            _cancellationTokenSource.Dispose();
         }
     }
 }

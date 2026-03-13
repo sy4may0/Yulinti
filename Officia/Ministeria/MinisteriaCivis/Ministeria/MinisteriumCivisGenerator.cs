@@ -12,17 +12,18 @@ namespace Yulinti.Officia.Ministeria {
     internal sealed class MinisteriumCivisGenerator : IMinisteriumIncipabilis, IMinisteriumLiberabilis {
         private readonly MinisteriumCivis _miCivis;
         private readonly IConfiguratioCivisGenerator _configuratio;
-        private readonly CancellationTokenSource _cancellationTokenSource;
+        private readonly ISignumCancellationisLegibile _signumCancellationisLegibile;
         private bool _estGenerare;
         private bool _estInitiare;
 
         public MinisteriumCivisGenerator(
             MinisteriumCivis miCivis,
-            IConfiguratioCivisGenerator configuratio
+            IConfiguratioCivisGenerator configuratio,
+            ISignumCancellationisLegibile signumCancellationisLegibile
         ) {
             _miCivis = miCivis;
             _configuratio = configuratio;
-            _cancellationTokenSource = new CancellationTokenSource();
+            _signumCancellationisLegibile = signumCancellationisLegibile;
             _estGenerare = false;
             _estInitiare = false;
         }
@@ -67,7 +68,7 @@ namespace Yulinti.Officia.Ministeria {
                         _configuratio.IntervallumMinimus * 1000,
                         _configuratio.IntervallumMaximus * 1000
                     );
-                    await UniTask.Delay(d, cancellationToken: _cancellationTokenSource.Token);
+                    await UniTask.Delay(d, cancellationToken: _signumCancellationisLegibile.Signum);
                     if (_miCivis.LongitudoActivum >= _configuratio.PopulatioMaxima) {
                         continue;
                     }
@@ -83,7 +84,6 @@ namespace Yulinti.Officia.Ministeria {
 
         public void Terminare() {
             _estGenerare = false;
-            _cancellationTokenSource.Cancel();
         }
 
         private async UniTask TempusExactumInitiareAsync() {
