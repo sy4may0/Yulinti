@@ -21,15 +21,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
     internal sealed class MilesPuellaeVigoris {
         private readonly ContextusPuellaeOstiorumLegibile _contextus;
-        private readonly AbacusStudiumAmittere _abacusStudiumAmittere;
+        private readonly AbacusTemporis _abacusStudiumAmittere;
 
         public MilesPuellaeVigoris(
             ContextusPuellaeOstiorumLegibile contextus
         ) {
             _contextus = contextus;
-            _abacusStudiumAmittere = new AbacusStudiumAmittere(
-                _contextus.Configuratio.Veletudo.TempusRecuperationisVigorisSec,
+            _abacusStudiumAmittere = new AbacusTemporis(
                 _contextus.Configuratio.Veletudo.TempusRecuperationisVigorisMaximaSec,
+                0f,
+                _contextus.Configuratio.Veletudo.TempusRecuperationisVigorisSec,
                 _contextus.Configuratio.Veletudo.PraeruptioTempusRecuperationisVigoris
             );
         }
