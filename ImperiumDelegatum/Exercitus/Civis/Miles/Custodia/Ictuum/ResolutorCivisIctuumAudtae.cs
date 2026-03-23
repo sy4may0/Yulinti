@@ -1,10 +1,11 @@
 using Yulinti.Nucleus.Contractus;
 using Yulinti.ImperiumDelegatum.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResolutorCivisIctuumAuditae : IResolutorCivisIctuumAuditae {
         private readonly ContextusCivisOstiorumLegibile _contextus;
-        private readonly AbacusDistantiaeVisus _abacusDistantiae;
+        private readonly AbacusDistantiae _abacusDistantiae;
 
         private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
 
@@ -17,11 +18,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _contextus = contextus;
             _resolutorCivisDistantia = resolutorCivisDistantia;
 
-            _abacusDistantiae = new AbacusDistantiaeVisus(
-                distantiaMaxima: 1.0f,
-                distantiaMin: 0.0f,
-                distantiaMedius: contextus.Configuratio.Custodiae.DistantiaAuditaeMedius,
-                praeruptioDistantiaeVisus: contextus.Configuratio.Custodiae.PraeruptioDistantiaAuditaeSoni
+            _abacusDistantiae = new AbacusDistantiae(
+                1.0f,
+                0.0f,
+                contextus.Configuratio.Custodiae.DistantiaAuditaeMedius,
+                contextus.Configuratio.Custodiae.PraeruptioDistantiaAuditaeSoni
             );
 
             _auditaIctuum = new float[contextus.Civis.Longitudo];
