@@ -1,6 +1,5 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Nucleus.Contractus;
-using Yulinti.Nucleus.Instrumentarium;
 using System.Numerics;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
@@ -14,7 +13,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IResolutorCivisIctuumVisae _resolutorCivisIctuum;
 
         private readonly CustodiaCivisSuspectaeModi[] _modiActualis;
-        private readonly AbacusTemporis[] _abacusStudiumAmittere;
+        private readonly AbacusStudiumAmittere[] _abacusStudiumAmittere;
 
         private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
 
@@ -28,13 +27,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resolutorCivisDistantia = resolutorCivisDistantia;
 
             _modiActualis = new CustodiaCivisSuspectaeModi[_contextus.Civis.Longitudo];
-            _abacusStudiumAmittere = new AbacusTemporis[_contextus.Civis.Longitudo];
+            _abacusStudiumAmittere = new AbacusStudiumAmittere[_contextus.Civis.Longitudo];
             for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
                 _modiActualis[i] = CustodiaCivisSuspectaeModi.Consumptio;
-                _abacusStudiumAmittere[i] = new AbacusTemporis(
-                    _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec,
-                    0.0f,
+                _abacusStudiumAmittere[i] = new AbacusStudiumAmittere(
                     _contextus.Configuratio.Custodiae.TempusStudiumAmittereSec,
+                    _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec,
                     _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere
                 );
             }

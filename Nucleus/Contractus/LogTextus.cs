@@ -1,12 +1,5 @@
 namespace Yulinti.Nucleus.Contractus {
     public static class LogTextus {
-        public const string TabulaLUT_LUT_LENGTH_TOO_SHORT = "TabulaLUT - lut length too short";
-        public const string AbacusAngli_ABACUSANGLI_INVALID_ANGULUS = "AbacusAngli - invalid angulus";
-        public const string AbacusAngli_ABACUSANGLI_INVALID_PRAERUPTIO_ANGULI = "AbacusAngli - invalid praeruptio anguli";
-        public const string AbacusDistantiae_ABACUSDISTANTIAE_INVALID_DISTANTIA = "AbacusDistantiae - invalid distantia";
-        public const string AbacusDistantiae_ABACUSDISTANTIAE_INVALID_PRAERUPTIO_DISTANTIA = "AbacusDistantiae - invalid praeruptio distantiae";
-        public const string AbacusTemporis_ABACUSTEMPORIS_INVALID_TEMPUS = "AbacusTemporis - invalid tempus";
-        public const string AbacusTemporis_ABACUSTEMPORIS_INVALID_PRAERUPTIO_TEMPUS = "AbacusTemporis - invalid praeruptio tempus";
         public const string AbacusAnguliVisus_ABACUSANGULIVISUS_INVALID_ANGULUS = "AbacusAnguliVisus - invalid angulus";
         public const string AbacusDistantiaeVisus_ABACUSDISTANTIAEVISUS_INVALID_DISTANTIA = "AbacusDistantiaeVisus - invalid distantia";
         public const string AnchoraCamera_ANCHORACAMERA_CAMERA_NULL = "AnchoraCamera - camera null";
