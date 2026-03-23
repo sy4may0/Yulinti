@@ -26,9 +26,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
 
         // Auditae時計
-        private readonly DuxHorologiumTemere[] _horologiumTemereAuditae;
+        private readonly IHorologium[] _horologiumTemereAuditae;
         // Surdus時計
-        private readonly DuxHorologiumTemere[] _horologiumTemereSurdus;
+        private readonly IHorologium[] _horologiumTemereSurdus;
 
         public ResolutorCivisAuditae(
             ContextusCivisOstiorumLegibile contextus,
@@ -38,8 +38,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _contextus = contextus;
             _resolutorCivisIctuumAuditae = resolutorCivisIctuumAuditae;
             _resolutorCivisDistantia = resolutorCivisDistantia;
-            _horologiumTemereAuditae = new DuxHorologiumTemere[_contextus.Civis.Longitudo];
-            _horologiumTemereSurdus = new DuxHorologiumTemere[_contextus.Civis.Longitudo];
+            _horologiumTemereAuditae = new IHorologium[_contextus.Civis.Longitudo];
+            _horologiumTemereSurdus = new IHorologium[_contextus.Civis.Longitudo];
 
             _modiActualis = new CustodiaCivisAuditaeModi[_contextus.Civis.Longitudo];
             _abacusStudiumAmittere = new AbacusTemporis[_contextus.Civis.Longitudo];
@@ -51,12 +51,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                     _contextus.Configuratio.Custodiae.TempusStudiumAmittereSec,
                     _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere
                 );
-                _horologiumTemereAuditae[i] = new DuxHorologiumTemere(
+                _horologiumTemereAuditae[i] = new HorologiumTemere(
                     _contextus.Configuratio.Custodiae.TempusAuditaeSecMinima,
                     _contextus.Configuratio.Custodiae.TempusAuditaeSecMaxima,
                     _contextus.RandomCommunis
                 );
-                _horologiumTemereSurdus[i] = new DuxHorologiumTemere(
+                _horologiumTemereSurdus[i] = new HorologiumTemere(
                     _contextus.Configuratio.Custodiae.TempusSurdaMinima,
                     _contextus.Configuratio.Custodiae.TempusSurdaMaxima,
                     _contextus.RandomCommunis

@@ -47,16 +47,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
             // 近距離で適用する視野角
             _abacusAnguliVisus0 = new AbacusAngli(
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Maxima),
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Min),
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Medius),
+                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Maxima),
+                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Min),
+                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Medius),
                 _contextus.Configuratio.Custodiae.PraeruptioAngulusVisus0
             );
             // 遠距離で適用する視野角
             _abacusAnguliVisus1 = new AbacusAngli(
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Maxima),
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Min),
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Medius),
+                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Maxima),
+                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Min),
+                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Medius),
                 _contextus.Configuratio.Custodiae.PraeruptioAngulusVisus1
             );
 
@@ -108,7 +108,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float ratioAngulus1 = _abacusAnguliVisus1.ComputareRatioVectorialisInversus(directioCivisCapitis, directio);
 
             // anglulus0が近距離、anglulus1が遠距離の補正値。
-            float ratio = DuxMath.Lerp(ratioAngulus1, ratioAngulus0, ratioDistantia);
+            float ratio = Mathematica.Lerp01(ratioAngulus1, ratioAngulus0, ratioDistantia);
 
             return ratio;
         }

@@ -1,4 +1,5 @@
 using Yulinti.ImperiumDelegatum.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResFluidaCivisVeletudinis : IResFluidaCivisVeletudinisLegibile {
@@ -160,12 +161,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float suspecta
         ) {
             if (!estActivum(idCivis)) return;
-            _vitae[idCivis] = DuxMath.Clamp(vitae, 0f, 1f);
-            _visus[idCivis] = DuxMath.Clamp(visus, 0f, 1f);
-            _visa[idCivis] = DuxMath.Clamp(visa, 0f, 1f);
-            _auditus[idCivis] = DuxMath.Clamp(auditus, 0f, 1f);
-            _audita[idCivis] = DuxMath.Clamp(audita, 0f, 1f);
-            _suspecta[idCivis] = DuxMath.Clamp(suspecta, 0f, 1f);
+            _vitae[idCivis] = Mathematica.Clamp01(vitae);
+            _visus[idCivis] = Mathematica.Clamp01(visus);
+            _visa[idCivis] = Mathematica.Clamp01(visa);
+            _auditus[idCivis] = Mathematica.Clamp01(auditus);
+            _audita[idCivis] = Mathematica.Clamp01(audita);
+            _suspecta[idCivis] = Mathematica.Clamp01(suspecta);
         }
 
         public void Purgare(int idCivis) {
