@@ -15,7 +15,7 @@ namespace Yulinti.Auctoritas.Senatus {
 
         private readonly CuratorVela _curatorVela;
 
-        private readonly CancellationTokenSource _cancellationTokenSource;
+        private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
 
         // Dux -> Velumへのコールバック
         private Action _aeAdPremereProfectio;
@@ -29,13 +29,15 @@ namespace Yulinti.Auctoritas.Senatus {
             IVelumPortus velumPortus,
             IPraecoConfirmationis legatusConfirmationis,
             ITurrisInterpretationis turrisInterpretationis,
-            CuratorVela curatorVela
+            CuratorVela curatorVela,
+            IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
         ) {
             _turrisMundus = turrisMundus;
             _velumPortus = velumPortus;
             _legatusConfirmationis = legatusConfirmationis;
             _turrisInterpretationis = turrisInterpretationis;
             _curatorVela = curatorVela;
+            _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
 
             _aeAdPremereProfectio = AdPremereProfectio;
             _aeAdPremereConstructio = AdPremereConstructio;
@@ -43,7 +45,6 @@ namespace Yulinti.Auctoritas.Senatus {
             _aeAdPremereOptiones = AdPremereOptiones;
             _aeAdPremereExi = AdPremereExi;
 
-            _cancellationTokenSource = new CancellationTokenSource();
         }
 
         public void Incipere() {
@@ -126,7 +127,7 @@ namespace Yulinti.Auctoritas.Senatus {
                     null,
                     IDSonusVeli.Submittere,
                     IDSonusVeli.Exire,
-                    _cancellationTokenSource.Token
+                    _ostiumSignumCancellationisLegibile.Signum
                 );
 
                 if (!estConfirmationis) {
@@ -142,8 +143,6 @@ namespace Yulinti.Auctoritas.Senatus {
             }
         }
 
-        public void Liberare() {
-            _cancellationTokenSource.Cancel();
-        }
+        public void Liberare() { }
     }
 }
