@@ -1,4 +1,6 @@
 using Yulinti.ImperiumDelegatum.Contractus;
+using Yulinti.Nucleus.Instrumentarium;
+
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResFluidaPuellaeVeletudinis : IResFluidaPuellaeVeletudinisLegibile {
         // health
@@ -60,14 +62,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float sonusQuietes,
             float sonusMotus
         ) {
-            _vigor = DuxMath.Clamp(vigor, 0f, 1f);
-            _patientia = DuxMath.Clamp(patientia, 0f, 1f);
-            _claritas = DuxMath.Clamp(claritas, 0f, 1f);
-            _aether = DuxMath.Clamp(aether, 0f, 1f);
-            _intentio = DuxMath.Clamp(intentio, 0f, 1f);
-            _dedecus = DuxMath.Clamp(dedecus, 0f, 1f);
-            _sonusQuietes = DuxMath.Clamp(sonusQuietes, 0f, 1f);
-            _sonusMotus = DuxMath.Clamp(sonusMotus, 0f, 1f);
+            _vigor = Mathematica.Clamp01(vigor);
+            _patientia = Mathematica.Clamp01(patientia);
+            _claritas = Mathematica.Clamp01(claritas);
+            _aether = Mathematica.Clamp01(aether);
+            _intentio = Mathematica.Clamp01(intentio);
+            _dedecus = Mathematica.Clamp01(dedecus);
+            _sonusQuietes = Mathematica.Clamp01(sonusQuietes);
+            _sonusMotus = Mathematica.Clamp01(sonusMotus);
         }
 
         public void RenovareNudusAnterior(bool estNudusAnterior) {

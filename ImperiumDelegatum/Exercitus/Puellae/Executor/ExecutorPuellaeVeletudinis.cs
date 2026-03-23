@@ -63,14 +63,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtSonusQuietes = 0f,
             float dtSonusMotus = 0f
         ) {
-            _phantasmaVigoris = DuxMath.Clamp(_phantasmaVigoris + dtVigoris, 0f, _vigorMaxima);
-            _phantasmaPatientiae = DuxMath.Clamp(_phantasmaPatientiae + dtPatientiae, 0f, _patientiaMaxima);
-            _phantasmaAether = DuxMath.Clamp(_phantasmaAether + dtAether, 0f, _aetherMaxima);
-            _phantasmaClaritas = DuxMath.Clamp(_phantasmaClaritas + dtClaritas, 0f, _claritasMaxima);
-            _phantasmaIntentio = DuxMath.Clamp(_phantasmaIntentio + dtIntentio, 0f, _intentioMaxima);
-            _phantasmaDedecus = DuxMath.Clamp(_phantasmaDedecus + dtDedecus, 0f, _dedecusMaxima);
-            _phantasmaSonusQuietes = DuxMath.Clamp(_phantasmaSonusQuietes + dtSonusQuietes, 0f, _sonusQuietesMaxima);
-            _phantasmaSonusMotus = DuxMath.Clamp(_phantasmaSonusMotus + dtSonusMotus, 0f, _sonusMotusMaxima);
+            _phantasmaVigoris = Mathematica.Clamp(_phantasmaVigoris + dtVigoris, 0f, _vigorMaxima);
+            _phantasmaPatientiae = Mathematica.Clamp(_phantasmaPatientiae + dtPatientiae, 0f, _patientiaMaxima);
+            _phantasmaAether = Mathematica.Clamp(_phantasmaAether + dtAether, 0f, _aetherMaxima);
+            _phantasmaClaritas = Mathematica.Clamp(_phantasmaClaritas + dtClaritas, 0f, _claritasMaxima);
+            _phantasmaIntentio = Mathematica.Clamp(_phantasmaIntentio + dtIntentio, 0f, _intentioMaxima);
+            _phantasmaDedecus = Mathematica.Clamp(_phantasmaDedecus + dtDedecus, 0f, _dedecusMaxima);
+            _phantasmaSonusQuietes = Mathematica.Clamp(_phantasmaSonusQuietes + dtSonusQuietes, 0f, _sonusQuietesMaxima);
+            _phantasmaSonusMotus = Mathematica.Clamp(_phantasmaSonusMotus + dtSonusMotus, 0f, _sonusMotusMaxima);
         }
 
         public void Pono(
@@ -83,14 +83,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float sonusQuietes,
             float sonusMotus
         ) {
-            _phantasmaVigoris = DuxMath.Clamp(vigor, 0f, _vigorMaxima);
-            _phantasmaPatientiae = DuxMath.Clamp(patientia, 0f, _patientiaMaxima);
-            _phantasmaAether = DuxMath.Clamp(aether, 0f, _aetherMaxima);
-            _phantasmaClaritas = DuxMath.Clamp(claritas, 0f, _claritasMaxima);
-            _phantasmaIntentio = DuxMath.Clamp(intentio, 0f, _intentioMaxima);
-            _phantasmaDedecus = DuxMath.Clamp(dedecus, 0f, _dedecusMaxima);
-            _phantasmaSonusQuietes = DuxMath.Clamp(sonusQuietes, 0f, _sonusQuietesMaxima);
-            _phantasmaSonusMotus = DuxMath.Clamp(sonusMotus, 0f, _sonusMotusMaxima);
+            _phantasmaVigoris = Mathematica.Clamp(vigor, 0f, _vigorMaxima);
+            _phantasmaPatientiae = Mathematica.Clamp(patientia, 0f, _patientiaMaxima);
+            _phantasmaAether = Mathematica.Clamp(aether, 0f, _aetherMaxima);
+            _phantasmaClaritas = Mathematica.Clamp(claritas, 0f, _claritasMaxima);
+            _phantasmaIntentio = Mathematica.Clamp(intentio, 0f, _intentioMaxima);
+            _phantasmaDedecus = Mathematica.Clamp(dedecus, 0f, _dedecusMaxima);
+            _phantasmaSonusQuietes = Mathematica.Clamp(sonusQuietes, 0f, _sonusQuietesMaxima);
+            _phantasmaSonusMotus = Mathematica.Clamp(sonusMotus, 0f, _sonusMotusMaxima);
         }
     }
 
@@ -179,7 +179,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float velocitasSoniMin = 0f;
             float velocitasActualis = _ostiumPuellaeLociLegibile.VelocitasHorizontalisActualis();
 
-            float ratio = DuxMath.InverseLerp(velocitasSoniMin, velocitasSoniMax, velocitasActualis);
+            float ratio = Mathematica.InverseLerp01(velocitasSoniMin, velocitasSoniMax, velocitasActualis);
             return ratio;
         }
 

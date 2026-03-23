@@ -71,7 +71,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float consumptioVigorisMinima,
             float consumptioVigorisMaxima
         ) {
-            float consumptio = DuxMath.NLerp(
+            float consumptio = Mathematica.Lerp01(
                 consumptioVigorisMinima,
                 consumptioVigorisMaxima,
                 dedecus

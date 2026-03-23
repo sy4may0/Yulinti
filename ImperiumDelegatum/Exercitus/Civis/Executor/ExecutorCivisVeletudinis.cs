@@ -71,12 +71,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtAudita = 0f,
             float dtSuspecta = 0f
         ) {
-            _phantasmaVitae[idCivis] = DuxMath.Clamp(_phantasmaVitae[idCivis] + dtVitae, 0f, _vitaeMaxima);
-            _phantasmaVisus[idCivis] = DuxMath.Clamp(_phantasmaVisus[idCivis] + dtVisus, 0f, _visusMaxima);
-            _phantasmaVisa[idCivis] = DuxMath.Clamp(_phantasmaVisa[idCivis] + dtVisa, 0f, _visaMaxima);
-            _phantasmaAuditus[idCivis] = DuxMath.Clamp(_phantasmaAuditus[idCivis] + dtAuditus, 0f, _auditusMaxima);
-            _phantasmaAudita[idCivis] = DuxMath.Clamp(_phantasmaAudita[idCivis] + dtAudita, 0f, _auditaMaxima);
-            _phantasmaSuspecta[idCivis] = DuxMath.Clamp(_phantasmaSuspecta[idCivis] + dtSuspecta, 0f, _suspectaMaxima);
+            _phantasmaVitae[idCivis] = Mathematica.Clamp(_phantasmaVitae[idCivis] + dtVitae, 0f, _vitaeMaxima);
+            _phantasmaVisus[idCivis] = Mathematica.Clamp(_phantasmaVisus[idCivis] + dtVisus, 0f, _visusMaxima);
+            _phantasmaVisa[idCivis] = Mathematica.Clamp(_phantasmaVisa[idCivis] + dtVisa, 0f, _visaMaxima);
+            _phantasmaAuditus[idCivis] = Mathematica.Clamp(_phantasmaAuditus[idCivis] + dtAuditus, 0f, _auditusMaxima);
+            _phantasmaAudita[idCivis] = Mathematica.Clamp(_phantasmaAudita[idCivis] + dtAudita, 0f, _auditaMaxima);
+            _phantasmaSuspecta[idCivis] = Mathematica.Clamp(_phantasmaSuspecta[idCivis] + dtSuspecta, 0f, _suspectaMaxima);
         }
 
         public void Pono(
@@ -88,12 +88,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float audita,
             float suspecta
         ) {
-            _phantasmaVitae[idCivis] = DuxMath.Clamp(vitae, 0f, _vitaeMaxima);
-            _phantasmaVisus[idCivis] = DuxMath.Clamp(visus, 0f, _visusMaxima);
-            _phantasmaVisa[idCivis] = DuxMath.Clamp(visa, 0f, _visaMaxima);
-            _phantasmaAuditus[idCivis] = DuxMath.Clamp(auditus, 0f, _auditusMaxima);
-            _phantasmaAudita[idCivis] = DuxMath.Clamp(audita, 0f, _auditaMaxima);
-            _phantasmaSuspecta[idCivis] = DuxMath.Clamp(suspecta, 0f, _suspectaMaxima);
+            _phantasmaVitae[idCivis] = Mathematica.Clamp(vitae, 0f, _vitaeMaxima);
+            _phantasmaVisus[idCivis] = Mathematica.Clamp(visus, 0f, _visusMaxima);
+            _phantasmaVisa[idCivis] = Mathematica.Clamp(visa, 0f, _visaMaxima);
+            _phantasmaAuditus[idCivis] = Mathematica.Clamp(auditus, 0f, _auditusMaxima);
+            _phantasmaAudita[idCivis] = Mathematica.Clamp(audita, 0f, _auditaMaxima);
+            _phantasmaSuspecta[idCivis] = Mathematica.Clamp(suspecta, 0f, _suspectaMaxima);
         }
     }
 

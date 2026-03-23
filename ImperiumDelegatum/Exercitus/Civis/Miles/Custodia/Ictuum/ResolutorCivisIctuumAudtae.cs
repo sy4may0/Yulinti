@@ -51,7 +51,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float distantia // 現在の距離
         ) {
             float distantiaMin = _contextus.Configuratio.Custodiae.DistantiaAuditaeSoniMin;
-            float ratioActualis = DuxMath.InverseLerp(distantiaMin, distantiaMaxima, distantia);
+            float ratioActualis = Mathematica.InverseLerp01(distantiaMin, distantiaMaxima, distantia);
             return _abacusDistantiae.ComputareRatioInversus(ratioActualis);
         }
 
@@ -67,7 +67,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float distantiaPuellae = _resolutorCivisDistantia.DistantiaPuellae(idCivis);
             float sonusQuietes = _contextus.ResFPuellae.Veletudinis.SonusQuietes;
             float sonusMotus = _contextus.ResFPuellae.Veletudinis.SonusMotus;
-            float sonus = DuxMath.Clamp((sonusQuietes + sonusMotus) / 2f, 0f, 1f);
+            float sonus = Mathematica.Clamp01((sonusQuietes + sonusMotus) / 2f);
 
             if (sonus <= Numerus.Epsilon) {
                 _auditaIctuum[idCivis] = 0f;
