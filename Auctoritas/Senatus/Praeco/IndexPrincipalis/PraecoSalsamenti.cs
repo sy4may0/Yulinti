@@ -18,7 +18,7 @@ namespace Yulinti.Auctoritas.Senatus {
 
         private readonly CuratorVela _curatorVela;
 
-        private CancellationTokenSource _cancellationTokenSource;
+        private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
 
         // Dux -> Velumへのコールバック
         private Action<Guid> _aeAdPremereOneraLudum;
@@ -37,7 +37,8 @@ namespace Yulinti.Auctoritas.Senatus {
             IPraecoConfirmationis legatusConfirmationis,
             ITurrisInterpretationis turrisInterpretationis,
             ITurrisSoniVeli turrisSoniVeli,
-            CuratorVela curatorVela
+            CuratorVela curatorVela,
+            IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
         ) {
             _turrisMundus = turrisMundus;
             _velumSalsamenti = velumSalsamenti;
@@ -46,6 +47,7 @@ namespace Yulinti.Auctoritas.Senatus {
             _turrisInterpretationis = turrisInterpretationis;
             _turrisSoniVeli = turrisSoniVeli;
             _curatorVela = curatorVela;
+            _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
 
             _aeAdPremereOneraLudum = AdPremereOneraLudum;
             _aeAdPremereDeletoLudum = AdPremereDeletoLudum;
@@ -59,7 +61,6 @@ namespace Yulinti.Auctoritas.Senatus {
         }
 
         public async Task Demittere(Action adReditum) {
-            InitareCancellationToken();
             try {
                 // UIを表示
                 _velumSalsamenti.DemittereSalsamenti();
@@ -68,7 +69,7 @@ namespace Yulinti.Auctoritas.Senatus {
                 _velumSalsamenti.AdPremereDeletoLudum(_aeAdPremereDeletoLudum);
                 _velumSalsamenti.AdPremereExi(_aeAdPremereExi);
 
-                CancellationToken cancellationToken = _cancellationTokenSource.Token;
+                CancellationToken cancellationToken = _ostiumSignumCancellationisLegibile.Signum;
                 // Notitiaをロード
                 IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaManualis = 
                     await _turrisSalsamenti.ArcessereNotitiamManualem(cancellationToken);
@@ -91,7 +92,6 @@ namespace Yulinti.Auctoritas.Senatus {
         }
 
         public void Tollere() {
-            InterrumpereCancellationToken();
             _velumSalsamenti.TollereSalsamenti();
             _adReditum?.Invoke();
             _adReditum = null;
@@ -107,9 +107,7 @@ namespace Yulinti.Auctoritas.Senatus {
             }
 
             try {
-                if (!ConariAcquirereCancellationToken(out CancellationToken cancellationToken)) {
-                    return;
-                }
+                CancellationToken cancellationToken = _ostiumSignumCancellationisLegibile.Signum;
 
                 await _turrisSalsamenti.Arcessere(id, cancellationToken);
                 _curatorVela.TollereVelaOmnium();
@@ -133,9 +131,7 @@ namespace Yulinti.Auctoritas.Senatus {
                 return;
             }
             try {
-                if (!ConariAcquirereCancellationToken(out CancellationToken cancellationToken)) {
-                    return;
-                }
+                CancellationToken cancellationToken = _ostiumSignumCancellationisLegibile.Signum;
                 bool estConfirmationis = await _legatusConfirmationis.DemittereAsync(
                     _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_TITULUS),
                     _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_TEXTUS),
@@ -193,9 +189,7 @@ namespace Yulinti.Auctoritas.Senatus {
             }
         }
 
-        public void Liberare() {
-            InterrumpereCancellationToken();
-        }
+        public void Liberare() { }
 
         private bool ConariIncipereProcessumButton() {
             if (_estProcessusButton) {
@@ -221,31 +215,6 @@ namespace Yulinti.Auctoritas.Senatus {
             _velumSalsamenti.DeactivareButton(ButtonSalsamenti.Exi);
             _velumSalsamenti.DeactivareButton(ButtonSalsamenti.OneraLudum);
             _velumSalsamenti.DeactivareButton(ButtonSalsamenti.DeletoLudum);
-        }
-
-        private void InitareCancellationToken() {
-            InterrumpereCancellationToken();
-            _cancellationTokenSource = new CancellationTokenSource();
-        }
-
-        private bool ConariAcquirereCancellationToken(out CancellationToken cancellationToken) {
-            if (_cancellationTokenSource == null) {
-                cancellationToken = CancellationToken.None;
-                return false;
-            }
-            cancellationToken = _cancellationTokenSource.Token;
-            return true;
-        }
-
-        private void InterrumpereCancellationToken() {
-            if (_cancellationTokenSource == null) {
-                return;
-            }
-            if (!_cancellationTokenSource.IsCancellationRequested) {
-                _cancellationTokenSource.Cancel();
-            }
-            _cancellationTokenSource.Dispose();
-            _cancellationTokenSource = null;
         }
     }
 }
