@@ -8,13 +8,13 @@ using Yulinti.Nucleus.Contractus;
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResolutorCivisIctuumVisae : IResolutorCivisIctuumVisae {
         private readonly ContextusCivisOstiorumLegibile _contextus;
-        private readonly AbacusDistantiae _abacusDistantiaeVisus;
+        private readonly AbacusDistantiaeVisus _abacusDistantiaeVisus;
 
         // 角度補正の合成用
         // _abacusDistantiaeVisusAngliが0 -> 1に増加するにつれ、AnguliVisus0からAnguliVisus1への補正が増加する。
-        private readonly AbacusDistantiae _abacusDistantiaeVisusAngli;
-        private readonly AbacusAngli _abacusAnguliVisus0;
-        private readonly AbacusAngli _abacusAnguliVisus1;
+        private readonly AbacusDistantiaeVisus _abacusDistantiaeVisusAngli;
+        private readonly AbacusAnguliVisus _abacusAnguliVisus0;
+        private readonly AbacusAnguliVisus _abacusAnguliVisus1;
 
         private readonly IDPuellaeResVisaeCapitis[] _cIDPuellaeResVisaeCapitis;
         private readonly IDPuellaeResVisaePectoris[] _cIDPuellaeResVisaePectoris;
@@ -31,33 +31,33 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             _contextus = contextus;
             _resolutorCivisDistantia = resolutorCivisDistantia;
-            _abacusDistantiaeVisus = new AbacusDistantiae(
-                _contextus.Configuratio.Custodiae.DistantiaVisaeMaxima,
-                _contextus.Configuratio.Custodiae.DistantiaVisaeMin,
-                _contextus.Configuratio.Custodiae.DistantiaVisaeMedius,
-                _contextus.Configuratio.Custodiae.PraeruptioDistantiaVisae
+            _abacusDistantiaeVisus = new AbacusDistantiaeVisus(
+                distantiaMaxima: _contextus.Configuratio.Custodiae.DistantiaVisaeMaxima,
+                distantiaMin: _contextus.Configuratio.Custodiae.DistantiaVisaeMin,
+                distantiaMedius: _contextus.Configuratio.Custodiae.DistantiaVisaeMedius,
+                praeruptioDistantiaeVisus: _contextus.Configuratio.Custodiae.PraeruptioDistantiaVisae
             );
 
-            _abacusDistantiaeVisusAngli = new AbacusDistantiae(
-                _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMaxima,
-                _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMin,
-                _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMedius,
-                _contextus.Configuratio.Custodiae.PraeruptioDistantiaAnguliVisus
+            _abacusDistantiaeVisusAngli = new AbacusDistantiaeVisus(
+                distantiaMaxima: _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMaxima,
+                distantiaMin: _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMin,
+                distantiaMedius: _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMedius,
+                praeruptioDistantiaeVisus: _contextus.Configuratio.Custodiae.PraeruptioDistantiaAnguliVisus
             );
 
             // 近距離で適用する視野角
-            _abacusAnguliVisus0 = new AbacusAngli(
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Maxima),
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Min),
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Medius),
-                _contextus.Configuratio.Custodiae.PraeruptioAngulusVisus0
+            _abacusAnguliVisus0 = new AbacusAnguliVisus(
+                angulusMaximaRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Maxima),
+                angulusMinRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Min),
+                angulusMediusRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Medius),
+                praeruptioAnguliVisus: _contextus.Configuratio.Custodiae.PraeruptioAngulusVisus0
             );
             // 遠距離で適用する視野角
-            _abacusAnguliVisus1 = new AbacusAngli(
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Maxima),
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Min),
-                DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Medius),
-                _contextus.Configuratio.Custodiae.PraeruptioAngulusVisus1
+            _abacusAnguliVisus1 = new AbacusAnguliVisus(
+                angulusMaximaRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Maxima),
+                angulusMinRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Min),
+                angulusMediusRad: DuxMath.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Medius),
+                praeruptioAnguliVisus: _contextus.Configuratio.Custodiae.PraeruptioAngulusVisus1
             );
 
             _cIDPuellaeResVisaeCapitis = (IDPuellaeResVisaeCapitis[])Enum.GetValues(typeof(IDPuellaeResVisaeCapitis));
@@ -87,7 +87,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             Vector3 positioCivisCapitis, // 頭の位置
             Vector3 positioPuellaeResVisae  // 視認対象の位置
         ) {
-            float ratioDistantia = _abacusDistantiaeVisus.ComputareRatioVectorialisInversus(positioCivisCapitis, positioPuellaeResVisae);
+            float ratioDistantia = _abacusDistantiaeVisus.ComputareRatioInversus(positioCivisCapitis, positioPuellaeResVisae);
             return ratioDistantia;
         }
          
@@ -102,10 +102,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // ゼロベクトル回避
             if (directio.LengthSquared() < Numerus.EpsilonSq) return 1f;
 
-            float ratioDistantia = _abacusDistantiaeVisusAngli.ComputareRatioVectorialisInversus(positioCivisCapitis, positioPuellaeResVisae);
+            float ratioDistantia = _abacusDistantiaeVisusAngli.ComputareRatioInversus(positioCivisCapitis, positioPuellaeResVisae);
             // angulusMaximaで0、angulusMinで1となるように逆補正を使う
-            float ratioAngulus0 = _abacusAnguliVisus0.ComputareRatioVectorialisInversus(directioCivisCapitis, directio);
-            float ratioAngulus1 = _abacusAnguliVisus1.ComputareRatioVectorialisInversus(directioCivisCapitis, directio);
+            float ratioAngulus0 = _abacusAnguliVisus0.ComputareRatioInversus(directioCivisCapitis, directio);
+            float ratioAngulus1 = _abacusAnguliVisus1.ComputareRatioInversus(directioCivisCapitis, directio);
 
             // anglulus0が近距離、anglulus1が遠距離の補正値。
             float ratio = DuxMath.Lerp(ratioAngulus1, ratioAngulus0, ratioDistantia);
