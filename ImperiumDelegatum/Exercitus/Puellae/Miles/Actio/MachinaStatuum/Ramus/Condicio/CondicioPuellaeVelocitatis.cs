@@ -4,10 +4,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal static class CondicioPuellaeVelocitatis {
         // 停止状態である。
         public static bool EstVelocitatisQuietes(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            ContextusRamusPuellae contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            float limenVelocitatisIntransQuietes = contextusOstiorum.Configuratio.Statuum.LimenVelocitatisIntransQuietes;
+            float limenVelocitatisIntransQuietes = contextusOstiorum.ConfiguratioStatuum.LimenVelocitatisIntransQuietes;
             return resFluida.Motus.VelocitasActualisHorizontalis < limenVelocitatisIntransQuietes;
         }
     }

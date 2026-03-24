@@ -5,17 +5,20 @@ using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesPuellaeFigurae {
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
+        private readonly IOstiumPuellaeOssisLegibile _ostiumOssis;
+        private readonly IOstiumCarrusPuellae _carrus;
 
         // VContainer注入
         public MilesPuellaeFigurae(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum
+            IOstiumPuellaeOssisLegibile ostiumOssis,
+            IOstiumCarrusPuellae carrus
         ) {
-            _contextusOstiorum = contextusOstiorum;
+            _ostiumOssis = ostiumOssis;
+            _carrus = carrus;
         }
 
         private void FiguroGenu() {
-            IOstiumPuellaeOssisLegibile os = _contextusOstiorum.Ossis;
+            IOstiumPuellaeOssisLegibile os = _ostiumOssis;
 
             float angulusGenusDexteri = 180f - InstrumentaVectorialis.AngulusTriumPunctorum(
                 os.LegoPositionem(IDPuellaeOssis.RightLowerLeg),
@@ -36,12 +39,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float pondus150Sin = 100 * InstrumentaVectorialis.AngulusAdPondus(angulusGenusSinisteri, 90f, 160f);
             float pondus120OffsetSin = 100 * InstrumentaVectorialis.AngulusAdTriPondus(angulusGenusSinisteri, 90f, 120f, 160f);
 
-            _contextusOstiorum.Carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee90, LatusPuellaeGenus.Dextra, pondus90Dex);
-            _contextusOstiorum.Carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee150, LatusPuellaeGenus.Dextra, pondus150Dex);
-            _contextusOstiorum.Carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee120Offset, LatusPuellaeGenus.Dextra, pondus120OffsetDex);
-            _contextusOstiorum.Carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee90, LatusPuellaeGenus.Sinistra, pondus90Sin);
-            _contextusOstiorum.Carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee150, LatusPuellaeGenus.Sinistra, pondus150Sin);
-            _contextusOstiorum.Carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee120Offset, LatusPuellaeGenus.Sinistra, pondus120OffsetSin);
+            _carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee90, LatusPuellaeGenus.Dextra, pondus90Dex);
+            _carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee150, LatusPuellaeGenus.Dextra, pondus150Dex);
+            _carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee120Offset, LatusPuellaeGenus.Dextra, pondus120OffsetDex);
+            _carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee90, LatusPuellaeGenus.Sinistra, pondus90Sin);
+            _carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee150, LatusPuellaeGenus.Sinistra, pondus150Sin);
+            _carrus.PostulareFiguraeGenus(IDPuellaeFiguraeGenus.csknee120Offset, LatusPuellaeGenus.Sinistra, pondus120OffsetSin);
         }
 
         private float CalculateXCapacitatemSquamae(float pondusX90, float pondusX150, float pondusY90) {
@@ -56,7 +59,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         private void FiguroPelvim() {
-            IOstiumPuellaeOssisLegibile os = _contextusOstiorum.Ossis;
+            IOstiumPuellaeOssisLegibile os = _ostiumOssis;
+
             float angulusX150Dex = InstrumentaVectorialis.AngulusTriumPunctorum(
                 os.LegoPositionem(IDPuellaeOssis.RightUpperLeg),
                 os.LegoPositionem(IDPuellaeOssis.RightX150pin),
@@ -94,13 +98,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             pondusX90Sin *= squamaeSin;
             pondusX150Sin *= squamaeSin;
 
-            _contextusOstiorum.Carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csLHipX90, pondusX90Dex);
-            _contextusOstiorum.Carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csLHipX150, pondusX150Dex);
-            _contextusOstiorum.Carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csLHipY90, pondusY90Dex);
-            _contextusOstiorum.Carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csRHipX90, pondusX90Sin);
-            _contextusOstiorum.Carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csRHipX150, pondusX150Sin);
-            _contextusOstiorum.Carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csRHipY90, pondusY90Sin);
-            _contextusOstiorum.Carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csAnusX150, pondusAni);
+            _carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csLHipX90, pondusX90Dex);
+            _carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csLHipX150, pondusX150Dex);
+            _carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csLHipY90, pondusY90Dex);
+            _carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csRHipX90, pondusX90Sin);
+            _carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csRHipX150, pondusX150Sin);
+            _carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csRHipY90, pondusY90Sin);
+            _carrus.PostulareFiguraePelvis(IDPuellaeFiguraePelvis.csAnusX150, pondusAni);
         }
 
         public void Ordinare() {

@@ -4,16 +4,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal static class CondicioPuellaeInput {
         // 移動E力があるかどうを判定すめ
         public static bool EstMotus(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            ContextusRamusPuellae contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            float limenInputQuadratum = contextusOstiorum.Configuratio.Statuum.LimenInputQuadratum;
+            float limenInputQuadratum = contextusOstiorum.ConfiguratioStatuum.LimenInputQuadratum;
             return contextusOstiorum.Introductionis.LegoMotus.LengthSquared() >= limenInputQuadratum;
         }
 
         // Incumboが押されていかどうを判定すめ
         public static bool EstIncumbo(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            ContextusRamusPuellae contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
             return contextusOstiorum.Introductionis.LegoIncumbo;
@@ -21,7 +21,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         // Cursusが押されていかどうを判定すめ
         public static bool EstCursus(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            ContextusRamusPuellae contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
             return contextusOstiorum.Introductionis.LegoCursus;
@@ -29,7 +29,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         // SpectaculumCorporisが押されていかどうを判定すめ
         public static bool EstSpectaculumCorporis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            ContextusRamusPuellae contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
             return contextusOstiorum.Introductionis.LegoSpectaculumCorporis;

@@ -38,8 +38,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            // ContextusOstiorum
-            builder.Register<ContextusPuellaeOstiorumLegibile>(Lifetime.Singleton);
+            // Contextus
+            builder.Register<ContextusRamusPuellae>(Lifetime.Singleton);
+            builder.Register<ContextusStatusPuellaeCorporis>(Lifetime.Singleton);
 
             // Executor
             builder.Register<ExecutorPuellaeAnimationis>(Lifetime.Singleton);

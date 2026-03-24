@@ -4,14 +4,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class RamusPuellaeCorporisAmbulatioAdSpectaculumIncipalis : IRamusPuellaeCorporis {
         public IDPuellaeStatusCorporis IdStatusActualis => IDPuellaeStatusCorporis.Ambulatio;
         public IDPuellaeStatusCorporis IdStatusProximus(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            ContextusRamusPuellae contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
             return IDPuellaeStatusCorporis.SpectaculumIncipalis;
         }
         public int Prioritas => 900;
         public bool Condicio(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            ContextusRamusPuellae contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
             return CondicioPuellaeInput.EstSpectaculumCorporis(contextusOstiorum, resFluida);
