@@ -12,9 +12,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     }
 
     internal sealed class MachinaPuellaeStatusCorporis {
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
         private readonly TabulaPuellaeStatuum _tabulaPuellaeStatuum;
         private readonly IConfiguratioPuellaeStatuum _configuratioStatuum;
+
+        private readonly IOstiumPuellaeAnimationisLegibile _animationis;
+        private readonly IOstiumCarrusPuellae _carrus;
         private readonly ResolutorPuellaeRamorumCorporis _resolutorRamorumCorporis;
 
         private PhasisMachinaPuellaeStatusCorporis _phasisActualis;
@@ -23,13 +25,21 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private IDPuellaeStatusCorporis _idStatusProximus;
 
         public MachinaPuellaeStatusCorporis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
-            IConfiguratioPuellaeStatuum configuratioStatuum
+            IConfiguratioPuellaeStatuum configuratioStatuum,
+            IOstiumPuellaeAnimationisLegibile animationis,
+            IOstiumCarrusPuellae carrus,
+            ContextusStatusPuellaeCorporis contextus,
+            ContextusRamusPuellae contextusRamus
         ) {
-            _contextusOstiorum = contextusOstiorum;
             _configuratioStatuum = configuratioStatuum;
-            _tabulaPuellaeStatuum = new TabulaPuellaeStatuum(_configuratioStatuum);
-            _resolutorRamorumCorporis = new ResolutorPuellaeRamorumCorporis(_contextusOstiorum);
+            _animationis = animationis;
+            _carrus = carrus;
+
+            _tabulaPuellaeStatuum = new TabulaPuellaeStatuum(_configuratioStatuum, contextus);
+
+            _resolutorRamorumCorporis = new ResolutorPuellaeRamorumCorporis(
+                contextusRamus
+            );
 
             _phasisActualis = PhasisMachinaPuellaeStatusCorporis.Incipalis;
             _idStatusActualis = IDPuellaeStatusCorporis.Nihil;
@@ -37,17 +47,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         private bool EstExhibensCorpus() {
-            return _contextusOstiorum.Animationis.EstExhibens(IDPuellaeAnimationisStratum.Corpus);
+            return _animationis.EstExhibens(IDPuellaeAnimationisStratum.Corpus);
         }
 
         private bool EstExhibensAutIteransCorpus() {
             return
-                _contextusOstiorum.Animationis.EstExhibens(IDPuellaeAnimationisStratum.Corpus) ||
-                _contextusOstiorum.Animationis.EstExhibensIterans(IDPuellaeAnimationisStratum.Corpus);
+                _animationis.EstExhibens(IDPuellaeAnimationisStratum.Corpus) ||
+                _animationis.EstExhibensIterans(IDPuellaeAnimationisStratum.Corpus);
         }
 
         private bool EstDesinensCorpus() {
-            return _contextusOstiorum.Animationis.EstDesinens(IDPuellaeAnimationisStratum.Corpus);
+            return _animationis.EstDesinens(IDPuellaeAnimationisStratum.Corpus);
         }
 
         private IStatusPuellaeCorporis LegereStatusActualis() {
@@ -261,7 +271,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            statusActualis.Intrare(_contextusOstiorum, resFluida);
+            statusActualis.Intrare(resFluida);
 
             // Intrare / Exire に Desinere は許可しない。
             if (statusActualis.IdAnimationisIntrare == IDPuellaeAnimationis.Desinere) {
@@ -287,7 +297,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            statusActualis.Transere(_contextusOstiorum, resFluida);
+            statusActualis.Transere(resFluida);
 
             // Transere は以下のように扱う。
             // Nihil     : フェーズを即スキップして Exiens
@@ -315,7 +325,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            statusActualis.Transere(_contextusOstiorum, resFluida);
+            statusActualis.Transere(resFluida);
 
             if (statusActualis.IdAnimationisTransere == IDPuellaeAnimationis.Nihil) {
                 MutareExiens(resFluida);
@@ -338,7 +348,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            statusActualis.Exire(_contextusOstiorum, resFluida);
+            statusActualis.Exire(resFluida);
 
             if (statusActualis.IdAnimationisExire == IDPuellaeAnimationis.Desinere) {
                 Notarius.Memorare(LogTextus.MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID);
@@ -402,7 +412,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            statusActualis.Ordinare(_contextusOstiorum, resFluida);
+            statusActualis.Ordinare(resFluida);
         }
     }
 }

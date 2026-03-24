@@ -20,18 +20,31 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     }
 
     internal sealed class MilesPuellaeVigoris {
-        private readonly ContextusPuellaeOstiorumLegibile _contextus;
+        private readonly ITurrisSalsamentiLegibile _turrisSalsamenti;
+        private readonly IConfiguratioPuellaeVeletudinis _configuratio;
+        private readonly IOstiumCarrusPuellae _carrus;
+        private readonly IOstiumTemporisLegibile _temporis;
+        private readonly IResFluidaCivisLegibile _resFCivis;
         private readonly AbacusTemporis _abacusStudiumAmittere;
 
         public MilesPuellaeVigoris(
-            ContextusPuellaeOstiorumLegibile contextus
+            ITurrisSalsamentiLegibile turrisSalsamenti,
+            IConfiguratioPuellaeVeletudinis configuratio,
+            IOstiumCarrusPuellae carrus,
+            IOstiumTemporisLegibile temporis,
+            IResFluidaCivisLegibile resFCivis
         ) {
-            _contextus = contextus;
+            _turrisSalsamenti = turrisSalsamenti;
+            _configuratio = configuratio;
+            _carrus = carrus;
+            _temporis = temporis;
+            _resFCivis = resFCivis;
+
             _abacusStudiumAmittere = new AbacusTemporis(
-                _contextus.Configuratio.Veletudo.TempusRecuperationisVigorisMaximaSec,
+                _configuratio.TempusRecuperationisVigorisMaximaSec,
                 0f,
-                _contextus.Configuratio.Veletudo.TempusRecuperationisVigorisSec,
-                _contextus.Configuratio.Veletudo.PraeruptioTempusRecuperationisVigoris
+                _configuratio.TempusRecuperationisVigorisSec,
+                _configuratio.PraeruptioTempusRecuperationisVigoris
             );
         }
 
@@ -40,14 +53,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int numerusVigilantia = 0;
             int numerusSuspecta = 0;
 
-            for (int idCivis = 0; idCivis < _contextus.ResFCivis.Veletudinis.Longitudo; idCivis++) {
-                if (_contextus.ResFCivis.Veletudinis.EstDetectio(idCivis)) {
+            for (int idCivis = 0; idCivis < _resFCivis.Veletudinis.Longitudo; idCivis++) {
+                if (_resFCivis.Veletudinis.EstDetectio(idCivis)) {
                     numerusDetectio++;
                 }
-                if (_contextus.ResFCivis.Veletudinis.EstVigilantia(idCivis)) {
+                if (_resFCivis.Veletudinis.EstVigilantia(idCivis)) {
                     numerusVigilantia++;
                 }
-                if (_contextus.ResFCivis.Veletudinis.EstSuspecta(idCivis)) {
+                if (_resFCivis.Veletudinis.EstSuspecta(idCivis)) {
                     numerusSuspecta++;
                 }
             }
@@ -62,7 +75,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int numerusCustodiae
         ) {
             // y = max - ((max - 1) / x)
-            float maxima = _contextus.Configuratio.Veletudo.RatioNumerusCustodiaeMaxima;
+            float maxima = _configuratio.RatioNumerusCustodiaeMaxima;
             return maxima - ((maxima - 1) / numerusCustodiae);
         }
 
@@ -82,7 +95,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Initare() {
             // 初期Vigorを100%に設定
-            _contextus.Carrus.PostulareVeletudinis(
+            _carrus.PostulareVeletudinis(
                 dtVigoris: 1f
             );
         }
@@ -97,23 +110,23 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 float c = ComputareConsumptioVigoris(
                     r,
                     resFluida.Veletudinis.Dedecus,
-                    _contextus.Configuratio.Veletudo.ConsumptioVigorisMinimaDetectio,
-                    _contextus.Configuratio.Veletudo.ConsumptioVigorisMaximaDetectio
+                    _configuratio.ConsumptioVigorisMinimaDetectio,
+                    _configuratio.ConsumptioVigorisMaximaDetectio
                 );
 
                 // 低レベル時はDetectioで高速死亡する。
                 // セーブデータが無い場合(異常)もデフォルト高速死亡
-                if (!_contextus.Salsamentum.ConareActualis(out IOstiumSalsamenti actualis)) {
+                if (!_turrisSalsamenti.ConareActualis(out IOstiumSalsamenti actualis)) {
                     Carnifex.Error(LogTextus.MilesPuellaeVigoris_MILSEPUELLAEVIGORIS_SALSAMENTUM_ACTUALIS_NULL);
-                    c *= _contextus.Configuratio.Veletudo.RatioConsumptioVigorisDetectio;
+                    c *= _configuratio.RatioConsumptioVigorisDetectio;
                 } else {
-                    if (actualis.PuellaePersonae.GradusExhibitus < _contextus.Configuratio.Veletudo.LimenRemissioExhibitus) {
-                        c *= _contextus.Configuratio.Veletudo.RatioConsumptioVigorisDetectio;
+                    if (actualis.PuellaePersonae.GradusExhibitus < _configuratio.LimenRemissioExhibitus) {
+                        c *= _configuratio.RatioConsumptioVigorisDetectio;
                     }
                 }
 
-                _contextus.Carrus.PostulareVeletudinis(
-                    dtVigoris: c * _contextus.Temporis.Intervallum
+                _carrus.PostulareVeletudinis(
+                    dtVigoris: c * _temporis.Intervallum
                 );
                 return;
             }
@@ -124,21 +137,21 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 float c = ComputareConsumptioVigoris(
                     r,
                     resFluida.Veletudinis.Dedecus,
-                    _contextus.Configuratio.Veletudo.ConsumptioVigorisMinimaVigilantia,
-                    _contextus.Configuratio.Veletudo.ConsumptioVigorisMaximaVigilantia
+                    _configuratio.ConsumptioVigorisMinimaVigilantia,
+                    _configuratio.ConsumptioVigorisMaximaVigilantia
                 );
-                _contextus.Carrus.PostulareVeletudinis(
-                    dtVigoris: c * _contextus.Temporis.Intervallum
+                _carrus.PostulareVeletudinis(
+                    dtVigoris: c * _temporis.Intervallum
                 );
                 return;
             }
 
-            _abacusStudiumAmittere.Pulsus(_contextus.Temporis.Intervallum);
+            _abacusStudiumAmittere.Pulsus(_temporis.Intervallum);
             float ratio = _abacusStudiumAmittere.ComputareRatio();
-            float recuperatio = _contextus.Configuratio.Veletudo.RecuperatioVigorisSec * ratio;
+            float recuperatio = _configuratio.RecuperatioVigorisSec * ratio;
 
-            _contextus.Carrus.PostulareVeletudinis(
-                dtVigoris: recuperatio * _contextus.Temporis.Intervallum
+            _carrus.PostulareVeletudinis(
+                dtVigoris: recuperatio * _temporis.Intervallum
             );
         }
     }

@@ -7,15 +7,20 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class FabricaStatusPuellaeCorporis {
         internal static IStatusPuellaeCorporis Creare(
             IConfiguratioPuellaeStatuum configuratioStatuum,
-            IConfiguratioPuellaeStatusCorporis configuratio
+            IConfiguratioPuellaeStatusCorporis configuratio,
+            ContextusStatusPuellaeCorporis contextus
         ) {
             // configuratioがMotus実装の場合
             if (configuratio is IConfiguratioPuellaeStatusCorporisMotus configuratioMotus) {
                 switch (configuratioMotus.IdModiMotus) {
                     case IDPuellaeStatusCorporisModiMotus.MotusQuietus:
-                        return new StatusPuellaeCorporisMotusQuietes(configuratioStatuum, configuratioMotus);
+                        return new StatusPuellaeCorporisMotusQuietes(
+                            configuratioStatuum, configuratioMotus, contextus
+                        );
                     case IDPuellaeStatusCorporisModiMotus.MotusLoci:
-                        return new StatusPuellaeCorporisMotusLoci(configuratioStatuum, configuratioMotus);
+                        return new StatusPuellaeCorporisMotusLoci(
+                            configuratioStatuum, configuratioMotus, contextus
+                        );
                     default:
                         Carnifex.Intermissio(LogTextus.FabricaStatusPuellaeCorporis_FABRICAPUELLAESTATUSCORPORIS_MODUS_NOT_FOUND);
                         return null;

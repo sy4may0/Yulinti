@@ -4,7 +4,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal static class CondicioPuellaeSpectaculi {
         public static IDPuellaeStatusCorporis ResolvereSpectaculum(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            ContextusRamusPuellae contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
             // 一応安全のため、Quietesをデフォルトとする。
@@ -21,7 +21,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public static bool EstSpectaculumCorporis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            ContextusRamusPuellae contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
             // 選択されたSpectaculumがあるかどうか。

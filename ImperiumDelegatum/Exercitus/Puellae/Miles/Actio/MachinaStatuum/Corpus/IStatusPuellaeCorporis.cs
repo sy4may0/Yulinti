@@ -18,19 +18,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         IDPuellaeStatusCorporis IdStatusProximusAutomaticus { get; }
 
         void Intrare(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         );
         void Transere(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         );
         void Exire(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         );
         void Ordinare(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         );
     }

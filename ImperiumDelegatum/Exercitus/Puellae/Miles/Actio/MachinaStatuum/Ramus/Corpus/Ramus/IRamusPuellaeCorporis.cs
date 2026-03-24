@@ -4,7 +4,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal interface IRamusPuellaeCorporis : IRamusPuellae {
         IDPuellaeStatusCorporis IdStatusActualis { get; }
         IDPuellaeStatusCorporis IdStatusProximus(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
+            ContextusRamusPuellae contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         );
     }

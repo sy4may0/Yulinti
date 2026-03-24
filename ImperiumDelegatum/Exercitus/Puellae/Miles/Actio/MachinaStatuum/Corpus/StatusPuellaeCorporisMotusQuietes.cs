@@ -6,12 +6,21 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IConfiguratioPuellaeStatuum _configuratioStatuum;
         private readonly IConfiguratioPuellaeStatusCorporisMotus _configuratio;
 
+        private readonly IOstiumCarrusPuellae _carrus;
+        private readonly IOstiumTemporisLegibile _temporis;
+        private readonly ITurrisIntroductionis _turrisIntroductionis;
+
         public StatusPuellaeCorporisMotusQuietes(
             IConfiguratioPuellaeStatuum configuratioStatuum,
-            IConfiguratioPuellaeStatusCorporisMotus configuratio
+            IConfiguratioPuellaeStatusCorporisMotus configuratio,
+            ContextusStatusPuellaeCorporis contextus
         ) {
             _configuratioStatuum = configuratioStatuum;
             _configuratio = configuratio;
+
+            _carrus = contextus.Carrus;
+            _temporis = contextus.Temporis;
+            _turrisIntroductionis = contextus.Introductionis;
         }
 
         public IDPuellaeStatusCorporis Id => _configuratio.Id;
@@ -26,41 +35,37 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public IDPuellaeStatusCorporis IdStatusProximusAutomaticus => _configuratio.IdStatusProximusAutomaticus;
 
         public void Intrare(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.PostulareAnimationis(
+            _carrus.PostulareAnimationis(
                 IDPuellaeAnimationisStratum.Corpus,
                 IdAnimationisIntrare
             );
         }
 
         public void Transere(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.PostulareAnimationis(
+            _carrus.PostulareAnimationis(
                 IDPuellaeAnimationisStratum.Corpus,
                 IdAnimationisTransere
             );
         }
         
         public void Exire(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.PostulareAnimationis(
+            _carrus.PostulareAnimationis(
                 IDPuellaeAnimationisStratum.Corpus,
                 IdAnimationisExire
             );
         }
 
         public void Ordinare(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum,
             IResFluidaPuellaeLegibile resFluida
         ) {
             MotusPuellaeHorizontalis oh = InstrumentaPuellaeMotus.OrdinareMotusHorizontalis(
-                contextusOstiorum.Introductionis.LegoMotus,
+                _turrisIntroductionis.LegoMotus,
                 0f,
                 resFluida.Motus.VelocitasActualisHorizontalis,
                 _configuratio.Acceleratio, _configuratio.Deceleratio,
@@ -73,16 +78,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 resFluida.Motus.RotatioYActualis
             );
 
-            contextusOstiorum.Carrus.PostulareMotus(
+            _carrus.PostulareMotus(
                 oh.Velocitas,
                 oh.TempusLevigatum,
                 or.RotatioY,
                 or.TempusLevigatum
             );
-            contextusOstiorum.Carrus.PostulareVeletudinis(
-                dtVigoris: _configuratio.ConsumptioVigorisSec * contextusOstiorum.Temporis.Intervallum,
-                dtPatientiae: _configuratio.ConsumptioPatientiaeSec * contextusOstiorum.Temporis.Intervallum,
-                dtAetheris: _configuratio.IncrementumAetherisSec * contextusOstiorum.Temporis.Intervallum,
+            _carrus.PostulareVeletudinis(
+                dtVigoris: _configuratio.ConsumptioVigorisSec * _temporis.Intervallum,
+                dtPatientiae: _configuratio.ConsumptioPatientiaeSec * _temporis.Intervallum,
+                dtAetheris: _configuratio.IncrementumAetherisSec * _temporis.Intervallum,
                 dtIntentio: _configuratio.Intentio,
                 dtClaritas: _configuratio.Claritas,
                 dtSonusQuietes: _configuratio.SonusQuietes,

@@ -6,7 +6,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IStatusPuellaeCorporis[] _statuum;
 
         public TabulaPuellaeStatuum(
-            IConfiguratioPuellaeStatuum configuratioStatuum
+            IConfiguratioPuellaeStatuum configuratioStatuum,
+            ContextusStatusPuellaeCorporis contextus
         ) {
             int longitudo = Enum.GetValues(typeof(IDPuellaeStatusCorporis)).Length;
             _statuum = new IStatusPuellaeCorporis[longitudo];
@@ -14,7 +15,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             foreach (var conf in configuratioStatuum.StatuumCorporis) {
                 _statuum[(int)conf.Id] = FabricaStatusPuellaeCorporis.Creare(
                     configuratioStatuum,
-                    conf
+                    conf,
+                    contextus
                 );
             }
         }

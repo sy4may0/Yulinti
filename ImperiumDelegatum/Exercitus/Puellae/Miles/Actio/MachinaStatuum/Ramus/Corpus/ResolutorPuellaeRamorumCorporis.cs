@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResolutorPuellaeRamorumCorporis { 
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
+        private readonly ContextusRamusPuellae _contextusOstiorum;
         private readonly IRamusPuellaeCorporis[] _rami;
         // キー: IDPuellaeStatusCorporisActualis
         // 値: ジャグ配列[Prioritas順のインデックス][同一Prioritasを持つRamus配列]
@@ -15,7 +15,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // !!!!!! LINQを使ってぁ !!!!!!!!!!
         // Updateループでは呼ぶな
         public ResolutorPuellaeRamorumCorporis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum
+            ContextusRamusPuellae contextusOstiorum
         ) {
             _contextusOstiorum = contextusOstiorum;
             _random = new Random();

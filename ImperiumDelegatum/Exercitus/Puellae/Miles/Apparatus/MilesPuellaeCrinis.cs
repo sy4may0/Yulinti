@@ -2,22 +2,22 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesPuellaeCrinis {
-        private readonly ContextusPuellaeOstiorumLegibile _contextusOstiorum;
+        private readonly IOstiumCarrusPuellae _carrus;
 
         // VContainer注入
         public MilesPuellaeCrinis(
-            ContextusPuellaeOstiorumLegibile contextusOstiorum
+            IOstiumCarrusPuellae carrus
         ) {
-            _contextusOstiorum = contextusOstiorum;
+            _carrus = carrus;
         }
 
         public void Initare() {
             // Default Hair
-            _contextusOstiorum.Carrus.PostulareCrinis(IDPuellaeCrinis.Resiliens);
+            _carrus.PostulareCrinis(IDPuellaeCrinis.Resiliens);
         }
 
         public void MutareComam(IDPuellaeCrinis idCrinis) {
-            _contextusOstiorum.Carrus.PostulareCrinis(idCrinis);
+            _carrus.PostulareCrinis(idCrinis);
         }
     }
 }
