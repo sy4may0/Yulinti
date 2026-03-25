@@ -15,6 +15,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ResFluidaPuellaeSpectaculi>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<ResFluidaPuellaeFormae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             builder.Register<ResFluidaPuellaeLegibile>(Lifetime.Singleton)
                 .AsSelf()
@@ -58,6 +61,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ExecutorCivisLoci>(Lifetime.Singleton);
             builder.Register<ExecutorCivisMortis>(Lifetime.Singleton);
             builder.Register<ExecutorCivisVeletudinis>(Lifetime.Singleton);
+            builder.Register<ExecutorPuellaeFormae>(Lifetime.Singleton);
 
             // Miles
             builder.Register<MilesPuellaeActionis>(Lifetime.Singleton);

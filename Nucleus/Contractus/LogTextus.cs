@@ -117,6 +117,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_MOTUS_QUEUE_FULL = "ExecutorPuellaeLoci - ordinatio motus queue full";
         public const string ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_NAVMESH_QUEUE_FULL = "ExecutorPuellaeLoci - ordinatio navmesh queue full";
         public const string ExecutorPuellaeVeletudinis_EXECUTORPUELLAEVELETUDINIS_ORDINATIO_VELETUDINISNUDI_QUEUE_FULL = "ExecutorPuellaeVeletudinis - ordinatio veletudinisnudi queue full";
+        public const string ExecutorPuellaeFormae_MINIATERIUMPUELLAEFORMAE_ORDINATIO_QUEUE_FULL = "ExecutorPuellaeFormae - miniateriumpuellaeformae ordinatio queue full";
         public const string FabricaStatusCivisCorporis_FABRICACIVISSTATUSCORPORIS_INVALID_CONFIGURATION = "FabricaStatusCivisCorporis - fabricacivisstatuscorporis invalid configuration";
         public const string FabricaStatusCivisCorporis_FABRICACIVISSTATUSCORPORIS_MODUS_NOT_FOUND = "FabricaStatusCivisCorporis - fabricacivisstatuscorporis modus not found";
         public const string FabricaStatusPuellaeCorporis_FABRICAPUELLAESTATUSCORPORIS_INVALID_CONFIGURATION = "FabricaStatusPuellaeCorporis - fabricapuellaestatuscorporis invalid configuration";
@@ -148,6 +149,9 @@ namespace Yulinti.Nucleus.Contractus {
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_EMISSIO_QUEUE_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinis emissio queue full";
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_LACUS_EMPTY = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinis lacus empty";
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINIS_LACUS_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinis lacus full";
+        public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEFORMAE_EMISSIO_QUEUE_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeformae emissio queue full";
+        public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEFORMAE_LACUS_EMPTY = "LacusOrdinatioPuellae - ordinatiopuellaeformae lacus empty";
+        public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEFORMAE_LACUS_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeformae lacus full";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_MISSING = "MachinaCivisStatuumCorporis - status missing";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_NOT_FOUND = "MachinaCivisStatuumCorporis - status not found";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_IDANIMATIONISINTRARE_DESINERE_INVALID = "MachinaCivisStatuumCorporis - idanimationisintrare desinere invalid";
@@ -211,5 +215,6 @@ namespace Yulinti.Nucleus.Contractus {
         public const string TabulaSoniVeli_TABULASONIVELI_SONUS_NOT_FOUND = "TabulaSoniVeli - sonus not found";
         public const string SonusVeli_SONUSVELI_SONUS_NULL = "SonusVeli - sonus null";
         public const string Temporis_TEMPORIS_INSTANCE_NULL = "Temporis - instance null";
+        public const string ResFluidaPuellaeFormae_LEGERE_NIHIL = "ResFluidaPuellaeFormae - legere nihil";
     }
 }

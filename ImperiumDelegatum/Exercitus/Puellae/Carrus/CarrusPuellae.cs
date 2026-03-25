@@ -12,7 +12,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly ExecutorPuellaeLoci _exLoci;
         private readonly ExecutorPuellaeVeletudinis _exVeletudinis;
         private readonly ExecutorPuellaePersonae _exPersonae;
-        
+        private readonly ExecutorPuellaeFormae _exFormae;
+
         private readonly LacusOrdinatioPuellae _lacusOrdinatioPuellae;
 
         public CarrusPuellae(
@@ -21,7 +22,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ExecutorPuellaeFigurae exFigurae,
             ExecutorPuellaeLoci exLoci,
             ExecutorPuellaeVeletudinis exVeletudinis,
-            ExecutorPuellaePersonae exPersonae
+            ExecutorPuellaePersonae exPersonae,
+            ExecutorPuellaeFormae exFormae
         ) {
             _exAnimationis = exAnimationis;
             _exCrinis = exCrinis;
@@ -29,6 +31,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exLoci = exLoci;
             _exVeletudinis = exVeletudinis;
             _exPersonae = exPersonae;
+            _exFormae = exFormae;
+
             _lacusOrdinatioPuellae = new LacusOrdinatioPuellae();
         }
 
@@ -39,6 +43,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exLoci.Primum();
             _exVeletudinis.Primum();
             _exPersonae.Primum();
+            _exFormae.Primum();
         }
 
         // Start()の一番最初に実行する。
@@ -49,6 +54,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exLoci.Initare();
             _exVeletudinis.Initare();
             _exPersonae.Initare();
+            _exFormae.Initare();
         }
 
         private void ConfirmareAnimationis() {
@@ -80,6 +86,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _lacusOrdinatioPuellae.ColligerePersonae();
         }
 
+        private void ConfirmareFormae() {
+            _exFormae.Confirmare();
+            _lacusOrdinatioPuellae.ColligereFormae();
+        }
+
         // Incipereの最後に実行 Start()で適用が必要なケースはここでやる。
         public void ConfirmareIncipabilis() {
             ConfirmareAnimationis();
@@ -107,6 +118,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ConfirmareVeletudinis();
             // Personaeを適用
             ConfirmarePersonae();
+            // Formaeを適用
+            ConfirmareFormae();
 
             _lacusOrdinatioPuellae.ColligereOmnia();
         }
@@ -118,6 +131,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exLoci.Purgare();
             _exVeletudinis.Purgare();
             _exPersonae.Purgare();
+            _exFormae.Purgare();
             _lacusOrdinatioPuellae.ColligereOmnia();
         }
 
@@ -252,6 +266,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                     dtAnimaeCorporis
                 );
                 _exPersonae.Executare(ordinatio);
+            }
+        }
+
+        public void PostulareFormae(
+            IDPuellaeFormae idFormae,
+            Vector3 magnitudoDesiderata
+        ){
+            if(_lacusOrdinatioPuellae.EmittareFormae(out var ordinatio)) {
+                ordinatio.Pono(idFormae, magnitudoDesiderata);
+                _exFormae.Executare(ordinatio);
             }
         }
     }

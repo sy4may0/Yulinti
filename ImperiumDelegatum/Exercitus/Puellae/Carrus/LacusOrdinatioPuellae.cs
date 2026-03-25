@@ -14,6 +14,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Lacus<OrdinatioPuellaeVeletudinis> _lacusVeletudinis;
         private readonly Lacus<OrdinatioPuellaeVeletudinisNudi> _lacusVeletudinisNudi;
         private readonly Lacus<OrdinatioPuellaePersonae> _lacusPersonae;
+        private readonly Lacus<OrdinatioPuellaeFormae> _lacusFormae;
 
         private readonly Ordo<OrdinatioPuellaeAnimationis> _emissioAnimationis;
         private readonly Ordo<OrdinatioPuellaeCrinis> _emissioCrinis;
@@ -25,6 +26,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Ordo<OrdinatioPuellaeVeletudinis> _emissioVeletudinis;
         private readonly Ordo<OrdinatioPuellaeVeletudinisNudi> _emissioVeletudinisNudi;
         private readonly Ordo<OrdinatioPuellaePersonae> _emissioPersonae;
+        private readonly Ordo<OrdinatioPuellaeFormae> _emissioFormae;
 
         public LacusOrdinatioPuellae() {
             _lacusAnimationis = new Lacus<OrdinatioPuellaeAnimationis>(
@@ -55,7 +57,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 ConstansPuellae.LongitudoOrdinatioVeletudinisNudi
             );
             _lacusPersonae = new Lacus<OrdinatioPuellaePersonae>(12);
-
+            _lacusFormae = new Lacus<OrdinatioPuellaeFormae>(
+                ConstansPuellae.LongitudoOrdinatioFormae
+            );
             _emissioAnimationis = new Ordo<OrdinatioPuellaeAnimationis>(
                 ConstansPuellae.LongitudoOrdinatioAnimationis
             );
@@ -85,6 +89,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             );
             _emissioPersonae = new Ordo<OrdinatioPuellaePersonae>(
                 ConstansPuellae.LongitudoOrdinatioVeletudinis
+            );
+            _emissioFormae = new Ordo<OrdinatioPuellaeFormae>(
+                ConstansPuellae.LongitudoOrdinatioFormae
             );
         }
 
@@ -248,6 +255,22 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             return false;
         }
 
+        public bool EmittareFormae(out OrdinatioPuellaeFormae formae) {
+            if (_lacusFormae.ConareLego(out var r)) {
+                if(_emissioFormae.ConarePono(r)) {
+                    formae = r;
+                    formae.Initare();
+                    return true;
+                }
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEFORMAE_EMISSIO_QUEUE_FULL);
+                formae = null;
+                return false;
+            }
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEFORMAE_LACUS_EMPTY);
+            formae = null;
+            return false;
+        }
+
         public void ColligereAnimationis() {
             while(_emissioAnimationis.ConareLego(out var r)) {
                 if(!_lacusAnimationis.ConarePono(r)) {
@@ -348,6 +371,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
         }
 
+        public void ColligereFormae() {
+            while(_emissioFormae.ConareLego(out var r)) {
+                if(!_lacusFormae.ConarePono(r)) {
+                    r.Purgere();
+                    r.Liberare();
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEFORMAE_LACUS_FULL);
+                }
+            }
+        }
+
         public void ColligereOmnia() {
             ColligereAnimationis();
             ColligereCrinis();
@@ -359,6 +392,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ColligereVeletudinis();
             ColligereVeletudinisNudi();
             ColligerePersonae();
+            ColligereFormae();
         }
     }
 }

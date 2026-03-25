@@ -13,7 +13,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         Apparatus,
         VeletudinisNudi,
         Personae,
-        PersonaeInitii
+        PersonaeInitii,
+        Formae
     }
     internal interface IOrdinatioPuellae {
         bool EstApplicandum { get; }
