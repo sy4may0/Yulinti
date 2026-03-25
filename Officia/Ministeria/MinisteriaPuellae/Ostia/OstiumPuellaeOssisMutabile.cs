@@ -22,8 +22,8 @@ namespace Yulinti.Officia.Ministeria {
         public void PonoRotationem(IDPuellaeOssis idOssis, System.Numerics.Quaternion rotatio) {
             _miPuellaeOssis.PonoRotationem(idOssis, InterpresNumeri.ToUnity(rotatio));
         }
-        public void PonoScalam(IDPuellaeOssis idOssis, System.Numerics.Vector3 scala) {
-            _miPuellaeOssis.PonoScalam(idOssis, InterpresNumeri.ToUnity(scala));
+        public void PonoMagnitudonem(IDPuellaeOssis idOssis, System.Numerics.Vector3 magnitudo) {
+            _miPuellaeOssis.PonoMagnitudonem(idOssis, InterpresNumeri.ToUnity(magnitudo));
         }
     }
 }

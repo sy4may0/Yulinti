@@ -7,9 +7,11 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [SerializeField] private ConfiguratioPuellaeStatuum statuum;
         [SerializeField] private ConfiguratioPuellaeActionisSecundarius actionisSecundarius;
         [SerializeField] private ConfiguratioPuellaeVeletudinis veletudo;
+        [SerializeField] private ConfiguratioPuellaeFormarum formarum;
 
         public IConfiguratioPuellaeStatuum Statuum => statuum;
         public IConfiguratioPuellaeActionisSecundarius ActionisSecundarius => actionisSecundarius;
         public IConfiguratioPuellaeVeletudinis Veletudo => veletudo;
+        public IConfiguratioPuellaeFormarum Formarum => formarum;
     }
 }
