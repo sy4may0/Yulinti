@@ -6,7 +6,10 @@ using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResolutorCivisIctuumVisae : IResolutorCivisIctuumVisae {
-        private readonly ContextusCivisOstiorumLegibile _contextus;
+        private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
+        private readonly IOstiumCivisLegibile _civis;
+        private readonly IOstiumCivisVisaeLegibile _visa;
+        private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
         private readonly AbacusDistantiae _abacusDistantiaeVisus;
 
         // 角度補正の合成用
@@ -25,48 +28,54 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
 
         public ResolutorCivisIctuumVisae(
-            ContextusCivisOstiorumLegibile contextus,
+            IConfiguratioCivisCustodiae configuratioCivisCustodiae,
+            IOstiumCivisLegibile civis,
+            IOstiumCivisVisaeLegibile visa,
+            IOstiumPuellaeResVisaeLegibile puellaeResVisae,
             IResolutorCivisDistantia resolutorCivisDistantia
         ) {
-            _contextus = contextus;
+            _configuratioCivisCustodiae = configuratioCivisCustodiae;
+            _civis = civis;
+            _visa = visa;
+            _puellaeResVisae = puellaeResVisae;
             _resolutorCivisDistantia = resolutorCivisDistantia;
             _abacusDistantiaeVisus = new AbacusDistantiae(
-                _contextus.Configuratio.Custodiae.DistantiaVisaeMaxima,
-                _contextus.Configuratio.Custodiae.DistantiaVisaeMin,
-                _contextus.Configuratio.Custodiae.DistantiaVisaeMedius,
-                _contextus.Configuratio.Custodiae.PraeruptioDistantiaVisae
+                _configuratioCivisCustodiae.DistantiaVisaeMaxima,
+                _configuratioCivisCustodiae.DistantiaVisaeMin,
+                _configuratioCivisCustodiae.DistantiaVisaeMedius,
+                _configuratioCivisCustodiae.PraeruptioDistantiaVisae
             );
 
             _abacusDistantiaeVisusAngli = new AbacusDistantiae(
-                _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMaxima,
-                _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMin,
-                _contextus.Configuratio.Custodiae.DistantiaAnguliVisusMedius,
-                _contextus.Configuratio.Custodiae.PraeruptioDistantiaAnguliVisus
+                _configuratioCivisCustodiae.DistantiaAnguliVisusMaxima,
+                _configuratioCivisCustodiae.DistantiaAnguliVisusMin,
+                _configuratioCivisCustodiae.DistantiaAnguliVisusMedius,
+                _configuratioCivisCustodiae.PraeruptioDistantiaAnguliVisus
             );
 
             // 近距離で適用する視野角
             _abacusAnguliVisus0 = new AbacusAnguli(
-                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Maxima),
-                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Min),
-                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus0Medius),
-                _contextus.Configuratio.Custodiae.PraeruptioAngulusVisus0
+                Mathematica.Deg2Rad(_configuratioCivisCustodiae.AngulusVisus0Maxima),
+                Mathematica.Deg2Rad(_configuratioCivisCustodiae.AngulusVisus0Min),
+                Mathematica.Deg2Rad(_configuratioCivisCustodiae.AngulusVisus0Medius),
+                _configuratioCivisCustodiae.PraeruptioAngulusVisus0
             );
             // 遠距離で適用する視野角
             _abacusAnguliVisus1 = new AbacusAnguli(
-                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Maxima),
-                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Min),
-                Mathematica.Deg2Rad(_contextus.Configuratio.Custodiae.AngulusVisus1Medius),
-                _contextus.Configuratio.Custodiae.PraeruptioAngulusVisus1
+                Mathematica.Deg2Rad(_configuratioCivisCustodiae.AngulusVisus1Maxima),
+                Mathematica.Deg2Rad(_configuratioCivisCustodiae.AngulusVisus1Min),
+                Mathematica.Deg2Rad(_configuratioCivisCustodiae.AngulusVisus1Medius),
+                _configuratioCivisCustodiae.PraeruptioAngulusVisus1
             );
 
             _cIDPuellaeResVisaeCapitis = (IDPuellaeResVisaeCapitis[])Enum.GetValues(typeof(IDPuellaeResVisaeCapitis));
             _cIDPuellaeResVisaePectoris = (IDPuellaeResVisaePectoris[])Enum.GetValues(typeof(IDPuellaeResVisaePectoris));
             _cIDPuellaeResVisaeNatium = (IDPuellaeResVisaeNatium[])Enum.GetValues(typeof(IDPuellaeResVisaeNatium));
 
-            _visaIctuumCapitis = new float[contextus.Civis.Longitudo];
-            _visaIctuumCorporis = new float[contextus.Civis.Longitudo];
+            _visaIctuumCapitis = new float[_civis.Longitudo];
+            _visaIctuumCorporis = new float[_civis.Longitudo];
 
-            for (int i = 0; i < contextus.Civis.Longitudo; i++) {
+            for (int i = 0; i < _civis.Longitudo; i++) {
                 _visaIctuumCapitis[i] = 0f;
                 _visaIctuumCorporis[i] = 0f;
             }
@@ -119,7 +128,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             Vector3 positioCivisCapitis,
             Vector3 directioCivisCapitis
         ) {
-            if (!_contextus.Visa.EstVisa(idCivis, positioResVisae)) return 0f;
+            if (!_visa.EstVisa(idCivis, positioResVisae)) return 0f;
 
             float ratioDistantia = ComputareRatioDistantia(positioCivisCapitis, positioResVisae);
             float ratioAngulus = ComputareRatioAngulus(positioCivisCapitis, positioResVisae, directioCivisCapitis);
@@ -135,7 +144,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             Vector3 directioCivisCapitis
         ) {
             Vector3 positioResVisae = default;
-            if (!_contextus.PuellaeResVisae.ConareLegoCapitis(idCapitis, out positioResVisae)) return 0f;
+            if (!_puellaeResVisae.ConareLegoCapitis(idCapitis, out positioResVisae)) return 0f;
             return ComputareVisaIctuum(idCivis, visus, positioResVisae, positioCivisCapitis, directioCivisCapitis);
         }
         private float ComputareVisaIctuum(
@@ -146,7 +155,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             Vector3 directioCivisCapitis
         ) {
             Vector3 positioResVisae = default;
-            if (!_contextus.PuellaeResVisae.ConareLegoPectoris(idPectoris, out positioResVisae)) return 0f;
+            if (!_puellaeResVisae.ConareLegoPectoris(idPectoris, out positioResVisae)) return 0f;
             return ComputareVisaIctuum(idCivis, visus, positioResVisae, positioCivisCapitis, directioCivisCapitis);
         }
         private float ComputareVisaIctuum(
@@ -157,7 +166,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             Vector3 directioCivisCapitis
         ) {
             Vector3 positioResVisae = default;
-            if (!_contextus.PuellaeResVisae.ConareLegoNatium(idNatium, out positioResVisae)) return 0f;
+            if (!_puellaeResVisae.ConareLegoNatium(idNatium, out positioResVisae)) return 0f;
             return ComputareVisaIctuum(idCivis, visus, positioResVisae, positioCivisCapitis, directioCivisCapitis);
         }
 
@@ -182,8 +191,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             Vector3 directioCivisCapitis = default;
 
             if (!(
-                _contextus.Visa.ConareLegoPositioCapitis(idCivis, out positioCivisCapitis) && 
-                _contextus.Visa.ConareLegoDirectioCapitis(idCivis, out directioCivisCapitis)
+                _visa.ConareLegoPositioCapitis(idCivis, out positioCivisCapitis) && 
+                _visa.ConareLegoDirectioCapitis(idCivis, out directioCivisCapitis)
             )) {
                 Notarius.Memorare(LogTextus.ResolutorCivisIctuumVisae_RESOLUTORCIVISICTUUM_CONARELEGO_FAILED);
                 _visaIctuumCapitis[idCivis] = 0f;

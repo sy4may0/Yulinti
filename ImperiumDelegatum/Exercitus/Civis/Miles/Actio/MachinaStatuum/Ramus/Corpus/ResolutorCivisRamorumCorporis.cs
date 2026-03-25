@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResolutorCivisRamorumCorporis {
-        private readonly ContextusCivisOstiorumLegibile _contextusOstiorum;
+        private readonly ContextusRamusCivis _contextus;
         private readonly IRamusCivisCorporis[] _rami;
         // キー: IDCivisStatusCorporisActualis
         // 値: ジャグ配列 [Prioritas順のインデックス][同一Prioritasを持つRamus配列]
@@ -13,9 +13,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Random _random;
 
         public ResolutorCivisRamorumCorporis(
-            ContextusCivisOstiorumLegibile contextusOstiorum
+            ContextusRamusCivis contextus
         ) {
-            _contextusOstiorum = contextusOstiorum;
+            _contextus = contextus;
             _random = new Random();
 
             _rami = new IRamusCivisCorporis[] {
@@ -82,7 +82,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int summa = 0;
 
             foreach (var ramus in rami) {
-                if (!ramus.Condicio(idCivis, _contextusOstiorum, resFluida)) {
+                if (!ramus.Condicio(idCivis, _contextus, resFluida)) {
                     continue;
                 }
 

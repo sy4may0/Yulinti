@@ -8,7 +8,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IStatusCivisCorporis[] _statuum;
 
         public TabulaCivisStatuum(
-            IConfiguratioCivisStatuum configuratioStatuum
+            IConfiguratioCivisStatuum configuratioStatuum,
+            ContextusStatusCivisCorporis contextus
         ) {
             int longitudo = Enum.GetValues(typeof(IDCivisStatusCorporis)).Length;
             _statuum = new IStatusCivisCorporis[longitudo];
@@ -16,11 +17,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             foreach (var conf in configuratioStatuum.StatuumCorporis) {
                 _statuum[(int)conf.Id] = FabricaStatusCivisCorporis.Creare(
                     configuratioStatuum,
-                    conf
+                    conf,
+                    contextus
                 );
             }
 
-            _statuum[(int)IDCivisStatusCorporis.Suicidium] = new StatusCivisCorporisSuicidium();
+            _statuum[(int)IDCivisStatusCorporis.Suicidium] = new StatusCivisCorporisSuicidium(contextus);
 
             for (int i = 0; i < longitudo; i++) {
                 IDCivisStatusCorporis id = (IDCivisStatusCorporis)i;

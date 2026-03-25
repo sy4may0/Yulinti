@@ -2,6 +2,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCorporisSuicidium : IStatusCivisCorporis {
+        private readonly ContextusStatusCivisCorporis _contextus;
         public IDCivisStatusCorporis Id => IDCivisStatusCorporis.Suicidium;
         public IDCivisAnimationis IdAnimationisIntrare => IDCivisAnimationis.Nihil;
         public IDCivisAnimationis IdAnimationisTransere => IDCivisAnimationis.Nihil;
@@ -13,33 +14,35 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public IDCivisStatusCorporis IDStatusProximusAutomaticus => IDCivisStatusCorporis.Suicidium;
 
+        public StatusCivisCorporisSuicidium(
+            ContextusStatusCivisCorporis contextus
+        ) {
+            _contextus = contextus;
+        }
+
         public void Intrare(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
         }
 
         public void Transere(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
         }
 
         public void Exire(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
         }
 
         public void Ordinare(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.PostulareMortis(
+            _contextus.Carrus.PostulareMortis(
                 idCivis, SpeciesOrdinationisCivisMortis.Spirituare
             );
         }

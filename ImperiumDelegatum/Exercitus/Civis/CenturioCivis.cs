@@ -2,7 +2,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class CenturioCivis : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisFixus, ICenturioPulsabilisTardus {
-        private readonly ContextusCivisOstiorumLegibile _contextus;
+        private readonly IOstiumCivisLegibile _ostiumCivisLegibile;
         private readonly MilesCivisActionis _milesCivisActionis;
         private readonly MilesCivisCustodiae _milesCivisCustodiae;
 
@@ -17,13 +17,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             MilesCivisActionis milesCivisActionis,
             MilesCivisCustodiae milesCivisCustodiae,
             IResFluidaCivisLegibile resFluidaLegibile,
-            ContextusCivisOstiorumLegibile contextus,
+            IOstiumCivisLegibile ostiumCivisLegibile,
             CarrusCivis carrusCivis
         ) {
             _milesCivisActionis = milesCivisActionis;
             _milesCivisCustodiae = milesCivisCustodiae;
             _resFluidaLegibile = resFluidaLegibile;
-            _contextus = contextus;
+            _ostiumCivisLegibile = ostiumCivisLegibile;
             _carrusCivis = carrusCivis;
 
             _carrusCivis.PonoAd(AdIncarnare, AdSpirituare);
@@ -43,7 +43,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         // 不整合のNPCが存在すれば修復する。
         private void RenovareDominare(int idCivis) {
-            bool estActivum = _contextus.Civis.EstActivum(idCivis);
+            bool estActivum = _ostiumCivisLegibile.EstActivum(idCivis);
             bool estDominare = _resFluidaLegibile.Veletudinis.EstDominare(idCivis);
 
             if (estActivum == estDominare) return;
@@ -56,7 +56,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Pulsus() {
-            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+            for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
                 // AdIncarnare/AdSpirituareが生成時にInvoke()されなかった場合に修復する。
                 RenovareDominare(i);
 
@@ -78,7 +78,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void PulsusFixus() {
-            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+            for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
                 if (!_resFluidaLegibile.Veletudinis.EstDominare(i)) continue;
 
                 _milesCivisCustodiae.ResolvereIctuum(i, _resFluidaLegibile);
@@ -86,7 +86,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void PulsusTardus() {
-            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+            for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
                 if (!_resFluidaLegibile.Veletudinis.EstDominare(i)) continue;
 
                 // Detectio判定の解決

@@ -43,7 +43,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ContextusRamusPuellae>(Lifetime.Singleton);
             builder.Register<ContextusStatusPuellaeCorporis>(Lifetime.Singleton);
 
-            builder.Register<ContextusCivisOstiorumLegibile>(Lifetime.Singleton);
+            builder.Register<ContextusRamusCivis>(Lifetime.Singleton);
+            builder.Register<ContextusStatusCivisCorporis>(Lifetime.Singleton);
 
             // Executor
             builder.Register<ExecutorPuellaeAnimationis>(Lifetime.Singleton);

@@ -4,13 +4,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCorporisMotusQuietes : IStatusCivisCorporis {
         private readonly IConfiguratioCivisStatuum _configuratioStatuum;
         private readonly IConfiguratioCivisStatusCorporisMotus _configuratio;
+        private readonly ContextusStatusCivisCorporis _contextus;
 
         public StatusCivisCorporisMotusQuietes(
             IConfiguratioCivisStatuum configuratioStatuum,
-            IConfiguratioCivisStatusCorporisMotus configuratio
+            IConfiguratioCivisStatusCorporisMotus configuratio,
+            ContextusStatusCivisCorporis contextus
         ) {
             _configuratioStatuum = configuratioStatuum;
             _configuratio = configuratio;
+            _contextus = contextus;
         }
 
         public IDCivisStatusCorporis Id => _configuratio.Id;
@@ -27,10 +30,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Intrare(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.PostulareAnimationis(
+            _contextus.Carrus.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Corpus,
                 IdAnimationisIntrare
@@ -39,10 +41,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Transere(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.PostulareAnimationis(
+            _contextus.Carrus.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Corpus,
                 IdAnimationisTransere
@@ -51,10 +52,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Exire(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.PostulareAnimationis(
+            _contextus.Carrus.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Corpus,
                 IdAnimationisExire
@@ -63,13 +63,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Ordinare(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         ) {
-            contextusOstiorum.Carrus.PostulareMotus(idCivis, 0f, 0f, 0f, 0f);
-            contextusOstiorum.Carrus.PostulareVeletudinisValoris(
+            _contextus.Carrus.PostulareMotus(idCivis, 0f, 0f, 0f, 0f);
+            _contextus.Carrus.PostulareVeletudinisValoris(
                 idCivis,
-                dtVitae: _configuratio.ConsumptioVitae * contextusOstiorum.Temporis.Intervallum,
+                dtVitae: _configuratio.ConsumptioVitae * _contextus.Temporis.Intervallum,
                 dtVisus: _configuratio.Visus,
                 dtAuditus: _configuratio.Auditus
             );

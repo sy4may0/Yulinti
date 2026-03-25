@@ -2,13 +2,21 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResolutorCivisMutareCustodiae {
-        private readonly ContextusCivisOstiorumLegibile _contextus;
+        private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
+        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCivisLegibile _civis;
 
         private readonly bool[] _estSpectareNudusPrioris;
 
-        public ResolutorCivisMutareCustodiae(ContextusCivisOstiorumLegibile contextus) {
-            _contextus = contextus;
-            _estSpectareNudusPrioris = new bool[contextus.Civis.Longitudo];
+        public ResolutorCivisMutareCustodiae(
+            IConfiguratioCivisCustodiae configuratioCivisCustodiae,
+            IOstiumCarrusCivis carrus,
+            IOstiumCivisLegibile civis
+        ) {
+            _configuratioCivisCustodiae = configuratioCivisCustodiae;
+            _carrus = carrus;
+            _civis = civis;
+            _estSpectareNudusPrioris = new bool[_civis.Longitudo];
         }
 
         public void Initare(int idCivis) {
@@ -34,7 +42,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                     dtVisa = (ConstansCivis.RatioSuspectaVisa - visa);
                 }
 
-                _contextus.Carrus.PostulareVeletudinisValoris(
+                _carrus.PostulareVeletudinisValoris(
                     idCivis,
                     dtVisa: dtVisa
                 );
@@ -46,12 +54,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 float visa = resFluida.Veletudinis.Visa(idCivis);
                 float suspecta = resFluida.Veletudinis.Suspecta(idCivis);
                 if (resFluida.Veletudinis.EstVigilantia(idCivis) || resFluida.Veletudinis.EstDetectio(idCivis)) {
-                    _contextus.Carrus.PostulareVeletudinisValoris(
+                    _carrus.PostulareVeletudinisValoris(
                         idCivis,
                         dtSuspecta: 1f
                     );
                 } else {
-                    _contextus.Carrus.PostulareVeletudinisValoris(
+                    _carrus.PostulareVeletudinisValoris(
                         idCivis,
                         dtSuspecta: visa - suspecta
                     );
@@ -70,8 +78,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             bool vigilantiaProximus = resFluida.Veletudinis.EstVigilantia(idCivis);
             bool detectioProximus = resFluida.Veletudinis.EstDetectio(idCivis);
-            float limenVigilantia = _contextus.Configuratio.Custodiae.LimenVigilantia;
-            float limenDetectio = _contextus.Configuratio.Custodiae.LimenDetectio;
+            float limenVigilantia = _configuratioCivisCustodiae.LimenVigilantia;
+            float limenDetectio = _configuratioCivisCustodiae.LimenDetectio;
             float hysteriaDetectionis = ConstansCivis.HysteriaDetectionis;
 
             // 通常時変動
@@ -108,7 +116,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                  detectioProximus == resFluida.Veletudinis.EstDetectio(idCivis)
             ) return;
 
-            _contextus.Carrus.PostulareVeletudinisCondicionis(
+            _carrus.PostulareVeletudinisCondicionis(
                 idCivis,
                 estVigilantia: vigilantiaProximus,
                 estDetectio: detectioProximus
@@ -119,7 +127,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis, IResFluidaCivisLegibile resFluida
         ) {
             bool detectioSonoraProximus = resFluida.Veletudinis.EstDetectioSonora(idCivis);
-            float limenDetectioSonora = _contextus.Configuratio.Custodiae.LimenDetectioSonora;
+            float limenDetectioSonora = _configuratioCivisCustodiae.LimenDetectioSonora;
             float hysteriaDetectioSonora = ConstansCivis.HysteriaDetectioSonora;
 
             if (resFluida.Veletudinis.Audita(idCivis) > limenDetectioSonora + hysteriaDetectioSonora) {
@@ -130,7 +138,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             
             if (detectioSonoraProximus == resFluida.Veletudinis.EstDetectioSonora(idCivis)) return;
 
-            _contextus.Carrus.PostulareVeletudinisCondicionis(
+            _carrus.PostulareVeletudinisCondicionis(
                 idCivis,
                 estDetectioSonora: detectioSonoraProximus
             );
@@ -140,7 +148,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis, IResFluidaCivisLegibile resFluida
         ) {
             bool suspectaProximus = resFluida.Veletudinis.EstSuspecta(idCivis);
-            float limenSuspecta = _contextus.Configuratio.Custodiae.LimenSuspecta;
+            float limenSuspecta = _configuratioCivisCustodiae.LimenSuspecta;
             float hysteriaSuspecta = ConstansCivis.HysteriaSuspecta;
 
             if (resFluida.Veletudinis.Suspecta(idCivis) > limenSuspecta + hysteriaSuspecta) {
@@ -151,7 +159,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
             if (suspectaProximus == resFluida.Veletudinis.EstSuspecta(idCivis)) return;
 
-            _contextus.Carrus.PostulareVeletudinisCondicionis(
+            _carrus.PostulareVeletudinisCondicionis(
                 idCivis,
                 estSuspecta: suspectaProximus
             );

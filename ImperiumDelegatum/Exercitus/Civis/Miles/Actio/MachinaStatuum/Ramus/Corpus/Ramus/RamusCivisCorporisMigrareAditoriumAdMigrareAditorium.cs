@@ -7,7 +7,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public int Prioritas => 1000;
         public bool Condicio(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextus,
+            ContextusRamusCivis contextus,
             IResFluidaCivisLegibile resFluida
         ) {
             return CondicioCivisNavmesh.EstAdPerveni(idCivis, contextus);

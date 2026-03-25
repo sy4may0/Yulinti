@@ -3,9 +3,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal static class CondicioCivisNavmesh {
         public static bool EstAdPerveni(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum
+            ContextusRamusCivis contextus
         ) {
-            return contextusOstiorum.Loci.EstAdPerveni(idCivis);
+            return contextus.Loci.EstAdPerveni(idCivis);
         }
     }
 }

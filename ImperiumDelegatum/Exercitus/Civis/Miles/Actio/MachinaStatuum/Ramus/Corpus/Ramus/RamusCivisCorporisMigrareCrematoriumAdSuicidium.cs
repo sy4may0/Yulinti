@@ -7,7 +7,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public int Prioritas => 0;
         public bool Condicio(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextus,
+            ContextusRamusCivis contextus,
             IResFluidaCivisLegibile resFluida
         ) {
             // Crematrium到達でSuicidiumに遷移

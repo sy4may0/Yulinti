@@ -15,22 +15,18 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         void Intrare(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         );
         void Transere(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         );
         void Exire(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         );
         void Ordinare(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
             IResFluidaCivisLegibile resFluida
         );
     }

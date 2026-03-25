@@ -7,13 +7,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class FabricaStatusCivisCorporis {
         internal static IStatusCivisCorporis Creare(
             IConfiguratioCivisStatuum configuratioStatuum,
-            IConfiguratioCivisStatusCorporis configuratio
+            IConfiguratioCivisStatusCorporis configuratio,
+            ContextusStatusCivisCorporis contextus
         ) {
             // configuratioがMotus実装の場合
             if (configuratio is IConfiguratioCivisStatusCorporisMotus configuratioMotus) {
                 switch (configuratioMotus.IdModiMotus) {
                     case IDCivisStatusCorporisModiMotus.MotusQuietus:
-                        return new StatusCivisCorporisMotusQuietes(configuratioStatuum, configuratioMotus);
+                        return new StatusCivisCorporisMotusQuietes(
+                            configuratioStatuum, configuratioMotus, contextus
+                        );
                     default:
                         Carnifex.Intermissio(LogTextus.FabricaStatusCivisCorporis_FABRICACIVISSTATUSCORPORIS_MODUS_NOT_FOUND);
                         return null;
@@ -22,7 +25,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             } else if (configuratio is IConfiguratioCivisStatusCorporisNavmesh configuratioNavmesh) {
                 switch (configuratioNavmesh.IdModiNavmesh) {
                     case IDCivisStatusCorporisModiNavmesh.NavmeshLociTemere:
-                        return new StatusCivisCorporisNavmeshLoci(configuratioStatuum, configuratioNavmesh);
+                        return new StatusCivisCorporisNavmeshLoci(
+                            configuratioStatuum, configuratioNavmesh, contextus
+                        );
                     default:
                         Carnifex.Intermissio(LogTextus.FabricaStatusCivisCorporis_FABRICACIVISSTATUSCORPORIS_MODUS_NOT_FOUND);
                         return null;

@@ -4,7 +4,9 @@ using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResolutorCivisIctuumAuditae : IResolutorCivisIctuumAuditae {
-        private readonly ContextusCivisOstiorumLegibile _contextus;
+        private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
+        private readonly IOstiumCivisLegibile _civis;
+        private readonly IResFluidaPuellaeLegibile _resFPuellae;
         private readonly AbacusDistantiae _abacusDistantiae;
 
         private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
@@ -12,21 +14,25 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly float[] _auditaIctuum;
 
         public ResolutorCivisIctuumAuditae(
-            ContextusCivisOstiorumLegibile contextus,
+            IConfiguratioCivisCustodiae configuratioCivisCustodiae,
+            IOstiumCivisLegibile civis,
+            IResFluidaPuellaeLegibile resFPuellae,
             IResolutorCivisDistantia resolutorCivisDistantia
         ) {
-            _contextus = contextus;
+            _configuratioCivisCustodiae = configuratioCivisCustodiae;
+            _civis = civis;
+            _resFPuellae = resFPuellae;
             _resolutorCivisDistantia = resolutorCivisDistantia;
 
             _abacusDistantiae = new AbacusDistantiae(
                 1.0f,
                 0.0f,
-                contextus.Configuratio.Custodiae.DistantiaAuditaeMedius,
-                contextus.Configuratio.Custodiae.PraeruptioDistantiaAuditaeSoni
+                _configuratioCivisCustodiae.DistantiaAuditaeMedius,
+                _configuratioCivisCustodiae.PraeruptioDistantiaAuditaeSoni
             );
 
-            _auditaIctuum = new float[contextus.Civis.Longitudo];
-            for (int i = 0; i < contextus.Civis.Longitudo; i++) {
+            _auditaIctuum = new float[_civis.Longitudo];
+            for (int i = 0; i < _civis.Longitudo; i++) {
                 _auditaIctuum[i] = 0f;
             }
         }
@@ -42,8 +48,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float ComputareDistantiaSoni(
             float sonus // 0~1補正値
         ) {
-            float max = _contextus.Configuratio.Custodiae.DistantiaAuditaeSoniMaxima;
-            float min = _contextus.Configuratio.Custodiae.DistantiaAuditaeSoniMin;
+            float max = _configuratioCivisCustodiae.DistantiaAuditaeSoniMaxima;
+            float min = _configuratioCivisCustodiae.DistantiaAuditaeSoniMin;
             return min + (max - min) * sonus;
         }
 
@@ -51,7 +57,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float distantiaMaxima, // ComputareDistantiaSoniで出した最大距離
             float distantia // 現在の距離
         ) {
-            float distantiaMin = _contextus.Configuratio.Custodiae.DistantiaAuditaeSoniMin;
+            float distantiaMin = _configuratioCivisCustodiae.DistantiaAuditaeSoniMin;
             float ratioActualis = Mathematica.InverseLerp01(distantiaMin, distantiaMaxima, distantia);
             return _abacusDistantiae.ComputareRatioInversus(ratioActualis);
         }
@@ -66,8 +72,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
 
             float distantiaPuellae = _resolutorCivisDistantia.DistantiaPuellae(idCivis);
-            float sonusQuietes = _contextus.ResFPuellae.Veletudinis.SonusQuietes;
-            float sonusMotus = _contextus.ResFPuellae.Veletudinis.SonusMotus;
+            float sonusQuietes = _resFPuellae.Veletudinis.SonusQuietes;
+            float sonusMotus = _resFPuellae.Veletudinis.SonusMotus;
             float sonus = Mathematica.Clamp01((sonusQuietes + sonusMotus) / 2f);
 
             if (sonus <= Numerus.Epsilon) {

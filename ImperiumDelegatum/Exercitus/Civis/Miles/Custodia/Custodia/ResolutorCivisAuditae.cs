@@ -2,6 +2,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Nucleus.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 using System.Numerics;
+using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
 
@@ -17,7 +18,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     }
 
     internal sealed class ResolutorCivisAuditae {
-        private readonly ContextusCivisOstiorumLegibile _contextus;
+        private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
+        private readonly IOstiumTemporisLegibile _temporis;
+        private readonly IOstiumCivisLegibile _civis;
+        private readonly IOstiumCarrusCivis _carrus;
+        private readonly Random _random;
+
         private readonly IResolutorCivisIctuumAuditae _resolutorCivisIctuumAuditae;
 
         private readonly CustodiaCivisAuditaeModi[] _modiActualis;
@@ -31,35 +37,43 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IHorologium[] _horologiumTemereSurdus;
 
         public ResolutorCivisAuditae(
-            ContextusCivisOstiorumLegibile contextus,
+            IConfiguratioCivisCustodiae configuratioCivisCustodiae,
+            IOstiumTemporisLegibile temporis,
+            IOstiumCarrusCivis carrus,
+            IOstiumCivisLegibile civis,
+            Random random,
             IResolutorCivisIctuumAuditae resolutorCivisIctuumAuditae,
             IResolutorCivisDistantia resolutorCivisDistantia
         ) {
-            _contextus = contextus;
+            _configuratioCivisCustodiae = configuratioCivisCustodiae;
+            _temporis = temporis;
+            _carrus = carrus;
+            _civis = civis;
+            _random = random;
             _resolutorCivisIctuumAuditae = resolutorCivisIctuumAuditae;
             _resolutorCivisDistantia = resolutorCivisDistantia;
-            _horologiumTemereAuditae = new IHorologium[_contextus.Civis.Longitudo];
-            _horologiumTemereSurdus = new IHorologium[_contextus.Civis.Longitudo];
+            _horologiumTemereAuditae = new IHorologium[_civis.Longitudo];
+            _horologiumTemereSurdus = new IHorologium[_civis.Longitudo];
 
-            _modiActualis = new CustodiaCivisAuditaeModi[_contextus.Civis.Longitudo];
-            _abacusStudiumAmittere = new AbacusTemporis[_contextus.Civis.Longitudo];
-            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+            _modiActualis = new CustodiaCivisAuditaeModi[_civis.Longitudo];
+            _abacusStudiumAmittere = new AbacusTemporis[_civis.Longitudo];
+            for (int i = 0; i < _civis.Longitudo; i++) {
                 _modiActualis[i] = CustodiaCivisAuditaeModi.Consumptio;
                 _abacusStudiumAmittere[i] = new AbacusTemporis(
-                    _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec,
+                    _configuratioCivisCustodiae.TempusStudiumAmittereMaximaSec,
                     0f,
-                    _contextus.Configuratio.Custodiae.TempusStudiumAmittereSec,
-                    _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere
+                    _configuratioCivisCustodiae.TempusStudiumAmittereSec,
+                    _configuratioCivisCustodiae.PraeruptioTempusAmittere
                 );
                 _horologiumTemereAuditae[i] = new HorologiumTemere(
-                    _contextus.Configuratio.Custodiae.TempusAuditaeSecMinima,
-                    _contextus.Configuratio.Custodiae.TempusAuditaeSecMaxima,
-                    _contextus.RandomCommunis
+                    _configuratioCivisCustodiae.TempusAuditaeSecMinima,
+                    _configuratioCivisCustodiae.TempusAuditaeSecMaxima,
+                    _random
                 );
                 _horologiumTemereSurdus[i] = new HorologiumTemere(
-                    _contextus.Configuratio.Custodiae.TempusSurdaMinima,
-                    _contextus.Configuratio.Custodiae.TempusSurdaMaxima,
-                    _contextus.RandomCommunis
+                    _configuratioCivisCustodiae.TempusSurdaMinima,
+                    _configuratioCivisCustodiae.TempusSurdaMaxima,
+                    _random
                 );
             }
         }
@@ -104,7 +118,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisLegibile resFluida
         ) {
             // Auditae時計が終了したらSurdusに遷移、時計を有効化。
-            if (_horologiumTemereAuditae[idCivis].EstExhaurita(_contextus.Temporis.Intervallum)) {
+            if (_horologiumTemereAuditae[idCivis].EstExhaurita(_temporis.Intervallum)) {
                 _modiActualis[idCivis] = CustodiaCivisAuditaeModi.Surdus;
                 _horologiumTemereSurdus[idCivis].Activare();
                 _horologiumTemereAuditae[idCivis].Deactivare();
@@ -121,7 +135,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisLegibile resFluida
         ) {
             // Surdus時計が終了したらConsumptioに遷移、時計をすべて無効化。
-            if (_horologiumTemereSurdus[idCivis].EstExhaurita(_contextus.Temporis.Intervallum)) {
+            if (_horologiumTemereSurdus[idCivis].EstExhaurita(_temporis.Intervallum)) {
                 _modiActualis[idCivis] = CustodiaCivisAuditaeModi.Consumptio;
                 _horologiumTemereAuditae[idCivis].Deactivare();
                 _horologiumTemereSurdus[idCivis].Deactivare();
@@ -172,10 +186,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // Ictuum状態での処理
             float audita = _resolutorCivisIctuumAuditae.Audita(idCivis) / 100f; // 0~0.01
             // 設定による上昇補正値
-            audita *= _contextus.Configuratio.Custodiae.RatioAudita;  // 0.10とか0.15とか。
-            audita *= _contextus.Temporis.Intervallum; // フレーム時間を適用する。
+            audita *= _configuratioCivisCustodiae.RatioAudita;  // 0.10とか0.15とか。
+            audita *= _temporis.Intervallum; // フレーム時間を適用する。
 
-            _contextus.Carrus.PostulareVeletudinisValoris(
+            _carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtAudita: audita
             );
@@ -186,7 +200,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisLegibile resFluida
         ) {
             float dtAudita = 1.0f;
-            _contextus.Carrus.PostulareVeletudinisValoris(
+            _carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtAudita: dtAudita
             );
@@ -196,8 +210,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            float dtAudita = _contextus.Configuratio.Custodiae.ConsumptioAuditaeSec * _contextus.Temporis.Intervallum;
-            _contextus.Carrus.PostulareVeletudinisValoris(
+            float dtAudita = _configuratioCivisCustodiae.ConsumptioAuditaeSec * _temporis.Intervallum;
+            _carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtAudita: dtAudita
             );
@@ -207,10 +221,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _abacusStudiumAmittere[idCivis].Pulsus(_contextus.Temporis.Intervallum);
+            _abacusStudiumAmittere[idCivis].Pulsus(_temporis.Intervallum);
             float ratio = _abacusStudiumAmittere[idCivis].ComputareRatio();
-            float dtAudita = _contextus.Configuratio.Custodiae.ConsumptioAuditaeSec * ratio * _contextus.Temporis.Intervallum;
-            _contextus.Carrus.PostulareVeletudinisValoris(
+            float dtAudita = _configuratioCivisCustodiae.ConsumptioAuditaeSec * ratio * _temporis.Intervallum;
+            _carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtAudita: dtAudita
             );

@@ -11,7 +11,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     }
 
     internal sealed class ResolutorCivisVisa {
-        private readonly ContextusCivisOstiorumLegibile _contextus;
+        private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
+        private readonly IOstiumTemporisLegibile _temporis;
+        private readonly IOstiumCivisLegibile _civis;
+        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IResFluidaPuellaeLegibile _resFPuellae;
+
         private readonly IResolutorCivisIctuumVisae _resolutorCivisIctuum;
 
         private readonly CustodiaCivisVisaeModi[] _modiActualis;
@@ -20,23 +25,31 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
 
         public ResolutorCivisVisa(
-            ContextusCivisOstiorumLegibile contextus,
+            IConfiguratioCivisCustodiae configuratioCivisCustodiae,
+            IOstiumTemporisLegibile temporis,
+            IOstiumCivisLegibile civis,
+            IOstiumCarrusCivis carrus,
+            IResFluidaPuellaeLegibile resFPuellae,
             IResolutorCivisIctuumVisae resolutorCivisIctuum,
             IResolutorCivisDistantia resolutorCivisDistantia
         ) {
-            _contextus = contextus;
+            _configuratioCivisCustodiae = configuratioCivisCustodiae;
+            _temporis = temporis;
+            _civis = civis;
+            _carrus = carrus;
+            _resFPuellae = resFPuellae;
             _resolutorCivisIctuum = resolutorCivisIctuum;
             _resolutorCivisDistantia = resolutorCivisDistantia;
 
-            _modiActualis = new CustodiaCivisVisaeModi[_contextus.Civis.Longitudo];
-            _abacusStudiumAmittere = new AbacusTemporis[_contextus.Civis.Longitudo];
-            for (int i = 0; i < _contextus.Civis.Longitudo; i++) {
+            _modiActualis = new CustodiaCivisVisaeModi[_civis.Longitudo];
+            _abacusStudiumAmittere = new AbacusTemporis[_civis.Longitudo];
+            for (int i = 0; i < _civis.Longitudo; i++) {
                 _modiActualis[i] = CustodiaCivisVisaeModi.Consumptio;
                 _abacusStudiumAmittere[i] = new AbacusTemporis(
-                    _contextus.Configuratio.Custodiae.TempusStudiumAmittereMaximaSec,
+                    _configuratioCivisCustodiae.TempusStudiumAmittereMaximaSec,
                     0f,
-                    _contextus.Configuratio.Custodiae.TempusStudiumAmittereSec,
-                    _contextus.Configuratio.Custodiae.PraeruptioTempusAmittere
+                    _configuratioCivisCustodiae.TempusStudiumAmittereSec,
+                    _configuratioCivisCustodiae.PraeruptioTempusAmittere
                 );
             }
         }
@@ -68,8 +81,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis
         ) {
             _abacusStudiumAmittere[idCivis].Purgere();
-            float dtVisa = _contextus.Configuratio.Custodiae.ConsumptioVisaeSec * _contextus.Temporis.Intervallum;
-            _contextus.Carrus.PostulareVeletudinisValoris(
+            float dtVisa = _configuratioCivisCustodiae.ConsumptioVisaeSec * _temporis.Intervallum;
+            _carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtVisa: dtVisa
             );
@@ -78,10 +91,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private void Consumptio(
             int idCivis
         ) {
-            _abacusStudiumAmittere[idCivis].Pulsus(_contextus.Temporis.Intervallum);
+            _abacusStudiumAmittere[idCivis].Pulsus(_temporis.Intervallum);
             float ratio = _abacusStudiumAmittere[idCivis].ComputareRatio();
-            float dtVisa = _contextus.Configuratio.Custodiae.ConsumptioVisaeSec * ratio * _contextus.Temporis.Intervallum;
-            _contextus.Carrus.PostulareVeletudinisValoris(
+            float dtVisa = _configuratioCivisCustodiae.ConsumptioVisaeSec * ratio * _temporis.Intervallum;
+            _carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtVisa: dtVisa
             );
@@ -93,10 +106,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _abacusStudiumAmittere[idCivis].Purgere();
             float dtVisa = _resolutorCivisIctuum.VisaCapitis(idCivis) + _resolutorCivisIctuum.VisaCorporis(idCivis);
             dtVisa /= 100f; // dtVisaは0~1の比率なので100で割る。
-            dtVisa *= _contextus.Configuratio.Custodiae.RatioVisus; // 設定による上昇補正値
-            dtVisa *= _contextus.ResFPuellae.Veletudinis.Claritas; // PuellaeステートのClaritas補正を適用する。
-            dtVisa *= _contextus.Temporis.Intervallum; // フレーム時間を適用する。
-            _contextus.Carrus.PostulareVeletudinisValoris(
+            dtVisa *= _configuratioCivisCustodiae.RatioVisus; // 設定による上昇補正値
+            dtVisa *= _resFPuellae.Veletudinis.Claritas; // PuellaeステートのClaritas補正を適用する。
+            dtVisa *= _temporis.Intervallum; // フレーム時間を適用する。
+            _carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtVisa: dtVisa
             );

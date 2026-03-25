@@ -7,7 +7,9 @@ using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResolutorCivisNudusVisae {
-        private readonly ContextusCivisOstiorumLegibile _contextus;
+        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCivisVisaeLegibile _visa;
+        private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
         private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
 
         private readonly IDPuellaeResNudusAnterior[] _cIDPuellaeResNudusAnterior;
@@ -16,10 +18,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private const float cos100 = -0.173648178f;
 
         public ResolutorCivisNudusVisae(
-            ContextusCivisOstiorumLegibile contextus,
+            IOstiumCarrusCivis carrus,
+            IOstiumCivisVisaeLegibile visa,
+            IOstiumPuellaeResVisaeLegibile puellaeResVisae,
             IResolutorCivisDistantia resolutorCivisDistantia
         ) {
-            _contextus = contextus;
+            _carrus = carrus;
+            _visa = visa;
+            _puellaeResVisae = puellaeResVisae;
             _resolutorCivisDistantia = resolutorCivisDistantia;
 
             _cIDPuellaeResNudusAnterior = new IDPuellaeResNudusAnterior[Enum.GetValues(typeof(IDPuellaeResNudusAnterior)).Length];
@@ -35,7 +41,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             // 視認範囲外の場合はSpectareNudusをfalseとする。
             if (!_resolutorCivisDistantia.EstCustodiaeVisae(idCivis)) {
-                _contextus.Carrus.PostulareVeletudinisCondicionis(
+                _carrus.PostulareVeletudinisCondicionis(
                     idCivis,
                     estSpectareNudusAnterior: false,
                     estSpectareNudusPosterior: false
@@ -47,7 +53,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             bool estSpectareNudusPosterior = false;
 
             Vector3 positioCivisCapitis = default;
-            if (!_contextus.Visa.ConareLegoPositioCapitis(idCivis, out positioCivisCapitis)) {
+            if (!_visa.ConareLegoPositioCapitis(idCivis, out positioCivisCapitis)) {
                 Notarius.Memorare(LogTextus.ResolutorCivisNudusVisae_RESOLUTORCIVISNUDUSVISAE_CONARELEGO_FAILED);
                 return;
             } 
@@ -56,8 +62,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 Vector3 directioResNudusAnterior = default;
                 Vector3 positioResNudus = default;
 
-                if (!_contextus.PuellaeResVisae.ConareLegoNudusAnterior(idNudusAnterior, out positioResNudus)) continue;
-                if (!_contextus.PuellaeResVisae.ConareLegoNudusAnteriorDirectio(idNudusAnterior, out directioResNudusAnterior)) continue;
+                if (!_puellaeResVisae.ConareLegoNudusAnterior(idNudusAnterior, out positioResNudus)) continue;
+                if (!_puellaeResVisae.ConareLegoNudusAnteriorDirectio(idNudusAnterior, out directioResNudusAnterior)) continue;
 
                 Vector3 directio = positioCivisCapitis - positioResNudus;
                 float angle = Vector3.Dot(Vector3.Normalize(directioResNudusAnterior), Vector3.Normalize(directio));
@@ -70,8 +76,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 Vector3 directioResNudusPosterior = default;
                 Vector3 positioResNudus = default;
 
-                if (!_contextus.PuellaeResVisae.ConareLegoNudusPosterior(idNudusPosterior, out positioResNudus)) continue;
-                if (!_contextus.PuellaeResVisae.ConareLegoNudusPosteriorDirectio(idNudusPosterior, out directioResNudusPosterior)) continue;
+                if (!_puellaeResVisae.ConareLegoNudusPosterior(idNudusPosterior, out positioResNudus)) continue;
+                if (!_puellaeResVisae.ConareLegoNudusPosteriorDirectio(idNudusPosterior, out directioResNudusPosterior)) continue;
 
                 Vector3 directio = positioCivisCapitis - positioResNudus;
                 float angle = Vector3.Dot(Vector3.Normalize(directioResNudusPosterior), Vector3.Normalize(directio));
@@ -80,7 +86,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 }
             }
 
-            _contextus.Carrus.PostulareVeletudinisCondicionis(
+            _carrus.PostulareVeletudinisCondicionis(
                 idCivis,
                 estSpectareNudusAnterior: estSpectareNudusAnterior,
                 estSpectareNudusPosterior: estSpectareNudusPosterior

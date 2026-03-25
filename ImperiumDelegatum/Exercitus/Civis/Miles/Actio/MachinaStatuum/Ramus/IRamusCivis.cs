@@ -5,7 +5,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         int Prioritas { get; }
         bool Condicio(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextus,
+            ContextusRamusCivis contextus,
             IResFluidaCivisLegibile resFluida
         );
     }

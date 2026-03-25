@@ -13,9 +13,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
     internal sealed class MachinaCivisStatuumCorporis {
         private readonly int _idCivis;
-        private readonly ContextusCivisOstiorumLegibile _contextusOstiorum;
-        private readonly TabulaCivisStatuum _tabulaCivisStatuum;
         private readonly IConfiguratioCivisStatuum _configuratioStatuum;
+        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCivisAnimationesLegibile _animationis;
+
+        private readonly ContextusRamusCivis _contextusRamusCivis;
+        private readonly ContextusStatusCivisCorporis _contextusStatusCivisCorporis;
+
+        private readonly TabulaCivisStatuum _tabulaCivisStatuum;
         private readonly ResolutorCivisRamorumCorporis _resolutorRamorumCorporis;
 
         private PhasisMachinaCivisStatusCorporis _phasisActualis;
@@ -25,14 +30,20 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public MachinaCivisStatuumCorporis(
             int idCivis,
-            ContextusCivisOstiorumLegibile contextusOstiorum,
+            IOstiumCarrusCivis carrus,
+            IOstiumCivisAnimationesLegibile animationis,
+            ContextusRamusCivis contextusRamusCivis,
+            ContextusStatusCivisCorporis contextusStatusCivisCorporis,
             IConfiguratioCivisStatuum configuratioStatuum
         ) {
             _idCivis = idCivis;
-            _contextusOstiorum = contextusOstiorum;
+            _carrus = carrus;
+            _animationis = animationis;
+            _contextusRamusCivis = contextusRamusCivis;
             _configuratioStatuum = configuratioStatuum;
-            _tabulaCivisStatuum = new TabulaCivisStatuum(_configuratioStatuum);
-            _resolutorRamorumCorporis = new ResolutorCivisRamorumCorporis(_contextusOstiorum);
+            _contextusStatusCivisCorporis = contextusStatusCivisCorporis;
+            _tabulaCivisStatuum = new TabulaCivisStatuum(_configuratioStatuum, contextusStatusCivisCorporis);
+            _resolutorRamorumCorporis = new ResolutorCivisRamorumCorporis(_contextusRamusCivis);
 
             _phasisActualis = PhasisMachinaCivisStatusCorporis.Incipalis;
             _idStatusActualis = IDCivisStatusCorporis.Nihil;
@@ -46,17 +57,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         private bool EstExhibensCorpus() {
-            return _contextusOstiorum.Animationes.EstExhibens(_idCivis, IDCivisAnimationisStratum.Corpus);
+            return _animationis.EstExhibens(_idCivis, IDCivisAnimationisStratum.Corpus);
         }
 
         private bool EstExhibensAutIteransCorpus() {
             return
-                _contextusOstiorum.Animationes.EstExhibens(_idCivis, IDCivisAnimationisStratum.Corpus) ||
-                _contextusOstiorum.Animationes.EstExhibensIterans(_idCivis, IDCivisAnimationisStratum.Corpus);
+                _animationis.EstExhibens(_idCivis, IDCivisAnimationisStratum.Corpus) ||
+                _animationis.EstExhibensIterans(_idCivis, IDCivisAnimationisStratum.Corpus);
         }
 
         private bool EstDesinensCorpus() {
-            return _contextusOstiorum.Animationes.EstDesinens(_idCivis, IDCivisAnimationisStratum.Corpus);
+            return _animationis.EstDesinens(_idCivis, IDCivisAnimationisStratum.Corpus);
         }
 
         private IStatusCivisCorporis LegereStatusActualis() {
@@ -270,7 +281,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            statusActualis.Intrare(_idCivis, _contextusOstiorum, resFluida);
+            statusActualis.Intrare(_idCivis, resFluida);
 
             // Intrare / Exire に Desinere は許可しない。
             if (statusActualis.IdAnimationisIntrare == IDCivisAnimationis.Desinere) {
@@ -296,7 +307,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            statusActualis.Transere(_idCivis, _contextusOstiorum, resFluida);
+            statusActualis.Transere(_idCivis, resFluida);
 
             // Transere は以下のように扱う。
             // Nihil     : フェーズを即スキップして Exiens
@@ -324,7 +335,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            statusActualis.Transere(_idCivis, _contextusOstiorum, resFluida);
+            statusActualis.Transere(_idCivis, resFluida);
 
             if (statusActualis.IdAnimationisTransere == IDCivisAnimationis.Nihil) {
                 MutareExiens(resFluida);
@@ -348,7 +359,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            statusActualis.Exire(_idCivis, _contextusOstiorum, resFluida);
+            statusActualis.Exire(_idCivis, resFluida);
 
             if (statusActualis.IdAnimationisExire == IDCivisAnimationis.Desinere) {
                 Notarius.Memorare(LogTextus.MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID);
@@ -416,7 +427,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            statusActualis.Ordinare(_idCivis, _contextusOstiorum, resFluida);
+            statusActualis.Ordinare(_idCivis, resFluida);
         }
     }
 }

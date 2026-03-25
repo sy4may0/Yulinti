@@ -2,19 +2,33 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesCivisActionis {
-        private readonly ContextusCivisOstiorumLegibile _contextusOstiorum;
+        private readonly IConfiguratioCivisStatuum _configuratioStatuum;
+        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumPunctumViaeLegibile _punctumViae;
         private readonly MachinaCivisStatuumCorporis[] _machinaCorporis;
 
         public MilesCivisActionis(
-            ContextusCivisOstiorumLegibile contextusOstiorum
+            IOstiumCarrusCivis carrus,
+            IOstiumCivisAnimationesLegibile animationis,
+            IOstiumCivisLegibile ostiumCivisLegibile,
+            IOstiumPunctumViaeLegibile punctumViae,
+            ContextusStatusCivisCorporis contextusStatusCivisCorporis,
+            ContextusRamusCivis contextusRamusCivis,
+            IConfiguratioCivisStatuum configuratioStatuum
         ) {
-            _contextusOstiorum = contextusOstiorum;
-            _machinaCorporis = new MachinaCivisStatuumCorporis[contextusOstiorum.Civis.Longitudo];
-            for (int i = 0; i < contextusOstiorum.Civis.Longitudo; i++) {
+            _configuratioStatuum = configuratioStatuum;
+            _carrus = carrus;
+            _punctumViae = punctumViae;
+            
+            _machinaCorporis = new MachinaCivisStatuumCorporis[ostiumCivisLegibile.Longitudo];
+            for (int i = 0; i < ostiumCivisLegibile.Longitudo; i++) {
                 _machinaCorporis[i] = new MachinaCivisStatuumCorporis(
                     i,
-                    contextusOstiorum,
-                    contextusOstiorum.Configuratio.Statuum
+                    carrus,
+                    animationis,
+                    contextusRamusCivis,
+                    contextusStatusCivisCorporis,
+                    configuratioStatuum
                 );
             }
         }
@@ -23,10 +37,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _contextusOstiorum.Carrus.PostulareAnimationis(
+            _carrus.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Fundamentum,
-                _contextusOstiorum.Configuratio.Statuum.IdAnimationisPraedefinitus
+                _configuratioStatuum.IdAnimationisPraedefinitus
             );
 
             // 初期位置へ移動（Puellae同様、MachinaではなくMiles側で要求する）。
@@ -51,15 +65,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         private void PostulareNavmeshIncipalis(int idCivis) {
-            if (!_contextusOstiorum.PunctumViae.ConareLegoNatoriumTemere(out IPunctumViaeLegibile punctumViae)) {
-                _contextusOstiorum.Carrus.PostulareMortis(
+            if (!_punctumViae.ConareLegoNatoriumTemere(out IPunctumViaeLegibile punctumViae)) {
+                _carrus.PostulareMortis(
                     idCivis,
                     SpeciesOrdinationisCivisMortis.Spirituare
                 );
                 return;
             }
 
-            _contextusOstiorum.Carrus.PostulareNavmesh(
+            _carrus.PostulareNavmesh(
                 idCivis,
                 punctumViae.Positio,
                 true,

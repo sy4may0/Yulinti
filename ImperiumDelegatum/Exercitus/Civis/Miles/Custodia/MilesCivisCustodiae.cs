@@ -1,13 +1,9 @@
-using Yulinti.Nucleus;
 using Yulinti.ImperiumDelegatum.Contractus;
 using System;
-using System.Numerics;
 
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesCivisCustodiae {
-        private readonly ContextusCivisOstiorumLegibile _contextus;
-
         private readonly ResolutorCivisIctuumVisae _resolutorCivisIctuum;
         private readonly ResolutorCivisIctuumAuditae _resolutorCivisIctuumAuditae;
 
@@ -18,18 +14,76 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly ResolutorCivisMutareCustodiae _resolutorCivisMutareCustodiae;
         private readonly ResolutorCivisAuditae _resolutorCivisAuditae;
 
-        public MilesCivisCustodiae(ContextusCivisOstiorumLegibile contextus) {
-            _contextus = contextus;
+        public MilesCivisCustodiae(
+            IConfiguratioCivisCustodiae configuratioCustodiae,
+            IOstiumTemporisLegibile temporis,
+            IOstiumCivisLegibile civis,
+            IOstiumCivisLociLegibile loci,
+            IOstiumCivisVisaeLegibile visa,
+            IOstiumPuellaeResVisaeLegibile puellaeResVisae,
+            IResFluidaPuellaeLegibile resFPuellae,
+            IOstiumCarrusCivis carrus
+        ) {
+            Random random = new Random();
 
-            _resolutorCivisDistantia = new ResolutorCivisDistantia(contextus);
-            _resolutorCivisIctuum = new ResolutorCivisIctuumVisae(contextus, _resolutorCivisDistantia);
-            _resolutorCivisIctuumAuditae = new ResolutorCivisIctuumAuditae(contextus, _resolutorCivisDistantia);
+            _resolutorCivisDistantia = new ResolutorCivisDistantia(
+                configuratioCustodiae,
+                civis,
+                loci,
+                puellaeResVisae
+            );
+            _resolutorCivisIctuum = new ResolutorCivisIctuumVisae(
+                configuratioCustodiae,
+                civis,
+                visa,
+                puellaeResVisae,
+                _resolutorCivisDistantia
+            );
+            _resolutorCivisIctuumAuditae = new ResolutorCivisIctuumAuditae(
+                configuratioCustodiae,
+                civis,
+                resFPuellae,
+                _resolutorCivisDistantia
+            );
 
-            _resolutorCivisNudusVisae = new ResolutorCivisNudusVisae(contextus, _resolutorCivisDistantia);
-            _resolutorCivisVisa = new ResolutorCivisVisa(contextus, _resolutorCivisIctuum, _resolutorCivisDistantia);
-            _resolutorCivisSuspectae = new ResolutorCivisSuspectae(contextus, _resolutorCivisIctuum, _resolutorCivisDistantia);
-            _resolutorCivisMutareCustodiae = new ResolutorCivisMutareCustodiae(contextus);
-            _resolutorCivisAuditae = new ResolutorCivisAuditae(contextus, _resolutorCivisIctuumAuditae, _resolutorCivisDistantia);
+            _resolutorCivisNudusVisae = new ResolutorCivisNudusVisae(
+                carrus,
+                visa,
+                puellaeResVisae,
+                _resolutorCivisDistantia
+            );
+            _resolutorCivisVisa = new ResolutorCivisVisa(
+                configuratioCustodiae,
+                temporis,
+                civis,
+                carrus,
+                resFPuellae,
+                _resolutorCivisIctuum,
+                _resolutorCivisDistantia
+            );
+            _resolutorCivisSuspectae = new ResolutorCivisSuspectae(
+                configuratioCustodiae,
+                temporis,
+                civis,
+                carrus,
+                resFPuellae,
+                _resolutorCivisIctuum,
+                _resolutorCivisDistantia
+            );
+            _resolutorCivisMutareCustodiae = new ResolutorCivisMutareCustodiae(
+                configuratioCustodiae,
+                carrus,
+                civis
+            );
+            _resolutorCivisAuditae = new ResolutorCivisAuditae(
+                configuratioCustodiae,
+                temporis,
+                carrus,
+                civis,
+                random,
+                _resolutorCivisIctuumAuditae,
+                _resolutorCivisDistantia
+            );
         }
 
         public void Initare(

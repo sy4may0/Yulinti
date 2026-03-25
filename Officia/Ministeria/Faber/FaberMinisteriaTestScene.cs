@@ -71,6 +71,7 @@ namespace Yulinti.Officia.Ministeria {
             builder.Register<IOstiumCivisLociLegibile, OstiumCivisLociLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisLociMutabile, OstiumCivisLociMutabile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisAnimationesMutabile, OstiumCivisAnimationesMutabile>(Lifetime.Singleton);
+            builder.Register<IOstiumCivisAnimationesLegibile, OstiumCivisAnimationesLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisVisaeLegibile, OstiumCivisVisaeLegibile>(Lifetime.Singleton);
 
             // Ministeria
