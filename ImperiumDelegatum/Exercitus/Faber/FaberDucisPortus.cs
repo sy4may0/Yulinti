@@ -22,6 +22,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ResFluidaPuellaeLegibile>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+
+            // ContextusSalsamenti
+            builder.Register<IContextusSalsamenti, ContextusSalsamenti>(Lifetime.Singleton);
             
 
             // Civis

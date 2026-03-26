@@ -5,6 +5,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         Guid Id { get; }
         DateTime Timestamp { get; }
         IOstiumSalsamentiPuellaePersonae PuellaePersonae { get; }
+        IOstiumSalsamentiPuellaeFormarum PuellaeFormarum { get; }
         bool EstActivum { get; }
     }
 }

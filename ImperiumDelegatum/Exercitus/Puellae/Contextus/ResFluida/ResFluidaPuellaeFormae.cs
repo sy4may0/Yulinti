@@ -8,11 +8,24 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResFluidaPuellaeFormae : IResFluidaPuellaeFormaeLegibile {
         private Vector3[] _magnitudinesActualium;
 
-        public ResFluidaPuellaeFormae() {
+        public ResFluidaPuellaeFormae(ITurrisSalsamenti turrisSalsamenti) {
+            IOstiumSalsamenti ostiumSalsamenti;
+            if (!turrisSalsamenti.ConareActualis(out ostiumSalsamenti)) {   
+                Carnifex.Intermissio(LogTextus.ResFluidaPuellaeFormae_SALSAMENTUM_ACTUALIS_NULL);
+            }
+
             int longitudo = Enum.GetValues(typeof(IDPuellaeFormae)).Length;
             _magnitudinesActualium = new Vector3[longitudo];
+
             for (int i = 0; i < longitudo; i++) {
-                _magnitudinesActualium[i] = new Vector3(1f, 1f, 1f);
+                if (i == (int)IDPuellaeFormae.Nihil) {
+                    continue;
+                }
+                 // セーブデータから値をロード。
+                 // PuellaeFormarumは内部的にIDPuellaeFormaeを基に初期化しているから、チェック不要。
+                _magnitudinesActualium[i] = ostiumSalsamenti.PuellaeFormarum.MagnitudoActualis(
+                    (IDPuellaeFormae)i
+                );
             }
         }
 

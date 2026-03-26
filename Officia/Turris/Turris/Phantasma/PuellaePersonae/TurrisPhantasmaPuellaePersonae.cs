@@ -8,9 +8,10 @@ namespace Yulinti.Officia.Turris {
     public sealed class TurrisPhantasmaPuellaePersonae : ITurrisPhantasmaPuellaePersonae {
         private readonly PhantasmaPuellaePersonae _phantasmaPuellaePersonae;
 
-        public TurrisPhantasmaPuellaePersonae(IConfiguratioTurrisPhantasma configuratioTurrisPhantasma) {
-            ResolutorPuellaePersonae resolutorPuellaePersonae = new ResolutorPuellaePersonae(configuratioTurrisPhantasma);
-            _phantasmaPuellaePersonae = new PhantasmaPuellaePersonae(resolutorPuellaePersonae);
+        public TurrisPhantasmaPuellaePersonae(
+            IPhantasmaPuellaePersonae phantasmaPuellaePersonae
+        ) {
+            _phantasmaPuellaePersonae = (PhantasmaPuellaePersonae)phantasmaPuellaePersonae;
         }
 
         public void Initare(IOstiumSalsamentiPuellaePersonae ostiumSalsamentiPuellae) {

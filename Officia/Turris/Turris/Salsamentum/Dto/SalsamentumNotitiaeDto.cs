@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Yulinti.Officia.Turris {
     internal sealed class SalsamentumNotitiaeDto {
@@ -7,6 +8,11 @@ namespace Yulinti.Officia.Turris {
 
         public SalsamentumNotitiaeDto() {
             PuellaePersonaeNotitiae = new SalsamentumPuellaePersonaeNotitiaeDto();
+        }
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context) {
+            PuellaePersonaeNotitiae ??= new SalsamentumPuellaePersonaeNotitiaeDto();
         }
     }
 }

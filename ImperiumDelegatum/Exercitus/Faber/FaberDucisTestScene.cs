@@ -34,6 +34,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            // ContextusSalsamenti
+            builder.Register<IContextusSalsamenti, ContextusSalsamenti>(Lifetime.Singleton);
+
             // Carrus
             builder.Register<CarrusPuellae>(Lifetime.Singleton)
                 .AsSelf()

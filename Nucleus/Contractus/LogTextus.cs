@@ -216,5 +216,6 @@ namespace Yulinti.Nucleus.Contractus {
         public const string SonusVeli_SONUSVELI_SONUS_NULL = "SonusVeli - sonus null";
         public const string Temporis_TEMPORIS_INSTANCE_NULL = "Temporis - instance null";
         public const string ResFluidaPuellaeFormae_LEGERE_NIHIL = "ResFluidaPuellaeFormae - legere nihil";
+        public const string ResFluidaPuellaeFormae_SALSAMENTUM_ACTUALIS_NULL = "ResFluidaPuellaeFormae - salsamentum actualis null";
     }
 }
