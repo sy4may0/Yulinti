@@ -24,6 +24,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Primum() {
             _queueFormae.Purgere();
+            _resFluidaFormae.ApplicatumEst();
         }
 
         public void Executare(
