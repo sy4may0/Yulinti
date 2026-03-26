@@ -21,8 +21,8 @@ namespace Yulinti.Officia.Ministeria {
             InterpresNumeri.ToNumerics(_miPuellaeOssis.LegoPositionem(idOssis));
         public System.Numerics.Quaternion LegoRotationem(IDPuellaeOssis idOssis) =>
             InterpresNumeri.ToNumerics(_miPuellaeOssis.LegoRotationem(idOssis));
-        public System.Numerics.Vector3 LegoScalam(IDPuellaeOssis idOssis) =>
-            InterpresNumeri.ToNumerics(_miPuellaeOssis.LegoScalam(idOssis));
+        public System.Numerics.Vector3 LegoMagnitudonem(IDPuellaeOssis idOssis) =>
+            InterpresNumeri.ToNumerics(_miPuellaeOssis.LegoMagnitudonem(idOssis));
     }
 }
 

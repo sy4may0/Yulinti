@@ -14,7 +14,7 @@ namespace Yulinti.Officia.Ministeria {
 
         public Vector3 LegoPositionem(IDPuellaeOssis idOssis) => _tabulaOssium.Lego(idOssis).position;
         public Quaternion LegoRotationem(IDPuellaeOssis idOssis) => _tabulaOssium.Lego(idOssis).rotation;
-        public Vector3 LegoScalam(IDPuellaeOssis idOssis) => _tabulaOssium.Lego(idOssis).localScale;
+        public Vector3 LegoMagnitudonem(IDPuellaeOssis idOssis) => _tabulaOssium.Lego(idOssis).localScale;
 
         public void PonoPositionem(IDPuellaeOssis idOssis, Vector3 positio) {
             Transform os = _tabulaOssium.Lego(idOssis);
@@ -24,9 +24,9 @@ namespace Yulinti.Officia.Ministeria {
             Transform os = _tabulaOssium.Lego(idOssis);
             os.rotation = rotatio;
         }
-        public void PonoScalam(IDPuellaeOssis idOssis, Vector3 scala) {
+        public void PonoMagnitudonem(IDPuellaeOssis idOssis, Vector3 magnitudo) {
             Transform os = _tabulaOssium.Lego(idOssis);
-            os.localScale = scala;
+            os.localScale = magnitudo;
         }
     }
 }

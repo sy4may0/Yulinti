@@ -6,6 +6,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+// !!! 必ずセーブデータロード後にAdMundumすること。 !!!
+// !!! 遅延ロードは想定しない。 !!!
+
 namespace Yulinti.Auctoritas.Senatus {
     internal sealed class PraecoIndexusPrincipalis : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis {
         private readonly ITurrisMundus _turrisMundus;

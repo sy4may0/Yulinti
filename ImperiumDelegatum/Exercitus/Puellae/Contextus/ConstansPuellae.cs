@@ -9,6 +9,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public const int LongitudoOrdinatioNavmesh = 12;
         public const int LongitudoOrdinatioVeletudinis = 32;
         public const int LongitudoOrdinatioVeletudinisNudi = 6;
+        public const int LongitudoOrdinatioFormae = 12;
 
         public const int GradusMaximus = 10;
         public const int SensusMaximus = 10;

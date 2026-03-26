@@ -60,6 +60,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             bool estNudusPosterior
         );
 
+        void PostulareFormae(
+            IDPuellaeFormae idFormae,
+            Vector3 magnitudoDesiderata
+        );
+
         void PostularePersonae(
             int dtAnimaeLuxuriosus = 0,
             int dtAnimaeExhibitus = 0,

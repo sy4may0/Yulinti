@@ -29,6 +29,8 @@ namespace Yulinti.Officia.Turris {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            builder.Register<ResolutorPuellaePersonae>(Lifetime.Singleton);
+            builder.Register<IPhantasmaPuellaePersonae, PhantasmaPuellaePersonae>(Lifetime.Singleton);
             builder.Register<TurrisPhantasmaPuellaePersonae>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();

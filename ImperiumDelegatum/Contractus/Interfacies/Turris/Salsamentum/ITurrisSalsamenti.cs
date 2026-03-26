@@ -33,14 +33,16 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         // P5 セーブデータをセーブ。
         Task<Guid> Servare(
             Guid id,
-            IPhantasmaPuellaePersonae phantasmaPuellaePersonae,
+            IContextusSalsamenti contextusSalsamenti,
             CancellationToken ct = default
         );
 
         // P5-ex オートセーブデータをセーブ。
         Task<Guid> ServareAutomaticus(
-            IPhantasmaPuellaePersonae phantasmaPuellaePersonae,
+            IContextusSalsamenti contextusSalsamenti,
             CancellationToken ct = default
         );
+
+        bool ConareActualis(out IOstiumSalsamenti actualis);
     }
 }

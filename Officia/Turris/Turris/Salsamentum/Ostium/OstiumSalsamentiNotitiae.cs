@@ -31,10 +31,13 @@ namespace Yulinti.Officia.Turris {
         }
 
         // 内部からのデータ更新
-        public void Renovare(Guid id, IPhantasmaPuellaePersonae phantasmaPuellaePersonae) {
+        public void Renovare(
+            Guid id, 
+            IContextusSalsamenti contextusSalsamenti
+        ) {
             _id = id;
             _timestamp = DateTime.Now;
-            _puellaePersonaeNotitiae.Renovare(phantasmaPuellaePersonae);
+            _puellaePersonaeNotitiae.Renovare(contextusSalsamenti.PhantasmaPuellaePersonae);
             _estActivum = true;
         }
 
