@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Yulinti.ImperiumDelegatum.Contractus;
 
@@ -9,12 +8,8 @@ namespace Yulinti.Auctoritas.Contractus {
         // UIを非表示
         void TollereSalsamenti();
 
-        void ActivareButton(ButtonSalsamenti buttonSalsamenti);
-        void DeactivareButton(ButtonSalsamenti buttonSalsamenti);
-
-        void AdPremereOneraLudum(Action<Guid> ae);
-        void AdPremereDeletoLudum(Action<Guid> ae);
-        void AdPremereExi(Action ae);
+        void ActivareUsus(UsusSalsamenti usus);
+        void DeactivareUsus(UsusSalsamenti usus);
 
         // リストをリロード
         void RenovareTablaeManualis(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaManualis);

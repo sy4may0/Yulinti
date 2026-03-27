@@ -14,6 +14,7 @@ namespace Yulinti.Officia.Velum {
         private readonly IAnchoraVelumSalsamenti _anchoraVelumSalsamenti;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
+        private readonly IOperatioSalsamenti _operatioSalsamenti;
 
         private UIDocument _uiSalsamenti;
 
@@ -36,10 +37,6 @@ namespace Yulinti.Officia.Velum {
         // ボタンキャンセル
         private Button _buttonExi;
 
-        private Action<Guid> _onOneraLudum;
-        private Action<Guid> _onDeletoLudum;
-        private Action _onExi;
-
         private Guid _focusGuid;
 
         // IReadOnlyListをListに変換するためのバッファ。
@@ -50,18 +47,16 @@ namespace Yulinti.Officia.Velum {
         public VelumSalsamenti(
             IAnchoraVelumSalsamenti anchoraVelumSalsamenti,
             ITurrisInterpretationis turrisInterpretationis,
-            ApplicatorSoniVeli applicatorSoniVeli
+            ApplicatorSoniVeli applicatorSoniVeli,
+            IOperatioSalsamenti operatioSalsamenti
         ) {
             _anchoraVelumSalsamenti = anchoraVelumSalsamenti;
             _turrisInterpretationis = turrisInterpretationis;
             _applicatorSoniVeli = applicatorSoniVeli;
+            _operatioSalsamenti = operatioSalsamenti;
 
             _bufNotitiaManualis = new List<IOstiumSalsamentiNotitiae>();
             _bufNotitiaAutomaticus = new List<IOstiumSalsamentiNotitiae>();
-
-            _onOneraLudum = null;
-            _onDeletoLudum = null;
-            _onExi = null;
 
             _focusGuid = Guid.Empty;
         }
@@ -120,20 +115,13 @@ namespace Yulinti.Officia.Velum {
                     if (obj is IOstiumSalsamentiNotitiae notitia && notitia.Id is Guid guid) {
                         estSelectus = true;
                         _focusGuid = guid;
-                        if (_focusGuid != Guid.Empty) {
-                            ActivareButton(ButtonSalsamenti.OneraLudum);
-                            ActivareButton(ButtonSalsamenti.DeletoLudum);
-                        } else {
-                            DeactivareButton(ButtonSalsamenti.OneraLudum);
-                            DeactivareButton(ButtonSalsamenti.DeletoLudum);
-                        }
+                        AppricareStatusUsus();
                         break;
                     }
                 }
                 if (!estSelectus) {
                     _focusGuid = Guid.Empty;
-                    DeactivareButton(ButtonSalsamenti.OneraLudum);
-                    DeactivareButton(ButtonSalsamenti.DeletoLudum);
+                    AppricareStatusUsus();
                 }
             };
         }
@@ -164,20 +152,13 @@ namespace Yulinti.Officia.Velum {
                     if (obj is IOstiumSalsamentiNotitiae notitia && notitia.Id is Guid guid) {
                         estSelectus = true;
                         _focusGuid = guid;
-                        if (_focusGuid != Guid.Empty) {
-                            ActivareButton(ButtonSalsamenti.OneraLudum);
-                            ActivareButton(ButtonSalsamenti.DeletoLudum);
-                        } else {
-                            DeactivareButton(ButtonSalsamenti.OneraLudum);
-                            DeactivareButton(ButtonSalsamenti.DeletoLudum);
-                        }
+                        AppricareStatusUsus();
                         break;
                     }
                 }
                 if (!estSelectus) {
                     _focusGuid = Guid.Empty;
-                    DeactivareButton(ButtonSalsamenti.OneraLudum);
-                    DeactivareButton(ButtonSalsamenti.DeletoLudum);
+                    AppricareStatusUsus();
                 }
             };
         }
@@ -190,11 +171,18 @@ namespace Yulinti.Officia.Velum {
             _containerSalsamenti.style.display = DisplayStyle.None;
         }
 
-        public void TollereSalsamenti() {
-            DeactivareButton(ButtonSalsamenti.OneraLudum);
-            DeactivareButton(ButtonSalsamenti.DeletoLudum);
-            DeactivareButton(ButtonSalsamenti.Exi);
+        // ボタン状態を反映する。
+        private void AppricareStatusUsus() {
+            if (_focusGuid != Guid.Empty) {
+                ActivareUsus(UsusSalsamenti.OneraLudum);
+                ActivareUsus(UsusSalsamenti.DeletoLudum);
+            } else {
+                DeactivareUsus(UsusSalsamenti.OneraLudum);
+                DeactivareUsus(UsusSalsamenti.DeletoLudum);
+            }
+        }
 
+        public void TollereSalsamenti() {
             _focusGuid = Guid.Empty;
             _listManualis.ClearSelection();
             _listAutomaticus.ClearSelection();
@@ -218,12 +206,9 @@ namespace Yulinti.Officia.Velum {
             _listManualis.Rebuild();
             _listAutomaticus.Rebuild();
 
-            DeactivareButton(ButtonSalsamenti.OneraLudum);
-            DeactivareButton(ButtonSalsamenti.DeletoLudum);
-            ActivareButton(ButtonSalsamenti.Exi);
-
             Activare();
             _buttonExi.Focus();
+            AppricareStatusUsus();
         }
 
         public void RenovareTablaeManualis(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaManualis) {
@@ -294,66 +279,44 @@ namespace Yulinti.Officia.Velum {
             articulus.userData = notitia.Id;
         }
 
-        public void ActivareButton(ButtonSalsamenti buttonSalsamenti) {
-            switch (buttonSalsamenti) {
-                case ButtonSalsamenti.OneraLudum:
-                    _buttonOneraLudum.SetEnabled(true);
-                    break;
-                case ButtonSalsamenti.DeletoLudum:
-                    _buttonDeletoLudum.SetEnabled(true);
-                    break;
-                case ButtonSalsamenti.Exi:
-                    _buttonExi.SetEnabled(true);
-                    break;
+        public void ActivareUsus(UsusSalsamenti usus) {
+            if (usus == UsusSalsamenti.OneraLudum) {
+                _buttonOneraLudum.SetEnabled(true);
+            } else if (usus == UsusSalsamenti.DeletoLudum) {
+                _buttonDeletoLudum.SetEnabled(true);
+            } else if (usus == UsusSalsamenti.Exi) {
+                _buttonExi.SetEnabled(true);
             }
         }
 
-        public void DeactivareButton(ButtonSalsamenti buttonSalsamenti) {
-            switch (buttonSalsamenti) {
-                case ButtonSalsamenti.OneraLudum:
-                    _buttonOneraLudum.SetEnabled(false);
-                    break;
-                case ButtonSalsamenti.DeletoLudum:
-                    _buttonDeletoLudum.SetEnabled(false);
-                    break;
-                case ButtonSalsamenti.Exi:
-                    _buttonExi.SetEnabled(false);
-                    break;
+        public void DeactivareUsus(UsusSalsamenti usus) {
+            if (usus == UsusSalsamenti.OneraLudum) {
+                _buttonOneraLudum.SetEnabled(false);
+            } else if (usus == UsusSalsamenti.DeletoLudum) {
+                _buttonDeletoLudum.SetEnabled(false);
+            } else if (usus == UsusSalsamenti.Exi) {
+                _buttonExi.SetEnabled(false);
             }
-        }
-
-        public void AdPremereOneraLudum(Action<Guid> ae) {
-            _onOneraLudum = ae;
         }
 
         private void premereOneraLudum() {
-            // ここでフォーカスGuidを取得して、_onOneraLudumを呼び出す。
             if (_focusGuid == Guid.Empty) {
                 // [TODO] エラーメッセージを画面に表示する。
                 return;
             }
-            _onOneraLudum?.Invoke(_focusGuid);
-        }
-
-        public void AdPremereDeletoLudum(Action<Guid> ae) {
-            _onDeletoLudum = ae;
+            _operatioSalsamenti.Executare(UsusSalsamenti.OneraLudum, _focusGuid);
         }
 
         private void premereDeletoLudum() {
-            // ここでフォーカスGuidを取得して、_onDeletoLudumを呼び出す。
             if (_focusGuid == Guid.Empty) {
                 // [TODO] エラーメッセージを画面に表示する。
                 return;
             }
-            _onDeletoLudum?.Invoke(_focusGuid);
-        }
-
-        public void AdPremereExi(Action ae) {
-            _onExi = ae;
+            _operatioSalsamenti.Executare(UsusSalsamenti.DeletoLudum, _focusGuid);
         }
 
         private void premereExi() {
-            _onExi?.Invoke();
+            _operatioSalsamenti.Executare(UsusSalsamenti.Exi);
         }
 
         public void Liberare() {

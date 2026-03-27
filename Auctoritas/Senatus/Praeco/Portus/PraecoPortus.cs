@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Yulinti.Auctoritas.Senatus {
-    internal sealed class PraecoPortus : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis {
+    internal sealed class PraecoPortus : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis, IOperatioPortus {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumPortus _velumPortus;
         private readonly IPraecoConfirmationis _legatusConfirmationis;
@@ -16,13 +16,6 @@ namespace Yulinti.Auctoritas.Senatus {
         private readonly CuratorVela _curatorVela;
 
         private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
-
-        // Dux -> Velumへのコールバック
-        private Action _aeAdPremereProfectio;
-        private Action _aeAdPremereConstructio;
-        private Action _aeAdPremereTaberna;
-        private Action _aeAdPremereOptiones;
-        private Action _aeAdPremereExi;
 
         public PraecoPortus(
             ITurrisMundus turrisMundus,
@@ -38,13 +31,6 @@ namespace Yulinti.Auctoritas.Senatus {
             _turrisInterpretationis = turrisInterpretationis;
             _curatorVela = curatorVela;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
-
-            _aeAdPremereProfectio = AdPremereProfectio;
-            _aeAdPremereConstructio = AdPremereConstructio;
-            _aeAdPremereTaberna = AdPremereTaberna;
-            _aeAdPremereOptiones = AdPremereOptiones;
-            _aeAdPremereExi = AdPremereExi;
-
         }
 
         public void Incipere() {
@@ -57,20 +43,24 @@ namespace Yulinti.Auctoritas.Senatus {
                 // UIを表示
                 _velumPortus.DemitterePortus();
 
-                _velumPortus.AdPremereProfectio(_aeAdPremereProfectio);
-                _velumPortus.AdPremereConstructio(_aeAdPremereConstructio);
-                _velumPortus.AdPremereTaberna(_aeAdPremereTaberna);
-                _velumPortus.AdPremereOptiones(_aeAdPremereOptiones);
-                _velumPortus.AdPremereExi(_aeAdPremereExi);
-
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             }
             return Task.CompletedTask;
         }
 
-        private void AdPremereProfectio() {
-            _ = PremereProfectio();
+        public void Executare(UsusPortus usus) {
+            if (usus == UsusPortus.Profectio) {
+                _ = PremereProfectio();
+            } else if (usus == UsusPortus.Constructio) {
+                _ = PremereConstructio();
+            } else if (usus == UsusPortus.Taberna) {
+                _ = PremereTaberna();
+            } else if (usus == UsusPortus.Optiones) {
+                _ = PremereOptiones();
+            } else if (usus == UsusPortus.Exi) {
+                _ = PremereExi();
+            }
         }
 
         private Task PremereProfectio() {
@@ -82,18 +72,10 @@ namespace Yulinti.Auctoritas.Senatus {
             return Task.CompletedTask;
         }
 
-        private void AdPremereConstructio() {
-            _ = PremereConstructio();
-        }
-
         private Task PremereConstructio() {
             Notarius.Memorare("未実装: PostulareConstructio");
             // 未実装
             return Task.CompletedTask;
-        }
-
-        private void AdPremereTaberna() {
-            _ = PremereTaberna();
         }
 
         private Task PremereTaberna() {
@@ -102,18 +84,10 @@ namespace Yulinti.Auctoritas.Senatus {
             return Task.CompletedTask;
         }
 
-        private void AdPremereOptiones() {
-            _ = PremereOptiones();
-        }
-
         private Task PremereOptiones() {
             Notarius.Memorare("未実装: PostulareOptiones");
             // 未実装
             return Task.CompletedTask;
-        }
-
-        private void AdPremereExi() {
-            _ = PremereExi();
         }
 
         private async Task PremereExi() {

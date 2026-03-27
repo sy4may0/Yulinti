@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace Yulinti.Auctoritas.Senatus {
-    internal sealed class PraecoSalsamenti : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis {
+    internal sealed class PraecoSalsamenti : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis, IOperatioSalsamenti {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumSalsamenti _velumSalsamenti;
         private readonly IPraecoConfirmationis _legatusConfirmationis;
@@ -20,15 +20,8 @@ namespace Yulinti.Auctoritas.Senatus {
 
         private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
 
-        // Dux -> Velumへのコールバック
-        private Action<Guid> _aeAdPremereOneraLudum;
-        private Action<Guid> _aeAdPremereDeletoLudum;
-        private Action _aeAdPremereExi;
-
         // Demittereで受け取り、Tollereで実行する、画面クローズ時のコールバック。
         private Action _adReditum;
-
-        private bool _estProcessusButton;
 
         public PraecoSalsamenti(
             ITurrisMundus turrisMundus,
@@ -49,10 +42,6 @@ namespace Yulinti.Auctoritas.Senatus {
             _curatorVela = curatorVela;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
 
-            _aeAdPremereOneraLudum = AdPremereOneraLudum;
-            _aeAdPremereDeletoLudum = AdPremereDeletoLudum;
-            _aeAdPremereExi = AdPremereExi;
-
             _adReditum = null;
         }
 
@@ -64,10 +53,6 @@ namespace Yulinti.Auctoritas.Senatus {
             try {
                 // UIを表示
                 _velumSalsamenti.DemittereSalsamenti();
-
-                _velumSalsamenti.AdPremereOneraLudum(_aeAdPremereOneraLudum);
-                _velumSalsamenti.AdPremereDeletoLudum(_aeAdPremereDeletoLudum);
-                _velumSalsamenti.AdPremereExi(_aeAdPremereExi);
 
                 CancellationToken cancellationToken = _ostiumSignumCancellationisLegibile.Signum;
                 // Notitiaをロード
@@ -97,15 +82,25 @@ namespace Yulinti.Auctoritas.Senatus {
             _adReditum = null;
         }
 
-        private void AdPremereOneraLudum(Guid id) {
-            _ = PremereOneraLudum(id);
+        public void Executare(UsusSalsamenti usus, Guid id) {
+            if (usus == UsusSalsamenti.OneraLudum) {
+                _ = PremereOneraLudum(id);
+            } else if (usus == UsusSalsamenti.DeletoLudum) {
+                _ = PremereDeletoLudum(id);
+            } else {
+                Carnifex.Error(LogTextus.PraecoSalsamenti_EXECUTARE_USUS_INVALID);
+            }
+        }
+
+        public void Executare(UsusSalsamenti usus) {
+            if (usus == UsusSalsamenti.Exi) {
+                PremereExi();
+            } else {
+                Carnifex.Error(LogTextus.PraecoSalsamenti_EXECUTARE_USUS_INVALID_NEED_GUID);
+            }
         }
 
         private async Task PremereOneraLudum(Guid id) {
-            if (!ConariIncipereProcessumButton()) {
-                return;
-            }
-
             try {
                 CancellationToken cancellationToken = _ostiumSignumCancellationisLegibile.Signum;
 
@@ -117,19 +112,10 @@ namespace Yulinti.Auctoritas.Senatus {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
-            } finally {
-                FinireProcessumButton();
             }
-        }
-
-        private void AdPremereDeletoLudum(Guid id) {
-            _ = PremereDeletoLudum(id);
         }
 
         private async Task PremereDeletoLudum(Guid id) {
-            if (!ConariIncipereProcessumButton()) {
-                return;
-            }
             try {
                 CancellationToken cancellationToken = _ostiumSignumCancellationisLegibile.Signum;
                 bool estConfirmationis = await _legatusConfirmationis.DemittereAsync(
@@ -161,25 +147,14 @@ namespace Yulinti.Auctoritas.Senatus {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
-            } finally {
-                FinireProcessumButton();
-                UnityEngine.Debug.Log("PremereDeletoLudum: FinireProcessumButton");
             }
-        }
-
-        private void AdPremereExi() {
-            PremereExi();
         }
 
         private void PremereExi() {
-            if (!ConariIncipereProcessumButton()) {
-                return;
-            }
             try {
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
-                FinireProcessumButton();
                 try {
                     _turrisSoniVeli.Sonare(IDSonusVeli.Exire);
                     Tollere();
@@ -190,31 +165,5 @@ namespace Yulinti.Auctoritas.Senatus {
         }
 
         public void Liberare() { }
-
-        private bool ConariIncipereProcessumButton() {
-            if (_estProcessusButton) {
-                return false;
-            }
-            _estProcessusButton = true;
-            DeactivareButtons();
-            return true;
-        }
-
-        private void FinireProcessumButton() {
-            ActivareButtons();
-            _estProcessusButton = false;
-        }
-
-        private void ActivareButtons() {
-            _velumSalsamenti.ActivareButton(ButtonSalsamenti.Exi);
-            _velumSalsamenti.ActivareButton(ButtonSalsamenti.OneraLudum);
-            _velumSalsamenti.ActivareButton(ButtonSalsamenti.DeletoLudum);
-        }
-
-        private void DeactivareButtons() {
-            _velumSalsamenti.DeactivareButton(ButtonSalsamenti.Exi);
-            _velumSalsamenti.DeactivareButton(ButtonSalsamenti.OneraLudum);
-            _velumSalsamenti.DeactivareButton(ButtonSalsamenti.DeletoLudum);
-        }
     }
 }

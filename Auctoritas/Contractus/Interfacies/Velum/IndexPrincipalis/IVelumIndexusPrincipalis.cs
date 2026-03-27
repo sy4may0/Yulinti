@@ -1,5 +1,3 @@
-using System;
-
 namespace Yulinti.Auctoritas.Contractus {
     public interface IVelumIndexusPrincipalis {
         // タイトルUIを表示
@@ -7,13 +5,7 @@ namespace Yulinti.Auctoritas.Contractus {
         // タイトルUIを非表示
         void TollereIndexusPrincipalis();
 
-        void ActivareButton(ButtonIndexusPrincipalis buttonIndexusPrincipalis);
-        void DeactivareButton(ButtonIndexusPrincipalis buttonIndexusPrincipalis);
-
-        void AdPremereLudusNovus(Action ae);
-        void AdPremerePergeLudum(Action ae);
-        void AdPremereOneraLudum(Action ae);
-        void AdPremereOptiones(Action ae);
-        void AdPremereExi(Action ae);
+        void ActivareUsus(UsusIndexusPrincipalis usus);
+        void DeactivareUsus(UsusIndexusPrincipalis usus);
     }
 }

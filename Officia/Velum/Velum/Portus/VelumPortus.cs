@@ -2,13 +2,13 @@ using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Auctoritas.Contractus;
 using Yulinti.Officia.Contractus;
 using UnityEngine.UIElements;
-using System;
 
 namespace Yulinti.Officia.Velum {
     internal sealed class VelumPortus : IVelum, IVelumPortus, IVelumIncipabilis, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumPortus _anchoraVelumPortus;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
+        private readonly IOperatioPortus _operatioPortus;
 
         private UIDocument _uiPortus;
 
@@ -26,27 +26,18 @@ namespace Yulinti.Officia.Velum {
         private Label _labelOptiones;
         private Label _labelExi;
 
-        private Action _onProfectio;
-        private Action _onConstructio;
-        private Action _onTaberna;
-        private Action _onOptiones;
-        private Action _onExi;
-
         public VelumPortus(
             IAnchoraVelumPortus anchoraVelumPortus,
             ITurrisInterpretationis turrisInterpretationis,
-            ApplicatorSoniVeli applicatorSoniVeli
+            ApplicatorSoniVeli applicatorSoniVeli,
+            IOperatioPortus operatioPortus
         ) {
             _anchoraVelumPortus = anchoraVelumPortus;
             _turrisInterpretationis = turrisInterpretationis;
             _applicatorSoniVeli = applicatorSoniVeli;
+            _operatioPortus = operatioPortus;
 
             _uiPortus = _anchoraVelumPortus.UIDocument;
-            _onProfectio = null;
-            _onConstructio = null;
-            _onTaberna = null;
-            _onOptiones = null;
-            _onExi = null;
         }
 
         public void Incipere() {
@@ -92,84 +83,52 @@ namespace Yulinti.Officia.Velum {
             Deactivare();
         }
 
-        public void ActivareButton(ButtonPortus buttonPortus) {
-            switch (buttonPortus) {
-                case ButtonPortus.Profectio:
-                    _buttonProfectio.SetEnabled(true);
-                    break;
-                case ButtonPortus.Constructio:
-                    _buttonConstructio.SetEnabled(true);
-                    break;
-                case ButtonPortus.Taberna:
-                    _buttonTaberna.SetEnabled(true);
-                    break;
-                case ButtonPortus.Optiones:
-                    _buttonOptiones.SetEnabled(true);
-                    break;
-                case ButtonPortus.Exi:
-                    _buttonExi.SetEnabled(true);
-                    break;
+        public void ActivareUsus(UsusPortus usus) {
+            if (usus == UsusPortus.Profectio) {
+                _buttonProfectio.SetEnabled(true);
+            } else if (usus == UsusPortus.Constructio) {
+                _buttonConstructio.SetEnabled(true);
+            } else if (usus == UsusPortus.Taberna) {
+                _buttonTaberna.SetEnabled(true);
+            } else if (usus == UsusPortus.Optiones) {
+                _buttonOptiones.SetEnabled(true);
+            } else if (usus == UsusPortus.Exi) {
+                _buttonExi.SetEnabled(true);
             }
         }
 
-        public void DeactivareButton(ButtonPortus buttonPortus) {
-            switch (buttonPortus) {
-                case ButtonPortus.Profectio:
-                    _buttonProfectio.SetEnabled(false);
-                    break;
-                case ButtonPortus.Constructio:
-                    _buttonConstructio.SetEnabled(false);
-                    break;
-                case ButtonPortus.Taberna:
-                    _buttonTaberna.SetEnabled(false);
-                    break;
-                case ButtonPortus.Optiones:
-                    _buttonOptiones.SetEnabled(false);
-                    break;
-                case ButtonPortus.Exi:
-                    _buttonExi.SetEnabled(false);
-                    break;
+        public void DeactivareUsus(UsusPortus usus) {
+            if (usus == UsusPortus.Profectio) {
+                _buttonProfectio.SetEnabled(false);
+            } else if (usus == UsusPortus.Constructio) {
+                _buttonConstructio.SetEnabled(false);
+            } else if (usus == UsusPortus.Taberna) {
+                _buttonTaberna.SetEnabled(false);
+            } else if (usus == UsusPortus.Optiones) {
+                _buttonOptiones.SetEnabled(false);
+            } else if (usus == UsusPortus.Exi) {
+                _buttonExi.SetEnabled(false);
             }
-        }
-
-        public void AdPremereProfectio(Action ae) {
-            _onProfectio = ae;
-        }
-
-        public void AdPremereConstructio(Action ae) {
-            _onConstructio = ae;
-        }
-
-        public void AdPremereTaberna(Action ae) {
-            _onTaberna = ae;
-        }
-
-        public void AdPremereOptiones(Action ae) {
-            _onOptiones = ae;
-        }
-
-        public void AdPremereExi(Action ae) {
-            _onExi = ae;
         }
 
         private void premereProfectio() {
-            _onProfectio?.Invoke();
+            _operatioPortus.Executare(UsusPortus.Profectio);
         }
 
         private void premereConstructio() {
-            _onConstructio?.Invoke();
+            _operatioPortus.Executare(UsusPortus.Constructio);
         }
 
         private void premereTaberna() {
-            _onTaberna?.Invoke();
+            _operatioPortus.Executare(UsusPortus.Taberna);
         }
 
         private void premereOptiones() {
-            _onOptiones?.Invoke();
+            _operatioPortus.Executare(UsusPortus.Optiones);
         }
 
         private void premereExi() {
-            _onExi?.Invoke();
+            _operatioPortus.Executare(UsusPortus.Exi);
         }
 
         public void Liberare() {

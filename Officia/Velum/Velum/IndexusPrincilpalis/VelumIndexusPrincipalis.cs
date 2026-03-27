@@ -2,13 +2,13 @@ using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Auctoritas.Contractus;
 using Yulinti.Officia.Contractus;
 using UnityEngine.UIElements;
-using System;
 
 namespace Yulinti.Officia.Velum {
     internal sealed class VelumIndexusPrincipalis : IVelum, IVelumIndexusPrincipalis, IVelumIncipabilis, IVelumLiberabilis, IVelumTerminabilis {
         private readonly IAnchoraVelumIndexusPrincipalis _anchoraVelumIndexusPrincipalis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
+        private readonly IOperatioIndexusPrincipalis _operatioIndexusPrincipalis;
 
         private UIDocument _uiIndexusPrincipalis;
 
@@ -27,26 +27,16 @@ namespace Yulinti.Officia.Velum {
         private Label _labelOptiones;
         private Label _labelExi;
 
-        private Action _onLudusNovus;
-        private Action _onPergeLudum;
-        private Action _onOneraLudum;
-        private Action _onOptiones;
-        private Action _onExi;
-
         public VelumIndexusPrincipalis(
             IAnchoraVelumIndexusPrincipalis anchoraVelumIndexusPrincipalis,
             ITurrisInterpretationis turrisInterpretationis,
-            ApplicatorSoniVeli applicatorSoniVeli
+            ApplicatorSoniVeli applicatorSoniVeli,
+            IOperatioIndexusPrincipalis operatioIndexusPrincipalis
         ) {
             _anchoraVelumIndexusPrincipalis = anchoraVelumIndexusPrincipalis;
             _turrisInterpretationis = turrisInterpretationis;
             _applicatorSoniVeli = applicatorSoniVeli;
-
-            _onLudusNovus = null;
-            _onPergeLudum = null;
-            _onOneraLudum = null;
-            _onOptiones = null;
-            _onExi = null;
+            _operatioIndexusPrincipalis = operatioIndexusPrincipalis;
         }
 
         // 各UI要素を初期化する。
@@ -92,84 +82,52 @@ namespace Yulinti.Officia.Velum {
             Deactivare();
         }
 
-        public void ActivareButton(ButtonIndexusPrincipalis buttonIndexusPrincipalis) {
-            switch (buttonIndexusPrincipalis) {
-                case ButtonIndexusPrincipalis.LudusNovus:
-                    _buttonLudusNovus.SetEnabled(true);
-                    break;
-                case ButtonIndexusPrincipalis.PergeLudum:
-                    _buttonPergeLudum.SetEnabled(true);
-                    break;
-                case ButtonIndexusPrincipalis.OneraLudum:
-                    _buttonOneraLudum.SetEnabled(true);
-                    break;
-                case ButtonIndexusPrincipalis.Optiones:
-                    _buttonOptiones.SetEnabled(true);
-                    break;
-                case ButtonIndexusPrincipalis.Exi:
-                    _buttonExi.SetEnabled(true);
-                    break;
+        public void ActivareUsus(UsusIndexusPrincipalis usus) {
+            if (usus == UsusIndexusPrincipalis.LudusNovus) {
+                _buttonLudusNovus.SetEnabled(true);
+            } else if (usus == UsusIndexusPrincipalis.PergeLudum) {
+                _buttonPergeLudum.SetEnabled(true);
+            } else if (usus == UsusIndexusPrincipalis.OneraLudum) {
+                _buttonOneraLudum.SetEnabled(true);
+            } else if (usus == UsusIndexusPrincipalis.Optiones) {
+                _buttonOptiones.SetEnabled(true);
+            } else if (usus == UsusIndexusPrincipalis.Exi) {
+                _buttonExi.SetEnabled(true);
             }
         }
 
-        public void DeactivareButton(ButtonIndexusPrincipalis buttonIndexusPrincipalis) {
-            switch (buttonIndexusPrincipalis) {
-                case ButtonIndexusPrincipalis.LudusNovus:
-                    _buttonLudusNovus.SetEnabled(false);
-                    break;
-                case ButtonIndexusPrincipalis.PergeLudum:
-                    _buttonPergeLudum.SetEnabled(false);
-                    break;
-                case ButtonIndexusPrincipalis.OneraLudum:
-                    _buttonOneraLudum.SetEnabled(false);
-                    break;
-                case ButtonIndexusPrincipalis.Optiones:
-                    _buttonOptiones.SetEnabled(false);
-                    break;
-                case ButtonIndexusPrincipalis.Exi:
-                    _buttonExi.SetEnabled(false);
-                    break;
+        public void DeactivareUsus(UsusIndexusPrincipalis usus) {
+            if (usus == UsusIndexusPrincipalis.LudusNovus) {
+                _buttonLudusNovus.SetEnabled(false);
+            } else if (usus == UsusIndexusPrincipalis.PergeLudum) {
+                _buttonPergeLudum.SetEnabled(false);
+            } else if (usus == UsusIndexusPrincipalis.OneraLudum) {
+                _buttonOneraLudum.SetEnabled(false);
+            } else if (usus == UsusIndexusPrincipalis.Optiones) {
+                _buttonOptiones.SetEnabled(false);
+            } else if (usus == UsusIndexusPrincipalis.Exi) {
+                _buttonExi.SetEnabled(false);
             }
-        }
-
-        public void AdPremereLudusNovus(Action ae) {
-            _onLudusNovus = ae;
-        }
-
-        public void AdPremerePergeLudum(Action ae) {
-            _onPergeLudum = ae;
-        }
-
-        public void AdPremereOneraLudum(Action ae) {
-            _onOneraLudum = ae;
-        }
-
-        public void AdPremereOptiones(Action ae) {
-            _onOptiones = ae;
-        }
-
-        public void AdPremereExi(Action ae) {
-            _onExi = ae;
         }
 
         private void premereLudusNovus() {
-            _onLudusNovus?.Invoke();
+            _operatioIndexusPrincipalis.Executare(UsusIndexusPrincipalis.LudusNovus);
         }
 
         private void premerePergeLudum() {
-            _onPergeLudum?.Invoke();
+            _operatioIndexusPrincipalis.Executare(UsusIndexusPrincipalis.PergeLudum);
         }
 
         private void premereOneraLudum() {
-            _onOneraLudum?.Invoke();
+            _operatioIndexusPrincipalis.Executare(UsusIndexusPrincipalis.OneraLudum);
         }
 
         private void premereOptiones() {
-            _onOptiones?.Invoke();
+            _operatioIndexusPrincipalis.Executare(UsusIndexusPrincipalis.Optiones);
         }
 
         private void premereExi() {
-            _onExi?.Invoke();
+            _operatioIndexusPrincipalis.Executare(UsusIndexusPrincipalis.Exi);
         }
 
         public void Liberare() {

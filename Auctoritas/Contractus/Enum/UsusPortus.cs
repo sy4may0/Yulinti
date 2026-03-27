@@ -1,5 +1,5 @@
 namespace Yulinti.Auctoritas.Contractus {
-    public enum ButtonPortus {
+    public enum UsusPortus {
         Profectio,
         Constructio,
         Taberna,
