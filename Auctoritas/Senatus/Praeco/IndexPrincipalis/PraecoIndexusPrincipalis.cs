@@ -31,6 +31,8 @@ namespace Yulinti.Auctoritas.Senatus {
         private bool _potestPergeLudum;
         private bool _potestOneraLudum;
 
+        private bool _estActivumUsus;
+
         public PraecoIndexusPrincipalis(
             ITurrisMundus turrisMundus,
             IVelumIndexusPrincipalis velumIndexusPrincipalis,
@@ -53,6 +55,7 @@ namespace Yulinti.Auctoritas.Senatus {
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
 
             _aeAdReditumSalsamenti = AdReditumSalsamenti;
+            _estActivumUsus = true;
 
         }
 
@@ -79,6 +82,7 @@ namespace Yulinti.Auctoritas.Senatus {
                 // 最新セーブデータが無ければContinueを無効化。
                 _potestPergeLudum = estNovissimus;
                 ApplicareStatusUsus();
+                _estActivumUsus = true;
             // これをキャンセルは異常のため、OperationCanceledExceptionはCarnifexで落とす。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
@@ -107,6 +111,7 @@ namespace Yulinti.Auctoritas.Senatus {
         // Salsamentiでセーブデータが更新されるため、ボタンの状態を更新する。
         private async Task ReditumSalsamenti() {
             try {
+                _estActivumUsus = false;
                 // LongitudoとNovissimusを取得。
                 int longitudoManualis = await _turrisSalsamenti.LongitudoManualis(_ostiumSignumCancellationisLegibile.Signum);
                 int longitudoAutomaticus = await _turrisSalsamenti.LongitudoAutomaticus(_ostiumSignumCancellationisLegibile.Signum);
@@ -122,11 +127,16 @@ namespace Yulinti.Auctoritas.Senatus {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
+            } finally {
+                _estActivumUsus = true;
             }
         }
 
         private async Task PremereLudusNovus() {
             try {
+                if (!ConareUsus()) {
+                    return;
+                }
                 bool estConfirmationis = await _legatusConfirmationis.DemittereAsync(
                     _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_TITULUS),
                     _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_TEXTUS),
@@ -151,11 +161,16 @@ namespace Yulinti.Auctoritas.Senatus {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
+            } finally {
+                LiberareUsus();
             }
         }
 
         private async Task PremerePergeLudum() {
             try {
+                if (!ConareUsus()) {
+                    return;
+                }
                 _ = await _turrisSalsamenti.ArcessereNovissimus(_ostiumSignumCancellationisLegibile.Signum);
                 _turrisSoniVeli.Sonare(IDSonusVeli.SubmittereAdditum);
                 _curatorVela.TollereVelaOmnium();
@@ -164,63 +179,83 @@ namespace Yulinti.Auctoritas.Senatus {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
+            } finally {
+                LiberareUsus();
             }
         }
 
         private async Task PremereOneraLudum() {
             try {
+                if (!ConareUsus()) {
+                    return;
+                }
                 //Salsamentumを開く。
                 await _legatusSalsamenti.Demittere(_aeAdReditumSalsamenti);
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
+            } finally {
+                LiberareUsus();
             }
         }
 
         private void PremereOptiones() {
             try {
+                if (!ConareUsus()) {
+                    return;
+                }
                 Notarius.Memorare("未実装: PostulareOptiones");
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
+            } finally {
+                LiberareUsus();
             }
         }
 
         private void PremereExi() {
             try {
+                if (!ConareUsus()) {
+                    return;
+                }
                 Notarius.Memorare("未実装: PostulareExi");
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
+            } finally {
+                LiberareUsus();
             }
+        }
+
+        private bool ConareUsus() {
+            if (!_estActivumUsus) {
+                return false;
+            }
+            _estActivumUsus = false;
+            return true;
+        }
+        private void LiberareUsus() {
+            _estActivumUsus = true;
         }
 
         public void Liberare() { }
 
         // ボタンの状態を反映する。
         private void ApplicareStatusUsus() {
-            ActivareUsus();
+            _velumIndexusPrincipalis.PonoPermissionemUsus(UsusIndexusPrincipalis.LudusNovus, true);
+            _velumIndexusPrincipalis.PonoPermissionemUsus(UsusIndexusPrincipalis.PergeLudum, true);
+            _velumIndexusPrincipalis.PonoPermissionemUsus(UsusIndexusPrincipalis.OneraLudum, true);
+            _velumIndexusPrincipalis.PonoPermissionemUsus(UsusIndexusPrincipalis.Optiones, true);
+            _velumIndexusPrincipalis.PonoPermissionemUsus(UsusIndexusPrincipalis.Exi, true);
             if (!_potestPergeLudum) {
-                _velumIndexusPrincipalis.DeactivareUsus(UsusIndexusPrincipalis.PergeLudum);
+                _velumIndexusPrincipalis.PonoPermissionemUsus(
+                    UsusIndexusPrincipalis.PergeLudum, false
+                );
             }
             if (!_potestOneraLudum) {
-                _velumIndexusPrincipalis.DeactivareUsus(UsusIndexusPrincipalis.OneraLudum);
+                _velumIndexusPrincipalis.PonoPermissionemUsus(
+                    UsusIndexusPrincipalis.OneraLudum, false
+                );
             }
-        }
-
-        private void ActivareUsus() {
-            _velumIndexusPrincipalis.ActivareUsus(UsusIndexusPrincipalis.LudusNovus);
-            _velumIndexusPrincipalis.ActivareUsus(UsusIndexusPrincipalis.PergeLudum);
-            _velumIndexusPrincipalis.ActivareUsus(UsusIndexusPrincipalis.OneraLudum);
-            _velumIndexusPrincipalis.ActivareUsus(UsusIndexusPrincipalis.Optiones);
-            _velumIndexusPrincipalis.ActivareUsus(UsusIndexusPrincipalis.Exi);
-        }
-
-        private void DeactivareUsus() {
-            _velumIndexusPrincipalis.DeactivareUsus(UsusIndexusPrincipalis.LudusNovus);
-            _velumIndexusPrincipalis.DeactivareUsus(UsusIndexusPrincipalis.PergeLudum);
-            _velumIndexusPrincipalis.DeactivareUsus(UsusIndexusPrincipalis.OneraLudum);
-            _velumIndexusPrincipalis.DeactivareUsus(UsusIndexusPrincipalis.Optiones);
-            _velumIndexusPrincipalis.DeactivareUsus(UsusIndexusPrincipalis.Exi);
         }
     }
 }

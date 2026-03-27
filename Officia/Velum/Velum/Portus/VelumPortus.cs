@@ -83,31 +83,17 @@ namespace Yulinti.Officia.Velum {
             Deactivare();
         }
 
-        public void ActivareUsus(UsusPortus usus) {
+        public void PonoPermissionemUsus(UsusPortus usus, bool permissio) {
             if (usus == UsusPortus.Profectio) {
-                _buttonProfectio.SetEnabled(true);
+                _buttonProfectio.SetEnabled(permissio);
             } else if (usus == UsusPortus.Constructio) {
-                _buttonConstructio.SetEnabled(true);
+                _buttonConstructio.SetEnabled(permissio);
             } else if (usus == UsusPortus.Taberna) {
-                _buttonTaberna.SetEnabled(true);
+                _buttonTaberna.SetEnabled(permissio);
             } else if (usus == UsusPortus.Optiones) {
-                _buttonOptiones.SetEnabled(true);
+                _buttonOptiones.SetEnabled(permissio);
             } else if (usus == UsusPortus.Exi) {
-                _buttonExi.SetEnabled(true);
-            }
-        }
-
-        public void DeactivareUsus(UsusPortus usus) {
-            if (usus == UsusPortus.Profectio) {
-                _buttonProfectio.SetEnabled(false);
-            } else if (usus == UsusPortus.Constructio) {
-                _buttonConstructio.SetEnabled(false);
-            } else if (usus == UsusPortus.Taberna) {
-                _buttonTaberna.SetEnabled(false);
-            } else if (usus == UsusPortus.Optiones) {
-                _buttonOptiones.SetEnabled(false);
-            } else if (usus == UsusPortus.Exi) {
-                _buttonExi.SetEnabled(false);
+                _buttonExi.SetEnabled(permissio);
             }
         }
 

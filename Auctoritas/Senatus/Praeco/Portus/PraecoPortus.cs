@@ -10,27 +10,30 @@ namespace Yulinti.Auctoritas.Senatus {
     internal sealed class PraecoPortus : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis, IOperatioPortus {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumPortus _velumPortus;
-        private readonly IPraecoConfirmationis _legatusConfirmationis;
+        private readonly IPraecoConfirmationis _praecoConfirmationis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
 
         private readonly CuratorVela _curatorVela;
 
         private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
 
+        private bool _estActivumUsus;
+
         public PraecoPortus(
             ITurrisMundus turrisMundus,
             IVelumPortus velumPortus,
-            IPraecoConfirmationis legatusConfirmationis,
+            IPraecoConfirmationis praecoConfirmationis,
             ITurrisInterpretationis turrisInterpretationis,
             CuratorVela curatorVela,
             IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
         ) {
             _turrisMundus = turrisMundus;
             _velumPortus = velumPortus;
-            _legatusConfirmationis = legatusConfirmationis;
+            _praecoConfirmationis = praecoConfirmationis;
             _turrisInterpretationis = turrisInterpretationis;
             _curatorVela = curatorVela;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
+            _estActivumUsus = true;
         }
 
         public void Incipere() {
@@ -42,7 +45,7 @@ namespace Yulinti.Auctoritas.Senatus {
             try {
                 // UIを表示
                 _velumPortus.DemitterePortus();
-
+                _estActivumUsus = true;
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             }
@@ -64,35 +67,73 @@ namespace Yulinti.Auctoritas.Senatus {
         }
 
         private Task PremereProfectio() {
-            Notarius.Memorare("未実装: PostulareProfectio");
-            // 仮。本来はマップ選択画面で選択してから、シーン移動。
-            _curatorVela.TollereVelaOmnium();
-            _turrisMundus.AdMundum(IDMundi.MundusTestScene);
- 
+            try {
+                if (!ConareUsus()) {
+                    return Task.CompletedTask;
+                }
+                Notarius.Memorare("未実装: PostulareProfectio");
+                // 仮。本来はマップ選択画面で選択してから、シーン移動。
+                _curatorVela.TollereVelaOmnium();
+                _turrisMundus.AdMundum(IDMundi.MundusTestScene);
+            } catch (Exception e) {
+                Carnifex.Intermissio(e);
+            } finally {
+                LiberareUsus();
+            }
             return Task.CompletedTask;
         }
 
         private Task PremereConstructio() {
-            Notarius.Memorare("未実装: PostulareConstructio");
+            try {
+                if (!ConareUsus()) {
+                    return Task.CompletedTask;
+                }
+                Notarius.Memorare("未実装: PostulareConstructio");
+            } catch (Exception e) {
+                Carnifex.Intermissio(e);
+            } finally {
+                LiberareUsus();
+            }
             // 未実装
             return Task.CompletedTask;
         }
 
         private Task PremereTaberna() {
-            Notarius.Memorare("未実装: PostulareTaberna");
+            try {
+                if (!ConareUsus()) {
+                    return Task.CompletedTask;
+                }
+                Notarius.Memorare("未実装: PostulareTaberna");
+            } catch (Exception e) {
+                Carnifex.Intermissio(e);
+            } finally {
+                LiberareUsus();
+            }
             // 未実装
             return Task.CompletedTask;
         }
 
         private Task PremereOptiones() {
-            Notarius.Memorare("未実装: PostulareOptiones");
+            try {
+                if (!ConareUsus()) {
+                    return Task.CompletedTask;
+                }
+                Notarius.Memorare("未実装: PostulareOptiones");
+            } catch (Exception e) {
+                Carnifex.Intermissio(e);
+            } finally {
+                LiberareUsus();
+            }
             // 未実装
             return Task.CompletedTask;
         }
 
         private async Task PremereExi() {
             try {
-                bool estConfirmationis = await _legatusConfirmationis.DemittereAsync(
+                if (!ConareUsus()) {
+                    return;
+                }
+                bool estConfirmationis = await _praecoConfirmationis.DemittereAsync(
                     _turrisInterpretationis.LegoTextus(IDTextus.PORTUS_BUTTON_EXI_TITULUS),
                     _turrisInterpretationis.LegoTextus(IDTextus.PORTUS_BUTTON_EXI_TEXTUS),
                     _turrisInterpretationis.LegoTextus(IDTextus.PORTUS_BUTTON_EXI_BUTTON_ITA),
@@ -114,7 +155,20 @@ namespace Yulinti.Auctoritas.Senatus {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
+            } finally {
+                LiberareUsus();
             }
+        }
+
+        private bool ConareUsus() {
+            if (!_estActivumUsus) {
+                return false;
+            }
+            _estActivumUsus = false;
+            return true;
+        }
+        private void LiberareUsus() {
+            _estActivumUsus = true;
         }
 
         public void Liberare() { }

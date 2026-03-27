@@ -8,8 +8,7 @@ namespace Yulinti.Auctoritas.Contractus {
         // UIを非表示
         void TollereSalsamenti();
 
-        void ActivareUsus(UsusSalsamenti usus);
-        void DeactivareUsus(UsusSalsamenti usus);
+        void PonoPermissionemUsus(UsusSalsamenti usus, bool permissio);
 
         // リストをリロード
         void RenovareTablaeManualis(IReadOnlyList<IOstiumSalsamentiNotitiae> notitiaManualis);

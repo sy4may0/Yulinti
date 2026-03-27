@@ -82,31 +82,17 @@ namespace Yulinti.Officia.Velum {
             Deactivare();
         }
 
-        public void ActivareUsus(UsusIndexusPrincipalis usus) {
+        public void PonoPermissionemUsus(UsusIndexusPrincipalis usus, bool permissio) {
             if (usus == UsusIndexusPrincipalis.LudusNovus) {
-                _buttonLudusNovus.SetEnabled(true);
+                _buttonLudusNovus.SetEnabled(permissio);
             } else if (usus == UsusIndexusPrincipalis.PergeLudum) {
-                _buttonPergeLudum.SetEnabled(true);
+                _buttonPergeLudum.SetEnabled(permissio);
             } else if (usus == UsusIndexusPrincipalis.OneraLudum) {
-                _buttonOneraLudum.SetEnabled(true);
+                _buttonOneraLudum.SetEnabled(permissio);
             } else if (usus == UsusIndexusPrincipalis.Optiones) {
-                _buttonOptiones.SetEnabled(true);
+                _buttonOptiones.SetEnabled(permissio);
             } else if (usus == UsusIndexusPrincipalis.Exi) {
-                _buttonExi.SetEnabled(true);
-            }
-        }
-
-        public void DeactivareUsus(UsusIndexusPrincipalis usus) {
-            if (usus == UsusIndexusPrincipalis.LudusNovus) {
-                _buttonLudusNovus.SetEnabled(false);
-            } else if (usus == UsusIndexusPrincipalis.PergeLudum) {
-                _buttonPergeLudum.SetEnabled(false);
-            } else if (usus == UsusIndexusPrincipalis.OneraLudum) {
-                _buttonOneraLudum.SetEnabled(false);
-            } else if (usus == UsusIndexusPrincipalis.Optiones) {
-                _buttonOptiones.SetEnabled(false);
-            } else if (usus == UsusIndexusPrincipalis.Exi) {
-                _buttonExi.SetEnabled(false);
+                _buttonExi.SetEnabled(permissio);
             }
         }
 

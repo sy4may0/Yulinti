@@ -174,11 +174,11 @@ namespace Yulinti.Officia.Velum {
         // ボタン状態を反映する。
         private void AppricareStatusUsus() {
             if (_focusGuid != Guid.Empty) {
-                ActivareUsus(UsusSalsamenti.OneraLudum);
-                ActivareUsus(UsusSalsamenti.DeletoLudum);
+                PonoPermissionemUsus(UsusSalsamenti.OneraLudum, true);
+                PonoPermissionemUsus(UsusSalsamenti.DeletoLudum, true);
             } else {
-                DeactivareUsus(UsusSalsamenti.OneraLudum);
-                DeactivareUsus(UsusSalsamenti.DeletoLudum);
+                PonoPermissionemUsus(UsusSalsamenti.OneraLudum, false);
+                PonoPermissionemUsus(UsusSalsamenti.DeletoLudum, false);
             }
         }
 
@@ -279,23 +279,13 @@ namespace Yulinti.Officia.Velum {
             articulus.userData = notitia.Id;
         }
 
-        public void ActivareUsus(UsusSalsamenti usus) {
+        public void PonoPermissionemUsus(UsusSalsamenti usus, bool permissio) {
             if (usus == UsusSalsamenti.OneraLudum) {
-                _buttonOneraLudum.SetEnabled(true);
+                _buttonOneraLudum.SetEnabled(permissio);
             } else if (usus == UsusSalsamenti.DeletoLudum) {
-                _buttonDeletoLudum.SetEnabled(true);
+                _buttonDeletoLudum.SetEnabled(permissio);
             } else if (usus == UsusSalsamenti.Exi) {
-                _buttonExi.SetEnabled(true);
-            }
-        }
-
-        public void DeactivareUsus(UsusSalsamenti usus) {
-            if (usus == UsusSalsamenti.OneraLudum) {
-                _buttonOneraLudum.SetEnabled(false);
-            } else if (usus == UsusSalsamenti.DeletoLudum) {
-                _buttonDeletoLudum.SetEnabled(false);
-            } else if (usus == UsusSalsamenti.Exi) {
-                _buttonExi.SetEnabled(false);
+                _buttonExi.SetEnabled(permissio);
             }
         }
 

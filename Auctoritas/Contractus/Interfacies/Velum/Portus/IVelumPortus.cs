@@ -5,7 +5,6 @@ namespace Yulinti.Auctoritas.Contractus {
         // タイトルUIを非表示
         void TollerePortus();
 
-        void ActivareUsus(UsusPortus usus);
-        void DeactivareUsus(UsusPortus usus);
+        void PonoPermissionemUsus(UsusPortus usus, bool permissio);
     }
 }

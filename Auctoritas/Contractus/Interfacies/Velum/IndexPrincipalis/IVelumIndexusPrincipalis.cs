@@ -5,7 +5,6 @@ namespace Yulinti.Auctoritas.Contractus {
         // タイトルUIを非表示
         void TollereIndexusPrincipalis();
 
-        void ActivareUsus(UsusIndexusPrincipalis usus);
-        void DeactivareUsus(UsusIndexusPrincipalis usus);
+        void PonoPermissionemUsus(UsusIndexusPrincipalis usus, bool permissio);
     }
 }
