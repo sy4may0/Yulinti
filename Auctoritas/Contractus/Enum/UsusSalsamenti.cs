@@ -1,5 +1,5 @@
 namespace Yulinti.Auctoritas.Contractus {
-    public enum ButtonSalsamenti {
+    public enum UsusSalsamenti {
         OneraLudum,
         DeletoLudum,
         Exi

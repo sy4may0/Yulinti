@@ -1,5 +1,5 @@
 namespace Yulinti.Auctoritas.Contractus {
-    public enum ButtonIndexusPrincipalis {
+    public enum UsusIndexusPrincipalis {
         LudusNovus,
         PergeLudum,
         OneraLudum,

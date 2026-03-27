@@ -217,5 +217,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string Temporis_TEMPORIS_INSTANCE_NULL = "Temporis - instance null";
         public const string ResFluidaPuellaeFormae_LEGERE_NIHIL = "ResFluidaPuellaeFormae - legere nihil";
         public const string ResFluidaPuellaeFormae_SALSAMENTUM_ACTUALIS_NULL = "ResFluidaPuellaeFormae - salsamentum actualis null";
+        public const string PraecoSalsamenti_EXECUTARE_USUS_INVALID = "PraecoSalsamenti - executare usus invalid";
+        public const string PraecoSalsamenti_EXECUTARE_USUS_INVALID_NEED_GUID = "PraecoSalsamenti - executare usus invalid need guid";
     }
 }

@@ -1,5 +1,3 @@
-using System;
-
 namespace Yulinti.Auctoritas.Contractus {
     public interface IVelumPortus {
         // タイトルUIを表示
@@ -7,13 +5,6 @@ namespace Yulinti.Auctoritas.Contractus {
         // タイトルUIを非表示
         void TollerePortus();
 
-        void ActivareButton(ButtonPortus buttonPortus);
-        void DeactivareButton(ButtonPortus buttonPortus);
-
-        void AdPremereProfectio(Action ae);
-        void AdPremereConstructio(Action ae);
-        void AdPremereTaberna(Action ae);
-        void AdPremereOptiones(Action ae);
-        void AdPremereExi(Action ae);
+        void PonoPermissionemUsus(UsusPortus usus, bool permissio);
     }
 }
