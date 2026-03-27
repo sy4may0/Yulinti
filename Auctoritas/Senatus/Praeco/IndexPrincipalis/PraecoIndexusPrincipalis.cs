@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 // !!! 遅延ロードは想定しない。 !!!
 
 namespace Yulinti.Auctoritas.Senatus {
-    internal sealed class PraecoIndexusPrincipalis : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis, IOperatioIndexusPrincipalis {
+    internal sealed class PraecoIndexusPrincipalis : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis, IOperatioIndexusPrincipalis, IOperatioReditusSalsamenti {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumIndexusPrincipalis _velumIndexusPrincipalis;
         private readonly IPraecoConfirmationis _legatusConfirmationis;
@@ -24,9 +24,6 @@ namespace Yulinti.Auctoritas.Senatus {
         private readonly PraecoSalsamenti _legatusSalsamenti;
 
         private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
-
-        // PraecoSalsamentiのDemittereへのコールバック
-        private Action _aeAdReditumSalsamenti;
 
         private bool _potestPergeLudum;
         private bool _potestOneraLudum;
@@ -54,7 +51,6 @@ namespace Yulinti.Auctoritas.Senatus {
             _curatorVela = curatorVela;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
 
-            _aeAdReditumSalsamenti = AdReditumSalsamenti;
             _estActivumUsus = true;
 
         }
@@ -104,7 +100,7 @@ namespace Yulinti.Auctoritas.Senatus {
         }
 
         // SalsamentiからCancelでタイトルに戻った際に実行する関数。
-        private void AdReditumSalsamenti() {
+        public void AdReditumSalsamenti() {
             _ = ReditumSalsamenti();
         }
 
@@ -190,7 +186,7 @@ namespace Yulinti.Auctoritas.Senatus {
                     return;
                 }
                 //Salsamentumを開く。
-                await _legatusSalsamenti.Demittere(_aeAdReditumSalsamenti);
+                await _legatusSalsamenti.Demittere();
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {

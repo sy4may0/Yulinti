@@ -20,8 +20,7 @@ namespace Yulinti.Auctoritas.Senatus {
 
         private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
 
-        // Demittereで受け取り、Tollereで実行する、画面クローズ時のコールバック。
-        private Action _adReditum;
+        private readonly IOperatioReditusSalsamenti _operatioReditusSalsamenti;
 
         private bool _estActivumUsus;
 
@@ -33,6 +32,7 @@ namespace Yulinti.Auctoritas.Senatus {
             ITurrisInterpretationis turrisInterpretationis,
             ITurrisSoniVeli turrisSoniVeli,
             CuratorVela curatorVela,
+            IOperatioReditusSalsamenti operatioReditusSalsamenti,
             IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
         ) {
             _turrisMundus = turrisMundus;
@@ -42,9 +42,9 @@ namespace Yulinti.Auctoritas.Senatus {
             _turrisInterpretationis = turrisInterpretationis;
             _turrisSoniVeli = turrisSoniVeli;
             _curatorVela = curatorVela;
+            _operatioReditusSalsamenti = operatioReditusSalsamenti;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
 
-            _adReditum = null;
             _estActivumUsus = true;
         }
 
@@ -52,7 +52,7 @@ namespace Yulinti.Auctoritas.Senatus {
             Tollere();
         }
 
-        public async Task Demittere(Action adReditum) {
+        public async Task Demittere() {
             try {
                 // UIを表示
                 _velumSalsamenti.DemittereSalsamenti();
@@ -75,15 +75,12 @@ namespace Yulinti.Auctoritas.Senatus {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
-            } finally {
-                _adReditum = adReditum;
             }
         }
 
         public void Tollere() {
             _velumSalsamenti.TollereSalsamenti();
-            _adReditum?.Invoke();
-            _adReditum = null;
+            _operatioReditusSalsamenti.AdReditumSalsamenti();
             _estActivumUsus = true;
         }
 
