@@ -179,7 +179,7 @@ namespace Yulinti.Auctoritas.Senatus {
         }
 
         public void Liberare() {
-            _operatioPortus.Purgare(Executare);
+            _operatioPortus.Purgare();
         }
     }
 }

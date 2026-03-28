@@ -11,15 +11,15 @@ namespace Yulinti.Auctoritas.Senatus {
             _revocatioGuid = null;
         }
 
-        public void Initiare(Action<UsusSalsamenti> revocatio) {
+        public void Initiare(
+            Action<UsusSalsamenti> revocatio,
+            Action<UsusSalsamenti, Guid> revocatioGuid
+        ) {
             _revocatio = revocatio;
-        }
-
-        public void Initiare(Action<UsusSalsamenti, Guid> revocatioGuid) {
             _revocatioGuid = revocatioGuid;
         }
 
-        public void Purgare(Action<UsusSalsamenti> revocatio) {
+        public void Purgare() {
             _revocatio = null;
             _revocatioGuid = null;
         }

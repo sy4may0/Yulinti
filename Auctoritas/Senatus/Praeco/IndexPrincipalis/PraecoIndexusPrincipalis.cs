@@ -57,7 +57,10 @@ namespace Yulinti.Auctoritas.Senatus {
             _operatioIndexusPrincipalis = operatioIndexusPrincipalis;
             _estActivumUsus = true;
 
-            _operatioIndexusPrincipalis.Initiare(Executare);
+            _operatioIndexusPrincipalis.Initiare(
+                revocatio: Executare,
+                adRenovareStatumSalsamenti: AdRenovareStatumSalsamenti
+            );
         }
 
         public void Incipere() {
@@ -101,9 +104,11 @@ namespace Yulinti.Auctoritas.Senatus {
                 PremereOptiones();
             } else if (usus == UsusIndexusPrincipalis.Exi) {
                 PremereExi();
-            } else if (usus == UsusIndexusPrincipalis.RenovareStatumSalsamenti) {
-                _ = PremereRenovareStatumSalsamenti();
             }
+        }
+
+        private void AdRenovareStatumSalsamenti() {
+            _ = PremereRenovareStatumSalsamenti();
         }
 
         // Salsamentiでセーブデータが更新されるため、ボタンの状態を更新する。
@@ -236,7 +241,7 @@ namespace Yulinti.Auctoritas.Senatus {
         }
 
         public void Liberare() {
-            _operatioIndexusPrincipalis.Purgare(Executare);
+            _operatioIndexusPrincipalis.Purgare();
         }
 
         // ボタンの状態を反映する。

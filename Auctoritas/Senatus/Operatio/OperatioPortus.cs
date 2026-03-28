@@ -13,7 +13,7 @@ namespace Yulinti.Auctoritas.Senatus {
             _revocatio = revocatio;
         }
 
-        public void Purgare(Action<UsusPortus> revocatio) {
+        public void Purgare() {
             _revocatio = null;
         }
 

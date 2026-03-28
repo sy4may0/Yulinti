@@ -20,7 +20,7 @@ namespace Yulinti.Auctoritas.Senatus {
         private readonly OperatioSalsamenti _operatioSalsamenti;
 
         // 上位Operatio
-        private readonly IOperatioIndexusPrincipalis _legiOperatioIndexusPrincipalis;
+        private readonly IOperatioInternaIndexusPrincipalis _operatioInternaIndexusPrincipalis;
 
         private readonly CuratorVela _curatorVela;
 
@@ -36,7 +36,7 @@ namespace Yulinti.Auctoritas.Senatus {
             ITurrisInterpretationis turrisInterpretationis,
             ITurrisSoniVeli turrisSoniVeli,
             OperatioSalsamenti operatioSalsamenti,
-            IOperatioIndexusPrincipalis operatioIndexusPrincipalis,
+            IOperatioInternaIndexusPrincipalis operatioInternaIndexusPrincipalis,
             CuratorVela curatorVela,
             IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
         ) {
@@ -49,10 +49,9 @@ namespace Yulinti.Auctoritas.Senatus {
             _curatorVela = curatorVela;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
             _operatioSalsamenti = operatioSalsamenti;
-            _legiOperatioIndexusPrincipalis = operatioIndexusPrincipalis;
+            _operatioInternaIndexusPrincipalis = operatioInternaIndexusPrincipalis;
 
-            _operatioSalsamenti.Initiare(Executare);
-            _operatioSalsamenti.Initiare(ExecutareGuid);
+            _operatioSalsamenti.Initiare(Executare, ExecutareGuid);
             _estActivumUsus = true;
         }
 
@@ -88,7 +87,7 @@ namespace Yulinti.Auctoritas.Senatus {
 
         public void Tollere() {
             _velumSalsamenti.TollereSalsamenti();
-            _legiOperatioIndexusPrincipalis.Executare(UsusIndexusPrincipalis.RenovareStatumSalsamenti);
+            _operatioInternaIndexusPrincipalis.RenovareStatumSalsamenti();
             _estActivumUsus = true;
         }
 
@@ -197,7 +196,7 @@ namespace Yulinti.Auctoritas.Senatus {
         }
 
         public void Liberare() {
-            _operatioSalsamenti.Purgare(Executare);
+            _operatioSalsamenti.Purgare();
         }
     }
 }
