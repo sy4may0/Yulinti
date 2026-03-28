@@ -5,22 +5,14 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.Officia.Turris {
     internal sealed class SalsamentumPuellaeFormaeDto {
-        [JsonProperty("magnitudo_x")]
-        public float MagnitudoX { get; set; }
-        [JsonProperty("magnitudo_y")]
-        public float MagnitudoY { get; set; }
-        [JsonProperty("magnitudo_z")]
-        public float MagnitudoZ { get; set; }
+        [JsonProperty("ratio")]
+        public float Ratio { get; set; }
 
         public SalsamentumPuellaeFormaeDto() {
-            MagnitudoX = 1f;
-            MagnitudoY = 1f;
-            MagnitudoZ = 1f;
+            Ratio = 0.5f;
         }
-        public void Renovare(Vector3 magnitudoActualis) {
-            MagnitudoX = magnitudoActualis.X;
-            MagnitudoY = magnitudoActualis.Y;
-            MagnitudoZ = magnitudoActualis.Z;
+        public void Renovare(float ratio) {
+            Ratio = ratio;
         }
     }
     // ここでOnDesirializedはいらない。

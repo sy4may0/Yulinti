@@ -10,6 +10,7 @@ namespace Yulinti.Officia.Turris {
         public Dictionary<IDPuellaeFormae, SalsamentumPuellaeFormaeDto> Formarum { get; set; }
 
         public SalsamentumPuellaeFormarumDto() {
+            UnityEngine.Debug.Log("SalsamentumPuellaeFormarumDto Constructor");
             Formarum = new Dictionary<IDPuellaeFormae, SalsamentumPuellaeFormaeDto>();
             InitiareFormarum();
         }

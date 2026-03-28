@@ -62,7 +62,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         void PostulareFormae(
             IDPuellaeFormae idFormae,
-            Vector3 magnitudoDesiderata
+            float ratioDesiderata
         );
 
         void PostularePersonae(
