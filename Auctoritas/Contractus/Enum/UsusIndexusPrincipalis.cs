@@ -4,6 +4,7 @@ namespace Yulinti.Auctoritas.Contractus {
         PergeLudum,
         OneraLudum,
         Optiones,
-        Exi
+        Exi,
+        RenovareStatumSalsamenti
     }
 }

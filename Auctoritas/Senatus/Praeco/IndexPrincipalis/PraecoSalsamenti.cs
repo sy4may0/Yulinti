@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace Yulinti.Auctoritas.Senatus {
-    internal sealed class PraecoSalsamenti : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis, IOperatioSalsamenti {
+    internal sealed class PraecoSalsamenti : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumSalsamenti _velumSalsamenti;
         private readonly IPraecoConfirmationis _praecoConfirmationis;
@@ -16,11 +16,15 @@ namespace Yulinti.Auctoritas.Senatus {
         private readonly ITurrisSalsamenti _turrisSalsamenti;
         private readonly ITurrisSoniVeli _turrisSoniVeli;
 
+        // Operatio
+        private readonly OperatioSalsamenti _operatioSalsamenti;
+
+        // 上位Operatio
+        private readonly IOperatioIndexusPrincipalis _legiOperatioIndexusPrincipalis;
+
         private readonly CuratorVela _curatorVela;
 
         private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
-
-        private readonly IOperatioReditusSalsamenti _operatioReditusSalsamenti;
 
         private bool _estActivumUsus;
 
@@ -31,8 +35,9 @@ namespace Yulinti.Auctoritas.Senatus {
             IPraecoConfirmationis praecoConfirmationis,
             ITurrisInterpretationis turrisInterpretationis,
             ITurrisSoniVeli turrisSoniVeli,
+            OperatioSalsamenti operatioSalsamenti,
+            IOperatioIndexusPrincipalis operatioIndexusPrincipalis,
             CuratorVela curatorVela,
-            IOperatioReditusSalsamenti operatioReditusSalsamenti,
             IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
         ) {
             _turrisMundus = turrisMundus;
@@ -42,9 +47,12 @@ namespace Yulinti.Auctoritas.Senatus {
             _turrisInterpretationis = turrisInterpretationis;
             _turrisSoniVeli = turrisSoniVeli;
             _curatorVela = curatorVela;
-            _operatioReditusSalsamenti = operatioReditusSalsamenti;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
+            _operatioSalsamenti = operatioSalsamenti;
+            _legiOperatioIndexusPrincipalis = operatioIndexusPrincipalis;
 
+            _operatioSalsamenti.Initiare(Executare);
+            _operatioSalsamenti.Initiare(ExecutareGuid);
             _estActivumUsus = true;
         }
 
@@ -80,11 +88,11 @@ namespace Yulinti.Auctoritas.Senatus {
 
         public void Tollere() {
             _velumSalsamenti.TollereSalsamenti();
-            _operatioReditusSalsamenti.AdReditumSalsamenti();
+            _legiOperatioIndexusPrincipalis.Executare(UsusIndexusPrincipalis.RenovareStatumSalsamenti);
             _estActivumUsus = true;
         }
 
-        public void Executare(UsusSalsamenti usus, Guid id) {
+        private void ExecutareGuid(UsusSalsamenti usus, Guid id) {
             if (usus == UsusSalsamenti.OneraLudum) {
                 _ = PremereOneraLudum(id);
             } else if (usus == UsusSalsamenti.DeletoLudum) {
@@ -94,7 +102,7 @@ namespace Yulinti.Auctoritas.Senatus {
             }
         }
 
-        public void Executare(UsusSalsamenti usus) {
+        private void Executare(UsusSalsamenti usus) {
             if (usus == UsusSalsamenti.Exi) {
                 PremereExi();
             } else {
@@ -188,6 +196,8 @@ namespace Yulinti.Auctoritas.Senatus {
             _estActivumUsus = true;
         }
 
-        public void Liberare() { }
+        public void Liberare() {
+            _operatioSalsamenti.Purgare(Executare);
+        }
     }
 }

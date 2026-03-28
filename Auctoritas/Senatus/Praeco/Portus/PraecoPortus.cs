@@ -7,11 +7,14 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Yulinti.Auctoritas.Senatus {
-    internal sealed class PraecoPortus : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis, IOperatioPortus {
+    internal sealed class PraecoPortus : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumPortus _velumPortus;
         private readonly IPraecoConfirmationis _praecoConfirmationis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
+
+        // Operatio
+        private readonly OperatioPortus _operatioPortus;
 
         private readonly CuratorVela _curatorVela;
 
@@ -24,6 +27,7 @@ namespace Yulinti.Auctoritas.Senatus {
             IVelumPortus velumPortus,
             IPraecoConfirmationis praecoConfirmationis,
             ITurrisInterpretationis turrisInterpretationis,
+            OperatioPortus operatioPortus,
             CuratorVela curatorVela,
             IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
         ) {
@@ -33,6 +37,9 @@ namespace Yulinti.Auctoritas.Senatus {
             _turrisInterpretationis = turrisInterpretationis;
             _curatorVela = curatorVela;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
+            _operatioPortus = operatioPortus;
+            _operatioPortus.Initiare(Executare);
+
             _estActivumUsus = true;
         }
 
@@ -52,7 +59,7 @@ namespace Yulinti.Auctoritas.Senatus {
             return Task.CompletedTask;
         }
 
-        public void Executare(UsusPortus usus) {
+        private void Executare(UsusPortus usus) {
             if (usus == UsusPortus.Profectio) {
                 _ = PremereProfectio();
             } else if (usus == UsusPortus.Constructio) {
@@ -171,6 +178,8 @@ namespace Yulinti.Auctoritas.Senatus {
             _estActivumUsus = true;
         }
 
-        public void Liberare() { }
+        public void Liberare() {
+            _operatioPortus.Purgare(Executare);
+        }
     }
 }

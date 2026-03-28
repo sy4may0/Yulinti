@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 // !!! 遅延ロードは想定しない。 !!!
 
 namespace Yulinti.Auctoritas.Senatus {
-    internal sealed class PraecoIndexusPrincipalis : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis, IOperatioIndexusPrincipalis, IOperatioReditusSalsamenti {
+    internal sealed class PraecoIndexusPrincipalis : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumIndexusPrincipalis _velumIndexusPrincipalis;
-        private readonly IPraecoConfirmationis _legatusConfirmationis;
+        private readonly IPraecoConfirmationis _praecoConfirmationis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ITurrisSalsamenti _turrisSalsamenti;
         private readonly ITurrisSoniVeli _turrisSoniVeli;
@@ -21,7 +21,10 @@ namespace Yulinti.Auctoritas.Senatus {
         private readonly CuratorVela _curatorVela;
 
         // 下位Praeco
-        private readonly PraecoSalsamenti _legatusSalsamenti;
+        private readonly PraecoSalsamenti _praecoSalsamenti;
+
+        // Operatio
+        private readonly OperatioIndexusPrincipalis _operatioIndexusPrincipalis;
 
         private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
 
@@ -36,23 +39,25 @@ namespace Yulinti.Auctoritas.Senatus {
             ITurrisSoniVeli turrisSoniVeli,
             ITurrisInterpretationis turrisInterpretationis,
             ITurrisSalsamenti turrisSalsamenti,
-            IPraecoConfirmationis legatusConfirmationis,
-            PraecoSalsamenti legatusSalsamenti,
+            IPraecoConfirmationis praecoConfirmationis,
+            PraecoSalsamenti praecoSalsamenti,
             CuratorVela curatorVela,
-            IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
+            IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile,
+            OperatioIndexusPrincipalis operatioIndexusPrincipalis
         ) {
             _turrisMundus = turrisMundus;
             _velumIndexusPrincipalis = velumIndexusPrincipalis;
             _turrisSoniVeli = turrisSoniVeli;
             _turrisInterpretationis = turrisInterpretationis;
             _turrisSalsamenti = turrisSalsamenti;
-            _legatusConfirmationis = legatusConfirmationis;
-            _legatusSalsamenti = legatusSalsamenti;
+            _praecoConfirmationis = praecoConfirmationis;
+            _praecoSalsamenti = praecoSalsamenti;
             _curatorVela = curatorVela;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
-
+            _operatioIndexusPrincipalis = operatioIndexusPrincipalis;
             _estActivumUsus = true;
 
+            _operatioIndexusPrincipalis.Initiare(Executare);
         }
 
         public void Incipere() {
@@ -85,7 +90,7 @@ namespace Yulinti.Auctoritas.Senatus {
             }
         }
 
-        public void Executare(UsusIndexusPrincipalis usus) {
+        private void Executare(UsusIndexusPrincipalis usus) {
             if (usus == UsusIndexusPrincipalis.LudusNovus) {
                 _ = PremereLudusNovus();
             } else if (usus == UsusIndexusPrincipalis.PergeLudum) {
@@ -96,16 +101,13 @@ namespace Yulinti.Auctoritas.Senatus {
                 PremereOptiones();
             } else if (usus == UsusIndexusPrincipalis.Exi) {
                 PremereExi();
+            } else if (usus == UsusIndexusPrincipalis.RenovareStatumSalsamenti) {
+                _ = PremereRenovareStatumSalsamenti();
             }
         }
 
-        // SalsamentiからCancelでタイトルに戻った際に実行する関数。
-        public void AdReditumSalsamenti() {
-            _ = ReditumSalsamenti();
-        }
-
         // Salsamentiでセーブデータが更新されるため、ボタンの状態を更新する。
-        private async Task ReditumSalsamenti() {
+        private async Task PremereRenovareStatumSalsamenti() {
             try {
                 _estActivumUsus = false;
                 // LongitudoとNovissimusを取得。
@@ -133,7 +135,7 @@ namespace Yulinti.Auctoritas.Senatus {
                 if (!ConareUsus()) {
                     return;
                 }
-                bool estConfirmationis = await _legatusConfirmationis.DemittereAsync(
+                bool estConfirmationis = await _praecoConfirmationis.DemittereAsync(
                     _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_TITULUS),
                     _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_TEXTUS),
                     _turrisInterpretationis.LegoTextus(IDTextus.INDEXUS_PRINCIPALIS_LUDUS_NOVUS_BUTTON_ITA),
@@ -186,7 +188,7 @@ namespace Yulinti.Auctoritas.Senatus {
                     return;
                 }
                 //Salsamentumを開く。
-                await _legatusSalsamenti.Demittere();
+                await _praecoSalsamenti.Demittere();
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
@@ -233,7 +235,9 @@ namespace Yulinti.Auctoritas.Senatus {
             _estActivumUsus = true;
         }
 
-        public void Liberare() { }
+        public void Liberare() {
+            _operatioIndexusPrincipalis.Purgare(Executare);
+        }
 
         // ボタンの状態を反映する。
         private void ApplicareStatusUsus() {
