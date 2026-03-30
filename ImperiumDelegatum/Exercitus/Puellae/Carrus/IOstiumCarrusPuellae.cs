@@ -55,6 +55,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtSonusMotus = 0f
         );
 
+        void PostulareVeletudinisMaxima(
+            float dtVigorMaxima = 0f,
+            float dtPatientiaeMaxima = 0f,
+            float dtAetherMaxima = 0f,
+            float dtClaritasMaxima = 0f,
+            float dtIntentioMaxima = 0f,
+            float dtDedecusMaxima = 0f,
+            float dtSonusQuietesMaxima = 0f,
+            float dtSonusMotusMaxima = 0f
+        );
+
         void PostulareVeletudinisNudi(
             bool estNudusAnterior,
             bool estNudusPosterior

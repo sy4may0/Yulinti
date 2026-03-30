@@ -66,6 +66,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ExecutorCivisVeletudinis>(Lifetime.Singleton);
             builder.Register<ExecutorPuellaeFormae>(Lifetime.Singleton);
 
+            // Resolutor
+            builder.Register<IResolutorPuellaeVigorisMaxima, ResolutorPuellaeVigorisMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorPuellaePatientiaeMaxima, ResolutorPuellaePatientiaeMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorPuellaeClaritatisMaximus, ResolutorPuellaeClaritatisMaximus>(Lifetime.Singleton);
+            builder.Register<IResolutorPuellaeAetherisMaxima, ResolutorPuellaeAetherisMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorPuellaeIntentioMaxima, ResolutorPuellaeIntentioMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorPuellaeDedecorisMaximum, ResolutorPuellaeDedecorisMaximum>(Lifetime.Singleton);
+            builder.Register<IResolutorPuellaeSonusQuietesMaximus, ResolutorPuellaeSonusQuietesMaximus>(Lifetime.Singleton);
+            builder.Register<IResolutorPuellaeSonusMotusMaximus, ResolutorPuellaeSonusMotusMaximus>(Lifetime.Singleton);
+
             // Miles
             builder.Register<MilesPuellaeActionis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeCrinis>(Lifetime.Singleton);
@@ -74,6 +84,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<MilesCivisActionis>(Lifetime.Singleton);
             builder.Register<MilesCivisCustodiae>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVigoris>(Lifetime.Singleton);
+            builder.Register<MilesPuellaeVeletudinisMaxima>(Lifetime.Singleton);
 
             // Centurio
             builder.Register<CenturioPuellae>(Lifetime.Singleton)

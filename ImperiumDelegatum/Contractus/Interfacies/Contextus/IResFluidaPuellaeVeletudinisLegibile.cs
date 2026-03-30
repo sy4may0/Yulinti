@@ -1,5 +1,14 @@
 namespace Yulinti.ImperiumDelegatum.Contractus {
     public interface IResFluidaPuellaeVeletudinisLegibile {
+        float VigorMaxima { get; }
+        float PatientiaMaxima { get; }
+        float ClaritasMaxima { get; }
+        float AetherMaxima { get; }
+        float IntentioMaxima { get; }
+        float DedecusMaxima { get; }
+        float SonusQuietesMaxima { get; }
+        float SonusMotusMaxima { get; }
+
         float Vigor { get; }
         bool EstExhauritaVigoris { get; }
         float Patientia { get; }
