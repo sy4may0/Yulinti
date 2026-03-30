@@ -22,6 +22,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             MilesPuellaeFigurae milesPuellaeFigurae,
             MilesPuellaeVestitae milesPuellaeVestitae,
             MilesPuellaeVigoris milesPuellaeVigoris,
+            MilesPuellaeVeletudinisMaxima milesPuellaeVeletudinisMaxima,
             IResFluidaPuellaeLegibile resFluidaLegibile,
             CarrusPuellae carrusPuellae
         ) {
@@ -30,6 +31,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _milesPuellaeFigurae = milesPuellaeFigurae;
             _milesPuellaeVestitae = milesPuellaeVestitae;
             _milesPuellaeVigoris = milesPuellaeVigoris;
+            _milesPuellaeVeletudinisMaxima = milesPuellaeVeletudinisMaxima;
             _resFluidaLegibile = resFluidaLegibile;
             _carrusPuellae = carrusPuellae;
         }
