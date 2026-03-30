@@ -79,6 +79,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private void ConfirmareVeletudinis() {
             _exVeletudinis.Confirmare();
             _lacusOrdinatioPuellae.ColligereVeletudinis();
+            _lacusOrdinatioPuellae.ColligereVeletudinisMaxima();
             _lacusOrdinatioPuellae.ColligereVeletudinisNudi();
         }
         private void ConfirmarePersonae() {
@@ -225,6 +226,26 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                     dtVigoris, dtPatientiae, dtAetheris,
                     dtIntentio, dtDedecus, dtClaritas,
                     dtSonusQuietes, dtSonusMotus
+                );
+                _exVeletudinis.Executare(ordinatio);
+            }
+        }
+
+        public void PostulareVeletudinisMaxima(
+            float dtVigorMaxima = 0f,
+            float dtPatientiaeMaxima = 0f,
+            float dtAetherMaxima = 0f,
+            float dtClaritasMaxima = 0f,
+            float dtIntentioMaxima = 0f,
+            float dtDedecusMaxima = 0f,
+            float dtSonusQuietesMaxima = 0f,
+            float dtSonusMotusMaxima = 0f
+        ){
+            if(_lacusOrdinatioPuellae.EmittareVeletudinisMaxima(out var ordinatio)) {
+                ordinatio.Pono(
+                    dtVigorMaxima, dtPatientiaeMaxima, dtAetherMaxima,
+                    dtClaritasMaxima, dtIntentioMaxima, dtDedecusMaxima,
+                    dtSonusQuietesMaxima, dtSonusMotusMaxima
                 );
                 _exVeletudinis.Executare(ordinatio);
             }

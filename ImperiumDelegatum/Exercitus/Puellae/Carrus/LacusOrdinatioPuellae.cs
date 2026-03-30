@@ -13,6 +13,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Lacus<OrdinatioPuellaeNavmeshInitii> _lacusNavmeshInitii;
         private readonly Lacus<OrdinatioPuellaeVeletudinis> _lacusVeletudinis;
         private readonly Lacus<OrdinatioPuellaeVeletudinisNudi> _lacusVeletudinisNudi;
+        private readonly Lacus<OrdinatioPuellaeVeletudinisMaxima> _lacusVeletudinisMaxima;
         private readonly Lacus<OrdinatioPuellaePersonae> _lacusPersonae;
         private readonly Lacus<OrdinatioPuellaeFormae> _lacusFormae;
 
@@ -25,6 +26,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Ordo<OrdinatioPuellaeNavmeshInitii> _emissioNavmeshInitii;
         private readonly Ordo<OrdinatioPuellaeVeletudinis> _emissioVeletudinis;
         private readonly Ordo<OrdinatioPuellaeVeletudinisNudi> _emissioVeletudinisNudi;
+        private readonly Ordo<OrdinatioPuellaeVeletudinisMaxima> _emissioVeletudinisMaxima;
         private readonly Ordo<OrdinatioPuellaePersonae> _emissioPersonae;
         private readonly Ordo<OrdinatioPuellaeFormae> _emissioFormae;
 
@@ -56,6 +58,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _lacusVeletudinisNudi = new Lacus<OrdinatioPuellaeVeletudinisNudi>(
                 ConstansPuellae.LongitudoOrdinatioVeletudinisNudi
             );
+            _lacusVeletudinisMaxima = new Lacus<OrdinatioPuellaeVeletudinisMaxima>(
+                ConstansPuellae.LongitudoOrdinatioVeletudinisMaxima
+            );
             _lacusPersonae = new Lacus<OrdinatioPuellaePersonae>(12);
             _lacusFormae = new Lacus<OrdinatioPuellaeFormae>(
                 ConstansPuellae.LongitudoOrdinatioFormae
@@ -86,6 +91,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             );
             _emissioVeletudinisNudi = new Ordo<OrdinatioPuellaeVeletudinisNudi>(
                 ConstansPuellae.LongitudoOrdinatioVeletudinisNudi
+            );
+            _emissioVeletudinisMaxima = new Ordo<OrdinatioPuellaeVeletudinisMaxima>(
+                ConstansPuellae.LongitudoOrdinatioVeletudinisMaxima
             );
             _emissioPersonae = new Ordo<OrdinatioPuellaePersonae>(
                 ConstansPuellae.LongitudoOrdinatioVeletudinis
@@ -223,6 +231,22 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             return false;
         }
 
+        public bool EmittareVeletudinisMaxima(out OrdinatioPuellaeVeletudinisMaxima veletudinisMaxima) {
+            if (_lacusVeletudinisMaxima.ConareLego(out var r)) {
+                if(_emissioVeletudinisMaxima.ConarePono(r)) {
+                    veletudinisMaxima = r;
+                    veletudinisMaxima.Initare();
+                    return true;
+                }
+                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_EMISSIO_QUEUE_FULL);
+                veletudinisMaxima = null;
+                return false;
+            }
+            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_LACUS_EMPTY);
+            veletudinisMaxima = null;
+            return false;
+        }
+
         public bool EmittareVeletudinisNudi(out OrdinatioPuellaeVeletudinisNudi veletudinisNudi) {
             if (_lacusVeletudinisNudi.ConareLego(out var r)) {
                 if(_emissioVeletudinisNudi.ConarePono(r)) {
@@ -351,6 +375,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
         }
 
+        public void ColligereVeletudinisMaxima() {
+            while(_emissioVeletudinisMaxima.ConareLego(out var r)) {
+                if(!_lacusVeletudinisMaxima.ConarePono(r)) {
+                    r.Purgere();
+                    r.Liberare();
+                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_LACUS_FULL);
+                }
+            }
+        }
+
         public void ColligereVeletudinisNudi() {
             while(_emissioVeletudinisNudi.ConareLego(out var r)) {
                 if(!_lacusVeletudinisNudi.ConarePono(r)) {
@@ -391,6 +425,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ColligereNavmeshInitii();
             ColligereVeletudinis();
             ColligereVeletudinisNudi();
+            ColligereVeletudinisMaxima();
             ColligerePersonae();
             ColligereFormae();
         }

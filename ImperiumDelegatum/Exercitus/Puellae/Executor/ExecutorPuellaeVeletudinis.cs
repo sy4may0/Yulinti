@@ -3,55 +3,86 @@ using Yulinti.Nucleus;
 using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
 
+// 全体設計: このクラスでClampしない。Maximaは見ない。Clampは反映時にResFluidaが行う。
+
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal sealed class PhantasmaPuellaeVeletudinis {
-        private float _phantasmaVigoris;
-        private float _phantasmaPatientiae;
-        private float _phantasmaAether;
-        private float _phantasmaClaritas;
-        private float _phantasmaIntentio;
-        private float _phantasmaDedecus;
-        private float _phantasmaSonusQuietes;
-        private float _phantasmaSonusMotus;
+    // 値のタイプ。流動か固定か。
+    // Fluidus: 流動値。毎フレーム前回の値を参照する。VigorやPatientiaなど増減する値。
+    // Fixus: 固定値。毎フレーム前回の値を参照しない。ClaritasやIntentioなど、毎フレーム特定の値が確定する。
+    internal enum TypusValoris {
+        Fluidus,
+        Fixus
+    }
 
-        private float _vigorMaxima;
-        private float _patientiaMaxima;
-        private float _claritasMaxima;
-        private float _aetherMaxima;
-        private float _intentioMaxima;
-        private float _dedecusMaxima;
-        private float _sonusQuietesMaxima;
-        private float _sonusMotusMaxima;
+    // 値タイプつきの値。
+    internal sealed class ValorisPuellaeVeletudinis {
+        public float Valor { get; set; }
+        private TypusValoris _typusValoris;
 
-        public PhantasmaPuellaeVeletudinis() {
-            _phantasmaVigoris = 0f;
-            _phantasmaPatientiae = 0f;
-            _phantasmaAether = 0f;
-            _phantasmaClaritas = 0f;
-            _phantasmaIntentio = 0f;
-            _phantasmaDedecus = 0f;
-            _phantasmaSonusQuietes = 0f;
-            _phantasmaSonusMotus = 0f;
-
-            // 将来Config取得とかに変わるかもしれないので、やりやすいように値にしておく。
-            _vigorMaxima = 1f;
-            _patientiaMaxima = 1f;
-            _claritasMaxima = 1f;
-            _aetherMaxima = 1f;
-            _intentioMaxima = 1f;
-            _dedecusMaxima = 1f;
-            _sonusQuietesMaxima = 1f;
-            _sonusMotusMaxima = 1f;
+        public ValorisPuellaeVeletudinis(float valor, TypusValoris typusValoris) {
+            Valor = valor;
+            _typusValoris = typusValoris;
         }
 
-        public float PhantasmaVigoris => _phantasmaVigoris;
-        public float PhantasmaPatientiae => _phantasmaPatientiae;
-        public float PhantasmaAether => _phantasmaAether;
-        public float PhantasmaClaritas => _phantasmaClaritas;
-        public float PhantasmaIntentio => _phantasmaIntentio;
-        public float PhantasmaDedecus => _phantasmaDedecus;
-        public float PhantasmaSonusQuietes => _phantasmaSonusQuietes;
-        public float PhantasmaSonusMotus => _phantasmaSonusMotus;
+        public TypusValoris TypusValoris => _typusValoris;
+    }
+
+    internal sealed class PhantasmaPuellaeVeletudinis {
+        private ValorisPuellaeVeletudinis _phantasmaVigoris;
+        private ValorisPuellaeVeletudinis _phantasmaPatientiae;
+        private ValorisPuellaeVeletudinis _phantasmaAether;
+        private ValorisPuellaeVeletudinis _phantasmaClaritas;
+        private ValorisPuellaeVeletudinis _phantasmaIntentio;
+        private ValorisPuellaeVeletudinis _phantasmaDedecus;
+        private ValorisPuellaeVeletudinis _phantasmaSonusQuietes;
+        private ValorisPuellaeVeletudinis _phantasmaSonusMotus;
+
+        private ValorisPuellaeVeletudinis _phantasmaVigorMaxima;
+        private ValorisPuellaeVeletudinis _phantasmaPatientiaeMaxima;
+        private ValorisPuellaeVeletudinis _phantasmaClaritasMaxima;
+        private ValorisPuellaeVeletudinis _phantasmaAetherMaxima;
+        private ValorisPuellaeVeletudinis _phantasmaIntentioMaxima;
+        private ValorisPuellaeVeletudinis _phantasmaDedecusMaxima;
+        private ValorisPuellaeVeletudinis _phantasmaSonusQuietesMaxima;
+        private ValorisPuellaeVeletudinis _phantasmaSonusMotusMaxima;
+
+        public PhantasmaPuellaeVeletudinis() {
+            _phantasmaVigoris = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fluidus);
+            _phantasmaPatientiae = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fluidus);
+            _phantasmaAether = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fluidus);
+            _phantasmaClaritas = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
+            _phantasmaIntentio = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
+            _phantasmaDedecus = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fluidus);
+            _phantasmaSonusQuietes = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
+            _phantasmaSonusMotus = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
+
+            _phantasmaVigorMaxima = new ValorisPuellaeVeletudinis(1f, TypusValoris.Fixus);
+            _phantasmaPatientiaeMaxima = new ValorisPuellaeVeletudinis(1f, TypusValoris.Fixus);
+            _phantasmaClaritasMaxima = new ValorisPuellaeVeletudinis(1f, TypusValoris.Fixus);
+            _phantasmaAetherMaxima = new ValorisPuellaeVeletudinis(1f, TypusValoris.Fixus);
+            _phantasmaIntentioMaxima = new ValorisPuellaeVeletudinis(1f, TypusValoris.Fixus);
+            _phantasmaDedecusMaxima = new ValorisPuellaeVeletudinis(1f, TypusValoris.Fixus);
+            _phantasmaSonusQuietesMaxima = new ValorisPuellaeVeletudinis(1f, TypusValoris.Fixus);
+            _phantasmaSonusMotusMaxima = new ValorisPuellaeVeletudinis(1f, TypusValoris.Fixus);
+        }
+
+        public float PhantasmaVigoris => _phantasmaVigoris.Valor;
+        public float PhantasmaPatientiae => _phantasmaPatientiae.Valor;
+        public float PhantasmaAether => _phantasmaAether.Valor;
+        public float PhantasmaClaritas => _phantasmaClaritas.Valor;
+        public float PhantasmaIntentio => _phantasmaIntentio.Valor;
+        public float PhantasmaDedecus => _phantasmaDedecus.Valor;
+        public float PhantasmaSonusQuietes => _phantasmaSonusQuietes.Valor;
+        public float PhantasmaSonusMotus => _phantasmaSonusMotus.Valor;
+
+        public float PhantasmaVigorMaxima => _phantasmaVigorMaxima.Valor;
+        public float PhantasmaPatientiaeMaxima => _phantasmaPatientiaeMaxima.Valor;
+        public float PhantasmaClaritasMaxima => _phantasmaClaritasMaxima.Valor;
+        public float PhantasmaAetherMaxima => _phantasmaAetherMaxima.Valor;
+        public float PhantasmaIntentioMaxima => _phantasmaIntentioMaxima.Valor;
+        public float PhantasmaDedecusMaxima => _phantasmaDedecusMaxima.Valor;
+        public float PhantasmaSonusQuietesMaxima => _phantasmaSonusQuietesMaxima.Valor;
+        public float PhantasmaSonusMotusMaxima => _phantasmaSonusMotusMaxima.Valor;
 
         public void Addo(
             float dtVigoris = 0f,
@@ -61,36 +92,86 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtIntentio = 0f,
             float dtDedecus = 0f,
             float dtSonusQuietes = 0f,
-            float dtSonusMotus = 0f
+            float dtSonusMotus = 0f,
+            float dtVigorMaxima = 0f,
+            float dtPatientiaeMaxima = 0f,
+            float dtClaritasMaxima = 0f,
+            float dtAetherMaxima = 0f,
+            float dtIntentioMaxima = 0f,
+            float dtDedecusMaxima = 0f,
+            float dtSonusQuietesMaxima = 0f,
+            float dtSonusMotusMaxima = 0f
         ) {
-            _phantasmaVigoris = Mathematica.Clamp(_phantasmaVigoris + dtVigoris, 0f, _vigorMaxima);
-            _phantasmaPatientiae = Mathematica.Clamp(_phantasmaPatientiae + dtPatientiae, 0f, _patientiaMaxima);
-            _phantasmaAether = Mathematica.Clamp(_phantasmaAether + dtAether, 0f, _aetherMaxima);
-            _phantasmaClaritas = Mathematica.Clamp(_phantasmaClaritas + dtClaritas, 0f, _claritasMaxima);
-            _phantasmaIntentio = Mathematica.Clamp(_phantasmaIntentio + dtIntentio, 0f, _intentioMaxima);
-            _phantasmaDedecus = Mathematica.Clamp(_phantasmaDedecus + dtDedecus, 0f, _dedecusMaxima);
-            _phantasmaSonusQuietes = Mathematica.Clamp(_phantasmaSonusQuietes + dtSonusQuietes, 0f, _sonusQuietesMaxima);
-            _phantasmaSonusMotus = Mathematica.Clamp(_phantasmaSonusMotus + dtSonusMotus, 0f, _sonusMotusMaxima);
+            _phantasmaVigoris.Valor = _phantasmaVigoris.Valor + dtVigoris;
+            _phantasmaPatientiae.Valor = _phantasmaPatientiae.Valor + dtPatientiae;
+            _phantasmaAether.Valor = _phantasmaAether.Valor + dtAether;
+            _phantasmaClaritas.Valor = _phantasmaClaritas.Valor + dtClaritas;
+            _phantasmaIntentio.Valor = _phantasmaIntentio.Valor + dtIntentio;
+            _phantasmaDedecus.Valor = _phantasmaDedecus.Valor + dtDedecus;
+            _phantasmaSonusQuietes.Valor = _phantasmaSonusQuietes.Valor + dtSonusQuietes;
+            _phantasmaSonusMotus.Valor = _phantasmaSonusMotus.Valor + dtSonusMotus;
+            _phantasmaVigorMaxima.Valor = _phantasmaVigorMaxima.Valor + dtVigorMaxima;
+            _phantasmaPatientiaeMaxima.Valor = _phantasmaPatientiaeMaxima.Valor + dtPatientiaeMaxima;
+            _phantasmaClaritasMaxima.Valor = _phantasmaClaritasMaxima.Valor + dtClaritasMaxima;
+            _phantasmaAetherMaxima.Valor = _phantasmaAetherMaxima.Valor + dtAetherMaxima;
+            _phantasmaIntentioMaxima.Valor = _phantasmaIntentioMaxima.Valor + dtIntentioMaxima;
+            _phantasmaDedecusMaxima.Valor = _phantasmaDedecusMaxima.Valor + dtDedecusMaxima;
+            _phantasmaSonusQuietesMaxima.Valor = _phantasmaSonusQuietesMaxima.Valor + dtSonusQuietesMaxima;
+            _phantasmaSonusMotusMaxima.Valor = _phantasmaSonusMotusMaxima.Valor + dtSonusMotusMaxima;
         }
 
-        public void Pono(
-            float vigor,
-            float patientia,
-            float aether,
-            float claritas,
-            float intentio,
-            float dedecus,
-            float sonusQuietes,
-            float sonusMotus
+        public void Purgere() {
+            _phantasmaVigoris.Valor = 0f;
+            _phantasmaPatientiae.Valor = 0f;
+            _phantasmaAether.Valor = 0f;
+            _phantasmaClaritas.Valor = 0f;
+            _phantasmaIntentio.Valor = 0f;
+            _phantasmaDedecus.Valor = 0f;
+            _phantasmaSonusQuietes.Valor = 0f;
+            _phantasmaSonusMotus.Valor = 0f;
+            _phantasmaVigorMaxima.Valor = 0f;
+            _phantasmaPatientiaeMaxima.Valor = 0f;
+            _phantasmaClaritasMaxima.Valor = 0f;
+            _phantasmaAetherMaxima.Valor = 0f;
+            _phantasmaIntentioMaxima.Valor = 0f;
+            _phantasmaDedecusMaxima.Valor = 0f;
+            _phantasmaSonusQuietesMaxima.Valor = 0f;
+            _phantasmaSonusMotusMaxima.Valor = 0f;
+        }
+
+        // 毎フレームの初期化時に、Phantasmaの値を初期化する。
+        // 流動値はvalorFluida(ResFluidaの値)で初期化する。
+        // 固定値は0で初期化する。
+        private void InitarePhantasma(
+            ValorisPuellaeVeletudinis valoris, 
+            float valorFluida
         ) {
-            _phantasmaVigoris = Mathematica.Clamp(vigor, 0f, _vigorMaxima);
-            _phantasmaPatientiae = Mathematica.Clamp(patientia, 0f, _patientiaMaxima);
-            _phantasmaAether = Mathematica.Clamp(aether, 0f, _aetherMaxima);
-            _phantasmaClaritas = Mathematica.Clamp(claritas, 0f, _claritasMaxima);
-            _phantasmaIntentio = Mathematica.Clamp(intentio, 0f, _intentioMaxima);
-            _phantasmaDedecus = Mathematica.Clamp(dedecus, 0f, _dedecusMaxima);
-            _phantasmaSonusQuietes = Mathematica.Clamp(sonusQuietes, 0f, _sonusQuietesMaxima);
-            _phantasmaSonusMotus = Mathematica.Clamp(sonusMotus, 0f, _sonusMotusMaxima);
+            if (valoris.TypusValoris == TypusValoris.Fluidus) {
+                valoris.Valor = valorFluida;
+            } else if (valoris.TypusValoris == TypusValoris.Fixus) {
+                valoris.Valor = 0f;
+            }
+        }
+
+        public void InitarePhantasma(
+            ResFluidaPuellaeVeletudinis resFluidaVeletudinis
+        ) {
+            InitarePhantasma(_phantasmaVigoris, resFluidaVeletudinis.Vigor);
+            InitarePhantasma(_phantasmaPatientiae, resFluidaVeletudinis.Patientia);
+            InitarePhantasma(_phantasmaAether, resFluidaVeletudinis.Aether);
+            InitarePhantasma(_phantasmaClaritas, resFluidaVeletudinis.Claritas);
+            InitarePhantasma(_phantasmaIntentio, resFluidaVeletudinis.Intentio);
+            InitarePhantasma(_phantasmaDedecus, resFluidaVeletudinis.Dedecus);
+            InitarePhantasma(_phantasmaSonusQuietes, resFluidaVeletudinis.SonusQuietes);
+            InitarePhantasma(_phantasmaSonusMotus, resFluidaVeletudinis.SonusMotus);
+            InitarePhantasma(_phantasmaVigorMaxima, resFluidaVeletudinis.VigorMaxima);
+            InitarePhantasma(_phantasmaPatientiaeMaxima, resFluidaVeletudinis.PatientiaMaxima);
+            InitarePhantasma(_phantasmaClaritasMaxima, resFluidaVeletudinis.ClaritasMaxima);
+            InitarePhantasma(_phantasmaAetherMaxima, resFluidaVeletudinis.AetherMaxima);
+            InitarePhantasma(_phantasmaIntentioMaxima, resFluidaVeletudinis.IntentioMaxima);
+            InitarePhantasma(_phantasmaDedecusMaxima, resFluidaVeletudinis.DedecusMaxima);
+            InitarePhantasma(_phantasmaSonusQuietesMaxima, resFluidaVeletudinis.SonusQuietesMaxima);
+            InitarePhantasma(_phantasmaSonusMotusMaxima, resFluidaVeletudinis.SonusMotusMaxima);
         }
     }
 
@@ -120,16 +201,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Initare() {
             _queueVeletudinisNudi.Purgere();
-            _phantasma.Pono(
-                vigor: 0f,
-                patientia: 0f,
-                aether: 0f,
-                dedecus: 0f,
-                claritas: 0f,
-                intentio: 0f,
-                sonusQuietes: 0f,
-                sonusMotus: 0f
-            );
+            _phantasma.Purgere();
             _resFluidaVeletudinis.Purgare();
             _ostiumPuellaeResVisaeMutabile.Activare();
         }
@@ -138,15 +210,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _queueVeletudinisNudi.Purgere();
             // 流動する値(スタミナ、HPなど)は現在の値で初期化する。
             // フレーム毎に確定する値(視認性、音量など)は0で初期化する。
-            _phantasma.Pono(
-                vigor: _resFluidaVeletudinis.Vigor,
-                patientia: _resFluidaVeletudinis.Patientia,
-                aether: _resFluidaVeletudinis.Aether,
-                claritas: 0f,
-                intentio: 0f,
-                dedecus: 0f,
-                sonusQuietes: 0f,
-                sonusMotus: 0f
+            _phantasma.InitarePhantasma(
+                _resFluidaVeletudinis
             );
         }
 
@@ -166,6 +231,21 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Executare(
+            IOrdinatioPuellaeVeletudinisMaxima veletudinisMaxima
+        ) {
+            _phantasma.Addo(
+                dtVigorMaxima: veletudinisMaxima.DtVigorMaxima,
+                dtPatientiaeMaxima: veletudinisMaxima.DtPatientiaeMaxima,
+                dtAetherMaxima: veletudinisMaxima.DtAetherMaxima,
+                dtClaritasMaxima: veletudinisMaxima.DtClaritasMaxima,
+                dtIntentioMaxima: veletudinisMaxima.DtIntentioMaxima,
+                dtDedecusMaxima: veletudinisMaxima.DtDedecusMaxima,
+                dtSonusQuietesMaxima: veletudinisMaxima.DtSonusQuietesMaxima,
+                dtSonusMotusMaxima: veletudinisMaxima.DtSonusMotusMaxima
+            );
+        }
+
+        public void Executare(
             IOrdinatioPuellaeVeletudinisNudi veletudinisNudi
         ) {
             if (!_queueVeletudinisNudi.ConarePono(veletudinisNudi)) {
@@ -174,7 +254,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
         }
 
-        private float ComputareSonusMotus() {
+        private float ComputareRationemSonusMotus() {
             float velocitasSoniMax = _configuratioVeletudinis.VelocitasSoniMaxima;
             float velocitasSoniMin = 0f;
             float velocitasActualis = _ostiumPuellaeLociLegibile.VelocitasHorizontalisActualis();
@@ -184,6 +264,18 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         private void ApplicareValoris() {
+            // 必ずMaximaを先に反映しろ。
+            _resFluidaVeletudinis.RenovareMaxima(
+                vigorMaxima: _phantasma.PhantasmaVigorMaxima,
+                patientiaMaxima: _phantasma.PhantasmaPatientiaeMaxima,
+                claritasMaxima: _phantasma.PhantasmaClaritasMaxima,
+                aetherMaxima: _phantasma.PhantasmaAetherMaxima,
+                intentioMaxima: _phantasma.PhantasmaIntentioMaxima,
+                dedecusMaxima: _phantasma.PhantasmaDedecusMaxima,
+                sonusQuietesMaxima: _phantasma.PhantasmaSonusQuietesMaxima,
+                sonusMotusMaxima: _phantasma.PhantasmaSonusMotusMaxima
+            );
+
             _resFluidaVeletudinis.RenovareValoris(
                 vigor: _phantasma.PhantasmaVigoris,
                 patientia: _phantasma.PhantasmaPatientiae,
@@ -192,18 +284,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 intentio: _phantasma.PhantasmaIntentio,
                 dedecus: _phantasma.PhantasmaDedecus,
                 sonusQuietes: _phantasma.PhantasmaSonusQuietes,
-                sonusMotus: _phantasma.PhantasmaSonusMotus * ComputareSonusMotus() // 速度補正をかける。
+                sonusMotus: _phantasma.PhantasmaSonusMotus * ComputareRationemSonusMotus() // 速度補正をかける。
             );
 
             _resFluidaVeletudinis.ResolvereExhauritaVigoris(
                 _configuratioVeletudinis.LimenExhauritaVigoris,
-                _configuratioVeletudinis.LimenRefectaVigoris,
-                1f // VigorMaxima Config設定可能にするならここを変える。
+                _configuratioVeletudinis.LimenRefectaVigoris
             );
             _resFluidaVeletudinis.ResolvereExhauritaPatientiae(
                 _configuratioVeletudinis.LimenExhauritaPatientiae,
-                _configuratioVeletudinis.LimenRefectaPatientiae,
-                1f // PatientiaMaxima Config設定可能にするならここを変える。
+                _configuratioVeletudinis.LimenRefectaPatientiae
             );
         }
 
@@ -232,16 +322,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Purgare() {
-            _phantasma.Pono(
-                vigor: 0f,
-                patientia: 0f,
-                aether: 0f,
-                claritas: 0f,
-                intentio: 0f,
-                dedecus: 0f,
-                sonusQuietes: 0f,
-                sonusMotus: 0f
-            );
+            _phantasma.Purgere();
             _resFluidaVeletudinis.Purgare();
         }
     }

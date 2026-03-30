@@ -1,8 +1,19 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
+using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResFluidaPuellaeVeletudinis : IResFluidaPuellaeVeletudinisLegibile {
+        // maxima
+        private float _vigorMaxima;
+        private float _patientiaMaxima;
+        private float _claritasMaxima;
+        private float _aetherMaxima;
+        private float _intentioMaxima;
+        private float _dedecusMaxima;
+        private float _sonusQuietesMaxima;
+        private float _sonusMotusMaxima;
+
         // health
         private float _vigor;
         private bool _estExhauritaVigoris;
@@ -31,13 +42,38 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private bool _estNudusPosterior;
 
         public ResFluidaPuellaeVeletudinis() {
-            this._vigor = 1f;
-            this._patientia = 1f;
-            this._claritas = 1f;
+            this._vigorMaxima = PuellaVeletudinis.VigorMaximaBasis;
+            this._patientiaMaxima = PuellaVeletudinis.PatientiaMaximaBasis;
+            this._claritasMaxima = PuellaVeletudinis.ClaritasMaximaBasis;
+            this._aetherMaxima = PuellaVeletudinis.AetherMaximaBasis;
+            this._intentioMaxima = PuellaVeletudinis.IntentioMaximaBasis;
+            this._dedecusMaxima = PuellaVeletudinis.DedecusMaximaBasis;
+            this._sonusQuietesMaxima = PuellaVeletudinis.SonusQuietesMaximaBasis;
+            this._sonusMotusMaxima = PuellaVeletudinis.SonusMotusMaximaBasis;
+
+            this._vigor = _vigorMaxima;
+            this._patientia = _patientiaMaxima;
             this._aether = 0f;
+            this._claritas = 0f;
             this._intentio = 0f;
             this._dedecus = 0f;
+            this._sonusQuietes = 0f;
+            this._sonusMotus = 0f;
+
+            this._estNudusAnterior = false;
+            this._estNudusPosterior = false;
+            this._estExhauritaVigoris = false;
+            this._estExhauritaPatientiae = false;
         }
+
+        public float VigorMaxima => _vigorMaxima;
+        public float PatientiaMaxima => _patientiaMaxima;
+        public float ClaritasMaxima => _claritasMaxima;
+        public float AetherMaxima => _aetherMaxima;
+        public float IntentioMaxima => _intentioMaxima;
+        public float DedecusMaxima => _dedecusMaxima;
+        public float SonusQuietesMaxima => _sonusQuietesMaxima;
+        public float SonusMotusMaxima => _sonusMotusMaxima;
 
         public float Vigor => _vigor;
         public bool EstExhauritaVigoris => _estExhauritaVigoris;
@@ -62,14 +98,34 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float sonusQuietes,
             float sonusMotus
         ) {
-            _vigor = Mathematica.Clamp01(vigor);
-            _patientia = Mathematica.Clamp01(patientia);
-            _claritas = Mathematica.Clamp01(claritas);
-            _aether = Mathematica.Clamp01(aether);
-            _intentio = Mathematica.Clamp01(intentio);
-            _dedecus = Mathematica.Clamp01(dedecus);
-            _sonusQuietes = Mathematica.Clamp01(sonusQuietes);
-            _sonusMotus = Mathematica.Clamp01(sonusMotus);
+            _vigor = Mathematica.Clamp(vigor, 0f, _vigorMaxima);
+            _patientia = Mathematica.Clamp(patientia, 0f, _patientiaMaxima);
+            _claritas = Mathematica.Clamp(claritas, 0f, _claritasMaxima);
+            _aether = Mathematica.Clamp(aether, 0f, _aetherMaxima);
+            _intentio = Mathematica.Clamp(intentio, 0f, _intentioMaxima);
+            _dedecus = Mathematica.Clamp(dedecus, 0f, _dedecusMaxima);
+            _sonusQuietes = Mathematica.Clamp(sonusQuietes, 0f, _sonusQuietesMaxima);
+            _sonusMotus = Mathematica.Clamp(sonusMotus, 0f, _sonusMotusMaxima);
+        }
+
+        public void RenovareMaxima(
+            float vigorMaxima,
+            float patientiaMaxima,
+            float claritasMaxima,
+            float aetherMaxima,
+            float intentioMaxima,
+            float dedecusMaxima,
+            float sonusQuietesMaxima,
+            float sonusMotusMaxima
+        ) {
+            _vigorMaxima = vigorMaxima;
+            _patientiaMaxima = patientiaMaxima;
+            _claritasMaxima = claritasMaxima;
+            _aetherMaxima = aetherMaxima;
+            _intentioMaxima = intentioMaxima;
+            _dedecusMaxima = dedecusMaxima;
+            _sonusQuietesMaxima = sonusQuietesMaxima;
+            _sonusMotusMaxima = sonusMotusMaxima;
         }
 
         public void RenovareNudusAnterior(bool estNudusAnterior) {
@@ -81,15 +137,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void ResolvereExhauritaVigoris(
             float LimenExhauritaVigoris,
-            float LimenRefectaVigoris,
-            float VigorMaxima
+            float LimenRefectaVigoris
         ) {
-            float limenEx = VigorMaxima * LimenExhauritaVigoris;
+            float limenEx = _vigorMaxima * LimenExhauritaVigoris;
             if (!_estExhauritaVigoris && _vigor <= limenEx) {
                 _estExhauritaVigoris = true;
             }
 
-            float limenRe = VigorMaxima * LimenRefectaVigoris;
+            float limenRe = _vigorMaxima * LimenRefectaVigoris;
             if (_estExhauritaVigoris && _vigor >= limenRe) {
                 _estExhauritaVigoris = false;
             }
@@ -97,25 +152,33 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void ResolvereExhauritaPatientiae(
             float LimenExhauritaPatientiae,
-            float LimenRefectaPatientiae,
-            float PatientiaMaxima
+            float LimenRefectaPatientiae
         ) {
-            float limenEx = PatientiaMaxima * LimenExhauritaPatientiae;
+            float limenEx = _patientiaMaxima * LimenExhauritaPatientiae;
             if (!_estExhauritaPatientiae && _patientia <= limenEx) {
                 _estExhauritaPatientiae = true;
             }
 
-            float limenRe = PatientiaMaxima * LimenRefectaPatientiae;
+            float limenRe = _patientiaMaxima * LimenRefectaPatientiae;
             if (_estExhauritaPatientiae && _patientia >= limenRe) {
                 _estExhauritaPatientiae = false;
             }
         }
 
         public void Purgare() {
-            _vigor = 1f;
-            _patientia = 1f;
-            _claritas = 0f;
+            _vigorMaxima = PuellaVeletudinis.VigorMaximaBasis;
+            _patientiaMaxima = PuellaVeletudinis.PatientiaMaximaBasis;
+            _claritasMaxima = PuellaVeletudinis.ClaritasMaximaBasis;
+            _aetherMaxima = PuellaVeletudinis.AetherMaximaBasis;
+            _intentioMaxima = PuellaVeletudinis.IntentioMaximaBasis;
+            _dedecusMaxima = PuellaVeletudinis.DedecusMaximaBasis;
+            _sonusQuietesMaxima = PuellaVeletudinis.SonusQuietesMaximaBasis;
+            _sonusMotusMaxima = PuellaVeletudinis.SonusMotusMaximaBasis;
+
+            _vigor = _vigorMaxima;
+            _patientia = _patientiaMaxima;
             _aether = 0f;
+            _claritas = 0f;
             _intentio = 0f;
             _dedecus = 0f;
             _sonusQuietes = 0f;

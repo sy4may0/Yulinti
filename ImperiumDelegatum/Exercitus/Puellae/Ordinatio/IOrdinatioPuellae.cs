@@ -14,7 +14,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         VeletudinisNudi,
         Personae,
         PersonaeInitii,
-        Formae
+        Formae,
+        VeletudinisMaxima
     }
     internal interface IOrdinatioPuellae {
         bool EstApplicandum { get; }

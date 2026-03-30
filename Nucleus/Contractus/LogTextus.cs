@@ -117,6 +117,9 @@ namespace Yulinti.Nucleus.Contractus {
         public const string ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_MOTUS_QUEUE_FULL = "ExecutorPuellaeLoci - ordinatio motus queue full";
         public const string ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_NAVMESH_QUEUE_FULL = "ExecutorPuellaeLoci - ordinatio navmesh queue full";
         public const string ExecutorPuellaeVeletudinis_EXECUTORPUELLAEVELETUDINIS_ORDINATIO_VELETUDINISNUDI_QUEUE_FULL = "ExecutorPuellaeVeletudinis - ordinatio veletudinisnudi queue full";
+        public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_EMISSIO_QUEUE_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinismaxima emissio queue full";
+        public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_LACUS_EMPTY = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinismaxima lacus empty";
+        public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_LACUS_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinismaxima lacus full";
         public const string ExecutorPuellaeFormae_MINIATERIUMPUELLAEFORMAE_ORDINATIO_QUEUE_FULL = "ExecutorPuellaeFormae - miniateriumpuellaeformae ordinatio queue full";
         public const string FabricaStatusCivisCorporis_FABRICACIVISSTATUSCORPORIS_INVALID_CONFIGURATION = "FabricaStatusCivisCorporis - fabricacivisstatuscorporis invalid configuration";
         public const string FabricaStatusCivisCorporis_FABRICACIVISSTATUSCORPORIS_MODUS_NOT_FOUND = "FabricaStatusCivisCorporis - fabricacivisstatuscorporis modus not found";
