@@ -10,11 +10,13 @@ namespace Yulinti.Officia.Turris {
 
         public SalsamentumDto() {
             PuellaePersonae = new SalsamentumPuellaePersonaeDto();
+            PuellaeFormarum = new SalsamentumPuellaeFormarumDto();
         }
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context) {
             PuellaePersonae ??= new SalsamentumPuellaePersonaeDto();
+            PuellaeFormarum ??= new SalsamentumPuellaeFormarumDto();
         }
     }
 }

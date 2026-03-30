@@ -4,29 +4,29 @@ using Yulinti.ImperiumDelegatum.Contractus;
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class OrdinatioPuellaeFormae : OrdinatioPuellae, IOrdinatioPuellaeFormae {
         private IDPuellaeFormae _idFormae;
-        private Vector3 _magnitudoDesiderata;
+        private float _ratioDesiderata;
 
         public OrdinatioPuellaeFormae()
             : base(true, SpeciesOrdinatioPuellae.Formae) {
             _idFormae = IDPuellaeFormae.Corpus;
-            _magnitudoDesiderata = new Vector3(1f, 1f, 1f);
+            _ratioDesiderata = 0.5f;
         }
 
         public IDPuellaeFormae IdFormae => _idFormae;
-        public Vector3 MagnitudoDesiderata => _magnitudoDesiderata;
+        public float RatioDesiderata => _ratioDesiderata;
 
         public override void Purgere() {
             _estApplicandum = false;
             _idFormae = IDPuellaeFormae.Corpus;
-            _magnitudoDesiderata = new Vector3(1f, 1f, 1f);
+            _ratioDesiderata = 0.5f;
         }
 
         public void Pono(
             IDPuellaeFormae idFormae,
-            Vector3 magnitudoDesiderata
+            float ratioDesiderata
         ) {
             _idFormae = idFormae;
-            _magnitudoDesiderata = magnitudoDesiderata;
+            _ratioDesiderata = ratioDesiderata;
             _estApplicandum = true;
         }
     }

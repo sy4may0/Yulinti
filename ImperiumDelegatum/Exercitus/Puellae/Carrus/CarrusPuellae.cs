@@ -292,10 +292,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void PostulareFormae(
             IDPuellaeFormae idFormae,
-            Vector3 magnitudoDesiderata
+            float ratioDesiderata
         ){
             if(_lacusOrdinatioPuellae.EmittareFormae(out var ordinatio)) {
-                ordinatio.Pono(idFormae, magnitudoDesiderata);
+                ordinatio.Pono(idFormae, ratioDesiderata);
                 _exFormae.Executare(ordinatio);
             }
         }

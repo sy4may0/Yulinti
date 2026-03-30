@@ -14,6 +14,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ContextusRamusPuellae contextusRamus
         ) {
             _configuratioStatuum = configuratioStatuum;
+            _carrus = carrus;
             _machinaStatusCorporis = new MachinaPuellaeStatusCorporis(
                 configuratioStatuum,
                 animationis,

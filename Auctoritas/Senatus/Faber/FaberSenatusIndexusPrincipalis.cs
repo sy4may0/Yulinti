@@ -8,6 +8,14 @@ namespace Yulinti.Auctoritas.Senatus {
             // Culator
             builder.Register<CuratorVela>(Lifetime.Singleton);
 
+            // Operatio
+            builder.Register<OperatioIndexusPrincipalis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<OperatioSalsamenti>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
             // IndexusPrincipalis
             builder.Register<PraecoIndexusPrincipalis>(Lifetime.Singleton)
                 .AsSelf()

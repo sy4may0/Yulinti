@@ -8,6 +8,11 @@ namespace Yulinti.Auctoritas.Senatus {
             // Curator
             builder.Register<CuratorVela>(Lifetime.Singleton);
 
+            // Operatio
+            builder.Register<OperatioPortus>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
             // Portus
             builder.Register<PraecoPortus>(Lifetime.Singleton)
                 .AsSelf()

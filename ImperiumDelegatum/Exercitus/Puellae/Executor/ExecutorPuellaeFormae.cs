@@ -38,8 +38,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Confirmare() {
             while (_queueFormae.ConareLego(out IOrdinatioPuellaeFormae formae)) {
-                _resFluidaFormae.RenovareMagnitudoActualis(
-                    formae.IdFormae, formae.MagnitudoDesiderata
+                _resFluidaFormae.RenovareRatioActualis(
+                    formae.IdFormae, formae.RatioDesiderata
                 );
             }
         }

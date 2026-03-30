@@ -12,15 +12,11 @@ namespace Yulinti.Officia.Turris {
             _puellaeFormarumDto = puellaeFormarumDto;
         }
 
-        public Vector3 MagnitudoActualis(IDPuellaeFormae idFormae) {
+        public float RatioActualis(IDPuellaeFormae idFormae) {
             if (!_puellaeFormarumDto.Formarum.ContainsKey(idFormae)) {
-                return new Vector3(1f, 1f, 1f);
+                return 0.5f;
             }
-            return new Vector3(
-                _puellaeFormarumDto.Formarum[idFormae].MagnitudoX,
-                _puellaeFormarumDto.Formarum[idFormae].MagnitudoY,
-                _puellaeFormarumDto.Formarum[idFormae].MagnitudoZ
-            );
+            return _puellaeFormarumDto.Formarum[idFormae].Ratio;
         }
 
         // Thesaurusからのデータ更新
@@ -34,7 +30,7 @@ namespace Yulinti.Officia.Turris {
                 if (idFormae == IDPuellaeFormae.Nihil) {
                     continue;
                 }
-                _puellaeFormarumDto.Formarum[idFormae].Renovare(resFluidaPuellaeFormae.MagnitudoActualis(idFormae));
+                _puellaeFormarumDto.Formarum[idFormae].Renovare(resFluidaPuellaeFormae.RatioActualis(idFormae));
             }
         }
     }

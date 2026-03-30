@@ -11,63 +11,58 @@ namespace Yulinti.Auctoritas.Senatus {
     internal sealed class PraecoSalsamenti : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis {
         private readonly ITurrisMundus _turrisMundus;
         private readonly IVelumSalsamenti _velumSalsamenti;
-        private readonly IPraecoConfirmationis _legatusConfirmationis;
+        private readonly IPraecoConfirmationis _praecoConfirmationis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ITurrisSalsamenti _turrisSalsamenti;
         private readonly ITurrisSoniVeli _turrisSoniVeli;
+
+        // Operatio
+        private readonly OperatioSalsamenti _operatioSalsamenti;
+
+        // 上位Operatio
+        private readonly IOperatioInternaIndexusPrincipalis _operatioInternaIndexusPrincipalis;
 
         private readonly CuratorVela _curatorVela;
 
         private readonly IOstiumSignumCancellationisLegibile _ostiumSignumCancellationisLegibile;
 
-        // Dux -> Velumへのコールバック
-        private Action<Guid> _aeAdPremereOneraLudum;
-        private Action<Guid> _aeAdPremereDeletoLudum;
-        private Action _aeAdPremereExi;
-
-        // Demittereで受け取り、Tollereで実行する、画面クローズ時のコールバック。
-        private Action _adReditum;
-
-        private bool _estProcessusButton;
+        private bool _estActivumUsus;
 
         public PraecoSalsamenti(
             ITurrisMundus turrisMundus,
             IVelumSalsamenti velumSalsamenti,
             ITurrisSalsamenti turrisSalsamenti,
-            IPraecoConfirmationis legatusConfirmationis,
+            IPraecoConfirmationis praecoConfirmationis,
             ITurrisInterpretationis turrisInterpretationis,
             ITurrisSoniVeli turrisSoniVeli,
+            OperatioSalsamenti operatioSalsamenti,
+            IOperatioInternaIndexusPrincipalis operatioInternaIndexusPrincipalis,
             CuratorVela curatorVela,
             IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
         ) {
             _turrisMundus = turrisMundus;
             _velumSalsamenti = velumSalsamenti;
             _turrisSalsamenti = turrisSalsamenti;
-            _legatusConfirmationis = legatusConfirmationis;
+            _praecoConfirmationis = praecoConfirmationis;
             _turrisInterpretationis = turrisInterpretationis;
             _turrisSoniVeli = turrisSoniVeli;
             _curatorVela = curatorVela;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
+            _operatioSalsamenti = operatioSalsamenti;
+            _operatioInternaIndexusPrincipalis = operatioInternaIndexusPrincipalis;
 
-            _aeAdPremereOneraLudum = AdPremereOneraLudum;
-            _aeAdPremereDeletoLudum = AdPremereDeletoLudum;
-            _aeAdPremereExi = AdPremereExi;
-
-            _adReditum = null;
+            _operatioSalsamenti.Initiare(Executare, ExecutareGuid);
+            _estActivumUsus = true;
         }
 
         public void Incipere() {
             Tollere();
         }
 
-        public async Task Demittere(Action adReditum) {
+        public async Task Demittere() {
             try {
                 // UIを表示
                 _velumSalsamenti.DemittereSalsamenti();
-
-                _velumSalsamenti.AdPremereOneraLudum(_aeAdPremereOneraLudum);
-                _velumSalsamenti.AdPremereDeletoLudum(_aeAdPremereDeletoLudum);
-                _velumSalsamenti.AdPremereExi(_aeAdPremereExi);
 
                 CancellationToken cancellationToken = _ostiumSignumCancellationisLegibile.Signum;
                 // Notitiaをロード
@@ -82,31 +77,43 @@ namespace Yulinti.Auctoritas.Senatus {
 
                 // 表示SE
                 _turrisSoniVeli.Sonare(IDSonusVeli.Demittere);
+                _estActivumUsus = true;
             } catch (OperationCanceledException) {
                 //キャンセルしてよい。何もしない。
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
-            } finally {
-                _adReditum = adReditum;
             }
         }
 
         public void Tollere() {
             _velumSalsamenti.TollereSalsamenti();
-            _adReditum?.Invoke();
-            _adReditum = null;
+            _operatioInternaIndexusPrincipalis.RenovareStatumSalsamenti();
+            _estActivumUsus = true;
         }
 
-        private void AdPremereOneraLudum(Guid id) {
-            _ = PremereOneraLudum(id);
+        private void ExecutareGuid(UsusSalsamenti usus, Guid id) {
+            if (usus == UsusSalsamenti.OneraLudum) {
+                _ = PremereOneraLudum(id);
+            } else if (usus == UsusSalsamenti.DeletoLudum) {
+                _ = PremereDeletoLudum(id);
+            } else {
+                Carnifex.Error(LogTextus.PraecoSalsamenti_EXECUTARE_USUS_INVALID);
+            }
+        }
+
+        private void Executare(UsusSalsamenti usus) {
+            if (usus == UsusSalsamenti.Exi) {
+                PremereExi();
+            } else {
+                Carnifex.Error(LogTextus.PraecoSalsamenti_EXECUTARE_USUS_INVALID_NEED_GUID);
+            }
         }
 
         private async Task PremereOneraLudum(Guid id) {
-            if (!ConariIncipereProcessumButton()) {
-                return;
-            }
-
             try {
+                if (!ConareUsus()) {
+                    return;
+                }
                 CancellationToken cancellationToken = _ostiumSignumCancellationisLegibile.Signum;
 
                 await _turrisSalsamenti.Arcessere(id, cancellationToken);
@@ -118,21 +125,17 @@ namespace Yulinti.Auctoritas.Senatus {
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
-                FinireProcessumButton();
+                LiberareUsus();
             }
-        }
-
-        private void AdPremereDeletoLudum(Guid id) {
-            _ = PremereDeletoLudum(id);
         }
 
         private async Task PremereDeletoLudum(Guid id) {
-            if (!ConariIncipereProcessumButton()) {
-                return;
-            }
             try {
+                if (!ConareUsus()) {
+                    return;
+                }
                 CancellationToken cancellationToken = _ostiumSignumCancellationisLegibile.Signum;
-                bool estConfirmationis = await _legatusConfirmationis.DemittereAsync(
+                bool estConfirmationis = await _praecoConfirmationis.DemittereAsync(
                     _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_TITULUS),
                     _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_TEXTUS),
                     _turrisInterpretationis.LegoTextus(IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_BUTTON_ITA),
@@ -162,59 +165,38 @@ namespace Yulinti.Auctoritas.Senatus {
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
-                FinireProcessumButton();
-                UnityEngine.Debug.Log("PremereDeletoLudum: FinireProcessumButton");
+                LiberareUsus();
             }
-        }
-
-        private void AdPremereExi() {
-            PremereExi();
         }
 
         private void PremereExi() {
-            if (!ConariIncipereProcessumButton()) {
-                return;
-            }
             try {
+                if (!ConareUsus()) {
+                    return;
+                }
+                _turrisSoniVeli.Sonare(IDSonusVeli.Exire);
+                Tollere();
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
-                FinireProcessumButton();
-                try {
-                    _turrisSoniVeli.Sonare(IDSonusVeli.Exire);
-                    Tollere();
-                } catch (Exception e) {
-                    Carnifex.Intermissio(e);
-                }
+                LiberareUsus();
             }
         }
 
-        public void Liberare() { }
-
-        private bool ConariIncipereProcessumButton() {
-            if (_estProcessusButton) {
+        private bool ConareUsus() {
+            if (!_estActivumUsus) {
                 return false;
             }
-            _estProcessusButton = true;
-            DeactivareButtons();
+            _estActivumUsus = false;
             return true;
         }
 
-        private void FinireProcessumButton() {
-            ActivareButtons();
-            _estProcessusButton = false;
+        private void LiberareUsus() {
+            _estActivumUsus = true;
         }
 
-        private void ActivareButtons() {
-            _velumSalsamenti.ActivareButton(ButtonSalsamenti.Exi);
-            _velumSalsamenti.ActivareButton(ButtonSalsamenti.OneraLudum);
-            _velumSalsamenti.ActivareButton(ButtonSalsamenti.DeletoLudum);
-        }
-
-        private void DeactivareButtons() {
-            _velumSalsamenti.DeactivareButton(ButtonSalsamenti.Exi);
-            _velumSalsamenti.DeactivareButton(ButtonSalsamenti.OneraLudum);
-            _velumSalsamenti.DeactivareButton(ButtonSalsamenti.DeletoLudum);
+        public void Liberare() {
+            _operatioSalsamenti.Purgare();
         }
     }
 }

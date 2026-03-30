@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
@@ -9,7 +8,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     // 骨Executorは強制同期フラグを実装すること。シーン開始時(Start())のスライダ適用は強制同期で行う。
     internal sealed class ResFluidaPuellaeFormae : IResFluidaPuellaeFormaeLegibile {
         private bool _estApplicandum;
-        private Vector3[] _magnitudinesActualium;
+        private float[] _ratiosActualium;
 
         public bool EstApplicandum => _estApplicandum;
 
@@ -20,7 +19,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
 
             int longitudo = Enum.GetValues(typeof(IDPuellaeFormae)).Length;
-            _magnitudinesActualium = new Vector3[longitudo];
+            _ratiosActualium = new float[longitudo];
 
             for (int i = 0; i < longitudo; i++) {
                 if (i == (int)IDPuellaeFormae.Nihil) {
@@ -28,27 +27,27 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 }
                  // セーブデータから値をロード。
                  // PuellaeFormarumは内部的にIDPuellaeFormaeを基に初期化しているから、チェック不要。
-                _magnitudinesActualium[i] = ostiumSalsamenti.PuellaeFormarum.MagnitudoActualis(
+                _ratiosActualium[i] = ostiumSalsamenti.PuellaeFormarum.RatioActualis(
                     (IDPuellaeFormae)i
                 );
             }
             ApplicatumEst();
         }
 
-        public Vector3 MagnitudoActualis(IDPuellaeFormae idFormae) {
+        public float RatioActualis(IDPuellaeFormae idFormae) {
             if (idFormae == IDPuellaeFormae.Nihil) {
                 Carnifex.Error(LogTextus.ResFluidaPuellaeFormae_LEGERE_NIHIL);
-                return new Vector3(1f, 1f, 1f);
+                return 0.5f;
             }
-            return _magnitudinesActualium[(int)idFormae];
+            return _ratiosActualium[(int)idFormae];
         }
 
-        public void RenovareMagnitudoActualis(IDPuellaeFormae idFormae, Vector3 magnitudoActualis) {
+        public void RenovareRatioActualis(IDPuellaeFormae idFormae, float ratioActualis) {
             if (idFormae == IDPuellaeFormae.Nihil) {
                 Carnifex.Error(LogTextus.ResFluidaPuellaeFormae_LEGERE_NIHIL);
                 return;
             }
-            _magnitudinesActualium[(int)idFormae] = magnitudoActualis;
+            _ratiosActualium[(int)idFormae] = ratioActualis;
             ApplicandumEst();
         }
 
@@ -62,8 +61,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Purgare() {
-            for (int i = 0; i < _magnitudinesActualium.Length; i++) {
-                _magnitudinesActualium[i] = new Vector3(1f, 1f, 1f);
+            for (int i = 0; i < _ratiosActualium.Length; i++) {
+                _ratiosActualium[i] = 0.5f;
             }
             ApplicatumEst();
         }

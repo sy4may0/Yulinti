@@ -8,6 +8,8 @@ namespace Yulinti.Auctoritas.Senatus {
             // Culator
             builder.Register<CuratorVela>(Lifetime.Singleton);
 
+            // Operatio
+
             // Praeco
             // 未実装
 
