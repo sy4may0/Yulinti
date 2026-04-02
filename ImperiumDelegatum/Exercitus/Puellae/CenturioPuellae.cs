@@ -54,7 +54,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // VeletudinisMaxima計画
             _milesPuellaeVeletudinisMaxima.Ordinare();
 
-            // Ordinatio計画
+            // Actionis計画
             _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);
             _milesPuellaeActionis.Ordinare(_resFluidaLegibile);
             _milesPuellaeVestitae.Ordinare(_resFluidaLegibile);
@@ -64,8 +64,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void PulsusTardus() {
-            // Ordinatio計画
+            // Figurae計画
             _milesPuellaeFigurae.Ordinare();
+            // Vigoris計画
             _milesPuellaeVigoris.Ordinare(_resFluidaLegibile);
 
             // Carrus適用(Ordinatio実行)
