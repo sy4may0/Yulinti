@@ -74,11 +74,13 @@ namespace Yulinti.Officia.Ministeria {
         private readonly IDPuellaeFormae _forma;
         private readonly List<FormaPuellaeFigurae> _figurae;
         private readonly List<FormaPuellaeOssisCorrectorium> _ossa;
+        private readonly ApplicatorPuellaeFormae _applicator;
 
         public FormaPuellae(IDPuellaeFormae forma) {
             _forma = forma;
             _figurae = new List<FormaPuellaeFigurae>();
             _ossa = new List<FormaPuellaeOssisCorrectorium>();
+            _applicator = new ApplicatorPuellaeFormae(_figurae, _ossa);
         }
 
         // コンストラクタ(Awake/Incipere)以外で呼ぶな。
@@ -118,12 +120,7 @@ namespace Yulinti.Officia.Ministeria {
         }
 
         public void Applicare(float ratio) {
-            foreach (var figurae in _figurae) {
-                figurae.Applicare(ratio);
-            }
-            foreach (var ossa in _ossa) {
-                ossa.Applicare(ratio);
-            }
+            _applicator.Applicare(ratio);
         }
     }
 }
