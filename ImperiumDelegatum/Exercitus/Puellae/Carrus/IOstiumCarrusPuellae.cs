@@ -76,10 +76,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float ratioDesiderata
         );
 
-        void PostulareFormae(
-            IResFluidaPuellaeFormaeLegibile resFluidaPuellaeFormae
-        );
-
         void PostularePersonae(
             int dtAnimaeLuxuriosus = 0,
             int dtAnimaeExhibitus = 0,

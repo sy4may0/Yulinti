@@ -299,18 +299,5 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _exFormae.Executare(ordinatio);
             }
         }
-
-        public void PostulareFormae(
-            IResFluidaPuellaeFormaeLegibile resFluidaPuellaeFormae
-        ) {
-            int longitudo = Enum.GetValues(typeof(IDPuellaeFormae)).Length;
-            for (int i = 0; i < longitudo; i++) {
-                if (i == (int)IDPuellaeFormae.Nihil) {
-                    continue;
-                }
-                IDPuellaeFormae idFormae = (IDPuellaeFormae)i;
-                PostulareFormae(idFormae, resFluidaPuellaeFormae.RatioActualis(idFormae));
-            }
-        }
     }
 }
