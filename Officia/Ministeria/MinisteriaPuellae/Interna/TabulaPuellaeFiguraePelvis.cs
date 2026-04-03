@@ -24,7 +24,7 @@ namespace Yulinti.Officia.Ministeria {
             _figuraeIndexes[(int)IDPuellaeFiguraePelvis.csAnusX150] = mesh.sharedMesh.GetBlendShapeIndex(config.X150AnusBlendShapeName);
 
             for (int i = 0; i < longitudo; i++) {
-                if (_figuraeIndexes[i] <= 0) {
+                if (_figuraeIndexes[i] < 0) {
                     Carnifex.Intermissio(LogTextus.TabulaPuellaeFiguraePelvis_TABULAPUELLAEFIGURAEPELVIS_BLEND_SHAPE_NOT_FOUND);
                 }
             }

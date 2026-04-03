@@ -64,6 +64,34 @@ namespace Yulinti.ImperiumMaius.Anchora {
         [SerializeField] private Transform _resNudusCatellus;
         [SerializeField] private Transform _resNudusNatium;
 
+        [SerializeField] private Transform _osCorrectoriumRadicis;
+        [SerializeField] private Transform _osCorrectoriumCapitis;
+        [SerializeField] private Transform _osCorrectoriumCervicis;
+        [SerializeField] private Transform _osCorrectoriumSpinae2;
+        [SerializeField] private Transform _osCorrectoriumSpinae1;
+        [SerializeField] private Transform _osCorrectoriumSpinae0;
+        [SerializeField] private Transform _osCorrectoriumPelvis;
+        [SerializeField] private Transform _osCorrectoriumUmeriDexter;
+        [SerializeField] private Transform _osCorrectoriumBracchiiDexter;
+        [SerializeField] private Transform _osCorrectoriumAntebracchiiDexter;
+        [SerializeField] private Transform _osCorrectoriumManusDexter;
+        [SerializeField] private Transform _osCorrectoriumUmeriSinister;
+        [SerializeField] private Transform _osCorrectoriumBracchiiSinister;
+        [SerializeField] private Transform _osCorrectoriumAntebracchiiSinister;
+        [SerializeField] private Transform _osCorrectoriumManusSinister;
+        [SerializeField] private Transform _osCorrectoriumFemurisDexter;
+        [SerializeField] private Transform _osCorrectoriumCrurisDexter;
+        [SerializeField] private Transform _osCorrectoriumPedisDexter;
+        [SerializeField] private Transform _osCorrectoriumDigitiPedisDexter;
+        [SerializeField] private Transform _osCorrectoriumFemurisSinister;
+        [SerializeField] private Transform _osCorrectoriumCrurisSinister;
+        [SerializeField] private Transform _osCorrectoriumPedisSinister;
+        [SerializeField] private Transform _osCorrectoriumDigitiPedisSinister;
+        [SerializeField] private Transform _osCorrectoriumPectorissDexter;
+        [SerializeField] private Transform _osCorrectoriumPectorissSinister;
+        [SerializeField] private Transform _osCorrectoriumNatisDexter;
+        [SerializeField] private Transform _osCorrectoriumNatisSinister;
+        [SerializeField] private Transform _osCorrectoriumVenter;
 
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
         public Animator Animator => _animator;
@@ -125,6 +153,35 @@ namespace Yulinti.ImperiumMaius.Anchora {
         public Transform ResNudusPectoris => _resNudusPectoris;
         public Transform ResNudusCatellus => _resNudusCatellus;
         public Transform ResNudusNatium => _resNudusNatium;
+
+        public Transform OsCorrectoriumRadicis => _osCorrectoriumRadicis;
+        public Transform OsCorrectoriumCapitis => _osCorrectoriumCapitis;
+        public Transform OsCorrectoriumCervicis => _osCorrectoriumCervicis;
+        public Transform OsCorrectoriumSpinae2 => _osCorrectoriumSpinae2;
+        public Transform OsCorrectoriumSpinae1 => _osCorrectoriumSpinae1;
+        public Transform OsCorrectoriumSpinae0 => _osCorrectoriumSpinae0;
+        public Transform OsCorrectoriumPelvis => _osCorrectoriumPelvis;
+        public Transform OsCorrectoriumUmeriDexter => _osCorrectoriumUmeriDexter;
+        public Transform OsCorrectoriumBracchiiDexter => _osCorrectoriumBracchiiDexter;
+        public Transform OsCorrectoriumAntebracchiiDexter => _osCorrectoriumAntebracchiiDexter;
+        public Transform OsCorrectoriumManusDexter => _osCorrectoriumManusDexter;
+        public Transform OsCorrectoriumUmeriSinister => _osCorrectoriumUmeriSinister;
+        public Transform OsCorrectoriumBracchiiSinister => _osCorrectoriumBracchiiSinister;
+        public Transform OsCorrectoriumAntebracchiiSinister => _osCorrectoriumAntebracchiiSinister;
+        public Transform OsCorrectoriumManusSinister => _osCorrectoriumManusSinister;
+        public Transform OsCorrectoriumFemurisDexter => _osCorrectoriumFemurisDexter;
+        public Transform OsCorrectoriumCrurisDexter => _osCorrectoriumCrurisDexter;
+        public Transform OsCorrectoriumPedisDexter => _osCorrectoriumPedisDexter;
+        public Transform OsCorrectoriumDigitiPedisDexter => _osCorrectoriumDigitiPedisDexter;
+        public Transform OsCorrectoriumFemurisSinister => _osCorrectoriumFemurisSinister;
+        public Transform OsCorrectoriumCrurisSinister => _osCorrectoriumCrurisSinister;
+        public Transform OsCorrectoriumPedisSinister => _osCorrectoriumPedisSinister;
+        public Transform OsCorrectoriumDigitiPedisSinister => _osCorrectoriumDigitiPedisSinister;
+        public Transform OsCorrectoriumPectorissDexter => _osCorrectoriumPectorissDexter;
+        public Transform OsCorrectoriumPectorissSinister => _osCorrectoriumPectorissSinister;
+        public Transform OsCorrectoriumNatisDexter => _osCorrectoriumNatisDexter;
+        public Transform OsCorrectoriumNatisSinister => _osCorrectoriumNatisSinister;
+        public Transform OsCorrectoriumVenter => _osCorrectoriumVenter;
 
         public bool Validare() {
             bool result = true;
@@ -299,6 +356,118 @@ namespace Yulinti.ImperiumMaius.Anchora {
             }
             if (_resNudusNatium == null) {
                 Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_NUDUS_NATIUM_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumRadicis == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_RADICIS_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumCapitis == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_CAPITIS_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumCervicis == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_CERVICIS_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumSpinae2 == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_SPINAE2_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumSpinae1 == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_SPINAE1_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumSpinae0 == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_SPINAE0_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumPelvis == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PELVIS_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumUmeriDexter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_UMERI_DEXTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumBracchiiDexter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_BRACCHII_DEXTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumAntebracchiiDexter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_ANTEBRACCHII_DEXTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumManusDexter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_MANUS_DEXTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumUmeriSinister == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_UMERI_SINISTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumBracchiiSinister == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_BRACCHII_SINISTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumAntebracchiiSinister == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_ANTEBRACCHII_SINISTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumManusSinister == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_MANUS_SINISTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumFemurisDexter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_FEMURIS_DEXTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumCrurisDexter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_CRURIS_DEXTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumPedisDexter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PEDIS_DEXTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumDigitiPedisDexter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_DIGITI_PEDIS_DEXTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumFemurisSinister == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_FEMURIS_SINISTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumCrurisSinister == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_CRURIS_SINISTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumPedisSinister == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PEDIS_SINISTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumDigitiPedisSinister == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_DIGITI_PEDIS_SINISTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumPectorissDexter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PECTORISS_DEXTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumPectorissSinister == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PECTORISS_SINISTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumNatisDexter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_NATIS_DEXTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumNatisSinister == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_NATIS_SINISTER_NULL);
+                result = false;
+            }
+            if (_osCorrectoriumVenter == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_VENTER_NULL);
                 result = false;
             }
             return result;

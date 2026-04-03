@@ -44,6 +44,7 @@ namespace Yulinti.Officia.Contractus {
         Transform OsHipsLeftX150Pin { get; }
         Transform OsHipsLeftY90Pin { get; }
 
+
         Transform ResVisaeCapitisDexter { get; }
         Transform ResVisaeCapitisSinister { get; }
         Transform ResVisaePectorisDexter { get; }
@@ -55,5 +56,34 @@ namespace Yulinti.Officia.Contractus {
         Transform ResNudusCatellus { get;}
         Transform ResNudusNatium { get;}
 
+        Transform OsCorrectoriumRadicis { get; }
+        Transform OsCorrectoriumCapitis { get; }
+        Transform OsCorrectoriumCervicis { get; }
+        Transform OsCorrectoriumSpinae2 { get; }
+        Transform OsCorrectoriumSpinae1 { get; }
+        Transform OsCorrectoriumSpinae0 { get; }
+        Transform OsCorrectoriumPelvis { get; }
+        // 左右はOsにかかるからすべて男性系形容詞
+        Transform OsCorrectoriumUmeriDexter { get; }
+        Transform OsCorrectoriumBracchiiDexter { get; }
+        Transform OsCorrectoriumAntebracchiiDexter { get; }
+        Transform OsCorrectoriumManusDexter { get; }
+        Transform OsCorrectoriumUmeriSinister { get; }
+        Transform OsCorrectoriumBracchiiSinister { get; }
+        Transform OsCorrectoriumAntebracchiiSinister { get; }
+        Transform OsCorrectoriumManusSinister { get; }
+        Transform OsCorrectoriumFemurisDexter { get; }
+        Transform OsCorrectoriumCrurisDexter { get; }
+        Transform OsCorrectoriumPedisDexter { get; }
+        Transform OsCorrectoriumDigitiPedisDexter { get; }
+        Transform OsCorrectoriumFemurisSinister { get; }
+        Transform OsCorrectoriumCrurisSinister { get; }
+        Transform OsCorrectoriumPedisSinister { get; }
+        Transform OsCorrectoriumDigitiPedisSinister { get; }
+        Transform OsCorrectoriumPectorissDexter { get; }
+        Transform OsCorrectoriumPectorissSinister { get; }
+        Transform OsCorrectoriumNatisDexter { get; }
+        Transform OsCorrectoriumNatisSinister { get; }
+        Transform OsCorrectoriumVenter { get; }
     }
 }

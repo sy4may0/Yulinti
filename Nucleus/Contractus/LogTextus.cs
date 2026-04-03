@@ -67,6 +67,34 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_VISAE_CAPITIS_NULL = "AnchoraPuellae - bone visae capitis null";
         public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_VISAE_NATIUM_NULL = "AnchoraPuellae - bone visae natium null";
         public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_VISAE_PECTORIS_NULL = "AnchoraPuellae - bone visae pectoris null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_ANTEBRACCHII_DEXTER_NULL = "AnchoraPuellae - bone correctorium antebracchii dexter null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_ANTEBRACCHII_SINISTER_NULL = "AnchoraPuellae - bone correctorium antebracchii sinister null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_BRACCHII_DEXTER_NULL = "AnchoraPuellae - bone correctorium bracchii dexter null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_BRACCHII_SINISTER_NULL = "AnchoraPuellae - bone correctorium bracchii sinister null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_CAPITIS_NULL = "AnchoraPuellae - bone correctorium capitis null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_CERVICIS_NULL = "AnchoraPuellae - bone correctorium cervicis null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_CRURIS_DEXTER_NULL = "AnchoraPuellae - bone correctorium cruris dexter null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_CRURIS_SINISTER_NULL = "AnchoraPuellae - bone correctorium cruris sinister null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_DIGITI_PEDIS_DEXTER_NULL = "AnchoraPuellae - bone correctorium digiti pedis dexter null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_DIGITI_PEDIS_SINISTER_NULL = "AnchoraPuellae - bone correctorium digiti pedis sinister null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_FEMURIS_DEXTER_NULL = "AnchoraPuellae - bone correctorium femuris dexter null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_FEMURIS_SINISTER_NULL = "AnchoraPuellae - bone correctorium femuris sinister null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_MANUS_DEXTER_NULL = "AnchoraPuellae - bone correctorium manus dexter null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_MANUS_SINISTER_NULL = "AnchoraPuellae - bone correctorium manus sinister null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_NATIS_DEXTER_NULL = "AnchoraPuellae - bone correctorium natis dexter null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_NATIS_SINISTER_NULL = "AnchoraPuellae - bone correctorium natis sinister null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PEDIS_DEXTER_NULL = "AnchoraPuellae - bone correctorium pedis dexter null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PEDIS_SINISTER_NULL = "AnchoraPuellae - bone correctorium pedis sinister null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PELVIS_NULL = "AnchoraPuellae - bone correctorium pelvis null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PECTORISS_DEXTER_NULL = "AnchoraPuellae - bone correctorium pectoriss dexter null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PECTORISS_SINISTER_NULL = "AnchoraPuellae - bone correctorium pectoriss sinister null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_RADICIS_NULL = "AnchoraPuellae - bone correctorium radicis null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_SPINAE0_NULL = "AnchoraPuellae - bone correctorium spinae0 null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_SPINAE1_NULL = "AnchoraPuellae - bone correctorium spinae1 null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_SPINAE2_NULL = "AnchoraPuellae - bone correctorium spinae2 null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_UMERI_DEXTER_NULL = "AnchoraPuellae - bone correctorium umeri dexter null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_UMERI_SINISTER_NULL = "AnchoraPuellae - bone correctorium umeri sinister null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_VENTER_NULL = "AnchoraPuellae - bone correctorium venter null";
         public const string AnchoraPuellae_ANCHORAPUELLAE_NAVMESHAGENT_NULL = "AnchoraPuellae - navmeshagent null";
         public const string AnchoraPuellae_ANCHORAPUELLAE_SKINNEDMESHRENDERER_HEAD_NULL = "AnchoraPuellae - skinnedmeshrenderer head null";
         public const string AnchoraPuellae_ANCHORAPUELLAE_SKINNEDMESHRENDERER_LEFTARM_NULL = "AnchoraPuellae - skinnedmeshrenderer leftarm null";
@@ -222,5 +250,11 @@ namespace Yulinti.Nucleus.Contractus {
         public const string ResFluidaPuellaeFormae_SALSAMENTUM_ACTUALIS_NULL = "ResFluidaPuellaeFormae - salsamentum actualis null";
         public const string PraecoSalsamenti_EXECUTARE_USUS_INVALID = "PraecoSalsamenti - executare usus invalid";
         public const string PraecoSalsamenti_EXECUTARE_USUS_INVALID_NEED_GUID = "PraecoSalsamenti - executare usus invalid need guid";
+        public const string TabulaRedittorPuellaeFigurae_TABULAREDITTORPUELLAEFIGURAE_SKINNED_MESH_RENDERER_NOT_FOUND = "TabulaRedittorPuellaeFigurae - skinned mesh renderer not found";
+        public const string TabulaRedittorPuellaeOssisCorrectorium_TABULAREDITTORPUELLAEOSSISCORRECTORIUM_BONE_NOT_FOUND = "TabulaRedittorPuellaeOssisCorrectorium - bone not found";
+        public const string FormaPuellaeFigurae_FORMATPUELLAEFIGURAE_BLEND_SHAPE_NOT_FOUND = "FormaPuellaeFigurae - blend shape not found";
+        public const string FormaPuellaeFigurae_FORMATPUELLAEFIGURAE_SHARED_MESH_NOT_FOUND = "FormaPuellaeFigurae - shared mesh not found";
+        public const string FormaPuellae_FORMATPUELLAE_FORMA_INVALID = "FormaPuellae - forma invalid";
+        public const string FormarumPuellae_FORMARUMPUELLAE_FORMA_NOT_FOUND = "FormarumPuellae - forma not found";
     }
 }

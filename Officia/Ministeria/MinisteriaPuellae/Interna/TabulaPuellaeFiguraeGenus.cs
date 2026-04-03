@@ -20,7 +20,7 @@ namespace Yulinti.Officia.Ministeria {
             _figuraeIndexes[(int)IDPuellaeFiguraeGenus.csknee120Offset] = mesh.sharedMesh.GetBlendShapeIndex(config.X120OffsetBlendShapeName);
 
             for (int i = 0; i < longitudo; i++) {
-                if (_figuraeIndexes[i] <= 0) {
+                if (_figuraeIndexes[i] < 0) {
                     Carnifex.Intermissio(LogTextus.TabulaPuellaeFiguraeGenus_TABULAPUELLAEFIGURAEGENUS_BLEND_SHAPE_NOT_FOUND);
                 }
             }
