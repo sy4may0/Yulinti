@@ -62,10 +62,6 @@ namespace Yulinti.Officia.Ministeria {
                     return;
                 }
 
-                // 懸念点
-                // これがAwakeフレームで呼ばれると、Operatio未登録になる可能性がある。
-                // -> AnchoraのManifestatioがVContainer初期化より早く終了するとまずい。
-                // -> 場合によってはInitiareAsyncはStartフレームで開始するべきかも。
                 foreach (IOperatioInitiumCivis operatio in _operationum) {
                     operatio.Executare(id);
                 }

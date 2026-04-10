@@ -1,9 +1,9 @@
 using UnityEngine;
-using Yulinti.Officia.Contractus;
+using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumMaius.Configuratio {
-    [CreateAssetMenu(fileName = "ConfiguratioCivisGenerator", menuName = "Yulinti/Configuratio/Ministeria/Civis/ConfiguratioCivisGenerator")]
-    public sealed class ConfiguratioCivisGenerator : ScriptableObject, IConfiguratioCivisGenerator {
+    [CreateAssetMenu(fileName = "ConfiguratioCivisGenerationis", menuName = "Yulinti/Configuratio/Exercitus/Civis/ConfiguratioCivisGenerationis")]
+    public sealed class ConfiguratioCivisGenerationis : ScriptableObject, IConfiguratioCivisGenerationis {
         [SerializeField] private int _populatioMaxima = 20;
         [SerializeField] private int _populatioInitialis = 5;
         [SerializeField] private int _intervallumMaximus = 120;

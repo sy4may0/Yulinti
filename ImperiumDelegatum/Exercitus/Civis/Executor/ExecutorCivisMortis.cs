@@ -27,14 +27,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _queueMortis[idCivis].Purgere();
         }
 
-        public void PonoAdIncarnare(Action<int> adIncarnare) {
-            _ostiumCivisMutabile.PonoAdIncarnare(adIncarnare);
-        }
-
-        public void PonoAdSpirituare(Action<int> adSpirituare) {
-            _ostiumCivisMutabile.PonoAdSpirituare(adSpirituare);
-        }
-
         public void Primum(int idCivis) {
             _queueMortis[idCivis].Purgere();
         }

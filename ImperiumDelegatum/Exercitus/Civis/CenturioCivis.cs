@@ -1,10 +1,12 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal sealed class CenturioCivis : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisFixus, ICenturioPulsabilisTardus {
+    internal sealed class CenturioCivis : ICenturio, ICenturioPulsabilis, ICenturioPulsabilisFixus, ICenturioPulsabilisTardus, ICenturioLiberabilis {
         private readonly IOstiumCivisLegibile _ostiumCivisLegibile;
         private readonly MilesCivisActionis _milesCivisActionis;
         private readonly MilesCivisCustodiae _milesCivisCustodiae;
+        private readonly MilesCivisGenerationis _milesCivisGenerationis;
+        private readonly OperatioCenturioCivis _operatioCenturioCivis;
 
         // Carrus
         private readonly CarrusCivis _carrusCivis;
@@ -16,17 +18,21 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public CenturioCivis(
             MilesCivisActionis milesCivisActionis,
             MilesCivisCustodiae milesCivisCustodiae,
+            MilesCivisGenerationis milesCivisGenerationis,
             IResFluidaCivisLegibile resFluidaLegibile,
             IOstiumCivisLegibile ostiumCivisLegibile,
-            CarrusCivis carrusCivis
+            CarrusCivis carrusCivis,
+            OperatioCenturioCivis operatioCenturioCivis
         ) {
             _milesCivisActionis = milesCivisActionis;
             _milesCivisCustodiae = milesCivisCustodiae;
             _resFluidaLegibile = resFluidaLegibile;
+            _milesCivisGenerationis = milesCivisGenerationis;
             _ostiumCivisLegibile = ostiumCivisLegibile;
             _carrusCivis = carrusCivis;
+            _operatioCenturioCivis = operatioCenturioCivis;
 
-            _carrusCivis.PonoAd(AdIncarnare, AdSpirituare);
+            _operatioCenturioCivis.Initare(AdIncarnare, AdSpirituare);
         }
 
         private void AdIncarnare(int idCivis) {
@@ -41,27 +47,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _carrusCivis.Purgare(idCivis);
         }
 
-        // 不整合のNPCが存在すれば修復する。
-        private void RenovareDominare(int idCivis) {
-            bool estActivum = _ostiumCivisLegibile.EstActivum(idCivis);
-            bool estDominare = _resFluidaLegibile.Veletudinis.EstDominare(idCivis);
-
-            if (estActivum == estDominare) return;
-
-            if (estActivum) {
-                AdIncarnare(idCivis);
-            } else {
-                AdSpirituare(idCivis);
-            }
-        }
-
         public void Pulsus() {
-            for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
-                // AdIncarnare/AdSpirituareが生成時にInvoke()されなかった場合に修復する。
-                RenovareDominare(i);
+            // Generator計画
+            _milesCivisGenerationis.Ordinare();
 
+            for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
                 // ActiveでないCivisはスキップ
-                if (!_resFluidaLegibile.Veletudinis.EstDominare(i)) continue;
+                if (!_ostiumCivisLegibile.EstActivum(i)) continue;
 
                 _carrusCivis.Primum(i);
 
@@ -79,7 +71,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void PulsusFixus() {
             for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
-                if (!_resFluidaLegibile.Veletudinis.EstDominare(i)) continue;
+                if (!_ostiumCivisLegibile.EstActivum(i)) continue;
 
                 _milesCivisCustodiae.ResolvereIctuum(i, _resFluidaLegibile);
             }
@@ -87,13 +79,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void PulsusTardus() {
             for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
-                if (!_resFluidaLegibile.Veletudinis.EstDominare(i)) continue;
+                if (!_ostiumCivisLegibile.EstActivum(i)) continue;
 
                 // Detectio判定の解決
                 _milesCivisCustodiae.ResolvereDetectio(i, _resFluidaLegibile);
 
                 _carrusCivis.ConfirmareTardus(i);
             }
+        }
+
+        public void Liberare() {
+            _milesCivisGenerationis.Liberare();
         }
     }
 }

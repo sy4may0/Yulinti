@@ -22,10 +22,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IOstiumCivisVisaeLegibile visa,
             IOstiumPuellaeResVisaeLegibile puellaeResVisae,
             IResFluidaPuellaeLegibile resFPuellae,
-            IOstiumCarrusCivis carrus
+            IOstiumCarrusCivis carrus,
+            Random random
         ) {
-            Random random = new Random();
-
             _resolutorCivisDistantia = new ResolutorCivisDistantia(
                 configuratioCustodiae,
                 civis,
