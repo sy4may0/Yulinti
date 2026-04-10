@@ -1,25 +1,15 @@
-using UnityEngine;
-using Cysharp.Threading.Tasks;
-using System;
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Nucleus;
 using Yulinti.Officia.Contractus;
-using Yulinti.Nucleus.Instrumentarium;
-using Yulinti.Nucleus.Contractus;
-using System.Collections.Generic;
 
 namespace Yulinti.Officia.Ministeria {
     internal sealed class MinisteriumCivis : IMinisteriumIncipabilis {
         private readonly TabulaCivis _tabulaCivis;
-        private readonly IReadOnlyList<IOperatioCivisGenerationis> _operationum;
         private bool[] _estActivumTemporarium;
 
         public MinisteriumCivis(
-            TabulaCivis tabulaCivis, 
-            IReadOnlyList<IOperatioCivisGenerationis> operationum
+            TabulaCivis tabulaCivis
         ) {
             _tabulaCivis = tabulaCivis;
-            _operationum = operationum;
             _estActivumTemporarium = new bool[tabulaCivis.Longitudo];
         }
 
@@ -39,18 +29,12 @@ namespace Yulinti.Officia.Ministeria {
             if (id < 0 || id >= _tabulaCivis.Longitudo) return;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
             anchora.Incarnare();
-            foreach (IOperatioCivisGenerationis operatio in _operationum) {
-                operatio.ExecutareIncarnare(id);
-            }
         }
 
         public void Spirituare(int id) {
             if (id < 0 || id >= _tabulaCivis.Longitudo) return;
             if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return;
             anchora.Spirituare();
-            foreach (IOperatioCivisGenerationis operatio in _operationum) {
-                operatio.ExecutareSpirituare(id);
-            }
         }
 
         // 非実体化ID(Incarnareされていない者)を取得
