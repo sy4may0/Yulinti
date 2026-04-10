@@ -23,6 +23,12 @@ namespace Yulinti.Officia.Ministeria {
             for (int i = 0; i < anchorae.Length; i++) {
                 _anchorae[i] = anchorae[i];
                 _ids[i] = i;
+            }
+        }
+
+        // IMinisteriumIncipabilisから呼ぶこと。
+        public void Initiare() {
+            for (int i = 0; i < _anchorae.Length; i++) {
                 InitiareAsync(i).Forget(e => Notarius.Memorare(e));
             }
         }
@@ -56,6 +62,10 @@ namespace Yulinti.Officia.Ministeria {
                     return;
                 }
 
+                // 懸念点
+                // これがAwakeフレームで呼ばれると、Operatio未登録になる可能性がある。
+                // -> AnchoraのManifestatioがVContainer初期化より早く終了するとまずい。
+                // -> 場合によってはInitiareAsyncはStartフレームで開始するべきかも。
                 foreach (IOperatioInitiumCivis operatio in _operationum) {
                     operatio.Executare(id);
                 }
@@ -85,6 +95,13 @@ namespace Yulinti.Officia.Ministeria {
             }
             anchora = _anchorae[id];
             return true;
+        }
+
+        public bool EstEns(int id) {
+            if (id < 0 || id >= _anchorae.Length) {
+                return false;
+            }
+            return _anchorae[id].EstEns;
         }
     }
 }

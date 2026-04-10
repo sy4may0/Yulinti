@@ -8,7 +8,7 @@ using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Officia.Ministeria {
-    internal sealed class MinisteriumCivis {
+    internal sealed class MinisteriumCivis : IMinisteriumIncipabilis {
         private readonly TabulaCivis _tabulaCivis;
 
         private bool _estPonoAdIncarnare;
@@ -28,6 +28,12 @@ namespace Yulinti.Officia.Ministeria {
         public int Longitudo => _tabulaCivis.Longitudo;
         public int LongitudoActivum => longitudoActivum();
         public bool EstActivum(int id) => estActivum(id);
+
+        // IMinisteriumIncipabilis
+        // 全CivisをManifestatioする。
+        public void Incipere() {
+            _tabulaCivis.Initiare();
+        }
 
         public void Incarnare(int id) {
             if (id < 0 || id >= _tabulaCivis.Longitudo) return;
