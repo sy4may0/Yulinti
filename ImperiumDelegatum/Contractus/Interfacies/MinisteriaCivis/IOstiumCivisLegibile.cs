@@ -10,5 +10,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         int LegoIDIntactus();
         // 実体化しているか。
         bool EstActivum(int id);
+        // 実体化しているかの配列。
+        bool[] EstActivumOmne { get; }
     }
 }

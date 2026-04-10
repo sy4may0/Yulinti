@@ -123,7 +123,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // Incarnare時にこれを実行する。
         // - Phantasma初期化
         // - resFluida初期化
-        // - Dominare
         public void Initare(int idCivis) {
             _queueVeletudinisCondicionis[idCivis].Purgere();
             _phantasma.Pono(
@@ -136,7 +135,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 suspecta: 0f
             );
             _resFluidaVeletudinis.Purgare(idCivis);
-            _resFluidaVeletudinis.Dominare(idCivis);
         }
 
         public void Primum(int idCivis) {
@@ -205,7 +203,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // Spirituare時にこれを実行する。
         // - Phantasma初期化
         // - resFluida初期化
-        // - Liberare
         public void Purgare(int idCivis) {
             _phantasma.Pono(
                 idCivis,
@@ -218,7 +215,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             );
             _queueVeletudinisCondicionis[idCivis].Purgere();
             _resFluidaVeletudinis.Purgare(idCivis);
-            _resFluidaVeletudinis.Liberare(idCivis);
         }
     }
 }

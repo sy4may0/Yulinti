@@ -8,105 +8,32 @@ using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Officia.Ministeria {
-    internal enum CivisGenerationisStatus {
-        None = 0,
-        Initio = 1,
-        Paratus = 2,
-        Termino = 3
-    }
-    internal sealed class CuratorCivisGenerationis {
-        private readonly int _id;
-        private readonly IAnchoraCivis _anchora;
-        private List<Action<int>> _adInitium;
-        private CivisGenerationisStatus _status;
-
-        public CuratorCivisGenerationis(int id, IAnchoraCivis anchora) {
-            _id = id;
-            _anchora = anchora;
-            _adInitium = new List<Action<int>>();
-            _status = CivisGenerationisStatus.None;
-            Initiare();
-        }
-
-        public void Initiare() {
-            if (_anchora.EstEns || _status != CivisGenerationisStatus.None) return;
-            _status = CivisGenerationisStatus.Initio;
-            InitiareAsync().Forget(e => Notarius.Memorare(e));
-        }
-
-        // Manifestatio成功後は呼び出せない。エラーの場合はゲームを落とす。
-        // Updateループでの生成は想定しない。
-        private async UniTask InitiareAsync() {
-            if (_anchora.EstEns || _status != CivisGenerationisStatus.Initio) return;
-            try {
-
-                await _anchora.Manifestatio();
-                bool ex = _anchora.ValidareManifestatio();
-
-                if (!ex) {
-                    _anchora.Deleto();
-                    _status = CivisGenerationisStatus.None;
-                    Carnifex.Intermissio(LogTextus.CuratorCivisGenerationis_CIVIS_INSTANTIATE_FAILED);
-                }
-                _status = CivisGenerationisStatus.Paratus;
-
-                _adInitium?.ForEach(a => a.Invoke(_id));
-                _adInitium = null;
-            } catch (Exception e) {
-                _status = CivisGenerationisStatus.None;
-                Notarius.Memorare(e);
-                Carnifex.Intermissio(LogTextus.CuratorCivisGenerationis_InitException);
-            }
-        }
-
-        public void Terminare() {
-            if (!_anchora.EstEns || _status != CivisGenerationisStatus.Paratus) return;
-            _anchora.Deleto();
-            _status = CivisGenerationisStatus.Termino;
-        }
-
-        public bool ConareLego(out IAnchoraCivis anchora) {
-            if (_status != CivisGenerationisStatus.Paratus) {
-                anchora = null;
-                return false;
-            }
-            if (_anchora == null || !_anchora.EstEns) {
-                anchora = null;
-                return false;
-            }
-            anchora = _anchora;
-            return true;
-        }
-
-        public void PonoAdInitium(Action<int> adInitium) {
-            if (_status >= CivisGenerationisStatus.Paratus && _anchora.EstEns) {
-                adInitium?.Invoke(_id);
-                return;
-            }
-            if (adInitium == null) return;
-            _adInitium.Add(adInitium);
-        }
-
-        public int Id => _id;
-        public CivisGenerationisStatus Status => _status;
-        public bool EstParatus() => _status == CivisGenerationisStatus.Paratus && _anchora.EstEns;
-    }
-
     internal sealed class TabulaCivis {
-        private readonly CuratorCivisGenerationis[] _curatoris;
+        private readonly IAnchoraCivis[] _anchorae;
         private readonly int[] _ids;
 
-        public TabulaCivis(IAnchoraCivis[] anchorae) {
+        private readonly IReadOnlyList<IOperatioInitiumCivis> _operationum;
+
+        public TabulaCivis(IAnchoraCivis[] anchorae, IReadOnlyList<IOperatioInitiumCivis> operationum) {
             _ids = new int[anchorae.Length];
             VaridareAnchorae(anchorae);
-            _curatoris = new CuratorCivisGenerationis[anchorae.Length];
+            _operationum = operationum;
+            _anchorae = new IAnchoraCivis[anchorae.Length];
+
             for (int i = 0; i < anchorae.Length; i++) {
-                _curatoris[i] = new CuratorCivisGenerationis(i, anchorae[i]);
+                _anchorae[i] = anchorae[i];
                 _ids[i] = i;
             }
         }
 
-        public void VaridareAnchorae(IAnchoraCivis[] anchorae) {
+        // IMinisteriumIncipabilisから呼ぶこと。
+        public void Initiare() {
+            for (int i = 0; i < _anchorae.Length; i++) {
+                InitiareAsync(i).Forget(e => Notarius.Memorare(e));
+            }
+        }
+
+        private void VaridareAnchorae(IAnchoraCivis[] anchorae) {
             if (anchorae == null) {
                 Carnifex.Intermissio(LogTextus.TabulaCivis_TABULACIVIS_ANCHORAE_NULL);
             }
@@ -124,37 +51,53 @@ namespace Yulinti.Officia.Ministeria {
             }
         }
 
-        public int[] IDs => _ids;
-        public int Longitudo => _ids.Length;
+        private async UniTask InitiareAsync(int id) {
+            IAnchoraCivis anchora = _anchorae[id];
+            if (anchora.EstEns) return;
+            try {
+                await anchora.Manifestatio();
 
-        public void PonoAdInitium(int id, Action<int> adInitium) {
-            if (id < 0 || id >= _curatoris.Length) return;
-            _curatoris[id].PonoAdInitium(adInitium);
-        }
+                if (!anchora.EstEns) {
+                    Carnifex.Intermissio(LogTextus.TabulaCivis_TABULACIVIS_INITIARE_FAILED);
+                    return;
+                }
 
-        public void Initiare() {
-            for (int i = 0; i < _curatoris.Length; i++) {
-                _curatoris[i].Initiare();
+                foreach (IOperatioInitiumCivis operatio in _operationum) {
+                    operatio.Executare(id);
+                }
+            } catch (Exception e) {
+                Notarius.Memorare(e);
+                Carnifex.Intermissio(LogTextus.TabulaCivis_TABULACIVIS_INITIARE_FAILED);
             }
         }
 
+        public int[] IDs => _ids;
+        public int Longitudo => _ids.Length;
+
         public void Terminare() {
-            for (int i = 0; i < _curatoris.Length; i++) {
-                _curatoris[i].Terminare();
+            for (int i = 0; i < _anchorae.Length; i++) {
+                _anchorae[i].Deleto();
             }
         }
 
         public bool ConareLego(int id, out IAnchoraCivis anchora) {
-            if (id < 0 || id >= _curatoris.Length) {
+            if (id < 0 || id >= _anchorae.Length) {
                 anchora = null;
                 return false;
             }
-            return _curatoris[id].ConareLego(out anchora);
+            if (!_anchorae[id].EstEns) {
+                anchora = null;
+                return false;
+            }
+            anchora = _anchorae[id];
+            return true;
         }
 
-        public bool EstParatus(int id) {
-            if (id < 0 || id >= _curatoris.Length) return false;
-            return _curatoris[id].EstParatus();
+        public bool EstEns(int id) {
+            if (id < 0 || id >= _anchorae.Length) {
+                return false;
+            }
+            return _anchorae[id].EstEns;
         }
     }
 }

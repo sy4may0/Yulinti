@@ -17,5 +17,6 @@ namespace Yulinti.Officia.Ministeria {
             if (id < 0 || id >= _miCivis.Longitudo) return false;
             return _miCivis.EstActivum(id);
         }
+        public bool[] EstActivumOmne => _miCivis.EstActivumOmne;
     }
 }

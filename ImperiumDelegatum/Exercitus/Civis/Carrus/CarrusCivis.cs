@@ -34,11 +34,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exMortis.Primum(idCivis);
         }
 
-        public void PonoAd(Action<int> adIncarnare, Action<int> adSpirituare) {
-            _exMortis.PonoAdIncarnare(adIncarnare);
-            _exMortis.PonoAdSpirituare(adSpirituare);
-        }
-
         public void Initare(int idCivis) {
             _exAnimationis.Initare(idCivis);
             _exLoci.Initare(idCivis);

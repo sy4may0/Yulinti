@@ -237,6 +237,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string TabulaCivis_TABULACIVIS_ANCHORAE_NULL = "TabulaCivis - anchorae null";
         public const string TabulaCivis_TABULACIVIS_ANCHORA_DUPLICATE = "TabulaCivis - anchora duplicate";
         public const string TabulaCivis_TABULACIVIS_ANCHORA_NULL = "TabulaCivis - anchora null";
+        public const string TabulaCivis_TABULACIVIS_INITIARE_FAILED = "TabulaCivis - initiare failed";
         public const string TabulaPuellaeAnimationumContinuata_TABULAPUELLAEANIMATIONUMCONTINUATA_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationumContinuata - config not found";
         public const string TabulaPuellaeAnimationum_TABULAPUELLAEANIMATIONUM_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationum - config not found";
         public const string TabulaPuellaeCrinis_TABULAPUELLAECRINIS_ID_NOT_FOUND = "TabulaPuellaeCrinis - id not found";

@@ -1,6 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 using Yulinti.ImperiumDelegatum.Contractus;
+using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     public static class FaberDucisTestScene {
@@ -83,8 +84,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<MilesPuellaeVestitae>(Lifetime.Singleton);
             builder.Register<MilesCivisActionis>(Lifetime.Singleton);
             builder.Register<MilesCivisCustodiae>(Lifetime.Singleton);
+            builder.Register<MilesCivisGenerationis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVigoris>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVeletudinisMaxima>(Lifetime.Singleton);
+
+            // Operatio
+            builder.Register<OperatioCenturioCivis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             // Centurio
             builder.Register<CenturioPuellae>(Lifetime.Singleton)
@@ -93,6 +98,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<CenturioCivis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+
+            // 単一Randomソース
+            builder.Register<Random>(Lifetime.Singleton);
 
             // Legatus
             builder.Register<ILegatus, Legatus>(Lifetime.Singleton);

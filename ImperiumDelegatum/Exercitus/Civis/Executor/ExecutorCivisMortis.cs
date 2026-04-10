@@ -10,13 +10,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumCivisMutabile _ostiumCivisMutabile;
 
         private Ordo<IOrdinatioCivisMortis>[] _queueMortis;
+        private readonly IOperatioCivisGenerationis _operatioCivisGenerationis;
 
         public ExecutorCivisMortis(
             IOstiumCivisLegibile ostiumCivisLegibile,
-            IOstiumCivisMutabile ostiumCivisMutabile
+            IOstiumCivisMutabile ostiumCivisMutabile,
+            IOperatioCivisGenerationis operatioCivisGenerationis
         ) {
             _ostiumCivisLegibile = ostiumCivisLegibile;
             _ostiumCivisMutabile = ostiumCivisMutabile;
+            _operatioCivisGenerationis = operatioCivisGenerationis;
             _queueMortis = new Ordo<IOrdinatioCivisMortis>[ostiumCivisLegibile.Longitudo];
             for (int i = 0; i < ostiumCivisLegibile.Longitudo; i++) {
                 _queueMortis[i] = new Ordo<IOrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
@@ -25,14 +28,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Initare(int idCivis) {
             _queueMortis[idCivis].Purgere();
-        }
-
-        public void PonoAdIncarnare(Action<int> adIncarnare) {
-            _ostiumCivisMutabile.PonoAdIncarnare(adIncarnare);
-        }
-
-        public void PonoAdSpirituare(Action<int> adSpirituare) {
-            _ostiumCivisMutabile.PonoAdSpirituare(adSpirituare);
         }
 
         public void Primum(int idCivis) {
@@ -65,8 +60,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
                 if (m.SpeciesMortis == SpeciesOrdinationisCivisMortis.Spirituare) {
                     _ostiumCivisMutabile.Spirituare(idCivis);
+                    _operatioCivisGenerationis.ExecutareSpirituare(idCivis);
                 } else if (m.SpeciesMortis == SpeciesOrdinationisCivisMortis.Incarnare) {
                     _ostiumCivisMutabile.Incarnare(idCivis);
+                    _operatioCivisGenerationis.ExecutareIncarnare(idCivis);
                 }
                 break;
             }

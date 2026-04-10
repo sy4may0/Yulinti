@@ -5,9 +5,8 @@ using Yulinti.Officia.Contractus;
 namespace Yulinti.Officia.Ministeria {
     internal sealed class OstiumCivisMutabile : IOstiumCivisMutabile {
         private readonly MinisteriumCivis _miCivis;
-        private readonly MinisteriumCivisGenerator _miCivisGenerator;
 
-        public OstiumCivisMutabile(MinisteriumCivis miCivis, MinisteriumCivisGenerator miCivisGenerator) {
+        public OstiumCivisMutabile(MinisteriumCivis miCivis) {
             _miCivis = miCivis;
         }
 
@@ -19,19 +18,8 @@ namespace Yulinti.Officia.Ministeria {
             _miCivis.Spirituare(id);
         }
 
-        public void TerminareGenerare() {
-            _miCivisGenerator.Terminare();
-        }
-
         public int[] IDs => _miCivis.IDs;
         public int Longitudo => _miCivis.Longitudo;
         public bool EstActivum(int id) => _miCivis.EstActivum(id);
-
-        public void PonoAdIncarnare(Action<int> adIncarnare) {
-            _miCivis.PonoAdIncarnare(adIncarnare);
-        }
-        public void PonoAdSpirituare(Action<int> adSpirituare) {
-            _miCivis.PonoAdSpirituare(adSpirituare);
-        }
     }
 }
