@@ -80,6 +80,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            // Mandatum
+            builder.Register<IMandatumPuellaeFormae, MandatumPuellaeFormae>(Lifetime.Singleton);
+
             // Legatus
             builder.Register<ILegatus, Legatus>(Lifetime.Singleton);
         }
