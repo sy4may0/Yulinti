@@ -63,7 +63,10 @@ namespace Yulinti.Officia.Ministeria {
             builder.Register<IOstiumPunctumViaeMutabile, OstiumPunctumViaeMutabile>(Lifetime.Singleton);
 
             // Civis
+            builder.Register<OperatioCivisAnimationis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+
             builder.Register<TabulaCivis>(Lifetime.Singleton);
+
             builder.Register<MinisteriumCivis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumCivisLoci>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumCivisAnimationes>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

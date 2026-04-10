@@ -11,7 +11,11 @@ namespace Yulinti.Officia.Ministeria {
         private readonly bool[] _estActivum;
         private readonly int _longitudoStratum;
 
-        public MinisteriumCivisAnimationes(TabulaCivis tabulaCivis, IConfiguratioCivisAnimationum config) {
+        public MinisteriumCivisAnimationes(
+            TabulaCivis tabulaCivis,
+            IConfiguratioCivisAnimationum config,
+            OperatioCivisAnimationis operatioCivisAnimationis
+        ) {
             _tabulaCivis = tabulaCivis;
             int longitudo = _tabulaCivis.Longitudo;
             _longitudoStratum = System.Enum.GetValues(typeof(IDCivisAnimationisStratum)).Length;
@@ -19,9 +23,7 @@ namespace Yulinti.Officia.Ministeria {
             _estActivum = new bool[longitudo];
             _tabulaAnimationum = new TabulaCivisAnimationum(config.Animationes);
 
-            for (int id = 0; id < longitudo; id++) {
-                _tabulaCivis.PonoAdInitium(id, (id) => Initio(id));
-            }
+            operatioCivisAnimationis.Initiare((id) => Initio(id));
         }
 
         private void Initio(int id) {
