@@ -28,8 +28,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _puellaeResVisae = puellaeResVisae;
             _resolutorCivisDistantia = resolutorCivisDistantia;
 
-            _cIDPuellaeResNudusAnterior = new IDPuellaeResNudusAnterior[Enum.GetValues(typeof(IDPuellaeResNudusAnterior)).Length];
-            _cIDPuellaeResNudusPosterior = new IDPuellaeResNudusPosterior[Enum.GetValues(typeof(IDPuellaeResNudusPosterior)).Length];
+            _cIDPuellaeResNudusAnterior = (IDPuellaeResNudusAnterior[])Enum.GetValues(typeof(IDPuellaeResNudusAnterior));
+            _cIDPuellaeResNudusPosterior = (IDPuellaeResNudusPosterior[])Enum.GetValues(typeof(IDPuellaeResNudusPosterior));
         }
 
         public void Initare(int idCivis) {
