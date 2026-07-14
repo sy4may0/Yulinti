@@ -31,6 +31,7 @@
             button-ghost-image
             constructio-navbar-button
             constructio-navbar-button-lapsorcorporis
+            sonus-f-supervolare
           "
         >
           <ui:Image
@@ -45,6 +46,7 @@
             button-ghost-image
             constructio-navbar-button
             constructio-navbar-button-lapsorfaciei
+            sonus-f-supervolare
           "
         >
           <ui:Image
@@ -59,6 +61,7 @@
             button-ghost-image
             constructio-navbar-button
             constructio-navbar-button-subligaculum
+            sonus-f-supervolare
           "
         >
           <ui:Image
@@ -73,6 +76,7 @@
             button-ghost-image
             constructio-navbar-button
             constructio-navbar-button-tunica
+            sonus-f-supervolare
           "
         >
           <ui:Image
@@ -87,6 +91,7 @@
             button-ghost-image
             constructio-navbar-button
             constructio-navbar-button-ornamentum
+            sonus-f-supervolare
           "
         >
           <ui:Image
@@ -101,6 +106,7 @@
             button-ghost-image
             constructio-navbar-button
             constructio-navbar-button-salsamentum
+            sonus-f-supervolare
           "
         >
           <ui:Image

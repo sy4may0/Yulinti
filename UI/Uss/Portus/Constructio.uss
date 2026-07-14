@@ -45,6 +45,11 @@
     margin: 0px;
 }
 
+/* 選択中タブ。フォーカスが外れても選択状態の見た目を維持する。 */
+.constructio-navbar-button--selectus Image {
+    --unity-image-tint-color: var(--accent);
+}
+
 .constructio-footer {
     flex-direction: row;
     justify-content: flex-end;

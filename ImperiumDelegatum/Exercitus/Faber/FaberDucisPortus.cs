@@ -44,6 +44,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<CarrusPuellae>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            
+            // Scrinium
+            builder.Register<ScriniumPuellaeFormae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             // Contextus
             builder.Register<ContextusRamusPuellae>(Lifetime.Singleton);

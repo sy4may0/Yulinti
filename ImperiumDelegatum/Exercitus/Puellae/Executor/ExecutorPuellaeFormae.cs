@@ -69,6 +69,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 }
                 _ostiumPuellaeFormaeMutabile.PonoRationem(idFormae, _resFluidaFormae.RatioActualis(idFormae));
             }
+            _resFluidaFormae.ApplicatumEst();
 
         }
     }

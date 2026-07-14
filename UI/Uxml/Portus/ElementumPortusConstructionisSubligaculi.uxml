@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+  <ui:VisualElement 
+    name="elementum-subligaculi-root" 
+    class="
+      elementum-subligaculi-root
+    "
+  >
+    <ui:Label
+      name="elementum-subligaculi-title"
+      class="elementum-subligaculi-title"
+      text="Subligaculi"
+    />
+  </ui:VisualElement>
+</ui:UXML>

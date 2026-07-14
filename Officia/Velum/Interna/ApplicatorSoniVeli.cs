@@ -40,7 +40,6 @@ namespace Yulinti.Officia.Velum {
 
         private void SonareSubmittere() {
             int framecount = UnityEngine.Time.frameCount;
-            UnityEngine.Debug.Log($"SonareSubmittere: {framecount}");
             _turrisSoniVeli.Sonare(IDSonusVeli.Submittere);
         }
         private void SonareSubmittereAdditum() {
@@ -51,7 +50,6 @@ namespace Yulinti.Officia.Velum {
         }
         private void SonareSupervolare(FocusEvent e) {
             int framecount = UnityEngine.Time.frameCount;
-            UnityEngine.Debug.Log($"SonareSupervolare: {framecount}");
             _turrisSoniVeli.Sonare(IDSonusVeli.Supervolare);
         }
         private void SonareSiNon(ChangeEvent<bool> e) {
@@ -82,14 +80,20 @@ namespace Yulinti.Officia.Velum {
         public void Applicare(VisualElement root) {
             foreach (var ve in root.Query<VisualElement>().ToList()) {
                 if (ve is Button button) {
-                    if (button.ClassListContains(C_Submittere))
+                    if (button.ClassListContains(C_Submittere)) {
+                        button.clicked -= _sonareSubmittere;
                         button.clicked += _sonareSubmittere;
-        
-                    if (button.ClassListContains(C_SubmittereAdditum))
+                    }
+
+                    if (button.ClassListContains(C_SubmittereAdditum)) {
+                        button.clicked -= _sonareSubmittereAdditum;
                         button.clicked += _sonareSubmittereAdditum;
-        
-                    if (button.ClassListContains(C_Exire))
+                    }
+
+                    if (button.ClassListContains(C_Exire)) {
+                        button.clicked -= _sonareExire;
                         button.clicked += _sonareExire;
+                    }
                 }
                 if (ve.focusable) {
                     if (ve.ClassListContains(C_Supervolare))
@@ -107,9 +111,10 @@ namespace Yulinti.Officia.Velum {
                 }
 
                 if (ve is ListView listView) {
-                    if (listView.ClassListContains(C_SupervolareList))
-                        UnityEngine.Debug.Log("ApplicareSupervolareList");
+                    if (listView.ClassListContains(C_SupervolareList)) {
+                        listView.selectionChanged -= _sonareSupervolareList;
                         listView.selectionChanged += _sonareSupervolareList;
+                    }
                 }
             }
         }

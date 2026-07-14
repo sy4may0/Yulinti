@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+  <ui:VisualElement 
+    name="elementum-tunicae-root" 
+    class="
+      elementum-tunicae-root
+    "
+  >
+    <ui:Label
+      name="elementum-tunicae-title"
+      class="elementum-tunicae-title"
+      text="Tunicae"
+    />
+  </ui:VisualElement>
+</ui:UXML>

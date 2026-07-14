@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+  <ui:VisualElement 
+    name="elementum-lapsor-corporis-root" 
+    class="
+      elementum-lapsor-corporis-root
+    "
+  >
+    <ui:VisualElement
+      name="elementum-lapsor-corporis-corporis-container"
+      class="
+        container
+        elementum-lapsor-corporis-corporis-container
+      "
+    >
+      <ui:Label
+        name="elementum-lapsor-corporis-corporis-title"
+        class="label-h3 elementum-lapsor-corporis-corporis-title"
+        text="Lapsor Corporis"
+      />
+      <ui:Slider
+        name="elementum-lapsor-corporis-corporis-slider"
+        class="
+          slider
+          elementum-lapsor-corporis-corporis-slider
+        "
+        value="0.5"
+        low-value="0"
+        high-value="1"
+      />
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

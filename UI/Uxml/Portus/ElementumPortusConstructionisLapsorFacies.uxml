@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+  <ui:VisualElement 
+    name="elementum-lapsor-facies-root" 
+    class="
+      elementum-lapsor-facies-root
+    "
+  >
+    <ui:Label
+      name="elementum-lapsor-facies-title"
+      class="elementum-lapsor-facies-title"
+      text="Lapsor Facies"
+    />
+  </ui:VisualElement>
+</ui:UXML>

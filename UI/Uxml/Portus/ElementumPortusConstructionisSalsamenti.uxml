@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+  <ui:VisualElement 
+    name="elementum-salsamenti-root" 
+    class="
+      elementum-salsamenti-root
+    "
+  >
+    <ui:Label
+      name="elementum-salsamenti-title"
+      class="elementum-salsamenti-title"
+      text="Salsamenti"
+    />
+  </ui:VisualElement>
+</ui:UXML>

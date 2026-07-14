@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+  <ui:VisualElement 
+    name="elementum-ornamenti-root" 
+    class="
+      elementum-ornamenti-root
+    "
+  >
+    <ui:Label
+      name="elementum-ornamenti-title"
+      class="elementum-ornamenti-title"
+      text="Ornamenti"
+    />
+  </ui:VisualElement>
+</ui:UXML>
