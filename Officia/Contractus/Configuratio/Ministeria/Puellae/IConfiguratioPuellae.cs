@@ -4,5 +4,6 @@ namespace Yulinti.Officia.Contractus {
         IConfiguratioPuellaeFigurae Figura { get; }
         IConfiguratioPuellaeAnimationum Animatio { get; }
         IConfiguratioPuellaeLoci Loci { get; }
+        IConfiguratioPuellaeFormarum Formae { get; }
     }
 }

@@ -13,6 +13,9 @@ namespace Yulinti.Auctoritas.Senatus {
         private readonly IPraecoConfirmationis _praecoConfirmationis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
 
+        // 下位Praeco
+        private readonly PraecoPortusConstructionis _praecoPortusConstructionis;
+
         // Operatio
         private readonly OperatioPortus _operatioPortus;
 
@@ -29,7 +32,8 @@ namespace Yulinti.Auctoritas.Senatus {
             ITurrisInterpretationis turrisInterpretationis,
             OperatioPortus operatioPortus,
             CuratorVela curatorVela,
-            IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
+            IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile,
+            PraecoPortusConstructionis praecoPortusConstructionis
         ) {
             _turrisMundus = turrisMundus;
             _velumPortus = velumPortus;
@@ -38,7 +42,8 @@ namespace Yulinti.Auctoritas.Senatus {
             _curatorVela = curatorVela;
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
             _operatioPortus = operatioPortus;
-            _operatioPortus.Initiare(Executare);
+            _praecoPortusConstructionis = praecoPortusConstructionis;
+            _operatioPortus.Initiare(Executare, ExireConstructionem);
 
             _estActivumUsus = true;
         }
@@ -72,6 +77,11 @@ namespace Yulinti.Auctoritas.Senatus {
                 _ = PremereExi();
             }
         }
+        
+        private void ExireConstructionem() {
+            // Constructioを閉じた際、Portusを再表示する。
+            _velumPortus.DemitterePortus();
+        }
 
         private Task PremereProfectio() {
             try {
@@ -95,7 +105,11 @@ namespace Yulinti.Auctoritas.Senatus {
                 if (!ConareUsus()) {
                     return Task.CompletedTask;
                 }
-                Notarius.Memorare("未実装: PostulareConstructio");
+
+                // Constructioを開き、Portusを閉じる。
+                _ = _praecoPortusConstructionis.Demittere();
+                _velumPortus.TollerePortus();
+
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {

@@ -47,6 +47,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // 初期生成
             if (numerusCivisActivum < _configuratioCivisGenerationis.PopulatioInitialis) {
                 int id = _ostiumCivisLegibile.LegoIDIntactus();
+                if (id < 0) return;
+
                 _carrus.PostulareMortis(
                     id,
                     SpeciesOrdinationisCivisMortis.Incarnare
@@ -57,6 +59,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // ランダムスポーン
             if (_horologiumTemere.EstExhaurita(_temporis.Intervallum)) {
                 int id = _ostiumCivisLegibile.LegoIDIntactus();
+                if (id < 0) return;
                 _carrus.PostulareMortis(
                     id,
                     SpeciesOrdinationisCivisMortis.Incarnare

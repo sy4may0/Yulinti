@@ -13,6 +13,9 @@ namespace Yulinti.Officia.Velum {
             builder.Register<VelumPortus>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<VelumPortusConstructionis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             builder.Register<IOrator, Orator>(Lifetime.Singleton);
         }

@@ -12,9 +12,15 @@ namespace Yulinti.Auctoritas.Senatus {
             builder.Register<OperatioPortus>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<OperatioPortusConstructionis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
-            // Portus
+            // Praeco
             builder.Register<PraecoPortus>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<PraecoPortusConstructionis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 

@@ -79,6 +79,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void PulsusTardus() {
             for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
+                // 生成/消失の処理は全IDに対して行う。
+                _carrusCivis.ConfirmareMortis(i);
+
                 if (!_ostiumCivisLegibile.EstActivum(i)) continue;
 
                 // Detectio判定の解決

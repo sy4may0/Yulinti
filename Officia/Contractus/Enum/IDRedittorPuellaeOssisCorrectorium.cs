@@ -29,27 +29,6 @@ namespace Yulinti.Officia.Contractus {
         Spina2,
         Spina1,
         Spina0,
-        Pelvis,
-        UmerusDexter,
-        BracchiumDextrum,
-        AntebracchiumDextrum,
-        ManusDextra,
-        UmerusSinister,
-        BracchiumSinistrum,
-        AntebracchiumSinistrum,
-        ManusSinistra,
-        FemurDextrum,
-        CrusDextrum,
-        PesDexter,
-        DigitusPedisDexter,
-        FemurSinistrum,
-        CrusSinistrum,
-        PesSinister,
-        DigitusPedisSinister,
-        PectusDextrum,
-        PectusSinistrum,
-        NatisDextra,
-        NatisSinistra,
-        Venter
+        Pelvis
     }
 }

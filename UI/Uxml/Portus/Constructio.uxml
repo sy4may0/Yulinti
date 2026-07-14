@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+
+    <Style src="../../Uss/Globalis.uss" />
+    <Style src="../../Uss/Portus/Constructio.uss" />
+
+    <ui:VisualElement
+        name="constructio-root"
+        class="
+            container
+            constructio-root
+        "
+    >
+      <ui:Label
+        name="constructio-title"
+        class="label-h1 constructio-title"
+        text="Constructio"
+      />
+
+      <ui:VisualElement
+        name="constructio-navbar"
+        class="
+            panel
+            constructio-navbar
+        "
+      >
+        <ui:Button
+          name="constructio-navbar-button-lapsorcorporis"
+          class="
+            button-ghost-image
+            constructio-navbar-button
+            constructio-navbar-button-lapsorcorporis
+          "
+        >
+          <ui:Image
+            name="constructio-navbar-button-lapsorcorporis-image"
+            class="constructio-navbar-button-lapsorcorporis-image"
+            style="--unity-image: url('project:/Assets/Resources/Images/buttonicon_constructio_lapsorcorporis.png');"
+          />
+        </ui:Button>
+        <ui:Button
+          name="constructio-navbar-button-lapsorfaciei"
+          class="
+            button-ghost-image
+            constructio-navbar-button
+            constructio-navbar-button-lapsorfaciei
+          "
+        >
+          <ui:Image
+            name="constructio-navbar-button-lapsorfaciei-image"
+            class="constructio-navbar-button-lapsorfaciei-image"
+            style="--unity-image: url('project:/Assets/Resources/Images/buttonicon_constructio_lapsorfaciei.png');"
+          />
+        </ui:Button>
+        <ui:Button
+          name="constructio-navbar-button-subligaculum"
+          class="
+            button-ghost-image
+            constructio-navbar-button
+            constructio-navbar-button-subligaculum
+          "
+        >
+          <ui:Image
+            name="constructio-navbar-button-subligaculum-image"
+            class="constructio-navbar-button-subligaculum-image"
+            style="--unity-image: url('project:/Assets/Resources/Images/buttonicon_constructio_subligaculum.png');"
+          />
+        </ui:Button>
+        <ui:Button
+          name="constructio-navbar-button-tunica"
+          class="
+            button-ghost-image
+            constructio-navbar-button
+            constructio-navbar-button-tunica
+          "
+        >
+          <ui:Image
+            name="constructio-navbar-button-tunica-image"
+            class="constructio-navbar-button-tunica-image"
+            style="--unity-image: url('project:/Assets/Resources/Images/buttonicon_constructio_tunica.png');"
+          />
+        </ui:Button>
+        <ui:Button
+          name="constructio-navbar-button-ornamentum"
+          class="
+            button-ghost-image
+            constructio-navbar-button
+            constructio-navbar-button-ornamentum
+          "
+        >
+          <ui:Image
+            name="constructio-navbar-button-ornamentum-image"
+            class="constructio-navbar-button-ornamentum-image"
+            style="--unity-image: url('project:/Assets/Resources/Images/buttonicon_constructio_ornamentum.png');"
+          />
+        </ui:Button>
+        <ui:Button
+          name="constructio-navbar-button-salsamentum"
+          class="
+            button-ghost-image
+            constructio-navbar-button
+            constructio-navbar-button-salsamentum
+          "
+        >
+          <ui:Image
+            name="constructio-navbar-button-salsamentum-image"
+            class="constructio-navbar-button-salsamentum-image"
+            style="--unity-image: url('project:/Assets/Resources/Images/buttonicon_constructio_salsamentum.png');"
+          />
+        </ui:Button>
+      </ui:VisualElement>
+
+      <ui:VisualElement
+        name="constructio-content"
+        class="
+            panel
+            constructio-content
+        "
+      >
+      </ui:VisualElement>
+
+      <ui:VisualElement
+        name="constructio-footer"
+        class="
+            constructio-footer
+        "
+      >
+        <ui:Button
+          name="constructio-button-exi"
+          class="
+            button
+            button-cancel
+            constructio-button
+          "
+          text="Exi"
+        />
+      </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

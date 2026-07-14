@@ -14,13 +14,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private Ordo<IOrdinatioPuellaeFormae> _queueFormae;
 
         public ExecutorPuellaeFormae(
-            ResFluidaPuellaeFormae resFluidaFormae
+            ResFluidaPuellaeFormae resFluidaFormae,
+            IOstiumPuellaeFormaeMutabile ostiumPuellaeFormaeMutabile
         ) {
             _resFluidaFormae = resFluidaFormae;
             _queueFormae = new Ordo<IOrdinatioPuellaeFormae>(
                 ConstansPuellae.LongitudoOrdinatioFormae
             );
             _idFormaeActualis = Enum.GetValues(typeof(IDPuellaeFormae)) as IDPuellaeFormae[];
+            _ostiumPuellaeFormaeMutabile = ostiumPuellaeFormaeMutabile;
         }
 
         public void Initare() {

@@ -15,6 +15,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
     public sealed class AugustusPortus : LifetimeScope {
         [SerializeField] private AnchoraPortus _anchora;
         [SerializeField] private AnchoraVelumPortus _anchoraVelumPortus;
+        [SerializeField] private AnchoraVelumConstructionis _anchoraVelumConstructionis;
         [SerializeField] private ConfiguratioImperium _configuratio;
 
         protected override void Configure(IContainerBuilder builder) {
@@ -22,7 +23,9 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IAnchoraCamera>(_anchora.AnchoraCamera);
             builder.RegisterInstance<IAnchoraPuellae>(_anchora.AnchoraPuellae);
             builder.RegisterInstance<IAnchoraPuellaeCrinis[]>(_anchora.AnchoraPuellaeCrinis);
+
             builder.RegisterInstance<IAnchoraVelumPortus>(_anchoraVelumPortus);
+            builder.RegisterInstance<IAnchoraVelumConstructionis>(_anchoraVelumConstructionis);
 
             builder.RegisterInstance<IConfiguratioPuellaeFiguraeGenusDexter>(_configuratio.Ministeria.Puellae.Figura.GenusDex);
             builder.RegisterInstance<IConfiguratioPuellaeFiguraeGenusSinister>(_configuratio.Ministeria.Puellae.Figura.GenusSin);
@@ -30,6 +33,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IConfiguratioPuellaeRelationisTerrae>(_configuratio.Ministeria.Puellae.Relatio.Terrae);
             builder.RegisterInstance<IConfiguratioPuellaeAnimationum>(_configuratio.Ministeria.Puellae.Animatio);
             builder.RegisterInstance<IConfiguratioPuellaeLoci>(_configuratio.Ministeria.Puellae.Loci);
+            builder.RegisterInstance<IConfiguratioPuellaeFormarum>(_configuratio.Ministeria.Puellae.Formae);
 
             builder.RegisterInstance<IConfiguratioExercitusPuellae>(_configuratio.Exercitus.ExercitusPuellae);
             builder.RegisterInstance<IConfiguratioPuellaeStatuum>(_configuratio.Exercitus.ExercitusPuellae.Statuum);

@@ -39,11 +39,15 @@ namespace Yulinti.Officia.Turris {
                 { IDTextus.SALSAMENTUM_DELETO_CONFIRMATIONIS_BUTTON_NON, "キャンセル" },
 
                 // 出撃画面
-                { IDTextus.PORTUS_BUTTON_PROFECTIO, "しゅつげき!!" },
-                { IDTextus.PORTUS_BUTTON_CONSTRUCTIO, "お着替え" },
+                { IDTextus.PORTUS_BUTTON_PROFECTIO, "出撃" },
+                { IDTextus.PORTUS_BUTTON_CONSTRUCTIO, "カスタマイズ" },
                 { IDTextus.PORTUS_BUTTON_TABERNA, "通販" },
                 { IDTextus.PORTUS_BUTTON_OPTIONES, "オプション" },
                 { IDTextus.PORTUS_BUTTON_EXI, "ゲーム終了" },
+
+                // Constructio画面
+                { IDTextus.PORTUS_CONSTRUCTIONIS_LABEL, "カスタマイズ" },
+                { IDTextus.PORTUS_CONSTRUCTIONIS_BUTTON_EXI, "閉じる" },
 
                 // Portus:タイトルに戻る確認
                 { IDTextus.PORTUS_BUTTON_EXI_TITULUS, "ゲーム終了" },

@@ -20,27 +20,6 @@ namespace Yulinti.Officia.Ministeria {
             _ossa[(int)IDRedittorPuellaeOssisCorrectorium.Spina1] = anchora.OsCorrectoriumSpinae1;
             _ossa[(int)IDRedittorPuellaeOssisCorrectorium.Spina0] = anchora.OsCorrectoriumSpinae0;
             _ossa[(int)IDRedittorPuellaeOssisCorrectorium.Pelvis] = anchora.OsCorrectoriumPelvis;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.UmerusDexter] = anchora.OsCorrectoriumUmeriDexter;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.BracchiumDextrum] = anchora.OsCorrectoriumBracchiiDexter;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.AntebracchiumDextrum] = anchora.OsCorrectoriumAntebracchiiDexter;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.ManusDextra] = anchora.OsCorrectoriumManusDexter;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.UmerusSinister] = anchora.OsCorrectoriumUmeriSinister;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.BracchiumSinistrum] = anchora.OsCorrectoriumBracchiiSinister;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.AntebracchiumSinistrum] = anchora.OsCorrectoriumAntebracchiiSinister;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.ManusSinistra] = anchora.OsCorrectoriumManusSinister;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.FemurDextrum] = anchora.OsCorrectoriumFemurisDexter;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.CrusDextrum] = anchora.OsCorrectoriumCrurisDexter;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.PesDexter] = anchora.OsCorrectoriumPedisDexter;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.DigitusPedisDexter] = anchora.OsCorrectoriumDigitiPedisDexter;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.FemurSinistrum] = anchora.OsCorrectoriumFemurisSinister;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.CrusSinistrum] = anchora.OsCorrectoriumCrurisSinister;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.PesSinister] = anchora.OsCorrectoriumPedisSinister;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.DigitusPedisSinister] = anchora.OsCorrectoriumDigitiPedisSinister;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.PectusDextrum] = anchora.OsCorrectoriumPectorissDexter;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.PectusSinistrum] = anchora.OsCorrectoriumPectorissSinister;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.NatisDextra] = anchora.OsCorrectoriumNatisDexter;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.NatisSinistra] = anchora.OsCorrectoriumNatisSinister;
-            _ossa[(int)IDRedittorPuellaeOssisCorrectorium.Venter] = anchora.OsCorrectoriumVenter;
 
             for (int i = 0; i < longitudo; i++) {
                 if (_ossa[i] == null) {

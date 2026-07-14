@@ -30,6 +30,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IConfiguratioPuellaeRelationisTerrae>(_configuratio.Ministeria.Puellae.Relatio.Terrae);
             builder.RegisterInstance<IConfiguratioPuellaeAnimationum>(_configuratio.Ministeria.Puellae.Animatio);
             builder.RegisterInstance<IConfiguratioPuellaeLoci>(_configuratio.Ministeria.Puellae.Loci);
+            builder.RegisterInstance<IConfiguratioPuellaeFormarum>(_configuratio.Ministeria.Puellae.Formae);
             builder.RegisterInstance<IConfiguratioCivis>(_configuratio.Ministeria.Civis);
             builder.RegisterInstance<IConfiguratioCivisLoci>(_configuratio.Ministeria.Civis.Loci);
             builder.RegisterInstance<IConfiguratioCivisAnimationum>(_configuratio.Ministeria.Civis.Animatio);

@@ -81,9 +81,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public void ConfirmareTardus(int idCivis) {
             // Veletudinisを適用
             ConfirmareVeletudinisValoris(idCivis);
-            ConfirmareVeletudinisMortis(idCivis);
 
             _lacusOrdinatioCivis.ColligereOmnia(idCivis);
+        }
+
+        // PulsusTardusで全IDに対して実行する。
+        public void ConfirmareMortis(int idCivis) {
+            ConfirmareVeletudinisMortis(idCivis);
         }
 
         public void Purgare(int idCivis) {

@@ -261,6 +261,22 @@
     opacity: 0.9;
 }
 
+.button-ghost-image {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* アイコン本体（子のImage）に色を乗せる。
+   Image要素の色は background-image 系ではなく --unity-image-tint-color を使う */
+.button-ghost-image Image {
+    --unity-image-tint-color: var(--text-dim);
+}
+
+.button-ghost-image:hover Image,
+.button-ghost-image:focus Image {
+    --unity-image-tint-color: var(--accent);
+}
+
 .button-submit.unity-disabled, 
 .button-cancel.unity-disabled {
     background-color: var(--warning-bg);
@@ -293,6 +309,15 @@
     border-color: transparent;
     color: var(--text-dim);
     opacity: 0.7;
+}
+
+.button-ghost-image.unity-disabled Image {
+    --unity-image-tint-color: var(--text-dim);
+}
+.button-ghost-image.unity-disabled:hover Image,
+.button-ghost-image.unity-disabled:focus Image,
+.button-ghost-image.unity-disabled:active Image {
+    --unity-image-tint-color: var(--text-dim);
 }
 
 .button-indicator {
