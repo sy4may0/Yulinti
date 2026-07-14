@@ -10,6 +10,7 @@ namespace Yulinti.Officia.Velum {
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
         private readonly IOperatioPortusConstructionisLapsorCorporis _operatioPortusConstructionisLapsorCorporis;
+        private readonly IResFluidaPuellaeFormaeLegibile _resFluidaPuellaeFormaeLegibile;
 
         private UIDocument _uiPortusConstructionis;
         private VisualTreeAsset _elementumLapsorCorporis;
@@ -24,12 +25,14 @@ namespace Yulinti.Officia.Velum {
             IAnchoraVelumConstructionis anchoraVelumConstructionis,
             ITurrisInterpretationis turrisInterpretationis,
             ApplicatorSoniVeli applicatorSoniVeli,
-            IOperatioPortusConstructionisLapsorCorporis operatioPortusConstructionisLapsorCorporis
+            IOperatioPortusConstructionisLapsorCorporis operatioPortusConstructionisLapsorCorporis,
+            IResFluidaPuellaeFormaeLegibile resFluidaPuellaeFormaeLegibile
         ) {
             _anchoraVelumConstructionis = anchoraVelumConstructionis;
             _turrisInterpretationis = turrisInterpretationis;
             _applicatorSoniVeli = applicatorSoniVeli;
             _operatioPortusConstructionisLapsorCorporis = operatioPortusConstructionisLapsorCorporis;
+            _resFluidaPuellaeFormaeLegibile = resFluidaPuellaeFormaeLegibile;
         }
 
         public void Incipere() {
@@ -50,11 +53,14 @@ namespace Yulinti.Officia.Velum {
             _labelLapsorCorporis = _elementum.Q<Label>("elementum-lapsor-corporis-corporis-title");
             _sliderLapsorCorporis = _elementum.Q<Slider>("elementum-lapsor-corporis-corporis-slider");
 
+            _labelLapsorCorporis.text = _turrisInterpretationis.LegoTextus(IDTextus.PORTUS_CONSTRUCTIONIS_LAPSOR_CORPORIS_LAPSOR_CORPORIS_LABEL);
+
             ActivareCB();
         }
 
         public void Activare() {
             _elementum.style.display = DisplayStyle.Flex;
+            renovareLapsor();
         }
 
         public void Deactivare() {
@@ -73,6 +79,10 @@ namespace Yulinti.Officia.Velum {
             if (usus == UsusPortusConstructionisLapsorCorporis.LapsorCorporis) {
                 _sliderLapsorCorporis.SetEnabled(permissio);
             }
+        }
+
+        private void renovareLapsor() {
+            _sliderLapsorCorporis.value = _resFluidaPuellaeFormaeLegibile.RatioActualis(IDPuellaeFormae.Corpus);
         }
 
         private void premereLapsorCorporis(ChangeEvent<float> evt) {

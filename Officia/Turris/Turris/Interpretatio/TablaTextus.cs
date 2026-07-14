@@ -55,6 +55,9 @@ namespace Yulinti.Officia.Turris {
                 { IDTextus.PORTUS_BUTTON_EXI_BUTTON_ITA, "ゲーム終了" },
                 { IDTextus.PORTUS_BUTTON_EXI_BUTTON_NON, "キャンセル" },
 
+                // Constructio画面
+                { IDTextus.PORTUS_CONSTRUCTIONIS_LAPSOR_CORPORIS_LAPSOR_CORPORIS_LABEL, "身長" },
+
                 // PuellaePersonae
                 { IDTextus.PUELLAEPERSONAE_GRADUS_PREFIX, "Level." },
                 { IDTextus.PUELLAEPERSONAE_ANIMA_PREFIX, "Exp." },
