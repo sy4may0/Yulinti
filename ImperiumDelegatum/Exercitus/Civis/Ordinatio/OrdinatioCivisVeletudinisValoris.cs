@@ -6,6 +6,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float _dtAuditus;
         private float _dtAudita;
         private float _dtSuspecta;
+        private float _dtStudium;
 
         public OrdinatioCivisVeletudinisValoris(int idCivis)
             : base(idCivis, true, SpeciesOrdinatioCivis.VeletudinisValoris) {
@@ -15,6 +16,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtAuditus = 0f;
             _dtAudita = 0f;
             _dtSuspecta = 0f;
+            _dtStudium = 0f;
         }
 
         public float DtVitae => _dtVitae;
@@ -23,6 +25,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float DtAuditus => _dtAuditus;
         public float DtAudita => _dtAudita;
         public float DtSuspecta => _dtSuspecta;
+        public float DtStudium => _dtStudium;
 
         public override void Purgere() {
             _estApplicandum = false;
@@ -32,6 +35,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtAuditus = 0f;
             _dtAudita = 0f;
             _dtSuspecta = 0f;
+            _dtStudium = 0f;
         }
 
         public void Pono(
@@ -40,7 +44,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtVisa,
             float dtAuditus,
             float dtAudita,
-            float dtSuspecta
+            float dtSuspecta,
+            float dtStudium
         ) {
             _estApplicandum = true;
             _dtVitae = dtVitae;
@@ -49,7 +54,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtAuditus = dtAuditus;
             _dtAudita = dtAudita;
             _dtSuspecta = dtSuspecta;
-
+            _dtStudium = dtStudium;
         }
     }
 }

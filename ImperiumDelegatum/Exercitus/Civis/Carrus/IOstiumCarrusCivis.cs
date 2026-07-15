@@ -34,7 +34,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtVisa = 0f,
             float dtAuditus = 0f,
             float dtAudita = 0f,
-            float dtSuspecta = 0f
+            float dtSuspecta = 0f,
+            float dtStudium = 0f
         );
 
         void PostulareMortis(

@@ -6,6 +6,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IResolutorPuellaeVigorisMaxima _resolutorPuellaeVigorisMaxima;
         private readonly IResolutorPuellaePatientiaeMaxima _resolutorPuellaePatientiaeMaxima;
         private readonly IResolutorPuellaeClaritatisMaximus _resolutorPuellaeClaritatisMaximus;
+        private readonly IResolutorPuellaeAnomaliaeMaxima _resolutorPuellaeAnomaliaeMaxima;
         private readonly IResolutorPuellaeAetherisMaxima _resolutorPuellaeAetherisMaxima;
         private readonly IResolutorPuellaeIntentioMaxima _resolutorPuellaeIntentioMaxima;
         private readonly IResolutorPuellaeDedecorisMaximum _resolutorPuellaeDedecorisMaximum;
@@ -15,6 +16,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float _vigorMaxima;
         private float _patientiaeMaxima;
         private float _claritasMaxima;
+        private float _anomaliaMaxima;
         private float _aetherMaxima;
         private float _intentioMaxima;
         private float _dedecusMaxima;
@@ -26,6 +28,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResolutorPuellaeVigorisMaxima resolutorPuellaeVigorisMaxima,
             IResolutorPuellaePatientiaeMaxima resolutorPuellaePatientiaeMaxima,
             IResolutorPuellaeClaritatisMaximus resolutorPuellaeClaritatisMaximus,
+            IResolutorPuellaeAnomaliaeMaxima resolutorPuellaeAnomaliaeMaxima,
             IResolutorPuellaeAetherisMaxima resolutorPuellaeAetherisMaxima,
             IResolutorPuellaeIntentioMaxima resolutorPuellaeIntentioMaxima,
             IResolutorPuellaeDedecorisMaximum resolutorPuellaeDedecorisMaximum,
@@ -36,6 +39,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resolutorPuellaeVigorisMaxima = resolutorPuellaeVigorisMaxima;
             _resolutorPuellaePatientiaeMaxima = resolutorPuellaePatientiaeMaxima;
             _resolutorPuellaeClaritatisMaximus = resolutorPuellaeClaritatisMaximus;
+            _resolutorPuellaeAnomaliaeMaxima = resolutorPuellaeAnomaliaeMaxima;
             _resolutorPuellaeAetherisMaxima = resolutorPuellaeAetherisMaxima;
             _resolutorPuellaeIntentioMaxima = resolutorPuellaeIntentioMaxima;
             _resolutorPuellaeDedecorisMaximum = resolutorPuellaeDedecorisMaximum;
@@ -48,6 +52,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _vigorMaxima = _resolutorPuellaeVigorisMaxima.Resolvere();
             _patientiaeMaxima = _resolutorPuellaePatientiaeMaxima.Resolvere();
             _claritasMaxima = _resolutorPuellaeClaritatisMaximus.Resolvere();
+            _anomaliaMaxima = _resolutorPuellaeAnomaliaeMaxima.Resolvere();
             _aetherMaxima = _resolutorPuellaeAetherisMaxima.Resolvere();
             _intentioMaxima = _resolutorPuellaeIntentioMaxima.Resolvere();
             _dedecusMaxima = _resolutorPuellaeDedecorisMaximum.Resolvere();
@@ -62,6 +67,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 dtPatientiaeMaxima: _patientiaeMaxima,
                 dtAetherMaxima: _aetherMaxima,
                 dtClaritasMaxima: _claritasMaxima,
+                dtAnomaliaMaxima: _anomaliaMaxima,
                 dtIntentioMaxima: _intentioMaxima,
                 dtDedecusMaxima: _dedecusMaxima,
                 dtSonusQuietesMaxima: _sonusQuietesMaxima,

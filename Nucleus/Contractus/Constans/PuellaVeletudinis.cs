@@ -4,6 +4,7 @@ namespace Yulinti.Nucleus.Contractus {
         public static readonly float PatientiaMaximaBasis = 100f;
         public static readonly float AetherMaximaBasis = 100f;
         public static readonly float ClaritasMaximaBasis = 100f;
+        public static readonly float AnomaliaMaximaBasis = 100f;
         public static readonly float IntentioMaximaBasis = 100f;
         public static readonly float DedecusMaximaBasis = 100f;
         public static readonly float SonusQuietesMaximaBasis = 100f;

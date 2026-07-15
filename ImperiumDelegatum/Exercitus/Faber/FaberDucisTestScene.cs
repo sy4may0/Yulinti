@@ -71,6 +71,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<IResolutorPuellaeVigorisMaxima, ResolutorPuellaeVigorisMaxima>(Lifetime.Singleton);
             builder.Register<IResolutorPuellaePatientiaeMaxima, ResolutorPuellaePatientiaeMaxima>(Lifetime.Singleton);
             builder.Register<IResolutorPuellaeClaritatisMaximus, ResolutorPuellaeClaritatisMaximus>(Lifetime.Singleton);
+            builder.Register<IResolutorPuellaeAnomaliaeMaxima, ResolutorPuellaeAnomaliaeMaxima>(Lifetime.Singleton);
             builder.Register<IResolutorPuellaeAetherisMaxima, ResolutorPuellaeAetherisMaxima>(Lifetime.Singleton);
             builder.Register<IResolutorPuellaeIntentioMaxima, ResolutorPuellaeIntentioMaxima>(Lifetime.Singleton);
             builder.Register<IResolutorPuellaeDedecorisMaximum, ResolutorPuellaeDedecorisMaximum>(Lifetime.Singleton);

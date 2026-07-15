@@ -7,6 +7,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float Auditus(int idCivis);
         float Audita(int idCivis);
         float Suspecta(int idCivis);
+        float Studium(int idCivis);
 
         bool EstExhaurita(int idCivis);
 

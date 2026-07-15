@@ -3,6 +3,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float VigorMaxima { get; }
         float PatientiaMaxima { get; }
         float ClaritasMaxima { get; }
+        float AnomaliaMaxima { get; }
         float AetherMaxima { get; }
         float IntentioMaxima { get; }
         float DedecusMaxima { get; }
@@ -14,6 +15,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float Patientia { get; }
         bool EstExhauritaPatientiae { get; }
         float Claritas { get; }
+        float Anomalia { get; }
         float Aether { get; }
         float Intentio { get; }
         float Dedecus { get; }
@@ -21,5 +23,15 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float SonusMotus { get; }
         bool EstNudusAnterior { get; }
         bool EstNudusPosterior { get; }
+
+        float RatioVigoris { get; }
+        float RatioPatientiae { get; }
+        float RatioClaritas { get; }
+        float RatioAnomaliae { get; }
+        float RatioAether { get; }
+        float RatioIntentionis { get; }
+        float RatioDedecus { get; }
+        float RatioSonusQuietes { get; }
+        float RatioSonusMotus { get; }
     }
 }

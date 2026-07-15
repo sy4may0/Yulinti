@@ -73,7 +73,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
                 if (!_ostiumCivisLegibile.EstActivum(i)) continue;
 
-                _milesCivisCustodiae.ResolvereIctuum(i, _resFluidaLegibile);
+                _milesCivisCustodiae.ResolvereIctuum(i);
             }
         }
 

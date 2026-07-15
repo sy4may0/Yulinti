@@ -5,6 +5,7 @@ using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
+    // TODO: Custodiaの再構成が終わったら、01レシオ出力に変更し、メソッド名もRatioAuditae/RatioVisaeに変更する
     internal sealed class ResolutorCivisIctuumVisae : IResolutorCivisIctuumVisae {
         private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
         private readonly IOstiumCivisLegibile _civis;
@@ -24,6 +25,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         private readonly float[] _visaIctuumCapitis;
         private readonly float[] _visaIctuumCorporis;
+
+        private readonly int _longitudoResVisae;
 
         private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
 
@@ -79,11 +82,20 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _visaIctuumCapitis[i] = 0f;
                 _visaIctuumCorporis[i] = 0f;
             }
+
+            _longitudoResVisae = _cIDPuellaeResVisaeCapitis.Length + 
+                                 _cIDPuellaeResVisaePectoris.Length + 
+                                 _cIDPuellaeResVisaeNatium.Length;
         }
 
         public float VisaCapitis(int idCivis) => _visaIctuumCapitis[idCivis];
         public float VisaCorporis(int idCivis) => _visaIctuumCorporis[idCivis];
+        public float RatioVisus(int idCivis) => ratioVisus(idCivis);
         public bool EstVisa(int idCivis) => _visaIctuumCapitis[idCivis] + _visaIctuumCorporis[idCivis] > Numerus.Epsilon;
+
+        private float ratioVisus(int idCivis) {
+            return (_visaIctuumCapitis[idCivis] + _visaIctuumCorporis[idCivis]) / _longitudoResVisae;
+        }
 
         public void Initare(int idCivis) {
             _visaIctuumCapitis[idCivis] = 0f;
@@ -122,8 +134,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         private float ComputareVisaIctuum(
-            int idCivis, 
-            float visus, // ベース視力
+            int idCivis,
             Vector3 positioResVisae, // 視認対象の位置
             Vector3 positioCivisCapitis,
             Vector3 directioCivisCapitis
@@ -133,53 +144,47 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float ratioDistantia = ComputareRatioDistantia(positioCivisCapitis, positioResVisae);
             float ratioAngulus = ComputareRatioAngulus(positioCivisCapitis, positioResVisae, directioCivisCapitis);
 
-            float visa = visus * ratioDistantia * ratioAngulus;
-            return visa;
+            return ratioDistantia * ratioAngulus;
         }
         private float ComputareVisaIctuum(
             int idCivis,
-            float visus, // ベース視力
             IDPuellaeResVisaeCapitis idCapitis,
             Vector3 positioCivisCapitis,
             Vector3 directioCivisCapitis
         ) {
             Vector3 positioResVisae = default;
             if (!_puellaeResVisae.ConareLegoCapitis(idCapitis, out positioResVisae)) return 0f;
-            return ComputareVisaIctuum(idCivis, visus, positioResVisae, positioCivisCapitis, directioCivisCapitis);
+            return ComputareVisaIctuum(idCivis, positioResVisae, positioCivisCapitis, directioCivisCapitis);
         }
         private float ComputareVisaIctuum(
             int idCivis,
-            float visus, // ベース視力
             IDPuellaeResVisaePectoris idPectoris,
             Vector3 positioCivisCapitis,
             Vector3 directioCivisCapitis
         ) {
             Vector3 positioResVisae = default;
             if (!_puellaeResVisae.ConareLegoPectoris(idPectoris, out positioResVisae)) return 0f;
-            return ComputareVisaIctuum(idCivis, visus, positioResVisae, positioCivisCapitis, directioCivisCapitis);
+            return ComputareVisaIctuum(idCivis, positioResVisae, positioCivisCapitis, directioCivisCapitis);
         }
         private float ComputareVisaIctuum(
             int idCivis,
-            float visus, // ベース視力
             IDPuellaeResVisaeNatium idNatium,
             Vector3 positioCivisCapitis,
             Vector3 directioCivisCapitis
         ) {
             Vector3 positioResVisae = default;
             if (!_puellaeResVisae.ConareLegoNatium(idNatium, out positioResVisae)) return 0f;
-            return ComputareVisaIctuum(idCivis, visus, positioResVisae, positioCivisCapitis, directioCivisCapitis);
+            return ComputareVisaIctuum(idCivis, positioResVisae, positioCivisCapitis, directioCivisCapitis);
         }
 
         // 視認度を計算する。
         // !! RayCastが発生する。FixedUpdate内で呼び出し値更新を行うこと。
         // 以下の処理を実行する。
         // 1. 全視認対象に対して、視認判定がTrueの場合、以下の値を算出する。
-        //    - ベース視力(visus) * 距離によるレシオ * 視野角によるレシオ
+        //    - 距離によるレシオ * 視野角によるレシオ
         // 2. 全視認対象で1.を算出し、合計を_visaIctuumCapitisと_visaIctuumCorporisに格納する。
         // 視認度は視認対象(ResVisae)の数によって増減する。多いほど見えやすくなる。
-        public void Resolvere(
-            int idCivis, IResFluidaCivisLegibile resFluida
-        ) {
+        public void Resolvere(int idCivis) {
             // 視認範囲外の場合は視認数を0とする。
             if (!_resolutorCivisDistantia.EstCustodiaeVisae(idCivis)) {
                 _visaIctuumCapitis[idCivis] = 0f;
@@ -200,20 +205,19 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return;
             }
 
-            float visus = resFluida.Veletudinis.Visus(idCivis);
             float summaVisaIctuumCapitis = 0f;
             float summaVisaIctuumCorporis = 0f;
 
             foreach (IDPuellaeResVisaeCapitis idCapitis in _cIDPuellaeResVisaeCapitis) {
-                float visa = ComputareVisaIctuum(idCivis, visus, idCapitis, positioCivisCapitis, directioCivisCapitis);
+                float visa = ComputareVisaIctuum(idCivis, idCapitis, positioCivisCapitis, directioCivisCapitis);
                 summaVisaIctuumCapitis += visa;
             }
             foreach (IDPuellaeResVisaePectoris idPectoris in _cIDPuellaeResVisaePectoris) {
-                float visa = ComputareVisaIctuum(idCivis, visus, idPectoris, positioCivisCapitis, directioCivisCapitis);
+                float visa = ComputareVisaIctuum(idCivis, idPectoris, positioCivisCapitis, directioCivisCapitis);
                 summaVisaIctuumCorporis += visa;
             }
             foreach (IDPuellaeResVisaeNatium idNatium in _cIDPuellaeResVisaeNatium) {
-                float visa = ComputareVisaIctuum(idCivis, visus, idNatium, positioCivisCapitis, directioCivisCapitis);
+                float visa = ComputareVisaIctuum(idCivis, idNatium, positioCivisCapitis, directioCivisCapitis);
                 summaVisaIctuumCorporis += visa;
             }
 

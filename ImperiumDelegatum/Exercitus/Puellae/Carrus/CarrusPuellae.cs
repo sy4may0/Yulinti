@@ -218,13 +218,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtIntentio = 0f,
             float dtDedecus = 0f,
             float dtClaritas = 0f,
+            float dtAnomalia = 0f,
             float dtSonusQuietes = 0f,
             float dtSonusMotus = 0f
         ){
             if(_lacusOrdinatioPuellae.EmittareVeletudinis(out var ordinatio)) {
                 ordinatio.Pono(
                     dtVigoris, dtPatientiae, dtAetheris,
-                    dtIntentio, dtDedecus, dtClaritas,
+                    dtIntentio, dtDedecus, dtClaritas, dtAnomalia,
                     dtSonusQuietes, dtSonusMotus
                 );
                 _exVeletudinis.Executare(ordinatio);
@@ -236,6 +237,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtPatientiaeMaxima = 0f,
             float dtAetherMaxima = 0f,
             float dtClaritasMaxima = 0f,
+            float dtAnomaliaMaxima = 0f,
             float dtIntentioMaxima = 0f,
             float dtDedecusMaxima = 0f,
             float dtSonusQuietesMaxima = 0f,
@@ -244,7 +246,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             if(_lacusOrdinatioPuellae.EmittareVeletudinisMaxima(out var ordinatio)) {
                 ordinatio.Pono(
                     dtVigorMaxima, dtPatientiaeMaxima, dtAetherMaxima,
-                    dtClaritasMaxima, dtIntentioMaxima, dtDedecusMaxima,
+                    dtClaritasMaxima, dtAnomaliaMaxima, dtIntentioMaxima, dtDedecusMaxima,
                     dtSonusQuietesMaxima, dtSonusMotusMaxima
                 );
                 _exVeletudinis.Executare(ordinatio);

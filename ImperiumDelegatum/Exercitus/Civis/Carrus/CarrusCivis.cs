@@ -136,10 +136,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtVisa = 0f,
             float dtAuditus = 0f,
             float dtAudita = 0f,
-            float dtSuspecta = 0f
+            float dtSuspecta = 0f,
+            float dtStudium = 0f
         ) {
             if (_lacusOrdinatioCivis.EmittareVeletudinisValoris(idCivis, out var ordinatio)) {
-                ordinatio.Pono(dtVitae, dtVisus, dtVisa, dtAuditus, dtAudita, dtSuspecta);
+                ordinatio.Pono(dtVitae, dtVisus, dtVisa, dtAuditus, dtAudita, dtSuspecta, dtStudium);
                 _exVeletudinis.Executare(idCivis, ordinatio);
             }
         }

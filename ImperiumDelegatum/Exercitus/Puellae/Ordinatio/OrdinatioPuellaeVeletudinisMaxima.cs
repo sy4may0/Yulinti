@@ -4,6 +4,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float _dtPatientiaeMaxima;
         private float _dtAetherMaxima;
         private float _dtClaritasMaxima;
+        private float _dtAnomaliaMaxima;
         private float _dtIntentioMaxima;
         private float _dtDedecusMaxima;
         private float _dtSonusQuietesMaxima;
@@ -15,6 +16,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtPatientiaeMaxima = 0f;
             _dtAetherMaxima = 0f;
             _dtClaritasMaxima = 0f;
+            _dtAnomaliaMaxima = 0f;
             _dtIntentioMaxima = 0f;
             _dtDedecusMaxima = 0f;
             _dtSonusQuietesMaxima = 0f;
@@ -25,6 +27,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float DtPatientiaeMaxima => _dtPatientiaeMaxima;
         public float DtAetherMaxima => _dtAetherMaxima;
         public float DtClaritasMaxima => _dtClaritasMaxima;
+        public float DtAnomaliaMaxima => _dtAnomaliaMaxima;
         public float DtIntentioMaxima => _dtIntentioMaxima;
         public float DtDedecusMaxima => _dtDedecusMaxima;
         public float DtSonusQuietesMaxima => _dtSonusQuietesMaxima;
@@ -36,6 +39,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtPatientiaeMaxima = 0f;
             _dtAetherMaxima = 0f;
             _dtClaritasMaxima = 0f;
+            _dtAnomaliaMaxima = 0f;
             _dtIntentioMaxima = 0f;
             _dtDedecusMaxima = 0f;
             _dtSonusQuietesMaxima = 0f;
@@ -47,6 +51,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtPatientiaeMaxima,
             float dtAetherMaxima,
             float dtClaritasMaxima,
+            float dtAnomaliaMaxima,
             float dtIntentioMaxima,
             float dtDedecusMaxima,
             float dtSonusQuietesMaxima,
@@ -56,6 +61,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtPatientiaeMaxima = dtPatientiaeMaxima;
             _dtAetherMaxima = dtAetherMaxima;
             _dtClaritasMaxima = dtClaritasMaxima;
+            _dtAnomaliaMaxima = dtAnomaliaMaxima;
             _dtIntentioMaxima = dtIntentioMaxima;
             _dtDedecusMaxima = dtDedecusMaxima;
             _dtSonusQuietesMaxima = dtSonusQuietesMaxima;

@@ -12,5 +12,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         float DtAudita { get; }
         // 疑心判定(不審者状態で上昇していく。露出状態でDtVisaに統合)
         float DtSuspecta { get; }
+        // 興味度
+        float DtStudium { get; }
     }
 }

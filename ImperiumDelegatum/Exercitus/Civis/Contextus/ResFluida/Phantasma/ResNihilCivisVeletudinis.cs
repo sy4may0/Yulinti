@@ -11,6 +11,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float Auditus(int idCivis) => 0f;
         public float Audita(int idCivis) => 0f;
         public float Suspecta(int idCivis) => 0f;
+        public float Studium(int idCivis) => 0f;
         public bool EstExhaurita(int idCivis) => false;
         public bool EstVigilantia(int idCivis) => false;
         public bool EstDetectio(int idCivis) => false;

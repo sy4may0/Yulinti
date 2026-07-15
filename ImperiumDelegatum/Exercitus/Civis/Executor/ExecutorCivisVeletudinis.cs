@@ -11,6 +11,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float[] _phantasmaAuditus;
         private float[] _phantasmaAudita;
         private float[] _phantasmaSuspecta;
+        private float[] _phantasmaStudium;
 
         private float _vitaeMaxima;
         private float _visusMaxima;
@@ -18,6 +19,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float _auditusMaxima;
         private float _auditaMaxima;
         private float _suspectaMaxima;
+        private float _studiumMaxima;
 
         public PhantasmaCivisVeletudinis(int longitudo) {
             _phantasmaVitae = new float[longitudo];
@@ -26,12 +28,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _phantasmaAuditus = new float[longitudo];
             _phantasmaAudita = new float[longitudo];
             _phantasmaSuspecta = new float[longitudo];
+            _phantasmaStudium = new float[longitudo];
             _vitaeMaxima = 1f;
             _visusMaxima = 1f;
             _visaMaxima = 1f;
             _auditusMaxima = 1f;
             _auditaMaxima = 1f;
             _suspectaMaxima = 1f;
+            _studiumMaxima = 1f;
 
             for (int i = 0; i < longitudo; i++) {
                 _phantasmaVitae[i] = 1f;
@@ -40,6 +44,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _phantasmaAuditus[i] = 1f;
                 _phantasmaAudita[i] = 0f;
                 _phantasmaSuspecta[i] = 0f;
+                _phantasmaStudium[i] = 0f;
             }
         }
         public float PhantasmaVitae(int idCivis) {
@@ -60,6 +65,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float PhantasmaSuspecta(int idCivis) {
             return _phantasmaSuspecta[idCivis];
         }
+        public float PhantasmaStudium(int idCivis) {
+            return _phantasmaStudium[idCivis];
+        }
 
 
         public void Addo(
@@ -69,7 +77,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtVisa = 0f,
             float dtAuditus = 0f,
             float dtAudita = 0f,
-            float dtSuspecta = 0f
+            float dtSuspecta = 0f,
+            float dtStudium = 0f
         ) {
             _phantasmaVitae[idCivis] = Mathematica.Clamp(_phantasmaVitae[idCivis] + dtVitae, 0f, _vitaeMaxima);
             _phantasmaVisus[idCivis] = Mathematica.Clamp(_phantasmaVisus[idCivis] + dtVisus, 0f, _visusMaxima);
@@ -77,6 +86,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _phantasmaAuditus[idCivis] = Mathematica.Clamp(_phantasmaAuditus[idCivis] + dtAuditus, 0f, _auditusMaxima);
             _phantasmaAudita[idCivis] = Mathematica.Clamp(_phantasmaAudita[idCivis] + dtAudita, 0f, _auditaMaxima);
             _phantasmaSuspecta[idCivis] = Mathematica.Clamp(_phantasmaSuspecta[idCivis] + dtSuspecta, 0f, _suspectaMaxima);
+            _phantasmaStudium[idCivis] = Mathematica.Clamp(_phantasmaStudium[idCivis] + dtStudium, 0f, _studiumMaxima);
         }
 
         public void Pono(
@@ -86,7 +96,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float visa,
             float auditus,
             float audita,
-            float suspecta
+            float suspecta,
+            float studium
         ) {
             _phantasmaVitae[idCivis] = Mathematica.Clamp(vitae, 0f, _vitaeMaxima);
             _phantasmaVisus[idCivis] = Mathematica.Clamp(visus, 0f, _visusMaxima);
@@ -94,6 +105,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _phantasmaAuditus[idCivis] = Mathematica.Clamp(auditus, 0f, _auditusMaxima);
             _phantasmaAudita[idCivis] = Mathematica.Clamp(audita, 0f, _auditaMaxima);
             _phantasmaSuspecta[idCivis] = Mathematica.Clamp(suspecta, 0f, _suspectaMaxima);
+            _phantasmaStudium[idCivis] = Mathematica.Clamp(studium, 0f, _studiumMaxima);
         }
     }
 
@@ -132,7 +144,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 visa: 0f,
                 auditus: 0f,
                 audita: 0f,
-                suspecta: 0f
+                suspecta: 0f,
+                studium: 0f
             );
             _resFluidaVeletudinis.Purgare(idCivis);
         }
@@ -146,7 +159,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 visa: _resFluidaVeletudinis.Visa(idCivis),
                 auditus: 0f, // 聴力はフレーム毎に加算して固定値を取る。
                 audita: _resFluidaVeletudinis.Audita(idCivis),
-                suspecta: _resFluidaVeletudinis.Suspecta(idCivis)
+                suspecta: _resFluidaVeletudinis.Suspecta(idCivis),
+                studium: _resFluidaVeletudinis.Studium(idCivis)
             );
         }
 
@@ -158,7 +172,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 dtVisa: veletudinisValoris.DtVisa,
                 dtAuditus: veletudinisValoris.DtAuditus,
                 dtAudita: veletudinisValoris.DtAudita,
-                dtSuspecta: veletudinisValoris.DtSuspecta
+                dtSuspecta: veletudinisValoris.DtSuspecta,
+                dtStudium: veletudinisValoris.DtStudium
             );
         }
 
@@ -177,7 +192,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 visa: _phantasma.PhantasmaVisa(idCivis),
                 auditus: _phantasma.PhantasmaAuditus(idCivis),
                 audita: _phantasma.PhantasmaAudita(idCivis),
-                suspecta: _phantasma.PhantasmaSuspecta(idCivis)
+                suspecta: _phantasma.PhantasmaSuspecta(idCivis),
+                studium: _phantasma.PhantasmaStudium(idCivis)
             );
         }
 
@@ -211,7 +227,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 visa: 0f,
                 auditus: 0f,
                 audita: 0f,
-                suspecta: 0f
+                suspecta: 0f,
+                studium: 0f
             );
             _queueVeletudinisCondicionis[idCivis].Purgere();
             _resFluidaVeletudinis.Purgare(idCivis);
