@@ -12,4 +12,19 @@ namespace Yulinti.Auctoritas.Contractus {
     public enum UsusPortusConstructionisLapsorCorporis {
         LapsorCorporis,
     }
+
+    public enum UsusPortusConstructionisLapsorFaciei {
+    }
+
+    public enum UsusPortusConstructionisSubligaculi {
+    }
+
+    public enum UsusPortusConstructionisTunicae {
+    }
+
+    public enum UsusPortusConstructionisOrnamenti {
+    }
+
+    public enum UsusPortusConstructionisSalsamenti {
+    }
 }

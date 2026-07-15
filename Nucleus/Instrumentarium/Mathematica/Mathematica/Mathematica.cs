@@ -45,6 +45,10 @@ namespace Yulinti.Nucleus.Instrumentarium {
             return Clamp01((v - min) / (max - min));
         }
 
+        public static float Round(float value) {
+            return (float)Math.Round(value);
+        }
+
         public static float Deg2Rad(float deg) {
             return deg * Numerus.Deg2Rad;
         }

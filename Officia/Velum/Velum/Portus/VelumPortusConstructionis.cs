@@ -5,13 +5,14 @@ using UnityEngine.UIElements;
 
 namespace Yulinti.Officia.Velum {
     internal sealed class VelumPortusConstructionis : IVelum, IVelumPortusConstructionis, IVelumIncipabilis, IVelumLiberabilis, IVelumTerminabilis {
+        private const string ClassisNavbarButtonSelectus = "constructio-navbar-button--selectus";
+
         private readonly IAnchoraVelumConstructionis _anchoraVelumConstructionis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
         private readonly IOperatioPortusConstructionis _operatioPortusConstructionis;
 
         private UIDocument _uiPortusConstructionis;
-        private VisualTreeAsset _formaLapsorCorporis;
 
         private VisualElement _containerPortusConstructionis;
 
@@ -39,7 +40,6 @@ namespace Yulinti.Officia.Velum {
 
         public void Incipere() {
             _uiPortusConstructionis = _anchoraVelumConstructionis.UIDocument;
-            _formaLapsorCorporis = _anchoraVelumConstructionis.FormaLapsorCorporis;
 
             _containerPortusConstructionis = _uiPortusConstructionis.rootVisualElement.Q<VisualElement>("constructio-root");
             _buttonLapsorCorporis = _containerPortusConstructionis.Q<Button>("constructio-navbar-button-lapsorcorporis");
@@ -67,7 +67,19 @@ namespace Yulinti.Officia.Velum {
 
         public void DemittereConstructionis() {
             Activare();
+            SeligereTab(_buttonLapsorCorporis);
             _buttonLapsorCorporis.Focus();
+        }
+
+        // タブ選択の維持.
+        private void SeligereTab(Button button) {
+            _buttonLapsorCorporis.RemoveFromClassList(ClassisNavbarButtonSelectus);
+            _buttonLapsorFaciei.RemoveFromClassList(ClassisNavbarButtonSelectus);
+            _buttonSubligaculum.RemoveFromClassList(ClassisNavbarButtonSelectus);
+            _buttonTunica.RemoveFromClassList(ClassisNavbarButtonSelectus);
+            _buttonOrnamentum.RemoveFromClassList(ClassisNavbarButtonSelectus);
+            _buttonSalsamentum.RemoveFromClassList(ClassisNavbarButtonSelectus);
+            button.AddToClassList(ClassisNavbarButtonSelectus);
         }
 
         public void TollereConstructionis() {
@@ -93,26 +105,32 @@ namespace Yulinti.Officia.Velum {
         }
 
         private void premereLapsorCorporis() {
+            SeligereTab(_buttonLapsorCorporis);
             _operatioPortusConstructionis.Executare(UsusPortusConstructionis.LapsorCorporis);
         }
 
         private void premereLapsorFaciei() {
+            SeligereTab(_buttonLapsorFaciei);
             _operatioPortusConstructionis.Executare(UsusPortusConstructionis.LapsorFaciei);
         }
 
         private void premereSubligaculum() {
+            SeligereTab(_buttonSubligaculum);
             _operatioPortusConstructionis.Executare(UsusPortusConstructionis.Subligaculum);
         }
 
         private void premereTunica() {
+            SeligereTab(_buttonTunica);
             _operatioPortusConstructionis.Executare(UsusPortusConstructionis.Tunica);
         }
 
         private void premereOrnamentum() {
+            SeligereTab(_buttonOrnamentum);
             _operatioPortusConstructionis.Executare(UsusPortusConstructionis.Ornamentum);
         }
 
         private void premereSalsamentum() {
+            SeligereTab(_buttonSalsamentum);
             _operatioPortusConstructionis.Executare(UsusPortusConstructionis.Salsamentum);
         }
 

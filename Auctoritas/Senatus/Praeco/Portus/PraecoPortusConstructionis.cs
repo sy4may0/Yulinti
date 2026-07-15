@@ -12,10 +12,19 @@ namespace Yulinti.Auctoritas.Senatus {
         private readonly IVelumPortusConstructionis _velumPortusConstructionis;
         private readonly IPraecoConfirmationis _praecoConfirmationis;
         private readonly ITurrisInterpretationis _turrisInterpretationis;
+        private readonly ITurrisSoniVeli _turrisSoniVeli;
 
         // Operatio
         private readonly OperatioPortusConstructionis _operatioPortusConstructionis;
         private readonly IOperatioInternaPortus _operatioInternaPortus;
+
+        // 下位Praeco
+        private readonly PraecoPortusConstructionisLapsorCorporis _praecoPortusConstructionisLapsorCorporis;
+        private readonly PraecoPortusConstructionisLapsorFaciei _praecoPortusConstructionisLapsorFaciei;
+        private readonly PraecoPortusConstructionisSubligaculi _praecoPortusConstructionisSubligaculum;
+        private readonly PraecoPortusConstructionisTunicae _praecoPortusConstructionisTunica;
+        private readonly PraecoPortusConstructionisOrnamenti _praecoPortusConstructionisOrnamentum;
+        private readonly PraecoPortusConstructionisSalsamenti _praecoPortusConstructionisSalsamentum;
 
         private readonly CuratorVela _curatorVela;
 
@@ -31,7 +40,14 @@ namespace Yulinti.Auctoritas.Senatus {
             OperatioPortusConstructionis operatioPortusConstructionis,
             IOperatioInternaPortus operatioInternaPortus,
             CuratorVela curatorVela,
-            IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile
+            IOstiumSignumCancellationisLegibile ostiumSignumCancellationisLegibile,
+            ITurrisSoniVeli turrisSoniVeli,
+            PraecoPortusConstructionisLapsorCorporis praecoPortusConstructionisLapsorCorporis,
+            PraecoPortusConstructionisLapsorFaciei praecoPortusConstructionisLapsorFaciei,
+            PraecoPortusConstructionisSubligaculi praecoPortusConstructionisSubligaculum,
+            PraecoPortusConstructionisTunicae praecoPortusConstructionisTunica,
+            PraecoPortusConstructionisOrnamenti praecoPortusConstructionisOrnamentum,
+            PraecoPortusConstructionisSalsamenti praecoPortusConstructionisSalsamentum
         ) {
             _turrisMundus = turrisMundus;
             _velumPortusConstructionis = velumPortusConstructionis;
@@ -41,7 +57,15 @@ namespace Yulinti.Auctoritas.Senatus {
             _ostiumSignumCancellationisLegibile = ostiumSignumCancellationisLegibile;
             _operatioPortusConstructionis = operatioPortusConstructionis;
             _operatioInternaPortus = operatioInternaPortus;
+            _turrisSoniVeli = turrisSoniVeli;
             _operatioPortusConstructionis.Initiare(Executare);
+
+            _praecoPortusConstructionisLapsorCorporis = praecoPortusConstructionisLapsorCorporis;
+            _praecoPortusConstructionisLapsorFaciei = praecoPortusConstructionisLapsorFaciei;
+            _praecoPortusConstructionisSubligaculum = praecoPortusConstructionisSubligaculum;
+            _praecoPortusConstructionisTunica = praecoPortusConstructionisTunica;
+            _praecoPortusConstructionisOrnamentum = praecoPortusConstructionisOrnamentum;
+            _praecoPortusConstructionisSalsamentum = praecoPortusConstructionisSalsamentum;
 
             _estActivumUsus = true;
         }
@@ -55,6 +79,12 @@ namespace Yulinti.Auctoritas.Senatus {
                 // UIを表示
                 _velumPortusConstructionis.DemittereConstructionis();
                 _estActivumUsus = true;
+
+                // 表示SE
+                _turrisSoniVeli.Sonare(IDSonusVeli.Demittere);
+
+                // 下位Praecoを起動(デフォルトLapsorCorporis)
+                _praecoPortusConstructionisLapsorCorporis.Demittere();
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             }
@@ -103,7 +133,8 @@ namespace Yulinti.Auctoritas.Senatus {
                 if (!ConareUsus()) {
                     return Task.CompletedTask;
                 }
-                Notarius.Memorare("未実装: PostulareLapsorCorporis");
+                PurgareElementa();
+                _praecoPortusConstructionisLapsorCorporis.Demittere();
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
@@ -117,7 +148,8 @@ namespace Yulinti.Auctoritas.Senatus {
                 if (!ConareUsus()) {
                     return Task.CompletedTask;
                 }
-                Notarius.Memorare("未実装: PostulareLapsorFaciei");
+                PurgareElementa();
+                _praecoPortusConstructionisLapsorFaciei.Demittere();
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
@@ -131,7 +163,8 @@ namespace Yulinti.Auctoritas.Senatus {
                 if (!ConareUsus()) {
                     return Task.CompletedTask;
                 }
-                Notarius.Memorare("未実装: PostulareSubligaculum");
+                PurgareElementa();
+                _praecoPortusConstructionisSubligaculum.Demittere();
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
@@ -145,7 +178,8 @@ namespace Yulinti.Auctoritas.Senatus {
                 if (!ConareUsus()) {
                     return Task.CompletedTask;
                 }
-                Notarius.Memorare("未実装: PostulareTunica");
+                PurgareElementa();
+                _praecoPortusConstructionisTunica.Demittere();
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
@@ -159,7 +193,8 @@ namespace Yulinti.Auctoritas.Senatus {
                 if (!ConareUsus()) {
                     return Task.CompletedTask;
                 }
-                Notarius.Memorare("未実装: PostulareOrnamentum");
+                PurgareElementa();
+                _praecoPortusConstructionisOrnamentum.Demittere();
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
@@ -173,7 +208,8 @@ namespace Yulinti.Auctoritas.Senatus {
                 if (!ConareUsus()) {
                     return Task.CompletedTask;
                 }
-                Notarius.Memorare("未実装: PostulareSalsamentum");
+                PurgareElementa();
+                _praecoPortusConstructionisSalsamentum.Demittere();
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
@@ -189,6 +225,9 @@ namespace Yulinti.Auctoritas.Senatus {
                 }
 
                 Tollere();
+
+                // 終了SE
+                _turrisSoniVeli.Sonare(IDSonusVeli.Exire);
             } catch (Exception e) {
                 Carnifex.Intermissio(e);
             } finally {
@@ -210,6 +249,15 @@ namespace Yulinti.Auctoritas.Senatus {
 
         public void Liberare() {
             _operatioPortusConstructionis.Purgare();
+        }
+
+        private void PurgareElementa() {
+            _praecoPortusConstructionisLapsorCorporis.Tollere();
+            _praecoPortusConstructionisLapsorFaciei.Tollere();
+            _praecoPortusConstructionisSubligaculum.Tollere();
+            _praecoPortusConstructionisTunica.Tollere();
+            _praecoPortusConstructionisOrnamentum.Tollere();
+            _praecoPortusConstructionisSalsamentum.Tollere();
         }
     }
 }

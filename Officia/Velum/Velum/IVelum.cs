@@ -6,6 +6,11 @@ namespace Yulinti.Officia.Velum {
         void Deactivare();
     }
 
+    internal interface IVelumElementi {
+        void Activare();
+        void Deactivare();
+    }
+
     internal interface IVelumIncipabilis : IIncipabilis {
     }
 

@@ -16,6 +16,24 @@ namespace Yulinti.Officia.Velum {
             builder.Register<VelumPortusConstructionis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<VelumElementiPortusConstructionisLapsorCorporis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<VelumElementiPortusConstructionisLapsorFaciei>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<VelumElementiPortusConstructionisSubligaculi>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<VelumElementiPortusConstructionisTunicae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<VelumElementiPortusConstructionisOrnamenti>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<VelumElementiPortusConstructionisSalsamenti>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             builder.Register<IOrator, Orator>(Lifetime.Singleton);
         }
