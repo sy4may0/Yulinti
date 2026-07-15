@@ -4,6 +4,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         float DtPatientiaeMaxima { get; }
         float DtAetherMaxima { get; }
         float DtClaritasMaxima { get; }
+        float DtAnomaliaMaxima { get; }
         float DtIntentioMaxima { get; }
         float DtDedecusMaxima { get; }
         float DtSonusQuietesMaxima { get; }

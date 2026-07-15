@@ -3,6 +3,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
+    // TODO: Custodiaの再構成が終わったら、01レシオ出力に変更し、メソッド名もRatioAuditae/RatioVisaeに変更する
     internal sealed class ResolutorCivisIctuumAuditae : IResolutorCivisIctuumAuditae {
         private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
         private readonly IOstiumCivisLegibile _civis;
@@ -62,9 +63,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             return _abacusDistantiae.ComputareRatioInversus(ratioActualis);
         }
 
-        public void Resolvere(
-            int idCivis, IResFluidaCivisLegibile resFluida
-        ) {
+        public void Resolvere(int idCivis) {
             // 聴認範囲外の場合は聴認数を0とする。
             if (!_resolutorCivisDistantia.EstCustodiaeAuditae(idCivis)) {
                 _auditaIctuum[idCivis] = 0f;
@@ -84,9 +83,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float distantiaMaxima = ComputareDistantiaSoni(sonus);
             float ratioDistantia = ComputareRatioDistantia(distantiaMaxima, distantiaPuellae);
 
-            float auditus = resFluida.Veletudinis.Auditus(idCivis);
-
-            _auditaIctuum[idCivis] = ratioDistantia * auditus * sonus;
+            _auditaIctuum[idCivis] = ratioDistantia * sonus;
         }
     }
 }

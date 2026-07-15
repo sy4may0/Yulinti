@@ -6,6 +6,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float _dtIntentio;
         private float _dtDedecus;
         private float _dtClaritas;
+        private float _dtAnomalia;
         private float _dtSonusQuietes;
         private float _dtSonusMotus;
 
@@ -17,6 +18,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtIntentio = 0f;
             _dtDedecus = 0f;
             _dtClaritas = 0f;
+            _dtAnomalia = 0f;
             _dtSonusQuietes = 0f;
             _dtSonusMotus = 0f;
         }
@@ -27,6 +29,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float DtIntentio => _dtIntentio;
         public float DtDedecus => _dtDedecus;
         public float DtClaritas => _dtClaritas;
+        public float DtAnomalia => _dtAnomalia;
         public float DtSonusQuietes => _dtSonusQuietes;
         public float DtSonusMotus => _dtSonusMotus;
 
@@ -38,6 +41,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtIntentio = 0f;
             _dtDedecus = 0f;
             _dtClaritas = 0f;
+            _dtAnomalia = 0f;
             _dtSonusQuietes = 0f;
             _dtSonusMotus = 0f;
         }
@@ -49,6 +53,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtIntentio,
             float dtDedecus,
             float dtClaritas,
+            float dtAnomalia,
             float dtSonusQuietes,
             float dtSonusMotus
         ) {
@@ -58,6 +63,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtIntentio = dtIntentio;
             _dtDedecus = dtDedecus;
             _dtClaritas = dtClaritas;
+            _dtAnomalia = dtAnomalia;
             _dtSonusQuietes = dtSonusQuietes;
             _dtSonusMotus = dtSonusMotus;
 

@@ -117,13 +117,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resolutorCivisAuditae.Ordinare(idCivis, resFluida);
         }
 
-        public void ResolvereIctuum(
-            int idCivis, IResFluidaCivisLegibile resFluida
-        ) {
+        public void ResolvereIctuum(int idCivis) {
             // Puellae視認数を解決
-            _resolutorCivisIctuum.Resolvere(idCivis, resFluida);
+            _resolutorCivisIctuum.Resolvere(idCivis);
             // Auditaの解決
-            _resolutorCivisIctuumAuditae.Resolvere(idCivis, resFluida);
+            _resolutorCivisIctuumAuditae.Resolvere(idCivis);
         }
 
         public void ResolvereDetectio(

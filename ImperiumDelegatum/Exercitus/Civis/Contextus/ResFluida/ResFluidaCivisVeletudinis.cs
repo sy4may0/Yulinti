@@ -15,6 +15,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float[] _audita;
         // 疑心度
         private float[] _suspecta;
+        // 興味度
+        private float[] _studium;
 
         private bool _estSpectareNudusAnterior;
         private bool _estSpectareNudusPosterior;
@@ -35,6 +37,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _auditus = new float[ostiumCivis.Longitudo];
             _audita = new float[ostiumCivis.Longitudo];
             _suspecta = new float[ostiumCivis.Longitudo];
+            _studium = new float[ostiumCivis.Longitudo];
 
             _estVigilantia = new bool[ostiumCivis.Longitudo];
             _estDetectio = new bool[ostiumCivis.Longitudo];
@@ -51,6 +54,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _auditus[i] = 1f;
                 _audita[i] = 0f;
                 _suspecta[i] = 0f;
+                _studium[i] = 0f;
                 _estVigilantia[i] = false;
                 _estDetectio[i] = false;
                 _estDetectioSonora[i] = false;
@@ -79,6 +83,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
         public float Suspecta(int idCivis) {
             return _suspecta[idCivis];
+        }
+        public float Studium(int idCivis) {
+            return _studium[idCivis];
         }
 
         public bool EstExhaurita(int idCivis) {
@@ -132,7 +139,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float visa,
             float auditus,
             float audita,
-            float suspecta
+            float suspecta,
+            float studium
         ) {
             _vitae[idCivis] = Mathematica.Clamp01(vitae);
             _visus[idCivis] = Mathematica.Clamp01(visus);
@@ -140,6 +148,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _auditus[idCivis] = Mathematica.Clamp01(auditus);
             _audita[idCivis] = Mathematica.Clamp01(audita);
             _suspecta[idCivis] = Mathematica.Clamp01(suspecta);
+            _studium[idCivis] = Mathematica.Clamp01(studium);
         }
 
         public void Purgare(int idCivis) {
@@ -149,6 +158,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _auditus[idCivis] = 1f;
             _audita[idCivis] = 0f;
             _suspecta[idCivis] = 0f;
+            _studium[idCivis] = 0f;
             _estVigilantia[idCivis] = false;
             _estDetectio[idCivis] = false;
             _estSpectareNudusAnterior = false;

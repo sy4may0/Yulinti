@@ -6,6 +6,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         float DtIntentio { get; }
         float DtDedecus { get; }
         float DtClaritas { get; }
+        float DtAnomalia { get; }
         float DtSonusQuietes { get; }
         float DtSonusMotus { get; }
     }

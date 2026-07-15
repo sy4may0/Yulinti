@@ -51,6 +51,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtIntentio = 0f,
             float dtDedecus = 0f,
             float dtClaritas = 0f,
+            float dtAnomalia = 0f,
             float dtSonusQuietes = 0f,
             float dtSonusMotus = 0f
         );
@@ -60,6 +61,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtPatientiaeMaxima = 0f,
             float dtAetherMaxima = 0f,
             float dtClaritasMaxima = 0f,
+            float dtAnomaliaMaxima = 0f,
             float dtIntentioMaxima = 0f,
             float dtDedecusMaxima = 0f,
             float dtSonusQuietesMaxima = 0f,
