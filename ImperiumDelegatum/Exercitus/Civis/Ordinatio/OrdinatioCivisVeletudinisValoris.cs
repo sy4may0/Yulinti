@@ -7,6 +7,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float _dtAudita;
         private float _dtSuspecta;
         private float _dtStudium;
+        private float _dtIntentio;
+        private float _dtTorelantiaAnomaliaeMaxima;
+        private float _dtTorelantiaAnomaliaeMinima;
 
         public OrdinatioCivisVeletudinisValoris(int idCivis)
             : base(idCivis, true, SpeciesOrdinatioCivis.VeletudinisValoris) {
@@ -17,6 +20,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtAudita = 0f;
             _dtSuspecta = 0f;
             _dtStudium = 0f;
+            _dtIntentio = 0f;
+            _dtTorelantiaAnomaliaeMaxima = 0f;
+            _dtTorelantiaAnomaliaeMinima = 0f;
         }
 
         public float DtVitae => _dtVitae;
@@ -26,6 +32,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float DtAudita => _dtAudita;
         public float DtSuspecta => _dtSuspecta;
         public float DtStudium => _dtStudium;
+        public float DtIntentio => _dtIntentio;
+        public float DtTorelantiaAnomaliaeMaxima => _dtTorelantiaAnomaliaeMaxima;
+        public float DtTorelantiaAnomaliaeMinima => _dtTorelantiaAnomaliaeMinima;
 
         public override void Purgere() {
             _estApplicandum = false;
@@ -36,6 +45,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtAudita = 0f;
             _dtSuspecta = 0f;
             _dtStudium = 0f;
+            _dtIntentio = 0f;
+            _dtTorelantiaAnomaliaeMaxima = 0f;
+            _dtTorelantiaAnomaliaeMinima = 0f;
         }
 
         public void Pono(
@@ -45,7 +57,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtAuditus,
             float dtAudita,
             float dtSuspecta,
-            float dtStudium
+            float dtStudium,
+            float dtIntentio,
+            float dtTorelantiaAnomaliaeMaxima,
+            float dtTorelantiaAnomaliaeMinima
         ) {
             _estApplicandum = true;
             _dtVitae = dtVitae;
@@ -55,6 +70,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _dtAudita = dtAudita;
             _dtSuspecta = dtSuspecta;
             _dtStudium = dtStudium;
+            _dtIntentio = dtIntentio;
+            _dtTorelantiaAnomaliaeMaxima = dtTorelantiaAnomaliaeMaxima;
+            _dtTorelantiaAnomaliaeMinima = dtTorelantiaAnomaliaeMinima;
         }
     }
 }

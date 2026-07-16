@@ -7,6 +7,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Stack<OrdinatioCivisMotus>[] _lacusMotus;
         private readonly Stack<OrdinatioCivisNavmesh>[] _lacusNavmesh;
         private readonly Stack<OrdinatioCivisVeletudinisValoris>[] _lacusVeletudinisValoris;
+        private readonly Stack<OrdinatioCivisVeletudinisMaxima>[] _lacusVeletudinisMaxima;
         private readonly Stack<OrdinatioCivisMortis>[] _lacusMortis;
         private readonly Stack<OrdinatioCivisVeletudinisCondicionis>[] _lacusVeletudinisCondicionis;
 
@@ -14,6 +15,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Ordo<OrdinatioCivisMotus>[] _emissioMotus;
         private readonly Ordo<OrdinatioCivisNavmesh>[] _emissioNavmesh;
         private readonly Ordo<OrdinatioCivisVeletudinisValoris>[] _emissioVeletudinisValoris;
+        private readonly Ordo<OrdinatioCivisVeletudinisMaxima>[] _emissioVeletudinisMaxima;
         private readonly Ordo<OrdinatioCivisMortis>[] _emissioMortis;
         private readonly Ordo<OrdinatioCivisVeletudinisCondicionis>[] _emissioVeletudinisCondicionis;
 
@@ -22,6 +24,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _lacusMotus = new Stack<OrdinatioCivisMotus>[longitudoCivis];
             _lacusNavmesh = new Stack<OrdinatioCivisNavmesh>[longitudoCivis];
             _lacusVeletudinisValoris = new Stack<OrdinatioCivisVeletudinisValoris>[longitudoCivis];
+            _lacusVeletudinisMaxima = new Stack<OrdinatioCivisVeletudinisMaxima>[longitudoCivis];
             _lacusMortis = new Stack<OrdinatioCivisMortis>[longitudoCivis];
             _lacusVeletudinisCondicionis = new Stack<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
 
@@ -29,6 +32,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _emissioMotus = new Ordo<OrdinatioCivisMotus>[longitudoCivis];
             _emissioNavmesh = new Ordo<OrdinatioCivisNavmesh>[longitudoCivis];
             _emissioVeletudinisValoris = new Ordo<OrdinatioCivisVeletudinisValoris>[longitudoCivis];
+            _emissioVeletudinisMaxima = new Ordo<OrdinatioCivisVeletudinisMaxima>[longitudoCivis];
             _emissioMortis = new Ordo<OrdinatioCivisMortis>[longitudoCivis];
             _emissioVeletudinisCondicionis = new Ordo<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
 
@@ -37,6 +41,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _lacusMotus[i] = new Stack<OrdinatioCivisMotus>(ConstansCivis.LongitudoOrdinatioMotus);
                 _lacusNavmesh[i] = new Stack<OrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
                 _lacusVeletudinisValoris[i] = new Stack<OrdinatioCivisVeletudinisValoris>(ConstansCivis.LongitudoOrdinatioVeletudinisValoris);
+                _lacusVeletudinisMaxima[i] = new Stack<OrdinatioCivisVeletudinisMaxima>(ConstansCivis.LongitudoOrdinatioVeletudinisMaxima);
                 _lacusMortis[i] = new Stack<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
                 _lacusVeletudinisCondicionis[i] = new Stack<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
 
@@ -44,6 +49,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _emissioMotus[i] = new Ordo<OrdinatioCivisMotus>(ConstansCivis.LongitudoOrdinatioMotus);
                 _emissioNavmesh[i] = new Ordo<OrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
                 _emissioVeletudinisValoris[i] = new Ordo<OrdinatioCivisVeletudinisValoris>(ConstansCivis.LongitudoOrdinatioVeletudinisValoris);
+                _emissioVeletudinisMaxima[i] = new Ordo<OrdinatioCivisVeletudinisMaxima>(ConstansCivis.LongitudoOrdinatioVeletudinisMaxima);
                 _emissioMortis[i] = new Ordo<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
                 _emissioVeletudinisCondicionis[i] = new Ordo<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
 
@@ -58,6 +64,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 }
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioVeletudinisValoris; j++) {
                     _lacusVeletudinisValoris[i].Push(new OrdinatioCivisVeletudinisValoris(i));
+                }
+                for (int j = 0; j < ConstansCivis.LongitudoOrdinatioVeletudinisMaxima; j++) {
+                    _lacusVeletudinisMaxima[i].Push(new OrdinatioCivisVeletudinisMaxima(i));
                 }
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioMortis; j++) {
                     _lacusMortis[i].Push(new OrdinatioCivisMortis(i));
@@ -117,6 +126,19 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 }
             }
             veletudinisValoris = null;
+            return false;
+        }
+
+        public bool EmittareVeletudinisMaxima(int idCivis, out OrdinatioCivisVeletudinisMaxima veletudinisMaxima) {
+            if (_lacusVeletudinisMaxima[idCivis].Count > 0) {
+                var r = _lacusVeletudinisMaxima[idCivis].Pop();
+                if (_emissioVeletudinisMaxima[idCivis].ConarePono(r)) {
+                    veletudinisMaxima = r;
+                    veletudinisMaxima.Initare();
+                    return true;
+                }
+            }
+            veletudinisMaxima = null;
             return false;
         }
 
@@ -190,6 +212,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
         }
 
+        public void ColligereVeletudinisMaxima(int idCivis) {
+            while (_emissioVeletudinisMaxima[idCivis].ConareLego(out var r)) {
+                if (_lacusVeletudinisMaxima[idCivis].Count < ConstansCivis.LongitudoOrdinatioVeletudinisMaxima) {
+                    _lacusVeletudinisMaxima[idCivis].Push(r);
+                } else {
+                    r.Purgere();
+                    r.Liberare();
+                }
+            }
+        }
+
         public void ColligereMortis(int idCivis) {
             while (_emissioMortis[idCivis].ConareLego(out var r)) {
                 if (_lacusMortis[idCivis].Count < ConstansCivis.LongitudoOrdinatioMortis) {
@@ -217,6 +250,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ColligereMotus(idCivis);
             ColligereNavmesh(idCivis);
             ColligereVeletudinisValoris(idCivis);
+            ColligereVeletudinisMaxima(idCivis);
             ColligereMortis(idCivis);
             ColligereVeletudinisCondicionis(idCivis);
         }

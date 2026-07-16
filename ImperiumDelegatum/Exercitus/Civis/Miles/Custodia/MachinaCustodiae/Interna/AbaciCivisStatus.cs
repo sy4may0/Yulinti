@@ -4,101 +4,142 @@ using Yulinti.Nucleus.Instrumentarium;
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class AbaciCivisStatus {
         private readonly int _longitudo;
-        private readonly AbacusTemporis[] _abacusStudiumHabereAuditae;
-        private readonly AbacusTemporis[] _abacusStudiumAmittereAuditae;
-        private readonly AbacusTemporis[] _abacusStudiumHabereVisae;
-        private readonly AbacusTemporis[] _abacusStudiumAmittereVisae;
+        private readonly AbacusTemporis[] _abacusStudiumHabereSuspectae;
+        private readonly AbacusTemporis[] _abacusStudiumAmittereSuspectae;
+        private readonly AbacusTemporis[] _abacusStudiumHabereStudii;
+        private readonly AbacusTemporis[] _abacusStudiumAmittereStudii;
+        private readonly AbacusTemporis[] _abacusStudiumHabereIntentionis;
+        private readonly AbacusTemporis[] _abacusStudiumAmittereIntentionis;
 
-        private readonly Horologium[] _horologiumAuditaeConservandi;
-        private readonly Horologium[] _horologiumVisaeConservandi;
+        private readonly Horologium[] _horologiumSuspectaeConservandi;
+        private readonly Horologium[] _horologiumStudiiConservandi;
+        private readonly Horologium[] _horologiumIntentionisConservandi;
 
         // 後で設定に移行する。
-        private readonly float _tempusAuditaeStudiumHabereMaxima = 2f;
-        private readonly float _tempusAuditaeStudiumHabereMedia = 0.5f;
-        private readonly float _tempusAuditaeStudiumHabereMinima = 0f;
-        private readonly float _praeruptioAuditaeTempusStudiumHabere = 16f;
-        private readonly float _tempusAuditaeStudiumAmittereMaxima = 10f;
-        private readonly float _tempusAuditaeStudiumAmittereMedia = 5f;
-        private readonly float _tempusAuditaeStudiumAmittereMinima = 0f;
-        private readonly float _praeruptioAuditaeTempusStudiumAmittere = 12f;
-        private readonly float _tempusVisaeStudiumHabereMaxima = 1f;
-        private readonly float _tempusVisaeStudiumHabereMedia = 0.5f;
-        private readonly float _tempusVisaeStudiumHabereMinima = 0f;
-        private readonly float _praeruptioVisaeTempusStudiumHabere = 16f;
-        private readonly float _tempusVisaeStudiumAmittereMaxima = 10f;
-        private readonly float _tempusVisaeStudiumAmittereMedia = 5f;
-        private readonly float _tempusVisaeStudiumAmittereMinima = 0f;
-        private readonly float _praeruptioVisaeTempusStudiumAmittere = 12f;
-        private readonly float _tempusAuditaeConservandi = 1f;
-        private readonly float _tempusVisaeConservandi = 1f;
+        private readonly float _tempusSuspectaeStudiumHabereMaxima = 1f;
+        private readonly float _tempusSuspectaeStudiumHabereMedia = 0.5f;
+        private readonly float _tempusSuspectaeStudiumHabereMinima = 0f;
+        private readonly float _praeruptioSuspectaeTempusStudiumHabere = 16f;
+        private readonly float _tempusSuspectaeStudiumAmittereMaxima = 10f;
+        private readonly float _tempusSuspectaeStudiumAmittereMedia = 5f;
+        private readonly float _tempusSuspectaeStudiumAmittereMinima = 0f;
+        private readonly float _praeruptioSuspectaeTempusStudiumAmittere = 12f;
+        private readonly float _tempusStudiiStudiumHabereMaxima = 5f;
+        private readonly float _tempusStudiiStudiumHabereMedia = 2.5f;
+        private readonly float _tempusStudiiStudiumHabereMinima = 0f;
+        private readonly float _praeruptioStudiiTempusStudiumHabere = 12f;
+        private readonly float _tempusStudiiStudiumAmittereMaxima = 7f;
+        private readonly float _tempusStudiiStudiumAmittereMedia = 5f;
+        private readonly float _tempusStudiiStudiumAmittereMinima = 0f;
+        private readonly float _praeruptioStudiiTempusStudiumAmittere = 16f;
+        private readonly float _tempusIntentionisStudiumHabereMaxima = 5f;
+        private readonly float _tempusIntentionisStudiumHabereMedia = 2.5f;
+        private readonly float _tempusIntentionisStudiumHabereMinima = 0f;
+        private readonly float _praeruptioIntentionisTempusStudiumHabere = 12f;
+        private readonly float _tempusIntentionisStudiumAmittereMaxima = 7f;
+        private readonly float _tempusIntentionisStudiumAmittereMedia = 5f;
+        private readonly float _tempusIntentionisStudiumAmittereMinima = 0f;
+        private readonly float _praeruptioIntentionisTempusStudiumAmittere = 16f;
+        private readonly float _tempusSuspectaeConservandi = 1f;
+        private readonly float _tempusStudiiConservandi = 1f;
+        private readonly float _tempusIntentionisConservandi = 1f;
 
-        private readonly bool[] _estAugereAuditae;
-        private readonly bool[] _estAugereVisae;
+        private readonly bool[] _estAugereSuspectae;
+        private readonly bool[] _estAugereStudii;
+        private readonly bool[] _estAugereIntentionis;
 
 
         public AbaciCivisStatus(
             IOstiumCivisLegibile civis
         ) {
             _longitudo = civis.Longitudo;
-            _abacusStudiumHabereAuditae = new AbacusTemporis[_longitudo];
-            _abacusStudiumAmittereAuditae = new AbacusTemporis[_longitudo];
-            _abacusStudiumHabereVisae = new AbacusTemporis[_longitudo];
-            _abacusStudiumAmittereVisae = new AbacusTemporis[_longitudo];
-            _horologiumAuditaeConservandi = new Horologium[_longitudo];
-            _horologiumVisaeConservandi = new Horologium[_longitudo];
-            _estAugereAuditae = new bool[_longitudo];
-            _estAugereVisae = new bool[_longitudo];
+            _abacusStudiumHabereSuspectae = new AbacusTemporis[_longitudo];
+            _abacusStudiumAmittereSuspectae = new AbacusTemporis[_longitudo];
+            _abacusStudiumHabereStudii = new AbacusTemporis[_longitudo];
+            _abacusStudiumAmittereStudii = new AbacusTemporis[_longitudo];
+            _abacusStudiumHabereIntentionis = new AbacusTemporis[_longitudo];
+            _abacusStudiumAmittereIntentionis = new AbacusTemporis[_longitudo];
+            _horologiumSuspectaeConservandi = new Horologium[_longitudo];
+            _horologiumStudiiConservandi = new Horologium[_longitudo];
+            _horologiumIntentionisConservandi = new Horologium[_longitudo];
+            _estAugereSuspectae = new bool[_longitudo];
+            _estAugereStudii = new bool[_longitudo];
+            _estAugereIntentionis = new bool[_longitudo];
 
             for (int i = 0; i < _longitudo; i++) {
-                _abacusStudiumHabereAuditae[i] = new AbacusTemporis(
-                    _tempusAuditaeStudiumHabereMaxima,
-                    _tempusAuditaeStudiumHabereMinima,
-                    _tempusAuditaeStudiumHabereMedia,
-                    _praeruptioAuditaeTempusStudiumHabere
+                _abacusStudiumHabereSuspectae[i] = new AbacusTemporis(
+                    _tempusSuspectaeStudiumHabereMaxima,
+                    _tempusSuspectaeStudiumHabereMinima,
+                    _tempusSuspectaeStudiumHabereMedia,
+                    _praeruptioSuspectaeTempusStudiumHabere
                 );
-                _abacusStudiumAmittereAuditae[i] = new AbacusTemporis(
-                    _tempusAuditaeStudiumAmittereMaxima,
-                    _tempusAuditaeStudiumAmittereMinima,
-                    _tempusAuditaeStudiumAmittereMedia,
-                    _praeruptioAuditaeTempusStudiumAmittere
+                _abacusStudiumAmittereSuspectae[i] = new AbacusTemporis(
+                    _tempusSuspectaeStudiumAmittereMaxima,
+                    _tempusSuspectaeStudiumAmittereMinima,
+                    _tempusSuspectaeStudiumAmittereMedia,
+                    _praeruptioSuspectaeTempusStudiumAmittere
                 );
-                _abacusStudiumHabereVisae[i] = new AbacusTemporis(
-                    _tempusVisaeStudiumHabereMaxima,
-                    _tempusVisaeStudiumHabereMinima,
-                    _tempusVisaeStudiumHabereMedia,
-                    _praeruptioVisaeTempusStudiumHabere
+                _abacusStudiumHabereStudii[i] = new AbacusTemporis(
+                    _tempusStudiiStudiumHabereMaxima,
+                    _tempusStudiiStudiumHabereMinima,
+                    _tempusStudiiStudiumHabereMedia,
+                    _praeruptioStudiiTempusStudiumHabere
                 );
-                _abacusStudiumAmittereVisae[i] = new AbacusTemporis(
-                    _tempusVisaeStudiumAmittereMaxima,
-                    _tempusVisaeStudiumAmittereMinima,
-                    _tempusVisaeStudiumAmittereMedia,
-                    _praeruptioVisaeTempusStudiumAmittere
+                _abacusStudiumAmittereStudii[i] = new AbacusTemporis(
+                    _tempusStudiiStudiumAmittereMaxima,
+                    _tempusStudiiStudiumAmittereMinima,
+                    _tempusStudiiStudiumAmittereMedia,
+                    _praeruptioStudiiTempusStudiumAmittere
                 );
-                _horologiumAuditaeConservandi[i] = new Horologium(
-                    _tempusAuditaeConservandi
+                _abacusStudiumHabereIntentionis[i] = new AbacusTemporis(
+                    _tempusIntentionisStudiumHabereMaxima,
+                    _tempusIntentionisStudiumHabereMinima,
+                    _tempusIntentionisStudiumHabereMedia,
+                    _praeruptioIntentionisTempusStudiumHabere
                 );
-                _horologiumVisaeConservandi[i] = new Horologium(
-                    _tempusVisaeConservandi
+                _abacusStudiumAmittereIntentionis[i] = new AbacusTemporis(
+                    _tempusIntentionisStudiumAmittereMaxima,
+                    _tempusIntentionisStudiumAmittereMinima,
+                    _tempusIntentionisStudiumAmittereMedia,
+                    _praeruptioIntentionisTempusStudiumAmittere
                 );
-                _estAugereAuditae[i] = false;
-                _estAugereVisae[i] = false;
+                _horologiumSuspectaeConservandi[i] = new Horologium(
+                    _tempusSuspectaeConservandi
+                );
+                _horologiumStudiiConservandi[i] = new Horologium(
+                    _tempusStudiiConservandi
+                );
+                _horologiumIntentionisConservandi[i] = new Horologium(
+                    _tempusIntentionisConservandi
+                );
+                _estAugereSuspectae[i] = false;
+                _estAugereStudii[i] = false;
+                _estAugereIntentionis[i] = false;
             }
         }
 
-        public AbacusTemporis StudiumHabereAuditae(int idCivis) {
-            return _abacusStudiumHabereAuditae[idCivis];
+        public AbacusTemporis StudiumHabereSuspectae(int idCivis) {
+            return _abacusStudiumHabereSuspectae[idCivis];
         }
 
-        public AbacusTemporis StudiumAmittereAuditae(int idCivis) {
-            return _abacusStudiumAmittereAuditae[idCivis];
+        public AbacusTemporis StudiumAmittereSuspectae(int idCivis) {
+            return _abacusStudiumAmittereSuspectae[idCivis];
         }
 
-        public AbacusTemporis StudiumHabereVisae(int idCivis) {
-            return _abacusStudiumHabereVisae[idCivis];
+        public AbacusTemporis StudiumHabereStudii(int idCivis) {
+            return _abacusStudiumHabereStudii[idCivis];
         }
 
-        public AbacusTemporis StudiumAmittereVisae(int idCivis) {
-            return _abacusStudiumAmittereVisae[idCivis];
+        public AbacusTemporis StudiumAmittereStudii(int idCivis) {
+            return _abacusStudiumAmittereStudii[idCivis];
+        }
+
+        public AbacusTemporis StudiumHabereIntentionis(int idCivis) {
+            return _abacusStudiumHabereIntentionis[idCivis];
+        }
+
+        public AbacusTemporis StudiumAmittereIntentionis(int idCivis) {
+            return _abacusStudiumAmittereIntentionis[idCivis];
         }
 
         private void ResolvereDirectionem(
@@ -143,44 +184,70 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
         }
 
-        public void ResolvereDirectionemAuditae(int idCivis, bool estAugereCurrens, float intervallum) {
+        public void ResolvereDirectionemSuspectae(int idCivis, bool estAugereCurrens, float intervallum) {
             ResolvereDirectionem(
                 idCivis,
-                _horologiumAuditaeConservandi,
-                _abacusStudiumAmittereAuditae,
-                _abacusStudiumHabereAuditae,
-                _estAugereAuditae,
+                _horologiumSuspectaeConservandi,
+                _abacusStudiumAmittereSuspectae,
+                _abacusStudiumHabereSuspectae,
+                _estAugereSuspectae,
                 estAugereCurrens,
                 intervallum
             );
         }
 
-        public void ResolvereDirectionemVisae(int idCivis, bool estAugereCurrens, float intervallum) {
+        public void ResolvereDirectionemStudii(int idCivis, bool estAugereCurrens, float intervallum) {
             ResolvereDirectionem(
                 idCivis,
-                _horologiumVisaeConservandi,
-                _abacusStudiumAmittereVisae,
-                _abacusStudiumHabereVisae,
-                _estAugereVisae,
+                _horologiumStudiiConservandi,
+                _abacusStudiumAmittereStudii,
+                _abacusStudiumHabereStudii,
+                _estAugereStudii,
+                estAugereCurrens,
+                intervallum
+            );
+        }
+
+        public void ResolvereDirectionemIntentionis(int idCivis, bool estAugereCurrens, float intervallum) {
+            ResolvereDirectionem(
+                idCivis,
+                _horologiumIntentionisConservandi,
+                _abacusStudiumAmittereIntentionis,
+                _abacusStudiumHabereIntentionis,
+                _estAugereIntentionis,
                 estAugereCurrens,
                 intervallum
             );
         }
 
         public void Purgere(int idCivis) {
-            _abacusStudiumHabereAuditae[idCivis].Purgere();
-            _abacusStudiumAmittereAuditae[idCivis].Purgere();
-            _abacusStudiumHabereVisae[idCivis].Purgere();
-            _abacusStudiumAmittereVisae[idCivis].Purgere();
-
-            _horologiumAuditaeConservandi[idCivis].Deactivare();
-            _horologiumAuditaeConservandi[idCivis].Purgere();
-            _horologiumVisaeConservandi[idCivis].Deactivare();
-            _horologiumVisaeConservandi[idCivis].Purgere();
-
-            _estAugereAuditae[idCivis] = false;
-            _estAugereVisae[idCivis] = false;
+            PurgereSuspectae(idCivis);
+            PurgereStudii(idCivis);
+            PurgereIntentionis(idCivis);
         }
 
+        public void PurgereSuspectae(int idCivis) {
+            _abacusStudiumHabereSuspectae[idCivis].Purgere();
+            _abacusStudiumAmittereSuspectae[idCivis].Purgere();
+            _horologiumSuspectaeConservandi[idCivis].Deactivare();
+            _horologiumSuspectaeConservandi[idCivis].Purgere();
+            _estAugereSuspectae[idCivis] = false;
+        }
+
+        public void PurgereStudii(int idCivis) {
+            _abacusStudiumHabereStudii[idCivis].Purgere();
+            _abacusStudiumAmittereStudii[idCivis].Purgere();
+            _horologiumStudiiConservandi[idCivis].Deactivare();
+            _horologiumStudiiConservandi[idCivis].Purgere();
+            _estAugereStudii[idCivis] = false;
+        }
+
+        public void PurgereIntentionis(int idCivis) {
+            _abacusStudiumHabereIntentionis[idCivis].Purgere();
+            _abacusStudiumAmittereIntentionis[idCivis].Purgere();
+            _horologiumIntentionisConservandi[idCivis].Deactivare();
+            _horologiumIntentionisConservandi[idCivis].Purgere();
+            _estAugereIntentionis[idCivis] = false;
+        }
     }
 }

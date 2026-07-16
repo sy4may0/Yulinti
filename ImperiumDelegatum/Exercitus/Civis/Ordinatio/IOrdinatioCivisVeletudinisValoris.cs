@@ -14,5 +14,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         float DtSuspecta { get; }
         // 興味度
         float DtStudium { get; }
+        // 緊張度
+        float DtIntentio { get; }
+        // 異常耐性上限
+        float DtTorelantiaAnomaliaeMaxima { get; }
+        // 異常耐性下限
+        float DtTorelantiaAnomaliaeMinima { get; }
     }
 }

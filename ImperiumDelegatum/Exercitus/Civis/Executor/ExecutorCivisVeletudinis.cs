@@ -3,72 +3,116 @@ using Yulinti.Nucleus;
 using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
 
-namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal sealed class PhantasmaCivisVeletudinis {
-        private float[] _phantasmaVitae;
-        private float[] _phantasmaVisus;
-        private float[] _phantasmaVisa;
-        private float[] _phantasmaAuditus;
-        private float[] _phantasmaAudita;
-        private float[] _phantasmaSuspecta;
-        private float[] _phantasmaStudium;
+// 全体設計: このクラスでClampしない。Maximaは見ない。Clampは反映時にResFluidaが行う。
 
-        private float _vitaeMaxima;
-        private float _visusMaxima;
-        private float _visaMaxima;
-        private float _auditusMaxima;
-        private float _auditaMaxima;
-        private float _suspectaMaxima;
-        private float _studiumMaxima;
+namespace Yulinti.ImperiumDelegatum.Exercitus {
+    // 値タイプつきの値。
+    internal sealed class ValorisCivisVeletudinis {
+        public float Valor { get; set; }
+        private TypusValoris _typusValoris;
+
+        public ValorisCivisVeletudinis(float valor, TypusValoris typusValoris) {
+            Valor = valor;
+            _typusValoris = typusValoris;
+        }
+
+        public TypusValoris TypusValoris => _typusValoris;
+    }
+
+    internal sealed class PhantasmaCivisVeletudinis {
+        private ValorisCivisVeletudinis[] _phantasmaVitae;
+        private ValorisCivisVeletudinis[] _phantasmaVisus;
+        private ValorisCivisVeletudinis[] _phantasmaVisa;
+        private ValorisCivisVeletudinis[] _phantasmaAuditus;
+        private ValorisCivisVeletudinis[] _phantasmaAudita;
+        private ValorisCivisVeletudinis[] _phantasmaSuspecta;
+        private ValorisCivisVeletudinis[] _phantasmaStudium;
+        private ValorisCivisVeletudinis[] _phantasmaIntentio;
+        private ValorisCivisVeletudinis[] _phantasmaTorelantiaAnomaliaeMaxima;
+        private ValorisCivisVeletudinis[] _phantasmaTorelantiaAnomaliaeMinima;
+
+        private ValorisCivisVeletudinis[] _phantasmaVitaeMaxima;
+        private ValorisCivisVeletudinis[] _phantasmaVisusMaxima;
+        private ValorisCivisVeletudinis[] _phantasmaVisaMaxima;
+        private ValorisCivisVeletudinis[] _phantasmaAuditusMaxima;
+        private ValorisCivisVeletudinis[] _phantasmaAuditaMaxima;
+        private ValorisCivisVeletudinis[] _phantasmaSuspectaMaxima;
+        private ValorisCivisVeletudinis[] _phantasmaStudiumMaxima;
+        private ValorisCivisVeletudinis[] _phantasmaIntentioMaxima;
+        private ValorisCivisVeletudinis[] _phantasmaTorelantiaAnomaliaeMaximaMaxima;
+        private ValorisCivisVeletudinis[] _phantasmaTorelantiaAnomaliaeMinimaMaxima;
 
         public PhantasmaCivisVeletudinis(int longitudo) {
-            _phantasmaVitae = new float[longitudo];
-            _phantasmaVisus = new float[longitudo];
-            _phantasmaVisa = new float[longitudo];
-            _phantasmaAuditus = new float[longitudo];
-            _phantasmaAudita = new float[longitudo];
-            _phantasmaSuspecta = new float[longitudo];
-            _phantasmaStudium = new float[longitudo];
-            _vitaeMaxima = 1f;
-            _visusMaxima = 1f;
-            _visaMaxima = 1f;
-            _auditusMaxima = 1f;
-            _auditaMaxima = 1f;
-            _suspectaMaxima = 1f;
-            _studiumMaxima = 1f;
+            _phantasmaVitae = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaVisus = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaVisa = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaAuditus = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaAudita = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaSuspecta = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaStudium = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaIntentio = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaTorelantiaAnomaliaeMaxima = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaTorelantiaAnomaliaeMinima = new ValorisCivisVeletudinis[longitudo];
+
+            _phantasmaVitaeMaxima = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaVisusMaxima = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaVisaMaxima = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaAuditusMaxima = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaAuditaMaxima = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaSuspectaMaxima = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaStudiumMaxima = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaIntentioMaxima = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaTorelantiaAnomaliaeMaximaMaxima = new ValorisCivisVeletudinis[longitudo];
+            _phantasmaTorelantiaAnomaliaeMinimaMaxima = new ValorisCivisVeletudinis[longitudo];
 
             for (int i = 0; i < longitudo; i++) {
-                _phantasmaVitae[i] = 1f;
-                _phantasmaVisus[i] = 0f;
-                _phantasmaVisa[i] = 0f;
-                _phantasmaAuditus[i] = 1f;
-                _phantasmaAudita[i] = 0f;
-                _phantasmaSuspecta[i] = 0f;
-                _phantasmaStudium[i] = 0f;
+                _phantasmaVitae[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fluidus);
+                _phantasmaVisus[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fixus);
+                _phantasmaVisa[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fluidus);
+                _phantasmaAuditus[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fixus);
+                _phantasmaAudita[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fluidus);
+                _phantasmaSuspecta[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fluidus);
+                _phantasmaStudium[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fluidus);
+                _phantasmaIntentio[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fluidus);
+                _phantasmaTorelantiaAnomaliaeMaxima[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fixus);
+                _phantasmaTorelantiaAnomaliaeMinima[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fixus);
+
+                // CivisのMaximaは規定値1で安定するためFluidus(ResFluidaから引き継ぎ)。
+                // Puellaeは毎フレームMilesが再計算するためFixus。
+                _phantasmaVitaeMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
+                _phantasmaVisusMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
+                _phantasmaVisaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
+                _phantasmaAuditusMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
+                _phantasmaAuditaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
+                _phantasmaSuspectaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
+                _phantasmaStudiumMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
+                _phantasmaIntentioMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
+                _phantasmaTorelantiaAnomaliaeMaximaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
+                _phantasmaTorelantiaAnomaliaeMinimaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
             }
         }
-        public float PhantasmaVitae(int idCivis) {
-            return _phantasmaVitae[idCivis];
-        }
-        public float PhantasmaVisus(int idCivis) {
-            return _phantasmaVisus[idCivis];
-        }
-        public float PhantasmaVisa(int idCivis) {
-            return _phantasmaVisa[idCivis];
-        }
-        public float PhantasmaAuditus(int idCivis) {
-            return _phantasmaAuditus[idCivis];
-        }
-        public float PhantasmaAudita(int idCivis) {
-            return _phantasmaAudita[idCivis];
-        }
-        public float PhantasmaSuspecta(int idCivis) {
-            return _phantasmaSuspecta[idCivis];
-        }
-        public float PhantasmaStudium(int idCivis) {
-            return _phantasmaStudium[idCivis];
-        }
 
+        public float PhantasmaVitae(int idCivis) => _phantasmaVitae[idCivis].Valor;
+        public float PhantasmaVisus(int idCivis) => _phantasmaVisus[idCivis].Valor;
+        public float PhantasmaVisa(int idCivis) => _phantasmaVisa[idCivis].Valor;
+        public float PhantasmaAuditus(int idCivis) => _phantasmaAuditus[idCivis].Valor;
+        public float PhantasmaAudita(int idCivis) => _phantasmaAudita[idCivis].Valor;
+        public float PhantasmaSuspecta(int idCivis) => _phantasmaSuspecta[idCivis].Valor;
+        public float PhantasmaStudium(int idCivis) => _phantasmaStudium[idCivis].Valor;
+        public float PhantasmaIntentio(int idCivis) => _phantasmaIntentio[idCivis].Valor;
+        public float PhantasmaTorelantiaAnomaliaeMaxima(int idCivis) => _phantasmaTorelantiaAnomaliaeMaxima[idCivis].Valor;
+        public float PhantasmaTorelantiaAnomaliaeMinima(int idCivis) => _phantasmaTorelantiaAnomaliaeMinima[idCivis].Valor;
+
+        public float PhantasmaVitaeMaxima(int idCivis) => _phantasmaVitaeMaxima[idCivis].Valor;
+        public float PhantasmaVisusMaxima(int idCivis) => _phantasmaVisusMaxima[idCivis].Valor;
+        public float PhantasmaVisaMaxima(int idCivis) => _phantasmaVisaMaxima[idCivis].Valor;
+        public float PhantasmaAuditusMaxima(int idCivis) => _phantasmaAuditusMaxima[idCivis].Valor;
+        public float PhantasmaAuditaMaxima(int idCivis) => _phantasmaAuditaMaxima[idCivis].Valor;
+        public float PhantasmaSuspectaMaxima(int idCivis) => _phantasmaSuspectaMaxima[idCivis].Valor;
+        public float PhantasmaStudiumMaxima(int idCivis) => _phantasmaStudiumMaxima[idCivis].Valor;
+        public float PhantasmaIntentioMaxima(int idCivis) => _phantasmaIntentioMaxima[idCivis].Valor;
+        public float PhantasmaTorelantiaAnomaliaeMaximaMaxima(int idCivis) => _phantasmaTorelantiaAnomaliaeMaximaMaxima[idCivis].Valor;
+        public float PhantasmaTorelantiaAnomaliaeMinimaMaxima(int idCivis) => _phantasmaTorelantiaAnomaliaeMinimaMaxima[idCivis].Valor;
 
         public void Addo(
             int idCivis,
@@ -78,34 +122,104 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtAuditus = 0f,
             float dtAudita = 0f,
             float dtSuspecta = 0f,
-            float dtStudium = 0f
+            float dtStudium = 0f,
+            float dtIntentio = 0f,
+            float dtTorelantiaAnomaliaeMaxima = 0f,
+            float dtTorelantiaAnomaliaeMinima = 0f,
+            float dtVitaeMaxima = 0f,
+            float dtVisusMaxima = 0f,
+            float dtVisaMaxima = 0f,
+            float dtAuditusMaxima = 0f,
+            float dtAuditaMaxima = 0f,
+            float dtSuspectaMaxima = 0f,
+            float dtStudiumMaxima = 0f,
+            float dtIntentioMaxima = 0f,
+            float dtTorelantiaAnomaliaeMaximaMaxima = 0f,
+            float dtTorelantiaAnomaliaeMinimaMaxima = 0f
         ) {
-            _phantasmaVitae[idCivis] = Mathematica.Clamp(_phantasmaVitae[idCivis] + dtVitae, 0f, _vitaeMaxima);
-            _phantasmaVisus[idCivis] = Mathematica.Clamp(_phantasmaVisus[idCivis] + dtVisus, 0f, _visusMaxima);
-            _phantasmaVisa[idCivis] = Mathematica.Clamp(_phantasmaVisa[idCivis] + dtVisa, 0f, _visaMaxima);
-            _phantasmaAuditus[idCivis] = Mathematica.Clamp(_phantasmaAuditus[idCivis] + dtAuditus, 0f, _auditusMaxima);
-            _phantasmaAudita[idCivis] = Mathematica.Clamp(_phantasmaAudita[idCivis] + dtAudita, 0f, _auditaMaxima);
-            _phantasmaSuspecta[idCivis] = Mathematica.Clamp(_phantasmaSuspecta[idCivis] + dtSuspecta, 0f, _suspectaMaxima);
-            _phantasmaStudium[idCivis] = Mathematica.Clamp(_phantasmaStudium[idCivis] + dtStudium, 0f, _studiumMaxima);
+            _phantasmaVitae[idCivis].Valor = _phantasmaVitae[idCivis].Valor + dtVitae;
+            _phantasmaVisus[idCivis].Valor = _phantasmaVisus[idCivis].Valor + dtVisus;
+            _phantasmaVisa[idCivis].Valor = _phantasmaVisa[idCivis].Valor + dtVisa;
+            _phantasmaAuditus[idCivis].Valor = _phantasmaAuditus[idCivis].Valor + dtAuditus;
+            _phantasmaAudita[idCivis].Valor = _phantasmaAudita[idCivis].Valor + dtAudita;
+            _phantasmaSuspecta[idCivis].Valor = _phantasmaSuspecta[idCivis].Valor + dtSuspecta;
+            _phantasmaStudium[idCivis].Valor = _phantasmaStudium[idCivis].Valor + dtStudium;
+            _phantasmaIntentio[idCivis].Valor = _phantasmaIntentio[idCivis].Valor + dtIntentio;
+            _phantasmaTorelantiaAnomaliaeMaxima[idCivis].Valor = _phantasmaTorelantiaAnomaliaeMaxima[idCivis].Valor + dtTorelantiaAnomaliaeMaxima;
+            _phantasmaTorelantiaAnomaliaeMinima[idCivis].Valor = _phantasmaTorelantiaAnomaliaeMinima[idCivis].Valor + dtTorelantiaAnomaliaeMinima;
+            _phantasmaVitaeMaxima[idCivis].Valor = _phantasmaVitaeMaxima[idCivis].Valor + dtVitaeMaxima;
+            _phantasmaVisusMaxima[idCivis].Valor = _phantasmaVisusMaxima[idCivis].Valor + dtVisusMaxima;
+            _phantasmaVisaMaxima[idCivis].Valor = _phantasmaVisaMaxima[idCivis].Valor + dtVisaMaxima;
+            _phantasmaAuditusMaxima[idCivis].Valor = _phantasmaAuditusMaxima[idCivis].Valor + dtAuditusMaxima;
+            _phantasmaAuditaMaxima[idCivis].Valor = _phantasmaAuditaMaxima[idCivis].Valor + dtAuditaMaxima;
+            _phantasmaSuspectaMaxima[idCivis].Valor = _phantasmaSuspectaMaxima[idCivis].Valor + dtSuspectaMaxima;
+            _phantasmaStudiumMaxima[idCivis].Valor = _phantasmaStudiumMaxima[idCivis].Valor + dtStudiumMaxima;
+            _phantasmaIntentioMaxima[idCivis].Valor = _phantasmaIntentioMaxima[idCivis].Valor + dtIntentioMaxima;
+            _phantasmaTorelantiaAnomaliaeMaximaMaxima[idCivis].Valor = _phantasmaTorelantiaAnomaliaeMaximaMaxima[idCivis].Valor + dtTorelantiaAnomaliaeMaximaMaxima;
+            _phantasmaTorelantiaAnomaliaeMinimaMaxima[idCivis].Valor = _phantasmaTorelantiaAnomaliaeMinimaMaxima[idCivis].Valor + dtTorelantiaAnomaliaeMinimaMaxima;
         }
 
-        public void Pono(
-            int idCivis,
-            float vitae,
-            float visus,
-            float visa,
-            float auditus,
-            float audita,
-            float suspecta,
-            float studium
+        public void Purgere(int idCivis) {
+            _phantasmaVitae[idCivis].Valor = 0f;
+            _phantasmaVisus[idCivis].Valor = 0f;
+            _phantasmaVisa[idCivis].Valor = 0f;
+            _phantasmaAuditus[idCivis].Valor = 0f;
+            _phantasmaAudita[idCivis].Valor = 0f;
+            _phantasmaSuspecta[idCivis].Valor = 0f;
+            _phantasmaStudium[idCivis].Valor = 0f;
+            _phantasmaIntentio[idCivis].Valor = 0f;
+            _phantasmaTorelantiaAnomaliaeMaxima[idCivis].Valor = 0f;
+            _phantasmaTorelantiaAnomaliaeMinima[idCivis].Valor = 0f;
+            _phantasmaVitaeMaxima[idCivis].Valor = 0f;
+            _phantasmaVisusMaxima[idCivis].Valor = 0f;
+            _phantasmaVisaMaxima[idCivis].Valor = 0f;
+            _phantasmaAuditusMaxima[idCivis].Valor = 0f;
+            _phantasmaAuditaMaxima[idCivis].Valor = 0f;
+            _phantasmaSuspectaMaxima[idCivis].Valor = 0f;
+            _phantasmaStudiumMaxima[idCivis].Valor = 0f;
+            _phantasmaIntentioMaxima[idCivis].Valor = 0f;
+            _phantasmaTorelantiaAnomaliaeMaximaMaxima[idCivis].Valor = 0f;
+            _phantasmaTorelantiaAnomaliaeMinimaMaxima[idCivis].Valor = 0f;
+        }
+
+        // 毎フレームの初期化時に、Phantasmaの値を初期化する。
+        // 流動値はvalorFluida(ResFluidaの値)で初期化する。
+        // 固定値は0で初期化する。
+        private void InitarePhantasma(
+            ValorisCivisVeletudinis valoris,
+            float valorFluida
         ) {
-            _phantasmaVitae[idCivis] = Mathematica.Clamp(vitae, 0f, _vitaeMaxima);
-            _phantasmaVisus[idCivis] = Mathematica.Clamp(visus, 0f, _visusMaxima);
-            _phantasmaVisa[idCivis] = Mathematica.Clamp(visa, 0f, _visaMaxima);
-            _phantasmaAuditus[idCivis] = Mathematica.Clamp(auditus, 0f, _auditusMaxima);
-            _phantasmaAudita[idCivis] = Mathematica.Clamp(audita, 0f, _auditaMaxima);
-            _phantasmaSuspecta[idCivis] = Mathematica.Clamp(suspecta, 0f, _suspectaMaxima);
-            _phantasmaStudium[idCivis] = Mathematica.Clamp(studium, 0f, _studiumMaxima);
+            if (valoris.TypusValoris == TypusValoris.Fluidus) {
+                valoris.Valor = valorFluida;
+            } else if (valoris.TypusValoris == TypusValoris.Fixus) {
+                valoris.Valor = 0f;
+            }
+        }
+
+        public void InitarePhantasma(
+            int idCivis,
+            ResFluidaCivisVeletudinis resFluidaVeletudinis
+        ) {
+            InitarePhantasma(_phantasmaVitae[idCivis], resFluidaVeletudinis.Vitae(idCivis));
+            InitarePhantasma(_phantasmaVisus[idCivis], resFluidaVeletudinis.Visus(idCivis));
+            InitarePhantasma(_phantasmaVisa[idCivis], resFluidaVeletudinis.Visa(idCivis));
+            InitarePhantasma(_phantasmaAuditus[idCivis], resFluidaVeletudinis.Auditus(idCivis));
+            InitarePhantasma(_phantasmaAudita[idCivis], resFluidaVeletudinis.Audita(idCivis));
+            InitarePhantasma(_phantasmaSuspecta[idCivis], resFluidaVeletudinis.Suspecta(idCivis));
+            InitarePhantasma(_phantasmaStudium[idCivis], resFluidaVeletudinis.Studium(idCivis));
+            InitarePhantasma(_phantasmaIntentio[idCivis], resFluidaVeletudinis.Intentio(idCivis));
+            InitarePhantasma(_phantasmaTorelantiaAnomaliaeMaxima[idCivis], resFluidaVeletudinis.TorelantiaAnomaliaeMaxima(idCivis));
+            InitarePhantasma(_phantasmaTorelantiaAnomaliaeMinima[idCivis], resFluidaVeletudinis.TorelantiaAnomaliaeMinima(idCivis));
+            InitarePhantasma(_phantasmaVitaeMaxima[idCivis], resFluidaVeletudinis.VitaeMaxima(idCivis));
+            InitarePhantasma(_phantasmaVisusMaxima[idCivis], resFluidaVeletudinis.VisusMaxima(idCivis));
+            InitarePhantasma(_phantasmaVisaMaxima[idCivis], resFluidaVeletudinis.VisaMaxima(idCivis));
+            InitarePhantasma(_phantasmaAuditusMaxima[idCivis], resFluidaVeletudinis.AuditusMaxima(idCivis));
+            InitarePhantasma(_phantasmaAuditaMaxima[idCivis], resFluidaVeletudinis.AuditaMaxima(idCivis));
+            InitarePhantasma(_phantasmaSuspectaMaxima[idCivis], resFluidaVeletudinis.SuspectaMaxima(idCivis));
+            InitarePhantasma(_phantasmaStudiumMaxima[idCivis], resFluidaVeletudinis.StudiumMaxima(idCivis));
+            InitarePhantasma(_phantasmaIntentioMaxima[idCivis], resFluidaVeletudinis.IntentioMaxima(idCivis));
+            InitarePhantasma(_phantasmaTorelantiaAnomaliaeMaximaMaxima[idCivis], resFluidaVeletudinis.TorelantiaAnomaliaeMaximaMaxima(idCivis));
+            InitarePhantasma(_phantasmaTorelantiaAnomaliaeMinimaMaxima[idCivis], resFluidaVeletudinis.TorelantiaAnomaliaeMinimaMaxima(idCivis));
         }
     }
 
@@ -137,31 +251,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // - resFluida初期化
         public void Initare(int idCivis) {
             _queueVeletudinisCondicionis[idCivis].Purgere();
-            _phantasma.Pono(
-                idCivis,
-                vitae: 1f,
-                visus: 0f, 
-                visa: 0f,
-                auditus: 0f,
-                audita: 0f,
-                suspecta: 0f,
-                studium: 0f
-            );
+            _phantasma.Purgere(idCivis);
             _resFluidaVeletudinis.Purgare(idCivis);
         }
 
         public void Primum(int idCivis) {
             _queueVeletudinisCondicionis[idCivis].Purgere();
-            _phantasma.Pono(
-                idCivis,
-                vitae: _resFluidaVeletudinis.Vitae(idCivis),
-                visus: 0f, // 視力はフレーム毎に加算して固定値を取る。
-                visa: _resFluidaVeletudinis.Visa(idCivis),
-                auditus: 0f, // 聴力はフレーム毎に加算して固定値を取る。
-                audita: _resFluidaVeletudinis.Audita(idCivis),
-                suspecta: _resFluidaVeletudinis.Suspecta(idCivis),
-                studium: _resFluidaVeletudinis.Studium(idCivis)
-            );
+            // 流動する値は現在の値で初期化する。
+            // フレーム毎に確定する値(視力、聴力など)は0で初期化する。
+            _phantasma.InitarePhantasma(idCivis, _resFluidaVeletudinis);
         }
 
         public void Executare(int idCivis, IOrdinatioCivisVeletudinisValoris veletudinisValoris) {
@@ -173,7 +271,26 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 dtAuditus: veletudinisValoris.DtAuditus,
                 dtAudita: veletudinisValoris.DtAudita,
                 dtSuspecta: veletudinisValoris.DtSuspecta,
-                dtStudium: veletudinisValoris.DtStudium
+                dtStudium: veletudinisValoris.DtStudium,
+                dtIntentio: veletudinisValoris.DtIntentio,
+                dtTorelantiaAnomaliaeMaxima: veletudinisValoris.DtTorelantiaAnomaliaeMaxima,
+                dtTorelantiaAnomaliaeMinima: veletudinisValoris.DtTorelantiaAnomaliaeMinima
+            );
+        }
+
+        public void Executare(int idCivis, IOrdinatioCivisVeletudinisMaxima veletudinisMaxima) {
+            _phantasma.Addo(
+                idCivis,
+                dtVitaeMaxima: veletudinisMaxima.DtVitaeMaxima,
+                dtVisusMaxima: veletudinisMaxima.DtVisusMaxima,
+                dtVisaMaxima: veletudinisMaxima.DtVisaMaxima,
+                dtAuditusMaxima: veletudinisMaxima.DtAuditusMaxima,
+                dtAuditaMaxima: veletudinisMaxima.DtAuditaMaxima,
+                dtSuspectaMaxima: veletudinisMaxima.DtSuspectaMaxima,
+                dtStudiumMaxima: veletudinisMaxima.DtStudiumMaxima,
+                dtIntentioMaxima: veletudinisMaxima.DtIntentioMaxima,
+                dtTorelantiaAnomaliaeMaximaMaxima: veletudinisMaxima.DtTorelantiaAnomaliaeMaximaMaxima,
+                dtTorelantiaAnomaliaeMinimaMaxima: veletudinisMaxima.DtTorelantiaAnomaliaeMinimaMaxima
             );
         }
 
@@ -184,7 +301,22 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
         }
 
-        private void ApplicarePhantasma(int idCivis) {
+        private void ApplicareValoris(int idCivis) {
+            // 必ずMaximaを先に反映しろ。
+            _resFluidaVeletudinis.RenovareMaxima(
+                idCivis,
+                vitaeMaxima: _phantasma.PhantasmaVitaeMaxima(idCivis),
+                visusMaxima: _phantasma.PhantasmaVisusMaxima(idCivis),
+                visaMaxima: _phantasma.PhantasmaVisaMaxima(idCivis),
+                auditusMaxima: _phantasma.PhantasmaAuditusMaxima(idCivis),
+                auditaMaxima: _phantasma.PhantasmaAuditaMaxima(idCivis),
+                suspectaMaxima: _phantasma.PhantasmaSuspectaMaxima(idCivis),
+                studiumMaxima: _phantasma.PhantasmaStudiumMaxima(idCivis),
+                intentioMaxima: _phantasma.PhantasmaIntentioMaxima(idCivis),
+                torelantiaAnomaliaeMaximaMaxima: _phantasma.PhantasmaTorelantiaAnomaliaeMaximaMaxima(idCivis),
+                torelantiaAnomaliaeMinimaMaxima: _phantasma.PhantasmaTorelantiaAnomaliaeMinimaMaxima(idCivis)
+            );
+
             _resFluidaVeletudinis.RenovareValoris(
                 idCivis,
                 vitae: _phantasma.PhantasmaVitae(idCivis),
@@ -193,7 +325,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 auditus: _phantasma.PhantasmaAuditus(idCivis),
                 audita: _phantasma.PhantasmaAudita(idCivis),
                 suspecta: _phantasma.PhantasmaSuspecta(idCivis),
-                studium: _phantasma.PhantasmaStudium(idCivis)
+                studium: _phantasma.PhantasmaStudium(idCivis),
+                intentio: _phantasma.PhantasmaIntentio(idCivis),
+                torelantiaAnomaliaeMaxima: _phantasma.PhantasmaTorelantiaAnomaliaeMaxima(idCivis),
+                torelantiaAnomaliaeMinima: _phantasma.PhantasmaTorelantiaAnomaliaeMinima(idCivis)
             );
         }
 
@@ -212,7 +347,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Confirmare(int idCivis) {
-            ApplicarePhantasma(idCivis);
+            ApplicareValoris(idCivis);
             ApplicareSpectare(idCivis);
         }
 
@@ -220,16 +355,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // - Phantasma初期化
         // - resFluida初期化
         public void Purgare(int idCivis) {
-            _phantasma.Pono(
-                idCivis,
-                vitae: 1f,
-                visus: 0f,
-                visa: 0f,
-                auditus: 0f,
-                audita: 0f,
-                suspecta: 0f,
-                studium: 0f
-            );
+            _phantasma.Purgere(idCivis);
             _queueVeletudinisCondicionis[idCivis].Purgere();
             _resFluidaVeletudinis.Purgare(idCivis);
         }

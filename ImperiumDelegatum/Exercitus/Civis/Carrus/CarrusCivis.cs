@@ -55,6 +55,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private void ConfirmareVeletudinisValoris(int idCivis) {
             _exVeletudinis.Confirmare(idCivis);
             _lacusOrdinatioCivis.ColligereVeletudinisValoris(idCivis);
+            _lacusOrdinatioCivis.ColligereVeletudinisMaxima(idCivis);
             _lacusOrdinatioCivis.ColligereVeletudinisCondicionis(idCivis);
         }
 
@@ -141,10 +142,39 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtAuditus = 0f,
             float dtAudita = 0f,
             float dtSuspecta = 0f,
-            float dtStudium = 0f
+            float dtStudium = 0f,
+            float dtIntentio = 0f,
+            float dtTorelantiaAnomaliaeMaxima = 0f,
+            float dtTorelantiaAnomaliaeMinima = 0f
         ) {
             if (_lacusOrdinatioCivis.EmittareVeletudinisValoris(idCivis, out var ordinatio)) {
-                ordinatio.Pono(dtVitae, dtVisus, dtVisa, dtAuditus, dtAudita, dtSuspecta, dtStudium);
+                ordinatio.Pono(
+                    dtVitae, dtVisus, dtVisa, dtAuditus, dtAudita, dtSuspecta, dtStudium,
+                    dtIntentio, dtTorelantiaAnomaliaeMaxima, dtTorelantiaAnomaliaeMinima
+                );
+                _exVeletudinis.Executare(idCivis, ordinatio);
+            }
+        }
+
+        public void PostulareVeletudinisMaxima(
+            int idCivis,
+            float dtVitaeMaxima = 0f,
+            float dtVisusMaxima = 0f,
+            float dtVisaMaxima = 0f,
+            float dtAuditusMaxima = 0f,
+            float dtAuditaMaxima = 0f,
+            float dtSuspectaMaxima = 0f,
+            float dtStudiumMaxima = 0f,
+            float dtIntentioMaxima = 0f,
+            float dtTorelantiaAnomaliaeMaximaMaxima = 0f,
+            float dtTorelantiaAnomaliaeMinimaMaxima = 0f
+        ) {
+            if (_lacusOrdinatioCivis.EmittareVeletudinisMaxima(idCivis, out var ordinatio)) {
+                ordinatio.Pono(
+                    dtVitaeMaxima, dtVisusMaxima, dtVisaMaxima,
+                    dtAuditusMaxima, dtAuditaMaxima, dtSuspectaMaxima, dtStudiumMaxima,
+                    dtIntentioMaxima, dtTorelantiaAnomaliaeMaximaMaxima, dtTorelantiaAnomaliaeMinimaMaxima
+                );
                 _exVeletudinis.Executare(idCivis, ordinatio);
             }
         }

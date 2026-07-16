@@ -35,7 +35,24 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtAuditus = 0f,
             float dtAudita = 0f,
             float dtSuspecta = 0f,
-            float dtStudium = 0f
+            float dtStudium = 0f,
+            float dtIntentio = 0f,
+            float dtTorelantiaAnomaliaeMaxima = 0f,
+            float dtTorelantiaAnomaliaeMinima = 0f
+        );
+
+        void PostulareVeletudinisMaxima(
+            int idCivis,
+            float dtVitaeMaxima = 0f,
+            float dtVisusMaxima = 0f,
+            float dtVisaMaxima = 0f,
+            float dtAuditusMaxima = 0f,
+            float dtAuditaMaxima = 0f,
+            float dtSuspectaMaxima = 0f,
+            float dtStudiumMaxima = 0f,
+            float dtIntentioMaxima = 0f,
+            float dtTorelantiaAnomaliaeMaximaMaxima = 0f,
+            float dtTorelantiaAnomaliaeMinimaMaxima = 0f
         );
 
         void PostulareMortis(
