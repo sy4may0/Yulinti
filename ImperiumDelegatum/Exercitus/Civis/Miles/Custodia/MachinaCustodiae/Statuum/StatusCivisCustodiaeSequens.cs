@@ -12,8 +12,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResolutorCivisDistantia resolutorCivisDistantia,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
-            IOstiumCivisLegibile civis,
-            Random random
+            IConfiguratioCivisStatusCustodiaeSequens configuratio
         ) : base(
             resFluidaCivisVeletudinis,
             resFluidaPuellaeVeletudinis,
@@ -22,8 +21,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             resolutorCivisDistantia,
             carrus,
             temporis,
-            civis,
-            random
+            configuratio
         ) {
         }
 
@@ -35,6 +33,19 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public override void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
             base.Ordinare(idCivis, abaciCivisStatus);
+        }
+
+        public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
+            IDCivisStatusCustodiae status = base.MutareStatus(idCivis);
+            if (status != IDCivisStatusCustodiae.Nihil) {
+                return status;
+            }
+
+            if (ResFluidaCivisVeletudinis.Intentio(idCivis) <= 0.4f) {
+                return IDCivisStatusCustodiae.Spectans;
+            }
+
+            return IDCivisStatusCustodiae.Nihil;
         }
     }
 }

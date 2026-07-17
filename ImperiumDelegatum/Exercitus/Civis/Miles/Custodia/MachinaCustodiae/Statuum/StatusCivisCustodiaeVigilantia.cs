@@ -6,58 +6,52 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCustodiaeVigilantia : IStatusCivisCustodiae {
         private readonly IOstiumCarrusCivis _carrus;
         private readonly IOstiumTemporisLegibile _temporis;
-        private readonly Horologium[] _horologiumAdFinem;
-
-        // 後で設定に移行する。
-        private readonly float _tempusAdFinemVigilantia = 4f;
+        private readonly IResFluidaCivisVeletudinisLegibile _resFluidaCivisVeletudinis;
+        private readonly IConfiguratioCivisStatusCustodiaeVigilantia _configuratio;
 
         public StatusCivisCustodiaeVigilantia(
             IOstiumCivisLegibile civis,
             IOstiumCarrusCivis carrus,
-            IOstiumTemporisLegibile temporis
+            IOstiumTemporisLegibile temporis,
+            IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
+            IConfiguratioCivisStatusCustodiaeVigilantia configuratio
         ) {
             _carrus = carrus;
             _temporis = temporis;
-
-            _horologiumAdFinem = new Horologium[civis.Longitudo];
-            for (int i = 0; i < civis.Longitudo; i++) {
-                _horologiumAdFinem[i] = new Horologium(
-                    _tempusAdFinemVigilantia
-                );
-            }
+            _resFluidaCivisVeletudinis = resFluidaCivisVeletudinis;
+            _configuratio = configuratio;
         }
 
         public void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
-            // Suspectaを1に固定する。
             _carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtSuspecta: 1.0f,
-                dtStudium: 1.0f
+                dtStudium: 1.0f,
+                dtIntentio: -1.0f
             );
-            _horologiumAdFinem[idCivis].Activare();
+            abaciCivisStatus.PurgereIntentionis(idCivis);
+            abaciCivisStatus.PurgereStudii(idCivis);
         }
 
         public void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
-            _horologiumAdFinem[idCivis].Deactivare();
-
-            // VigilantiaがIntuitusステートの起点。Intentio/Studium関連を初期化する。
-            _carrus.PostulareVeletudinisValoris(
-                idCivis,
-                dtIntentio: -1.0f,
-                dtStudium: -1.0f
-            );
-            abaciCivisStatus.PurgereStudii(idCivis);
-            abaciCivisStatus.PurgereIntentionis(idCivis);
         }
 
         public void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
-            // horologiumが切れたらstudiumを0にする。
-            if (_horologiumAdFinem[idCivis].EstExhaurita(_temporis.Intervallum)) {
-                _carrus.PostulareVeletudinisValoris(
-                    idCivis,
-                    dtStudium: -1.0f
-                );
+            // Intuitusステートに向かうため、Studiumを減らす。(Studium0でSpectansステートになる)
+            // Suspectaは常に1, Intentioは常に-1固定。
+            _carrus.PostulareVeletudinisValoris(
+                idCivis,
+                dtStudium: -_configuratio.DeminutioStudiumAdIntuitusSec * _temporis.Intervallum,
+                dtSuspecta: 1.0f,
+                dtIntentio: -1.0f
+            );
+        }
+
+        public IDCivisStatusCustodiae MutareStatus(int idCivis) {
+            if (_resFluidaCivisVeletudinis.Studium(idCivis) <= 0.0f) {
+                return IDCivisStatusCustodiae.Spectans;
             }
+            return IDCivisStatusCustodiae.Nihil;
         }
     } 
 }

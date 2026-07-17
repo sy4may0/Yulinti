@@ -77,18 +77,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _phantasmaTorelantiaAnomaliaeMaxima[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fixus);
                 _phantasmaTorelantiaAnomaliaeMinima[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fixus);
 
-                // CivisのMaximaは規定値1で安定するためFluidus(ResFluidaから引き継ぎ)。
-                // Puellaeは毎フレームMilesが再計算するためFixus。
-                _phantasmaVitaeMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
-                _phantasmaVisusMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
-                _phantasmaVisaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
-                _phantasmaAuditusMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
-                _phantasmaAuditaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
-                _phantasmaSuspectaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
-                _phantasmaStudiumMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
-                _phantasmaIntentioMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
-                _phantasmaTorelantiaAnomaliaeMaximaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
-                _phantasmaTorelantiaAnomaliaeMinimaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fluidus);
+                // CivisのMaximaも毎フレームMilesが再計算するためFixus。
+                _phantasmaVitaeMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fixus);
+                _phantasmaVisusMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fixus);
+                _phantasmaVisaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fixus);
+                _phantasmaAuditusMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fixus);
+                _phantasmaAuditaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fixus);
+                _phantasmaSuspectaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fixus);
+                _phantasmaStudiumMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fixus);
+                _phantasmaIntentioMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fixus);
+                _phantasmaTorelantiaAnomaliaeMaximaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fixus);
+                _phantasmaTorelantiaAnomaliaeMinimaMaxima[i] = new ValorisCivisVeletudinis(1f, TypusValoris.Fixus);
             }
         }
 

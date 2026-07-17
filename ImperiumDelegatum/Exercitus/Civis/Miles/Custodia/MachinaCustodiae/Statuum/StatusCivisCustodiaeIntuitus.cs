@@ -1,21 +1,10 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Nucleus.Instrumentarium;
-using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal abstract class StatusCivisCustodiaeIntuitus : StatusCivisCustodiaeAttendens {
-        // 後で設定に移行する。
-        private readonly float _augmentumIntentionisSec = 0.01f;
-        private readonly float _deminutioIntentionisSec = 0.01f;
-        private readonly float _augmentumStudiumSec = 0.01f;
-        private readonly float _deminutioStudiumSec = 0.01f;
-        private readonly float _tempusAdRecsationemMaxima = 5f;
-        private readonly float _tempusAdRecsationemMinima = 3f;
-        private readonly float _tempusAdAmittensMaxima = 5f;
-        private readonly float _tempusAdAmittensMinima = 3f;
+        private readonly IConfiguratioCivisStatusCustodiaeIntuitus _configuratio;
 
-        private readonly HorologiumTemere[] _horologiumAdRecsationem;
-        private readonly HorologiumTemere[] _horologiumAdAmittens;
+        protected IConfiguratioCivisStatusCustodiaeIntuitus ConfiguratioIntuitus => _configuratio;
 
         protected StatusCivisCustodiaeIntuitus(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
@@ -25,8 +14,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResolutorCivisDistantia resolutorCivisDistantia,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
-            IOstiumCivisLegibile civis,
-            Random random
+            IConfiguratioCivisStatusCustodiaeIntuitus configuratio
         ) : base(
             resFluidaCivisVeletudinis,
             resFluidaPuellaeVeletudinis,
@@ -34,23 +22,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             resolutorCivisIctuumVisae,
             resolutorCivisDistantia,
             carrus,
-            temporis
+            temporis,
+            configuratio
         ) {
-            _horologiumAdRecsationem = new HorologiumTemere[civis.Longitudo];
-            _horologiumAdAmittens = new HorologiumTemere[civis.Longitudo];
-
-            for (int i = 0; i < civis.Longitudo; i++) {
-                _horologiumAdRecsationem[i] = new HorologiumTemere(
-                    _tempusAdRecsationemMinima,
-                    _tempusAdRecsationemMaxima,
-                    random
-                );
-                _horologiumAdAmittens[i] = new HorologiumTemere(
-                    _tempusAdAmittensMinima,
-                    _tempusAdAmittensMaxima,
-                    random
-                );
-            }
+            _configuratio = configuratio;
         }
 
         private float ResolvereIntentionem(
@@ -72,7 +47,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
             if (estAugere) {
                 return ResolutorCivisStatus.AugereIntentionisIntuitus(
-                    augmentumIntentionis: _augmentumIntentionisSec,
+                    augmentumIntentionis: _configuratio.AugmentumIntentionisSec,
                     ratio: ResolutorCivisIctuumVisae.RatioVisus(idCivis),
                     puellaeAnomalia: puellaeAnomaliae,
                     torelantiaAnomaliaeMaxima: torelantiaAnomaliaeMaxima,
@@ -80,10 +55,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                     abaciCivisStatus.StudiumHabereIntentionis(idCivis),
                     Temporis.Intervallum
                 );
-            } 
+            }
 
             return ResolutorCivisStatus.DeminuereIntentionisIntuitus(
-                deminutioIntentionis: _deminutioIntentionisSec,
+                deminutioIntentionis: _configuratio.DeminutioIntentionisSec,
                 abaciCivisStatus.StudiumAmittereIntentionis(idCivis),
                 Temporis.Intervallum
             );
@@ -108,7 +83,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
             if (estAugere) {
                 return ResolutorCivisStatus.AugereStudiumIntuitus(
-                    augmentumStudium: _augmentumStudiumSec,
+                    augmentumStudium: _configuratio.AugmentumStudiumSec,
                     puellaeAnomalia: puellaeAnomaliae,
                     torelantiaAnomaliaeMaxima: torelantiaAnomaliaeMaxima,
                     torelantiaAnomaliaeMinima: torelantiaAnomaliaeMinima,
@@ -118,41 +93,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
 
             return ResolutorCivisStatus.DeminuereStudiumIntuitus(
-                deminutioStudium: _deminutioStudiumSec,
+                deminutioStudium: _configuratio.DeminutioStudiumSec,
                 abaciCivisStatus.StudiumAmittereStudii(idCivis),
                 Temporis.Intervallum
             );
-        }
-
-        private void ResolvereRecsationem(int idCivis) {
-            if (!_horologiumAdRecsationem[idCivis].EstActivum) {
-                _horologiumAdRecsationem[idCivis].Activare();
-            }
-
-            if (_horologiumAdRecsationem[idCivis].EstExhaurita(Temporis.Intervallum)) {
-                // 一定時間anomalia超過でIntentio/Studiumを0にする。
-                Carrus.PostulareVeletudinisValoris(
-                    idCivis,
-                    dtIntentio: -1f,
-                    dtStudium: -1f
-                );
-                _horologiumAdRecsationem[idCivis].Deactivare();
-            }
-        }
-
-        private void ResolvereAmittens(int idCivis) {
-            if (!_horologiumAdAmittens[idCivis].EstActivum) {
-                _horologiumAdAmittens[idCivis].Activare();
-            }
-
-            // 視認ロストでSuspectaを0にする。
-            if (_horologiumAdAmittens[idCivis].EstExhaurita(Temporis.Intervallum)) {
-                Carrus.PostulareVeletudinisValoris(
-                    idCivis,
-                    dtSuspecta: -1f
-                );
-                _horologiumAdAmittens[idCivis].Deactivare();
-            }
         }
 
         public override void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
@@ -162,18 +106,22 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float torelantiaAnomaliaeMaxima = ResFluidaCivisVeletudinis.RatioTorelantiaAnomaliaeMaxima(idCivis);
 
             if (puellaeAnomaliae > torelantiaAnomaliaeMaxima) {
-                ResolvereRecsationem(idCivis);
-            } else {
-                _horologiumAdRecsationem[idCivis].Deactivare();
+                Carrus.PostulareVeletudinisValoris(
+                    idCivis,
+                    dtStudium: -_configuratio.DeminutioStudiumAdRecsationemSec
+                );
+                return;
             }
 
             if (
-                !ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) || 
+                !ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) ||
                 !ResolutorCivisIctuumVisae.EstVisa(idCivis)
             ) {
-                ResolvereAmittens(idCivis);
-            } else {
-                _horologiumAdAmittens[idCivis].Deactivare();
+                Carrus.PostulareVeletudinisValoris(
+                    idCivis,
+                    dtStudium: -_configuratio.DeminutioStudiumAdAmittensSec
+                );
+                return;
             }
 
             float dtIntentio = ResolvereIntentionem(idCivis, abaciCivisStatus);
@@ -185,5 +133,25 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 dtStudium: dtStudium
             );
         }
+
+        public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
+            if (ResFluidaCivisVeletudinis.Studium(idCivis) <= 0.0f) {
+                float pa = ResFluidaPuellaeVeletudinis.RatioAnomaliae;
+                float ta = ResFluidaCivisVeletudinis.RatioTorelantiaAnomaliaeMaxima(idCivis);
+
+                if (pa > ta) {
+                    return IDCivisStatusCustodiae.Discedens;
+                } else {
+                    return IDCivisStatusCustodiae.RefrigeratioVigilantia;
+                }
+            }
+
+            if (ResFluidaCivisVeletudinis.Suspecta(idCivis) <= 0.4f) {
+                return IDCivisStatusCustodiae.Quaerens;
+            }
+
+            return IDCivisStatusCustodiae.Nihil;
+        }
+
     }
 }

@@ -9,6 +9,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
         private readonly IOstiumCarrusCivis _carrus;
         private readonly IOstiumTemporisLegibile _temporis;
+        private readonly IConfiguratioCivisStatusCustodiaeAttendens _configuratio;
 
         protected IResFluidaCivisVeletudinisLegibile ResFluidaCivisVeletudinis => _resFluidaCivisVeletudinis;
         protected IResFluidaPuellaeVeletudinisLegibile ResFluidaPuellaeVeletudinis => _resFluidaPuellaeVeletudinis;
@@ -17,12 +18,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         protected IResolutorCivisDistantia ResolutorCivisDistantia => _resolutorCivisDistantia;
         protected IOstiumCarrusCivis Carrus => _carrus;
         protected IOstiumTemporisLegibile Temporis => _temporis;
-
-        // 後で設定に移行する。
-        // Suspecta(疑心度)への上昇量。視覚刺激と聴覚刺激で別レート、視覚のほうが速い。
-        private readonly float _augmentumSuspectaeVisaeSec = 0.02f;
-        private readonly float _augmentumSuspectaeAuditaeSec = 0.01f;
-        private readonly float _deminutioSuspectaeSec = 0.01f;
+        protected IConfiguratioCivisStatusCustodiaeAttendens ConfiguratioAttendens => _configuratio;
 
         protected StatusCivisCustodiaeAttendens(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
@@ -31,7 +27,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResolutorCivisIctuumVisae resolutorCivisIctuumVisae,
             IResolutorCivisDistantia resolutorCivisDistantia,
             IOstiumCarrusCivis carrus,
-            IOstiumTemporisLegibile temporis
+            IOstiumTemporisLegibile temporis,
+            IConfiguratioCivisStatusCustodiaeAttendens configuratio
         ) {
             _resFluidaCivisVeletudinis = resFluidaCivisVeletudinis;
             _resFluidaPuellaeVeletudinis = resFluidaPuellaeVeletudinis;
@@ -40,6 +37,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resolutorCivisDistantia = resolutorCivisDistantia;
             _carrus = carrus;
             _temporis = temporis;
+            _configuratio = configuratio;
         }
 
         public abstract void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus);
@@ -74,7 +72,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
                 if (estAugereVisae) {
                     dtSuspecta += ResolutorCivisStatus.AugereSuspectaeVisae(
-                        _augmentumSuspectaeVisaeSec,
+                        _configuratio.AugmentumSuspectaeVisaeSec,
                         ResolutorCivisIctuumVisae.RatioVisus(idCivis),
                         ResFluidaCivisVeletudinis.RatioVisus(idCivis),
                         ResFluidaPuellaeVeletudinis.RatioClaritas,
@@ -86,7 +84,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
                 if (estAugereAuditae) {
                     dtSuspecta += ResolutorCivisStatus.AugereSuspectaeAuditae(
-                        _augmentumSuspectaeAuditaeSec,
+                        _configuratio.AugmentumSuspectaeAuditaeSec,
                         ResFluidaCivisVeletudinis.Auditus(idCivis),
                         ResolutorCivisIctuumAuditae.Audita(idCivis),
                         abaciCivisStatus.StudiumHabereSuspectae(idCivis),
@@ -98,10 +96,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
 
             return -ResolutorCivisStatus.DeminuereSuspectam(
-                _deminutioSuspectaeSec,
+                _configuratio.DeminutioSuspectaeSec,
                 abaciCivisStatus.StudiumAmittereSuspectae(idCivis),
                 Temporis.Intervallum
             );
         }
+
+        public abstract IDCivisStatusCustodiae MutareStatus(int idCivis);
     }
 }

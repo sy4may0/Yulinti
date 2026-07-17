@@ -1,8 +1,8 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal sealed class StatusCivisCustodiaeNihil : StatusCivisCustodiaeAttendens {
-        public StatusCivisCustodiaeNihil(
+    internal sealed class StatusCivisCustodiaeCircumitus : StatusCivisCustodiaeAttendens {
+        public StatusCivisCustodiaeCircumitus(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             IOstiumCivisLegibile civis,
@@ -10,7 +10,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResolutorCivisIctuumVisae resolutorCivisIctuumVisae,
             IResolutorCivisDistantia resolutorCivisDistantia,
             IOstiumCarrusCivis carrus,
-            IOstiumTemporisLegibile temporis
+            IOstiumTemporisLegibile temporis,
+            IConfiguratioCivisStatusCustodiaeCircumitus configuratio
         ) : base(
             resFluidaCivisVeletudinis,
             resFluidaPuellaeVeletudinis,
@@ -18,21 +19,30 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             resolutorCivisIctuumVisae,
             resolutorCivisDistantia,
             carrus,
-            temporis
+            temporis,
+            configuratio
         ) {
         }
 
         public override void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
-            // ここがSuspecta増減の起点ステート, 値とAbaciを初期化する。
+            // Attendens起点
             Carrus.PostulareVeletudinisValoris(
                 idCivis,
-                dtSuspecta: -1.0f,
-                dtStudium: -1.0f
+                dtSuspecta: 0.0f,
+                dtStudium: 0.0f,
+                dtIntentio: 0.0f
             );
             abaciCivisStatus.Purgere(idCivis);
         }
 
         public override void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        }
+
+        public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
+            if (ResFluidaCivisVeletudinis.Suspecta(idCivis) >= ResFluidaCivisVeletudinis.SuspectaMaxima(idCivis)) {
+                return IDCivisStatusCustodiae.Vigilantia;
+            }
+            return IDCivisStatusCustodiae.Nihil;
         }
     }
 }
