@@ -44,10 +44,47 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public abstract void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus);
 
         public virtual void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+            float dtSuspecta = ResolvereSuspectam(idCivis, abaciCivisStatus);
             Carrus.PostulareVeletudinisValoris(
                 idCivis,
-                dtSuspecta: ResolvereSuspectam(idCivis, abaciCivisStatus)
+                dtSuspecta: RestringereSuspectam(idCivis, dtSuspecta)
             );
+        }
+        
+        protected float RestringereSuspectam(int idCivis, float dtSuspecta) {
+            float rs = ResFluidaCivisVeletudinis.Suspecta(idCivis) + dtSuspecta;
+            float anomalia = ResolutorCivisStatus.CorrigereAnomaliae(
+                ResFluidaPuellaeVeletudinis,
+                ResFluidaCivisVeletudinis,
+                idCivis
+            );
+
+            if (dtSuspecta <= 0) {
+                return dtSuspecta;
+            }
+
+            // Nihil Anomariae
+            if (anomalia <= 0) {
+                if (rs > _configuratio.SuspectaMaximaNihilAnomaliae) {
+                    return _configuratio.SuspectaMaximaNihilAnomaliae - ResFluidaCivisVeletudinis.Suspecta(idCivis);
+                }
+            }
+
+            // Auditae Solus
+            if (!ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) || !ResolutorCivisIctuumVisae.EstVisa(idCivis)) {
+                if (rs > _configuratio.SuspectaMaximaAuditaeSolus) {
+                    return _configuratio.SuspectaMaximaAuditaeSolus - ResFluidaCivisVeletudinis.Suspecta(idCivis);
+                }
+            }
+
+            // Anomaliae Deest
+            if (anomalia <= _configuratio.AnomaliaeMinimaAdVigilantiam) {
+                if (rs > _configuratio.SuspectaMaximaAnomaliaeDeest) {
+                    return _configuratio.SuspectaMaximaAnomaliaeDeest - ResFluidaCivisVeletudinis.Suspecta(idCivis);
+                }
+            }
+
+            return dtSuspecta;
         }
 
         // Visa/Auditaを統合したSuspecta(疑心度)の増減を解決する。
@@ -76,7 +113,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                         ResolutorCivisIctuumVisae.RatioVisus(idCivis),
                         ResFluidaCivisVeletudinis.RatioVisus(idCivis),
                         ResFluidaPuellaeVeletudinis.RatioClaritas,
-                        ResFluidaPuellaeVeletudinis.RatioAnomaliae,
                         abaciCivisStatus.StudiumHabereSuspectae(idCivis),
                         Temporis.Intervallum
                     );

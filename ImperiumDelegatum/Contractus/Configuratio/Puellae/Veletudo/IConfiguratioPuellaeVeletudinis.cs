@@ -6,6 +6,9 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float LimenRefectaPatientiae { get; }
         float VelocitasSoniMaxima { get; }
 
+        float AnomaliaBasis { get; }
+        float AnomaliaNudusBasis { get; }
+
         // Vigilantia時、Debecus0.0のVigor減少量(sec)
         float ConsumptioVigorisMinimaVigilantia { get; }
         // Vigilantia時、Debecus1.0のVigor減少量(sec)

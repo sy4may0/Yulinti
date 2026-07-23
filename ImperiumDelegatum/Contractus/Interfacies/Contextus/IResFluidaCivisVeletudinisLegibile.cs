@@ -13,6 +13,8 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float TorelantiaAnomaliaeMaximaMaxima(int idCivis);
         float TorelantiaAnomaliaeMinimaMaxima(int idCivis);
 
+        IDCivisStatusCustodiae StatusCustodiaeCurrens(int idCivis);
+
         float Vitae(int idCivis);
         float Visus(int idCivis);
         float Visa(int idCivis);

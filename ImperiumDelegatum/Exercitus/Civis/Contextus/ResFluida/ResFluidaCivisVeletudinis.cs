@@ -16,6 +16,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float[] _torelantiaAnomaliaeMaximaMaxima;
         private float[] _torelantiaAnomaliaeMinimaMaxima;
 
+        private IDCivisStatusCustodiae[] _statusCustodiaeCurrens;
+
         // health
         private float[] _vitae;
 
@@ -64,6 +66,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _torelantiaAnomaliaeMaximaMaxima = new float[longitudo];
             _torelantiaAnomaliaeMinimaMaxima = new float[longitudo];
 
+            _statusCustodiaeCurrens = new IDCivisStatusCustodiae[longitudo];
+
             _vitae = new float[longitudo];
             _visus = new float[longitudo];
             _visa = new float[longitudo];
@@ -100,6 +104,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _torelantiaAnomaliaeMaximaMaxima[idCivis] = CivisVeletudinis.TorelantiaAnomaliaeMaximaMaximaBasis;
             _torelantiaAnomaliaeMinimaMaxima[idCivis] = CivisVeletudinis.TorelantiaAnomaliaeMinimaMaximaBasis;
 
+            _statusCustodiaeCurrens[idCivis] = IDCivisStatusCustodiae.Circumitus;
+
             _vitae[idCivis] = _vitaeMaxima[idCivis];
             _visus[idCivis] = _visusMaxima[idCivis];
             _visa[idCivis] = 0f;
@@ -131,6 +137,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float IntentioMaxima(int idCivis) => _intentioMaxima[idCivis];
         public float TorelantiaAnomaliaeMaximaMaxima(int idCivis) => _torelantiaAnomaliaeMaximaMaxima[idCivis];
         public float TorelantiaAnomaliaeMinimaMaxima(int idCivis) => _torelantiaAnomaliaeMinimaMaxima[idCivis];
+
+        public IDCivisStatusCustodiae StatusCustodiaeCurrens(int idCivis) => _statusCustodiaeCurrens[idCivis];
 
         public float Vitae(int idCivis) => _vitae[idCivis];
         public float Visus(int idCivis) => _visus[idCivis];
@@ -187,7 +195,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             bool? estDetectioSonora = null,
             bool? estSuspecta = null,
             bool? estSpectareNudusAnterior = null,
-            bool? estSpectareNudusPosterior = null
+            bool? estSpectareNudusPosterior = null,
+            IDCivisStatusCustodiae? statusCustodiaeCurrens = IDCivisStatusCustodiae.Nihil
         ) {
             if (estVigilantia != null) _estVigilantia[idCivis] = estVigilantia.Value;
             if (estDetectio != null) _estDetectio[idCivis] = estDetectio.Value;
@@ -195,6 +204,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             if (estSuspecta != null) _estSuspecta[idCivis] = estSuspecta.Value;
             if (estSpectareNudusAnterior != null) _estSpectareNudusAnterior = estSpectareNudusAnterior.Value;
             if (estSpectareNudusPosterior != null) _estSpectareNudusPosterior = estSpectareNudusPosterior.Value;
+            if (statusCustodiaeCurrens != null && statusCustodiaeCurrens.Value != IDCivisStatusCustodiae.Nihil) {
+                _statusCustodiaeCurrens[idCivis] = statusCustodiaeCurrens.Value;
+            }
         }
 
         public void RenovareValoris(

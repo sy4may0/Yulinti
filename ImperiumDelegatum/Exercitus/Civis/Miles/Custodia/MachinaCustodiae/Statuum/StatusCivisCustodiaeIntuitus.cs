@@ -32,7 +32,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             AbaciCivisStatus abaciCivisStatus
         ) {
-            float puellaeAnomaliae = ResFluidaPuellaeVeletudinis.RatioAnomaliae;
+            float puellaeAnomaliae = ResolutorCivisStatus.CorrigereRatioAnomaliae(
+                ResFluidaPuellaeVeletudinis,
+                ResFluidaCivisVeletudinis,
+                idCivis
+            );
             float torelantiaAnomaliaeMaxima = ResFluidaCivisVeletudinis.RatioTorelantiaAnomaliaeMaxima(idCivis);
             float torelantiaAnomaliaeMinima = ResFluidaCivisVeletudinis.RatioTorelantiaAnomaliaeMinima(idCivis);
 
@@ -68,7 +72,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             AbaciCivisStatus abaciCivisStatus
         ) {
-            float puellaeAnomaliae = ResFluidaPuellaeVeletudinis.RatioAnomaliae;
+            float puellaeAnomaliae = ResolutorCivisStatus.CorrigereRatioAnomaliae(
+                ResFluidaPuellaeVeletudinis,
+                ResFluidaCivisVeletudinis,
+                idCivis
+            );
             float torelantiaAnomaliaeMaxima = ResFluidaCivisVeletudinis.RatioTorelantiaAnomaliaeMaxima(idCivis);
             float torelantiaAnomaliaeMinima = ResFluidaCivisVeletudinis.RatioTorelantiaAnomaliaeMinima(idCivis);
 
@@ -102,13 +110,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public override void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
             base.Ordinare(idCivis, abaciCivisStatus);
 
-            float puellaeAnomaliae = ResFluidaPuellaeVeletudinis.RatioAnomaliae;
+            float puellaeAnomaliae = ResolutorCivisStatus.CorrigereRatioAnomaliae(
+                ResFluidaPuellaeVeletudinis,
+                ResFluidaCivisVeletudinis,
+                idCivis
+            );
             float torelantiaAnomaliaeMaxima = ResFluidaCivisVeletudinis.RatioTorelantiaAnomaliaeMaxima(idCivis);
 
             if (puellaeAnomaliae > torelantiaAnomaliaeMaxima) {
                 Carrus.PostulareVeletudinisValoris(
                     idCivis,
-                    dtStudium: -_configuratio.DeminutioStudiumAdRecsationemSec
+                    dtStudium: -_configuratio.DeminutioStudiumAdRecusationemSec * Temporis.Intervallum
                 );
                 return;
             }
@@ -119,7 +131,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ) {
                 Carrus.PostulareVeletudinisValoris(
                     idCivis,
-                    dtStudium: -_configuratio.DeminutioStudiumAdAmittensSec
+                    dtStudium: -_configuratio.DeminutioStudiumAdAmittensSec * Temporis.Intervallum
                 );
                 return;
             }
@@ -135,19 +147,23 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
+            if (ResFluidaCivisVeletudinis.Suspecta(idCivis) <= _configuratio.RatioSuspectaeMinimaAdQuaerens * ResFluidaCivisVeletudinis.SuspectaMaxima(idCivis)) {
+                return IDCivisStatusCustodiae.Quaerens;
+            }
+
             if (ResFluidaCivisVeletudinis.Studium(idCivis) <= 0.0f) {
-                float pa = ResFluidaPuellaeVeletudinis.RatioAnomaliae;
+                float pa = ResolutorCivisStatus.CorrigereRatioAnomaliae(
+                    ResFluidaPuellaeVeletudinis,
+                    ResFluidaCivisVeletudinis,
+                    idCivis
+                );
                 float ta = ResFluidaCivisVeletudinis.RatioTorelantiaAnomaliaeMaxima(idCivis);
 
                 if (pa > ta) {
                     return IDCivisStatusCustodiae.Discedens;
                 } else {
-                    return IDCivisStatusCustodiae.RefrigeratioVigilantia;
+                    return IDCivisStatusCustodiae.Refrigeratio;
                 }
-            }
-
-            if (ResFluidaCivisVeletudinis.Suspecta(idCivis) <= 0.4f) {
-                return IDCivisStatusCustodiae.Quaerens;
             }
 
             return IDCivisStatusCustodiae.Nihil;

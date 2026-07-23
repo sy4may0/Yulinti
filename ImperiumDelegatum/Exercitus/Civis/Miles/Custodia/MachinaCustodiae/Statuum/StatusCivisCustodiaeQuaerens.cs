@@ -1,6 +1,4 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Nucleus.Instrumentarium;
-using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCustodiaeQuaerens : StatusCivisCustodiaeAttendens {
@@ -29,6 +27,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public override void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+            Carrus.PostulareVeletudinisCondicionis(
+                idCivis,
+                statusCustodiaeCurrens: IDCivisStatusCustodiae.Quaerens
+            );
         }
 
         public override void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
@@ -49,7 +51,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
 
             if (ResFluidaCivisVeletudinis.Suspecta(idCivis) <= 0.0f) {
-                return IDCivisStatusCustodiae.RefrigeratioVigilantia;
+                return IDCivisStatusCustodiae.Refrigeratio;
             }
 
             return IDCivisStatusCustodiae.Nihil;

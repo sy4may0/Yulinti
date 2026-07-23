@@ -1,6 +1,4 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Nucleus.Instrumentarium;
-using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCustodiaeSequens : StatusCivisCustodiaeIntuitus {
@@ -26,6 +24,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public override void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+            Carrus.PostulareVeletudinisCondicionis(
+                idCivis,
+                statusCustodiaeCurrens: IDCivisStatusCustodiae.Sequens
+            );
         }
 
         public override void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
@@ -39,10 +41,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IDCivisStatusCustodiae status = base.MutareStatus(idCivis);
             if (status != IDCivisStatusCustodiae.Nihil) {
                 return status;
-            }
-
-            if (ResFluidaCivisVeletudinis.Intentio(idCivis) <= 0.4f) {
-                return IDCivisStatusCustodiae.Spectans;
             }
 
             return IDCivisStatusCustodiae.Nihil;

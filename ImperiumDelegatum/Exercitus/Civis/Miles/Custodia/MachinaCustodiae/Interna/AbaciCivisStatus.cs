@@ -15,42 +15,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Horologium[] _horologiumStudiiConservandi;
         private readonly Horologium[] _horologiumIntentionisConservandi;
 
-        // 後で設定に移行する。
-        private readonly float _tempusSuspectaeStudiumHabereMaxima = 2f;
-        private readonly float _tempusSuspectaeStudiumHabereMedia = 1f;
-        private readonly float _tempusSuspectaeStudiumHabereMinima = 0f;
-        private readonly float _praeruptioSuspectaeTempusStudiumHabere = 12f;
-        private readonly float _tempusSuspectaeStudiumAmittereMaxima = 4f;
-        private readonly float _tempusSuspectaeStudiumAmittereMedia = 2f;
-        private readonly float _tempusSuspectaeStudiumAmittereMinima = 0f;
-        private readonly float _praeruptioSuspectaeTempusStudiumAmittere = 12f;
-        private readonly float _tempusStudiiStudiumHabereMaxima = 5f;
-        private readonly float _tempusStudiiStudiumHabereMedia = 2.5f;
-        private readonly float _tempusStudiiStudiumHabereMinima = 0f;
-        private readonly float _praeruptioStudiiTempusStudiumHabere = 12f;
-        private readonly float _tempusStudiiStudiumAmittereMaxima = 5f;
-        private readonly float _tempusStudiiStudiumAmittereMedia = 2.5f;
-        private readonly float _tempusStudiiStudiumAmittereMinima = 0f;
-        private readonly float _praeruptioStudiiTempusStudiumAmittere = 12f;
-        private readonly float _tempusIntentionisStudiumHabereMaxima = 7f;
-        private readonly float _tempusIntentionisStudiumHabereMedia = 5f;
-        private readonly float _tempusIntentionisStudiumHabereMinima = 0f;
-        private readonly float _praeruptioIntentionisTempusStudiumHabere = 12f;
-        private readonly float _tempusIntentionisStudiumAmittereMaxima = 7f;
-        private readonly float _tempusIntentionisStudiumAmittereMedia = 5f;
-        private readonly float _tempusIntentionisStudiumAmittereMinima = 0f;
-        private readonly float _praeruptioIntentionisTempusStudiumAmittere = 12f;
-        private readonly float _tempusSuspectaeConservandi = 1f;
-        private readonly float _tempusStudiiConservandi = 1f;
-        private readonly float _tempusIntentionisConservandi = 1f;
-
         private readonly bool[] _estAugereSuspectae;
         private readonly bool[] _estAugereStudii;
         private readonly bool[] _estAugereIntentionis;
 
 
         public AbaciCivisStatus(
-            IOstiumCivisLegibile civis
+            IOstiumCivisLegibile civis,
+            IConfiguratioCivisStatusCustodiaeCommunis configuratio
         ) {
             _longitudo = civis.Longitudo;
             _abacusStudiumHabereSuspectae = new AbacusTemporis[_longitudo];
@@ -68,49 +40,49 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
             for (int i = 0; i < _longitudo; i++) {
                 _abacusStudiumHabereSuspectae[i] = new AbacusTemporis(
-                    _tempusSuspectaeStudiumHabereMaxima,
-                    _tempusSuspectaeStudiumHabereMinima,
-                    _tempusSuspectaeStudiumHabereMedia,
-                    _praeruptioSuspectaeTempusStudiumHabere
+                    configuratio.TempusSuspectaeStudiumHabereMaxima,
+                    configuratio.TempusSuspectaeStudiumHabereMinima,
+                    configuratio.TempusSuspectaeStudiumHabereMedia,
+                    configuratio.PraeruptioSuspectaeTempusStudiumHabere
                 );
                 _abacusStudiumAmittereSuspectae[i] = new AbacusTemporis(
-                    _tempusSuspectaeStudiumAmittereMaxima,
-                    _tempusSuspectaeStudiumAmittereMinima,
-                    _tempusSuspectaeStudiumAmittereMedia,
-                    _praeruptioSuspectaeTempusStudiumAmittere
+                    configuratio.TempusSuspectaeStudiumAmittereMaxima,
+                    configuratio.TempusSuspectaeStudiumAmittereMinima,
+                    configuratio.TempusSuspectaeStudiumAmittereMedia,
+                    configuratio.PraeruptioSuspectaeTempusStudiumAmittere
                 );
                 _abacusStudiumHabereStudii[i] = new AbacusTemporis(
-                    _tempusStudiiStudiumHabereMaxima,
-                    _tempusStudiiStudiumHabereMinima,
-                    _tempusStudiiStudiumHabereMedia,
-                    _praeruptioStudiiTempusStudiumHabere
+                    configuratio.TempusStudiiStudiumHabereMaxima,
+                    configuratio.TempusStudiiStudiumHabereMinima,
+                    configuratio.TempusStudiiStudiumHabereMedia,
+                    configuratio.PraeruptioStudiiTempusStudiumHabere
                 );
                 _abacusStudiumAmittereStudii[i] = new AbacusTemporis(
-                    _tempusStudiiStudiumAmittereMaxima,
-                    _tempusStudiiStudiumAmittereMinima,
-                    _tempusStudiiStudiumAmittereMedia,
-                    _praeruptioStudiiTempusStudiumAmittere
+                    configuratio.TempusStudiiStudiumAmittereMaxima,
+                    configuratio.TempusStudiiStudiumAmittereMinima,
+                    configuratio.TempusStudiiStudiumAmittereMedia,
+                    configuratio.PraeruptioStudiiTempusStudiumAmittere
                 );
                 _abacusStudiumHabereIntentionis[i] = new AbacusTemporis(
-                    _tempusIntentionisStudiumHabereMaxima,
-                    _tempusIntentionisStudiumHabereMinima,
-                    _tempusIntentionisStudiumHabereMedia,
-                    _praeruptioIntentionisTempusStudiumHabere
+                    configuratio.TempusIntentionisStudiumHabereMaxima,
+                    configuratio.TempusIntentionisStudiumHabereMinima,
+                    configuratio.TempusIntentionisStudiumHabereMedia,
+                    configuratio.PraeruptioIntentionisTempusStudiumHabere
                 );
                 _abacusStudiumAmittereIntentionis[i] = new AbacusTemporis(
-                    _tempusIntentionisStudiumAmittereMaxima,
-                    _tempusIntentionisStudiumAmittereMinima,
-                    _tempusIntentionisStudiumAmittereMedia,
-                    _praeruptioIntentionisTempusStudiumAmittere
+                    configuratio.TempusIntentionisStudiumAmittereMaxima,
+                    configuratio.TempusIntentionisStudiumAmittereMinima,
+                    configuratio.TempusIntentionisStudiumAmittereMedia,
+                    configuratio.PraeruptioIntentionisTempusStudiumAmittere
                 );
                 _horologiumSuspectaeConservandi[i] = new Horologium(
-                    _tempusSuspectaeConservandi
+                    configuratio.TempusSuspectaeConservandi
                 );
                 _horologiumStudiiConservandi[i] = new Horologium(
-                    _tempusStudiiConservandi
+                    configuratio.TempusStudiiConservandi
                 );
                 _horologiumIntentionisConservandi[i] = new Horologium(
-                    _tempusIntentionisConservandi
+                    configuratio.TempusIntentionisConservandi
                 );
                 _estAugereSuspectae[i] = false;
                 _estAugereStudii[i] = false;

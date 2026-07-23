@@ -1,9 +1,9 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Nucleus.Instrumentarium;
-using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCustodiaeSpectans : StatusCivisCustodiaeIntuitus {
+        private readonly IConfiguratioCivisStatusCustodiaeSpectans _configuratio;
+
         public StatusCivisCustodiaeSpectans(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
@@ -23,15 +23,20 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             temporis,
             configuratio
         ) {
+            _configuratio = configuratio;
         }
 
         public override void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+            Carrus.PostulareVeletudinisCondicionis(
+                idCivis,
+                statusCustodiaeCurrens: IDCivisStatusCustodiae.Spectans
+            );
             // Intuitus起点
             Carrus.PostulareVeletudinisValoris(
                 idCivis,
-                dtSuspecta: 1.0f,
-                dtStudium: 1.0f,
-                dtIntentio: -1.0f
+                dtSuspecta: ResFluidaCivisVeletudinis.SuspectaMaxima(idCivis),
+                dtStudium: ResFluidaCivisVeletudinis.StudiumMaxima(idCivis),
+                dtIntentio: -ResFluidaCivisVeletudinis.IntentioMaxima(idCivis)
             );
             abaciCivisStatus.PurgereIntentionis(idCivis);
             abaciCivisStatus.PurgereStudii(idCivis);
@@ -50,7 +55,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return status;
             }
 
-            if (ResFluidaCivisVeletudinis.Intentio(idCivis) >= 0.5f) {
+            if (ResFluidaCivisVeletudinis.Intentio(idCivis) >= _configuratio.RatioIntentionisAdSequens * ResFluidaCivisVeletudinis.IntentioMaxima(idCivis)) {
                 return IDCivisStatusCustodiae.Sequens;
             }
 

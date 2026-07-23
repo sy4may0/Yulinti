@@ -340,7 +340,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                     estDetectioSonora: s.EstDetectioSonora,
                     estSuspecta: s.EstSuspecta,
                     estSpectareNudusAnterior: s.EstSpectareNudusAnterior,
-                    estSpectareNudusPosterior: s.EstSpectareNudusPosterior
+                    estSpectareNudusPosterior: s.EstSpectareNudusPosterior,
+                    statusCustodiaeCurrens: s.StatusCustodiaeCurrens
                 );
             }
         }

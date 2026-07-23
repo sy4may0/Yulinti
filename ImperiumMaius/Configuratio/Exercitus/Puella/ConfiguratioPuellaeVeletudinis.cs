@@ -10,6 +10,11 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [SerializeField] private float limenRefectaPatientiae = 0.3f;
         [SerializeField] private float velocitasSoniMaxima = 3.0f;
 
+        [Header("Anomalia基準値")]
+        [SerializeField] private float anomaliaBasis = 0f;
+        [Header("AnomaliaNudus基準値")]
+        [SerializeField] private float anomaliaNudusBasis = 100f;
+
         [Header("Vigilantia時、Debecus0.0のVigor減少量(sec)")]
         [SerializeField] private float consumptioVigorisMinimaVigilantia = -0.033f;
         [Header("Vigilantia時、Debecus1.0のVigor減少量(sec)")]
@@ -39,6 +44,9 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         public float LimenExhauritaPatientiae => limenExhauritaPatientiae;
         public float LimenRefectaPatientiae => limenRefectaPatientiae;
         public float VelocitasSoniMaxima => velocitasSoniMaxima;
+
+        public float AnomaliaBasis => anomaliaBasis;
+        public float AnomaliaNudusBasis => anomaliaNudusBasis;
 
         public float ConsumptioVigorisMinimaVigilantia => consumptioVigorisMinimaVigilantia;
         public float ConsumptioVigorisMaximaVigilantia => consumptioVigorisMaximaVigilantia;

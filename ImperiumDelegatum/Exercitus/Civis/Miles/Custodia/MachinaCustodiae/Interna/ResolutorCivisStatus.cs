@@ -1,4 +1,4 @@
-using Yulinti.Nucleus.Contractus;
+using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
@@ -9,7 +9,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float ratio,
             float civisVisus,
             float puellaeClaritas,
-            float puellaeAnomalia,
             AbacusTemporis abacusStudiumHabereSuspectae,
             float intervallum
         ) {
@@ -17,7 +16,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                    ratio * //Ictuumによる距離/視野角補正
                    civisVisus * //Civis視力
                    puellaeClaritas * //PuellaeステートのClaritas補正
-                   puellaeAnomalia * //PuellaeステートのAnomalia補正
                    abacusStudiumHabereSuspectae.ComputareRatio() *
                    intervallum;
         }
@@ -125,6 +123,29 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             return deminutioIntentionis * 
                    abacusStudiumAmittereIntentionis.ComputareRatio() *
                    intervallum;
+        }
+
+        // 補正Anomaliae
+        public static float CorrigereAnomaliae(
+            IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
+            IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
+            int idCivis
+        ) {
+            if (resFluidaCivisVeletudinis.EstSpectareNudus(idCivis)) {
+                return resFluidaPuellaeVeletudinis.AnomaliaNudus;
+            }
+            return resFluidaPuellaeVeletudinis.Anomalia;
+        }
+
+        public static float CorrigereRatioAnomaliae(
+            IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
+            IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
+            int idCivis
+        ) {
+            if (resFluidaCivisVeletudinis.EstSpectareNudus(idCivis)) {
+                return resFluidaPuellaeVeletudinis.RatioAnomaliaeNudus;
+            }
+            return resFluidaPuellaeVeletudinis.RatioAnomaliae;
         }
     }
 }

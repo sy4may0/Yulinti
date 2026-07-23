@@ -80,6 +80,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<MilesPuellaeVestitae>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVigoris>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVeletudinisMaxima>(Lifetime.Singleton);
+            builder.Register<MilesPuellaeVeletudinisAnomaliae>(Lifetime.Singleton);
 
             // Centurio
             builder.Register<CenturioPuellae>(Lifetime.Singleton)

@@ -1,8 +1,10 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal sealed class StatusCivisCustodiaeCircumitus : StatusCivisCustodiaeAttendens {
-        public StatusCivisCustodiaeCircumitus(
+    internal sealed class StatusCivisCustodiaeRefrigerationis : StatusCivisCustodiaeAttendens {
+        private readonly IConfiguratioCivisStatusCustodiaeRefrigerationis _configuratio;
+
+        public StatusCivisCustodiaeRefrigerationis(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             IOstiumCivisLegibile civis,
@@ -11,7 +13,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResolutorCivisDistantia resolutorCivisDistantia,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
-            IConfiguratioCivisStatusCustodiaeCircumitus configuratio
+            IConfiguratioCivisStatusCustodiaeRefrigerationis configuratio
         ) : base(
             resFluidaCivisVeletudinis,
             resFluidaPuellaeVeletudinis,
@@ -22,18 +24,19 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             temporis,
             configuratio
         ) {
+            _configuratio = configuratio;
         }
 
         public override void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
-            // Attendens起点
             Carrus.PostulareVeletudinisCondicionis(
                 idCivis,
-                statusCustodiaeCurrens: IDCivisStatusCustodiae.Circumitus
+                statusCustodiaeCurrens: IDCivisStatusCustodiae.Refrigeratio
             );
+            // Refrigerationis起点
             Carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtSuspecta: -ResFluidaCivisVeletudinis.SuspectaMaxima(idCivis),
-                dtStudium: -ResFluidaCivisVeletudinis.StudiumMaxima(idCivis),
+                dtStudium: ResFluidaCivisVeletudinis.StudiumMaxima(idCivis),
                 dtIntentio: -ResFluidaCivisVeletudinis.IntentioMaxima(idCivis)
             );
             abaciCivisStatus.Purgere(idCivis);
@@ -42,15 +45,31 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public override void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
         }
 
+        public override void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+            base.Ordinare(idCivis, abaciCivisStatus);
+
+            Carrus.PostulareVeletudinisValoris(
+                idCivis,
+                dtStudium: -_configuratio.DeminutioStudiumAdRefrigerationemSec * Temporis.Intervallum
+            );
+        }
+
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
-            // ガード
-            if (!ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) || !ResolutorCivisIctuumVisae.EstVisa(idCivis)) {
-                return IDCivisStatusCustodiae.Nihil;
+            // 距離が上限に達したら解除
+            if (ResolutorCivisDistantia.DistantiaPuellae(idCivis) > _configuratio.DistantiaRefrigerationis) {
+                return IDCivisStatusCustodiae.Circumitus;
             }
 
-            if (ResFluidaCivisVeletudinis.Suspecta(idCivis) >= ResFluidaCivisVeletudinis.SuspectaMaxima(idCivis)) {
-                return IDCivisStatusCustodiae.Vigilantia;
+            // 一定時間で解除
+            if (ResFluidaCivisVeletudinis.Studium(idCivis) <= 0) {
+                return IDCivisStatusCustodiae.Circumitus;
             }
+
+            // 再発覚でSequens
+            if (ResFluidaCivisVeletudinis.Suspecta(idCivis) >= ResFluidaCivisVeletudinis.SuspectaMaxima(idCivis)) {
+                return IDCivisStatusCustodiae.Sequens;
+            }
+
             return IDCivisStatusCustodiae.Nihil;
         }
     }

@@ -15,6 +15,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float IntentioMaxima(int idCivis) => 0f;
         public float TorelantiaAnomaliaeMaximaMaxima(int idCivis) => 0f;
         public float TorelantiaAnomaliaeMinimaMaxima(int idCivis) => 0f;
+        public IDCivisStatusCustodiae StatusCustodiaeCurrens(int idCivis) => IDCivisStatusCustodiae.Circumitus;
         public float Vitae(int idCivis) => 0f;
         public float Visus(int idCivis) => 0f;
         public float Visa(int idCivis) => 0f;

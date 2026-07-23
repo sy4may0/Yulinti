@@ -1,8 +1,8 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal sealed class StatusCivisCustodiaeCircumitus : StatusCivisCustodiaeAttendens {
-        public StatusCivisCustodiaeCircumitus(
+    internal sealed class StatusCivisCustodiaeDiscedens : StatusCivisCustodiaeAttendens {
+        public StatusCivisCustodiaeDiscedens(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             IOstiumCivisLegibile civis,
@@ -11,7 +11,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResolutorCivisDistantia resolutorCivisDistantia,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
-            IConfiguratioCivisStatusCustodiaeCircumitus configuratio
+            IConfiguratioCivisStatusCustodiaeDiscedens configuratio
         ) : base(
             resFluidaCivisVeletudinis,
             resFluidaPuellaeVeletudinis,
@@ -28,7 +28,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // Attendens起点
             Carrus.PostulareVeletudinisCondicionis(
                 idCivis,
-                statusCustodiaeCurrens: IDCivisStatusCustodiae.Circumitus
+                statusCustodiaeCurrens: IDCivisStatusCustodiae.Discedens
             );
             Carrus.PostulareVeletudinisValoris(
                 idCivis,
@@ -43,14 +43,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
-            // ガード
-            if (!ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) || !ResolutorCivisIctuumVisae.EstVisa(idCivis)) {
-                return IDCivisStatusCustodiae.Nihil;
-            }
-
-            if (ResFluidaCivisVeletudinis.Suspecta(idCivis) >= ResFluidaCivisVeletudinis.SuspectaMaxima(idCivis)) {
-                return IDCivisStatusCustodiae.Vigilantia;
-            }
             return IDCivisStatusCustodiae.Nihil;
         }
     }

@@ -1,3 +1,5 @@
+using Yulinti.ImperiumDelegatum.Contractus;
+
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class OrdinatioCivisVeletudinisCondicionis : OrdinatioCivis, IOrdinatioCivisVeletudinisCondicionis {
         private bool? _estVigilantia;
@@ -6,6 +8,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private bool? _estSuspecta;
         private bool? _estSpectareNudusAnterior;
         private bool? _estSpectareNudusPosterior;
+        private IDCivisStatusCustodiae? _statusCustodiaeCurrens;
 
         public OrdinatioCivisVeletudinisCondicionis(int idCivis)
             : base(idCivis, true, SpeciesOrdinatioCivis.VeletudinisSpectare) {
@@ -15,6 +18,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _estSuspecta = null;
             _estSpectareNudusAnterior = null;
             _estSpectareNudusPosterior = null;
+            _statusCustodiaeCurrens = IDCivisStatusCustodiae.Nihil;
         }
 
         public bool? EstVigilantia => _estVigilantia;
@@ -23,6 +27,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public bool? EstSuspecta => _estSuspecta;
         public bool? EstSpectareNudusAnterior => _estSpectareNudusAnterior;
         public bool? EstSpectareNudusPosterior => _estSpectareNudusPosterior;
+        public IDCivisStatusCustodiae? StatusCustodiaeCurrens => _statusCustodiaeCurrens;
 
         public override void Purgere() {
             _estApplicandum = false;
@@ -32,6 +37,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _estSuspecta = null;
             _estSpectareNudusAnterior = null;
             _estSpectareNudusPosterior = null;
+            _statusCustodiaeCurrens = IDCivisStatusCustodiae.Nihil;
         }
         
         public void Pono(
@@ -40,7 +46,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             bool? estDetectioSonora = null,
             bool? estSuspecta = null,
             bool? estSpectareNudusAnterior = null,
-            bool? estSpectareNudusPosterior = null
+            bool? estSpectareNudusPosterior = null,
+            IDCivisStatusCustodiae? statusCustodiaeCurrens = IDCivisStatusCustodiae.Nihil
         ) {
             _estApplicandum = true;
             _estVigilantia = estVigilantia;
@@ -49,6 +56,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _estSuspecta = estSuspecta;
             _estSpectareNudusAnterior = estSpectareNudusAnterior;
             _estSpectareNudusPosterior = estSpectareNudusPosterior;
+            _statusCustodiaeCurrens = statusCustodiaeCurrens;
         }
     }
 }

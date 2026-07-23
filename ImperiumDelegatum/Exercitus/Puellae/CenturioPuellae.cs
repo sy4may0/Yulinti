@@ -8,6 +8,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly MilesPuellaeVestitae _milesPuellaeVestitae;
         private readonly MilesPuellaeVigoris _milesPuellaeVigoris;
         private readonly MilesPuellaeVeletudinisMaxima _milesPuellaeVeletudinisMaxima;
+        private readonly MilesPuellaeVeletudinisAnomaliae _milesPuellaeVeletudinisAnomaliae;
 
         // Carrus
         private readonly CarrusPuellae _carrusPuellae;
@@ -23,6 +24,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             MilesPuellaeVestitae milesPuellaeVestitae,
             MilesPuellaeVigoris milesPuellaeVigoris,
             MilesPuellaeVeletudinisMaxima milesPuellaeVeletudinisMaxima,
+            MilesPuellaeVeletudinisAnomaliae milesPuellaeVeletudinisAnomaliae,
             IResFluidaPuellaeLegibile resFluidaLegibile,
             CarrusPuellae carrusPuellae
         ) {
@@ -53,6 +55,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
             // VeletudinisMaxima計画
             _milesPuellaeVeletudinisMaxima.Ordinare();
+
+            // Anomaliae計画
+            _milesPuellaeVeletudinisAnomaliae.Ordinare();
 
             // Actionis計画
             _milesPuellaeActionis.MutareStatus(_resFluidaLegibile);

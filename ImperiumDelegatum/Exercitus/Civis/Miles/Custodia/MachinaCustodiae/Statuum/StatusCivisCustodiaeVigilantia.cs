@@ -1,6 +1,4 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Nucleus.Instrumentarium;
-using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCustodiaeVigilantia : IStatusCivisCustodiae {
@@ -10,7 +8,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IConfiguratioCivisStatusCustodiaeVigilantia _configuratio;
 
         public StatusCivisCustodiaeVigilantia(
-            IOstiumCivisLegibile civis,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
@@ -23,11 +20,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+            _carrus.PostulareVeletudinisCondicionis(
+                idCivis,
+                statusCustodiaeCurrens: IDCivisStatusCustodiae.Vigilantia
+            );
             _carrus.PostulareVeletudinisValoris(
                 idCivis,
-                dtSuspecta: 1.0f,
-                dtStudium: 1.0f,
-                dtIntentio: -1.0f
+                dtSuspecta: _resFluidaCivisVeletudinis.SuspectaMaxima(idCivis),
+                dtStudium: _resFluidaCivisVeletudinis.StudiumMaxima(idCivis),
+                dtIntentio: -_resFluidaCivisVeletudinis.IntentioMaxima(idCivis)
             );
             abaciCivisStatus.PurgereIntentionis(idCivis);
             abaciCivisStatus.PurgereStudii(idCivis);
@@ -42,8 +43,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _carrus.PostulareVeletudinisValoris(
                 idCivis,
                 dtStudium: -_configuratio.DeminutioStudiumAdIntuitusSec * _temporis.Intervallum,
-                dtSuspecta: 1.0f,
-                dtIntentio: -1.0f
+                dtSuspecta: _resFluidaCivisVeletudinis.SuspectaMaxima(idCivis),
+                dtIntentio: -_resFluidaCivisVeletudinis.IntentioMaxima(idCivis)
             );
         }
 

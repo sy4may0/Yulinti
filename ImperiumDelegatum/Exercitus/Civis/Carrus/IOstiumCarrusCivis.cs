@@ -67,7 +67,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             bool? estDetectioSonora = null,
             bool? estSuspecta = null,
             bool? estSpectareNudusAnterior = null,
-            bool? estSpectareNudusPosterior = null
+            bool? estSpectareNudusPosterior = null,
+            IDCivisStatusCustodiae? statusCustodiaeCurrens = IDCivisStatusCustodiae.Nihil
         );
     }
 }

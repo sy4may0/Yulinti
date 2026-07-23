@@ -6,8 +6,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         Spectans,
         Sequens,
         Quaerens,
-        RefrigeratioSuspectio,
-        RefrigeratioVigilantia,
+        Refrigeratio,
         Discedens,
     }
 }
