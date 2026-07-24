@@ -6,18 +6,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             IOstiumCivisLegibile civis,
-            IResolutorCivisIctuumAuditae resolutorCivisIctuumAuditae,
-            IResolutorCivisIctuumVisae resolutorCivisIctuumVisae,
-            IResolutorCivisDistantia resolutorCivisDistantia,
+            IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
-            IConfiguratioCivisStatusCustodiaeCircumitus configuratio
+            IConfiguratioCivisCustodiaeStatusCircumitus configuratio
         ) : base(
             resFluidaCivisVeletudinis,
             resFluidaPuellaeVeletudinis,
-            resolutorCivisIctuumAuditae,
-            resolutorCivisIctuumVisae,
-            resolutorCivisDistantia,
+            resFluidaCivisCustodiae,
             carrus,
             temporis,
             configuratio
@@ -44,7 +40,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
             // ガード
-            if (!ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) || !ResolutorCivisIctuumVisae.EstVisa(idCivis)) {
+            if (!ResFluidaCivisCustodiae.EstCustodiaeVisae(idCivis) || !ResFluidaCivisCustodiae.EstVisa(idCivis)) {
                 return IDCivisStatusCustodiae.Nihil;
             }
 

@@ -5,13 +5,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumCarrusCivis _carrus;
         private readonly IOstiumTemporisLegibile _temporis;
         private readonly IResFluidaCivisVeletudinisLegibile _resFluidaCivisVeletudinis;
-        private readonly IConfiguratioCivisStatusCustodiaeVigilantia _configuratio;
+        private readonly IConfiguratioCivisCustodiaeStatusVigilantia _configuratio;
 
         public StatusCivisCustodiaeVigilantia(
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
-            IConfiguratioCivisStatusCustodiaeVigilantia configuratio
+            IConfiguratioCivisCustodiaeStatusVigilantia configuratio
         ) {
             _carrus = carrus;
             _temporis = temporis;

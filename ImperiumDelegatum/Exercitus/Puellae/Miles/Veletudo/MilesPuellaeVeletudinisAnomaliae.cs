@@ -13,6 +13,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _carrus = carrus;
         }
 
+        public void Initare() {
+            // 基本値を設定
+            _carrus.PostulareVeletudinis(
+                dtAnomalia: _configuratio.AnomaliaBasis,
+                dtAnomaliaNudus: _configuratio.AnomaliaNudusBasis
+            );
+        }
+
         public void Ordinare() {
             // 基本値を設定
             _carrus.PostulareVeletudinis(

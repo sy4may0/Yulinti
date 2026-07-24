@@ -41,8 +41,8 @@ Miles(市民)の警戒挙動を制御するステートマシン(`MachinaCustodi
 
 | 条件 | 判定 |
 |---|---|
-| 視認中 | `IResolutorCivisDistantia.EstCustodiaeVisae && IResolutorCivisIctuumVisae.EstVisa` |
-| 聴取中 | `IResolutorCivisDistantia.EstCustodiaeAuditae && IResolutorCivisIctuumAuditae.EstAudita` |
+| 視認中 | `IResFluidaCivisCustodiaeLegibile.EstCustodiaeVisae && IResFluidaCivisCustodiaeLegibile.EstVisa` |
+| 聴取中 | `IResFluidaCivisCustodiaeLegibile.EstCustodiaeAuditae && IResFluidaCivisCustodiaeLegibile.EstAudita` |
 
 ---
 

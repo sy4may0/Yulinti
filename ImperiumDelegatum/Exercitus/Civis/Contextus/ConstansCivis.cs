@@ -9,6 +9,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public const int LongitudoOrdinatioVeletudinisMaxima = 12;
         public const int LongitudoOrdinatioMortis = 6;
         public const int LongitudoOrdinatioVeletudinisCondicionis = 12;
+        public const int LongitudoOrdinatioCustodiae = 32;
 
         // Custodiaeの各種定数
         public const int LongitudoSigmoidStudiumAmittere = 256;

@@ -3,9 +3,9 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumMaius.Configuratio {
     [CreateAssetMenu(
-        fileName = "ConfiguratioCivisStatusCustodiaeSpectans",
-        menuName = "Yulinti/Configuratio/Exercitus/Civis/StatusCustodiae/Spectans")]
-    public sealed class ConfiguratioCivisStatusCustodiaeSpectans : ConfiguratioCivisStatusCustodiaeIntuitusBasis, IConfiguratioCivisStatusCustodiaeSpectans {
+        fileName = "ConfiguratioCivisCustodiaeStatusSpectans",
+        menuName = "Yulinti/Configuratio/Exercitus/Civis/CustodiaeStatus/Spectans")]
+    public sealed class ConfiguratioCivisCustodiaeStatusSpectans : ConfiguratioCivisCustodiaeStatusIntuitusBasis, IConfiguratioCivisCustodiaeStatusSpectans {
         [Header("Intentio がこの割合(対Maxima)以上で Sequens へ")]
         [SerializeField] private float ratioIntentionisAdSequens = 0.5f;
 

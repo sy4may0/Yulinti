@@ -10,6 +10,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly ExecutorCivisLoci _exLoci;
         private readonly ExecutorCivisVeletudinis _exVeletudinis;
         private readonly ExecutorCivisMortis _exMortis;
+        private readonly ExecutorCivisCustodiae _exCustodiae;
 
         private readonly LacusOrdinatioCivis _lacusOrdinatioCivis;
 
@@ -18,12 +19,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ExecutorCivisAnimationis exAnimationis,
             ExecutorCivisLoci exLoci,
             ExecutorCivisVeletudinis exVeletudinis,
-            ExecutorCivisMortis exMortis
+            ExecutorCivisMortis exMortis,
+            ExecutorCivisCustodiae exCustodiae
         ) {
             _exAnimationis = exAnimationis;
             _exLoci = exLoci;
             _exVeletudinis = exVeletudinis;
             _exMortis = exMortis;
+            _exCustodiae = exCustodiae;
             _lacusOrdinatioCivis = new LacusOrdinatioCivis(ostiumCivisLegibile.Longitudo);
         }
 
@@ -32,6 +35,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exLoci.Primum(idCivis);
             _exVeletudinis.Primum(idCivis);
             _exMortis.Primum(idCivis);
+            _exCustodiae.Primum(idCivis);
         }
 
         public void Initare(int idCivis) {
@@ -39,6 +43,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exLoci.Initare(idCivis);
             _exVeletudinis.Initare(idCivis);
             _exMortis.Initare(idCivis);
+            _exCustodiae.Initare(idCivis);
        }
 
         private void ConfirmareAnimationis(int idCivis) {
@@ -64,6 +69,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _lacusOrdinatioCivis.ColligereMortis(idCivis);
         }
 
+        private void ConfirmareCustodiae(int idCivis) {
+            _exCustodiae.Confirmare(idCivis);
+            _lacusOrdinatioCivis.ColligereCustodiae(idCivis);
+        }
+
         // Incipereの最後に実行 Civis生成時で適用が必要なケースはここでやる。
         public void ConfirmareIncipabilis(int idCivis) {
             ConfirmareLoci(idCivis);
@@ -82,6 +92,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public void ConfirmareTardus(int idCivis) {
             // Veletudinisを適用
             ConfirmareVeletudinisValoris(idCivis);
+            // Custodiaを適用
+            ConfirmareCustodiae(idCivis);
 
             _lacusOrdinatioCivis.ColligereOmnia(idCivis);
         }
@@ -96,6 +108,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exLoci.Purgare(idCivis);
             _exVeletudinis.Purgare(idCivis);
             _exMortis.Purgare(idCivis);
+            _exCustodiae.Purgare(idCivis);
             _lacusOrdinatioCivis.ColligereOmnia(idCivis);
         }
 
@@ -138,9 +151,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             float dtVitae = 0f,
             float dtVisus = 0f,
-            float dtVisa = 0f,
             float dtAuditus = 0f,
-            float dtAudita = 0f,
             float dtSuspecta = 0f,
             float dtStudium = 0f,
             float dtIntentio = 0f,
@@ -149,7 +160,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             if (_lacusOrdinatioCivis.EmittareVeletudinisValoris(idCivis, out var ordinatio)) {
                 ordinatio.Pono(
-                    dtVitae, dtVisus, dtVisa, dtAuditus, dtAudita, dtSuspecta, dtStudium,
+                    dtVitae, dtVisus, dtAuditus, dtSuspecta, dtStudium,
                     dtIntentio, dtTorelantiaAnomaliaeMaxima, dtTorelantiaAnomaliaeMinima
                 );
                 _exVeletudinis.Executare(idCivis, ordinatio);
@@ -160,9 +171,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             float dtVitaeMaxima = 0f,
             float dtVisusMaxima = 0f,
-            float dtVisaMaxima = 0f,
             float dtAuditusMaxima = 0f,
-            float dtAuditaMaxima = 0f,
             float dtSuspectaMaxima = 0f,
             float dtStudiumMaxima = 0f,
             float dtIntentioMaxima = 0f,
@@ -171,9 +180,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             if (_lacusOrdinatioCivis.EmittareVeletudinisMaxima(idCivis, out var ordinatio)) {
                 ordinatio.Pono(
-                    dtVitaeMaxima, dtVisusMaxima, dtVisaMaxima,
-                    dtAuditusMaxima, dtAuditaMaxima, dtSuspectaMaxima, dtStudiumMaxima,
-                    dtIntentioMaxima, dtTorelantiaAnomaliaeMaximaMaxima, dtTorelantiaAnomaliaeMinimaMaxima
+                    dtVitaeMaxima, dtVisusMaxima, dtAuditusMaxima,
+                    dtSuspectaMaxima, dtStudiumMaxima, dtIntentioMaxima,
+                    dtTorelantiaAnomaliaeMaximaMaxima, dtTorelantiaAnomaliaeMinimaMaxima
                 );
                 _exVeletudinis.Executare(idCivis, ordinatio);
             }
@@ -191,20 +200,57 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void PostulareVeletudinisCondicionis(
             int idCivis,
-            bool? estVigilantia = null,
-            bool? estDetectio = null,
-            bool? estDetectioSonora = null,
-            bool? estSuspecta = null,
             bool? estSpectareNudusAnterior = null,
             bool? estSpectareNudusPosterior = null,
             IDCivisStatusCustodiae? statusCustodiaeCurrens = IDCivisStatusCustodiae.Nihil
         ) {
             if (_lacusOrdinatioCivis.EmittareVeletudinisCondicionis(idCivis, out var ordinatio)) {
                 ordinatio.Pono(
-                    estVigilantia, estDetectio, estDetectioSonora, estSuspecta,
                     estSpectareNudusAnterior, estSpectareNudusPosterior, statusCustodiaeCurrens
                 );
                 _exVeletudinis.Executare(idCivis, ordinatio);
+            }
+        }
+
+        public void PostulareCustodiaeDistantia(
+            int idCivis,
+            float distantiaPuellae,
+            bool estCustodiaeVisae,
+            bool estCustodiaeAuditae
+        ) {
+            if (_lacusOrdinatioCivis.EmittareCustodiae(idCivis, out var ordinatio)) {
+                ordinatio.Pono(
+                    distantiaPuellae: distantiaPuellae,
+                    estCustodiaeVisae: estCustodiaeVisae,
+                    estCustodiaeAuditae: estCustodiaeAuditae
+                );
+                _exCustodiae.Executare(idCivis, ordinatio);
+            }
+        }
+
+        public void PostulareCustodiaeIctuumVisae(
+            int idCivis,
+            float visaCapitis,
+            float visaCorporis
+        ) {
+            if (_lacusOrdinatioCivis.EmittareCustodiae(idCivis, out var ordinatio)) {
+                ordinatio.Pono(
+                    visaCapitis: visaCapitis,
+                    visaCorporis: visaCorporis
+                );
+                _exCustodiae.Executare(idCivis, ordinatio);
+            }
+        }
+
+        public void PostulareCustodiaeIctuumAuditae(
+            int idCivis,
+            float audita
+        ) {
+            if (_lacusOrdinatioCivis.EmittareCustodiae(idCivis, out var ordinatio)) {
+                ordinatio.Pono(
+                    audita: audita
+                );
+                _exCustodiae.Executare(idCivis, ordinatio);
             }
         }
     }

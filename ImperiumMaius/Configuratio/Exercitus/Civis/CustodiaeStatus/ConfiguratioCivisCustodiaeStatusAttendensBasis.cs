@@ -3,7 +3,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumMaius.Configuratio {
     // Attendens系ステート(Circumitus/Discedens/Quaerens/Refrigerationis/Intuitus系)の共通設定。
-    public abstract class ConfiguratioCivisStatusCustodiaeAttendensBasis : ScriptableObject, IConfiguratioCivisStatusCustodiaeAttendens {
+    public abstract class ConfiguratioCivisCustodiaeStatusAttendensBasis : ScriptableObject, IConfiguratioCivisCustodiaeStatusAttendens {
         [Header("Suspecta 増減量(毎秒)")]
         [SerializeField] private float augmentumSuspectaeVisaeSec = 0.5f;
         [SerializeField] private float augmentumSuspectaeAuditaeSec = 0.3f;

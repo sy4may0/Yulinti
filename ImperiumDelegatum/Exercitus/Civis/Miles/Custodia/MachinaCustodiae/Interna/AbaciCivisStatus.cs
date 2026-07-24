@@ -22,7 +22,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public AbaciCivisStatus(
             IOstiumCivisLegibile civis,
-            IConfiguratioCivisStatusCustodiaeCommunis configuratio
+            IConfiguratioCivisCustodiaeStatusCommunis configuratio
         ) {
             _longitudo = civis.Longitudo;
             _abacusStudiumHabereSuspectae = new AbacusTemporis[_longitudo];

@@ -8,36 +8,32 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IDCivisStatusCustodiae[] _statusCustodiaeCurrens;
 
         public MachinaCivisCustodiae(
-            IConfiguratioCivisStatusCustodiae configuratioCivisStatusCustodiae,
+            IConfiguratioCivisCustodiaeStatus configuratioCivisStatusCustodiae,
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             IOstiumCivisLegibile civis,
-            IResolutorCivisIctuumAuditae resolutorCivisIctuumAuditae,
-            IResolutorCivisIctuumVisae resolutorCivisIctuumVisae,
-            IResolutorCivisDistantia resolutorCivisDistantia,
+            IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis
         ) {
             _tabulaCivisStatusCustodiae = new TabulaCivisStatusCustodiae(
-                configuratioCivisStatusCustodiae.ConfiguratioStatusCustodiaeCircumitus,
-                configuratioCivisStatusCustodiae.ConfiguratioStatusCustodiaeVigilantia,
-                configuratioCivisStatusCustodiae.ConfiguratioStatusCustodiaeSpectans,
-                configuratioCivisStatusCustodiae.ConfiguratioStatusCustodiaeSequens,
-                configuratioCivisStatusCustodiae.ConfiguratioStatusCustodiaeQuaerens,
-                configuratioCivisStatusCustodiae.ConfiguratioStatusCustodiaeRefrigerationis,
-                configuratioCivisStatusCustodiae.ConfiguratioStatusCustodiaeDiscedens,
+                configuratioCivisStatusCustodiae.ConfiguratioCustodiaeStatusCircumitus,
+                configuratioCivisStatusCustodiae.ConfiguratioCustodiaeStatusVigilantia,
+                configuratioCivisStatusCustodiae.ConfiguratioCustodiaeStatusSpectans,
+                configuratioCivisStatusCustodiae.ConfiguratioCustodiaeStatusSequens,
+                configuratioCivisStatusCustodiae.ConfiguratioCustodiaeStatusQuaerens,
+                configuratioCivisStatusCustodiae.ConfiguratioCustodiaeStatusRefrigerationis,
+                configuratioCivisStatusCustodiae.ConfiguratioCustodiaeStatusDiscedens,
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
                 civis,
-                resolutorCivisIctuumAuditae,
-                resolutorCivisIctuumVisae,
-                resolutorCivisDistantia,
+                resFluidaCivisCustodiae,
                 carrus,
                 temporis
             );
             _abaciCivisStatus = new AbaciCivisStatus(
                 civis,
-                configuratioCivisStatusCustodiae.ConfiguratioStatusCustodiaeCommunis
+                configuratioCivisStatusCustodiae.ConfiguratioCustodiaeStatusCommunis
             );
             _longitudo = civis.Longitudo;
             _statusCustodiaeCurrens = new IDCivisStatusCustodiae[_longitudo];

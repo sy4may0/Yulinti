@@ -3,9 +3,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumCarrusCivis _carrus;
         private readonly IResolutorCivisVitaeMaxima _resolutorCivisVitaeMaxima;
         private readonly IResolutorCivisVisusMaxima _resolutorCivisVisusMaxima;
-        private readonly IResolutorCivisVisaMaxima _resolutorCivisVisaMaxima;
         private readonly IResolutorCivisAuditusMaxima _resolutorCivisAuditusMaxima;
-        private readonly IResolutorCivisAuditaMaxima _resolutorCivisAuditaMaxima;
         private readonly IResolutorCivisSuspectaMaxima _resolutorCivisSuspectaMaxima;
         private readonly IResolutorCivisStudiumMaxima _resolutorCivisStudiumMaxima;
         private readonly IResolutorCivisIntentioMaxima _resolutorCivisIntentioMaxima;
@@ -14,9 +12,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         private float _vitaeMaxima;
         private float _visusMaxima;
-        private float _visaMaxima;
         private float _auditusMaxima;
-        private float _auditaMaxima;
         private float _suspectaMaxima;
         private float _studiumMaxima;
         private float _intentioMaxima;
@@ -25,9 +21,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IOstiumCarrusCivis carrus,
             IResolutorCivisVitaeMaxima resolutorCivisVitaeMaxima,
             IResolutorCivisVisusMaxima resolutorCivisVisusMaxima,
-            IResolutorCivisVisaMaxima resolutorCivisVisaMaxima,
             IResolutorCivisAuditusMaxima resolutorCivisAuditusMaxima,
-            IResolutorCivisAuditaMaxima resolutorCivisAuditaMaxima,
             IResolutorCivisSuspectaMaxima resolutorCivisSuspectaMaxima,
             IResolutorCivisStudiumMaxima resolutorCivisStudiumMaxima,
             IResolutorCivisIntentioMaxima resolutorCivisIntentioMaxima,
@@ -37,9 +31,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _carrus = carrus;
             _resolutorCivisVitaeMaxima = resolutorCivisVitaeMaxima;
             _resolutorCivisVisusMaxima = resolutorCivisVisusMaxima;
-            _resolutorCivisVisaMaxima = resolutorCivisVisaMaxima;
             _resolutorCivisAuditusMaxima = resolutorCivisAuditusMaxima;
-            _resolutorCivisAuditaMaxima = resolutorCivisAuditaMaxima;
             _resolutorCivisSuspectaMaxima = resolutorCivisSuspectaMaxima;
             _resolutorCivisStudiumMaxima = resolutorCivisStudiumMaxima;
             _resolutorCivisIntentioMaxima = resolutorCivisIntentioMaxima;
@@ -52,9 +44,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // TorelantiaはPuellaeのAnomaliaMaximaに追従するため毎フレームResolvereする。
             _vitaeMaxima = _resolutorCivisVitaeMaxima.Resolvere();
             _visusMaxima = _resolutorCivisVisusMaxima.Resolvere();
-            _visaMaxima = _resolutorCivisVisaMaxima.Resolvere();
             _auditusMaxima = _resolutorCivisAuditusMaxima.Resolvere();
-            _auditaMaxima = _resolutorCivisAuditaMaxima.Resolvere();
             _suspectaMaxima = _resolutorCivisSuspectaMaxima.Resolvere();
             _studiumMaxima = _resolutorCivisStudiumMaxima.Resolvere();
             _intentioMaxima = _resolutorCivisIntentioMaxima.Resolvere();
@@ -66,9 +56,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 idCivis,
                 dtVitaeMaxima: _vitaeMaxima,
                 dtVisusMaxima: _visusMaxima,
-                dtVisaMaxima: _visaMaxima,
                 dtAuditusMaxima: _auditusMaxima,
-                dtAuditaMaxima: _auditaMaxima,
                 dtSuspectaMaxima: _suspectaMaxima,
                 dtStudiumMaxima: _studiumMaxima,
                 dtIntentioMaxima: _intentioMaxima,

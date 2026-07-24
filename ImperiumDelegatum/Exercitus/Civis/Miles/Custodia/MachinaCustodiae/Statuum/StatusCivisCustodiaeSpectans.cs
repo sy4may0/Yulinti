@@ -2,23 +2,19 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCustodiaeSpectans : StatusCivisCustodiaeIntuitus {
-        private readonly IConfiguratioCivisStatusCustodiaeSpectans _configuratio;
+        private readonly IConfiguratioCivisCustodiaeStatusSpectans _configuratio;
 
         public StatusCivisCustodiaeSpectans(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
-            IResolutorCivisIctuumAuditae resolutorCivisIctuumAuditae,
-            IResolutorCivisIctuumVisae resolutorCivisIctuumVisae,
-            IResolutorCivisDistantia resolutorCivisDistantia,
+            IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
-            IConfiguratioCivisStatusCustodiaeSpectans configuratio
+            IConfiguratioCivisCustodiaeStatusSpectans configuratio
         ) : base(
             resFluidaCivisVeletudinis,
             resFluidaPuellaeVeletudinis,
-            resolutorCivisIctuumAuditae,
-            resolutorCivisIctuumVisae,
-            resolutorCivisDistantia,
+            resFluidaCivisCustodiae,
             carrus,
             temporis,
             configuratio

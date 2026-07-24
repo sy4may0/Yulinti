@@ -5,18 +5,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public StatusCivisCustodiaeSequens(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
-            IResolutorCivisIctuumAuditae resolutorCivisIctuumAuditae,
-            IResolutorCivisIctuumVisae resolutorCivisIctuumVisae,
-            IResolutorCivisDistantia resolutorCivisDistantia,
+            IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
-            IConfiguratioCivisStatusCustodiaeSequens configuratio
+            IConfiguratioCivisCustodiaeStatusSequens configuratio
         ) : base(
             resFluidaCivisVeletudinis,
             resFluidaPuellaeVeletudinis,
-            resolutorCivisIctuumAuditae,
-            resolutorCivisIctuumVisae,
-            resolutorCivisDistantia,
+            resFluidaCivisCustodiae,
             carrus,
             temporis,
             configuratio

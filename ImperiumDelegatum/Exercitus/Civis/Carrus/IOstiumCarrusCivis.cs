@@ -31,9 +31,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             float dtVitae = 0f,
             float dtVisus = 0f,
-            float dtVisa = 0f,
             float dtAuditus = 0f,
-            float dtAudita = 0f,
             float dtSuspecta = 0f,
             float dtStudium = 0f,
             float dtIntentio = 0f,
@@ -45,9 +43,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             float dtVitaeMaxima = 0f,
             float dtVisusMaxima = 0f,
-            float dtVisaMaxima = 0f,
             float dtAuditusMaxima = 0f,
-            float dtAuditaMaxima = 0f,
             float dtSuspectaMaxima = 0f,
             float dtStudiumMaxima = 0f,
             float dtIntentioMaxima = 0f,
@@ -62,13 +58,27 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         void PostulareVeletudinisCondicionis(
             int idCivis,
-            bool? estVigilantia = null,
-            bool? estDetectio = null,
-            bool? estDetectioSonora = null,
-            bool? estSuspecta = null,
             bool? estSpectareNudusAnterior = null,
             bool? estSpectareNudusPosterior = null,
             IDCivisStatusCustodiae? statusCustodiaeCurrens = IDCivisStatusCustodiae.Nihil
+        );
+
+        void PostulareCustodiaeDistantia(
+            int idCivis,
+            float distantiaPuellae,
+            bool estCustodiaeVisae,
+            bool estCustodiaeAuditae
+        );
+
+        void PostulareCustodiaeIctuumVisae(
+            int idCivis,
+            float visaCapitis,
+            float visaCorporis
+        );
+
+        void PostulareCustodiaeIctuumAuditae(
+            int idCivis,
+            float audita
         );
     }
 }

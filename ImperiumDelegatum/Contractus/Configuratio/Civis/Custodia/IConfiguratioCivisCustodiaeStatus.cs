@@ -1,16 +1,16 @@
 namespace Yulinti.ImperiumDelegatum.Contractus {
-    public interface IConfiguratioCivisStatusCustodiae {
-        IConfiguratioCivisStatusCustodiaeCommunis ConfiguratioStatusCustodiaeCommunis { get; }
-        IConfiguratioCivisStatusCustodiaeCircumitus ConfiguratioStatusCustodiaeCircumitus { get; }
-        IConfiguratioCivisStatusCustodiaeVigilantia ConfiguratioStatusCustodiaeVigilantia { get; }
-        IConfiguratioCivisStatusCustodiaeSpectans ConfiguratioStatusCustodiaeSpectans { get; }
-        IConfiguratioCivisStatusCustodiaeSequens ConfiguratioStatusCustodiaeSequens { get; }
-        IConfiguratioCivisStatusCustodiaeQuaerens ConfiguratioStatusCustodiaeQuaerens { get; }
-        IConfiguratioCivisStatusCustodiaeDiscedens ConfiguratioStatusCustodiaeDiscedens { get; }
-        IConfiguratioCivisStatusCustodiaeRefrigerationis ConfiguratioStatusCustodiaeRefrigerationis { get; }
+    public interface IConfiguratioCivisCustodiaeStatus {
+        IConfiguratioCivisCustodiaeStatusCommunis ConfiguratioCustodiaeStatusCommunis { get; }
+        IConfiguratioCivisCustodiaeStatusCircumitus ConfiguratioCustodiaeStatusCircumitus { get; }
+        IConfiguratioCivisCustodiaeStatusVigilantia ConfiguratioCustodiaeStatusVigilantia { get; }
+        IConfiguratioCivisCustodiaeStatusSpectans ConfiguratioCustodiaeStatusSpectans { get; }
+        IConfiguratioCivisCustodiaeStatusSequens ConfiguratioCustodiaeStatusSequens { get; }
+        IConfiguratioCivisCustodiaeStatusQuaerens ConfiguratioCustodiaeStatusQuaerens { get; }
+        IConfiguratioCivisCustodiaeStatusDiscedens ConfiguratioCustodiaeStatusDiscedens { get; }
+        IConfiguratioCivisCustodiaeStatusRefrigerationis ConfiguratioCustodiaeStatusRefrigerationis { get; }
     }
 
-    public interface IConfiguratioCivisStatusCustodiaeCommunis {
+    public interface IConfiguratioCivisCustodiaeStatusCommunis {
         float TempusSuspectaeStudiumHabereMaxima { get; }
         float TempusSuspectaeStudiumHabereMedia { get; }
         float TempusSuspectaeStudiumHabereMinima { get; }
@@ -40,7 +40,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float TempusIntentionisConservandi { get; }
     }
 
-    public interface IConfiguratioCivisStatusCustodiaeAttendens {
+    public interface IConfiguratioCivisCustodiaeStatusAttendens {
         float AugmentumSuspectaeVisaeSec { get; }
         float AugmentumSuspectaeAuditaeSec { get; }
         float DeminutioSuspectaeSec { get; }
@@ -50,7 +50,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float AnomaliaeMinimaAdVigilantiam { get; }
     }
 
-    public interface IConfiguratioCivisStatusCustodiaeIntuitus : IConfiguratioCivisStatusCustodiaeAttendens {
+    public interface IConfiguratioCivisCustodiaeStatusIntuitus : IConfiguratioCivisCustodiaeStatusAttendens {
         float AugmentumIntentionisSec { get; }
         float DeminutioIntentionisSec { get; }
         float AugmentumStudiumSec { get; }
@@ -61,29 +61,29 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float RatioSuspectaeMinimaAdQuaerens { get; }
     }
 
-    public interface IConfiguratioCivisStatusCustodiaeCircumitus : IConfiguratioCivisStatusCustodiaeAttendens {
+    public interface IConfiguratioCivisCustodiaeStatusCircumitus : IConfiguratioCivisCustodiaeStatusAttendens {
     }
 
-    public interface IConfiguratioCivisStatusCustodiaeVigilantia {
+    public interface IConfiguratioCivisCustodiaeStatusVigilantia {
         float DeminutioStudiumAdIntuitusSec { get; }
     }
 
-    public interface IConfiguratioCivisStatusCustodiaeSpectans : IConfiguratioCivisStatusCustodiaeIntuitus {
+    public interface IConfiguratioCivisCustodiaeStatusSpectans : IConfiguratioCivisCustodiaeStatusIntuitus {
         // Intentio がこの割合(対Maxima)以上になると Sequens へ遷移する。
         float RatioIntentionisAdSequens { get; }
     }
 
-    public interface IConfiguratioCivisStatusCustodiaeSequens : IConfiguratioCivisStatusCustodiaeIntuitus {
+    public interface IConfiguratioCivisCustodiaeStatusSequens : IConfiguratioCivisCustodiaeStatusIntuitus {
     }
 
-    public interface IConfiguratioCivisStatusCustodiaeQuaerens : IConfiguratioCivisStatusCustodiaeAttendens {
+    public interface IConfiguratioCivisCustodiaeStatusQuaerens : IConfiguratioCivisCustodiaeStatusAttendens {
         float DeminutioStudiumAdCassationemSec { get; }
     }
 
-    public interface IConfiguratioCivisStatusCustodiaeDiscedens : IConfiguratioCivisStatusCustodiaeAttendens {
+    public interface IConfiguratioCivisCustodiaeStatusDiscedens : IConfiguratioCivisCustodiaeStatusAttendens {
     }
 
-    public interface IConfiguratioCivisStatusCustodiaeRefrigerationis : IConfiguratioCivisStatusCustodiaeAttendens {
+    public interface IConfiguratioCivisCustodiaeStatusRefrigerationis : IConfiguratioCivisCustodiaeStatusAttendens {
         float DistantiaRefrigerationis { get; }
         float DeminutioStudiumAdRefrigerationemSec { get; }
     }

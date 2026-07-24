@@ -2,25 +2,21 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal abstract class StatusCivisCustodiaeIntuitus : StatusCivisCustodiaeAttendens {
-        private readonly IConfiguratioCivisStatusCustodiaeIntuitus _configuratio;
+        private readonly IConfiguratioCivisCustodiaeStatusIntuitus _configuratio;
 
-        protected IConfiguratioCivisStatusCustodiaeIntuitus ConfiguratioIntuitus => _configuratio;
+        protected IConfiguratioCivisCustodiaeStatusIntuitus ConfiguratioIntuitus => _configuratio;
 
         protected StatusCivisCustodiaeIntuitus(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
-            IResolutorCivisIctuumAuditae resolutorCivisIctuumAuditae,
-            IResolutorCivisIctuumVisae resolutorCivisIctuumVisae,
-            IResolutorCivisDistantia resolutorCivisDistantia,
+            IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
-            IConfiguratioCivisStatusCustodiaeIntuitus configuratio
+            IConfiguratioCivisCustodiaeStatusIntuitus configuratio
         ) : base(
             resFluidaCivisVeletudinis,
             resFluidaPuellaeVeletudinis,
-            resolutorCivisIctuumAuditae,
-            resolutorCivisIctuumVisae,
-            resolutorCivisDistantia,
+            resFluidaCivisCustodiae,
             carrus,
             temporis,
             configuratio
@@ -41,8 +37,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float torelantiaAnomaliaeMinima = ResFluidaCivisVeletudinis.RatioTorelantiaAnomaliaeMinima(idCivis);
 
             bool estAugere = (
-                ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) &&
-                ResolutorCivisIctuumVisae.EstVisa(idCivis) &&
+                ResFluidaCivisCustodiae.EstCustodiaeVisae(idCivis) &&
+                ResFluidaCivisCustodiae.EstVisa(idCivis) &&
                 puellaeAnomaliae <= torelantiaAnomaliaeMaxima &&
                 puellaeAnomaliae >= torelantiaAnomaliaeMinima
             );
@@ -52,7 +48,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             if (estAugere) {
                 return ResolutorCivisStatus.AugereIntentionisIntuitus(
                     augmentumIntentionis: _configuratio.AugmentumIntentionisSec,
-                    ratio: ResolutorCivisIctuumVisae.RatioVisus(idCivis),
+                    ratio: ResFluidaCivisCustodiae.RatioVisus(idCivis),
                     puellaeAnomalia: puellaeAnomaliae,
                     torelantiaAnomaliaeMaxima: torelantiaAnomaliaeMaxima,
                     torelantiaAnomaliaeMinima: torelantiaAnomaliaeMinima,
@@ -81,8 +77,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float torelantiaAnomaliaeMinima = ResFluidaCivisVeletudinis.RatioTorelantiaAnomaliaeMinima(idCivis);
 
             bool estAugere = (
-                ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) &&
-                ResolutorCivisIctuumVisae.EstVisa(idCivis) &&
+                ResFluidaCivisCustodiae.EstCustodiaeVisae(idCivis) &&
+                ResFluidaCivisCustodiae.EstVisa(idCivis) &&
                 puellaeAnomaliae <= torelantiaAnomaliaeMaxima &&
                 puellaeAnomaliae >= torelantiaAnomaliaeMinima
             );
@@ -126,8 +122,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
 
             if (
-                !ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) ||
-                !ResolutorCivisIctuumVisae.EstVisa(idCivis)
+                !ResFluidaCivisCustodiae.EstCustodiaeVisae(idCivis) ||
+                !ResFluidaCivisCustodiae.EstVisa(idCivis)
             ) {
                 Carrus.PostulareVeletudinisValoris(
                     idCivis,

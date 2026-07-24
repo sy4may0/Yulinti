@@ -3,9 +3,9 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumMaius.Configuratio {
     [CreateAssetMenu(
-        fileName = "ConfiguratioCivisStatusCustodiaeCommunis",
-        menuName = "Yulinti/Configuratio/Exercitus/Civis/StatusCustodiae/Communis")]
-    public sealed class ConfiguratioCivisStatusCustodiaeCommunis : ScriptableObject, IConfiguratioCivisStatusCustodiaeCommunis {
+        fileName = "ConfiguratioCivisCustodiaeStatusCommunis",
+        menuName = "Yulinti/Configuratio/Exercitus/Civis/CustodiaeStatus/Communis")]
+    public sealed class ConfiguratioCivisCustodiaeStatusCommunis : ScriptableObject, IConfiguratioCivisCustodiaeStatusCommunis {
         [Header("Suspecta: 興味あり(Habere)の時間補正")]
         [SerializeField] private float tempusSuspectaeStudiumHabereMaxima = 10f;
         [SerializeField] private float tempusSuspectaeStudiumHabereMedia = 5f;

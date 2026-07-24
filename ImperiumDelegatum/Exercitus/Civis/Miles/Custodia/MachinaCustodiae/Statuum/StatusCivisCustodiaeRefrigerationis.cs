@@ -2,24 +2,20 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCustodiaeRefrigerationis : StatusCivisCustodiaeAttendens {
-        private readonly IConfiguratioCivisStatusCustodiaeRefrigerationis _configuratio;
+        private readonly IConfiguratioCivisCustodiaeStatusRefrigerationis _configuratio;
 
         public StatusCivisCustodiaeRefrigerationis(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             IOstiumCivisLegibile civis,
-            IResolutorCivisIctuumAuditae resolutorCivisIctuumAuditae,
-            IResolutorCivisIctuumVisae resolutorCivisIctuumVisae,
-            IResolutorCivisDistantia resolutorCivisDistantia,
+            IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
-            IConfiguratioCivisStatusCustodiaeRefrigerationis configuratio
+            IConfiguratioCivisCustodiaeStatusRefrigerationis configuratio
         ) : base(
             resFluidaCivisVeletudinis,
             resFluidaPuellaeVeletudinis,
-            resolutorCivisIctuumAuditae,
-            resolutorCivisIctuumVisae,
-            resolutorCivisDistantia,
+            resFluidaCivisCustodiae,
             carrus,
             temporis,
             configuratio
@@ -56,7 +52,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
             // 距離が上限に達したら解除
-            if (ResolutorCivisDistantia.DistantiaPuellae(idCivis) > _configuratio.DistantiaRefrigerationis) {
+            if (ResFluidaCivisCustodiae.DistantiaPuellae(idCivis) > _configuratio.DistantiaRefrigerationis) {
                 return IDCivisStatusCustodiae.Circumitus;
             }
 

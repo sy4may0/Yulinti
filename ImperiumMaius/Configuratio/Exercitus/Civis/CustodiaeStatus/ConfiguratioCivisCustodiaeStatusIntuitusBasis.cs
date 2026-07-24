@@ -3,7 +3,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumMaius.Configuratio {
     // Intuitus系ステート(Spectans/Sequens)の共通設定。
-    public abstract class ConfiguratioCivisStatusCustodiaeIntuitusBasis : ConfiguratioCivisStatusCustodiaeAttendensBasis, IConfiguratioCivisStatusCustodiaeIntuitus {
+    public abstract class ConfiguratioCivisCustodiaeStatusIntuitusBasis : ConfiguratioCivisCustodiaeStatusAttendensBasis, IConfiguratioCivisCustodiaeStatusIntuitus {
         [Header("Intentio 増減量(毎秒)")]
         [SerializeField] private float augmentumIntentionisSec = 0.5f;
         [SerializeField] private float deminutioIntentionisSec = 0.3f;

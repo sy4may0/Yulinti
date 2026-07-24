@@ -4,37 +4,29 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal abstract class StatusCivisCustodiaeAttendens : IStatusCivisCustodiae {
         private readonly IResFluidaCivisVeletudinisLegibile _resFluidaCivisVeletudinis;
         private readonly IResFluidaPuellaeVeletudinisLegibile _resFluidaPuellaeVeletudinis;
-        private readonly IResolutorCivisIctuumAuditae _resolutorCivisIctuumAuditae;
-        private readonly IResolutorCivisIctuumVisae _resolutorCivisIctuumVisae;
-        private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
+        private readonly IResFluidaCivisCustodiaeLegibile _resFluidaCivisCustodiae;
         private readonly IOstiumCarrusCivis _carrus;
         private readonly IOstiumTemporisLegibile _temporis;
-        private readonly IConfiguratioCivisStatusCustodiaeAttendens _configuratio;
+        private readonly IConfiguratioCivisCustodiaeStatusAttendens _configuratio;
 
         protected IResFluidaCivisVeletudinisLegibile ResFluidaCivisVeletudinis => _resFluidaCivisVeletudinis;
         protected IResFluidaPuellaeVeletudinisLegibile ResFluidaPuellaeVeletudinis => _resFluidaPuellaeVeletudinis;
-        protected IResolutorCivisIctuumAuditae ResolutorCivisIctuumAuditae => _resolutorCivisIctuumAuditae;
-        protected IResolutorCivisIctuumVisae ResolutorCivisIctuumVisae => _resolutorCivisIctuumVisae;
-        protected IResolutorCivisDistantia ResolutorCivisDistantia => _resolutorCivisDistantia;
+        protected IResFluidaCivisCustodiaeLegibile ResFluidaCivisCustodiae => _resFluidaCivisCustodiae;
         protected IOstiumCarrusCivis Carrus => _carrus;
         protected IOstiumTemporisLegibile Temporis => _temporis;
-        protected IConfiguratioCivisStatusCustodiaeAttendens ConfiguratioAttendens => _configuratio;
+        protected IConfiguratioCivisCustodiaeStatusAttendens ConfiguratioAttendens => _configuratio;
 
         protected StatusCivisCustodiaeAttendens(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
-            IResolutorCivisIctuumAuditae resolutorCivisIctuumAuditae,
-            IResolutorCivisIctuumVisae resolutorCivisIctuumVisae,
-            IResolutorCivisDistantia resolutorCivisDistantia,
+            IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
-            IConfiguratioCivisStatusCustodiaeAttendens configuratio
+            IConfiguratioCivisCustodiaeStatusAttendens configuratio
         ) {
             _resFluidaCivisVeletudinis = resFluidaCivisVeletudinis;
             _resFluidaPuellaeVeletudinis = resFluidaPuellaeVeletudinis;
-            _resolutorCivisIctuumAuditae = resolutorCivisIctuumAuditae;
-            _resolutorCivisIctuumVisae = resolutorCivisIctuumVisae;
-            _resolutorCivisDistantia = resolutorCivisDistantia;
+            _resFluidaCivisCustodiae = resFluidaCivisCustodiae;
             _carrus = carrus;
             _temporis = temporis;
             _configuratio = configuratio;
@@ -71,7 +63,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
 
             // Auditae Solus
-            if (!ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) || !ResolutorCivisIctuumVisae.EstVisa(idCivis)) {
+            if (!ResFluidaCivisCustodiae.EstCustodiaeVisae(idCivis) || !ResFluidaCivisCustodiae.EstVisa(idCivis)) {
                 if (rs > _configuratio.SuspectaMaximaAuditaeSolus) {
                     return _configuratio.SuspectaMaximaAuditaeSolus - ResFluidaCivisVeletudinis.Suspecta(idCivis);
                 }
@@ -93,12 +85,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // ここでは蓄積は単一のSuspectaに集約する。
         protected float ResolvereSuspectam(int idCivis, AbaciCivisStatus abaciCivisStatus) {
             bool estAugereVisae = (
-                ResolutorCivisDistantia.EstCustodiaeVisae(idCivis) &&
-                ResolutorCivisIctuumVisae.EstVisa(idCivis)
+                ResFluidaCivisCustodiae.EstCustodiaeVisae(idCivis) &&
+                ResFluidaCivisCustodiae.EstVisa(idCivis)
             );
             bool estAugereAuditae = (
-                ResolutorCivisDistantia.EstCustodiaeAuditae(idCivis) &&
-                ResolutorCivisIctuumAuditae.EstAudita(idCivis)
+                ResFluidaCivisCustodiae.EstCustodiaeAuditae(idCivis) &&
+                ResFluidaCivisCustodiae.EstAudita(idCivis)
             );
             bool estAugere = estAugereVisae || estAugereAuditae;
 
@@ -110,7 +102,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 if (estAugereVisae) {
                     dtSuspecta += ResolutorCivisStatus.AugereSuspectaeVisae(
                         _configuratio.AugmentumSuspectaeVisaeSec,
-                        ResolutorCivisIctuumVisae.RatioVisus(idCivis),
+                        ResFluidaCivisCustodiae.RatioVisus(idCivis),
                         ResFluidaCivisVeletudinis.RatioVisus(idCivis),
                         ResFluidaPuellaeVeletudinis.RatioClaritas,
                         abaciCivisStatus.StudiumHabereSuspectae(idCivis),
@@ -122,7 +114,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                     dtSuspecta += ResolutorCivisStatus.AugereSuspectaeAuditae(
                         _configuratio.AugmentumSuspectaeAuditaeSec,
                         ResFluidaCivisVeletudinis.Auditus(idCivis),
-                        ResolutorCivisIctuumAuditae.Audita(idCivis),
+                        ResFluidaCivisCustodiae.Audita(idCivis),
                         abaciCivisStatus.StudiumHabereSuspectae(idCivis),
                         Temporis.Intervallum
                     );

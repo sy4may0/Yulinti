@@ -7,19 +7,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IStatusCivisCustodiae[] _statuum;
 
         public TabulaCivisStatusCustodiae(
-            IConfiguratioCivisStatusCustodiaeCircumitus configuratioStatusCustodiaeCircumitus,
-            IConfiguratioCivisStatusCustodiaeVigilantia configuratioStatusCustodiaeVigilantia,
-            IConfiguratioCivisStatusCustodiaeSpectans configuratioStatusCustodiaeSpectans,
-            IConfiguratioCivisStatusCustodiaeSequens configuratioStatusCustodiaeSequens,
-            IConfiguratioCivisStatusCustodiaeQuaerens configuratioStatusCustodiaeQuaerens,
-            IConfiguratioCivisStatusCustodiaeRefrigerationis configuratioStatusCustodiaeRefrigerationis,
-            IConfiguratioCivisStatusCustodiaeDiscedens configuratioStatusCustodiaeDiscedens,
+            IConfiguratioCivisCustodiaeStatusCircumitus configuratioStatusCustodiaeCircumitus,
+            IConfiguratioCivisCustodiaeStatusVigilantia configuratioStatusCustodiaeVigilantia,
+            IConfiguratioCivisCustodiaeStatusSpectans configuratioStatusCustodiaeSpectans,
+            IConfiguratioCivisCustodiaeStatusSequens configuratioStatusCustodiaeSequens,
+            IConfiguratioCivisCustodiaeStatusQuaerens configuratioStatusCustodiaeQuaerens,
+            IConfiguratioCivisCustodiaeStatusRefrigerationis configuratioStatusCustodiaeRefrigerationis,
+            IConfiguratioCivisCustodiaeStatusDiscedens configuratioStatusCustodiaeDiscedens,
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             IOstiumCivisLegibile civis,
-            IResolutorCivisIctuumAuditae resolutorCivisIctuumAuditae,
-            IResolutorCivisIctuumVisae resolutorCivisIctuumVisae,
-            IResolutorCivisDistantia resolutorCivisDistantia,
+            IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis
         ) {
@@ -32,9 +30,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
                 civis,
-                resolutorCivisIctuumAuditae,
-                resolutorCivisIctuumVisae,
-                resolutorCivisDistantia,
+                resFluidaCivisCustodiae,
                 carrus,
                 temporis,
                 configuratioStatusCustodiaeCircumitus
@@ -48,9 +44,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _statuum[(int)IDCivisStatusCustodiae.Spectans] = new StatusCivisCustodiaeSpectans(
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
-                resolutorCivisIctuumAuditae,
-                resolutorCivisIctuumVisae,
-                resolutorCivisDistantia,
+                resFluidaCivisCustodiae,
                 carrus,
                 temporis,
                 configuratioStatusCustodiaeSpectans
@@ -58,9 +52,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _statuum[(int)IDCivisStatusCustodiae.Sequens] = new StatusCivisCustodiaeSequens(
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
-                resolutorCivisIctuumAuditae,
-                resolutorCivisIctuumVisae,
-                resolutorCivisDistantia,
+                resFluidaCivisCustodiae,
                 carrus,
                 temporis,
                 configuratioStatusCustodiaeSequens
@@ -68,9 +60,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _statuum[(int)IDCivisStatusCustodiae.Quaerens] = new StatusCivisCustodiaeQuaerens(
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
-                resolutorCivisIctuumAuditae,
-                resolutorCivisIctuumVisae,
-                resolutorCivisDistantia,
+                resFluidaCivisCustodiae,
                 carrus,
                 temporis,
                 configuratioStatusCustodiaeQuaerens
@@ -79,9 +69,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
                 civis,
-                resolutorCivisIctuumAuditae,
-                resolutorCivisIctuumVisae,
-                resolutorCivisDistantia,
+                resFluidaCivisCustodiae,
                 carrus,
                 temporis,
                 configuratioStatusCustodiaeRefrigerationis
@@ -90,9 +78,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
                 civis,
-                resolutorCivisIctuumAuditae,
-                resolutorCivisIctuumVisae,
-                resolutorCivisDistantia,
+                resFluidaCivisCustodiae,
                 carrus,
                 temporis,
                 configuratioStatusCustodiaeDiscedens

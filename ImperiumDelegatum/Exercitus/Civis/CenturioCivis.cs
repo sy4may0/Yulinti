@@ -91,9 +91,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
                 if (!_ostiumCivisLegibile.EstActivum(i)) continue;
 
-                // Detectio判定の解決
-                _milesCivisCustodiae.ResolvereDetectio(i, _resFluidaLegibile);
-
                 _carrusCivis.ConfirmareTardus(i);
             }
         }

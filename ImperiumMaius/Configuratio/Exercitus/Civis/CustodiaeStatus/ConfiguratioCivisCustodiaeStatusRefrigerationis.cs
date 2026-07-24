@@ -3,9 +3,9 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumMaius.Configuratio {
     [CreateAssetMenu(
-        fileName = "ConfiguratioCivisStatusCustodiaeRefrigerationis",
-        menuName = "Yulinti/Configuratio/Exercitus/Civis/StatusCustodiae/Refrigerationis")]
-    public sealed class ConfiguratioCivisStatusCustodiaeRefrigerationis : ConfiguratioCivisStatusCustodiaeAttendensBasis, IConfiguratioCivisStatusCustodiaeRefrigerationis {
+        fileName = "ConfiguratioCivisCustodiaeStatusRefrigerationis",
+        menuName = "Yulinti/Configuratio/Exercitus/Civis/CustodiaeStatus/Refrigerationis")]
+    public sealed class ConfiguratioCivisCustodiaeStatusRefrigerationis : ConfiguratioCivisCustodiaeStatusAttendensBasis, IConfiguratioCivisCustodiaeStatusRefrigerationis {
         [Header("クールダウン解除距離")]
         [SerializeField] private float distantiaRefrigerationis = 20f;
 
