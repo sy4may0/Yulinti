@@ -37,17 +37,10 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
 
         // Dedecus人数倍率の最大人数
         int NumerusIctuumDedecorisMaxima { get; }
+        // Dedecus人数倍率補正の角度(ExponentialSaturationのk)
+        float PraeruptioNumerusIctuumDedecoris { get; }
 
         // Anomaliaに対する最大Dedecus人数倍率
         float RatioDedecorisMaximaAnomaliae { get; }
-
-        // 非Vigilantia時のDedecus補正値
-        float RatioDedecorisAttendens { get; }
-
-        // 視認距離によるDedecus倍率補正
-        float DistantiaDedecorisMaximaMaxima { get; }
-        float DistantiaDedecorisMaximaMin { get; }
-        float DistantiaDedecorisMaximaMedius { get; }
-        float PraeruptioDistantiaDedecorisMaxima { get; }
     }
 }
