@@ -74,4 +74,31 @@ namespace Yulinti.Nucleus.Instrumentarium {
             }
         }
     }
+
+    public sealed class TabulaLUTExponentialSaturation : ITabulaLUT01<float> {
+        private readonly float[] _lut;
+
+        public TabulaLUTExponentialSaturation(
+            int longitudo,
+            float k
+        ) {
+            if (longitudo < 2) {
+                Carnifex.Intermissio(LogTextus.TabulaLUT_LUT_LENGTH_TOO_SHORT);
+            }
+            _lut = new float[longitudo];
+
+            for (int i = 0; i < longitudo; i++) {
+                float x = Mathematica.Lerp(0f, 1f, i / (longitudo - 1f));
+                _lut[i] = (1f - MathF.Exp(-k * x)) / (1f - MathF.Exp(-k));
+            }
+        }
+
+        public float this[float x] {
+            get {
+                x = Mathematica.InverseLerp01(0f, 1f, x);
+                int index = (int)MathF.Round(x * (_lut.Length - 1f));
+                return _lut[index];
+            }
+        }
+    }
 }

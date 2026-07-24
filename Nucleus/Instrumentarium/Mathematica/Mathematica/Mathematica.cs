@@ -57,6 +57,16 @@ namespace Yulinti.Nucleus.Instrumentarium {
             return rad * Numerus.Rad2Deg;
         }
 
+        public static float SmoothStep(
+            float x, float min, float max
+        ) {
+            if (min >= max) {
+                return 0f;
+            }
+            float t = Clamp01((x - min) / (max - min));
+            return t * t * (3f - 2f * t);
+        }
+
         public static float Sigmoid(
             float x, float centrum, float praeruptio
         ) {
@@ -72,6 +82,26 @@ namespace Yulinti.Nucleus.Instrumentarium {
             float y = Sigmoid(x, centrum, praeruptio);
 
             return InverseLerp(min, max, y);
+        }
+
+        public static float Gaussian01(
+            float x, float min, float max, float epsilon 
+        ) {
+            x = Clamp01(x);
+            min = Clamp01(min);
+            max = Clamp01(max);
+            if (min >= max) {
+                return 0f;
+            }
+            if (epsilon <= 0f || epsilon > 1f) {
+                return 0f;
+            }
+
+            float centrum = (min + max) / 2f;
+            float h = (max - min) / 2f;
+            float sigma = h / MathF.Sqrt(-2f * MathF.Log(epsilon));
+
+            return MathF.Exp(-MathF.Pow(x - centrum, 2f) / (2f * MathF.Pow(sigma, 2f)));
         }
     }
 }

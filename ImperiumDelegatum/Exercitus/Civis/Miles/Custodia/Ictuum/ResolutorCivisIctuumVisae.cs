@@ -6,11 +6,12 @@ using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     // TODO: Custodiaの再構成が終わったら、01レシオ出力に変更し、メソッド名もRatioAuditae/RatioVisaeに変更する
-    internal sealed class ResolutorCivisIctuumVisae : IResolutorCivisIctuumVisae {
-        private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
+    internal sealed class ResolutorCivisIctuumVisae {
+        private readonly IConfiguratioCivisCustodiaeIctuum _configuratioCivisCustodiae;
         private readonly IOstiumCivisLegibile _civis;
         private readonly IOstiumCivisVisaeLegibile _visa;
         private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
+        private readonly IOstiumCarrusCivis _carrus;
         private readonly AbacusDistantiae _abacusDistantiaeVisus;
 
         // 角度補正の合成用
@@ -23,25 +24,22 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IDPuellaeResVisaePectoris[] _cIDPuellaeResVisaePectoris;
         private readonly IDPuellaeResVisaeNatium[] _cIDPuellaeResVisaeNatium;
 
-        private readonly float[] _visaIctuumCapitis;
-        private readonly float[] _visaIctuumCorporis;
-
-        private readonly int _longitudoResVisae;
-
-        private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
+        private readonly IResFluidaCivisCustodiaeLegibile _resFCustodiae;
 
         public ResolutorCivisIctuumVisae(
-            IConfiguratioCivisCustodiae configuratioCivisCustodiae,
+            IConfiguratioCivisCustodiaeIctuum configuratioCivisCustodiae,
             IOstiumCivisLegibile civis,
             IOstiumCivisVisaeLegibile visa,
             IOstiumPuellaeResVisaeLegibile puellaeResVisae,
-            IResolutorCivisDistantia resolutorCivisDistantia
+            IOstiumCarrusCivis carrus,
+            IResFluidaCivisCustodiaeLegibile resFCustodiae
         ) {
             _configuratioCivisCustodiae = configuratioCivisCustodiae;
             _civis = civis;
             _visa = visa;
             _puellaeResVisae = puellaeResVisae;
-            _resolutorCivisDistantia = resolutorCivisDistantia;
+            _carrus = carrus;
+            _resFCustodiae = resFCustodiae;
             _abacusDistantiaeVisus = new AbacusDistantiae(
                 _configuratioCivisCustodiae.DistantiaVisaeMaxima,
                 _configuratioCivisCustodiae.DistantiaVisaeMin,
@@ -74,32 +72,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _cIDPuellaeResVisaeCapitis = (IDPuellaeResVisaeCapitis[])Enum.GetValues(typeof(IDPuellaeResVisaeCapitis));
             _cIDPuellaeResVisaePectoris = (IDPuellaeResVisaePectoris[])Enum.GetValues(typeof(IDPuellaeResVisaePectoris));
             _cIDPuellaeResVisaeNatium = (IDPuellaeResVisaeNatium[])Enum.GetValues(typeof(IDPuellaeResVisaeNatium));
-
-            _visaIctuumCapitis = new float[_civis.Longitudo];
-            _visaIctuumCorporis = new float[_civis.Longitudo];
-
-            for (int i = 0; i < _civis.Longitudo; i++) {
-                _visaIctuumCapitis[i] = 0f;
-                _visaIctuumCorporis[i] = 0f;
-            }
-
-            _longitudoResVisae = _cIDPuellaeResVisaeCapitis.Length + 
-                                 _cIDPuellaeResVisaePectoris.Length + 
-                                 _cIDPuellaeResVisaeNatium.Length;
-        }
-
-        public float VisaCapitis(int idCivis) => _visaIctuumCapitis[idCivis];
-        public float VisaCorporis(int idCivis) => _visaIctuumCorporis[idCivis];
-        public float RatioVisus(int idCivis) => ratioVisus(idCivis);
-        public bool EstVisa(int idCivis) => _visaIctuumCapitis[idCivis] + _visaIctuumCorporis[idCivis] > Numerus.Epsilon;
-
-        private float ratioVisus(int idCivis) {
-            return (_visaIctuumCapitis[idCivis] + _visaIctuumCorporis[idCivis]) / _longitudoResVisae;
         }
 
         public void Initare(int idCivis) {
-            _visaIctuumCapitis[idCivis] = 0f;
-            _visaIctuumCorporis[idCivis] = 0f;
+            // ResFluidaCivisCustodiaeの初期化はExecutorCivisCustodiaeが行う。
         }
 
         // 距離による視力レシオを計算する。
@@ -186,9 +162,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // 視認度は視認対象(ResVisae)の数によって増減する。多いほど見えやすくなる。
         public void Resolvere(int idCivis) {
             // 視認範囲外の場合は視認数を0とする。
-            if (!_resolutorCivisDistantia.EstCustodiaeVisae(idCivis)) {
-                _visaIctuumCapitis[idCivis] = 0f;
-                _visaIctuumCorporis[idCivis] = 0f;
+            if (!_resFCustodiae.EstCustodiaeVisae(idCivis)) {
+                _carrus.PostulareCustodiaeIctuumVisae(idCivis, 0f, 0f);
                 return;
             }
 
@@ -200,8 +175,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _visa.ConareLegoDirectioCapitis(idCivis, out directioCivisCapitis)
             )) {
                 Notarius.Memorare(LogTextus.ResolutorCivisIctuumVisae_RESOLUTORCIVISICTUUM_CONARELEGO_FAILED);
-                _visaIctuumCapitis[idCivis] = 0f;
-                _visaIctuumCorporis[idCivis] = 0f;
+                _carrus.PostulareCustodiaeIctuumVisae(idCivis, 0f, 0f);
                 return;
             }
 
@@ -221,8 +195,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 summaVisaIctuumCorporis += visa;
             }
 
-            _visaIctuumCapitis[idCivis] = summaVisaIctuumCapitis;
-            _visaIctuumCorporis[idCivis] = summaVisaIctuumCorporis;
+            _carrus.PostulareCustodiaeIctuumVisae(idCivis, summaVisaIctuumCapitis, summaVisaIctuumCorporis);
         }
     }
 }

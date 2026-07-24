@@ -1,12 +1,12 @@
 namespace Yulinti.ImperiumDelegatum.Contractus {
-    internal enum IDCivisStatusCustodiae {
+    public enum IDCivisStatusCustodiae {
         Nihil,
-        SuspectioAuditae,
-        SuspectioVisae,
+        Circumitus,
         Vigilantia,
-        Sequens,
         Spectans,
-        Discedens,
+        Sequens,
         Quaerens,
+        Refrigeratio,
+        Discedens,
     }
 }

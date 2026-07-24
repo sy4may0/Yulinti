@@ -6,6 +6,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly MilesCivisActionis _milesCivisActionis;
         private readonly MilesCivisCustodiae _milesCivisCustodiae;
         private readonly MilesCivisGenerationis _milesCivisGenerationis;
+        private readonly MilesCivisVeletudinisMaxima _milesCivisVeletudinisMaxima;
         private readonly OperatioCenturioCivis _operatioCenturioCivis;
 
         // Carrus
@@ -19,6 +20,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             MilesCivisActionis milesCivisActionis,
             MilesCivisCustodiae milesCivisCustodiae,
             MilesCivisGenerationis milesCivisGenerationis,
+            MilesCivisVeletudinisMaxima milesCivisVeletudinisMaxima,
             IResFluidaCivisLegibile resFluidaLegibile,
             IOstiumCivisLegibile ostiumCivisLegibile,
             CarrusCivis carrusCivis,
@@ -26,8 +28,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             _milesCivisActionis = milesCivisActionis;
             _milesCivisCustodiae = milesCivisCustodiae;
-            _resFluidaLegibile = resFluidaLegibile;
             _milesCivisGenerationis = milesCivisGenerationis;
+            _milesCivisVeletudinisMaxima = milesCivisVeletudinisMaxima;
+            _resFluidaLegibile = resFluidaLegibile;
             _ostiumCivisLegibile = ostiumCivisLegibile;
             _carrusCivis = carrusCivis;
             _operatioCenturioCivis = operatioCenturioCivis;
@@ -40,6 +43,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _carrusCivis.Primum(idCivis);
             _milesCivisActionis.Initare(idCivis, _resFluidaLegibile);
             _milesCivisCustodiae.Initare(idCivis);
+            _milesCivisVeletudinisMaxima.Initare(idCivis);
             _carrusCivis.ConfirmareIncipabilis(idCivis);
         }
 
@@ -56,6 +60,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 if (!_ostiumCivisLegibile.EstActivum(i)) continue;
 
                 _carrusCivis.Primum(i);
+
+                // VeletudinisMaxima計画
+                _milesCivisVeletudinisMaxima.Ordinare(i);
 
                 // Actionis処理実行
                 _milesCivisActionis.MutareStatus(i, _resFluidaLegibile);
@@ -83,9 +90,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _carrusCivis.ConfirmareMortis(i);
 
                 if (!_ostiumCivisLegibile.EstActivum(i)) continue;
-
-                // Detectio判定の解決
-                _milesCivisCustodiae.ResolvereDetectio(i, _resFluidaLegibile);
 
                 _carrusCivis.ConfirmareTardus(i);
             }

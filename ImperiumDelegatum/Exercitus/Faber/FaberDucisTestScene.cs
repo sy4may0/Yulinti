@@ -30,6 +30,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ResFluidaCivisVeletudinis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<ResFluidaCivisCustodiae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             builder.Register<ResFluidaCivisLegibile>(Lifetime.Singleton)
                 .AsSelf()
@@ -65,6 +68,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ExecutorCivisLoci>(Lifetime.Singleton);
             builder.Register<ExecutorCivisMortis>(Lifetime.Singleton);
             builder.Register<ExecutorCivisVeletudinis>(Lifetime.Singleton);
+            builder.Register<ExecutorCivisCustodiae>(Lifetime.Singleton);
             builder.Register<ExecutorPuellaeFormae>(Lifetime.Singleton);
 
             // Resolutor
@@ -78,6 +82,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<IResolutorPuellaeSonusQuietesMaximus, ResolutorPuellaeSonusQuietesMaximus>(Lifetime.Singleton);
             builder.Register<IResolutorPuellaeSonusMotusMaximus, ResolutorPuellaeSonusMotusMaximus>(Lifetime.Singleton);
 
+            builder.Register<IResolutorCivisVitaeMaxima, ResolutorCivisVitaeMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorCivisVisusMaxima, ResolutorCivisVisusMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorCivisAuditusMaxima, ResolutorCivisAuditusMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorCivisSuspectaMaxima, ResolutorCivisSuspectaMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorCivisStudiumMaxima, ResolutorCivisStudiumMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorCivisIntentioMaxima, ResolutorCivisIntentioMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorCivisTorelantiaAnomaliaeMaximaMaxima, ResolutorCivisTorelantiaAnomaliaeMaximaMaxima>(Lifetime.Singleton);
+            builder.Register<IResolutorCivisTorelantiaAnomaliaeMinimaMaxima, ResolutorCivisTorelantiaAnomaliaeMinimaMaxima>(Lifetime.Singleton);
+
             // Miles
             builder.Register<MilesPuellaeActionis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeCrinis>(Lifetime.Singleton);
@@ -86,8 +99,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<MilesCivisActionis>(Lifetime.Singleton);
             builder.Register<MilesCivisCustodiae>(Lifetime.Singleton);
             builder.Register<MilesCivisGenerationis>(Lifetime.Singleton);
-            builder.Register<MilesPuellaeVigoris>(Lifetime.Singleton);
+            builder.Register<MilesCivisVeletudinisMaxima>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVeletudinisMaxima>(Lifetime.Singleton);
+            builder.Register<MilesPuellaeVeletudinisAnomaliae>(Lifetime.Singleton);
 
             // Operatio
             builder.Register<OperatioCenturioCivis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

@@ -6,6 +6,9 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float LimenRefectaPatientiae { get; }
         float VelocitasSoniMaxima { get; }
 
+        float AnomaliaBasis { get; }
+        float AnomaliaNudusBasis { get; }
+
         // Vigilantia時、Debecus0.0のVigor減少量(sec)
         float ConsumptioVigorisMinimaVigilantia { get; }
         // Vigilantia時、Debecus1.0のVigor減少量(sec)
@@ -31,5 +34,20 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float TempusRecuperationisVigorisMaximaSec { get; }
         // 回復カーブ角度
         float PraeruptioTempusRecuperationisVigoris { get; }
+
+        // Dedecus人数倍率の最大人数
+        int NumerusIctuumDedecorisMaxima { get; }
+
+        // Anomaliaに対する最大Dedecus人数倍率
+        float RatioDedecorisMaximaAnomaliae { get; }
+
+        // 非Vigilantia時のDedecus補正値
+        float RatioDedecorisAttendens { get; }
+
+        // 視認距離によるDedecus倍率補正
+        float DistantiaDedecorisMaximaMaxima { get; }
+        float DistantiaDedecorisMaximaMin { get; }
+        float DistantiaDedecorisMaximaMedius { get; }
+        float PraeruptioDistantiaDedecorisMaxima { get; }
     }
 }

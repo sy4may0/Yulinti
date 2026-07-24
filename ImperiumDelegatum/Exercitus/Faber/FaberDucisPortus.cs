@@ -39,6 +39,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ResNihilCivisLegibile>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<ResNihilCivisCustodiae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             // Carrus
             builder.Register<CarrusPuellae>(Lifetime.Singleton)
@@ -78,8 +81,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<MilesPuellaeCrinis>(Lifetime.Singleton);
             builder.Register<MilesPuellaeFigurae>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVestitae>(Lifetime.Singleton);
-            builder.Register<MilesPuellaeVigoris>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVeletudinisMaxima>(Lifetime.Singleton);
+            builder.Register<MilesPuellaeVeletudinisAnomaliae>(Lifetime.Singleton);
 
             // Centurio
             builder.Register<CenturioPuellae>(Lifetime.Singleton)

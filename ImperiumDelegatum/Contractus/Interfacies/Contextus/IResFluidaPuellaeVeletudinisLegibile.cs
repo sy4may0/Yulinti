@@ -16,6 +16,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         bool EstExhauritaPatientiae { get; }
         float Claritas { get; }
         float Anomalia { get; }
+        float AnomaliaNudus { get; }
         float Aether { get; }
         float Intentio { get; }
         float Dedecus { get; }
@@ -28,6 +29,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float RatioPatientiae { get; }
         float RatioClaritas { get; }
         float RatioAnomaliae { get; }
+        float RatioAnomaliaeNudus { get; }
         float RatioAether { get; }
         float RatioIntentionis { get; }
         float RatioDedecus { get; }
