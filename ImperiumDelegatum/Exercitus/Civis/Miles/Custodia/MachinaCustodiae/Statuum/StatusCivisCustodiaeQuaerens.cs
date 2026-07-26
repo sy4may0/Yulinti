@@ -22,17 +22,21 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _configuratio = configuratio;
         }
 
-        public override void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Initare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             Carrus.PostulareVeletudinisCondicionis(
                 idCivis,
                 statusCustodiaeCurrens: IDCivisStatusCustodiae.Quaerens
             );
+            Carrus.PostulareVeletudinisValoris(
+                idCivis,
+                dtStudium: ResFluidaCivisVeletudinis.StudiumMaxima(idCivis)
+            );
         }
 
-        public override void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Exire(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
         }
 
-        public override void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Ordinare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             base.Ordinare(idCivis, abaciCivisStatus);
 
             Carrus.PostulareVeletudinisValoris(
@@ -46,7 +50,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return IDCivisStatusCustodiae.Spectans;
             }
 
-            if (ResFluidaCivisVeletudinis.Suspecta(idCivis) <= 0.0f) {
+            if (ResFluidaCivisVeletudinis.Studium(idCivis) <= 0.0f) {
                 return IDCivisStatusCustodiae.Refrigeratio;
             }
 

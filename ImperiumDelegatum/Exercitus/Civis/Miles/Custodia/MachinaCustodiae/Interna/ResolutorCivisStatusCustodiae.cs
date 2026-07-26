@@ -2,7 +2,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal static class ResolutorCivisStatus {
+    internal static class ResolutorCivisStatusCustodiae {
         // 視覚刺激によるSuspecta増加量。
         public static float AugereSuspectaeVisae(
             float augmentumSuspectae,

@@ -3,7 +3,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MachinaCivisCustodiae {
         private readonly TabulaCivisStatusCustodiae _tabulaCivisStatusCustodiae;
-        private readonly AbaciCivisStatus _abaciCivisStatus;
+        private readonly AbaciCivisStatusCustodiae _abaciCivisStatus;
         private readonly int _longitudo;
         private readonly IDCivisStatusCustodiae[] _statusCustodiaeCurrens;
 
@@ -26,12 +26,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 configuratioCivisStatusCustodiae.ConfiguratioCustodiaeStatusDiscedens,
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
-                civis,
                 resFluidaCivisCustodiae,
                 carrus,
                 temporis
             );
-            _abaciCivisStatus = new AbaciCivisStatus(
+            _abaciCivisStatus = new AbaciCivisStatusCustodiae(
                 civis,
                 configuratioCivisStatusCustodiae.ConfiguratioCustodiaeStatusCommunis
             );

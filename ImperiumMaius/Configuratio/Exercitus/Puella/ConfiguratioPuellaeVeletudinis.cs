@@ -15,13 +15,13 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [Header("AnomaliaNudus基準値")]
         [SerializeField] private float anomaliaNudusBasis = 100f;
 
-        [Header("Vigilantia時、Debecus0.0のVigor減少量(sec)")]
+        [Header("Vigilantia時、Dedecus0.0のVigor減少量(sec)")]
         [SerializeField] private float consumptioVigorisMinimaVigilantia = -0.033f;
-        [Header("Vigilantia時、Debecus1.0のVigor減少量(sec)")]
+        [Header("Vigilantia時、Dedecus1.0のVigor減少量(sec)")]
         [SerializeField] private float consumptioVigorisMaximaVigilantia = -0.1f;
-        [Header("Detectio時、Debecus0.0のVigor減少量(sec)")]
+        [Header("Detectio時、Dedecus0.0のVigor減少量(sec)")]
         [SerializeField] private float consumptioVigorisMinimaDetectio = -0.067f;
-        [Header("Detectio時、Debecus1.0のVigor減少量(sec)")]
+        [Header("Detectio時、Dedecus1.0のVigor減少量(sec)")]
         [SerializeField] private float consumptioVigorisMaximaDetectio = -0.2f;
         [Header("低レベル時のDetectio時Vigor減少倍率")]
         [SerializeField] private float ratioConsumptioVigorisDetectio = 30f;
@@ -39,12 +39,40 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [Header("回復カーブ角度")]
         [SerializeField] private float praeruptioTempusRecuperationisVigoris = 12f;
 
-        [Header("Dedecus人数倍率の最大人数")]
-        [SerializeField] private int numerusIctuumDedecorisMaxima = 10;
-        [Header("Dedecus人数倍率補正の角度(ExponentialSaturationのk)")]
-        [SerializeField] private float praeruptioNumerusIctuumDedecoris = 3f;
-        [Header("Anomaliaに対する最大Dedecus人数倍率")]
-        [SerializeField] private float ratioDedecorisMaximaAnomaliae = 10f;
+        [Header("Dedecus増加量の距離補正")]
+        [SerializeField] private float distantiaDedecorisMaxima = 30f;
+        [SerializeField] private float distantiaDedecorisMedia = 12f;
+        [SerializeField] private float distantiaDedecorisMinima = 3f;
+        [SerializeField] private float praeruptioDistantiaDedecoris = 10f;
+
+        [Header("Anomalia超過補正最大倍率")]
+        [SerializeField] private float ratioDedecorisAnomaliaeExcessusMaxima = 5f;
+        [Header("Anomalia超過補正最小倍率")]
+        [SerializeField] private float ratioDedecorisAnomaliaeExcessusMinima = 1.5f;
+        [Header("最大Anomalia超過値")]
+        [SerializeField] private float limenAnomaliaeExcessusMaxima = 400f;
+
+        [Header("Attendens時のDedecus増加補正")]
+        [SerializeField] private float ratioDedecorisAttendens = 0.3f;
+        [Header("Vigilantia/Intuitus時のDedecus増加補正")]
+        [SerializeField] private float ratioDedecorisVigilantia = 1.2f;
+        [Header("Discedens時のDedecus増加補正")]
+        [SerializeField] private float ratioDedecorisDiscedens = 0.9f;
+
+
+        [Header("最小ダメージ(sec)")]
+        [SerializeField] private float consumptioVigorisMinimaSec = 1f;
+        [Header("最大ダメージ(sec)")]
+        [SerializeField] private float consumptioVigorisMaximaSec = 1000f;
+        [Header("ダメージ最大化Dedecus値")]
+        [SerializeField] private float dedecusMaximaConsumptioVigoris = 2000f;
+        [Header("回復レシオ量(sec)")]
+        [SerializeField] private float ratioRepletioVigoris = 0.143f;
+        [Header("回復時間シグモイド設定")]
+        [SerializeField] private float tempusRepletioVigorisMaximaSec = 7f;
+        [SerializeField] private float tempusRepletioVigorisMediaSec = 5f;
+        [SerializeField] private float tempusRepletioVigorisMinimaSec = 0f;
+        [SerializeField] private float praeruptioRepletioVigoris = 16f;
 
         public float LimenExhauritaVigoris => limenExhauritaVigoris;
         public float LimenRefectaVigoris => limenRefectaVigoris;
@@ -67,8 +95,26 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         public float TempusRecuperationisVigorisMaximaSec => tempusRecuperationisVigorisMaximaSec;
         public float PraeruptioTempusRecuperationisVigoris => praeruptioTempusRecuperationisVigoris;
 
-        public int NumerusIctuumDedecorisMaxima => numerusIctuumDedecorisMaxima;
-        public float PraeruptioNumerusIctuumDedecoris => praeruptioNumerusIctuumDedecoris;
-        public float RatioDedecorisMaximaAnomaliae => ratioDedecorisMaximaAnomaliae;
+        public float DistantiaDedecorisMaxima => distantiaDedecorisMaxima;
+        public float DistantiaDedecorisMedia => distantiaDedecorisMedia;
+        public float DistantiaDedecorisMinima => distantiaDedecorisMinima;
+        public float PraeruptioDistantiaDedecoris => praeruptioDistantiaDedecoris;
+
+        public float RatioDedecorisAnomaliaeExcessusMaxima => ratioDedecorisAnomaliaeExcessusMaxima;
+        public float RatioDedecorisAnomaliaeExcessusMinima => ratioDedecorisAnomaliaeExcessusMinima;
+        public float LimenAnomaliaeExcessusMaxima => limenAnomaliaeExcessusMaxima;
+
+        public float RatioDedecorisAttendens => ratioDedecorisAttendens;
+        public float RatioDedecorisVigilantia => ratioDedecorisVigilantia;
+        public float RatioDedecorisDiscedens => ratioDedecorisDiscedens;
+
+        public float ConsumptioVigorisMinimaSec => consumptioVigorisMinimaSec;
+        public float ConsumptioVigorisMaximaSec => consumptioVigorisMaximaSec;
+        public float DedecusMaximaConsumptioVigoris => dedecusMaximaConsumptioVigoris;
+        public float RatioRepletioVigoris => ratioRepletioVigoris;
+        public float TempusRepletioVigorisMaximaSec => tempusRepletioVigorisMaximaSec;
+        public float TempusRepletioVigorisMediaSec => tempusRepletioVigorisMediaSec;
+        public float TempusRepletioVigorisMinimaSec => tempusRepletioVigorisMinimaSec;
+        public float PraeruptioRepletioVigoris => praeruptioRepletioVigoris;
     }
 }

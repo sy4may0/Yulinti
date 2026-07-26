@@ -5,7 +5,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public StatusCivisCustodiaeCircumitus(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
-            IOstiumCivisLegibile civis,
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
@@ -20,7 +19,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
         }
 
-        public override void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Initare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             // Attendens起点
             Carrus.PostulareVeletudinisCondicionis(
                 idCivis,
@@ -35,7 +34,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             abaciCivisStatus.Purgere(idCivis);
         }
 
-        public override void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Exire(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
         }
 
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {

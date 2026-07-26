@@ -14,7 +14,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return PuellaVeletudinis.DedecusMaximaBasis;
             }
 
-            // Debecusは固定
+            // Dedecusは固定
             float maximus = PuellaVeletudinis.DedecusMaximaBasis; // 規定値
             float ratio = 1.0f; // 補正倍率
 

@@ -102,6 +102,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<MilesCivisVeletudinisMaxima>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVeletudinisMaxima>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVeletudinisAnomaliae>(Lifetime.Singleton);
+            builder.Register<MilesPuellaeVeletudinisDedecoris>(Lifetime.Singleton);
+            builder.Register<MilesPuellaeVeletudinisVigoris>(Lifetime.Singleton);
 
             // Operatio
             builder.Register<OperatioCenturioCivis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

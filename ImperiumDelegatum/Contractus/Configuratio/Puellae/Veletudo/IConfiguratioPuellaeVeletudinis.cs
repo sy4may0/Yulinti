@@ -9,14 +9,14 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float AnomaliaBasis { get; }
         float AnomaliaNudusBasis { get; }
 
-        // Vigilantia時、Debecus0.0のVigor減少量(sec)
+        // Vigilantia時、Dedecus0.0のVigor減少量(sec)
         float ConsumptioVigorisMinimaVigilantia { get; }
-        // Vigilantia時、Debecus1.0のVigor減少量(sec)
+        // Vigilantia時、Dedecus1.0のVigor減少量(sec)
         float ConsumptioVigorisMaximaVigilantia { get; }
 
-        // Detectio時、Debecus0.0のVigor減少量(sec)
+        // Detectio時、Dedecus0.0のVigor減少量(sec)
         float ConsumptioVigorisMinimaDetectio { get; }
-        // Detectio時、Debecus1.0のVigor減少量(sec)
+        // Detectio時、Dedecus1.0のVigor減少量(sec)
         float ConsumptioVigorisMaximaDetectio { get; }
 
         // 低レベル時のDetectio時Vigor減少倍率
@@ -35,12 +35,42 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         // 回復カーブ角度
         float PraeruptioTempusRecuperationisVigoris { get; }
 
-        // Dedecus人数倍率の最大人数
-        int NumerusIctuumDedecorisMaxima { get; }
-        // Dedecus人数倍率補正の角度(ExponentialSaturationのk)
-        float PraeruptioNumerusIctuumDedecoris { get; }
+        // Dedecus増加量の距離補正
+        float DistantiaDedecorisMaxima { get; }
+        float DistantiaDedecorisMedia { get; }
+        float DistantiaDedecorisMinima { get; }
+        float PraeruptioDistantiaDedecoris { get; }
 
-        // Anomaliaに対する最大Dedecus人数倍率
-        float RatioDedecorisMaximaAnomaliae { get; }
+        // Anomalia超過補正最大倍率
+        float RatioDedecorisAnomaliaeExcessusMaxima { get; }
+        // Anomalia超過補正最小倍率
+        float RatioDedecorisAnomaliaeExcessusMinima { get; }
+        // 最大Anomalia超過値
+        float LimenAnomaliaeExcessusMaxima { get; }
+
+        // Attendens時のDedecus増加補正
+        float RatioDedecorisAttendens { get; }
+
+        // Vigilantia/Intuitus時のDedecus増加補正
+        float RatioDedecorisVigilantia { get; }
+
+        // Discedens時のDedecus増加補正
+        float RatioDedecorisDiscedens { get; }
+
+        // 最小ダメージ(sec)
+        float ConsumptioVigorisMinimaSec { get; }
+        // 最大ダメージ(sec)
+        float ConsumptioVigorisMaximaSec { get; }
+        // ダメージ最大化Dedecus値
+        float DedecusMaximaConsumptioVigoris { get; }
+
+        // 回復レシオ量(sec) ※回復はVigor実値ではなく、Maxima換算の割合
+        float RatioRepletioVigoris { get; }
+
+        // 回復時間シグモイド設定
+        float TempusRepletioVigorisMaximaSec { get; }
+        float TempusRepletioVigorisMediaSec { get; }
+        float TempusRepletioVigorisMinimaSec { get; }
+        float PraeruptioRepletioVigoris { get; }
     }
 }

@@ -7,7 +7,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public StatusCivisCustodiaeRefrigerationis(
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
-            IOstiumCivisLegibile civis,
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis,
@@ -23,7 +22,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _configuratio = configuratio;
         }
 
-        public override void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Initare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             Carrus.PostulareVeletudinisCondicionis(
                 idCivis,
                 statusCustodiaeCurrens: IDCivisStatusCustodiae.Refrigeratio
@@ -38,10 +37,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             abaciCivisStatus.Purgere(idCivis);
         }
 
-        public override void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Exire(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
         }
 
-        public override void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Ordinare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             base.Ordinare(idCivis, abaciCivisStatus);
 
             Carrus.PostulareVeletudinisValoris(
@@ -51,6 +50,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
+            // 再発覚でSequens
+            if (ResFluidaCivisVeletudinis.Suspecta(idCivis) >= ResFluidaCivisVeletudinis.SuspectaMaxima(idCivis)) {
+                return IDCivisStatusCustodiae.Sequens;
+            }
+
             // 距離が上限に達したら解除
             if (ResFluidaCivisCustodiae.DistantiaPuellae(idCivis) > _configuratio.DistantiaRefrigerationis) {
                 return IDCivisStatusCustodiae.Circumitus;
@@ -59,11 +63,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // 一定時間で解除
             if (ResFluidaCivisVeletudinis.Studium(idCivis) <= 0) {
                 return IDCivisStatusCustodiae.Circumitus;
-            }
-
-            // 再発覚でSequens
-            if (ResFluidaCivisVeletudinis.Suspecta(idCivis) >= ResFluidaCivisVeletudinis.SuspectaMaxima(idCivis)) {
-                return IDCivisStatusCustodiae.Sequens;
             }
 
             return IDCivisStatusCustodiae.Nihil;

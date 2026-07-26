@@ -26,9 +26,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         private float ResolvereIntentionem(
             int idCivis,
-            AbaciCivisStatus abaciCivisStatus
+            AbaciCivisStatusCustodiae abaciCivisStatus
         ) {
-            float puellaeAnomaliae = ResolutorCivisStatus.CorrigereRatioAnomaliae(
+            float puellaeAnomaliae = ResolutorCivisStatusCustodiae.CorrigereRatioAnomaliae(
                 ResFluidaPuellaeVeletudinis,
                 ResFluidaCivisVeletudinis,
                 idCivis
@@ -46,7 +46,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             abaciCivisStatus.ResolvereDirectionemIntentionis(idCivis, estAugere, Temporis.Intervallum);
 
             if (estAugere) {
-                return ResolutorCivisStatus.AugereIntentionisIntuitus(
+                return ResolutorCivisStatusCustodiae.AugereIntentionisIntuitus(
                     augmentumIntentionis: _configuratio.AugmentumIntentionisSec,
                     ratio: ResFluidaCivisCustodiae.RatioVisus(idCivis),
                     puellaeAnomalia: puellaeAnomaliae,
@@ -57,7 +57,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 );
             }
 
-            return ResolutorCivisStatus.DeminuereIntentionisIntuitus(
+            return -ResolutorCivisStatusCustodiae.DeminuereIntentionisIntuitus(
                 deminutioIntentionis: _configuratio.DeminutioIntentionisSec,
                 abaciCivisStatus.StudiumAmittereIntentionis(idCivis),
                 Temporis.Intervallum
@@ -66,9 +66,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         private float ResolvereStudium(
             int idCivis,
-            AbaciCivisStatus abaciCivisStatus
+            AbaciCivisStatusCustodiae abaciCivisStatus
         ) {
-            float puellaeAnomaliae = ResolutorCivisStatus.CorrigereRatioAnomaliae(
+            float puellaeAnomaliae = ResolutorCivisStatusCustodiae.CorrigereRatioAnomaliae(
                 ResFluidaPuellaeVeletudinis,
                 ResFluidaCivisVeletudinis,
                 idCivis
@@ -86,7 +86,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             abaciCivisStatus.ResolvereDirectionemStudii(idCivis, estAugere, Temporis.Intervallum);
 
             if (estAugere) {
-                return ResolutorCivisStatus.AugereStudiumIntuitus(
+                return ResolutorCivisStatusCustodiae.AugereStudiumIntuitus(
                     augmentumStudium: _configuratio.AugmentumStudiumSec,
                     puellaeAnomalia: puellaeAnomaliae,
                     torelantiaAnomaliaeMaxima: torelantiaAnomaliaeMaxima,
@@ -96,17 +96,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 );
             }
 
-            return ResolutorCivisStatus.DeminuereStudiumIntuitus(
+            return -ResolutorCivisStatusCustodiae.DeminuereStudiumIntuitus(
                 deminutioStudium: _configuratio.DeminutioStudiumSec,
                 abaciCivisStatus.StudiumAmittereStudii(idCivis),
                 Temporis.Intervallum
             );
         }
 
-        public override void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Ordinare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             base.Ordinare(idCivis, abaciCivisStatus);
 
-            float puellaeAnomaliae = ResolutorCivisStatus.CorrigereRatioAnomaliae(
+            float puellaeAnomaliae = ResolutorCivisStatusCustodiae.CorrigereRatioAnomaliae(
                 ResFluidaPuellaeVeletudinis,
                 ResFluidaCivisVeletudinis,
                 idCivis
@@ -148,7 +148,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
 
             if (ResFluidaCivisVeletudinis.Studium(idCivis) <= 0.0f) {
-                float pa = ResolutorCivisStatus.CorrigereRatioAnomaliae(
+                float pa = ResolutorCivisStatusCustodiae.CorrigereRatioAnomaliae(
                     ResFluidaPuellaeVeletudinis,
                     ResFluidaCivisVeletudinis,
                     idCivis

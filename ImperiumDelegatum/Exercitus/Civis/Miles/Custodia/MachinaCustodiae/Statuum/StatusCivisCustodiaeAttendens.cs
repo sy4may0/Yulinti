@@ -32,10 +32,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _configuratio = configuratio;
         }
 
-        public abstract void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus);
-        public abstract void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus);
+        public abstract void Initare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus);
+        public abstract void Exire(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus);
 
-        public virtual void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public virtual void Ordinare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             float dtSuspecta = ResolvereSuspectam(idCivis, abaciCivisStatus);
             Carrus.PostulareVeletudinisValoris(
                 idCivis,
@@ -45,7 +45,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         
         protected float RestringereSuspectam(int idCivis, float dtSuspecta) {
             float rs = ResFluidaCivisVeletudinis.Suspecta(idCivis) + dtSuspecta;
-            float anomalia = ResolutorCivisStatus.CorrigereAnomaliae(
+            float anomalia = ResolutorCivisStatusCustodiae.CorrigereAnomaliae(
                 ResFluidaPuellaeVeletudinis,
                 ResFluidaCivisVeletudinis,
                 idCivis
@@ -83,7 +83,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // 視覚刺激・聴覚刺激のいずれかがあれば上昇し、両方無ければ減衰する。
         // 「音か視覚か」「振り向くか注視か」はSuspecta値と瞬間の視認boolで判断するため、
         // ここでは蓄積は単一のSuspectaに集約する。
-        protected float ResolvereSuspectam(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        protected float ResolvereSuspectam(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             bool estAugereVisae = (
                 ResFluidaCivisCustodiae.EstCustodiaeVisae(idCivis) &&
                 ResFluidaCivisCustodiae.EstVisa(idCivis)
@@ -100,7 +100,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 float dtSuspecta = 0f;
 
                 if (estAugereVisae) {
-                    dtSuspecta += ResolutorCivisStatus.AugereSuspectaeVisae(
+                    dtSuspecta += ResolutorCivisStatusCustodiae.AugereSuspectaeVisae(
                         _configuratio.AugmentumSuspectaeVisaeSec,
                         ResFluidaCivisCustodiae.RatioVisus(idCivis),
                         ResFluidaCivisVeletudinis.RatioVisus(idCivis),
@@ -111,10 +111,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 }
 
                 if (estAugereAuditae) {
-                    dtSuspecta += ResolutorCivisStatus.AugereSuspectaeAuditae(
+                    dtSuspecta += ResolutorCivisStatusCustodiae.AugereSuspectaeAuditae(
                         _configuratio.AugmentumSuspectaeAuditaeSec,
-                        ResFluidaCivisVeletudinis.Auditus(idCivis),
                         ResFluidaCivisCustodiae.Audita(idCivis),
+                        ResFluidaCivisVeletudinis.Auditus(idCivis),
                         abaciCivisStatus.StudiumHabereSuspectae(idCivis),
                         Temporis.Intervallum
                     );
@@ -123,7 +123,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return dtSuspecta;
             }
 
-            return -ResolutorCivisStatus.DeminuereSuspectam(
+            return -ResolutorCivisStatusCustodiae.DeminuereSuspectam(
                 _configuratio.DeminutioSuspectaeSec,
                 abaciCivisStatus.StudiumAmittereSuspectae(idCivis),
                 Temporis.Intervallum

@@ -19,7 +19,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _configuratio = configuratio;
         }
 
-        public void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public void Initare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             _carrus.PostulareVeletudinisCondicionis(
                 idCivis,
                 statusCustodiaeCurrens: IDCivisStatusCustodiae.Vigilantia
@@ -34,10 +34,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             abaciCivisStatus.PurgereStudii(idCivis);
         }
 
-        public void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public void Exire(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
         }
 
-        public void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public void Ordinare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             // Intuitusステートに向かうため、Studiumを減らす。(Studium0でSpectansステートになる)
             // Suspectaは常に1, Intentioは常に-1固定。
             _carrus.PostulareVeletudinisValoris(

@@ -1,5 +1,4 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Nucleus.Instrumentarium;
 using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
@@ -16,7 +15,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IConfiguratioCivisCustodiaeStatusDiscedens configuratioStatusCustodiaeDiscedens,
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
-            IOstiumCivisLegibile civis,
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCarrusCivis carrus,
             IOstiumTemporisLegibile temporis
@@ -29,7 +27,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _statuum[(int)IDCivisStatusCustodiae.Circumitus] = new StatusCivisCustodiaeCircumitus(
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
-                civis,
                 resFluidaCivisCustodiae,
                 carrus,
                 temporis,
@@ -68,7 +65,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _statuum[(int)IDCivisStatusCustodiae.Refrigeratio] = new StatusCivisCustodiaeRefrigerationis(
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
-                civis,
                 resFluidaCivisCustodiae,
                 carrus,
                 temporis,
@@ -77,7 +73,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _statuum[(int)IDCivisStatusCustodiae.Discedens] = new StatusCivisCustodiaeDiscedens(
                 resFluidaCivisVeletudinis,
                 resFluidaPuellaeVeletudinis,
-                civis,
                 resFluidaCivisCustodiae,
                 carrus,
                 temporis,

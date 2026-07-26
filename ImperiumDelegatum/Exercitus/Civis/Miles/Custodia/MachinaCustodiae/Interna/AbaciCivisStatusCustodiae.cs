@@ -2,7 +2,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Nucleus.Instrumentarium;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal sealed class AbaciCivisStatus {
+    internal sealed class AbaciCivisStatusCustodiae {
         private readonly int _longitudo;
         private readonly AbacusTemporis[] _abacusStudiumHabereSuspectae;
         private readonly AbacusTemporis[] _abacusStudiumAmittereSuspectae;
@@ -20,7 +20,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly bool[] _estAugereIntentionis;
 
 
-        public AbaciCivisStatus(
+        public AbaciCivisStatusCustodiae(
             IOstiumCivisLegibile civis,
             IConfiguratioCivisCustodiaeStatusCommunis configuratio
         ) {

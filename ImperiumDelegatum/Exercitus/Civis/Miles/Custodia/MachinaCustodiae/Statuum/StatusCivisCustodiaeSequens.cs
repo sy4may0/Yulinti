@@ -19,27 +19,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
         }
 
-        public override void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Initare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             Carrus.PostulareVeletudinisCondicionis(
                 idCivis,
                 statusCustodiaeCurrens: IDCivisStatusCustodiae.Sequens
             );
         }
 
-        public override void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
-        }
-
-        public override void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
-            base.Ordinare(idCivis, abaciCivisStatus);
-        }
-
-        public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
-            IDCivisStatusCustodiae status = base.MutareStatus(idCivis);
-            if (status != IDCivisStatusCustodiae.Nihil) {
-                return status;
-            }
-
-            return IDCivisStatusCustodiae.Nihil;
+        public override void Exire(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _configuratio = configuratio;
         }
 
-        public override void Initare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
+        public override void Initare(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
             Carrus.PostulareVeletudinisCondicionis(
                 idCivis,
                 statusCustodiaeCurrens: IDCivisStatusCustodiae.Spectans
@@ -38,11 +38,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             abaciCivisStatus.PurgereStudii(idCivis);
         }
 
-        public override void Exire(int idCivis, AbaciCivisStatus abaciCivisStatus) {
-        }
-
-        public override void Ordinare(int idCivis, AbaciCivisStatus abaciCivisStatus) {
-            base.Ordinare(idCivis, abaciCivisStatus);
+        public override void Exire(int idCivis, AbaciCivisStatusCustodiae abaciCivisStatus) {
         }
 
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
