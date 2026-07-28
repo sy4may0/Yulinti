@@ -64,7 +64,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _abacusTemporisRepletioVigoris.Purgere();
             float consumptioVigoris = ComputareConsumptioVigoris(dedecus);
             _carrus.PostulareVeletudinis(
-                dtVigoris: consumptioVigoris * _temporis.Intervallum
+                dtVigoris: -consumptioVigoris * _temporis.Intervallum
             );
         }
     }

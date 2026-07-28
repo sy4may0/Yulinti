@@ -56,6 +56,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 currens = _tabulaCivisStatusCustodiae.Legere(idCurrens);
 
                 currens.Initare(idCivis, _abaciCivisStatus);
+                _statusCustodiaeCurrens[idCivis] = idCurrens;
             }
 
             currens.Ordinare(idCivis, _abaciCivisStatus);

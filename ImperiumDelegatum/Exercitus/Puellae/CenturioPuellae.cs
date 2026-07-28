@@ -47,9 +47,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _milesPuellaeActionis.Initare(_resFluidaLegibile);
             _milesPuellaeCrinis.Initare();
             _milesPuellaeVestitae.Initare();
+
+            _milesPuellaeVeletudinisMaxima.Initare();
             _milesPuellaeVeletudinisAnomaliae.Initare();
             _milesPuellaeVeletudinisDedecoris.Initare();
             _milesPuellaeVeletudinisVigoris.Initare();
+
             _carrusPuellae.ConfirmareIncipabilis();
         }
 

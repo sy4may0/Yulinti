@@ -132,8 +132,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             return (
                 _statusCustodiaeCurrens[idCivis] == IDCivisStatusCustodiae.Vigilantia ||
                 _statusCustodiaeCurrens[idCivis] == IDCivisStatusCustodiae.Spectans ||
-                _statusCustodiaeCurrens[idCivis] == IDCivisStatusCustodiae.Sequens ||
-                _statusCustodiaeCurrens[idCivis] == IDCivisStatusCustodiae.Discedens 
+                _statusCustodiaeCurrens[idCivis] == IDCivisStatusCustodiae.Sequens
             );
         }
 
