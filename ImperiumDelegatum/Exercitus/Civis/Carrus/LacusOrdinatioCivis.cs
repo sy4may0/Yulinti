@@ -7,45 +7,57 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Stack<OrdinatioCivisMotus>[] _lacusMotus;
         private readonly Stack<OrdinatioCivisNavmesh>[] _lacusNavmesh;
         private readonly Stack<OrdinatioCivisVeletudinisValoris>[] _lacusVeletudinisValoris;
+        private readonly Stack<OrdinatioCivisVeletudinisMaxima>[] _lacusVeletudinisMaxima;
         private readonly Stack<OrdinatioCivisMortis>[] _lacusMortis;
         private readonly Stack<OrdinatioCivisVeletudinisCondicionis>[] _lacusVeletudinisCondicionis;
+        private readonly Stack<OrdinatioCivisCustodiae>[] _lacusCustodiae;
 
         private readonly Ordo<OrdinatioCivisAnimationis>[] _emissioAnimationis;
         private readonly Ordo<OrdinatioCivisMotus>[] _emissioMotus;
         private readonly Ordo<OrdinatioCivisNavmesh>[] _emissioNavmesh;
         private readonly Ordo<OrdinatioCivisVeletudinisValoris>[] _emissioVeletudinisValoris;
+        private readonly Ordo<OrdinatioCivisVeletudinisMaxima>[] _emissioVeletudinisMaxima;
         private readonly Ordo<OrdinatioCivisMortis>[] _emissioMortis;
         private readonly Ordo<OrdinatioCivisVeletudinisCondicionis>[] _emissioVeletudinisCondicionis;
+        private readonly Ordo<OrdinatioCivisCustodiae>[] _emissioCustodiae;
 
         public LacusOrdinatioCivis(int longitudoCivis) {
             _lacusAnimationis = new Stack<OrdinatioCivisAnimationis>[longitudoCivis];
             _lacusMotus = new Stack<OrdinatioCivisMotus>[longitudoCivis];
             _lacusNavmesh = new Stack<OrdinatioCivisNavmesh>[longitudoCivis];
             _lacusVeletudinisValoris = new Stack<OrdinatioCivisVeletudinisValoris>[longitudoCivis];
+            _lacusVeletudinisMaxima = new Stack<OrdinatioCivisVeletudinisMaxima>[longitudoCivis];
             _lacusMortis = new Stack<OrdinatioCivisMortis>[longitudoCivis];
             _lacusVeletudinisCondicionis = new Stack<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
+            _lacusCustodiae = new Stack<OrdinatioCivisCustodiae>[longitudoCivis];
 
             _emissioAnimationis = new Ordo<OrdinatioCivisAnimationis>[longitudoCivis];
             _emissioMotus = new Ordo<OrdinatioCivisMotus>[longitudoCivis];
             _emissioNavmesh = new Ordo<OrdinatioCivisNavmesh>[longitudoCivis];
             _emissioVeletudinisValoris = new Ordo<OrdinatioCivisVeletudinisValoris>[longitudoCivis];
+            _emissioVeletudinisMaxima = new Ordo<OrdinatioCivisVeletudinisMaxima>[longitudoCivis];
             _emissioMortis = new Ordo<OrdinatioCivisMortis>[longitudoCivis];
             _emissioVeletudinisCondicionis = new Ordo<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
+            _emissioCustodiae = new Ordo<OrdinatioCivisCustodiae>[longitudoCivis];
 
             for (int i = 0; i < longitudoCivis; i++) {
                 _lacusAnimationis[i] = new Stack<OrdinatioCivisAnimationis>(ConstansCivis.LongitudoOrdinatioAnimationis);
                 _lacusMotus[i] = new Stack<OrdinatioCivisMotus>(ConstansCivis.LongitudoOrdinatioMotus);
                 _lacusNavmesh[i] = new Stack<OrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
                 _lacusVeletudinisValoris[i] = new Stack<OrdinatioCivisVeletudinisValoris>(ConstansCivis.LongitudoOrdinatioVeletudinisValoris);
+                _lacusVeletudinisMaxima[i] = new Stack<OrdinatioCivisVeletudinisMaxima>(ConstansCivis.LongitudoOrdinatioVeletudinisMaxima);
                 _lacusMortis[i] = new Stack<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
                 _lacusVeletudinisCondicionis[i] = new Stack<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
+                _lacusCustodiae[i] = new Stack<OrdinatioCivisCustodiae>(ConstansCivis.LongitudoOrdinatioCustodiae);
 
                 _emissioAnimationis[i] = new Ordo<OrdinatioCivisAnimationis>(ConstansCivis.LongitudoOrdinatioAnimationis);
                 _emissioMotus[i] = new Ordo<OrdinatioCivisMotus>(ConstansCivis.LongitudoOrdinatioMotus);
                 _emissioNavmesh[i] = new Ordo<OrdinatioCivisNavmesh>(ConstansCivis.LongitudoOrdinatioNavmesh);
                 _emissioVeletudinisValoris[i] = new Ordo<OrdinatioCivisVeletudinisValoris>(ConstansCivis.LongitudoOrdinatioVeletudinisValoris);
+                _emissioVeletudinisMaxima[i] = new Ordo<OrdinatioCivisVeletudinisMaxima>(ConstansCivis.LongitudoOrdinatioVeletudinisMaxima);
                 _emissioMortis[i] = new Ordo<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
                 _emissioVeletudinisCondicionis[i] = new Ordo<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
+                _emissioCustodiae[i] = new Ordo<OrdinatioCivisCustodiae>(ConstansCivis.LongitudoOrdinatioCustodiae);
 
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioAnimationis; j++) {
                     _lacusAnimationis[i].Push(new OrdinatioCivisAnimationis(i));
@@ -59,11 +71,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioVeletudinisValoris; j++) {
                     _lacusVeletudinisValoris[i].Push(new OrdinatioCivisVeletudinisValoris(i));
                 }
+                for (int j = 0; j < ConstansCivis.LongitudoOrdinatioVeletudinisMaxima; j++) {
+                    _lacusVeletudinisMaxima[i].Push(new OrdinatioCivisVeletudinisMaxima(i));
+                }
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioMortis; j++) {
                     _lacusMortis[i].Push(new OrdinatioCivisMortis(i));
                 }
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis; j++) {
                     _lacusVeletudinisCondicionis[i].Push(new OrdinatioCivisVeletudinisCondicionis(i));
+                }
+                for (int j = 0; j < ConstansCivis.LongitudoOrdinatioCustodiae; j++) {
+                    _lacusCustodiae[i].Push(new OrdinatioCivisCustodiae(i));
                 }
             }
         }
@@ -120,6 +138,19 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             return false;
         }
 
+        public bool EmittareVeletudinisMaxima(int idCivis, out OrdinatioCivisVeletudinisMaxima veletudinisMaxima) {
+            if (_lacusVeletudinisMaxima[idCivis].Count > 0) {
+                var r = _lacusVeletudinisMaxima[idCivis].Pop();
+                if (_emissioVeletudinisMaxima[idCivis].ConarePono(r)) {
+                    veletudinisMaxima = r;
+                    veletudinisMaxima.Initare();
+                    return true;
+                }
+            }
+            veletudinisMaxima = null;
+            return false;
+        }
+
         public bool EmittareMortis(int idCivis, out OrdinatioCivisMortis mortis) {
             if (_lacusMortis[idCivis].Count > 0) {
                 var r = _lacusMortis[idCivis].Pop();
@@ -143,6 +174,19 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 }
             }
             veletudinisCondicionis = null;
+            return false;
+        }
+
+        public bool EmittareCustodiae(int idCivis, out OrdinatioCivisCustodiae custodiae) {
+            if (_lacusCustodiae[idCivis].Count > 0) {
+                var r = _lacusCustodiae[idCivis].Pop();
+                if (_emissioCustodiae[idCivis].ConarePono(r)) {
+                    custodiae = r;
+                    custodiae.Initare();
+                    return true;
+                }
+            }
+            custodiae = null;
             return false;
         }
 
@@ -190,6 +234,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
         }
 
+        public void ColligereVeletudinisMaxima(int idCivis) {
+            while (_emissioVeletudinisMaxima[idCivis].ConareLego(out var r)) {
+                if (_lacusVeletudinisMaxima[idCivis].Count < ConstansCivis.LongitudoOrdinatioVeletudinisMaxima) {
+                    _lacusVeletudinisMaxima[idCivis].Push(r);
+                } else {
+                    r.Purgere();
+                    r.Liberare();
+                }
+            }
+        }
+
         public void ColligereMortis(int idCivis) {
             while (_emissioMortis[idCivis].ConareLego(out var r)) {
                 if (_lacusMortis[idCivis].Count < ConstansCivis.LongitudoOrdinatioMortis) {
@@ -212,13 +267,26 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
         }
 
+        public void ColligereCustodiae(int idCivis) {
+            while (_emissioCustodiae[idCivis].ConareLego(out var r)) {
+                if (_lacusCustodiae[idCivis].Count < ConstansCivis.LongitudoOrdinatioCustodiae) {
+                    _lacusCustodiae[idCivis].Push(r);
+                } else {
+                    r.Purgere();
+                    r.Liberare();
+                }
+            }
+        }
+
         public void ColligereOmnia(int idCivis) {
             ColligereAnimationis(idCivis);
             ColligereMotus(idCivis);
             ColligereNavmesh(idCivis);
             ColligereVeletudinisValoris(idCivis);
+            ColligereVeletudinisMaxima(idCivis);
             ColligereMortis(idCivis);
             ColligereVeletudinisCondicionis(idCivis);
+            ColligereCustodiae(idCivis);
         }
     }
 }

@@ -219,13 +219,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtDedecus = 0f,
             float dtClaritas = 0f,
             float dtAnomalia = 0f,
+            float dtAnomaliaNudus = 0f,
             float dtSonusQuietes = 0f,
             float dtSonusMotus = 0f
         ){
             if(_lacusOrdinatioPuellae.EmittareVeletudinis(out var ordinatio)) {
                 ordinatio.Pono(
                     dtVigoris, dtPatientiae, dtAetheris,
-                    dtIntentio, dtDedecus, dtClaritas, dtAnomalia,
+                    dtIntentio, dtDedecus, dtClaritas, dtAnomalia, dtAnomaliaNudus,
                     dtSonusQuietes, dtSonusMotus
                 );
                 _exVeletudinis.Executare(ordinatio);

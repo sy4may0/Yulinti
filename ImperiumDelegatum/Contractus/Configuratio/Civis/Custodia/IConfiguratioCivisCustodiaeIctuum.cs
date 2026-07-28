@@ -1,35 +1,5 @@
 namespace Yulinti.ImperiumDelegatum.Contractus {
-    public interface IConfiguratioCivisCustodiae {
-        // 視認度上昇倍率 (乗算値)
-        float RatioVisus { get; }
-        // 猜疑度値上昇倍率 (乗算値)
-        float RatioSuspecta { get; }
-        // 聴認度上昇倍率 (乗算値)
-        float RatioAudita { get; }
-
-        float LimenVigilantia { get; }
-        float LimenDetectio { get; }
-        float LimenDetectioSonora { get; }
-        float LimenSuspecta { get; }
-
-        // 発覚状態での固定減少量
-        float ConsumptioVisaeDetectioSec { get; }
-        // 警戒状態/通常時の視認減少量 => シグモイド関数で算出する興味喪失度で補正される。
-        float ConsumptioVisaeSec { get; }
-
-        // 猜疑度値減少量 => シグモイド関数で算出する興味喪失度で補正される。
-        float ConsumptioSuspectaSec { get; }
-
-        // 聴認減少量 => シグモイド関数で算出する興味喪失度で補正される。
-        float ConsumptioAuditaeSec { get; }
-
-        // 興味を失い始める時間(Sigmoidの坂にあたるポイント)
-        float TempusStudiumAmittereSec { get; }
-        // 視認減少が最大化するまでの時間(Sigmoidの右端にあたるポイント)
-        float TempusStudiumAmittereMaximaSec { get; }
-        // 興味の減少カーブ角度
-        float PraeruptioTempusAmittere { get; }
-
+    public interface IConfiguratioCivisCustodiaeIctuum {
         // 視認範囲 この範囲内で計算を行う。
         float DistantiaCustodiaeActivum { get; }
     
@@ -70,12 +40,5 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         // Mediusは0~1の比率を直接指定する。
         float DistantiaAuditaeMedius { get; }
         float PraeruptioDistantiaAuditaeSoni { get; }
-
-        // 聴認状態維持時間(区間ランダム)
-        float TempusAuditaeSecMaxima { get; }
-        float TempusAuditaeSecMinima { get; }
-        // 聴認状態クールタイム(区間ランダム)
-        float TempusSurdaMaxima { get; }
-        float TempusSurdaMinima { get; }
     }
 }

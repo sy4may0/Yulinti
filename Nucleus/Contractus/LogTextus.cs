@@ -5,6 +5,8 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AbacusAnguli_ABACUSANGLI_INVALID_PRAERUPTIO_ANGULI = "AbacusAnguli - invalid praeruptio anguli";
         public const string AbacusDistantiae_ABACUSDISTANTIAE_INVALID_DISTANTIA = "AbacusDistantiae - invalid distantia";
         public const string AbacusDistantiae_ABACUSDISTANTIAE_INVALID_PRAERUPTIO_DISTANTIA = "AbacusDistantiae - invalid praeruptio distantiae";
+        public const string AbacusLenis_ABACUSLENIS_INVALID_LENIS = "AbacusLenis - invalid lenis";
+        public const string AbacusLenis_ABACUSLENIS_INVALID_PRAERUPTIO_LENIS = "AbacusLenis - invalid praeruptio lenis";
         public const string AbacusTemporis_ABACUSTEMPORIS_INVALID_TEMPUS = "AbacusTemporis - invalid tempus";
         public const string AbacusTemporis_ABACUSTEMPORIS_INVALID_PRAERUPTIO_TEMPUS = "AbacusTemporis - invalid praeruptio tempus";
         public const string AbacusAnguliVisus_ABACUSANGULIVISUS_INVALID_ANGULUS = "AbacusAnguliVisus - invalid angulus";

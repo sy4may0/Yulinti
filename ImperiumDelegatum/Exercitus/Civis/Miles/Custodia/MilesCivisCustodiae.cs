@@ -1,5 +1,4 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using System;
 
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
@@ -9,79 +8,59 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         private readonly ResolutorCivisDistantia _resolutorCivisDistantia;
         private readonly ResolutorCivisNudusVisae _resolutorCivisNudusVisae;
-        private readonly ResolutorCivisVisa _resolutorCivisVisa;
-        private readonly ResolutorCivisSuspectae _resolutorCivisSuspectae;
-        private readonly ResolutorCivisMutareCustodiae _resolutorCivisMutareCustodiae;
-        private readonly ResolutorCivisAuditae _resolutorCivisAuditae;
+
+        private readonly MachinaCivisCustodiae _machinaCivisCustodiae;
 
         public MilesCivisCustodiae(
-            IConfiguratioCivisCustodiae configuratioCustodiae,
+            IConfiguratioCivisCustodiaeIctuum configuratioCustodiae,
+            IConfiguratioCivisCustodiaeStatus configuratioCivisStatusCustodiae,
             IOstiumTemporisLegibile temporis,
             IOstiumCivisLegibile civis,
             IOstiumCivisLociLegibile loci,
             IOstiumCivisVisaeLegibile visa,
             IOstiumPuellaeResVisaeLegibile puellaeResVisae,
             IResFluidaPuellaeLegibile resFPuellae,
-            IOstiumCarrusCivis carrus,
-            Random random
+            IResFluidaCivisLegibile resFCivis,
+            IOstiumCarrusCivis carrus
         ) {
             _resolutorCivisDistantia = new ResolutorCivisDistantia(
                 configuratioCustodiae,
                 civis,
                 loci,
-                puellaeResVisae
+                puellaeResVisae,
+                carrus
             );
             _resolutorCivisIctuum = new ResolutorCivisIctuumVisae(
                 configuratioCustodiae,
                 civis,
                 visa,
                 puellaeResVisae,
-                _resolutorCivisDistantia
+                carrus,
+                resFCivis.Custodiae
             );
             _resolutorCivisIctuumAuditae = new ResolutorCivisIctuumAuditae(
                 configuratioCustodiae,
                 civis,
+                carrus,
                 resFPuellae,
-                _resolutorCivisDistantia
+                resFCivis.Custodiae
             );
 
             _resolutorCivisNudusVisae = new ResolutorCivisNudusVisae(
                 carrus,
                 visa,
                 puellaeResVisae,
-                _resolutorCivisDistantia
+                resFCivis.Custodiae
             );
-            _resolutorCivisVisa = new ResolutorCivisVisa(
-                configuratioCustodiae,
-                temporis,
+
+            _machinaCivisCustodiae = new MachinaCivisCustodiae(
+                configuratioCivisStatusCustodiae,
+                resFCivis.Veletudinis,
+                resFPuellae.Veletudinis,
                 civis,
+                resFCivis.Custodiae,
                 carrus,
-                resFPuellae,
-                _resolutorCivisIctuum,
-                _resolutorCivisDistantia
-            );
-            _resolutorCivisSuspectae = new ResolutorCivisSuspectae(
-                configuratioCustodiae,
-                temporis,
-                civis,
-                carrus,
-                resFPuellae,
-                _resolutorCivisIctuum,
-                _resolutorCivisDistantia
-            );
-            _resolutorCivisMutareCustodiae = new ResolutorCivisMutareCustodiae(
-                configuratioCustodiae,
-                carrus,
-                civis
-            );
-            _resolutorCivisAuditae = new ResolutorCivisAuditae(
-                configuratioCustodiae,
-                temporis,
-                carrus,
-                civis,
-                random,
-                _resolutorCivisIctuumAuditae,
-                _resolutorCivisDistantia
+                temporis
             );
         }
 
@@ -90,12 +69,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             _resolutorCivisDistantia.Initare(idCivis);
             _resolutorCivisNudusVisae.Initare(idCivis);
-            _resolutorCivisVisa.Initare(idCivis);
-            _resolutorCivisSuspectae.Initare(idCivis);
             _resolutorCivisIctuum.Initare(idCivis);
             _resolutorCivisIctuumAuditae.Initare(idCivis);
-            _resolutorCivisMutareCustodiae.Initare(idCivis);
-            _resolutorCivisAuditae.Initare(idCivis);
+            _machinaCivisCustodiae.Initare(idCivis);
         }
 
         public void OrdinareCustodiae(
@@ -105,16 +81,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resolutorCivisDistantia.Ordinare(idCivis);
             // SpectareNudusの解決
             _resolutorCivisNudusVisae.Ordinare(idCivis);
-
-            // Nudus視認前後の挙動を解決
-            _resolutorCivisMutareCustodiae.OrdinareVisa(idCivis, resFluida);
-
-            // Visaの解決
-            _resolutorCivisVisa.Ordinare(idCivis, resFluida);
-            // Suspectaの解決
-            _resolutorCivisSuspectae.Ordinare(idCivis, resFluida);
-            // Auditaの解決
-            _resolutorCivisAuditae.Ordinare(idCivis, resFluida);
+            // 状態の解決
+            _machinaCivisCustodiae.Ordinare(idCivis);
         }
 
         public void ResolvereIctuum(int idCivis) {
@@ -122,17 +90,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resolutorCivisIctuum.Resolvere(idCivis);
             // Auditaの解決
             _resolutorCivisIctuumAuditae.Resolvere(idCivis);
-        }
-
-        public void ResolvereDetectio(
-            int idCivis, IResFluidaCivisLegibile resFluida
-        ) {
-            // Detectio, Vigilantiaの解決
-            _resolutorCivisMutareCustodiae.ResolvereDetectio(idCivis, resFluida);
-            // Suspectaの解決
-            _resolutorCivisMutareCustodiae.ResolvereSuspecta(idCivis, resFluida);
-            // DetectioSonoraの解決
-            _resolutorCivisMutareCustodiae.ResolvereDetectioSonora(idCivis, resFluida);
         }
     }
 }

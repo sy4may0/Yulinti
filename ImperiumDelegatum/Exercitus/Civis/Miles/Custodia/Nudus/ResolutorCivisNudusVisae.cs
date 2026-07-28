@@ -10,7 +10,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumCarrusCivis _carrus;
         private readonly IOstiumCivisVisaeLegibile _visa;
         private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
-        private readonly IResolutorCivisDistantia _resolutorCivisDistantia;
+        private readonly IResFluidaCivisCustodiaeLegibile _resFCustodiae;
 
         private readonly IDPuellaeResNudusAnterior[] _cIDPuellaeResNudusAnterior;
         private readonly IDPuellaeResNudusPosterior[] _cIDPuellaeResNudusPosterior;
@@ -21,12 +21,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IOstiumCarrusCivis carrus,
             IOstiumCivisVisaeLegibile visa,
             IOstiumPuellaeResVisaeLegibile puellaeResVisae,
-            IResolutorCivisDistantia resolutorCivisDistantia
+            IResFluidaCivisCustodiaeLegibile resFCustodiae
         ) {
             _carrus = carrus;
             _visa = visa;
             _puellaeResVisae = puellaeResVisae;
-            _resolutorCivisDistantia = resolutorCivisDistantia;
+            _resFCustodiae = resFCustodiae;
 
             _cIDPuellaeResNudusAnterior = (IDPuellaeResNudusAnterior[])Enum.GetValues(typeof(IDPuellaeResNudusAnterior));
             _cIDPuellaeResNudusPosterior = (IDPuellaeResNudusPosterior[])Enum.GetValues(typeof(IDPuellaeResNudusPosterior));
@@ -40,7 +40,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis
         ) {
             // 視認範囲外の場合はSpectareNudusをfalseとする。
-            if (!_resolutorCivisDistantia.EstCustodiaeVisae(idCivis)) {
+            if (!_resFCustodiae.EstCustodiaeVisae(idCivis)) {
                 _carrus.PostulareVeletudinisCondicionis(
                     idCivis,
                     estSpectareNudusAnterior: false,

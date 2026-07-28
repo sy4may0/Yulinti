@@ -33,6 +33,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private ValorisPuellaeVeletudinis _phantasmaAether;
         private ValorisPuellaeVeletudinis _phantasmaClaritas;
         private ValorisPuellaeVeletudinis _phantasmaAnomalia;
+        private ValorisPuellaeVeletudinis _phantasmaAnomaliaNudus;
         private ValorisPuellaeVeletudinis _phantasmaIntentio;
         private ValorisPuellaeVeletudinis _phantasmaDedecus;
         private ValorisPuellaeVeletudinis _phantasmaSonusQuietes;
@@ -54,6 +55,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _phantasmaAether = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fluidus);
             _phantasmaClaritas = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
             _phantasmaAnomalia = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
+            _phantasmaAnomaliaNudus = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
             _phantasmaIntentio = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
             _phantasmaDedecus = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fluidus);
             _phantasmaSonusQuietes = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
@@ -75,6 +77,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float PhantasmaAether => _phantasmaAether.Valor;
         public float PhantasmaClaritas => _phantasmaClaritas.Valor;
         public float PhantasmaAnomalia => _phantasmaAnomalia.Valor;
+        public float PhantasmaAnomaliaNudus => _phantasmaAnomaliaNudus.Valor;
         public float PhantasmaIntentio => _phantasmaIntentio.Valor;
         public float PhantasmaDedecus => _phantasmaDedecus.Valor;
         public float PhantasmaSonusQuietes => _phantasmaSonusQuietes.Valor;
@@ -96,6 +99,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float dtAether = 0f,
             float dtClaritas = 0f,
             float dtAnomalia = 0f,
+            float dtAnomaliaNudus = 0f,
             float dtIntentio = 0f,
             float dtDedecus = 0f,
             float dtSonusQuietes = 0f,
@@ -115,6 +119,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _phantasmaAether.Valor = _phantasmaAether.Valor + dtAether;
             _phantasmaClaritas.Valor = _phantasmaClaritas.Valor + dtClaritas;
             _phantasmaAnomalia.Valor = _phantasmaAnomalia.Valor + dtAnomalia;
+            _phantasmaAnomaliaNudus.Valor = _phantasmaAnomaliaNudus.Valor + dtAnomaliaNudus;
             _phantasmaIntentio.Valor = _phantasmaIntentio.Valor + dtIntentio;
             _phantasmaDedecus.Valor = _phantasmaDedecus.Valor + dtDedecus;
             _phantasmaSonusQuietes.Valor = _phantasmaSonusQuietes.Valor + dtSonusQuietes;
@@ -136,6 +141,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _phantasmaAether.Valor = 0f;
             _phantasmaClaritas.Valor = 0f;
             _phantasmaAnomalia.Valor = 0f;
+            _phantasmaAnomaliaNudus.Valor = 0f;
             _phantasmaIntentio.Valor = 0f;
             _phantasmaDedecus.Valor = 0f;
             _phantasmaSonusQuietes.Valor = 0f;
@@ -173,6 +179,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             InitarePhantasma(_phantasmaAether, resFluidaVeletudinis.Aether);
             InitarePhantasma(_phantasmaClaritas, resFluidaVeletudinis.Claritas);
             InitarePhantasma(_phantasmaAnomalia, resFluidaVeletudinis.Anomalia);
+            InitarePhantasma(_phantasmaAnomaliaNudus, resFluidaVeletudinis.AnomaliaNudus);
             InitarePhantasma(_phantasmaIntentio, resFluidaVeletudinis.Intentio);
             InitarePhantasma(_phantasmaDedecus, resFluidaVeletudinis.Dedecus);
             InitarePhantasma(_phantasmaSonusQuietes, resFluidaVeletudinis.SonusQuietes);
@@ -238,6 +245,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 dtAether: veletudinis.DtAetheris,
                 dtClaritas: veletudinis.DtClaritas,
                 dtAnomalia: veletudinis.DtAnomalia,
+                dtAnomaliaNudus: veletudinis.DtAnomaliaNudus,
                 dtIntentio: veletudinis.DtIntentio,
                 dtDedecus: veletudinis.DtDedecus,
                 dtSonusQuietes: veletudinis.DtSonusQuietes,
@@ -298,6 +306,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 patientia: _phantasma.PhantasmaPatientiae,
                 claritas: _phantasma.PhantasmaClaritas,
                 anomalia: _phantasma.PhantasmaAnomalia,
+                anomaliaNudus: _phantasma.PhantasmaAnomaliaNudus,
                 aether: _phantasma.PhantasmaAether,
                 intentio: _phantasma.PhantasmaIntentio,
                 dedecus: _phantasma.PhantasmaDedecus,

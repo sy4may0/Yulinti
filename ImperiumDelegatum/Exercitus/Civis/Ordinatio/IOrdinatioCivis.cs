@@ -9,6 +9,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         VeletudinisCustodiae,
         VeletudinisMortis,
         VeletudinisValoris,
+        VeletudinisMaxima,
         VeletudinisSpectare
     }
 

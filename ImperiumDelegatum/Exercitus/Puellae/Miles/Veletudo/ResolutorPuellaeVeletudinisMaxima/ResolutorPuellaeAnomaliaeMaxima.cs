@@ -14,7 +14,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return PuellaVeletudinis.AnomaliaMaximaBasis;
             }
 
-            // Anomaliaはとりあえず100固定
+            // Anomaliaは固定
             float maximus = PuellaVeletudinis.AnomaliaMaximaBasis; // 規定値
             float ratio = 1.0f; // 補正倍率
 

@@ -3,44 +3,47 @@ using Yulinti.ImperiumDelegatum.Contractus;
 using System.Numerics;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal sealed class ResolutorCivisDistantia : IResolutorCivisDistantia {
-        private readonly IConfiguratioCivisCustodiae _configuratioCivisCustodiae;
+    internal sealed class ResolutorCivisDistantia {
+        private readonly IConfiguratioCivisCustodiaeIctuum _configuratioCivisCustodiae;
         private readonly IOstiumCivisLegibile _civis;
         private readonly IOstiumCivisLociLegibile _loci;
         private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
-
-        private readonly float[] _distantiaPuellae;
+        private readonly IOstiumCarrusCivis _carrus;
 
         public ResolutorCivisDistantia(
-            IConfiguratioCivisCustodiae configuratioCivisCustodiae,
+            IConfiguratioCivisCustodiaeIctuum configuratioCivisCustodiae,
             IOstiumCivisLegibile civis,
             IOstiumCivisLociLegibile loci,
-            IOstiumPuellaeResVisaeLegibile puellaeResVisae
+            IOstiumPuellaeResVisaeLegibile puellaeResVisae,
+            IOstiumCarrusCivis carrus
         ) {
             _configuratioCivisCustodiae = configuratioCivisCustodiae;
             _civis = civis;
             _loci = loci;
             _puellaeResVisae = puellaeResVisae;
-            _distantiaPuellae = new float[_civis.Longitudo];
-            for (int i = 0; i < _civis.Longitudo; i++) {
-                _distantiaPuellae[i] = float.MaxValue;
-            }
+            _carrus = carrus;
         }
 
         public void Initare(int idCivis) {
-            _distantiaPuellae[idCivis] = float.MaxValue;
+            // ResFluidaCivisCustodiaeの初期化はExecutorCivisCustodiaeが行う。
         }
-
-        public float DistantiaPuellae(int idCivis) => _distantiaPuellae[idCivis];
-        public bool EstCustodiaeVisae(int idCivis) => _distantiaPuellae[idCivis] <= _configuratioCivisCustodiae.DistantiaCustodiaeActivum;
-        public bool EstCustodiaeAuditae(int idCivis) => _distantiaPuellae[idCivis] <= _configuratioCivisCustodiae.DistantiaAuditaeActivum;
 
         public void Ordinare(
             int idCivis
         ) {
             Vector3 positioCivis = _loci.Positio(idCivis);
             Vector3 positioPuellae = _puellaeResVisae.LegoPositionemRadix();
-            _distantiaPuellae[idCivis] = (positioCivis - positioPuellae).Length();
+            float distantiaPuellae = (positioCivis - positioPuellae).Length();
+
+            bool estCustodiaeVisae = distantiaPuellae <= _configuratioCivisCustodiae.DistantiaCustodiaeActivum;
+            bool estCustodiaeAuditae = distantiaPuellae <= _configuratioCivisCustodiae.DistantiaAuditaeActivum;
+
+            _carrus.PostulareCustodiaeDistantia(
+                idCivis,
+                distantiaPuellae,
+                estCustodiaeVisae,
+                estCustodiaeAuditae
+            );
         }
     }
 }

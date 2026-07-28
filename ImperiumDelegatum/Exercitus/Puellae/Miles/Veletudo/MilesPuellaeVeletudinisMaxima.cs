@@ -59,6 +59,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _sonusQuietesMaxima = _resolutorPuellaeSonusQuietesMaximus.Resolvere();
             _sonusMotusMaxima = _resolutorPuellaeSonusMotusMaximus.Resolvere();
             Ordinare();
+            // 所定の実値はMaximaで初期化する。
+            _carrus.PostulareVeletudinis(
+                dtVigoris: _vigorMaxima,
+                dtPatientiae: _patientiaeMaxima
+            );
         }
 
         public void Ordinare() {

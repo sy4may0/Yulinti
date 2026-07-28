@@ -6,9 +6,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly MilesPuellaeCrinis _milesPuellaeCrinis;
         private readonly MilesPuellaeFigurae _milesPuellaeFigurae;
         private readonly MilesPuellaeVestitae _milesPuellaeVestitae;
-        private readonly MilesPuellaeVigoris _milesPuellaeVigoris;
         private readonly MilesPuellaeVeletudinisMaxima _milesPuellaeVeletudinisMaxima;
-
+        private readonly MilesPuellaeVeletudinisAnomaliae _milesPuellaeVeletudinisAnomaliae;
+        private readonly MilesPuellaeVeletudinisDedecoris _milesPuellaeVeletudinisDedecoris;
+        private readonly MilesPuellaeVeletudinisVigoris _milesPuellaeVeletudinisVigoris;
         // Carrus
         private readonly CarrusPuellae _carrusPuellae;
 
@@ -21,8 +22,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             MilesPuellaeCrinis milesPuellaeCrinis,
             MilesPuellaeFigurae milesPuellaeFigurae,
             MilesPuellaeVestitae milesPuellaeVestitae,
-            MilesPuellaeVigoris milesPuellaeVigoris,
             MilesPuellaeVeletudinisMaxima milesPuellaeVeletudinisMaxima,
+            MilesPuellaeVeletudinisAnomaliae milesPuellaeVeletudinisAnomaliae,
+            MilesPuellaeVeletudinisDedecoris milesPuellaeVeletudinisDedecoris,
+            MilesPuellaeVeletudinisVigoris milesPuellaeVeletudinisVigoris,
             IResFluidaPuellaeLegibile resFluidaLegibile,
             CarrusPuellae carrusPuellae
         ) {
@@ -30,8 +33,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _milesPuellaeCrinis = milesPuellaeCrinis;
             _milesPuellaeFigurae = milesPuellaeFigurae;
             _milesPuellaeVestitae = milesPuellaeVestitae;
-            _milesPuellaeVigoris = milesPuellaeVigoris;
             _milesPuellaeVeletudinisMaxima = milesPuellaeVeletudinisMaxima;
+            _milesPuellaeVeletudinisAnomaliae = milesPuellaeVeletudinisAnomaliae;
+            _milesPuellaeVeletudinisDedecoris = milesPuellaeVeletudinisDedecoris;
+            _milesPuellaeVeletudinisVigoris = milesPuellaeVeletudinisVigoris;
             _resFluidaLegibile = resFluidaLegibile;
             _carrusPuellae = carrusPuellae;
         }
@@ -42,8 +47,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _milesPuellaeActionis.Initare(_resFluidaLegibile);
             _milesPuellaeCrinis.Initare();
             _milesPuellaeVestitae.Initare();
-            _milesPuellaeVigoris.Initare();
+
             _milesPuellaeVeletudinisMaxima.Initare();
+            _milesPuellaeVeletudinisAnomaliae.Initare();
+            _milesPuellaeVeletudinisDedecoris.Initare();
+            _milesPuellaeVeletudinisVigoris.Initare();
+
             _carrusPuellae.ConfirmareIncipabilis();
         }
 
@@ -66,8 +75,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public void PulsusTardus() {
             // Figurae計画
             _milesPuellaeFigurae.Ordinare();
+
+            // Veletudinis系
+            // Dedecoris計画
+            _milesPuellaeVeletudinisDedecoris.Ordinare();
+            // VeletudinisAnomaliae計画
+            _milesPuellaeVeletudinisAnomaliae.Ordinare();
             // Vigoris計画
-            _milesPuellaeVigoris.Ordinare(_resFluidaLegibile);
+            _milesPuellaeVeletudinisVigoris.Ordinare();
 
             // Carrus適用(Ordinatio実行)
             _carrusPuellae.ConfirmareTardus();

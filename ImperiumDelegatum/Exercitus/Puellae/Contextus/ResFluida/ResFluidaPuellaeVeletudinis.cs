@@ -27,6 +27,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float _claritas;
         // irregularity(0~1)
         private float _anomalia;
+        // irregularity(0~1)
+        private float _anomaliaNudus;
         // electricity
         private float _aether;
         // voltage
@@ -60,6 +62,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             this._aether = 0f;
             this._claritas = 0f;
             this._anomalia = 0f;
+            this._anomaliaNudus = 0f;
             this._intentio = 0f;
             this._dedecus = 0f;
             this._sonusQuietes = 0f;
@@ -87,6 +90,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public bool EstExhauritaPatientiae => _estExhauritaPatientiae;
         public float Claritas => _claritas;
         public float Anomalia => _anomalia;
+        public float AnomaliaNudus => _anomaliaNudus;
         public float Aether => _aether;
         public float Intentio => _intentio;
         public float Dedecus => _dedecus;
@@ -99,6 +103,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float RatioPatientiae => Mathematica.Clamp01(_patientia / _patientiaMaxima);
         public float RatioClaritas => Mathematica.Clamp01(_claritas / _claritasMaxima);
         public float RatioAnomaliae => Mathematica.Clamp01(_anomalia / _anomaliaMaxima);
+        public float RatioAnomaliaeNudus => Mathematica.Clamp01(_anomaliaNudus / _anomaliaMaxima);
         public float RatioAether => Mathematica.Clamp01(_aether / _aetherMaxima);
         public float RatioIntentionis => Mathematica.Clamp01(_intentio / _intentioMaxima);
         public float RatioDedecus => Mathematica.Clamp01(_dedecus / _dedecusMaxima);
@@ -110,6 +115,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float patientia,
             float claritas,
             float anomalia,
+            float anomaliaNudus,
             float aether,
             float intentio,
             float dedecus,
@@ -120,6 +126,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _patientia = Mathematica.Clamp(patientia, 0f, _patientiaMaxima);
             _claritas = Mathematica.Clamp(claritas, 0f, _claritasMaxima);
             _anomalia = Mathematica.Clamp(anomalia, 0f, _anomaliaMaxima);
+            _anomaliaNudus = Mathematica.Clamp(anomaliaNudus, 0f, _anomaliaMaxima);
             _aether = Mathematica.Clamp(aether, 0f, _aetherMaxima);
             _intentio = Mathematica.Clamp(intentio, 0f, _intentioMaxima);
             _dedecus = Mathematica.Clamp(dedecus, 0f, _dedecusMaxima);
@@ -202,6 +209,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _aether = 0f;
             _claritas = 0f;
             _anomalia = 0f;
+            _anomaliaNudus = 0f;
             _intentio = 0f;
             _dedecus = 0f;
             _sonusQuietes = 0f;

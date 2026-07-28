@@ -6,8 +6,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // CivisのNavmesh要求は重複する可能性がある。
         public const int LongitudoOrdinatioNavmesh = 12;
         public const int LongitudoOrdinatioVeletudinisValoris = 32;
+        public const int LongitudoOrdinatioVeletudinisMaxima = 12;
         public const int LongitudoOrdinatioMortis = 6;
         public const int LongitudoOrdinatioVeletudinisCondicionis = 12;
+        public const int LongitudoOrdinatioCustodiae = 32;
 
         // Custodiaeの各種定数
         public const int LongitudoSigmoidStudiumAmittere = 256;
