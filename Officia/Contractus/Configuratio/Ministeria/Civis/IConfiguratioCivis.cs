@@ -3,5 +3,6 @@ namespace Yulinti.Officia.Contractus {
         IConfiguratioCivisLoci Loci { get; }
         IConfiguratioCivisAnimationum Animatio { get; }
         IConfiguratioCivisVisae Visa { get; }
+        IConfiguratioCivisSchemarum Schemarum { get; }
     }
 }

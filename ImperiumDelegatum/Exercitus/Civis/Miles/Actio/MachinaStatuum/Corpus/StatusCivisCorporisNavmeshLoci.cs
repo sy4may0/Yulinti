@@ -98,9 +98,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
             _contextus.Carrus.PostulareVeletudinisValoris(
                 idCivis,
-                dtVitae: _configuratio.ConsumptioVitae * _contextus.Temporis.Intervallum,
-                dtVisus: _configuratio.Visus,
-                dtAuditus: _configuratio.Auditus
+                dtVitae: -_configuratio.ConsumptioVitae * _contextus.Temporis.Intervallum
             );
         }
     }

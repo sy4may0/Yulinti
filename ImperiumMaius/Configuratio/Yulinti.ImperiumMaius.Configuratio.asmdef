@@ -7,7 +7,9 @@
     "Yulinti.Nucleus",
     "Yulinti.ImperiumDelegatum.Contractus",
     "Yulinti.Officia.Contractus",
-    "Yulinti.Officia.Instrumentarium"
+    "Yulinti.Officia.Instrumentarium",
+    "Unity.Addressables",
+    "Unity.ResourceManager"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
