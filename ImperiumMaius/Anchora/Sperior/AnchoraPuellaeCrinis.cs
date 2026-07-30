@@ -16,6 +16,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
         private GameObject _ens;
         private AnchoraPuellaeCrinisInf _anchoraInf;
         private bool _estEns;
+        private bool _estManifestatum;
 
         public IDPuellaeCrinis Typus => _idCrinis;
 
@@ -55,23 +56,30 @@ namespace Yulinti.ImperiumMaius.Anchora {
         }
 
         public async UniTask Manifestatio() {
-            var handle = _prefab.InstantiateAsync(
-                transform.position,
-                transform.rotation
-            );
+            if (_estManifestatum) return;
+            _estManifestatum = true;
 
-            _ens = await handle.Task;
+            try {
+                var handle = _prefab.InstantiateAsync(
+                    transform.position,
+                    transform.rotation
+                );
 
-            await UniTask.SwitchToMainThread();
+                _ens = await handle.Task;
 
-            _anchoraInf = _ens.GetComponent<AnchoraPuellaeCrinisInf>();
-            _ens.SetActive(false);
+                await UniTask.SwitchToMainThread();
 
-            if (ValidareManifestatio()) {
-                _estEns = true;
-            } else {
-                Deleto();
-                Notarius.Memorare(LogTextus.AnchoraPuellaeCrinis_ANCHORAPUELLAE_CRINIS_INSTANTIATE_FAILED);
+                _anchoraInf = _ens.GetComponent<AnchoraPuellaeCrinisInf>();
+                _ens.SetActive(false);
+
+                if (ValidareManifestatio()) {
+                    _estEns = true;
+                } else {
+                    Deleto();
+                    Notarius.Memorare(LogTextus.AnchoraPuellaeCrinis_ANCHORAPUELLAE_CRINIS_INSTANTIATE_FAILED);
+                }
+            } finally {
+                _estManifestatum = false;
             }
         }
 
@@ -97,5 +105,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
 
         public bool EstEns => _estEns;
         public bool EstActivum => _estEns && _ens.activeSelf;
+        public bool EstManifestatum => _estManifestatum;
+        public bool EstSpiritus => _estEns && !_ens.activeSelf;
     }
 }

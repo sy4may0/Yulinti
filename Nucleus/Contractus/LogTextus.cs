@@ -196,6 +196,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string MinisteriumCivisGenerator_GENERATORCIVIS_TIMEOUT_INITIARE = "MinisteriumCivisGenerator - generatorcivis timeout initiare";
         public const string MinisteriumCivis_CIVIS_ADINCARNARE_ALREADY_SET = "MinisteriumCivis - civis adincarnare already set";
         public const string MinisteriumCivis_CIVIS_ADSPIRITUARE_ALREADY_SET = "MinisteriumCivis - civis adspirituare already set";
+        public const string MinisteriumCivis_MANIFESTATIO_FAILED = "MinisteriumCivis - manifestatio failed. schema not found";
         public const string MinisteriumPuellaeCrinisAdiunctionis_MINISTERIUMPUELLAECRINISADIUNCTIONIS_INSTANTIATE_FAILED = "MinisteriumPuellaeCrinisAdiunctionis - instantiate failed";
         public const string MinisteriumPuellaeLoci_MINIATERIUMPUELLAELOCI_CONFIG_NULL = "MinisteriumPuellaeLoci - miniateriumpuellaeloci config null";
         public const string MinisteriumPuellaeRelationisTerraE_RAYCAST_STRATUM_NULL = "MinisteriumPuellaeRelationisTerrae - Raycast Stratum is null";
@@ -240,6 +241,12 @@ namespace Yulinti.Nucleus.Contractus {
         public const string TabulaCivis_TABULACIVIS_ANCHORA_DUPLICATE = "TabulaCivis - anchora duplicate";
         public const string TabulaCivis_TABULACIVIS_ANCHORA_NULL = "TabulaCivis - anchora null";
         public const string TabulaCivis_TABULACIVIS_INITIARE_FAILED = "TabulaCivis - initiare failed";
+        public const string LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_ANCHORAE_NULL = "LacusAnchorarumCivis - anchorae null";
+        public const string LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_ANCHORA_NULL = "LacusAnchorarumCivis - anchora null";
+        public const string LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_ANCHORA_DUPLICATE = "LacusAnchorarumCivis - anchora duplicate";
+        public const string LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_CHANGE_SCHEMA_FAILED = "LacusAnchorarumCivis - change schema failed";
+        public const string LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_MANIFESTATIO_FAILED = "LacusAnchorarumCivis - manifestatio failed";
+        public const string TabulaCivisSchemarum_TABULACIVISSCHEMARUM_SCHEMA_NOT_FOUND = "TabulaCivisSchemarum - schema not found";
         public const string TabulaPuellaeAnimationumContinuata_TABULAPUELLAEANIMATIONUMCONTINUATA_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationumContinuata - config not found";
         public const string TabulaPuellaeAnimationum_TABULAPUELLAEANIMATIONUM_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationum - config not found";
         public const string TabulaPuellaeCrinis_TABULAPUELLAECRINIS_ID_NOT_FOUND = "TabulaPuellaeCrinis - id not found";

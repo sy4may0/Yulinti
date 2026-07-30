@@ -9,7 +9,6 @@ namespace Yulinti.Officia.Ministeria {
             _miCivis = miCivis;
         }
 
-        public int[] IDs => _miCivis.IDs;
         public int Longitudo => _miCivis.Longitudo;
         public int LongitudoActivum => _miCivis.LongitudoActivum;
         public int LegoIDIntactus() => _miCivis.LegoIDIntactus();

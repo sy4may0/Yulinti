@@ -2,7 +2,6 @@ using System;
 
 namespace Yulinti.ImperiumDelegatum.Contractus {
     public interface IOstiumCivisMutabile {
-        int[] IDs { get; }
         int Longitudo { get; }
         bool EstActivum(int id);
 
@@ -10,5 +9,10 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         void Incarnare(int id);
         // 実体化解除
         void Spirituare(int id);
+
+        // Schema指定生成
+        void Manifestatio(IDCivisSchemae schema);
+        // 削除
+        void Deleto(int id);
     }
 }

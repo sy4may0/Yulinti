@@ -132,6 +132,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
 
         public bool EstEns => _estEns;
         public bool EstActivum => _estEns && _ens.activeSelf;
-        
+        public bool EstManifestatum => _estManifestatum;
+        public bool EstSpiritus => _estEns && !_ens.activeSelf;
     }
 }

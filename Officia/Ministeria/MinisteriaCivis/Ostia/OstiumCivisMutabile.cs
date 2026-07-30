@@ -18,7 +18,14 @@ namespace Yulinti.Officia.Ministeria {
             _miCivis.Spirituare(id);
         }
 
-        public int[] IDs => _miCivis.IDs;
+        public void Manifestatio(IDCivisSchemae schema) {
+            _miCivis.Manifestatio(schema);
+        }
+
+        public void Deleto(int id) {
+            _miCivis.Deleto(id);
+        }
+
         public int Longitudo => _miCivis.Longitudo;
         public bool EstActivum(int id) => _miCivis.EstActivum(id);
     }

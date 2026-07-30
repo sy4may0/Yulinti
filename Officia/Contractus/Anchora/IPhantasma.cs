@@ -9,5 +9,7 @@ namespace Yulinti.Officia.Contractus {
         void Spirituare();
         bool EstEns { get; } 
         bool EstActivum { get; }
+        bool EstManifestatum { get; }
+        bool EstSpiritus { get; }
     }
 }

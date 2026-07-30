@@ -1,7 +1,5 @@
 namespace Yulinti.ImperiumDelegatum.Contractus {
     public interface IOstiumCivisLegibile {
-        // 全ID
-        int[] IDs { get; }
         // 総数
         int Longitudo { get; }
         // 実体化している総数
