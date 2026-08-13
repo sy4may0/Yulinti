@@ -5,49 +5,53 @@ using Yulinti.Officia.Contractus;
 
 namespace Yulinti.Officia.Ministeria {
     internal sealed class MinisteriumCivisAnimationes : IMinisteriumPulsabilis {
-        private readonly TabulaCivis _tabulaCivis;
+        private readonly LacusAnchorarumCivis _lacusAnchorarumCivis;
         private readonly TabulaCivisAnimationum _tabulaAnimationum;
         private readonly LusorAnimationis[,] _lusoris;
         private readonly bool[] _estActivum;
         private readonly int _longitudoStratum;
 
         public MinisteriumCivisAnimationes(
-            TabulaCivis tabulaCivis,
+            LacusAnchorarumCivis lacusAnchorarumCivis,
             IConfiguratioCivisAnimationum config,
-            OperatioCivisAnimationis operatioCivisAnimationis
+            OperatioAnchoraCivisAnimationes operatio
         ) {
-            _tabulaCivis = tabulaCivis;
-            int longitudo = _tabulaCivis.Longitudo;
+            _lacusAnchorarumCivis = lacusAnchorarumCivis;
+            int longitudo = _lacusAnchorarumCivis.Longitudo;
             _longitudoStratum = System.Enum.GetValues(typeof(IDCivisAnimationisStratum)).Length;
             _lusoris = new LusorAnimationis[longitudo, _longitudoStratum];
             _estActivum = new bool[longitudo];
             _tabulaAnimationum = new TabulaCivisAnimationum(config.Animationes);
 
-            operatioCivisAnimationis.Initiare((id) => Initio(id));
+            for (int id = 0; id < longitudo; id++) {
+                for (int i = 0; i < _longitudoStratum; i++) {
+                    _lusoris[id, i] = new LusorAnimationis();
+                }
+            }
+
+            operatio.Initiare(Initio, Deleto);
         }
 
-        private void Initio(int id) {
-            IAnchoraCivis anchora;
-            if (!_tabulaCivis.ConareLego(id, out anchora)) {
-                Carnifex.Intermissio(LogTextus.MinisteriumCivisAnimationes_MINISTERIUICIVISANIMATIONES_ANCHORA_NULL);
-                return;
-            }
+        private void Initio(int id, IAnchoraCivis anchora) {
             for (int i = 0; i < _longitudoStratum; i++) {
                 if (i == (int)IDCivisAnimationisStratum.Fundamentum) {
                     // Fundamentum層は永続化する。
-                    _lusoris[id, i] = new LusorAnimationis(anchora.Animancer, i, true);
+                    _lusoris[id, i].Initiare(anchora.Animancer, i, true);
                 } else {
-                    _lusoris[id, i] = new LusorAnimationis(anchora.Animancer, i);
+                    _lusoris[id, i].Initiare(anchora.Animancer, i);
                 }
             }
             _estActivum[id] = true;
         }
 
-        public int[] IDs => _tabulaCivis.IDs;
-        public int Longitudo => _tabulaCivis.Longitudo;
+        // 多分何もしなくていい？AnimancerComponentが消えてる。
+        private void Deleto(int id) {
+        }
+
+        public int Longitudo => _lacusAnchorarumCivis.Longitudo;
 
         public bool EstActivum(int id) {
-            if (!_tabulaCivis.ConareLego(id, out IAnchoraCivis anchora)) return false;
+            if (!_lacusAnchorarumCivis.ConareLego(id, out IAnchoraCivis anchora)) return false;
             if (!anchora.EstActivum) return false;
             return _estActivum[id];
         }
@@ -103,7 +107,7 @@ namespace Yulinti.Officia.Ministeria {
         }
 
         public void Pulsus() {
-            for (int id = 0; id < _tabulaCivis.Longitudo; id++) {
+            for (int id = 0; id < _lacusAnchorarumCivis.Longitudo; id++) {
                 if (!EstActivum(id)) continue;
                 float tempusFundamenti = _lusoris[id, (int)IDCivisAnimationisStratum.Fundamentum].LegereSimulataneum();
                 for (int i = 1; i < _longitudoStratum; i++) {

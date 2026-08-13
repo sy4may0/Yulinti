@@ -9,7 +9,6 @@ namespace Yulinti.Officia.Ministeria {
             _miCivisAnimationes = miCivisAnimationes;
         }
 
-        public int[] IDs => _miCivisAnimationes.IDs;
         public int Longitudo => _miCivisAnimationes.Longitudo;
 
         public bool EstExhibens(int id, IDCivisAnimationisStratum stratum) {

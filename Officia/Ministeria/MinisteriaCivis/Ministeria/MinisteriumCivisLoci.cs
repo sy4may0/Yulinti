@@ -6,7 +6,7 @@ using Yulinti.Officia.Contractus;
 
 namespace Yulinti.Officia.Ministeria {
     internal sealed class MinisteriumCivisLoci {
-        private readonly TabulaCivis _tabulaCivis;
+        private readonly ILacusAnchorarumCivisLegibile _lacusAnchorarumCivis;
         private readonly IConfiguratioCivisLoci _configLoci;
 
         private readonly float[] _refVelocitisHorizontalis;
@@ -22,32 +22,32 @@ namespace Yulinti.Officia.Ministeria {
         private bool[] _estErrans;
 
         public MinisteriumCivisLoci(
-            TabulaCivis tabulaCivis,
+            ILacusAnchorarumCivisLegibile lacusAnchorarumCivis,
             IConfiguratioCivisLoci configLoci
         ) {
-            _tabulaCivis = tabulaCivis;
+            _lacusAnchorarumCivis = lacusAnchorarumCivis;
             _configLoci = configLoci;
+            int longitudo = _lacusAnchorarumCivis.Longitudo;
 
-            _refVelocitisHorizontalis = new float[tabulaCivis.Longitudo];
-            _refRotationisY = new float[tabulaCivis.Longitudo];
-            _velocitasHorizontalisActualis = new float[tabulaCivis.Longitudo];
-            _rotationisYActualis = new float[tabulaCivis.Longitudo];
+            _refVelocitisHorizontalis = new float[longitudo];
+            _refRotationisY = new float[longitudo];
+            _velocitasHorizontalisActualis = new float[longitudo];
+            _rotationisYActualis = new float[longitudo];
 
-            _estMotus = new bool[tabulaCivis.Longitudo];
-            _estNavMesh = new bool[tabulaCivis.Longitudo];
-            _estErrans = new bool[tabulaCivis.Longitudo];
-            for (int id = 0; id < tabulaCivis.Longitudo; id++) {
+            _estMotus = new bool[longitudo];
+            _estNavMesh = new bool[longitudo];
+            _estErrans = new bool[longitudo];
+            for (int id = 0; id < longitudo; id++) {
                 _estMotus[id] = true;
                 _estNavMesh[id] = false;
                 _estErrans[id] = false;
             }
         }
 
-        public int[] IDs => _tabulaCivis.IDs;
-        public int Longitudo => _tabulaCivis.Longitudo;
+        public int Longitudo => _lacusAnchorarumCivis.Longitudo;
 
         private bool ConareLegoNavMesh(int id, out IAnchoraCivis anchora) {
-            if (!_tabulaCivis.ConareLego(id, out anchora)) return false;
+            if (!_lacusAnchorarumCivis.ConareLego(id, out anchora)) return false;
             if (anchora.NavMeshAgent == null) return false;
             if (!anchora.EstActivum) return false;
             return anchora.NavMeshAgent.enabled;

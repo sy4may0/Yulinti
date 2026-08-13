@@ -53,12 +53,12 @@ namespace Yulinti.Officia.Ministeria {
 
 
     internal sealed class LusorAnimationis {
-        private readonly AnimancerLayer _layer;
+        private AnimancerLayer _layer;
         // Animancerのレイヤー番号
-        private readonly int _indexusLusoris;
+        private int _indexusLusoris;
 
         // 時刻同期のソースレイヤーか
-        private readonly bool _simulatrumBasis;
+        private bool _simulatrumBasis;
 
         // 現在再生中のアニメーション
         private IOnusAnimationis _animatioCurrens;
@@ -76,29 +76,32 @@ namespace Yulinti.Officia.Ministeria {
         private readonly Action _adFinem;
 
         public LusorAnimationis(
+        ) {
+            _adFinem = AdAnimationemFinem;
+            _statusLusoris = IDStatusLusoris.Nihil;
+        }
+
+        public void Initiare(
             AnimancerComponent animancer,
             int indexusLusoris,
             bool simulatrumBasis = false
         ) {
+            Purgere();
+
             if (animancer == null) {
                 Carnifex.Intermissio(LogTextus.LusorAnimationis_LUSORANIMATIONIS_ANIMANCER_NULL);
             }
             if (indexusLusoris < 0) {
                 Carnifex.Intermissio(LogTextus.LusorAnimationis_LUSORANIMATIONIS_INDEXUS_LUSORIS_OUT_OF_RANGE);
             }
+
             _layer = animancer.Layers[indexusLusoris];
             _indexusLusoris = indexusLusoris;
-
-            _animatioCurrens = null;
-            _statusCurrens = null;
-            _linearMixerStateC = null;
-            _tempusSimulataneum = 0f;
             _simulatrumBasis = simulatrumBasis;
 
-            _statusLusoris = IDStatusLusoris.Nihil;
-
-            // ループでないアニメーション終了時に_statusCurrensをnullにする。
-            _adFinem = AdAnimationemFinem;
+            if (_layer != null) {
+                _layer.Stop();
+            }
         }
 
 
@@ -108,7 +111,7 @@ namespace Yulinti.Officia.Ministeria {
 
         public void Purgere() {
             PurgereOnEnd();
-            _layer.Stop();
+            if (_layer != null) _layer.Stop();
             _animatioCurrens = null;
             _statusCurrens = null;
             _linearMixerStateC = null;

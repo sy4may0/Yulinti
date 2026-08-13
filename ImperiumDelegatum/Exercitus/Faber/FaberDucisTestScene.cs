@@ -116,8 +116,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            // 単一Randomソース
-            builder.RegisterInstance(new Random());
+
 
             // Legatus
             builder.Register<ILegatus, Legatus>(Lifetime.Singleton);
