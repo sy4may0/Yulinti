@@ -60,6 +60,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _carrus.PostulareManifestationis(
                     _selectorCivisPersonae.Selectare()
                 );
+                return;
             }
 
             // ランダムスポーン
