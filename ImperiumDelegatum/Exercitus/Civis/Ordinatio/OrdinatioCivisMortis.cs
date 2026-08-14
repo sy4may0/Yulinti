@@ -14,7 +14,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _speciesMortis = SpeciesOrdinationisCivisMortis.Nihil;
         }
 
-        public void Pono(SpeciesOrdinationisCivisMortis speciesMortis) {
+        public void Pono(
+            SpeciesOrdinationisCivisMortis speciesMortis
+        ) {
             _estApplicandum = true;
             _speciesMortis = speciesMortis;
         }

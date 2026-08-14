@@ -3,6 +3,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         Nihil,
         Spirituare,
         Incarnare,
+        Deleto,
     }
     internal interface IOrdinatioCivisMortis : IOrdinatioCivis {
         SpeciesOrdinationisCivisMortis SpeciesMortis { get; }

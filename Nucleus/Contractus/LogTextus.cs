@@ -137,6 +137,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_ORDINATIO_NAVMESH_QUEUE_FULL = "ExecutorCivisLoci - ordinatio navmesh queue full";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_PURGARE_TRANSPORTO_FAILED = "ExecutorCivisLoci - purgare transporto failed";
         public const string ExecutorCivisMortis_EXECUTORCIVISMORTIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisMortis - ordinatio queue full";
+        public const string ExecutorCivisMortis_EXECUTORCIVISMORTIS_MANIFESTATIONIS_QUEUE_FULL = "ExecutorCivisMortis - manifestationis queue full";
         public const string ExecutorCivisVeletudinis_EXECUTORCIVISVELETUDINISVALORIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisVeletudinis - executorcivisveletudinisvaloris ordinatio queue full";
         public const string ExecutorPuellaeAnimationis_MINIATERIUMPUELLAEANIMATION_ORDINATIO_QUEUE_FULL = "ExecutorPuellaeAnimationis - miniateriumpuellaeanimation ordinatio queue full";
         public const string ExecutorPuellaeCrinis_MINIATERIUMPUELLAECRINIS_ORDINATIO_QUEUE_FULL = "ExecutorPuellaeCrinis - miniateriumpuellaecrinis ordinatio queue full";
@@ -147,6 +148,9 @@ namespace Yulinti.Nucleus.Contractus {
         public const string ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_MOTUS_QUEUE_FULL = "ExecutorPuellaeLoci - ordinatio motus queue full";
         public const string ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_NAVMESH_QUEUE_FULL = "ExecutorPuellaeLoci - ordinatio navmesh queue full";
         public const string ExecutorPuellaeVeletudinis_EXECUTORPUELLAEVELETUDINIS_ORDINATIO_VELETUDINISNUDI_QUEUE_FULL = "ExecutorPuellaeVeletudinis - ordinatio veletudinisnudi queue full";
+        public const string LacusOrdinatioCivisManifestationis_ORDINATIOCIVISMANIFESTATIONIS_EMISSIO_QUEUE_FULL = "LacusOrdinatioCivisManifestationis - ordinatiocivismanifestationis emissio queue full";
+        public const string LacusOrdinatioCivisManifestationis_ORDINATIOCIVISMANIFESTATIONIS_LACUS_EMPTY = "LacusOrdinatioCivisManifestationis - ordinatiocivismanifestationis lacus empty";
+        public const string LacusOrdinatioCivisManifestationis_ORDINATIOCIVISMANIFESTATIONIS_LACUS_FULL = "LacusOrdinatioCivisManifestationis - ordinatiocivismanifestationis lacus full";
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_EMISSIO_QUEUE_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinismaxima emissio queue full";
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_LACUS_EMPTY = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinismaxima lacus empty";
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_LACUS_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinismaxima lacus full";

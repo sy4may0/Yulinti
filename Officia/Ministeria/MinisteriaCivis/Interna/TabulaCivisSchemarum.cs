@@ -12,32 +12,32 @@ namespace Yulinti.Officia.Ministeria {
         public TabulaCivisSchemarum(
             IConfiguratioCivisSchemae[] schemarum
         ) {
-            int longitudo = Enum.GetValues(typeof(IDCivisSchemae)).Length;
+            int longitudo = Enum.GetValues(typeof(IDCivisPersonae)).Length;
             _schemarum = new AssetReferenceGameObject[longitudo][];
 
             foreach (IConfiguratioCivisSchemae schema in schemarum) {
                 if (schema == null) continue;
-                if (schema.IDCivisSchemae == IDCivisSchemae.Nihil) continue;
+                if (schema.IDCivisPersonae == IDCivisPersonae.Nihil) continue;
 
-                _schemarum[(int)schema.IDCivisSchemae] = schema.Schemarum;
+                _schemarum[(int)schema.IDCivisPersonae] = schema.Schemarum;
             }
 
             for (int i = 0; i < longitudo; i++) {
-                if ((IDCivisSchemae)i == IDCivisSchemae.Nihil) continue;
+                if ((IDCivisPersonae)i == IDCivisPersonae.Nihil) continue;
                 if (_schemarum[i] == null || _schemarum[i].Length == 0) {
                     Carnifex.Intermissio(LogTextus.TabulaCivisSchemarum_TABULACIVISSCHEMARUM_SCHEMA_NOT_FOUND);
                 }
             }
         }
 
-        public AssetReferenceGameObject[] Legere(IDCivisSchemae idCivisSchemae) {
-            if (idCivisSchemae == IDCivisSchemae.Nihil) return null;
-            return _schemarum[(int)idCivisSchemae];
+        public AssetReferenceGameObject[] Legere(IDCivisPersonae idCivisPersonae) {
+            if (idCivisPersonae == IDCivisPersonae.Nihil) return null;
+            return _schemarum[(int)idCivisPersonae];
         }
 
-        public AssetReferenceGameObject LegereTemere(IDCivisSchemae idCivisSchemae, Random random) {
-            if (idCivisSchemae == IDCivisSchemae.Nihil) return null;
-            return _schemarum[(int)idCivisSchemae][random.Next(_schemarum[(int)idCivisSchemae].Length)];
+        public AssetReferenceGameObject LegereTemere(IDCivisPersonae idCivisPersonae, Random random) {
+            if (idCivisPersonae == IDCivisPersonae.Nihil) return null;
+            return _schemarum[(int)idCivisPersonae][random.Next(_schemarum[(int)idCivisPersonae].Length)];
         }
     }
 }

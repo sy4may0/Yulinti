@@ -78,6 +78,7 @@ namespace Yulinti.Officia.Ministeria {
 
         // 内部RWインターフェース
         public async UniTask ManifestatioAsync(
+            IDCivisPersonae idCivisPersonae,
             AssetReferenceGameObject schema = null
         ) {
             int idCivis = -1;
@@ -104,15 +105,19 @@ namespace Yulinti.Officia.Ministeria {
             await UniTask.SwitchToMainThread();
 
             if (!_anchorae[idCivis].EstEns) {
-                Carnifex.Intermissio(LogTextus.LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_MANIFESTATIO_FAILED);
+                Notarius.Memorare(LogTextus.LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_MANIFESTATIO_FAILED);
                 return;
             }
+
+            // ここでアクティブにする。必ずActive直後にOperatioが実行されるように。
+            _anchorae[idCivis].Incarnare();
 
             // Operationum実行
             foreach (IOperatioAnchoraCivis operatio in _operationumAnchorae) {
                 operatio.ExecutareManifestatio(idCivis, _anchorae[idCivis]);
             }
             foreach (IOperatioCivisGenerationis operatio in _operationumCivisGenerationis) {
+                operatio.ExecutareManifestatio(idCivis, idCivisPersonae);
                 operatio.ExecutareIncarnare(idCivis);
             }
 
@@ -124,10 +129,14 @@ namespace Yulinti.Officia.Ministeria {
             if (idCivis < 0 || idCivis >= _longitudo) {
                 return;
             }
+            if (!_anchorae[idCivis].EstEns) {
+                return;
+            }
             _anchorae[idCivis].Deleto();
 
             foreach (IOperatioCivisGenerationis operatio in _operationumCivisGenerationis) {
                 operatio.ExecutareSpirituare(idCivis);
+                operatio.ExecutareDeleto(idCivis);
             }
             foreach (IOperatioAnchoraCivis operatio in _operationumAnchorae) {
                 operatio.ExecutareDeleto(idCivis);
@@ -136,6 +145,9 @@ namespace Yulinti.Officia.Ministeria {
 
         public void Incarnare(int idCivis) {
             if (idCivis < 0 || idCivis >= _longitudo) {
+                return;
+            }
+            if (!_anchorae[idCivis].EstEns) {
                 return;
             }
             _anchorae[idCivis].Incarnare();
@@ -148,10 +160,24 @@ namespace Yulinti.Officia.Ministeria {
             if (idCivis < 0 || idCivis >= _longitudo) {
                 return;
             }
+            if (!_anchorae[idCivis].EstEns) {
+                return;
+            }
             _anchorae[idCivis].Spirituare();
             foreach (IOperatioCivisGenerationis operatio in _operationumCivisGenerationis) {
                 operatio.ExecutareSpirituare(idCivis);
             }
+        }
+
+        public int LongitudoManifestationes() {
+            int longitudo = 0;
+            for (int i = 0; i < _longitudo; i++) {
+                if (
+                    _anchorae[i].EstEns ||
+                    _anchorae[i].EstManifestatum
+                ) longitudo++;
+            }
+            return longitudo;
         }
     }
 }

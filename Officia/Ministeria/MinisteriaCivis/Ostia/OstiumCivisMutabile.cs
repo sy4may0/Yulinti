@@ -18,8 +18,8 @@ namespace Yulinti.Officia.Ministeria {
             _miCivis.Spirituare(id);
         }
 
-        public void Manifestatio(IDCivisSchemae schema) {
-            _miCivis.Manifestatio(schema);
+        public void Manifestatio(IDCivisPersonae idCivisPersonae) {
+            _miCivis.Manifestatio(idCivisPersonae);
         }
 
         public void Deleto(int id) {

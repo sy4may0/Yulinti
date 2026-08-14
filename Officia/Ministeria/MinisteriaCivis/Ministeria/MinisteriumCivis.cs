@@ -26,6 +26,7 @@ namespace Yulinti.Officia.Ministeria {
 
         public int Longitudo => _lacusAnchorarumCivis.Longitudo;
         public int LongitudoActivum => longitudoActivum();
+        public int LongitudoManifestationes => longitudoManifestationes();
         public bool EstActivum(int id) => _lacusAnchorarumCivis.EstActivum(id);
         public bool[] EstActivumOmne => estActivumOmne();
 
@@ -40,15 +41,15 @@ namespace Yulinti.Officia.Ministeria {
             _lacusAnchorarumCivis.Spirituare(id);
         }
 
-        public void Manifestatio(IDCivisSchemae schemaID) {
+        public void Manifestatio(IDCivisPersonae idCivisPersonae) {
             // Schemaを選択する。
-            AssetReferenceGameObject schema = _tabulaCivisSchemarum.LegereTemere(schemaID, _random);
+            AssetReferenceGameObject schema = _tabulaCivisSchemarum.LegereTemere(idCivisPersonae, _random);
             if (schema == null) {
                 Notarius.Memorare(LogTextus.TabulaCivisSchemarum_TABULACIVISSCHEMARUM_SCHEMA_NOT_FOUND);
                 return;
             }
             // Fire and Forget
-            _lacusAnchorarumCivis.ManifestatioAsync(schema)
+            _lacusAnchorarumCivis.ManifestatioAsync(idCivisPersonae, schema)
                 .Forget(e => Notarius.Memorare(e));
         }
 
@@ -81,6 +82,10 @@ namespace Yulinti.Officia.Ministeria {
                 if (estActivum(i)) longitudo++;
             }
             return longitudo;
+        }
+
+        private int longitudoManifestationes() {
+            return _lacusAnchorarumCivis.LongitudoManifestationes();
         }
 
         private bool[] estActivumOmne() {

@@ -23,7 +23,8 @@ namespace Yulinti.Officia.Ministeria {
 
         public MinisteriumCivisLoci(
             ILacusAnchorarumCivisLegibile lacusAnchorarumCivis,
-            IConfiguratioCivisLoci configLoci
+            IConfiguratioCivisLoci configLoci,
+            OperatioAnchoraCivisLoci operatio
         ) {
             _lacusAnchorarumCivis = lacusAnchorarumCivis;
             _configLoci = configLoci;
@@ -42,9 +43,27 @@ namespace Yulinti.Officia.Ministeria {
                 _estNavMesh[id] = false;
                 _estErrans[id] = false;
             }
+
+            operatio.Initiare(Initio, Deleto);
         }
 
         public int Longitudo => _lacusAnchorarumCivis.Longitudo;
+
+        private void Initio(int id, IAnchoraCivis anchora) {
+            _estMotus[id] = true;
+            _estNavMesh[id] = false;
+            _estErrans[id] = false;
+            _refVelocitisHorizontalis[id] = 0f;
+            _refRotationisY[id] = 0f;
+            _velocitasHorizontalisActualis[id] = 0f;
+            _rotationisYActualis[id] = anchora.NavMeshAgent.transform.eulerAngles.y;
+        }
+
+        private void Deleto(int id) {
+            _estMotus[id] = false;
+            _estNavMesh[id] = false;
+            _estErrans[id] = false;
+        }
 
         private bool ConareLegoNavMesh(int id, out IAnchoraCivis anchora) {
             if (!_lacusAnchorarumCivis.ConareLego(id, out anchora)) return false;

@@ -72,6 +72,10 @@ namespace Yulinti.ImperiumMaius.Anchora {
                     Deleto();
                     Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_INSTANTIATE_FAILED);
                 }
+            // キャンセルトークンを渡す場合はここにcatchを追加する。
+            } catch {
+                Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_INSTANTIATE_FAILED);
+                Deleto();
             } finally {
                 _estManifestatum = false;
             }
@@ -82,6 +86,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
                 _prefab.ReleaseInstance(_ens);
                 _ens = null;
             }
+            _anchoraInf = null;
             _estEns = false;
         }
 
@@ -101,11 +106,11 @@ namespace Yulinti.ImperiumMaius.Anchora {
             bool result = true;
             if (_ens == null) {
                 Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_INSTANCE_NULL);
-                result = false;
+                return false;
             }
             if (_anchoraInf == null) {
                 Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_INFERIOR_ANCHOR_NULL);
-                result = false;
+                return false;
             }
             if (_anchoraInf.Animator == null) {
                 Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_ANIMATOR_NULL);

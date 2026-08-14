@@ -64,6 +64,7 @@ namespace Yulinti.Officia.Ministeria {
 
             // Civis
             builder.Register<OperatioAnchoraCivisAnimationes>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<OperatioAnchoraCivisLoci>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<LacusAnchorarumCivis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 

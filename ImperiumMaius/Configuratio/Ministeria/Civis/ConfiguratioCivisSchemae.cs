@@ -8,12 +8,12 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         fileName = "ConfiguratioCivisSchemae",
         menuName = "Yulinti/Configuratio/Ministeria/Civis/Schema/CivisSchemae")]
     public sealed class ConfiguratioCivisSchemae : ScriptableObject, IConfiguratioCivisSchemae {
-        [Header("SchemaID")]
-        [SerializeField] private IDCivisSchemae idCivisSchemae;
+        [Header("PersonaID")]
+        [SerializeField] private IDCivisPersonae idCivisPersonae;
         [Header("Prefabセット")]
         [SerializeField] private AssetReferenceGameObject[] schemarum;
 
-        public IDCivisSchemae IDCivisSchemae => idCivisSchemae;
+        public IDCivisPersonae IDCivisPersonae => idCivisPersonae;
         public AssetReferenceGameObject[] Schemarum => schemarum;
     }
 }

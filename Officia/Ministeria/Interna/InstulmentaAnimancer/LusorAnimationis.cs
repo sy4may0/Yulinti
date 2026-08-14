@@ -247,5 +247,15 @@ namespace Yulinti.Officia.Ministeria {
                 }
             }
         }
+
+        // Deleto後に呼ばれる。
+        public void Liberare() {
+            _layer = null;
+            _statusCurrens = null;
+            _linearMixerStateC = null;
+            _animatioCurrens = null;
+            _tempusSimulataneum = 0f;
+            _statusLusoris = IDStatusLusoris.Nihil;
+        }
     }
 }

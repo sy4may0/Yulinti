@@ -11,6 +11,7 @@ namespace Yulinti.Officia.Ministeria {
 
         public int Longitudo => _miCivis.Longitudo;
         public int LongitudoActivum => _miCivis.LongitudoActivum;
+        public int LongitudoManifestationes => _miCivis.LongitudoManifestationes;
         public int LegoIDIntactus() => _miCivis.LegoIDIntactus();
         public bool EstActivum(int id) {
             if (id < 0 || id >= _miCivis.Longitudo) return false;

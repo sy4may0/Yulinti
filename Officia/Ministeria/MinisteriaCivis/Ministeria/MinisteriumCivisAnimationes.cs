@@ -44,8 +44,11 @@ namespace Yulinti.Officia.Ministeria {
             _estActivum[id] = true;
         }
 
-        // 多分何もしなくていい？AnimancerComponentが消えてる。
         private void Deleto(int id) {
+            for (int i = 0; i < _longitudoStratum; i++) {
+                _lusoris[id, i].Liberare();
+            }
+            _estActivum[id] = false;
         }
 
         public int Longitudo => _lacusAnchorarumCivis.Longitudo;

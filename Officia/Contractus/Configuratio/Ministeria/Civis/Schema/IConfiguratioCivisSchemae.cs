@@ -3,7 +3,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.Officia.Contractus {
     public interface IConfiguratioCivisSchemae {
-        IDCivisSchemae IDCivisSchemae { get; }
+        IDCivisPersonae IDCivisPersonae { get; }
         AssetReferenceGameObject[] Schemarum { get; }
     }
 }

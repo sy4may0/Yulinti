@@ -9,8 +9,6 @@ namespace Yulinti.ImperiumMaius.Configuratio {
     public sealed class ConfiguratioCivisPersonae : ScriptableObject, IConfiguratioCivisPersonae {
         [Header("PersonaID")]
         [SerializeField] private IDCivisPersonae idCivisPersonae;
-        [Header("PrefabセットID")]
-        [SerializeField] private IDCivisSchemae[] schemarum;
         [Header("生成確率Weight(大きいほど高確率)")]
         [SerializeField] private int pondusGenerationis;
         [Header("初期体力[min, max]")]
@@ -25,7 +23,6 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [SerializeField] private Vector2 torelantiaAnomaliaeMinima;
 
         public IDCivisPersonae IDCivisPersonae => idCivisPersonae;
-        public IDCivisSchemae[] Schemarum => schemarum;
         public int PondusGenerationis => pondusGenerationis;
         public System.Numerics.Vector2 VitaInitialis => InterpresNumeri.ToNumerics(vitaeInitialis);
         public System.Numerics.Vector2 VisusBasis => InterpresNumeri.ToNumerics(visusBasis);

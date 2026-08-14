@@ -11,7 +11,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         void Spirituare(int id);
 
         // Schema指定生成
-        void Manifestatio(IDCivisSchemae schema);
+        void Manifestatio(IDCivisPersonae idCivisPersonae);
         // 削除
         void Deleto(int id);
     }
