@@ -9,21 +9,22 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumCivisLegibile _ostiumCivisLegibile;
         private readonly IOstiumCivisMutabile _ostiumCivisMutabile;
 
-        private Ordo<IOrdinatioCivisMortis>[] _queueMortis;
-        private readonly IOperatioCivisGenerationis _operatioCivisGenerationis;
+        private readonly Ordo<IOrdinatioCivisMortis>[] _queueMortis;
+        private readonly Ordo<IOrdinatioCivisManifestationis> _queueManifestationis;
 
         public ExecutorCivisMortis(
             IOstiumCivisLegibile ostiumCivisLegibile,
-            IOstiumCivisMutabile ostiumCivisMutabile,
-            IOperatioCivisGenerationis operatioCivisGenerationis
+            IOstiumCivisMutabile ostiumCivisMutabile
         ) {
             _ostiumCivisLegibile = ostiumCivisLegibile;
             _ostiumCivisMutabile = ostiumCivisMutabile;
-            _operatioCivisGenerationis = operatioCivisGenerationis;
             _queueMortis = new Ordo<IOrdinatioCivisMortis>[ostiumCivisLegibile.Longitudo];
             for (int i = 0; i < ostiumCivisLegibile.Longitudo; i++) {
                 _queueMortis[i] = new Ordo<IOrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
             }
+            _queueManifestationis = new Ordo<IOrdinatioCivisManifestationis>(
+                ConstansCivis.LongitudoOrdinatioManifestationis
+            );
         }
 
         public void Initare(int idCivis) {
@@ -41,6 +42,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
         }
 
+        public void ExecutareManifestationis(IOrdinatioCivisManifestationis manifestationis) {
+            if (!_queueManifestationis.ConarePono(manifestationis)) {
+                Notarius.Memorare(LogTextus.ExecutorCivisMortis_EXECUTORCIVISMORTIS_MANIFESTATIONIS_QUEUE_FULL);
+                return;
+            }
+        }
+
         private void ApplicareMortis(int idCivis) {
             SpeciesOrdinationisCivisMortis currens = SpeciesOrdinationisCivisMortis.Nihil;
 
@@ -53,6 +61,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // 適用できるもののみ適用し、かつ1つ適用したら終了する。
             // 実体化時 -> Spirituareのみ適用
             // 非実体化時 -> Incarnareのみ適用
+            // Deletoは実体化状態に依存せず適用する。
             while (_queueMortis[idCivis].ConareLego(out var m)) {
                 if (m.SpeciesMortis == currens) {
                     continue;
@@ -60,12 +69,18 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
                 if (m.SpeciesMortis == SpeciesOrdinationisCivisMortis.Spirituare) {
                     _ostiumCivisMutabile.Spirituare(idCivis);
-                    _operatioCivisGenerationis.ExecutareSpirituare(idCivis);
                 } else if (m.SpeciesMortis == SpeciesOrdinationisCivisMortis.Incarnare) {
                     _ostiumCivisMutabile.Incarnare(idCivis);
-                    _operatioCivisGenerationis.ExecutareIncarnare(idCivis);
+                } else if (m.SpeciesMortis == SpeciesOrdinationisCivisMortis.Deleto) {
+                    _ostiumCivisMutabile.Deleto(idCivis);
                 }
                 break;
+            }
+        }
+
+        private void ApplicareManifestationis() {
+            while (_queueManifestationis.ConareLego(out var m)) {
+                _ostiumCivisMutabile.Manifestatio(m.IdCivisPersonae);
             }
         }
 
@@ -73,8 +88,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ApplicareMortis(idCivis);
         }
 
+        public void ConfirmareManifestationis() {
+            ApplicareManifestationis();
+        }
+
         public void Purgare(int idCivis) {
             _queueMortis[idCivis].Purgere();
+        }
+
+        public void PurgareManifestationis() {
+            _queueManifestationis.Purgere();
         }
     }
 }

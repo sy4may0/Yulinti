@@ -17,6 +17,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
         private AnchoraCivisInf _anchoraInf;
 
         private bool _estEns;
+        private bool _estManifestatum;
 
         public Animator Animator => _anchoraInf?.Animator;
         public AnimancerComponent Animancer => _anchoraInf?.Animancer;
@@ -28,6 +29,13 @@ namespace Yulinti.ImperiumMaius.Anchora {
         public Quaternion Rotatio => transform.rotation;
         public Vector3 Scala => transform.localScale;
 
+        public bool PonoSchemam(AssetReferenceGameObject schemam) {
+            if (_estManifestatum || _ens != null || _estEns) return false;
+
+            _prefab = schemam;
+            return true;
+        }
+
         public bool Validare() {
             bool result = true;
             if (_prefab == null) {
@@ -38,27 +46,38 @@ namespace Yulinti.ImperiumMaius.Anchora {
         }
 
         public async UniTask Manifestatio() {
-            var handle = _prefab.InstantiateAsync(
-                Vector3.zero,
-                Quaternion.identity
-            );
+            if (_estManifestatum) return;
+            _estManifestatum = true;
 
-            _ens = await handle.Task;
-            _ens.transform.SetParent(transform, false);
-            _ens.transform.localPosition = Vector3.zero;
-            _ens.transform.localRotation = Quaternion.identity;
-            _ens.transform.localScale = Vector3.one;
+            try {
+                var handle = _prefab.InstantiateAsync(
+                    Vector3.zero,
+                    Quaternion.identity
+                );
 
-            await UniTask.SwitchToMainThread();
+                _ens = await handle.Task;
+                _ens.transform.SetParent(transform, false);
+                _ens.transform.localPosition = Vector3.zero;
+                _ens.transform.localRotation = Quaternion.identity;
+                _ens.transform.localScale = Vector3.one;
 
-            _anchoraInf = _ens.GetComponent<AnchoraCivisInf>();
-            _ens.SetActive(false);
+                await UniTask.SwitchToMainThread();
 
-            if (ValidareManifestatio()) {
-                _estEns = true;
-            } else {
-                Deleto();
+                _anchoraInf = _ens.GetComponent<AnchoraCivisInf>();
+                _ens.SetActive(false);
+
+                if (ValidareManifestatio()) {
+                    _estEns = true;
+                } else {
+                    Deleto();
+                    Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_INSTANTIATE_FAILED);
+                }
+            // キャンセルトークンを渡す場合はここにcatchを追加する。
+            } catch {
                 Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_INSTANTIATE_FAILED);
+                Deleto();
+            } finally {
+                _estManifestatum = false;
             }
         }
 
@@ -67,6 +86,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
                 _prefab.ReleaseInstance(_ens);
                 _ens = null;
             }
+            _anchoraInf = null;
             _estEns = false;
         }
 
@@ -86,11 +106,11 @@ namespace Yulinti.ImperiumMaius.Anchora {
             bool result = true;
             if (_ens == null) {
                 Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_INSTANCE_NULL);
-                result = false;
+                return false;
             }
             if (_anchoraInf == null) {
                 Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_INFERIOR_ANCHOR_NULL);
-                result = false;
+                return false;
             }
             if (_anchoraInf.Animator == null) {
                 Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_ANIMATOR_NULL);
@@ -117,6 +137,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
 
         public bool EstEns => _estEns;
         public bool EstActivum => _estEns && _ens.activeSelf;
-        
+        public bool EstManifestatum => _estManifestatum;
+        public bool EstSpiritus => _estEns && !_ens.activeSelf;
     }
 }

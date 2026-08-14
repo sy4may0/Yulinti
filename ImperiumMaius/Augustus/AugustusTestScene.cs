@@ -35,6 +35,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IConfiguratioCivisLoci>(_configuratio.Ministeria.Civis.Loci);
             builder.RegisterInstance<IConfiguratioCivisAnimationum>(_configuratio.Ministeria.Civis.Animatio);
             builder.RegisterInstance<IConfiguratioCivisVisae>(_configuratio.Ministeria.Civis.Visa);
+            builder.RegisterInstance<IConfiguratioCivisSchemarum>(_configuratio.Ministeria.Civis.Schemarum);
             builder.RegisterInstance<IConfiguratioPunctumViae>(_configuratio.Ministeria.PunctumViae);
 
 
@@ -48,6 +49,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IConfiguratioCivisCustodiaeIctuum>(_configuratio.Exercitus.ExercitusCivis.CustodiaeIctuum);
             builder.RegisterInstance<IConfiguratioCivisCustodiaeStatus>(_configuratio.Exercitus.ExercitusCivis.CustodiaeStatus);
             builder.RegisterInstance<IConfiguratioCivisGenerationis>(_configuratio.Exercitus.ExercitusCivis.Generationis);
+            builder.RegisterInstance<IConfiguratioCiviumPersonarum>(_configuratio.Exercitus.ExercitusCivis.Personae);
 
             FaberVelumTestScene.Initio(builder);
             FaberSenatusTestScene.Initio(builder);

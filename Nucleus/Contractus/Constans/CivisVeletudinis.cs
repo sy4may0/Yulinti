@@ -1,6 +1,6 @@
 namespace Yulinti.Nucleus.Contractus {
     public static class CivisVeletudinis {
-        public static readonly float VitaeMaximaBasis = 1f;
+        public static readonly float VitaeMaximaBasis = 10000f;
         public static readonly float VisusMaximaBasis = 1f;
         public static readonly float AuditusMaximaBasis = 1f;
         public static readonly float SuspectaMaximaBasis = 1f;

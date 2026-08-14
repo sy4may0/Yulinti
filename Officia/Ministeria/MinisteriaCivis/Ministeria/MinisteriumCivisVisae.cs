@@ -5,17 +5,17 @@ using Yulinti.Officia.Contractus;
 
 namespace Yulinti.Officia.Ministeria {
     internal sealed class MinisteriumCivisVisae {
-        private readonly TabulaCivis _tabulaCivis;
+        private readonly ILacusAnchorarumCivisLegibile _lacusAnchorarumCivis;
         private LayerMask _stratumObstaculum;
 
-        public MinisteriumCivisVisae(TabulaCivis tabulaCivis, IConfiguratioCivisVisae configVisae) {
-            _tabulaCivis = tabulaCivis;
+        public MinisteriumCivisVisae(ILacusAnchorarumCivisLegibile lacusAnchorarumCivis, IConfiguratioCivisVisae configVisae) {
+            _lacusAnchorarumCivis = lacusAnchorarumCivis;
             _stratumObstaculum = configVisae.StratumObstaculum;
         }
 
         private bool ConareLegoActivum(int idCivis, out IAnchoraCivis anchora) {
             IAnchoraCivis anchoraP = null;
-            if (_tabulaCivis.ConareLego(idCivis, out anchoraP)) {
+            if (_lacusAnchorarumCivis.ConareLego(idCivis, out anchoraP)) {
                 if (anchoraP.EstActivum) {
                     anchora = anchoraP;
                     return true;

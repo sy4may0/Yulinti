@@ -4,17 +4,20 @@ using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesCivisGenerationis  {
-        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCarrusCivisManifestationis _carrus;
         private readonly IOstiumTemporisLegibile _temporis;
         private readonly IConfiguratioCivisGenerationis _configuratioCivisGenerationis;
         private readonly IOstiumCivisLegibile _ostiumCivisLegibile;
         private readonly HorologiumTemere _horologiumTemere;
 
+        private readonly SelectorCivisPersonae _selectorCivisPersonae;
+
         public MilesCivisGenerationis(
             IConfiguratioCivisGenerationis configuratioCivisGenerationis,
+            IConfiguratioCiviumPersonarum configuratioCiviumPersonarum,
             IOstiumCivisLegibile ostiumCivisLegibile,
             IOstiumTemporisLegibile temporis,
-            IOstiumCarrusCivis carrus,
+            IOstiumCarrusCivisManifestationis carrus,
             Random random
         ) {
             _configuratioCivisGenerationis = configuratioCivisGenerationis;
@@ -27,15 +30,23 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 random
             );
 
+            _selectorCivisPersonae = new SelectorCivisPersonae(
+                configuratioCiviumPersonarum.Configurationes,
+                random
+            );
+
             _horologiumTemere.Purgere();
             _horologiumTemere.Activare();
         }
 
+        // !! フレーム毎の生成数 !!
+        // 現在の実装では1フレームにつき1NPCの生成にするように。
+        // numerusManifestationesがずれたりすると大変面倒だしそもそもAnchora枠がない。
         public void Ordinare() {
-            int numerusCivisActivum = _ostiumCivisLegibile.LongitudoActivum;
+            int numerusManifestationes = _ostiumCivisLegibile.LongitudoManifestationes;
 
             // 最大数を超えたら停止
-            if (numerusCivisActivum >= _configuratioCivisGenerationis.PopulatioMaxima) {
+            if (numerusManifestationes >= _configuratioCivisGenerationis.PopulatioMaxima) {
                 _horologiumTemere.Deactivare();
                 return;
             } else {
@@ -45,24 +56,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
 
             // 初期生成
-            if (numerusCivisActivum < _configuratioCivisGenerationis.PopulatioInitialis) {
-                int id = _ostiumCivisLegibile.LegoIDIntactus();
-                if (id < 0) return;
-
-                _carrus.PostulareMortis(
-                    id,
-                    SpeciesOrdinationisCivisMortis.Incarnare
+            if (numerusManifestationes < _configuratioCivisGenerationis.PopulatioInitialis) {
+                _carrus.PostulareManifestationis(
+                    _selectorCivisPersonae.Selectare()
                 );
                 return;
             }
 
             // ランダムスポーン
             if (_horologiumTemere.EstExhaurita(_temporis.Intervallum)) {
-                int id = _ostiumCivisLegibile.LegoIDIntactus();
-                if (id < 0) return;
-                _carrus.PostulareMortis(
-                    id,
-                    SpeciesOrdinationisCivisMortis.Incarnare
+                _carrus.PostulareManifestationis(
+                    _selectorCivisPersonae.Selectare()
                 );
                 return;
             }

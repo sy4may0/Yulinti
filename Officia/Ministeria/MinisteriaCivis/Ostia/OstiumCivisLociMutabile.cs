@@ -16,7 +16,6 @@ namespace Yulinti.Officia.Ministeria {
             return true;
         }
 
-        public int[] IDs => _miCivisLoci.IDs;
         public int Longitudo => _miCivisLoci.Longitudo;
         public bool EstActivum(int id) {
             if (!VerificareID(id)) return false;

@@ -1,6 +1,5 @@
 namespace Yulinti.ImperiumDelegatum.Contractus {
     public interface IOstiumCivisLociMutabile {
-        int[] IDs { get; }
         int Longitudo { get; }
         bool EstActivum(int id);
         void ActivareMotus(int id);

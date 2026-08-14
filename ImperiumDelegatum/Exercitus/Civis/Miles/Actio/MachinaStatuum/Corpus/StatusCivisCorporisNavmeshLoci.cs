@@ -47,7 +47,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ) {
                 _contextus.Carrus.PostulareMortis(
                     idCivis,
-                    SpeciesOrdinationisCivisMortis.Spirituare
+                    SpeciesOrdinationisCivisMortis.Deleto
                 );
                 return;
             }
@@ -92,15 +92,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // 直近のTransporto失敗時はNPCを削除する。
             if (_contextus.Loci.EstErrans(idCivis)) {
                 _contextus.Carrus.PostulareMortis(
-                    idCivis, SpeciesOrdinationisCivisMortis.Spirituare
+                    idCivis, SpeciesOrdinationisCivisMortis.Deleto
                 );
                 return;
             }
             _contextus.Carrus.PostulareVeletudinisValoris(
                 idCivis,
-                dtVitae: _configuratio.ConsumptioVitae * _contextus.Temporis.Intervallum,
-                dtVisus: _configuratio.Visus,
-                dtAuditus: _configuratio.Auditus
+                dtVitae: -_configuratio.ConsumptioVitae * _contextus.Temporis.Intervallum
             );
         }
     }

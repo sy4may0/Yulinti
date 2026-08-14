@@ -14,10 +14,6 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [SerializeField] private IDCivisStatusCorporis idStatusProximusAutomaticus;
 
         [SerializeField] private float consumptioVitae;
-        [SerializeField] private float visus;
-        [SerializeField] private float visusDistantia;
-        [SerializeField] private float auditus;
-        [SerializeField] private float auditusDistantia;
 
         public IDCivisStatusCorporis Id => id;
         public IDCivisAnimationis IdAnimationisIntrare => idAnimationisIntrare;
@@ -30,9 +26,5 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         public IDCivisStatusCorporis IDStatusProximusAutomaticus => idStatusProximusAutomaticus;
 
         public float ConsumptioVitae => consumptioVitae;
-        public float Visus => visus;
-        public float VisusDistantia => visusDistantia;
-        public float Auditus => auditus;
-        public float AuditusDistantia => auditusDistantia;
     }
 }

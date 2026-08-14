@@ -1,5 +1,6 @@
 using VContainer;
 using VContainer.Unity;
+using System;
 using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Officia.Contractus;
 
@@ -38,6 +39,9 @@ namespace Yulinti.Officia.Turris {
             builder.Register<TurrisSoniVeli>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+
+            // 共通Randomソース
+            builder.RegisterInstance(new Random());
 
             builder.Register<IMonsAltus, MonsAltus>(Lifetime.Singleton);
         }

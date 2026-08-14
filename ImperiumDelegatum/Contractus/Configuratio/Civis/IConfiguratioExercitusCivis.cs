@@ -4,5 +4,6 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         IConfiguratioCivisCustodiaeIctuum CustodiaeIctuum { get; }
         IConfiguratioCivisCustodiaeStatus CustodiaeStatus { get; }
         IConfiguratioCivisGenerationis Generationis { get; }
+        IConfiguratioCiviumPersonarum Personae { get; }
     }
 }

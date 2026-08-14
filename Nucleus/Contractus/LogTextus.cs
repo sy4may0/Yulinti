@@ -137,6 +137,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_ORDINATIO_NAVMESH_QUEUE_FULL = "ExecutorCivisLoci - ordinatio navmesh queue full";
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_PURGARE_TRANSPORTO_FAILED = "ExecutorCivisLoci - purgare transporto failed";
         public const string ExecutorCivisMortis_EXECUTORCIVISMORTIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisMortis - ordinatio queue full";
+        public const string ExecutorCivisMortis_EXECUTORCIVISMORTIS_MANIFESTATIONIS_QUEUE_FULL = "ExecutorCivisMortis - manifestationis queue full";
         public const string ExecutorCivisVeletudinis_EXECUTORCIVISVELETUDINISVALORIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisVeletudinis - executorcivisveletudinisvaloris ordinatio queue full";
         public const string ExecutorPuellaeAnimationis_MINIATERIUMPUELLAEANIMATION_ORDINATIO_QUEUE_FULL = "ExecutorPuellaeAnimationis - miniateriumpuellaeanimation ordinatio queue full";
         public const string ExecutorPuellaeCrinis_MINIATERIUMPUELLAECRINIS_ORDINATIO_QUEUE_FULL = "ExecutorPuellaeCrinis - miniateriumpuellaecrinis ordinatio queue full";
@@ -147,6 +148,9 @@ namespace Yulinti.Nucleus.Contractus {
         public const string ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_MOTUS_QUEUE_FULL = "ExecutorPuellaeLoci - ordinatio motus queue full";
         public const string ExecutorPuellaeLoci_EXECUTORPUELLAELOCI_ORDINATIO_NAVMESH_QUEUE_FULL = "ExecutorPuellaeLoci - ordinatio navmesh queue full";
         public const string ExecutorPuellaeVeletudinis_EXECUTORPUELLAEVELETUDINIS_ORDINATIO_VELETUDINISNUDI_QUEUE_FULL = "ExecutorPuellaeVeletudinis - ordinatio veletudinisnudi queue full";
+        public const string LacusOrdinatioCivisManifestationis_ORDINATIOCIVISMANIFESTATIONIS_EMISSIO_QUEUE_FULL = "LacusOrdinatioCivisManifestationis - ordinatiocivismanifestationis emissio queue full";
+        public const string LacusOrdinatioCivisManifestationis_ORDINATIOCIVISMANIFESTATIONIS_LACUS_EMPTY = "LacusOrdinatioCivisManifestationis - ordinatiocivismanifestationis lacus empty";
+        public const string LacusOrdinatioCivisManifestationis_ORDINATIOCIVISMANIFESTATIONIS_LACUS_FULL = "LacusOrdinatioCivisManifestationis - ordinatiocivismanifestationis lacus full";
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_EMISSIO_QUEUE_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinismaxima emissio queue full";
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_LACUS_EMPTY = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinismaxima lacus empty";
         public const string LacusOrdinatioPuellae_ORDINATIOPUELLAEVELETUDINISMAXIMA_LACUS_FULL = "LacusOrdinatioPuellae - ordinatiopuellaeveletudinismaxima lacus full";
@@ -196,6 +200,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string MinisteriumCivisGenerator_GENERATORCIVIS_TIMEOUT_INITIARE = "MinisteriumCivisGenerator - generatorcivis timeout initiare";
         public const string MinisteriumCivis_CIVIS_ADINCARNARE_ALREADY_SET = "MinisteriumCivis - civis adincarnare already set";
         public const string MinisteriumCivis_CIVIS_ADSPIRITUARE_ALREADY_SET = "MinisteriumCivis - civis adspirituare already set";
+        public const string MinisteriumCivis_MANIFESTATIO_FAILED = "MinisteriumCivis - manifestatio failed. schema not found";
         public const string MinisteriumPuellaeCrinisAdiunctionis_MINISTERIUMPUELLAECRINISADIUNCTIONIS_INSTANTIATE_FAILED = "MinisteriumPuellaeCrinisAdiunctionis - instantiate failed";
         public const string MinisteriumPuellaeLoci_MINIATERIUMPUELLAELOCI_CONFIG_NULL = "MinisteriumPuellaeLoci - miniateriumpuellaeloci config null";
         public const string MinisteriumPuellaeRelationisTerraE_RAYCAST_STRATUM_NULL = "MinisteriumPuellaeRelationisTerrae - Raycast Stratum is null";
@@ -240,6 +245,12 @@ namespace Yulinti.Nucleus.Contractus {
         public const string TabulaCivis_TABULACIVIS_ANCHORA_DUPLICATE = "TabulaCivis - anchora duplicate";
         public const string TabulaCivis_TABULACIVIS_ANCHORA_NULL = "TabulaCivis - anchora null";
         public const string TabulaCivis_TABULACIVIS_INITIARE_FAILED = "TabulaCivis - initiare failed";
+        public const string LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_ANCHORAE_NULL = "LacusAnchorarumCivis - anchorae null";
+        public const string LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_ANCHORA_NULL = "LacusAnchorarumCivis - anchora null";
+        public const string LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_ANCHORA_DUPLICATE = "LacusAnchorarumCivis - anchora duplicate";
+        public const string LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_CHANGE_SCHEMA_FAILED = "LacusAnchorarumCivis - change schema failed";
+        public const string LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_MANIFESTATIO_FAILED = "LacusAnchorarumCivis - manifestatio failed";
+        public const string TabulaCivisSchemarum_TABULACIVISSCHEMARUM_SCHEMA_NOT_FOUND = "TabulaCivisSchemarum - schema not found";
         public const string TabulaPuellaeAnimationumContinuata_TABULAPUELLAEANIMATIONUMCONTINUATA_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationumContinuata - config not found";
         public const string TabulaPuellaeAnimationum_TABULAPUELLAEANIMATIONUM_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationum - config not found";
         public const string TabulaPuellaeCrinis_TABULAPUELLAECRINIS_ID_NOT_FOUND = "TabulaPuellaeCrinis - id not found";

@@ -21,9 +21,11 @@ namespace Yulinti.Officia.Ministeria {
             for (int i = 0; i < _longitudoStratum; i++) {
                 if (i == (int)IDPuellaeAnimationisStratum.Fundamentum) {
                     // Fundamentum層は永続化する。
-                    _lusoris[i] = new LusorAnimationis(anchora.Animancer, i, true);
+                    _lusoris[i] = new LusorAnimationis();
+                    _lusoris[i].Initiare(anchora.Animancer, i, true);
                 } else {
-                    _lusoris[i] = new LusorAnimationis(anchora.Animancer, i);
+                    _lusoris[i] = new LusorAnimationis();
+                    _lusoris[i].Initiare(anchora.Animancer, i);
                 }
             }
         }

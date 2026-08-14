@@ -2,7 +2,6 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Contractus {
     public interface IOstiumCivisAnimationesMutabile {
-        int[] IDs { get; }
         int Longitudo { get; }
         bool EstExhibens(int id, IDCivisAnimationisStratum stratum);
         bool EstDesinens(int id, IDCivisAnimationisStratum stratum);

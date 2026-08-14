@@ -80,7 +80,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
             _statusCustodiaeCurrens[idCivis] = IDCivisStatusCustodiae.Circumitus;
 
-            _vitae[idCivis] = _vitaeMaxima[idCivis];
+            // Vitaeは加算値。初期値はMilesCivisPersonae.Initareが積む。
+            _vitae[idCivis] = 0f;
             _visus[idCivis] = _visusMaxima[idCivis];
             _auditus[idCivis] = _auditusMaxima[idCivis];
             _suspecta[idCivis] = 0f;

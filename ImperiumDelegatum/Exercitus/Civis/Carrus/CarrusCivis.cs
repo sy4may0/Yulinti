@@ -78,6 +78,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public void ConfirmareIncipabilis(int idCivis) {
             ConfirmareLoci(idCivis);
             ConfirmareAnimationis(idCivis);
+            // Personae.Initareの加算VitaeをResFluidaへ確定する。
+            // 次フレームPrimumがFluidusをResFluidaから再初期化するため、ここで書かないと初期値が消える。
+            ConfirmareVeletudinisValoris(idCivis);
         }
 
         // Pulsusの最後に実行

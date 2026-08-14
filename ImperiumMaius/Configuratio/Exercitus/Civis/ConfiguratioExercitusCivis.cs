@@ -8,10 +8,12 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [SerializeField] private ConfiguratioCivisCustodiaeIctuum custodiaeIctuum;
         [SerializeField] private ConfiguratioCivisCustodiaeStatus custodiaeStatus;
         [SerializeField] private ConfiguratioCivisGenerationis generationis;
+        [SerializeField] private ConfiguratioCiviumPersonarum personae;
 
         public IConfiguratioCivisStatuum Statuum => statuum;
         public IConfiguratioCivisCustodiaeIctuum CustodiaeIctuum => custodiaeIctuum;
         public IConfiguratioCivisCustodiaeStatus CustodiaeStatus => custodiaeStatus;
         public IConfiguratioCivisGenerationis Generationis => generationis;
+        public IConfiguratioCiviumPersonarum Personae => personae;
     }
 }

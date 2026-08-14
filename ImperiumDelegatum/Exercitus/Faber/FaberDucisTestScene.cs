@@ -48,6 +48,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<CarrusCivis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<CarrusCivisManifestationis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             // Contextus
             builder.Register<ContextusRamusPuellae>(Lifetime.Singleton);
@@ -100,6 +103,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<MilesCivisCustodiae>(Lifetime.Singleton);
             builder.Register<MilesCivisGenerationis>(Lifetime.Singleton);
             builder.Register<MilesCivisVeletudinisMaxima>(Lifetime.Singleton);
+            builder.Register<MilesCivisPersonae>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVeletudinisMaxima>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVeletudinisAnomaliae>(Lifetime.Singleton);
             builder.Register<MilesPuellaeVeletudinisDedecoris>(Lifetime.Singleton);
@@ -116,8 +120,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            // 単一Randomソース
-            builder.RegisterInstance(new Random());
+
 
             // Legatus
             builder.Register<ILegatus, Legatus>(Lifetime.Singleton);

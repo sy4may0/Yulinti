@@ -68,7 +68,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             if (!_punctumViae.ConareLegoNatoriumTemere(out IPunctumViaeLegibile punctumViae)) {
                 _carrus.PostulareMortis(
                     idCivis,
-                    SpeciesOrdinationisCivisMortis.Spirituare
+                    SpeciesOrdinationisCivisMortis.Deleto
                 );
                 return;
             }

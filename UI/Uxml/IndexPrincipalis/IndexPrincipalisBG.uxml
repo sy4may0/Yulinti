@@ -9,7 +9,7 @@
         <ui:Image 
             name="indexprincipalis-background" 
             class="image indexprincipalis-background" 
-            style="--unity-image: url('project:/Assets/Resources/Images/title_bg.png');"
+            style="--unity-image: url('project:/Assets/Resources/Images/BG.jpg');"
         />
     </ui:VisualElement>
 </ui:UXML>
