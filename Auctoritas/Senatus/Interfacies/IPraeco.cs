@@ -11,6 +11,12 @@ namespace Yulinti.Auctoritas.Senatus {
     public interface IPraecoLiberabilis : ILiberabilis {
     }
 
+    public interface IPraecoPulsabilis : IPulsabilis {
+    }
+
+    public interface IPraecoPulsabilisTardus : IPulsabilisTardus {
+    }
+
     // DontDestroyOnLoadのTick
     public interface IPraecoIncipabilisRadicis : IIncipabilis {
     }

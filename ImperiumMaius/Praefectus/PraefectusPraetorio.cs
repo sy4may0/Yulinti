@@ -43,6 +43,7 @@ namespace Yulinti.ImperiumMaius.Praefectus {
             _ministeria.PulsusPrimum();
             _legatus.Pulsus();
             _ministeria.Pulsus();
+            _senator.Pulsus();
         }
 
         public void FixedTick() {
@@ -57,6 +58,7 @@ namespace Yulinti.ImperiumMaius.Praefectus {
             _ministeria.PulsusTardusPrimum();
             _legatus.PulsusTardus();
             _ministeria.PulsusTardus();
+            _senator.PulsusTardus();
         }
 
         public void Dispose() {
