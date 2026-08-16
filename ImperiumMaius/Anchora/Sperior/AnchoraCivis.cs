@@ -25,6 +25,8 @@ namespace Yulinti.ImperiumMaius.Anchora {
         public NavMeshAgent NavMeshAgent => _anchoraInf?.NavMeshAgent;
         public Transform Capitis => _anchoraInf?.Capitis;
 
+        public IAnchoraVelumSpatiiCivisVeletudinis VelumVeletudinis => _anchoraInf?.AnchoraVelumSpatiiCivisVeletudinis;
+
         public Vector3 Positio => transform.position;
         public Quaternion Rotatio => transform.rotation;
         public Vector3 Scala => transform.localScale;
@@ -130,6 +132,14 @@ namespace Yulinti.ImperiumMaius.Anchora {
             }
             if (_anchoraInf.Capitis == null) {
                 Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_CAPITIS_NULL);
+                result = false;
+            }
+            if (_anchoraInf.AnchoraVelumSpatiiCivisVeletudinis == null) {
+                Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_VELUMVELETUDINIS_NULL);
+                result = false;
+            }
+            if (!_anchoraInf.AnchoraVelumSpatiiCivisVeletudinis.Validare()) {
+                Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_VELUMVELETUDINIS_INVALID);
                 result = false;
             }
             return result;

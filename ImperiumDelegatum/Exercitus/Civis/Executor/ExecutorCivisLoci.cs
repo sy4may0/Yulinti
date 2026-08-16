@@ -66,6 +66,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _queueNavmesh[idCivis].Purgere();
         }
 
+        public void Activare(int idCivis) {
+            _resFluidaMotus.Activare(idCivis);
+        }
+
+        public void Deactivare(int idCivis) {
+            _resFluidaMotus.Deactivare(idCivis);
+        }
+
         public void Primum(int idCivis) {
             _queueMotus[idCivis].Purgere();
             _queueNavmesh[idCivis].Purgere();

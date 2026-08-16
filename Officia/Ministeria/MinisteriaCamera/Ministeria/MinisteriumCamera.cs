@@ -12,6 +12,8 @@ namespace Yulinti.Officia.Ministeria {
             _camera = anchoraCamera.Camera;
         }
 
+        public Quaternion Rotatio => _camera.transform.rotation;
+
         public Quaternion RotatioVerticalis
         {
             get

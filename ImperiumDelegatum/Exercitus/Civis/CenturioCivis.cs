@@ -58,19 +58,21 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _milesCivisVeletudinisMaxima.Initare(idCivis);
             _milesCivisPersonae.Initare(idCivis, idCivisPersonae);
             _carrusCivis.ConfirmareIncipabilis(idCivis);
+            _carrusCivis.Activare(idCivis);
         }
 
         private void AdIncarnare(int idCivis) {
-            // 予約
+            _carrusCivis.Activare(idCivis);
         }
 
         private void AdSpirituare(int idCivis) {
-            // 予約
+            _carrusCivis.Deactivare(idCivis);
         }
 
         private void AdDeleto(int idCivis) {
             _milesCivisPersonae.Purgare(idCivis);
             _carrusCivis.Purgare(idCivis);
+            _carrusCivis.Deactivare(idCivis);
         }
 
         public void Pulsus() {

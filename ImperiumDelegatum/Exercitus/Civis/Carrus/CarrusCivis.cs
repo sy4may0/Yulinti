@@ -46,6 +46,18 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exCustodiae.Initare(idCivis);
        }
 
+        public void Activare(int idCivis) {
+            _exLoci.Activare(idCivis);
+            _exVeletudinis.Activare(idCivis);
+            _exCustodiae.Activare(idCivis);
+        }
+        
+        public void Deactivare(int idCivis) {
+            _exLoci.Deactivare(idCivis);
+            _exVeletudinis.Deactivare(idCivis);
+            _exCustodiae.Deactivare(idCivis);
+        }
+
         private void ConfirmareAnimationis(int idCivis) {
             _exAnimationis.Confirmare(idCivis);
             _lacusOrdinatioCivis.ColligereAnimationis(idCivis);

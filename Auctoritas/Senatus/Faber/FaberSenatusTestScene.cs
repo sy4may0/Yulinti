@@ -12,6 +12,12 @@ namespace Yulinti.Auctoritas.Senatus {
 
             // Praeco
             // 未実装
+            builder.Register<PraecoSpatiiPuellaeVeletudinis>(Lifetime.Singleton)
+                .AsImplementedInterfaces()
+                .AsSelf();
+            builder.Register<PraecoSpatiiCivisVeletudinis>(Lifetime.Singleton)
+                .AsImplementedInterfaces()
+                .AsSelf();
 
             // Senator
             builder.Register<ISenator, Senator>(Lifetime.Singleton);

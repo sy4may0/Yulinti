@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.AddressableAssets;
-using Cysharp.Threading.Tasks;
 using Animancer;
 
 namespace Yulinti.Officia.Contractus {
@@ -12,5 +11,7 @@ namespace Yulinti.Officia.Contractus {
         SkinnedMeshRenderer Figura { get; }
         NavMeshAgent NavMeshAgent { get; }
         Transform Capitis { get; }
+
+        IAnchoraVelumSpatiiCivisVeletudinis VelumVeletudinis { get; }
     }
 }

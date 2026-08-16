@@ -5,6 +5,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public ResNihilCivisCustodiae() {
         }
         public int Longitudo => 0;
+        public bool EstActivum(int idCivis) => false;
         public float VisaCapitis(int idCivis) => 0f;
         public float VisaCorporis(int idCivis) => 0f;
         public float RatioVisus(int idCivis) => 0f;

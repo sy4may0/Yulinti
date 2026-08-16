@@ -21,6 +21,8 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraCivis_ANCHORACIVIS_NAVMESHAGENT_NULL = "AnchoraCivis - navmeshagent null";
         public const string AnchoraCivis_ANCHORACIVIS_PREFAB_INSTANCE_NULL = "AnchoraCivis - prefab instance null";
         public const string AnchoraCivis_ANCHORACIVIS_SKINNEDMESHRENDERER_NULL = "AnchoraCivis - skinnedmeshrenderer null";
+        public const string AnchoraCivis_ANCHORACIVIS_VELUMVELETUDINIS_NULL = "AnchoraCivis - velum veletudinis null";
+        public const string AnchoraCivis_ANCHORACIVIS_VELUMVELETUDINIS_INVALID = "AnchoraCivis - velum veletudinis invalid";
         public const string AnchoraInput_ANCHORAINPUT_CANCELINPUT_NULL = "AnchoraInput - cancelinput null";
         public const string AnchoraInput_ANCHORAINPUT_CLICKINPUT_NULL = "AnchoraInput - clickinput null";
         public const string AnchoraInput_ANCHORAINPUT_CLICKRIGHTINPUT_NULL = "AnchoraInput - clickrightinput null";
@@ -270,5 +272,8 @@ namespace Yulinti.Nucleus.Contractus {
         public const string FormaPuellaeFigurae_FORMATPUELLAEFIGURAE_SHARED_MESH_NOT_FOUND = "FormaPuellaeFigurae - shared mesh not found";
         public const string FormaPuellae_FORMATPUELLAE_FORMA_INVALID = "FormaPuellae - forma invalid";
         public const string FormarumPuellae_FORMARUMPUELLAE_FORMA_NOT_FOUND = "FormarumPuellae - forma not found";
+        public const string AnchoraVelumPuellaeVeletudinis_ANCHORAVELUMPUELLAEVELETDUNIS_ANCHORAVELUMSPATIIPUPELLAEVELETUDINIS_NULL = "AnchoraVelumPuellaeVeletudinis - anchora velum spatii puellae veletudinis null";
+        public const string AnchoraVelumPuellaeVeletudinis_ANCHORAVELUMPUELLAEVELETDUNIS_RESOLVE_FAILED = "AnchoraVelumPuellaeVeletudinis - Some necessary anchora velum spatii not set";
+        public const string AnchoraVelumPuellaeVeletudinis_ANCHORAVELUMPUELLAEVELETDUNIS_VALIDATE_FAILED = "AnchoraVelumPuellaeVeletudinis - Some necessary anchora velum spatii not valid";
     }
 }

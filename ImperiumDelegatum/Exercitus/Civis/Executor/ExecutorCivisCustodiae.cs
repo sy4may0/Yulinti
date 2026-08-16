@@ -48,6 +48,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resFluidaCustodiae.Purgare(idCivis);
         }
 
+        public void Activare(int idCivis) {
+            _resFluidaCustodiae.Activare(idCivis);
+        }
+
+        public void Deactivare(int idCivis) {
+            _resFluidaCustodiae.Deactivare(idCivis);
+        }
+
         public void Primum(int idCivis) {
         }
 

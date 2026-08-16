@@ -37,6 +37,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private bool _estSpectareNudusAnterior;
         private bool _estSpectareNudusPosterior;
 
+        private bool[] _estActivum;
+
         public ResFluidaCivisVeletudinis(IOstiumCivisLegibile ostiumCivis) {
             int longitudo = ostiumCivis.Longitudo;
 
@@ -59,6 +61,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _intentio = new float[longitudo];
             _torelantiaAnomaliaeMaxima = new float[longitudo];
             _torelantiaAnomaliaeMinima = new float[longitudo];
+
+            _estActivum = new bool[longitudo];
 
             _estSpectareNudusAnterior = false;
             _estSpectareNudusPosterior = false;
@@ -92,6 +96,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
             _estSpectareNudusAnterior = false;
             _estSpectareNudusPosterior = false;
+            _estActivum[idCivis] = false;
         }
 
         public int Longitudo => _vitae.Length;
@@ -208,6 +213,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Purgare(int idCivis) {
             InitareCivis(idCivis);
+        }
+
+        public bool EstActivum(int idCivis) => _estActivum[idCivis];
+        public void Activare(int idCivis) {
+            _estActivum[idCivis] = true;
+        }
+        public void Deactivare(int idCivis) {
+            _estActivum[idCivis] = false;
         }
     }
 }

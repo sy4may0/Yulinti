@@ -11,10 +11,14 @@ namespace Yulinti.Auctoritas.Senatus {
 
         public Senator(
             IReadOnlyList<IPraecoIncipabilis> praecosIncipabilis,
-            IReadOnlyList<IPraecoLiberabilis> praecosLiberabilis
+            IReadOnlyList<IPraecoLiberabilis> praecosLiberabilis,
+            IReadOnlyList<IPraecoPulsabilis> praecosPulsabilis,
+            IReadOnlyList<IPraecoPulsabilisTardus> praecosPulsabilisTardus
         ) {
             _praecosIncipabilis = praecosIncipabilis.ToArray();
             _praecosLiberabilis = praecosLiberabilis.ToArray();
+            _praecosPulsabilis = praecosPulsabilis.ToArray();
+            _praecosPulsabilisTardus = praecosPulsabilisTardus.ToArray();
         }
 
         public void Incipere() {

@@ -19,6 +19,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // RatioVisus算出用の視認対象数。
         private readonly int _longitudoResVisae;
 
+        private readonly bool[] _estActivum;
+
         public ResFluidaCivisCustodiae(IOstiumCivisLegibile ostiumCivis) {
             int longitudo = ostiumCivis.Longitudo;
 
@@ -29,6 +31,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _distantiaPuellae = new float[longitudo];
             _estCustodiaeVisae = new bool[longitudo];
             _estCustodiaeAuditae = new bool[longitudo];
+
+            _estActivum = new bool[longitudo];
 
             _longitudoResVisae =
                 Enum.GetValues(typeof(IDPuellaeResVisaeCapitis)).Length +
@@ -48,6 +52,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _distantiaPuellae[idCivis] = float.MaxValue;
             _estCustodiaeVisae[idCivis] = false;
             _estCustodiaeAuditae[idCivis] = false;
+
+            _estActivum[idCivis] = false;
         }
 
         public int Longitudo => _visaCapitis.Length;
@@ -93,6 +99,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Purgare(int idCivis) {
             InitareCivis(idCivis);
+        }
+
+        public bool EstActivum(int idCivis) => _estActivum[idCivis];
+        public void Activare(int idCivis) {
+            _estActivum[idCivis] = true;
+        }
+        public void Deactivare(int idCivis) {
+            _estActivum[idCivis] = false;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
     public sealed class AugustusTestScene : LifetimeScope {
         [SerializeField] private AnchoraTestScene _anchora;
         [SerializeField] private ConfiguratioImperium _configuratio;
+        [SerializeField] private AnchoraVelumPuellaeVeletudinis _anchoraVelumPuellaeVeletudinis;
 
         protected override void Configure(IContainerBuilder builder) {
             Debug.Log("RexTestScene Configure");
@@ -23,6 +24,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IAnchoraPuellaeCrinis[]>(_anchora.AnchoraPuellaeCrinis);
             builder.RegisterInstance<IAnchoraPunctumViae[]>(_anchora.AnchoraPunctumViae);
             builder.RegisterInstance<IAnchoraCivis[]>(_anchora.AnchoraCivis);
+            builder.RegisterInstance<IAnchoraVelumSpatiiPuellaeVeletudinis>(_anchoraVelumPuellaeVeletudinis.AnchoraVelumSpatiiPuellaeVeletudinis);
 
             builder.RegisterInstance<IConfiguratioPuellaeFiguraeGenusDexter>(_configuratio.Ministeria.Puellae.Figura.GenusDex);
             builder.RegisterInstance<IConfiguratioPuellaeFiguraeGenusSinister>(_configuratio.Ministeria.Puellae.Figura.GenusSin);

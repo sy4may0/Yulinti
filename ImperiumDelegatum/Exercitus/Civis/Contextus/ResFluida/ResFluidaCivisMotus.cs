@@ -6,14 +6,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float[] _velocitasActualisVerticalis;
         private float[] _rotatioYActualis;
         private bool[] _estInTerra;
+        private bool[] _estActivum;
 
         public ResFluidaCivisMotus(IOstiumCivisLegibile ostiumCivis) {
             _velocitasActualisHorizontalis = new float[ostiumCivis.Longitudo];
             _velocitasActualisVerticalis = new float[ostiumCivis.Longitudo];
             _rotatioYActualis = new float[ostiumCivis.Longitudo];
             _estInTerra = new bool[ostiumCivis.Longitudo];
+            _estActivum = new bool[ostiumCivis.Longitudo];
             for (int i = 0; i < ostiumCivis.Longitudo; i++) {
                 _estInTerra[i] = true;
+                _estActivum[i] = false;
             }
         }
 
@@ -67,6 +70,20 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _velocitasActualisVerticalis[idCivis] = 0f;
             _rotatioYActualis[idCivis] = 0f;
             _estInTerra[idCivis] = true;
+            _estActivum[idCivis] = false;
+        }
+
+        public bool EstActivum(int idCivis) {
+            if (idCivis < 0 || idCivis >= _estActivum.Length) return false;
+            return _estActivum[idCivis];
+        }
+        public void Activare(int idCivis) {
+            if (idCivis < 0 || idCivis >= _estActivum.Length) return;
+            _estActivum[idCivis] = true;
+        }
+        public void Deactivare(int idCivis) {
+            if (idCivis < 0 || idCivis >= _estActivum.Length) return;
+            _estActivum[idCivis] = false;
         }
     }
 }

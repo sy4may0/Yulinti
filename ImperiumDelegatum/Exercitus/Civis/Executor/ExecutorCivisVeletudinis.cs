@@ -219,6 +219,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resFluidaVeletudinis.Purgare(idCivis);
         }
 
+        public void Activare(int idCivis) {
+            _resFluidaVeletudinis.Activare(idCivis);
+        }
+
+        public void Deactivare(int idCivis) {
+            _resFluidaVeletudinis.Deactivare(idCivis);
+        }
+
         public void Primum(int idCivis) {
             _queueVeletudinisCondicionis[idCivis].Purgere();
             // 流動する値は現在の値で初期化する。

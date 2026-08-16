@@ -11,6 +11,7 @@
         "Yulinti.ImperiumDelegatum.Contractus",
         "Unity.Addressables",
         "Unity.ResourceManager",
+        "Unity.TextMeshPro",
         "UniTask"
     ],
     "includePlatforms": [],

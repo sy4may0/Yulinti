@@ -17,6 +17,7 @@ namespace Yulinti.Officia.Ministeria {
             _miCamera = miCamera;
         }
 
+        public System.Numerics.Quaternion Rotatio => InterpresNumeri.ToNumerics(_miCamera.Rotatio);
         public System.Numerics.Quaternion RotatioVerticalis => InterpresNumeri.ToNumerics(_miCamera.RotatioVerticalis);
         public System.Numerics.Vector3 DexterXZ => InterpresNumeri.ToNumerics(_miCamera.DexterXZ);
         public System.Numerics.Vector3 AnteriorXZ => InterpresNumeri.ToNumerics(_miCamera.AnteriorXZ);

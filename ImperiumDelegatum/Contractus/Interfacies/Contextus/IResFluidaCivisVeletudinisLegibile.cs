@@ -1,6 +1,7 @@
 namespace Yulinti.ImperiumDelegatum.Contractus {
     public interface IResFluidaCivisVeletudinisLegibile {
         int Longitudo { get; }
+        bool EstActivum(int idCivis);
 
         float VitaeMaxima(int idCivis);
         float VisusMaxima(int idCivis);

@@ -3,6 +3,7 @@
   "rootNamespace": "Yulinti.Officia.Velum",
   "references": [
     "Yulinti.Officia.Contractus",
+    "Yulinti.Officia.Instrumentarium",
     "Yulinti.Nucleus.Contractus",
     "Yulinti.Nucleus.Instrumentarium",
     "Yulinti.ImperiumDelegatum.Contractus",
