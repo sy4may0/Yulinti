@@ -11,7 +11,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
         [SerializeField] private TextMeshProUGUI _text;
 
         public bool EstActivum => estActivum();
-        public bool EstActivumCorrigere => _text.gameObject.activeSelf;
+        public bool EstActivumCorrigere => _text != null && _text.gameObject.activeSelf;
 
         private bool estActivum() {
             return _vigor.gameObject.activeSelf && _patientia.gameObject.activeSelf;
@@ -31,7 +31,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
         public Quaternion Rotatio => _rectTransform.rotation;
         public Vector3 Scala => _rectTransform.localScale;
         public bool Validare() {
-            return _rectTransform != null && _vigor != null && _patientia != null;
+            return _rectTransform != null && _vigor != null && _patientia != null && _text != null;
         }
 
         public void PonoRotationem(Quaternion rotationem) {
@@ -50,10 +50,12 @@ namespace Yulinti.ImperiumMaius.Anchora {
         }
 
         public void IncarnareCorrigere() {
+            if (_text == null) return;
             _text.gameObject.SetActive(true);
         }
 
         public void SpirituareCorrigere() {
+            if (_text == null) return;
             _text.gameObject.SetActive(false);
         }
 
