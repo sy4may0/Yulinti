@@ -32,7 +32,17 @@ namespace Yulinti.Auctoritas.Senatus {
             if (_turrisCorrectrix.EstCorrigere()) {
                 _velumSpatiiPuellaeVeletudinis.PonoTextus(
                     $"VIG: {_resFluidaPuellaeVeletudinis.Vigor}\n" +
-                    $"PAT: {_resFluidaPuellaeVeletudinis.Patientia}"
+                    $"PAT: {_resFluidaPuellaeVeletudinis.Patientia}\n" +
+                    $"CLAR: {_resFluidaPuellaeVeletudinis.Claritas}\n" +
+                    $"ANO: {_resFluidaPuellaeVeletudinis.Anomalia}\n" +
+                    $"ANOUD: {_resFluidaPuellaeVeletudinis.AnomaliaNudus}\n" +
+                    $"AET: {_resFluidaPuellaeVeletudinis.Aether}\n" +
+                    $"INT: {_resFluidaPuellaeVeletudinis.Intentio}\n" +
+                    $"DED: {_resFluidaPuellaeVeletudinis.Dedecus}\n" +
+                    $"SONQ: {_resFluidaPuellaeVeletudinis.SonusQuietes}\n" +
+                    $"SONM: {_resFluidaPuellaeVeletudinis.SonusMotus}\n" +
+                    $"NUDUSANT: {_resFluidaPuellaeVeletudinis.EstNudusAnterior}\n" +
+                    $"NUDUSPOS: {_resFluidaPuellaeVeletudinis.EstNudusPosterior}"
                 );
             }
         }

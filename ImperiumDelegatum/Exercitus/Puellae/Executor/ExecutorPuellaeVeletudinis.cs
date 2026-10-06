@@ -57,7 +57,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _phantasmaAnomalia = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
             _phantasmaAnomaliaNudus = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
             _phantasmaIntentio = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
-            _phantasmaDedecus = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fluidus);
+            _phantasmaDedecus = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
             _phantasmaSonusQuietes = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
             _phantasmaSonusMotus = new ValorisPuellaeVeletudinis(0f, TypusValoris.Fixus);
 
