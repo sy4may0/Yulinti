@@ -19,6 +19,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraCivis_ANCHORACIVIS_INSTANCE_NULL = "AnchoraCivis - instance null";
         public const string AnchoraCivis_ANCHORACIVIS_INSTANTIATE_FAILED = "AnchoraCivis - instantiate failed";
         public const string AnchoraCivis_ANCHORACIVIS_NAVMESHAGENT_NULL = "AnchoraCivis - navmeshagent null";
+        public const string AnchoraCivis_ANCHORACIVIS_LOOKATIK_NULL = "AnchoraCivis - lookatik null";
         public const string AnchoraCivis_ANCHORACIVIS_PREFAB_INSTANCE_NULL = "AnchoraCivis - prefab instance null";
         public const string AnchoraCivis_ANCHORACIVIS_SKINNEDMESHRENDERER_NULL = "AnchoraCivis - skinnedmeshrenderer null";
         public const string AnchoraCivis_ANCHORACIVIS_VELUMVELETUDINIS_NULL = "AnchoraCivis - velum veletudinis null";
@@ -107,6 +108,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraPuellae_ANCHORAPUELLAE_SKINNEDMESHRENDERER_RIGHTARM_NULL = "AnchoraPuellae - skinnedmeshrenderer rightarm null";
         public const string AnchoraPuellae_ANCHORAPUELLAE_SKINNEDMESHRENDERER_RIGHTLEG_NULL = "AnchoraPuellae - skinnedmeshrenderer rightleg null";
         public const string AnchoraPuellae_ANCHORAPUELLAE_SKINNEDMESHRENDERER_TORSO_NULL = "AnchoraPuellae - skinnedmeshrenderer torso null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_LOCUS_REFERENS_CAPITIS_NULL = "AnchoraPuellae - bone locus referens capitis null";
         public const string AnchoraPuellae_MINISTERIUMPUELLAEANIMATIONES_ANIMANCER_NULL = "AnchoraPuellae - ministeriumpuellaeanimationes animancer null";
         public const string AnchoraTestScene_REX_ANCHORA_NOT_SET = "AnchoraTestScene - rex anchora not set";
         public const string AnchoraTestScene_REX_ANCHORA_RESOLVE_FAILED = "AnchoraTestScene - rex anchora resolve failed";

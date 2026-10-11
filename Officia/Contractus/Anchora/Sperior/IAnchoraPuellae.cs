@@ -63,5 +63,7 @@ namespace Yulinti.Officia.Contractus {
         Transform OsCorrectoriumSpinae1 { get; }
         Transform OsCorrectoriumSpinae0 { get; }
         Transform OsCorrectoriumPelvis { get; }
+
+        Transform LocusReferensCapitis { get; }
     }
 }

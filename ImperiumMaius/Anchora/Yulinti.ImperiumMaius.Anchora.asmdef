@@ -12,7 +12,8 @@
         "Unity.Addressables",
         "Unity.ResourceManager",
         "Unity.TextMeshPro",
-        "UniTask"
+        "UniTask",
+        "RootMotion"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

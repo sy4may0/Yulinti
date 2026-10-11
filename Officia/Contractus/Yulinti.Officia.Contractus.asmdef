@@ -8,7 +8,8 @@
     "Kybernetik.Animancer",
     "Unity.Addressables",
     "Unity.ResourceManager",
-    "UniTask"
+    "UniTask",
+    "RootMotion"
  
   ],
   "includePlatforms": [],

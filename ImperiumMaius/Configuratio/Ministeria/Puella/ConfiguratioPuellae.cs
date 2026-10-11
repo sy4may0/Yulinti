@@ -9,11 +9,13 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [SerializeField] ConfiguratioPuellaeAnimationum animatio;
         [SerializeField] ConfiguratioPuellaeLoci loci;
         [SerializeField] ConfiguratioPuellaeFormarum formae;
+        [SerializeField] ConfiguratioPuellaeReferensCapitis referensCapitis;
 
         public IConfiguratioPuellaeRelationis Relatio => relatio;
         public IConfiguratioPuellaeFigurae Figura => figura;
         public IConfiguratioPuellaeAnimationum Animatio => animatio;
         public IConfiguratioPuellaeLoci Loci => loci;
         public IConfiguratioPuellaeFormarum Formae => formae;
+        public IConfiguratioPuellaeReferensCapitis ReferensCapitis => referensCapitis;
     }
 }

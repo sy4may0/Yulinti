@@ -8,6 +8,7 @@ using Cysharp.Threading.Tasks;
 using Yulinti.Nucleus;
 using Yulinti.Officia.Contractus;
 using Yulinti.Nucleus.Contractus;
+using RootMotion.FinalIK;
 
 namespace Yulinti.ImperiumMaius.Anchora {
     public sealed class AnchoraCivis : MonoBehaviour, IAnchora, IPhantasma, IAnchoraCivis {
@@ -23,6 +24,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
         public AnimancerComponent Animancer => _anchoraInf?.Animancer;
         public SkinnedMeshRenderer Figura => _anchoraInf?.SkinnedMeshRenderer;
         public NavMeshAgent NavMeshAgent => _anchoraInf?.NavMeshAgent;
+        public LookAtIK LookAtIK => _anchoraInf?.LookAtIK;
         public Transform Capitis => _anchoraInf?.Capitis;
 
         public IAnchoraVelumSpatiiCivisVeletudinis VelumVeletudinis => _anchoraInf?.AnchoraVelumSpatiiCivisVeletudinis;
@@ -140,6 +142,10 @@ namespace Yulinti.ImperiumMaius.Anchora {
             }
             if (!_anchoraInf.AnchoraVelumSpatiiCivisVeletudinis.Validare()) {
                 Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_VELUMVELETUDINIS_INVALID);
+                result = false;
+            }
+            if (_anchoraInf.LookAtIK == null) {
+                Notarius.Memorare(LogTextus.AnchoraCivis_ANCHORACIVIS_LOOKATIK_NULL);
                 result = false;
             }
             return result;

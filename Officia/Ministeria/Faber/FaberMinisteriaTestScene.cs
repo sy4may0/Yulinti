@@ -37,6 +37,7 @@ namespace Yulinti.Officia.Ministeria {
             builder.Register<MinisteriumPuellaeRelationisTerrae>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeResVisae>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeFormae>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<MinisteriumPuellaeReferensCapitis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<IOstiumPuellaeAnimationisMutabile, OstiumPuellaeAnimationisMutabile>(Lifetime.Singleton);
             builder.Register<IOstiumPuellaeAnimationisLegibile, OstiumPuellaeAnimationisLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumPuellaeFiguraeGenusLegibile, OstiumPuellaeFiguraeGenusLegibile>(Lifetime.Singleton);
@@ -79,6 +80,7 @@ namespace Yulinti.Officia.Ministeria {
             builder.Register<IOstiumCivisAnimationesMutabile, OstiumCivisAnimationesMutabile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisAnimationesLegibile, OstiumCivisAnimationesLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisVisaeLegibile, OstiumCivisVisaeLegibile>(Lifetime.Singleton);
+
 
             // Ministeria
             builder.Register<IMinisteria, Ministeria>(Lifetime.Singleton);
