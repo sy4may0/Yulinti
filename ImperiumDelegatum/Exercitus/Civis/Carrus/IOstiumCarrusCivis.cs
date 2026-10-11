@@ -80,5 +80,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             float audita
         );
+
+        void PostulareSpectandi(
+            int idCivis,
+            bool estActivum
+        );
     }
 }

@@ -142,6 +142,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_PURGARE_TRANSPORTO_FAILED = "ExecutorCivisLoci - purgare transporto failed";
         public const string ExecutorCivisMortis_EXECUTORCIVISMORTIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisMortis - ordinatio queue full";
         public const string ExecutorCivisMortis_EXECUTORCIVISMORTIS_MANIFESTATIONIS_QUEUE_FULL = "ExecutorCivisMortis - manifestationis queue full";
+        public const string ExecutorCivisSpectandi_EXECUTORCIVISSPECTANDI_ORDINATIO_QUEUE_FULL = "ExecutorCivisSpectandi - ordinatio queue full";
         public const string ExecutorCivisVeletudinis_EXECUTORCIVISVELETUDINISVALORIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisVeletudinis - executorcivisveletudinisvaloris ordinatio queue full";
         public const string ExecutorPuellaeAnimationis_MINIATERIUMPUELLAEANIMATION_ORDINATIO_QUEUE_FULL = "ExecutorPuellaeAnimationis - miniateriumpuellaeanimation ordinatio queue full";
         public const string ExecutorPuellaeCrinis_MINIATERIUMPUELLAECRINIS_ORDINATIO_QUEUE_FULL = "ExecutorPuellaeCrinis - miniateriumpuellaecrinis ordinatio queue full";

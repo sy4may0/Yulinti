@@ -39,6 +39,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IConfiguratioCivisAnimationum>(_configuratio.Ministeria.Civis.Animatio);
             builder.RegisterInstance<IConfiguratioCivisVisae>(_configuratio.Ministeria.Civis.Visa);
             builder.RegisterInstance<IConfiguratioCivisSchemarum>(_configuratio.Ministeria.Civis.Schemarum);
+            builder.RegisterInstance<IConfiguratioCivisSpectandi>(_configuratio.Ministeria.Civis.Spectandi);
             builder.RegisterInstance<IConfiguratioPunctumViae>(_configuratio.Ministeria.PunctumViae);
 
 
