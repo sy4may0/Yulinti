@@ -10,6 +10,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         protected readonly IResFluidaPuellaeVeletudinisLegibile ResFluidaPuellaeVeletudinis;
         protected readonly HorologiaCivisStatuumCustodiae Horologia;
         protected readonly IOstiumCarrusCivis Carrus;
+        protected readonly IOstiumTemporisLegibile Temporis;
 
         public abstract IDCivisStatusCustodiae Id { get; }
 
@@ -19,7 +20,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             HorologiaCivisStatuumCustodiae horologiaCivisStatuumCustodiae,
-            IOstiumCarrusCivis ostiumCarrusCivis
+            IOstiumCarrusCivis ostiumCarrusCivis,
+            IOstiumTemporisLegibile ostiumTemporisLegibile
         ) {
             Configuratio = configuratio;
             ResFluidaCivisVeletudinis = resFluidaCivisVeletudinis;
@@ -27,6 +29,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ResFluidaPuellaeVeletudinis = resFluidaPuellaeVeletudinis;
             Horologia = horologiaCivisStatuumCustodiae;
             Carrus = ostiumCarrusCivis;
+            Temporis = ostiumTemporisLegibile;
         }
 
         public abstract void Intrare(int idCivis);
@@ -35,9 +38,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         
         
         public virtual void Ordinare(int idCivis) {
-            if (!ResFluidaCivisCustodiae.EstVisa(idCivis) && !ResFluidaCivisCustodiae.EstAudita(idCivis)) {
-                return;
-            }
+            float intervallum = Temporis.Intervallum;
 
             float dtSuspecta = InstrumentaCivisSuspectae.ComputareIncrementumSuspectae(
                 idCivis,
@@ -47,11 +48,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 ResFluidaCivisVeletudinis,
                 ResFluidaCivisCustodiae,
                 Configuratio.LimenAnomaliaeSuspectaeNonNudus
-            );
+            ) * intervallum;
 
             dtSuspecta = InstrumentaCivisSuspectae.LimitareSuspectae(
                 idCivis,
                 dtSuspecta,
+                Configuratio.ConsumptioSuspectaeBasis * intervallum,
                 Configuratio.LimitatioSuspectaeAuditae,
                 Configuratio.LimitatioSuspectaeNonNudus,
                 ResFluidaCivisVeletudinis,

@@ -87,16 +87,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public static float LimitareSuspectae(
             int idCivis,
             float dtSuspectae,
+            float consumptioSuspectae,
             float limitatioSuspectaeAuditae,
             float limitatioSuspectaeNonNudus,
             IResFluidaCivisVeletudinisLegibile civisVeletudinis,
             IResFluidaCivisCustodiaeLegibile civisCustodiae
         ) {
             if (dtSuspectae <= 0f) {
-                return dtSuspectae;
-            }
-
-            if (!civisCustodiae.EstVisa(idCivis) && !civisCustodiae.EstAudita(idCivis)) {
                 return dtSuspectae;
             }
 
@@ -113,7 +110,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float s = civisVeletudinis.Suspecta(idCivis) + dtSuspectae;
 
             if (s > limitatio) {
-                return limitatio - civisVeletudinis.Suspecta(idCivis);
+                float dtLimitata = limitatio - civisVeletudinis.Suspecta(idCivis);
+                // 上限超過済みの場合は通常の消費速度で上限まで減少させる。
+                if (dtLimitata < -consumptioSuspectae) {
+                    return -consumptioSuspectae;
+                }
+                return dtLimitata;
             }
 
             return dtSuspectae;

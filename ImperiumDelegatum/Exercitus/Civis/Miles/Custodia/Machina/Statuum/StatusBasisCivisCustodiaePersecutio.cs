@@ -10,14 +10,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             HorologiaCivisStatuumCustodiae horologiaCivisStatuumCustodiae,
-            IOstiumCarrusCivis ostiumCarrusCivis
+            IOstiumCarrusCivis ostiumCarrusCivis,
+            IOstiumTemporisLegibile ostiumTemporisLegibile
         ) : base(
             configuratio,
             resFluidaCivisVeletudinis,
             resFluidaCivisCustodiae,
             resFluidaPuellaeVeletudinis,
             horologiaCivisStatuumCustodiae,
-            ostiumCarrusCivis
+            ostiumCarrusCivis,
+            ostiumTemporisLegibile
         ) {
         }
 
@@ -33,7 +35,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 ResFluidaCivisVeletudinis,
                 ResFluidaCivisCustodiae,
                 Configuratio.MargoTorelantiaeAnomaliae
-            );
+            ) * Temporis.Intervallum;
 
             Carrus.PostulareVeletudinisValoris(
                 idCivis,
