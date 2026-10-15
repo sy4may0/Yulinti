@@ -235,7 +235,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Executare(int idCivis, IOrdinatioCivisVeletudinisValoris veletudinisValoris) {
-            UnityEngine.Debug.Log($"veletudinisValoris ExAdd: {veletudinisValoris.DtSuspecta}");
             _phantasma.Addo(
                 idCivis,
                 dtVitae: veletudinisValoris.DtVitae,
