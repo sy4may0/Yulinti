@@ -8,12 +8,16 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         // 視認Ictuum(胴体)
         float VisaCorporis(int idCivis);
         // 視認レシオ(0~1)
-        float RatioVisus(int idCivis);
+        float RatioVisae(int idCivis);
         // 視認判定
         bool EstVisa(int idCivis);
+        // 視認頭部判定
+        bool EstVisaCapitis(int idCivis);
+        // 視認胴体判定
+        bool EstVisaCorporis(int idCivis);
 
-        // 聴認Ictuum
-        float Audita(int idCivis);
+        // 聴認レシオ(0~1)
+        float RatioAudita(int idCivis);
         // 聴認判定
         bool EstAudita(int idCivis);
 

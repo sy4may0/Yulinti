@@ -72,6 +72,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ExecutorCivisMortis>(Lifetime.Singleton);
             builder.Register<ExecutorCivisVeletudinis>(Lifetime.Singleton);
             builder.Register<ExecutorCivisCustodiae>(Lifetime.Singleton);
+            builder.Register<ExecutorCivisSpectandi>(Lifetime.Singleton);
             builder.Register<ExecutorPuellaeFormae>(Lifetime.Singleton);
 
             // Resolutor

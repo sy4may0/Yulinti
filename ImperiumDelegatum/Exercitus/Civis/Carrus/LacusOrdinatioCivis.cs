@@ -11,6 +11,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Stack<OrdinatioCivisMortis>[] _lacusMortis;
         private readonly Stack<OrdinatioCivisVeletudinisCondicionis>[] _lacusVeletudinisCondicionis;
         private readonly Stack<OrdinatioCivisCustodiae>[] _lacusCustodiae;
+        private readonly Stack<OrdinatioCivisSpectandi>[] _lacusSpectandi;
 
         private readonly Ordo<OrdinatioCivisAnimationis>[] _emissioAnimationis;
         private readonly Ordo<OrdinatioCivisMotus>[] _emissioMotus;
@@ -20,6 +21,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly Ordo<OrdinatioCivisMortis>[] _emissioMortis;
         private readonly Ordo<OrdinatioCivisVeletudinisCondicionis>[] _emissioVeletudinisCondicionis;
         private readonly Ordo<OrdinatioCivisCustodiae>[] _emissioCustodiae;
+        private readonly Ordo<OrdinatioCivisSpectandi>[] _emissioSpectandi;
 
         public LacusOrdinatioCivis(int longitudoCivis) {
             _lacusAnimationis = new Stack<OrdinatioCivisAnimationis>[longitudoCivis];
@@ -30,6 +32,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _lacusMortis = new Stack<OrdinatioCivisMortis>[longitudoCivis];
             _lacusVeletudinisCondicionis = new Stack<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
             _lacusCustodiae = new Stack<OrdinatioCivisCustodiae>[longitudoCivis];
+            _lacusSpectandi = new Stack<OrdinatioCivisSpectandi>[longitudoCivis];
 
             _emissioAnimationis = new Ordo<OrdinatioCivisAnimationis>[longitudoCivis];
             _emissioMotus = new Ordo<OrdinatioCivisMotus>[longitudoCivis];
@@ -39,6 +42,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _emissioMortis = new Ordo<OrdinatioCivisMortis>[longitudoCivis];
             _emissioVeletudinisCondicionis = new Ordo<OrdinatioCivisVeletudinisCondicionis>[longitudoCivis];
             _emissioCustodiae = new Ordo<OrdinatioCivisCustodiae>[longitudoCivis];
+            _emissioSpectandi = new Ordo<OrdinatioCivisSpectandi>[longitudoCivis];
 
             for (int i = 0; i < longitudoCivis; i++) {
                 _lacusAnimationis[i] = new Stack<OrdinatioCivisAnimationis>(ConstansCivis.LongitudoOrdinatioAnimationis);
@@ -49,6 +53,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _lacusMortis[i] = new Stack<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
                 _lacusVeletudinisCondicionis[i] = new Stack<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
                 _lacusCustodiae[i] = new Stack<OrdinatioCivisCustodiae>(ConstansCivis.LongitudoOrdinatioCustodiae);
+                _lacusSpectandi[i] = new Stack<OrdinatioCivisSpectandi>(ConstansCivis.LongitudoOrdinatioSpectandi);
 
                 _emissioAnimationis[i] = new Ordo<OrdinatioCivisAnimationis>(ConstansCivis.LongitudoOrdinatioAnimationis);
                 _emissioMotus[i] = new Ordo<OrdinatioCivisMotus>(ConstansCivis.LongitudoOrdinatioMotus);
@@ -58,6 +63,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _emissioMortis[i] = new Ordo<OrdinatioCivisMortis>(ConstansCivis.LongitudoOrdinatioMortis);
                 _emissioVeletudinisCondicionis[i] = new Ordo<OrdinatioCivisVeletudinisCondicionis>(ConstansCivis.LongitudoOrdinatioVeletudinisCondicionis);
                 _emissioCustodiae[i] = new Ordo<OrdinatioCivisCustodiae>(ConstansCivis.LongitudoOrdinatioCustodiae);
+                _emissioSpectandi[i] = new Ordo<OrdinatioCivisSpectandi>(ConstansCivis.LongitudoOrdinatioSpectandi);
 
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioAnimationis; j++) {
                     _lacusAnimationis[i].Push(new OrdinatioCivisAnimationis(i));
@@ -82,6 +88,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 }
                 for (int j = 0; j < ConstansCivis.LongitudoOrdinatioCustodiae; j++) {
                     _lacusCustodiae[i].Push(new OrdinatioCivisCustodiae(i));
+                }
+                for (int j = 0; j < ConstansCivis.LongitudoOrdinatioSpectandi; j++) {
+                    _lacusSpectandi[i].Push(new OrdinatioCivisSpectandi(i));
                 }
             }
         }
@@ -190,6 +199,19 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             return false;
         }
 
+        public bool EmittareSpectandi(int idCivis, out OrdinatioCivisSpectandi spectandi) {
+            if (_lacusSpectandi[idCivis].Count > 0) {
+                var r = _lacusSpectandi[idCivis].Pop();
+                if (_emissioSpectandi[idCivis].ConarePono(r)) {
+                    spectandi = r;
+                    spectandi.Initare();
+                    return true;
+                }
+            }
+            spectandi = null;
+            return false;
+        }
+
         public void ColligereAnimationis(int idCivis) {
             while (_emissioAnimationis[idCivis].ConareLego(out var r)) {
                 if (_lacusAnimationis[idCivis].Count < ConstansCivis.LongitudoOrdinatioAnimationis) {
@@ -278,6 +300,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             }
         }
 
+        public void ColligereSpectandi(int idCivis) {
+            while (_emissioSpectandi[idCivis].ConareLego(out var r)) {
+                if (_lacusSpectandi[idCivis].Count < ConstansCivis.LongitudoOrdinatioSpectandi) {
+                    _lacusSpectandi[idCivis].Push(r);
+                } else {
+                    r.Purgere();
+                    r.Liberare();
+                }
+            }
+        }
+
         public void ColligereOmnia(int idCivis) {
             ColligereAnimationis(idCivis);
             ColligereMotus(idCivis);
@@ -287,6 +320,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ColligereMortis(idCivis);
             ColligereVeletudinisCondicionis(idCivis);
             ColligereCustodiae(idCivis);
+            ColligereSpectandi(idCivis);
         }
     }
 }

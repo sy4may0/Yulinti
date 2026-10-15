@@ -8,10 +8,12 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [SerializeField] private ConfiguratioCivisAnimationum animatio;
         [SerializeField] private ConfiguratioCivisVisae visa;
         [SerializeField] private ConfiguratioCivisSchemarum schemarum;
+        [SerializeField] private ConfiguratioCivisSpectandi spectandi;
 
         public IConfiguratioCivisLoci Loci => loci;
         public IConfiguratioCivisAnimationum Animatio => animatio;
         public IConfiguratioCivisVisae Visa => visa;
         public IConfiguratioCivisSchemarum Schemarum => schemarum;
+        public IConfiguratioCivisSpectandi Spectandi => spectandi;
     }
 }

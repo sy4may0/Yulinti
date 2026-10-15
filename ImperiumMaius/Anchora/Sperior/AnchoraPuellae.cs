@@ -72,6 +72,8 @@ namespace Yulinti.ImperiumMaius.Anchora {
         [SerializeField] private Transform _osCorrectoriumSpinae0;
         [SerializeField] private Transform _osCorrectoriumPelvis;
 
+        [SerializeField] private Transform _locusReferensCapitis;
+
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
         public Animator Animator => _animator;
         public AnimancerComponent Animancer => _animancer;
@@ -140,6 +142,10 @@ namespace Yulinti.ImperiumMaius.Anchora {
         public Transform OsCorrectoriumSpinae1 => _osCorrectoriumSpinae1;
         public Transform OsCorrectoriumSpinae0 => _osCorrectoriumSpinae0;
         public Transform OsCorrectoriumPelvis => _osCorrectoriumPelvis;
+
+        // 揺れを押さえた頭の基準位置。
+        // カメラの焦点やNPCのLookAt先として使う。
+        public Transform LocusReferensCapitis => _locusReferensCapitis;
 
         public bool Validare() {
             bool result = true;
@@ -342,6 +348,10 @@ namespace Yulinti.ImperiumMaius.Anchora {
             }
             if (_osCorrectoriumPelvis == null) {
                 Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_CORRECTORIUM_PELVIS_NULL);
+                result = false;
+            }
+            if (_locusReferensCapitis == null) {
+                Carnifex.Intermissio(LogTextus.AnchoraPuellae_ANCHORAPUELLAE_BONE_LOCUS_REFERENS_CAPITIS_NULL);
                 result = false;
             }
             return result;

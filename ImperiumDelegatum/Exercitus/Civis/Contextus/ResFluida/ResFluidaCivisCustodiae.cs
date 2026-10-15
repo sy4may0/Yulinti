@@ -60,10 +60,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public float VisaCapitis(int idCivis) => _visaCapitis[idCivis];
         public float VisaCorporis(int idCivis) => _visaCorporis[idCivis];
-        public float RatioVisus(int idCivis) => (_visaCapitis[idCivis] + _visaCorporis[idCivis]) / _longitudoResVisae;
+        public float RatioVisae(int idCivis) => (_visaCapitis[idCivis] + _visaCorporis[idCivis]) / _longitudoResVisae;
         public bool EstVisa(int idCivis) => _visaCapitis[idCivis] + _visaCorporis[idCivis] > Numerus.Epsilon;
+        public bool EstVisaCapitis(int idCivis) => _visaCapitis[idCivis] > Numerus.Epsilon;
+        public bool EstVisaCorporis(int idCivis) => _visaCorporis[idCivis] > Numerus.Epsilon;
 
-        public float Audita(int idCivis) => _audita[idCivis];
+        public float RatioAudita(int idCivis) => _audita[idCivis];
         public bool EstAudita(int idCivis) => _audita[idCivis] > Numerus.Epsilon;
 
         public float DistantiaPuellae(int idCivis) => _distantiaPuellae[idCivis];

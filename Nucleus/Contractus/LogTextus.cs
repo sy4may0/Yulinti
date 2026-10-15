@@ -19,6 +19,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraCivis_ANCHORACIVIS_INSTANCE_NULL = "AnchoraCivis - instance null";
         public const string AnchoraCivis_ANCHORACIVIS_INSTANTIATE_FAILED = "AnchoraCivis - instantiate failed";
         public const string AnchoraCivis_ANCHORACIVIS_NAVMESHAGENT_NULL = "AnchoraCivis - navmeshagent null";
+        public const string AnchoraCivis_ANCHORACIVIS_LOOKATIK_NULL = "AnchoraCivis - lookatik null";
         public const string AnchoraCivis_ANCHORACIVIS_PREFAB_INSTANCE_NULL = "AnchoraCivis - prefab instance null";
         public const string AnchoraCivis_ANCHORACIVIS_SKINNEDMESHRENDERER_NULL = "AnchoraCivis - skinnedmeshrenderer null";
         public const string AnchoraCivis_ANCHORACIVIS_VELUMVELETUDINIS_NULL = "AnchoraCivis - velum veletudinis null";
@@ -107,6 +108,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraPuellae_ANCHORAPUELLAE_SKINNEDMESHRENDERER_RIGHTARM_NULL = "AnchoraPuellae - skinnedmeshrenderer rightarm null";
         public const string AnchoraPuellae_ANCHORAPUELLAE_SKINNEDMESHRENDERER_RIGHTLEG_NULL = "AnchoraPuellae - skinnedmeshrenderer rightleg null";
         public const string AnchoraPuellae_ANCHORAPUELLAE_SKINNEDMESHRENDERER_TORSO_NULL = "AnchoraPuellae - skinnedmeshrenderer torso null";
+        public const string AnchoraPuellae_ANCHORAPUELLAE_BONE_LOCUS_REFERENS_CAPITIS_NULL = "AnchoraPuellae - bone locus referens capitis null";
         public const string AnchoraPuellae_MINISTERIUMPUELLAEANIMATIONES_ANIMANCER_NULL = "AnchoraPuellae - ministeriumpuellaeanimationes animancer null";
         public const string AnchoraTestScene_REX_ANCHORA_NOT_SET = "AnchoraTestScene - rex anchora not set";
         public const string AnchoraTestScene_REX_ANCHORA_RESOLVE_FAILED = "AnchoraTestScene - rex anchora resolve failed";
@@ -140,6 +142,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string ExecutorCivisLoci_EXECUTORCIVISLOCI_PURGARE_TRANSPORTO_FAILED = "ExecutorCivisLoci - purgare transporto failed";
         public const string ExecutorCivisMortis_EXECUTORCIVISMORTIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisMortis - ordinatio queue full";
         public const string ExecutorCivisMortis_EXECUTORCIVISMORTIS_MANIFESTATIONIS_QUEUE_FULL = "ExecutorCivisMortis - manifestationis queue full";
+        public const string ExecutorCivisSpectandi_EXECUTORCIVISSPECTANDI_ORDINATIO_QUEUE_FULL = "ExecutorCivisSpectandi - ordinatio queue full";
         public const string ExecutorCivisVeletudinis_EXECUTORCIVISVELETUDINISVALORIS_ORDINATIO_QUEUE_FULL = "ExecutorCivisVeletudinis - executorcivisveletudinisvaloris ordinatio queue full";
         public const string ExecutorPuellaeAnimationis_MINIATERIUMPUELLAEANIMATION_ORDINATIO_QUEUE_FULL = "ExecutorPuellaeAnimationis - miniateriumpuellaeanimation ordinatio queue full";
         public const string ExecutorPuellaeCrinis_MINIATERIUMPUELLAECRINIS_ORDINATIO_QUEUE_FULL = "ExecutorPuellaeCrinis - miniateriumpuellaecrinis ordinatio queue full";
@@ -195,6 +198,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_NOT_FOUND = "MachinaCivisStatuumCorporis - status not found";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_IDANIMATIONISINTRARE_DESINERE_INVALID = "MachinaCivisStatuumCorporis - idanimationisintrare desinere invalid";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID = "MachinaCivisStatuumCorporis - idanimationisexire desinere invalid";
+        public const string MachinaCivisStatuumCustodiae_MACHINACIVISSTATUUMCUSTODIAE_STATUS_MISSING = "MachinaCivisStatuumCustodiae - status missing";
         public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_STATUS_NOT_FOUND = "MachinaPuellaeStatusCorporis - status not found";
         public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISINTRARE_DESINERE_INVALID = "MachinaPuellaeStatusCorporis - idanimationisintrare desinere invalid";
         public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID = "MachinaPuellaeStatusCorporis - idanimationisexire desinere invalid";

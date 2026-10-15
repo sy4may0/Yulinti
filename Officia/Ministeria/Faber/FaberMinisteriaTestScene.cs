@@ -37,6 +37,7 @@ namespace Yulinti.Officia.Ministeria {
             builder.Register<MinisteriumPuellaeRelationisTerrae>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeResVisae>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeFormae>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<MinisteriumPuellaeReferensCapitis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<IOstiumPuellaeAnimationisMutabile, OstiumPuellaeAnimationisMutabile>(Lifetime.Singleton);
             builder.Register<IOstiumPuellaeAnimationisLegibile, OstiumPuellaeAnimationisLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumPuellaeFiguraeGenusLegibile, OstiumPuellaeFiguraeGenusLegibile>(Lifetime.Singleton);
@@ -65,6 +66,7 @@ namespace Yulinti.Officia.Ministeria {
             // Civis
             builder.Register<OperatioAnchoraCivisAnimationes>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<OperatioAnchoraCivisLoci>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<OperatioAnchoraCivisSpectandi>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<LacusAnchorarumCivis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
@@ -72,6 +74,7 @@ namespace Yulinti.Officia.Ministeria {
             builder.Register<MinisteriumCivisLoci>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumCivisAnimationes>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumCivisVisae>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<MinisteriumCivisSpectandi>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<IOstiumCivisLegibile, OstiumCivisLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisMutabile, OstiumCivisMutabile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisLociLegibile, OstiumCivisLociLegibile>(Lifetime.Singleton);
@@ -79,6 +82,8 @@ namespace Yulinti.Officia.Ministeria {
             builder.Register<IOstiumCivisAnimationesMutabile, OstiumCivisAnimationesMutabile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisAnimationesLegibile, OstiumCivisAnimationesLegibile>(Lifetime.Singleton);
             builder.Register<IOstiumCivisVisaeLegibile, OstiumCivisVisaeLegibile>(Lifetime.Singleton);
+            builder.Register<IOstiumCivisSpectandiMutabile, OstiumCivisSpectandiMutabile>(Lifetime.Singleton);
+
 
             // Ministeria
             builder.Register<IMinisteria, Ministeria>(Lifetime.Singleton);

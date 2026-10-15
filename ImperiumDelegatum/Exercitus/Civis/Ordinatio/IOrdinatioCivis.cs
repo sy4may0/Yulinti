@@ -6,6 +6,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ActioMotus,
         ActioNavmesh,
         ActioAnimationis,
+        ActioSpectandi,
         VeletudinisCustodiae,
         VeletudinisMortis,
         VeletudinisValoris,

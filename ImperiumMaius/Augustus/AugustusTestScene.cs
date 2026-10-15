@@ -33,11 +33,13 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IConfiguratioPuellaeAnimationum>(_configuratio.Ministeria.Puellae.Animatio);
             builder.RegisterInstance<IConfiguratioPuellaeLoci>(_configuratio.Ministeria.Puellae.Loci);
             builder.RegisterInstance<IConfiguratioPuellaeFormarum>(_configuratio.Ministeria.Puellae.Formae);
+            builder.RegisterInstance<IConfiguratioPuellaeReferensCapitis>(_configuratio.Ministeria.Puellae.ReferensCapitis);
             builder.RegisterInstance<IConfiguratioCivis>(_configuratio.Ministeria.Civis);
             builder.RegisterInstance<IConfiguratioCivisLoci>(_configuratio.Ministeria.Civis.Loci);
             builder.RegisterInstance<IConfiguratioCivisAnimationum>(_configuratio.Ministeria.Civis.Animatio);
             builder.RegisterInstance<IConfiguratioCivisVisae>(_configuratio.Ministeria.Civis.Visa);
             builder.RegisterInstance<IConfiguratioCivisSchemarum>(_configuratio.Ministeria.Civis.Schemarum);
+            builder.RegisterInstance<IConfiguratioCivisSpectandi>(_configuratio.Ministeria.Civis.Spectandi);
             builder.RegisterInstance<IConfiguratioPunctumViae>(_configuratio.Ministeria.PunctumViae);
 
 
@@ -49,7 +51,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IConfiguratioExercitusCivis>(_configuratio.Exercitus.ExercitusCivis);
             builder.RegisterInstance<IConfiguratioCivisStatuum>(_configuratio.Exercitus.ExercitusCivis.Statuum);
             builder.RegisterInstance<IConfiguratioCivisCustodiaeIctuum>(_configuratio.Exercitus.ExercitusCivis.CustodiaeIctuum);
-            builder.RegisterInstance<IConfiguratioCivisCustodiaeStatus>(_configuratio.Exercitus.ExercitusCivis.CustodiaeStatus);
+            builder.RegisterInstance<IConfiguratioCivisCustodiaeStatuum>(_configuratio.Exercitus.ExercitusCivis.CustodiaeStatuum);
             builder.RegisterInstance<IConfiguratioCivisGenerationis>(_configuratio.Exercitus.ExercitusCivis.Generationis);
             builder.RegisterInstance<IConfiguratioCiviumPersonarum>(_configuratio.Exercitus.ExercitusCivis.Personae);
 

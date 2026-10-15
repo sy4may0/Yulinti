@@ -11,6 +11,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly ExecutorCivisVeletudinis _exVeletudinis;
         private readonly ExecutorCivisMortis _exMortis;
         private readonly ExecutorCivisCustodiae _exCustodiae;
+        private readonly ExecutorCivisSpectandi _exSpectandi;
 
         private readonly LacusOrdinatioCivis _lacusOrdinatioCivis;
 
@@ -20,13 +21,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ExecutorCivisLoci exLoci,
             ExecutorCivisVeletudinis exVeletudinis,
             ExecutorCivisMortis exMortis,
-            ExecutorCivisCustodiae exCustodiae
+            ExecutorCivisCustodiae exCustodiae,
+            ExecutorCivisSpectandi exSpectandi
         ) {
             _exAnimationis = exAnimationis;
             _exLoci = exLoci;
             _exVeletudinis = exVeletudinis;
             _exMortis = exMortis;
             _exCustodiae = exCustodiae;
+            _exSpectandi = exSpectandi;
             _lacusOrdinatioCivis = new LacusOrdinatioCivis(ostiumCivisLegibile.Longitudo);
         }
 
@@ -36,6 +39,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exVeletudinis.Primum(idCivis);
             _exMortis.Primum(idCivis);
             _exCustodiae.Primum(idCivis);
+            _exSpectandi.Primum(idCivis);
         }
 
         public void Initare(int idCivis) {
@@ -44,6 +48,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exVeletudinis.Initare(idCivis);
             _exMortis.Initare(idCivis);
             _exCustodiae.Initare(idCivis);
+            _exSpectandi.Initare(idCivis);
        }
 
         public void Activare(int idCivis) {
@@ -86,6 +91,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _lacusOrdinatioCivis.ColligereCustodiae(idCivis);
         }
 
+        private void ConfirmareSpectandi(int idCivis) {
+            _exSpectandi.Confirmare(idCivis);
+            _lacusOrdinatioCivis.ColligereSpectandi(idCivis);
+        }
+
         // Incipereの最後に実行 Civis生成時で適用が必要なケースはここでやる。
         public void ConfirmareIncipabilis(int idCivis) {
             ConfirmareLoci(idCivis);
@@ -101,6 +111,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ConfirmareLoci(idCivis);
             // Animationisを適用
             ConfirmareAnimationis(idCivis);
+            // Spectandiを適用
+            ConfirmareSpectandi(idCivis);
         }
 
         // PulsusTardusの最後に実行
@@ -124,6 +136,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _exVeletudinis.Purgare(idCivis);
             _exMortis.Purgare(idCivis);
             _exCustodiae.Purgare(idCivis);
+            _exSpectandi.Purgare(idCivis);
             _lacusOrdinatioCivis.ColligereOmnia(idCivis);
         }
 
@@ -266,6 +279,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                     audita: audita
                 );
                 _exCustodiae.Executare(idCivis, ordinatio);
+            }
+        }
+
+        public void PostulareSpectandi(
+            int idCivis,
+            bool estActivum
+        ) {
+            if (_lacusOrdinatioCivis.EmittareSpectandi(idCivis, out var ordinatio)) {
+                ordinatio.Pono(estActivum);
+                _exSpectandi.Executare(idCivis, ordinatio);
             }
         }
     }

@@ -13,7 +13,8 @@
         "Yulinti.ImperiumDelegatum.Contractus",
         "Unity.Addressables",
         "Unity.ResourceManager",
-        "UniTask"
+        "UniTask",
+        "RootMotion"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
