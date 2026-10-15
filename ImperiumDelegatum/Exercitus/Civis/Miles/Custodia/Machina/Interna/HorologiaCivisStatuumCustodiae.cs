@@ -4,13 +4,12 @@ using Yulinti.Nucleus.Instrumentarium;
 using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    // ProhibitioConsumptioのPurgereのタイミングはCivis生成時でよい。
-    // それ以外はステート遷移で使われるため、ステートのintrare, exireでPurgereする。
+    // 消費制限はステート遷移をまたいで継続させるため、PurgereはCivis生成時のみ行う。
     internal sealed class HorologiaCivisStatuumCustodiae {
         private readonly float[] _dtSuspectaPrior;
         private readonly float[] _dtIntentioPrior;
-        private readonly Horologium[] _horologiaProhibitioConsumptioSuspectae;
-        private readonly Horologium[] _horologiaProhibitioConsumptioIntentionis;
+        private readonly Horologium[] _horologiaProhibitionisConsumptionisSuspectae;
+        private readonly Horologium[] _horologiaProhibitionisConsumptionisIntentionis;
 
         public HorologiaCivisStatuumCustodiae(
             int longitudoCivis,
@@ -19,65 +18,70 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             _dtSuspectaPrior = new float[longitudoCivis];
             _dtIntentioPrior = new float[longitudoCivis];
-            _horologiaProhibitioConsumptioSuspectae = new Horologium[longitudoCivis];
-            _horologiaProhibitioConsumptioIntentionis = new Horologium[longitudoCivis];
+            _horologiaProhibitionisConsumptionisSuspectae = new Horologium[longitudoCivis];
+            _horologiaProhibitionisConsumptionisIntentionis = new Horologium[longitudoCivis];
 
             for (int i = 0; i < longitudoCivis; i++) {
                 _dtSuspectaPrior[i] = 0f;
                 _dtIntentioPrior[i] = 0f;
-                _horologiaProhibitioConsumptioSuspectae[i] = new Horologium(
+                _horologiaProhibitionisConsumptionisSuspectae[i] = new Horologium(
                     configuratio.TempusProhibitioConsumptioSuspectae
                 );
-                _horologiaProhibitioConsumptioIntentionis[i] = new Horologium(
+                _horologiaProhibitionisConsumptionisIntentionis[i] = new Horologium(
                     configuratio.TempusProhibitioConsumptioIntentio
                 );
             }
         }
 
         // 消費制限ブロック中かどうか
-        public bool EstProhibitioConsumptioSuspectae(int idCivis) {
-            return _horologiaProhibitioConsumptioSuspectae[idCivis].EstActivum;
+        public bool EstProhibitioConsumptionisSuspectae(int idCivis) {
+            return _horologiaProhibitionisConsumptionisSuspectae[idCivis].EstActivum;
         }
 
         // Ordinareから呼ぶ。Horologiumの起動or停止を行う。
         // dtSuspectaには消費制限を適用する前の増減値を渡すこと。
-        public void CommutareProhibitioConsumptioSuspectae(
+        public void CommutareProhibitionemConsumptionisSuspectae(
             int idCivis, float dtSuspecta, float intervallum
         ) {
             Commutare(
-                _horologiaProhibitioConsumptioSuspectae[idCivis],
+                _horologiaProhibitionisConsumptionisSuspectae[idCivis],
                 _dtSuspectaPrior,
                 idCivis, dtSuspecta, intervallum
             );
         }
 
-        public void PurgereProhibitioConsumptioSuspectae(int idCivis) {
+        public void PurgereProhibitionemConsumptionisSuspectae(int idCivis) {
             _dtSuspectaPrior[idCivis] = 0f;
-            _horologiaProhibitioConsumptioSuspectae[idCivis].Deactivare();
-            _horologiaProhibitioConsumptioSuspectae[idCivis].Purgere();
+            _horologiaProhibitionisConsumptionisSuspectae[idCivis].Deactivare();
+            _horologiaProhibitionisConsumptionisSuspectae[idCivis].Purgere();
         }
 
         // 消費制限ブロック中かどうか
-        public bool EstProhibitioConsumptioIntentionis(int idCivis) {
-            return _horologiaProhibitioConsumptioIntentionis[idCivis].EstActivum;
+        public bool EstProhibitioConsumptionisIntentionis(int idCivis) {
+            return _horologiaProhibitionisConsumptionisIntentionis[idCivis].EstActivum;
         }
 
         // Ordinareから呼ぶ。Horologiumの起動or停止を行う。
         // dtIntentioには消費制限を適用する前の増減値を渡すこと。
-        public void CommutareProhibitioConsumptioIntentionis(
+        public void CommutareProhibitionemConsumptionisIntentionis(
             int idCivis, float dtIntentio, float intervallum
         ) {
             Commutare(
-                _horologiaProhibitioConsumptioIntentionis[idCivis],
+                _horologiaProhibitionisConsumptionisIntentionis[idCivis],
                 _dtIntentioPrior,
                 idCivis, dtIntentio, intervallum
             );
         }
 
-        public void PurgereProhibitioConsumptioIntentionis(int idCivis) {
+        public void PurgereProhibitionemConsumptionisIntentionis(int idCivis) {
             _dtIntentioPrior[idCivis] = 0f;
-            _horologiaProhibitioConsumptioIntentionis[idCivis].Deactivare();
-            _horologiaProhibitioConsumptioIntentionis[idCivis].Purgere();
+            _horologiaProhibitionisConsumptionisIntentionis[idCivis].Deactivare();
+            _horologiaProhibitionisConsumptionisIntentionis[idCivis].Purgere();
+        }
+
+        public void PurgereOmnia(int idCivis) {
+            PurgereProhibitionemConsumptionisSuspectae(idCivis);
+            PurgereProhibitionemConsumptionisIntentionis(idCivis);
         }
 
         private static void Commutare(

@@ -1,5 +1,4 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCustodiaeVigilantia : StatusBasisCivisCustodiaePatrulatio {
@@ -15,14 +14,19 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             HorologiaCivisStatuumCustodiae horologiaCivisStatuumCustodiae,
             IOstiumCarrusCivis ostiumCarrusCivis,
-            HorologiaCivisStatuumCustodiaeMutationis horologiaCivisStatuumCustodiaeMutationis,
-            IOstiumTemporisLegibile ostiumTemporisLegibile
+            IOstiumTemporisLegibile ostiumTemporisLegibile,
+            HorologiaCivisStatuumCustodiaeMutationis horologiaCivisStatuumCustodiaeMutationis
         ) : base(configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis, horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile) {
             _horologiaCivisStatuumCustodiaeMutationis = horologiaCivisStatuumCustodiaeMutationis;
         }
 
         public override void Intrare(int idCivis) {
             _horologiaCivisStatuumCustodiaeMutationis.ActivareVigilantiam(idCivis);
+
+            Carrus.PostulareVeletudinisCondicionis(
+                idCivis,
+                statusCustodiaeCurrens: IDCivisStatusCustodiae.Vigilantia
+            );
         }
 
         public override void Exire(int idCivis) {
@@ -31,11 +35,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public override void Ordinare(int idCivis) {
             base.Ordinare(idCivis);
+            PurgereIntentionem(idCivis);
         }
 
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
             // horologium時間が経過した時
-            if (_horologiaCivisStatuumCustodiaeMutationis.EstExhauritaVigilantiam(idCivis, Temporis.Intervallum)) {
+            if (_horologiaCivisStatuumCustodiaeMutationis.EstExhauritaVigilantiae(idCivis, Temporis.Intervallum)) {
                 return IDCivisStatusCustodiae.Spectans;
             }
 

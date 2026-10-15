@@ -64,7 +64,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         float TempusConservationisQuaerensMaxima { get; }
         float TempusConservationisQuaerensMinima { get; }
 
-        // Refrigeratio維持時間: どれだけ冷房状態を維持するか。(temere, 30~60秒くらい)
+        // Refrigeratio維持時間: どれだけクールダウン状態を維持するか。(temere, 30~60秒くらい)
         float TempusConservationisRefrigeratioMaxima { get; }
         float TempusConservationisRefrigeratioMinima { get; }
     }

@@ -60,7 +60,8 @@ namespace Yulinti.Auctoritas.Senatus {
                        $"INT: {_resFluidaCivisVeletudinis.Intentio(i)}\n" +
                        $"TORMAX: {_resFluidaCivisVeletudinis.TorelantiaAnomaliaeMaxima(i)}\n" +
                        $"TORMIN: {_resFluidaCivisVeletudinis.TorelantiaAnomaliaeMinima(i)}\n" +
-                       $"SPCNUD: {_resFluidaCivisVeletudinis.EstSpectareNudus(i)}"
+                       $"SPCNUD: {_resFluidaCivisVeletudinis.EstSpectareNudus(i)}\n" +
+                       $"STATCUST: {_resFluidaCivisVeletudinis.StatusCustodiaeCurrens(i)}"
                     );
                 }
             }

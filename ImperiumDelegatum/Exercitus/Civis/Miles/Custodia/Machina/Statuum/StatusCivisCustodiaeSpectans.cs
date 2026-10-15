@@ -15,20 +15,25 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             HorologiaCivisStatuumCustodiae horologiaCivisStatuumCustodiae,
             IOstiumCarrusCivis ostiumCarrusCivis,
-            HorologiaCivisStatuumCustodiaeMutationis horologiaCivisStatuumCustodiaeMutationis,
-            IOstiumTemporisLegibile ostiumTemporisLegibile
+            IOstiumTemporisLegibile ostiumTemporisLegibile,
+            HorologiaCivisStatuumCustodiaeMutationis horologiaCivisStatuumCustodiaeMutationis
         ) : base(configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis, horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile) {
             _horologiaCivisStatuumCustodiaeMutationis = horologiaCivisStatuumCustodiaeMutationis;
         }
 
         public override void Intrare(int idCivis) {
-            _horologiaCivisStatuumCustodiaeMutationis.DeactivateSpectansInVisus(idCivis);
-            _horologiaCivisStatuumCustodiaeMutationis.DeactivateSpectansIntentioZero(idCivis);
+            _horologiaCivisStatuumCustodiaeMutationis.DeactivareSpectantemInVisus(idCivis);
+            _horologiaCivisStatuumCustodiaeMutationis.DeactivareSpectantemIntentionisZero(idCivis);
+
+            Carrus.PostulareVeletudinisCondicionis(
+                idCivis,
+                statusCustodiaeCurrens: IDCivisStatusCustodiae.Spectans
+            );
         }
 
         public override void Exire(int idCivis) {
-            _horologiaCivisStatuumCustodiaeMutationis.DeactivateSpectansInVisus(idCivis);
-            _horologiaCivisStatuumCustodiaeMutationis.DeactivateSpectansIntentioZero(idCivis);
+            _horologiaCivisStatuumCustodiaeMutationis.DeactivareSpectantemInVisus(idCivis);
+            _horologiaCivisStatuumCustodiaeMutationis.DeactivareSpectantemIntentionisZero(idCivis);
         }
 
         public override void Ordinare(int idCivis) {
@@ -36,12 +41,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
-            // Anomalia超過時 -> Discedens
-            float anomaliaPuellae = ResFluidaPuellaeVeletudinis.Anomalia;
-            if (ResFluidaCivisVeletudinis.EstSpectareNudus(idCivis)) {
-                anomaliaPuellae = ResFluidaPuellaeVeletudinis.AnomaliaNudus;
-            }
-            if (anomaliaPuellae > ResFluidaCivisVeletudinis.TorelantiaAnomaliaeMaxima(idCivis)) {
+            // Anomalia超過を視認 -> Discedens
+            if (EstExcessusAnomaliaeVisae(idCivis)) {
                 return IDCivisStatusCustodiae.Discedens;
             }
 
@@ -53,33 +54,31 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // Intentio = 0% -> Refrigeratio
             if (ResFluidaCivisVeletudinis.RatioIntentionis(idCivis) <= Numerus.Epsilon) {
                 // 初回Activare
-                if (!_horologiaCivisStatuumCustodiaeMutationis.EstActivumSpectansIntentioZero(idCivis)) {
-                    _horologiaCivisStatuumCustodiaeMutationis.ActivareSpectansIntentioZero(idCivis);
+                if (!_horologiaCivisStatuumCustodiaeMutationis.EstActivumSpectantisIntentionisZero(idCivis)) {
+                    _horologiaCivisStatuumCustodiaeMutationis.ActivareSpectantemIntentionisZero(idCivis);
                 }
                 // Exhaurita -> Refrigeratio
-                if (_horologiaCivisStatuumCustodiaeMutationis.EstExhauritaSpectansIntentioZero(idCivis, Temporis.Intervallum)) {
-                    _horologiaCivisStatuumCustodiaeMutationis.DeactivateSpectansIntentioZero(idCivis);
+                if (_horologiaCivisStatuumCustodiaeMutationis.EstExhauritaSpectantisIntentionisZero(idCivis, Temporis.Intervallum)) {
                     return IDCivisStatusCustodiae.Refrigeratio;
                 }
             } else {
                 // Intentio > 0% horologium停止
-                _horologiaCivisStatuumCustodiaeMutationis.DeactivateSpectansIntentioZero(idCivis);
+                _horologiaCivisStatuumCustodiaeMutationis.DeactivareSpectantemIntentionisZero(idCivis);
             }
 
             // 視認ロスト -> Quaerens
             if (!ResFluidaCivisCustodiae.EstVisa(idCivis)) {
                 // 初回Activare
-                if (!_horologiaCivisStatuumCustodiaeMutationis.EstActivumSpectansInVisus(idCivis)) {
-                    _horologiaCivisStatuumCustodiaeMutationis.ActivareSpectansInVisus(idCivis);
+                if (!_horologiaCivisStatuumCustodiaeMutationis.EstActivumSpectantisInVisus(idCivis)) {
+                    _horologiaCivisStatuumCustodiaeMutationis.ActivareSpectantemInVisus(idCivis);
                 }
                 // Exhaurita -> Quaerens
-                if (_horologiaCivisStatuumCustodiaeMutationis.EstExhauritaSpectansInVisus(idCivis, Temporis.Intervallum)) {
-                    _horologiaCivisStatuumCustodiaeMutationis.DeactivateSpectansInVisus(idCivis);
+                if (_horologiaCivisStatuumCustodiaeMutationis.EstExhauritaSpectantisInVisus(idCivis, Temporis.Intervallum)) {
                     return IDCivisStatusCustodiae.Quaerens;
                 }
             } else {
                 // 視認中 horologium停止
-                _horologiaCivisStatuumCustodiaeMutationis.DeactivateSpectansInVisus(idCivis);
+                _horologiaCivisStatuumCustodiaeMutationis.DeactivareSpectantemInVisus(idCivis);
             }
 
             return IDCivisStatusCustodiae.Nihil;

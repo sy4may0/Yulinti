@@ -51,6 +51,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IConfiguratioExercitusCivis>(_configuratio.Exercitus.ExercitusCivis);
             builder.RegisterInstance<IConfiguratioCivisStatuum>(_configuratio.Exercitus.ExercitusCivis.Statuum);
             builder.RegisterInstance<IConfiguratioCivisCustodiaeIctuum>(_configuratio.Exercitus.ExercitusCivis.CustodiaeIctuum);
+            builder.RegisterInstance<IConfiguratioCivisCustodiaeStatuum>(_configuratio.Exercitus.ExercitusCivis.CustodiaeStatuum);
             builder.RegisterInstance<IConfiguratioCivisGenerationis>(_configuratio.Exercitus.ExercitusCivis.Generationis);
             builder.RegisterInstance<IConfiguratioCiviumPersonarum>(_configuratio.Exercitus.ExercitusCivis.Personae);
 

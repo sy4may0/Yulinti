@@ -34,8 +34,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         // 異常耐性下限(0~1)
         private float[] _torelantiaAnomaliaeMinima;
 
-        private bool _estSpectareNudusAnterior;
-        private bool _estSpectareNudusPosterior;
+        private bool[] _estSpectareNudusAnterior;
+        private bool[] _estSpectareNudusPosterior;
 
         private bool[] _estActivum;
 
@@ -64,8 +64,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
             _estActivum = new bool[longitudo];
 
-            _estSpectareNudusAnterior = false;
-            _estSpectareNudusPosterior = false;
+            _estSpectareNudusAnterior = new bool[longitudo];
+            _estSpectareNudusPosterior = new bool[longitudo];
 
             for (int i = 0; i < longitudo; i++) {
                 InitareCivis(i);
@@ -94,8 +94,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _torelantiaAnomaliaeMaxima[idCivis] = 0f;
             _torelantiaAnomaliaeMinima[idCivis] = 0f;
 
-            _estSpectareNudusAnterior = false;
-            _estSpectareNudusPosterior = false;
+            _estSpectareNudusAnterior[idCivis] = false;
+            _estSpectareNudusPosterior[idCivis] = false;
             _estActivum[idCivis] = false;
         }
 
@@ -143,13 +143,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public bool EstSpectareNudusAnterior(int idCivis) {
-            return _estSpectareNudusAnterior;
+            return _estSpectareNudusAnterior[idCivis];
         }
         public bool EstSpectareNudusPosterior(int idCivis) {
-            return _estSpectareNudusPosterior;
+            return _estSpectareNudusPosterior[idCivis];
         }
         public bool EstSpectareNudus(int idCivis) {
-            return _estSpectareNudusAnterior || _estSpectareNudusPosterior;
+            return _estSpectareNudusAnterior[idCivis] || _estSpectareNudusPosterior[idCivis];
         }
 
         public void RenovareCondicionis(
@@ -158,8 +158,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             bool? estSpectareNudusPosterior = null,
             IDCivisStatusCustodiae? statusCustodiaeCurrens = IDCivisStatusCustodiae.Nihil
         ) {
-            if (estSpectareNudusAnterior != null) _estSpectareNudusAnterior = estSpectareNudusAnterior.Value;
-            if (estSpectareNudusPosterior != null) _estSpectareNudusPosterior = estSpectareNudusPosterior.Value;
+            if (estSpectareNudusAnterior != null) _estSpectareNudusAnterior[idCivis] = estSpectareNudusAnterior.Value;
+            if (estSpectareNudusPosterior != null) _estSpectareNudusPosterior[idCivis] = estSpectareNudusPosterior.Value;
             if (statusCustodiaeCurrens != null && statusCustodiaeCurrens.Value != IDCivisStatusCustodiae.Nihil) {
                 _statusCustodiaeCurrens[idCivis] = statusCustodiaeCurrens.Value;
             }

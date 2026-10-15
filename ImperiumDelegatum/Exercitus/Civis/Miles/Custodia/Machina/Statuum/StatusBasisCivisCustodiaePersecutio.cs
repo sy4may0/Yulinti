@@ -1,7 +1,7 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 
 // Abstract
-// Spectans計算とIntentio計算を行うステート状態の基底クラス。
+// Suspecta計算とIntentio計算を行うステートの基底クラス。
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal abstract class StatusBasisCivisCustodiaePersecutio : StatusBasisCivisCustodiaePatrulatio {
         protected StatusBasisCivisCustodiaePersecutio(
@@ -26,6 +26,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public override void Ordinare(int idCivis) {
             base.Ordinare(idCivis);
 
+            float intervallum = Temporis.Intervallum;
+
             float dtIntentio = InstrumentaCivisIntentionis.ComputareIncrementumIntentionis(
                 idCivis,
                 Configuratio.IncrementumIntentionisBasis,
@@ -35,7 +37,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 ResFluidaCivisVeletudinis,
                 ResFluidaCivisCustodiae,
                 Configuratio.MargoTorelantiaeAnomaliae
-            ) * Temporis.Intervallum;
+            ) * intervallum;
+
+            // 増加 -> 減少に切り替わった直後は一定時間減少させない。
+            Horologia.CommutareProhibitionemConsumptionisIntentionis(idCivis, dtIntentio, intervallum);
+            if (dtIntentio < 0f && Horologia.EstProhibitioConsumptionisIntentionis(idCivis)) {
+                dtIntentio = 0f;
+            }
 
             Carrus.PostulareVeletudinisValoris(
                 idCivis,

@@ -1,5 +1,5 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-
+using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesCivisCustodiae {
@@ -9,15 +9,20 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly ResolutorCivisDistantia _resolutorCivisDistantia;
         private readonly ResolutorCivisNudusVisae _resolutorCivisNudusVisae;
 
+        private readonly MachinaCivisStatuumCustodiae _machinaCivisStatuumCustodiae;
+
         public MilesCivisCustodiae(
             IConfiguratioCivisCustodiaeIctuum configuratioCustodiae,
+            IConfiguratioCivisCustodiaeStatuum configuratioStatuum,
             IOstiumCivisLegibile civis,
             IOstiumCivisLociLegibile loci,
             IOstiumCivisVisaeLegibile visa,
             IOstiumPuellaeResVisaeLegibile puellaeResVisae,
             IResFluidaPuellaeLegibile resFPuellae,
             IResFluidaCivisLegibile resFCivis,
-            IOstiumCarrusCivis carrus
+            IOstiumCarrusCivis carrus,
+            IOstiumTemporisLegibile temporis,
+            Random random
         ) {
             _resolutorCivisDistantia = new ResolutorCivisDistantia(
                 configuratioCustodiae,
@@ -48,6 +53,16 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 puellaeResVisae,
                 resFCivis.Custodiae
             );
+
+            _machinaCivisStatuumCustodiae = new MachinaCivisStatuumCustodiae(
+                civis.Longitudo,
+                configuratioStatuum,
+                resFCivis,
+                resFPuellae,
+                carrus,
+                temporis,
+                random
+            );
         }
 
         public void Initare(
@@ -57,6 +72,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resolutorCivisNudusVisae.Initare(idCivis);
             _resolutorCivisIctuum.Initare(idCivis);
             _resolutorCivisIctuumAuditae.Initare(idCivis);
+
+            _machinaCivisStatuumCustodiae.Initare(idCivis);
         }
 
         public void OrdinareCustodiae(
@@ -66,6 +83,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resolutorCivisDistantia.Ordinare(idCivis);
             // SpectareNudusの解決
             _resolutorCivisNudusVisae.Ordinare(idCivis);
+
+            _machinaCivisStatuumCustodiae.Ordinare(idCivis);
         }
 
         public void ResolvereIctuum(int idCivis) {

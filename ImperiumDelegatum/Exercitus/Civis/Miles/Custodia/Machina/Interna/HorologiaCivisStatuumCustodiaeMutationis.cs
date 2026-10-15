@@ -5,129 +5,197 @@ using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class HorologiaCivisStatuumCustodiaeMutationis {
-        private readonly HorologiumTemere[] _horologiaTemereVigilantiae;
-        private readonly HorologiumTemere[] _horologiaTemereConservationisSpectansInVisus;
-        private readonly HorologiumTemere[] _horologiaTemereConservationisSpectansIntentioZero;
-        private readonly HorologiumTemere[] _horologiaTemereConservationisSequensInVisus;
-        private readonly HorologiumTemere[] _horologiaTemereConservationisSequensIntentioZero;
+        private readonly HorologiumTemere[] _horologiaTemereConservationisVigilantiae;
+        private readonly HorologiumTemere[] _horologiaTemereConservationisSpectantisInVisus;
+        private readonly HorologiumTemere[] _horologiaTemereConservationisSpectantisIntentionisZero;
+        private readonly HorologiumTemere[] _horologiaTemereConservationisSequentisInVisus;
+        private readonly HorologiumTemere[] _horologiaTemereConservationisSequentisIntentionisZero;
+        private readonly HorologiumTemere[] _horologiaTemereConservationisQuaerentis;
+        private readonly HorologiumTemere[] _horologiaTemereConservationisRefrigerationis;
 
         public HorologiaCivisStatuumCustodiaeMutationis(
             int longitudoCivis,
             IConfiguratioCivisCustodiaeStatuum configuratio,
             Random random
         ) {
-            _horologiaTemereVigilantiae = new HorologiumTemere[longitudoCivis];
-            _horologiaTemereConservationisSpectansInVisus = new HorologiumTemere[longitudoCivis];
-            _horologiaTemereConservationisSpectansIntentioZero = new HorologiumTemere[longitudoCivis];
-            _horologiaTemereConservationisSequensInVisus = new HorologiumTemere[longitudoCivis];
-            _horologiaTemereConservationisSequensIntentioZero = new HorologiumTemere[longitudoCivis];
+            _horologiaTemereConservationisVigilantiae = new HorologiumTemere[longitudoCivis];
+            _horologiaTemereConservationisSpectantisInVisus = new HorologiumTemere[longitudoCivis];
+            _horologiaTemereConservationisSpectantisIntentionisZero = new HorologiumTemere[longitudoCivis];
+            _horologiaTemereConservationisSequentisInVisus = new HorologiumTemere[longitudoCivis];
+            _horologiaTemereConservationisSequentisIntentionisZero = new HorologiumTemere[longitudoCivis];
+            _horologiaTemereConservationisQuaerentis = new HorologiumTemere[longitudoCivis];
+            _horologiaTemereConservationisRefrigerationis = new HorologiumTemere[longitudoCivis];
             for (int i = 0; i < longitudoCivis; i++) {
-                _horologiaTemereVigilantiae[i] = new HorologiumTemere(
+                _horologiaTemereConservationisVigilantiae[i] = new HorologiumTemere(
                     configuratio.TempusConservationisVigilantiaeMinima,
                     configuratio.TempusConservationisVigilantiaeMaxima,
                     random
                 );
-                _horologiaTemereConservationisSpectansInVisus[i] = new HorologiumTemere(
+                _horologiaTemereConservationisSpectantisInVisus[i] = new HorologiumTemere(
                     configuratio.TempusConservationisSpectansInVisusMinima,
                     configuratio.TempusConservationisSpectansInVisusMaxima,
                     random
                 );
-                _horologiaTemereConservationisSpectansIntentioZero[i] = new HorologiumTemere(
+                _horologiaTemereConservationisSpectantisIntentionisZero[i] = new HorologiumTemere(
                     configuratio.TempusConservationisSpectansIntentioZeroMinima,
                     configuratio.TempusConservationisSpectansIntentioZeroMaxima,
                     random
                 );
-                _horologiaTemereConservationisSequensInVisus[i] = new HorologiumTemere(
+                _horologiaTemereConservationisSequentisInVisus[i] = new HorologiumTemere(
                     configuratio.TempusConservationisSequensInVisusMinima,
                     configuratio.TempusConservationisSequensInVisusMaxima,
                     random
                 );
-                _horologiaTemereConservationisSequensIntentioZero[i] = new HorologiumTemere(
+                _horologiaTemereConservationisSequentisIntentionisZero[i] = new HorologiumTemere(
                     configuratio.TempusConservationisSequensIntentioZeroMinima,
                     configuratio.TempusConservationisSequensIntentioZeroMaxima,
+                    random
+                );
+                _horologiaTemereConservationisQuaerentis[i] = new HorologiumTemere(
+                    configuratio.TempusConservationisQuaerensMinima,
+                    configuratio.TempusConservationisQuaerensMaxima,
+                    random
+                );
+                _horologiaTemereConservationisRefrigerationis[i] = new HorologiumTemere(
+                    configuratio.TempusConservationisRefrigeratioMinima,
+                    configuratio.TempusConservationisRefrigeratioMaxima,
                     random
                 );
             }
         }
 
-        public bool EstActivumVigilantiam(int idCivis) {
-            return _horologiaTemereVigilantiae[idCivis].EstActivum;
-        }
-
-        public bool EstActivumSpectansIntentioZero(int idCivis) {
-            return _horologiaTemereConservationisSpectansIntentioZero[idCivis].EstActivum;
-        }
-
-        public bool EstActivumSpectansInVisus(int idCivis) {
-            return _horologiaTemereConservationisSpectansInVisus[idCivis].EstActivum;
+        // Vigilantia
+        public bool EstActivumVigilantiae(int idCivis) {
+            return _horologiaTemereConservationisVigilantiae[idCivis].EstActivum;
         }
 
         public void ActivareVigilantiam(int idCivis) {
-            _horologiaTemereVigilantiae[idCivis].Activare();
+            _horologiaTemereConservationisVigilantiae[idCivis].Activare();
         }
 
         public void DeactivareVigilantiam(int idCivis) {
-            _horologiaTemereVigilantiae[idCivis].Deactivare();
+            _horologiaTemereConservationisVigilantiae[idCivis].Deactivare();
         }
 
-        public bool EstExhauritaVigilantiam(int idCivis, float intervallum) {
-            return _horologiaTemereVigilantiae[idCivis].EstExhaurita(intervallum);
+        public bool EstExhauritaVigilantiae(int idCivis, float intervallum) {
+            return _horologiaTemereConservationisVigilantiae[idCivis].EstExhaurita(intervallum);
         }
 
-        public void ActivareSpectansInVisus(int idCivis) {
-            _horologiaTemereConservationisSpectansInVisus[idCivis].Activare();
+        // Spectans InVisus
+        public bool EstActivumSpectantisInVisus(int idCivis) {
+            return _horologiaTemereConservationisSpectantisInVisus[idCivis].EstActivum;
         }
 
-        public void DeactivateSpectansInVisus(int idCivis) {
-            _horologiaTemereConservationisSpectansInVisus[idCivis].Deactivare();
+        public void ActivareSpectantemInVisus(int idCivis) {
+            _horologiaTemereConservationisSpectantisInVisus[idCivis].Activare();
         }
 
-        public bool EstExhauritaSpectansInVisus(int idCivis, float intervallum) {
-            return _horologiaTemereConservationisSpectansInVisus[idCivis].EstExhaurita(intervallum);
+        public void DeactivareSpectantemInVisus(int idCivis) {
+            _horologiaTemereConservationisSpectantisInVisus[idCivis].Deactivare();
         }
 
-        public void ActivareSpectansIntentioZero(int idCivis) {
-            _horologiaTemereConservationisSpectansIntentioZero[idCivis].Activare();
+        public bool EstExhauritaSpectantisInVisus(int idCivis, float intervallum) {
+            return _horologiaTemereConservationisSpectantisInVisus[idCivis].EstExhaurita(intervallum);
         }
 
-        public void DeactivateSpectansIntentioZero(int idCivis) {
-            _horologiaTemereConservationisSpectansIntentioZero[idCivis].Deactivare();
+        // Spectans IntentioZero
+        public bool EstActivumSpectantisIntentionisZero(int idCivis) {
+            return _horologiaTemereConservationisSpectantisIntentionisZero[idCivis].EstActivum;
         }
 
-        public bool EstExhauritaSpectansIntentioZero(int idCivis, float intervallum) {
-            return _horologiaTemereConservationisSpectansIntentioZero[idCivis].EstExhaurita(intervallum);
+        public void ActivareSpectantemIntentionisZero(int idCivis) {
+            _horologiaTemereConservationisSpectantisIntentionisZero[idCivis].Activare();
         }
 
-        public bool EstActivumSequensInVisus(int idCivis) {
-            return _horologiaTemereConservationisSequensInVisus[idCivis].EstActivum;
+        public void DeactivareSpectantemIntentionisZero(int idCivis) {
+            _horologiaTemereConservationisSpectantisIntentionisZero[idCivis].Deactivare();
         }
 
-        public void ActivareSequensInVisus(int idCivis) {
-            _horologiaTemereConservationisSequensInVisus[idCivis].Activare();
+        public bool EstExhauritaSpectantisIntentionisZero(int idCivis, float intervallum) {
+            return _horologiaTemereConservationisSpectantisIntentionisZero[idCivis].EstExhaurita(intervallum);
         }
 
-        public void DeactivateSequensInVisus(int idCivis) {
-            _horologiaTemereConservationisSequensInVisus[idCivis].Deactivare();
+        // Sequens InVisus
+        public bool EstActivumSequentisInVisus(int idCivis) {
+            return _horologiaTemereConservationisSequentisInVisus[idCivis].EstActivum;
         }
 
-        public bool EstExhauritaSequensInVisus(int idCivis, float intervallum) {
-            return _horologiaTemereConservationisSequensInVisus[idCivis].EstExhaurita(intervallum);
+        public void ActivareSequentemInVisus(int idCivis) {
+            _horologiaTemereConservationisSequentisInVisus[idCivis].Activare();
         }
 
-        public bool EstActivumSequensIntentioZero(int idCivis) {
-            return _horologiaTemereConservationisSequensIntentioZero[idCivis].EstActivum;
+        public void DeactivareSequentemInVisus(int idCivis) {
+            _horologiaTemereConservationisSequentisInVisus[idCivis].Deactivare();
         }
 
-        public void ActivareSequensIntentioZero(int idCivis) {
-            _horologiaTemereConservationisSequensIntentioZero[idCivis].Activare();
+        public bool EstExhauritaSequentisInVisus(int idCivis, float intervallum) {
+            return _horologiaTemereConservationisSequentisInVisus[idCivis].EstExhaurita(intervallum);
         }
 
-        public void DeactivateSequensIntentioZero(int idCivis) {
-            _horologiaTemereConservationisSequensIntentioZero[idCivis].Deactivare();
+        // Sequens IntentioZero
+        public bool EstActivumSequentisIntentionisZero(int idCivis) {
+            return _horologiaTemereConservationisSequentisIntentionisZero[idCivis].EstActivum;
         }
 
-        public bool EstExhauritaSequensIntentioZero(int idCivis, float intervallum) {
-            return _horologiaTemereConservationisSequensIntentioZero[idCivis].EstExhaurita(intervallum);
+        public void ActivareSequentemIntentionisZero(int idCivis) {
+            _horologiaTemereConservationisSequentisIntentionisZero[idCivis].Activare();
+        }
+
+        public void DeactivareSequentemIntentionisZero(int idCivis) {
+            _horologiaTemereConservationisSequentisIntentionisZero[idCivis].Deactivare();
+        }
+
+        public bool EstExhauritaSequentisIntentionisZero(int idCivis, float intervallum) {
+            return _horologiaTemereConservationisSequentisIntentionisZero[idCivis].EstExhaurita(intervallum);
+        }
+
+        // Quaerens
+        public bool EstActivumQuaerentis(int idCivis) {
+            return _horologiaTemereConservationisQuaerentis[idCivis].EstActivum;
+        }
+
+        public void ActivareQuaerentem(int idCivis) {
+            _horologiaTemereConservationisQuaerentis[idCivis].Activare();
+        }
+
+        public void DeactivareQuaerentem(int idCivis) {
+            _horologiaTemereConservationisQuaerentis[idCivis].Deactivare();
+        }
+
+        public bool EstExhauritaQuaerentis(int idCivis, float intervallum) {
+            return _horologiaTemereConservationisQuaerentis[idCivis].EstExhaurita(intervallum);
+        }
+
+        // Refrigeratio
+        public bool EstActivumRefrigerationis(int idCivis) {
+            return _horologiaTemereConservationisRefrigerationis[idCivis].EstActivum;
+        }
+
+        public void ActivareRefrigerationem(int idCivis) {
+            _horologiaTemereConservationisRefrigerationis[idCivis].Activare();
+        }
+
+        public void DeactivareRefrigerationem(int idCivis) {
+            _horologiaTemereConservationisRefrigerationis[idCivis].Deactivare();
+        }
+
+        public bool EstExhauritaRefrigerationis(int idCivis, float intervallum) {
+            return _horologiaTemereConservationisRefrigerationis[idCivis].EstExhaurita(intervallum);
+        }
+
+        public void PurgereOmnia(int idCivis) {
+            Purgere(_horologiaTemereConservationisVigilantiae[idCivis]);
+            Purgere(_horologiaTemereConservationisSpectantisInVisus[idCivis]);
+            Purgere(_horologiaTemereConservationisSpectantisIntentionisZero[idCivis]);
+            Purgere(_horologiaTemereConservationisSequentisInVisus[idCivis]);
+            Purgere(_horologiaTemereConservationisSequentisIntentionisZero[idCivis]);
+            Purgere(_horologiaTemereConservationisQuaerentis[idCivis]);
+            Purgere(_horologiaTemereConservationisRefrigerationis[idCivis]);
+        }
+
+        private static void Purgere(HorologiumTemere horologium) {
+            horologium.Deactivare();
+            horologium.Purgere();
         }
     }
 }

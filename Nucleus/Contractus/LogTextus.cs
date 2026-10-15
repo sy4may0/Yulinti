@@ -198,6 +198,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_STATUS_NOT_FOUND = "MachinaCivisStatuumCorporis - status not found";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_IDANIMATIONISINTRARE_DESINERE_INVALID = "MachinaCivisStatuumCorporis - idanimationisintrare desinere invalid";
         public const string MachinaCivisStatuumCorporis_MACHINACIVISSTATUUMCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID = "MachinaCivisStatuumCorporis - idanimationisexire desinere invalid";
+        public const string MachinaCivisStatuumCustodiae_MACHINACIVISSTATUUMCUSTODIAE_STATUS_MISSING = "MachinaCivisStatuumCustodiae - status missing";
         public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_STATUS_NOT_FOUND = "MachinaPuellaeStatusCorporis - status not found";
         public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISINTRARE_DESINERE_INVALID = "MachinaPuellaeStatusCorporis - idanimationisintrare desinere invalid";
         public const string MachinaPuellaeStatusCorporis_MACHINAPUELLAESTATUSCORPORIS_IDANIMATIONISEXIRE_DESINERE_INVALID = "MachinaPuellaeStatusCorporis - idanimationisexire desinere invalid";

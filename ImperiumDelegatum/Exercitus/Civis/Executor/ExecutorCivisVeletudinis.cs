@@ -61,7 +61,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _phantasmaVitae[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fluidus);
                 _phantasmaVisus[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fixus);
                 _phantasmaAuditus[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fixus);
-                _phantasmaSuspecta[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fixus);
+                _phantasmaSuspecta[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fluidus);
                 _phantasmaStudium[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fluidus);
                 _phantasmaIntentio[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fluidus);
                 _phantasmaTorelantiaAnomaliaeMaxima[i] = new ValorisCivisVeletudinis(0f, TypusValoris.Fixus);
@@ -235,6 +235,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void Executare(int idCivis, IOrdinatioCivisVeletudinisValoris veletudinisValoris) {
+            UnityEngine.Debug.Log($"veletudinisValoris ExAdd: {veletudinisValoris.DtSuspecta}");
             _phantasma.Addo(
                 idCivis,
                 dtVitae: veletudinisValoris.DtVitae,

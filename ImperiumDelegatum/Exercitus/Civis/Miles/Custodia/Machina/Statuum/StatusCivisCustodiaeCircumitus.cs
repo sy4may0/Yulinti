@@ -1,5 +1,4 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class StatusCivisCustodiaeCircumitus : StatusBasisCivisCustodiaePatrulatio {
@@ -18,6 +17,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public override void Intrare(int idCivis) {
+            Carrus.PostulareVeletudinisCondicionis(
+                idCivis,
+                statusCustodiaeCurrens: IDCivisStatusCustodiae.Circumitus
+            );
         }
 
         public override void Exire(int idCivis) {
@@ -25,25 +28,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public override void Ordinare(int idCivis) {
             base.Ordinare(idCivis);
+            PurgereIntentionem(idCivis);
         }
 
         public override IDCivisStatusCustodiae MutareStatus(int idCivis) {
-            // Anomalia超過時は即時Discedensにする。
-            // なぜVigilantiaにしないかというと、DiscedensではIntentio計算を停止する必要が無いため。
-            // Civisのアクション側は以下のようにすること。
-            // - Vigilantiaの場合: Vigilantiaステートで発覚アクション、その後Spectansステートで注視アクション。
-            // - Discedensの場合: Discedens開始で発覚アクション、その後アクション側の遷移で逃走アクションに移動。
-            if (1 - ResFluidaCivisVeletudinis.RatioSuspecta(idCivis) <= Numerus.Epsilon) {
-
-                // Anomalia超過時 -> Discedens
-                float anomaliaPuellae = ResFluidaPuellaeVeletudinis.Anomalia;
-                if (ResFluidaCivisVeletudinis.EstSpectareNudus(idCivis)) {
-                    anomaliaPuellae = ResFluidaPuellaeVeletudinis.AnomaliaNudus;
-                }
-                if (anomaliaPuellae > ResFluidaCivisVeletudinis.TorelantiaAnomaliaeMaxima(idCivis)) {
+            // Suspecta 100%到達時、Anomalia超過を視認していればVigilantiaを挟まず即時Discedensにする。
+            // - Vigilantia: 発覚アイコンを表示する。アイコン表示中にIntentioゲージが進まないよう、Spectansの前にVigilantiaを挟む。
+            // - Discedens: 恐怖アイコンを表示したまま消失まで逃走するため、Vigilantiaは不要。
+            if (EstSuspectaPlena(idCivis)) {
+                if (EstExcessusAnomaliaeVisae(idCivis)) {
                     return IDCivisStatusCustodiae.Discedens;
                 }
-
                 return IDCivisStatusCustodiae.Vigilantia;
             }
 
