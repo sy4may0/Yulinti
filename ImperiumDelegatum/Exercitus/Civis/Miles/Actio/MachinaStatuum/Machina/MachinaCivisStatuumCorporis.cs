@@ -14,7 +14,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MachinaCivisStatuumCorporis {
         private readonly int _idCivis;
         private readonly IConfiguratioCivisStatuum _configuratioStatuum;
-        private readonly IOstiumCarrusCivis _carrus;
         private readonly IOstiumCivisAnimationesLegibile _animationis;
 
         private readonly ContextusRamusCivis _contextusRamusCivis;
@@ -30,14 +29,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public MachinaCivisStatuumCorporis(
             int idCivis,
-            IOstiumCarrusCivis carrus,
             IOstiumCivisAnimationesLegibile animationis,
             ContextusRamusCivis contextusRamusCivis,
             ContextusStatusCivisCorporis contextusStatusCivisCorporis,
             IConfiguratioCivisStatuum configuratioStatuum
         ) {
             _idCivis = idCivis;
-            _carrus = carrus;
             _animationis = animationis;
             _contextusRamusCivis = contextusRamusCivis;
             _configuratioStatuum = configuratioStatuum;

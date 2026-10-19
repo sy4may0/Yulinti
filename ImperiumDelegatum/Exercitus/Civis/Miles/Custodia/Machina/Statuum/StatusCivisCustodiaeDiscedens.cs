@@ -12,13 +12,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             HorologiaCivisStatuumCustodiae horologiaCivisStatuumCustodiae,
-            IOstiumCarrusCivis ostiumCarrusCivis,
+            IOstiumCarrusCivisVeletudinis ostiumCarrusCivisVeletudinis,
             IOstiumTemporisLegibile ostiumTemporisLegibile
-        ) : base(configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis, horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile) {
+        ) : base(configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis, horologiaCivisStatuumCustodiae, ostiumCarrusCivisVeletudinis, ostiumTemporisLegibile) {
         }
 
         public override void Intrare(int idCivis) {
-            Carrus.PostulareVeletudinisCondicionis(
+            CarrusVeletudinis.PostulareVeletudinisCondicionis(
                 idCivis,
                 statusCustodiaeCurrens: IDCivisStatusCustodiae.Discedens
             );
@@ -29,7 +29,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public override void Ordinare(int idCivis) {
             float dtSuspecta = -Configuratio.ConsumptioSuspectaeBasis * Temporis.Intervallum;
-            Carrus.PostulareVeletudinisValoris(
+            CarrusVeletudinis.PostulareVeletudinisValoris(
                 idCivis,
                 dtSuspecta: dtSuspecta
             );

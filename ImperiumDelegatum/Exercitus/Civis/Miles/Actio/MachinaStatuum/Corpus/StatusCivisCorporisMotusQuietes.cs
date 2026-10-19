@@ -32,7 +32,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _contextus.Carrus.PostulareAnimationis(
+            _contextus.CarrusAnimationis.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Corpus,
                 IdAnimationisIntrare
@@ -43,7 +43,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _contextus.Carrus.PostulareAnimationis(
+            _contextus.CarrusAnimationis.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Corpus,
                 IdAnimationisTransere
@@ -54,7 +54,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _contextus.Carrus.PostulareAnimationis(
+            _contextus.CarrusAnimationis.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Corpus,
                 IdAnimationisExire
@@ -65,8 +65,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _contextus.Carrus.PostulareMotus(idCivis, 0f, 0f, 0f, 0f);
-            _contextus.Carrus.PostulareVeletudinisValoris(
+            _contextus.CarrusLoci.PostulareMotus(idCivis, 0f, 0f, 0f, 0f);
+            _contextus.CarrusVeletudinis.PostulareVeletudinisValoris(
                 idCivis,
                 dtVitae: -_configuratio.ConsumptioVitae * _contextus.Temporis.Intervallum
             );

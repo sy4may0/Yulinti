@@ -3,12 +3,16 @@ using Yulinti.ImperiumDelegatum.Contractus;
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesCivisActionis {
         private readonly IConfiguratioCivisStatuum _configuratioStatuum;
-        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCarrusCivisAnimationis _carrusAnimationis;
+        private readonly IOstiumCarrusCivisMortis _carrusMortis;
+        private readonly IOstiumCarrusCivisLoci _carrusLoci;
         private readonly IOstiumPunctumViaeLegibile _punctumViae;
         private readonly MachinaCivisStatuumCorporis[] _machinaCorporis;
 
         public MilesCivisActionis(
-            IOstiumCarrusCivis carrus,
+            IOstiumCarrusCivisAnimationis carrusAnimationis,
+            IOstiumCarrusCivisMortis carrusMortis,
+            IOstiumCarrusCivisLoci carrusLoci,
             IOstiumCivisAnimationesLegibile animationis,
             IOstiumCivisLegibile ostiumCivisLegibile,
             IOstiumPunctumViaeLegibile punctumViae,
@@ -17,14 +21,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IConfiguratioCivisStatuum configuratioStatuum
         ) {
             _configuratioStatuum = configuratioStatuum;
-            _carrus = carrus;
+            _carrusAnimationis = carrusAnimationis;
+            _carrusMortis = carrusMortis;
+            _carrusLoci = carrusLoci;
             _punctumViae = punctumViae;
             
             _machinaCorporis = new MachinaCivisStatuumCorporis[ostiumCivisLegibile.Longitudo];
             for (int i = 0; i < ostiumCivisLegibile.Longitudo; i++) {
                 _machinaCorporis[i] = new MachinaCivisStatuumCorporis(
                     i,
-                    carrus,
                     animationis,
                     contextusRamusCivis,
                     contextusStatusCivisCorporis,
@@ -37,7 +42,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _carrus.PostulareAnimationis(
+            _carrusAnimationis.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Fundamentum,
                 _configuratioStatuum.IdAnimationisPraedefinitus
@@ -66,14 +71,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         private void PostulareNavmeshIncipalis(int idCivis) {
             if (!_punctumViae.ConareLegoNatoriumTemere(out IPunctumViaeLegibile punctumViae)) {
-                _carrus.PostulareMortis(
+                _carrusMortis.PostulareMortis(
                     idCivis,
                     SpeciesOrdinationisCivisMortis.Deleto
                 );
                 return;
             }
 
-            _carrus.PostulareNavmesh(
+            _carrusLoci.PostulareNavmesh(
                 idCivis,
                 punctumViae.Positio,
                 true,

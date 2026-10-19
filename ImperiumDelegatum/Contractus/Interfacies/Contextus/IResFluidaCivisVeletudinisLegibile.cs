@@ -35,9 +35,5 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         bool EstExhaurita(int idCivis);
 
         bool EstVigilantia(int idCivis);
-
-        bool EstSpectareNudusAnterior(int idCivis);
-        bool EstSpectareNudusPosterior(int idCivis);
-        bool EstSpectareNudus(int idCivis);
     }
 }

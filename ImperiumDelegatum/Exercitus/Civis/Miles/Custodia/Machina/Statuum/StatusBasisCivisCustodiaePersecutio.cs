@@ -10,7 +10,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             HorologiaCivisStatuumCustodiae horologiaCivisStatuumCustodiae,
-            IOstiumCarrusCivis ostiumCarrusCivis,
+            IOstiumCarrusCivisVeletudinis ostiumCarrusCivisVeletudinis,
             IOstiumTemporisLegibile ostiumTemporisLegibile
         ) : base(
             configuratio,
@@ -18,7 +18,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             resFluidaCivisCustodiae,
             resFluidaPuellaeVeletudinis,
             horologiaCivisStatuumCustodiae,
-            ostiumCarrusCivis,
+            ostiumCarrusCivisVeletudinis,
             ostiumTemporisLegibile
         ) {
         }
@@ -45,7 +45,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 dtIntentio = 0f;
             }
 
-            Carrus.PostulareVeletudinisValoris(
+            CarrusVeletudinis.PostulareVeletudinisValoris(
                 idCivis,
                 dtIntentio: dtIntentio
             );

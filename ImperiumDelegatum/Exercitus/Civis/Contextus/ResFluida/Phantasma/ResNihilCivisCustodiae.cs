@@ -17,5 +17,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float DistantiaPuellae(int idCivis) => float.MaxValue;
         public bool EstCustodiaeVisae(int idCivis) => false;
         public bool EstCustodiaeAuditae(int idCivis) => false;
+        public bool EstSpectareNudusAnterior(int idCivis) => false;
+        public bool EstSpectareNudusPosterior(int idCivis) => false;
+        public bool EstSpectareNudus(int idCivis) => false;
     }
 }

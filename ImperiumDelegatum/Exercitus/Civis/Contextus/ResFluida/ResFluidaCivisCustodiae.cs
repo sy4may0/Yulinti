@@ -16,6 +16,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly bool[] _estCustodiaeVisae;
         private readonly bool[] _estCustodiaeAuditae;
 
+        // Puellaeを裸として視認しているか(前面/背面)
+        private readonly bool[] _estSpectareNudusAnterior;
+        private readonly bool[] _estSpectareNudusPosterior;
+
         // RatioVisus算出用の視認対象数。
         private readonly int _longitudoResVisae;
 
@@ -31,6 +35,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _distantiaPuellae = new float[longitudo];
             _estCustodiaeVisae = new bool[longitudo];
             _estCustodiaeAuditae = new bool[longitudo];
+
+            _estSpectareNudusAnterior = new bool[longitudo];
+            _estSpectareNudusPosterior = new bool[longitudo];
 
             _estActivum = new bool[longitudo];
 
@@ -53,6 +60,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _estCustodiaeVisae[idCivis] = false;
             _estCustodiaeAuditae[idCivis] = false;
 
+            _estSpectareNudusAnterior[idCivis] = false;
+            _estSpectareNudusPosterior[idCivis] = false;
+
             _estActivum[idCivis] = false;
         }
 
@@ -71,6 +81,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float DistantiaPuellae(int idCivis) => _distantiaPuellae[idCivis];
         public bool EstCustodiaeVisae(int idCivis) => _estCustodiaeVisae[idCivis];
         public bool EstCustodiaeAuditae(int idCivis) => _estCustodiaeAuditae[idCivis];
+
+        public bool EstSpectareNudusAnterior(int idCivis) => _estSpectareNudusAnterior[idCivis];
+        public bool EstSpectareNudusPosterior(int idCivis) => _estSpectareNudusPosterior[idCivis];
+        public bool EstSpectareNudus(int idCivis) => _estSpectareNudusAnterior[idCivis] || _estSpectareNudusPosterior[idCivis];
 
         public void RenovareDistantia(
             int idCivis,
@@ -97,6 +111,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float audita
         ) {
             _audita[idCivis] = audita;
+        }
+
+        public void RenovareSpectareNudus(
+            int idCivis,
+            bool? estSpectareNudusAnterior = null,
+            bool? estSpectareNudusPosterior = null
+        ) {
+            if (estSpectareNudusAnterior != null) _estSpectareNudusAnterior[idCivis] = estSpectareNudusAnterior.Value;
+            if (estSpectareNudusPosterior != null) _estSpectareNudusPosterior[idCivis] = estSpectareNudusPosterior.Value;
         }
 
         public void Purgare(int idCivis) {

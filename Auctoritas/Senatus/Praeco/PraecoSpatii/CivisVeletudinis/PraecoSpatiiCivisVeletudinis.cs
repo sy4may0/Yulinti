@@ -6,17 +6,20 @@ namespace Yulinti.Auctoritas.Senatus {
     internal sealed class PraecoSpatiiCivisVeletudinis : IPraeco, IPraecoIncipabilis, IPraecoLiberabilis, IPraecoPulsabilisTardus {
         private readonly IVelumSpatiiCivisVeletudinis _velumSpatiiCivisVeletudinis;
         private readonly IResFluidaCivisVeletudinisLegibile _resFluidaCivisVeletudinis;
+        private readonly IResFluidaCivisCustodiaeLegibile _resFluidaCivisCustodiae;
         private readonly IOstiumCameraLegibile _ostiumCameraLegibile;
         private readonly ITurrisCorrectrix _turrisCorrectrix;
 
         public PraecoSpatiiCivisVeletudinis(
             IVelumSpatiiCivisVeletudinis velumSpatiiCivisVeletudinis,
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
+            IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IOstiumCameraLegibile ostiumCameraLegibile,
             ITurrisCorrectrix turrisCorrectrix
         ) {
             _velumSpatiiCivisVeletudinis = velumSpatiiCivisVeletudinis;
             _resFluidaCivisVeletudinis = resFluidaCivisVeletudinis;
+            _resFluidaCivisCustodiae = resFluidaCivisCustodiae;
             _ostiumCameraLegibile = ostiumCameraLegibile;
             _turrisCorrectrix = turrisCorrectrix;
         }
@@ -60,7 +63,7 @@ namespace Yulinti.Auctoritas.Senatus {
                        $"INT: {_resFluidaCivisVeletudinis.Intentio(i)}\n" +
                        $"TORMAX: {_resFluidaCivisVeletudinis.TorelantiaAnomaliaeMaxima(i)}\n" +
                        $"TORMIN: {_resFluidaCivisVeletudinis.TorelantiaAnomaliaeMinima(i)}\n" +
-                       $"SPCNUD: {_resFluidaCivisVeletudinis.EstSpectareNudus(i)}\n" +
+                       $"SPCNUD: {_resFluidaCivisCustodiae.EstSpectareNudus(i)}\n" +
                        $"STATCUST: {_resFluidaCivisVeletudinis.StatusCustodiaeCurrens(i)}"
                     );
                 }

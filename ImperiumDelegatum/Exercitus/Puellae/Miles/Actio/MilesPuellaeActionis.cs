@@ -3,22 +3,24 @@ using Yulinti.ImperiumDelegatum.Contractus;
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesPuellaeActionis {
         private readonly IConfiguratioPuellaeStatuum _configuratioStatuum;
-        private readonly IOstiumCarrusPuellae _carrus;
+        private readonly IOstiumCarrusPuellaeAnimationis _carrusAnimationis;
+        private readonly IOstiumCarrusPuellaeLoci _carrusLoci;
         private readonly MachinaPuellaeStatusCorporis _machinaStatusCorporis;
 
         public MilesPuellaeActionis(
             IConfiguratioPuellaeStatuum configuratioStatuum,
             IOstiumPuellaeAnimationisLegibile animationis,
-            IOstiumCarrusPuellae carrus,
+            IOstiumCarrusPuellaeAnimationis carrusAnimationis,
+            IOstiumCarrusPuellaeLoci carrusLoci,
             ContextusStatusPuellaeCorporis contextus,
             ContextusRamusPuellae contextusRamus
         ) {
             _configuratioStatuum = configuratioStatuum;
-            _carrus = carrus;
+            _carrusAnimationis = carrusAnimationis;
+            _carrusLoci = carrusLoci;
             _machinaStatusCorporis = new MachinaPuellaeStatusCorporis(
                 configuratioStatuum,
                 animationis,
-                carrus,
                 contextus,
                 contextusRamus
             );
@@ -31,7 +33,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             // ベースアニメーションを適用する。
             IDPuellaeAnimationis idAnimationisPraedefinitus = _configuratioStatuum.IdAnimationisPraedefinitus;
-            _carrus.PostulareAnimationis(
+            _carrusAnimationis.PostulareAnimationis(
                 IDPuellaeAnimationisStratum.Fundamentum,
                 idAnimationisPraedefinitus
             );
@@ -39,7 +41,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             // 初期位置に移動する。
             System.Numerics.Vector3 positioIncipalis = _configuratioStatuum.PositioIncipalis;
             System.Numerics.Quaternion rotatioIncipalis = _configuratioStatuum.RotatioIncipalis;
-            _carrus.PostulareNavmeshInitii(
+            _carrusLoci.PostulareNavmeshInitii(
                 positioIncipalis,
                 rotatioIncipalis
             );

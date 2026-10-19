@@ -27,5 +27,10 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         bool EstCustodiaeVisae(int idCivis);
         // 聴認範囲内判定
         bool EstCustodiaeAuditae(int idCivis);
+
+        // Puellaeを裸として視認しているか(前面/背面)
+        bool EstSpectareNudusAnterior(int idCivis);
+        bool EstSpectareNudusPosterior(int idCivis);
+        bool EstSpectareNudus(int idCivis);
     }
 }

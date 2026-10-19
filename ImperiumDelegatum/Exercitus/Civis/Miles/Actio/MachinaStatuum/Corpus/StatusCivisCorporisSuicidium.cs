@@ -42,7 +42,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _contextus.Carrus.PostulareMortis(
+            _contextus.CarrusMortis.PostulareMortis(
                 idCivis, SpeciesOrdinationisCivisMortis.Deleto
             );
         }

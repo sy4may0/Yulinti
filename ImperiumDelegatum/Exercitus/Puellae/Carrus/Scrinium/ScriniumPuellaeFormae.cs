@@ -2,16 +2,16 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ScriniumPuellaeFormae : IScriniumPuellaeFormae {
-        private readonly IOstiumCarrusPuellae _ostiumCarrusPuellae;
+        private readonly IOstiumCarrusPuellaeFormae _ostiumCarrusPuellaeFormae;
 
         public ScriniumPuellaeFormae(
-            IOstiumCarrusPuellae ostiumCarrusPuellae
+            IOstiumCarrusPuellaeFormae ostiumCarrusPuellaeFormae
         ) {
-            _ostiumCarrusPuellae = ostiumCarrusPuellae;
+            _ostiumCarrusPuellaeFormae = ostiumCarrusPuellaeFormae;
         }
 
         public void PostulareRatioActualis(IDPuellaeFormae idFormae, float ratioActualis) {
-            _ostiumCarrusPuellae.PostulareFormae(idFormae, ratioActualis);
+            _ostiumCarrusPuellaeFormae.PostulareFormae(idFormae, ratioActualis);
         }
     }
 }

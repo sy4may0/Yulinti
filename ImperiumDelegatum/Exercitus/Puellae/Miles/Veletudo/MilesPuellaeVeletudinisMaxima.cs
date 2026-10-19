@@ -2,7 +2,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesPuellaeVeletudinisMaxima {
-        private readonly IOstiumCarrusPuellae _carrus;
+        private readonly IOstiumCarrusPuellaeVeletudinis _carrus;
         private readonly IResolutorPuellaeVigorisMaxima _resolutorPuellaeVigorisMaxima;
         private readonly IResolutorPuellaePatientiaeMaxima _resolutorPuellaePatientiaeMaxima;
         private readonly IResolutorPuellaeClaritatisMaximus _resolutorPuellaeClaritatisMaximus;
@@ -24,7 +24,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float _sonusMotusMaxima;
 
         public MilesPuellaeVeletudinisMaxima(
-            IOstiumCarrusPuellae carrus,
+            IOstiumCarrusPuellaeVeletudinis carrus,
             IResolutorPuellaeVigorisMaxima resolutorPuellaeVigorisMaxima,
             IResolutorPuellaePatientiaeMaxima resolutorPuellaePatientiaeMaxima,
             IResolutorPuellaeClaritatisMaximus resolutorPuellaeClaritatisMaximus,

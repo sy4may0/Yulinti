@@ -9,7 +9,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IResFluidaPuellaeVeletudinisLegibile _resFluidaPuellaeVeletudinis;
         private readonly IResFluidaCivisVeletudinisLegibile _resFluidaCivisVeletudinis;
         private readonly IResFluidaCivisCustodiaeLegibile _resFluidaCivisCustodiae;
-        private readonly IOstiumCarrusPuellae _carrus;
+        private readonly IOstiumCarrusPuellaeVeletudinis _carrus;
 
         private readonly AbacusDistantiae _abacusDistantiaeDedecoris;
 
@@ -19,7 +19,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             IResFluidaCivisVeletudinisLegibile resFluidaCivisVeletudinis,
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
-            IOstiumCarrusPuellae carrus
+            IOstiumCarrusPuellaeVeletudinis carrus
         ) {
             _configuratio = configuratio;
             _resFluidaPuellaeVeletudinis = resFluidaPuellaeVeletudinis;
@@ -45,7 +45,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         private float ComputareAnomalia(int idCivis) {
             float anomalia = 0f;
-            if (_resFluidaCivisVeletudinis.EstSpectareNudus(idCivis)) {
+            if (_resFluidaCivisCustodiae.EstSpectareNudus(idCivis)) {
                 anomalia = _resFluidaPuellaeVeletudinis.AnomaliaNudus;
             } else {
                 anomalia = _resFluidaPuellaeVeletudinis.Anomalia;

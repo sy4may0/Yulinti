@@ -1,6 +1,6 @@
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesCivisVeletudinisMaxima {
-        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCarrusCivisVeletudinis _carrus;
         private readonly IResolutorCivisVitaeMaxima _resolutorCivisVitaeMaxima;
         private readonly IResolutorCivisVisusMaxima _resolutorCivisVisusMaxima;
         private readonly IResolutorCivisAuditusMaxima _resolutorCivisAuditusMaxima;
@@ -18,7 +18,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private float _intentioMaxima;
 
         public MilesCivisVeletudinisMaxima(
-            IOstiumCarrusCivis carrus,
+            IOstiumCarrusCivisVeletudinis carrus,
             IResolutorCivisVitaeMaxima resolutorCivisVitaeMaxima,
             IResolutorCivisVisusMaxima resolutorCivisVisusMaxima,
             IResolutorCivisAuditusMaxima resolutorCivisAuditusMaxima,

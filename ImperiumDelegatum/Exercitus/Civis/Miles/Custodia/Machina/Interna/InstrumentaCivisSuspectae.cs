@@ -11,7 +11,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisCustodiaeLegibile civisCustodiae,
             float limenAnomaliaeSuspectaeNonNudus
         ) {
-            if (civisCustodiae.EstVisa(idCivis) && civisVeletudinis.EstSpectareNudus(idCivis)) {
+            if (civisCustodiae.EstVisa(idCivis) && civisCustodiae.EstSpectareNudus(idCivis)) {
                 return computareIncrementumNudus(
                     idCivis,
                     incrementumSuspectae,
@@ -103,7 +103,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 limitatio = limitatioSuspectaeAuditae;
             }
 
-            if (civisCustodiae.EstVisa(idCivis) && !civisVeletudinis.EstSpectareNudus(idCivis)) {
+            if (civisCustodiae.EstVisa(idCivis) && !civisCustodiae.EstSpectareNudus(idCivis)) {
                 limitatio = limitatioSuspectaeNonNudus;
             }
 

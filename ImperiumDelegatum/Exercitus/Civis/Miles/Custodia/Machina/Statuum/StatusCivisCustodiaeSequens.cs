@@ -14,10 +14,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             HorologiaCivisStatuumCustodiae horologiaCivisStatuumCustodiae,
-            IOstiumCarrusCivis ostiumCarrusCivis,
+            IOstiumCarrusCivisVeletudinis ostiumCarrusCivisVeletudinis,
             IOstiumTemporisLegibile ostiumTemporisLegibile,
             HorologiaCivisStatuumCustodiaeMutationis horologiaCivisStatuumCustodiaeMutationis
-        ) : base(configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis, horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile) {
+        ) : base(configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis, horologiaCivisStatuumCustodiae, ostiumCarrusCivisVeletudinis, ostiumTemporisLegibile) {
             _horologiaCivisStatuumCustodiaeMutationis = horologiaCivisStatuumCustodiaeMutationis;
         }
 
@@ -25,7 +25,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _horologiaCivisStatuumCustodiaeMutationis.DeactivareSequentemInVisus(idCivis);
             _horologiaCivisStatuumCustodiaeMutationis.DeactivareSequentemIntentionisZero(idCivis);
 
-            Carrus.PostulareVeletudinisCondicionis(
+            CarrusVeletudinis.PostulareVeletudinisCondicionis(
                 idCivis,
                 statusCustodiaeCurrens: IDCivisStatusCustodiae.Sequens
             );

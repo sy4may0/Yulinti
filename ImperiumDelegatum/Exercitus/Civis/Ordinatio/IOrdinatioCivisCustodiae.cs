@@ -13,5 +13,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         bool? EstCustodiaeVisae { get; }
         // 聴認範囲内判定
         bool? EstCustodiaeAuditae { get; }
+
+        // Puellaeを裸として視認しているか(前面/背面)
+        bool? EstSpectareNudusAnterior { get; }
+        bool? EstSpectareNudusPosterior { get; }
     }
 }

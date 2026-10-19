@@ -3,11 +3,11 @@ using Yulinti.ImperiumDelegatum.Contractus;
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesPuellaeVeletudinisAnomaliae {
         private readonly IConfiguratioPuellaeVeletudinis _configuratio;
-        private readonly IOstiumCarrusPuellae _carrus;
+        private readonly IOstiumCarrusPuellaeVeletudinis _carrus;
 
         public MilesPuellaeVeletudinisAnomaliae(
             IConfiguratioPuellaeVeletudinis configuratio,
-            IOstiumCarrusPuellae carrus
+            IOstiumCarrusPuellaeVeletudinis carrus
         ) {
             _configuratio = configuratio;
             _carrus = carrus;

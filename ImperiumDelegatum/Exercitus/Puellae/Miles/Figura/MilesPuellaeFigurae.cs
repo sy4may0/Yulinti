@@ -6,12 +6,12 @@ using System;
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesPuellaeFigurae {
         private readonly IOstiumPuellaeOssisLegibile _ostiumOssis;
-        private readonly IOstiumCarrusPuellae _carrus;
+        private readonly IOstiumCarrusPuellaeFigurae _carrus;
 
         // VContainer注入
         public MilesPuellaeFigurae(
             IOstiumPuellaeOssisLegibile ostiumOssis,
-            IOstiumCarrusPuellae carrus
+            IOstiumCarrusPuellaeFigurae carrus
         ) {
             _ostiumOssis = ostiumOssis;
             _carrus = carrus;

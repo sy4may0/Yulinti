@@ -15,6 +15,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly float[] _distantiaPuellae;
         private readonly bool[] _estCustodiaeVisae;
         private readonly bool[] _estCustodiaeAuditae;
+        private readonly bool[] _estSpectareNudusAnterior;
+        private readonly bool[] _estSpectareNudusPosterior;
 
         public ExecutorCivisCustodiae(
             ResFluidaCivisCustodiae resFluidaCustodiae
@@ -28,6 +30,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _distantiaPuellae = new float[longitudo];
             _estCustodiaeVisae = new bool[longitudo];
             _estCustodiaeAuditae = new bool[longitudo];
+            _estSpectareNudusAnterior = new bool[longitudo];
+            _estSpectareNudusPosterior = new bool[longitudo];
 
             for (int i = 0; i < longitudo; i++) {
                 InitarePhantasma(i);
@@ -41,6 +45,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _distantiaPuellae[idCivis] = float.MaxValue;
             _estCustodiaeVisae[idCivis] = false;
             _estCustodiaeAuditae[idCivis] = false;
+            _estSpectareNudusAnterior[idCivis] = false;
+            _estSpectareNudusPosterior[idCivis] = false;
         }
 
         public void Initare(int idCivis) {
@@ -74,6 +80,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             if (custodiae.Audita.HasValue) {
                 _audita[idCivis] = custodiae.Audita.Value;
             }
+
+            // nullは「変更なし」。値が指定された場合のみキャッシュを更新する。
+            if (custodiae.EstSpectareNudusAnterior.HasValue) {
+                _estSpectareNudusAnterior[idCivis] = custodiae.EstSpectareNudusAnterior.Value;
+            }
+            if (custodiae.EstSpectareNudusPosterior.HasValue) {
+                _estSpectareNudusPosterior[idCivis] = custodiae.EstSpectareNudusPosterior.Value;
+            }
         }
 
         public void Confirmare(int idCivis) {
@@ -91,6 +105,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _resFluidaCustodiae.RenovareIctuumAuditae(
                 idCivis,
                 _audita[idCivis]
+            );
+            _resFluidaCustodiae.RenovareSpectareNudus(
+                idCivis,
+                _estSpectareNudusAnterior[idCivis],
+                _estSpectareNudusPosterior[idCivis]
             );
         }
 

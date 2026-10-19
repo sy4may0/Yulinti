@@ -44,9 +44,29 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 .AsImplementedInterfaces();
 
             // Carrus
-            builder.Register<CarrusPuellae>(Lifetime.Singleton)
+            builder.Register<CarrusPuellaeAnimationis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaeCrinis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaeFigurae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaeLoci>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaeVeletudinis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaePersonae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaeFormae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<AurigaPuellae>(Lifetime.Singleton)
+                .AsSelf();
             
             // Scrinium
             builder.Register<ScriniumPuellaeFormae>(Lifetime.Singleton)

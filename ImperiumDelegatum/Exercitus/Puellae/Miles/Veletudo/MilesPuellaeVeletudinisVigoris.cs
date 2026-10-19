@@ -6,7 +6,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesPuellaeVeletudinisVigoris {
         private readonly IConfiguratioPuellaeVeletudinis _configuratio;
         private readonly IResFluidaPuellaeVeletudinisLegibile _resFluidaPuellaeVeletudinis;
-        private readonly IOstiumCarrusPuellae _carrus;
+        private readonly IOstiumCarrusPuellaeVeletudinis _carrus;
         private readonly IOstiumTemporisLegibile _temporis;
 
         private readonly AbacusTemporis _abacusTemporisRepletioVigoris;
@@ -14,7 +14,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public MilesPuellaeVeletudinisVigoris(
             IConfiguratioPuellaeVeletudinis configuratio,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
-            IOstiumCarrusPuellae carrus,
+            IOstiumCarrusPuellaeVeletudinis carrus,
             IOstiumTemporisLegibile temporis
         ) {
             _configuratio = configuratio;

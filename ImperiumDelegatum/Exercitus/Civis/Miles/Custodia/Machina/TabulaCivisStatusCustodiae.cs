@@ -13,7 +13,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             HorologiaCivisStatuumCustodiae horologiaCivisStatuumCustodiae,
-            IOstiumCarrusCivis ostiumCarrusCivis,
+            IOstiumCarrusCivisVeletudinis ostiumCarrusCivisVeletudinis,
             IOstiumTemporisLegibile ostiumTemporisLegibile,
             HorologiaCivisStatuumCustodiaeMutationis horologiaCivisStatuumCustodiaeMutationis
         ) {
@@ -22,36 +22,36 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
             Registrare(new StatusCivisCustodiaeCircumitus(
                 configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis,
-                horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile
+                horologiaCivisStatuumCustodiae, ostiumCarrusCivisVeletudinis, ostiumTemporisLegibile
             ));
             Registrare(new StatusCivisCustodiaeVigilantia(
                 configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis,
-                horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile,
+                horologiaCivisStatuumCustodiae, ostiumCarrusCivisVeletudinis, ostiumTemporisLegibile,
                 horologiaCivisStatuumCustodiaeMutationis
             ));
             Registrare(new StatusCivisCustodiaeSpectans(
                 configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis,
-                horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile,
+                horologiaCivisStatuumCustodiae, ostiumCarrusCivisVeletudinis, ostiumTemporisLegibile,
                 horologiaCivisStatuumCustodiaeMutationis
             ));
             Registrare(new StatusCivisCustodiaeSequens(
                 configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis,
-                horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile,
+                horologiaCivisStatuumCustodiae, ostiumCarrusCivisVeletudinis, ostiumTemporisLegibile,
                 horologiaCivisStatuumCustodiaeMutationis
             ));
             Registrare(new StatusCivisCustodiaeQuaerens(
                 configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis,
-                horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile,
+                horologiaCivisStatuumCustodiae, ostiumCarrusCivisVeletudinis, ostiumTemporisLegibile,
                 horologiaCivisStatuumCustodiaeMutationis
             ));
             Registrare(new StatusCivisCustodiaeRefrigeratio(
                 configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis,
-                horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile,
+                horologiaCivisStatuumCustodiae, ostiumCarrusCivisVeletudinis, ostiumTemporisLegibile,
                 horologiaCivisStatuumCustodiaeMutationis
             ));
             Registrare(new StatusCivisCustodiaeDiscedens(
                 configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis,
-                horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile
+                horologiaCivisStatuumCustodiae, ostiumCarrusCivisVeletudinis, ostiumTemporisLegibile
             ));
 
             for (int i = 0; i < longitudo; i++) {
