@@ -33,8 +33,5 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float RatioTorelantiaAnomaliaeMinima(int idCivis) => 0f;
         public bool EstExhaurita(int idCivis) => false;
         public bool EstVigilantia(int idCivis) => false;
-        public bool EstSpectareNudusAnterior(int idCivis) => false;
-        public bool EstSpectareNudusPosterior(int idCivis) => false;
-        public bool EstSpectareNudus(int idCivis) => false;
     }
 }

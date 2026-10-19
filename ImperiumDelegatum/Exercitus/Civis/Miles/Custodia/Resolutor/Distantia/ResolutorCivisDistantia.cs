@@ -8,14 +8,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumCivisLegibile _civis;
         private readonly IOstiumCivisLociLegibile _loci;
         private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
-        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCarrusCivisCustodiae _carrus;
 
         public ResolutorCivisDistantia(
             IConfiguratioCivisCustodiaeIctuum configuratioCivisCustodiae,
             IOstiumCivisLegibile civis,
             IOstiumCivisLociLegibile loci,
             IOstiumPuellaeResVisaeLegibile puellaeResVisae,
-            IOstiumCarrusCivis carrus
+            IOstiumCarrusCivisCustodiae carrus
         ) {
             _configuratioCivisCustodiae = configuratioCivisCustodiae;
             _civis = civis;

@@ -8,6 +8,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private bool? _estCustodiaeVisae;
         private bool? _estCustodiaeAuditae;
 
+        private bool? _estSpectareNudusAnterior;
+        private bool? _estSpectareNudusPosterior;
+
         public OrdinatioCivisCustodiae(int idCivis)
             : base(idCivis, true, SpeciesOrdinatioCivis.VeletudinisCustodiae) {
             _visaCapitis = null;
@@ -16,6 +19,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _distantiaPuellae = null;
             _estCustodiaeVisae = null;
             _estCustodiaeAuditae = null;
+            _estSpectareNudusAnterior = null;
+            _estSpectareNudusPosterior = null;
         }
 
         public float? VisaCapitis => _visaCapitis;
@@ -24,6 +29,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public float? DistantiaPuellae => _distantiaPuellae;
         public bool? EstCustodiaeVisae => _estCustodiaeVisae;
         public bool? EstCustodiaeAuditae => _estCustodiaeAuditae;
+        public bool? EstSpectareNudusAnterior => _estSpectareNudusAnterior;
+        public bool? EstSpectareNudusPosterior => _estSpectareNudusPosterior;
 
         public override void Purgere() {
             _estApplicandum = false;
@@ -33,6 +40,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _distantiaPuellae = null;
             _estCustodiaeVisae = null;
             _estCustodiaeAuditae = null;
+            _estSpectareNudusAnterior = null;
+            _estSpectareNudusPosterior = null;
         }
 
         public void Pono(
@@ -41,7 +50,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             float? audita = null,
             float? distantiaPuellae = null,
             bool? estCustodiaeVisae = null,
-            bool? estCustodiaeAuditae = null
+            bool? estCustodiaeAuditae = null,
+            bool? estSpectareNudusAnterior = null,
+            bool? estSpectareNudusPosterior = null
         ) {
             _estApplicandum = true;
             _visaCapitis = visaCapitis;
@@ -50,6 +61,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _distantiaPuellae = distantiaPuellae;
             _estCustodiaeVisae = estCustodiaeVisae;
             _estCustodiaeAuditae = estCustodiaeAuditae;
+            _estSpectareNudusAnterior = estSpectareNudusAnterior;
+            _estSpectareNudusPosterior = estSpectareNudusPosterior;
         }
     }
 }

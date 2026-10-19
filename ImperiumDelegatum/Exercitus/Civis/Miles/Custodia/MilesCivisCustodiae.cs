@@ -20,7 +20,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IOstiumPuellaeResVisaeLegibile puellaeResVisae,
             IResFluidaPuellaeLegibile resFPuellae,
             IResFluidaCivisLegibile resFCivis,
-            IOstiumCarrusCivis carrus,
+            IOstiumCarrusCivisCustodiae carrusCustodiae,
+            IOstiumCarrusCivisVeletudinis carrusVeletudinis,
             IOstiumTemporisLegibile temporis,
             Random random
         ) {
@@ -29,26 +30,26 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 civis,
                 loci,
                 puellaeResVisae,
-                carrus
+                carrusCustodiae
             );
             _resolutorCivisIctuum = new ResolutorCivisIctuumVisae(
                 configuratioCustodiae,
                 civis,
                 visa,
                 puellaeResVisae,
-                carrus,
+                carrusCustodiae,
                 resFCivis.Custodiae
             );
             _resolutorCivisIctuumAuditae = new ResolutorCivisIctuumAuditae(
                 configuratioCustodiae,
                 civis,
-                carrus,
+                carrusCustodiae,
                 resFPuellae,
                 resFCivis.Custodiae
             );
 
             _resolutorCivisNudusVisae = new ResolutorCivisNudusVisae(
-                carrus,
+                carrusCustodiae,
                 visa,
                 puellaeResVisae,
                 resFCivis.Custodiae
@@ -59,7 +60,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 configuratioStatuum,
                 resFCivis,
                 resFPuellae,
-                carrus,
+                carrusVeletudinis,
                 temporis,
                 random
             );

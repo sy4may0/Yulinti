@@ -50,12 +50,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesCivisPersonae {
         private readonly TabulaCivisPersonae _tabulaCivisPersonae;
         private readonly PhantasmaCivisPersonae[] _phantasmasCivisPersonae;
-        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCarrusCivisVeletudinis _carrus;
 
         public MilesCivisPersonae(
             IConfiguratioCiviumPersonarum configuratioCiviumPersonarum,
             IOstiumCivisLegibile ostiumCivisLegibile,
-            IOstiumCarrusCivis carrus,
+            IOstiumCarrusCivisVeletudinis carrus,
             Random random
         ) {
             _tabulaCivisPersonae = new TabulaCivisPersonae(

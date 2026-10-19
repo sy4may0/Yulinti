@@ -6,7 +6,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IConfiguratioPuellaeStatuum _configuratioStatuum;
         private readonly IConfiguratioPuellaeStatusCorporisMotus _configuratio;
 
-        private readonly IOstiumCarrusPuellae _carrus;
+        private readonly IOstiumCarrusPuellaeAnimationis _carrusAnimationis;
+        private readonly IOstiumCarrusPuellaeLoci _carrusLoci;
+        private readonly IOstiumCarrusPuellaeVeletudinis _carrusVeletudinis;
         private readonly IOstiumTemporisLegibile _temporis;
         private readonly ITurrisIntroductionis _turrisIntroductionis;
 
@@ -18,7 +20,9 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _configuratioStatuum = configuratioStatuum;
             _configuratio = configuratio;
 
-            _carrus = contextus.Carrus;
+            _carrusAnimationis = contextus.CarrusAnimationis;
+            _carrusLoci = contextus.CarrusLoci;
+            _carrusVeletudinis = contextus.CarrusVeletudinis;
             _temporis = contextus.Temporis;
             _turrisIntroductionis = contextus.Introductionis;
         }
@@ -37,7 +41,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public void Intrare(
             IResFluidaPuellaeLegibile resFluida
         ) {
-            _carrus.PostulareAnimationis(
+            _carrusAnimationis.PostulareAnimationis(
                 IDPuellaeAnimationisStratum.Corpus,
                 IdAnimationisIntrare
             );
@@ -46,7 +50,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public void Transere(
             IResFluidaPuellaeLegibile resFluida
         ) {
-            _carrus.PostulareAnimationis(
+            _carrusAnimationis.PostulareAnimationis(
                 IDPuellaeAnimationisStratum.Corpus,
                 IdAnimationisTransere
             );
@@ -55,7 +59,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public void Exire(
             IResFluidaPuellaeLegibile resFluida
         ) {
-            _carrus.PostulareAnimationis(
+            _carrusAnimationis.PostulareAnimationis(
                 IDPuellaeAnimationisStratum.Corpus,
                 IdAnimationisExire
             );
@@ -78,13 +82,13 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 resFluida.Motus.RotatioYActualis
             );
 
-            _carrus.PostulareMotus(
+            _carrusLoci.PostulareMotus(
                 oh.Velocitas,
                 oh.TempusLevigatum,
                 or.RotatioY,
                 or.TempusLevigatum
             );
-            _carrus.PostulareVeletudinis(
+            _carrusVeletudinis.PostulareVeletudinis(
                 dtVigoris: _configuratio.ConsumptioVigorisSec * _temporis.Intervallum,
                 dtPatientiae: _configuratio.ConsumptioPatientiaeSec * _temporis.Intervallum,
                 dtAetheris: _configuratio.IncrementumAetherisSec * _temporis.Intervallum,

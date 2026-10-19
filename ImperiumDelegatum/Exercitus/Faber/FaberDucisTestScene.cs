@@ -42,12 +42,49 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<IContextusSalsamenti, ContextusSalsamenti>(Lifetime.Singleton);
 
             // Carrus
-            builder.Register<CarrusPuellae>(Lifetime.Singleton)
+            builder.Register<CarrusPuellaeAnimationis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
-            builder.Register<CarrusCivis>(Lifetime.Singleton)
+            builder.Register<CarrusPuellaeCrinis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaeFigurae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaeLoci>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaeVeletudinis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaePersonae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusPuellaeFormae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<AurigaPuellae>(Lifetime.Singleton)
+                .AsSelf();
+            builder.Register<CarrusCivisAnimationis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusCivisLoci>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusCivisVeletudinis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusCivisMortis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusCivisCustodiae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<CarrusCivisSpectandi>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<AurigaCivis>(Lifetime.Singleton)
+                .AsSelf();
             builder.Register<CarrusCivisManifestationis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();

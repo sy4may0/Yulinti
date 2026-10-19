@@ -13,17 +13,17 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             HorologiaCivisStatuumCustodiae horologiaCivisStatuumCustodiae,
-            IOstiumCarrusCivis ostiumCarrusCivis,
+            IOstiumCarrusCivisVeletudinis ostiumCarrusCivisVeletudinis,
             IOstiumTemporisLegibile ostiumTemporisLegibile,
             HorologiaCivisStatuumCustodiaeMutationis horologiaCivisStatuumCustodiaeMutationis
-        ) : base(configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis, horologiaCivisStatuumCustodiae, ostiumCarrusCivis, ostiumTemporisLegibile) {
+        ) : base(configuratio, resFluidaCivisVeletudinis, resFluidaCivisCustodiae, resFluidaPuellaeVeletudinis, horologiaCivisStatuumCustodiae, ostiumCarrusCivisVeletudinis, ostiumTemporisLegibile) {
             _horologiaCivisStatuumCustodiaeMutationis = horologiaCivisStatuumCustodiaeMutationis;
         }
 
         public override void Intrare(int idCivis) {
             _horologiaCivisStatuumCustodiaeMutationis.ActivareVigilantiam(idCivis);
 
-            Carrus.PostulareVeletudinisCondicionis(
+            CarrusVeletudinis.PostulareVeletudinisCondicionis(
                 idCivis,
                 statusCustodiaeCurrens: IDCivisStatusCustodiae.Vigilantia
             );

@@ -11,7 +11,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IOstiumCivisLegibile _civis;
         private readonly IOstiumCivisVisaeLegibile _visa;
         private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
-        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCarrusCivisCustodiae _carrus;
         private readonly AbacusDistantiae _abacusDistantiaeVisus;
 
         // 角度補正の合成用
@@ -31,7 +31,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IOstiumCivisLegibile civis,
             IOstiumCivisVisaeLegibile visa,
             IOstiumPuellaeResVisaeLegibile puellaeResVisae,
-            IOstiumCarrusCivis carrus,
+            IOstiumCarrusCivisCustodiae carrus,
             IResFluidaCivisCustodiaeLegibile resFCustodiae
         ) {
             _configuratioCivisCustodiae = configuratioCivisCustodiae;

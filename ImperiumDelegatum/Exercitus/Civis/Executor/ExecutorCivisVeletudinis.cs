@@ -300,8 +300,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             while (_queueVeletudinisCondicionis[idCivis].ConareLego(out var s)) {
                 _resFluidaVeletudinis.RenovareCondicionis(
                     idCivis,
-                    estSpectareNudusAnterior: s.EstSpectareNudusAnterior,
-                    estSpectareNudusPosterior: s.EstSpectareNudusPosterior,
                     statusCustodiaeCurrens: s.StatusCustodiaeCurrens
                 );
             }

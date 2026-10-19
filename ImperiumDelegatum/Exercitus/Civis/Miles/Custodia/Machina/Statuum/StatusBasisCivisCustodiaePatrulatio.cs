@@ -10,7 +10,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         protected readonly IResFluidaCivisCustodiaeLegibile ResFluidaCivisCustodiae;
         protected readonly IResFluidaPuellaeVeletudinisLegibile ResFluidaPuellaeVeletudinis;
         protected readonly HorologiaCivisStatuumCustodiae Horologia;
-        protected readonly IOstiumCarrusCivis Carrus;
+        protected readonly IOstiumCarrusCivisVeletudinis CarrusVeletudinis;
         protected readonly IOstiumTemporisLegibile Temporis;
 
         public abstract IDCivisStatusCustodiae Id { get; }
@@ -21,7 +21,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IResFluidaCivisCustodiaeLegibile resFluidaCivisCustodiae,
             IResFluidaPuellaeVeletudinisLegibile resFluidaPuellaeVeletudinis,
             HorologiaCivisStatuumCustodiae horologiaCivisStatuumCustodiae,
-            IOstiumCarrusCivis ostiumCarrusCivis,
+            IOstiumCarrusCivisVeletudinis ostiumCarrusCivisVeletudinis,
             IOstiumTemporisLegibile ostiumTemporisLegibile
         ) {
             Configuratio = configuratio;
@@ -29,7 +29,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             ResFluidaCivisCustodiae = resFluidaCivisCustodiae;
             ResFluidaPuellaeVeletudinis = resFluidaPuellaeVeletudinis;
             Horologia = horologiaCivisStatuumCustodiae;
-            Carrus = ostiumCarrusCivis;
+            CarrusVeletudinis = ostiumCarrusCivisVeletudinis;
             Temporis = ostiumTemporisLegibile;
         }
 
@@ -66,7 +66,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 ResFluidaCivisCustodiae
             );
 
-            Carrus.PostulareVeletudinisValoris(
+            CarrusVeletudinis.PostulareVeletudinisValoris(
                 idCivis,
                 dtSuspecta: dtSuspecta
             );
@@ -80,7 +80,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             if (intentio <= Numerus.Epsilon) {
                 return;
             }
-            Carrus.PostulareVeletudinisValoris(
+            CarrusVeletudinis.PostulareVeletudinisValoris(
                 idCivis,
                 dtIntentio: -intentio
             );
@@ -96,7 +96,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 return false;
             }
 
-            float anomaliaPuellae = ResFluidaCivisVeletudinis.EstSpectareNudus(idCivis)
+            float anomaliaPuellae = ResFluidaCivisCustodiae.EstSpectareNudus(idCivis)
                 ? ResFluidaPuellaeVeletudinis.AnomaliaNudus
                 : ResFluidaPuellaeVeletudinis.Anomalia;
 

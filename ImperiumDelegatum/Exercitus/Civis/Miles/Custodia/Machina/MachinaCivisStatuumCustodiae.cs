@@ -15,7 +15,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             IConfiguratioCivisCustodiaeStatuum configuratio,
             IResFluidaCivisLegibile resFCivis,
             IResFluidaPuellaeLegibile resFPuellae,
-            IOstiumCarrusCivis carrus,
+            IOstiumCarrusCivisVeletudinis carrus,
             IOstiumTemporisLegibile temporis,
             Random random
         ) {

@@ -7,7 +7,7 @@ using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResolutorCivisNudusVisae {
-        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCarrusCivisCustodiae _carrus;
         private readonly IOstiumCivisVisaeLegibile _visa;
         private readonly IOstiumPuellaeResVisaeLegibile _puellaeResVisae;
         private readonly IResFluidaCivisCustodiaeLegibile _resFCustodiae;
@@ -18,7 +18,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private const float cos100 = -0.173648178f;
 
         public ResolutorCivisNudusVisae(
-            IOstiumCarrusCivis carrus,
+            IOstiumCarrusCivisCustodiae carrus,
             IOstiumCivisVisaeLegibile visa,
             IOstiumPuellaeResVisaeLegibile puellaeResVisae,
             IResFluidaCivisCustodiaeLegibile resFCustodiae
@@ -41,7 +41,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             // 視認範囲外の場合はSpectareNudusをfalseとする。
             if (!_resFCustodiae.EstCustodiaeVisae(idCivis)) {
-                _carrus.PostulareVeletudinisCondicionis(
+                _carrus.PostulareSpectareNudus(
                     idCivis,
                     estSpectareNudusAnterior: false,
                     estSpectareNudusPosterior: false
@@ -86,7 +86,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 }
             }
 
-            _carrus.PostulareVeletudinisCondicionis(
+            _carrus.PostulareSpectareNudus(
                 idCivis,
                 estSpectareNudusAnterior: estSpectareNudusAnterior,
                 estSpectareNudusPosterior: estSpectareNudusPosterior

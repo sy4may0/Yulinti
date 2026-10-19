@@ -10,8 +10,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly MilesCivisPersonae _milesCivisPersonae;
         private readonly OperatioCenturioCivis _operatioCenturioCivis;
 
-        // Carrus
-        private readonly CarrusCivis _carrusCivis;
+        // Auriga / Carrus
+        private readonly AurigaCivis _aurigaCivis;
         private readonly CarrusCivisManifestationis _carrusCivisManifestationis;
 
         // ResFluidaファサード
@@ -26,7 +26,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             MilesCivisPersonae milesCivisPersonae,
             IResFluidaCivisLegibile resFluidaLegibile,
             IOstiumCivisLegibile ostiumCivisLegibile,
-            CarrusCivis carrusCivis,
+            AurigaCivis aurigaCivis,
             CarrusCivisManifestationis carrusCivisManifestationis,
             OperatioCenturioCivis operatioCenturioCivis
         ) {
@@ -37,7 +37,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _milesCivisPersonae = milesCivisPersonae;
             _resFluidaLegibile = resFluidaLegibile;
             _ostiumCivisLegibile = ostiumCivisLegibile;
-            _carrusCivis = carrusCivis;
+            _aurigaCivis = aurigaCivis;
             _carrusCivisManifestationis = carrusCivisManifestationis;
             _operatioCenturioCivis = operatioCenturioCivis;
 
@@ -50,29 +50,29 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         private void AdManifestatio(int idCivis, IDCivisPersonae idCivisPersonae) {
-            // ResFluidaは_carrusCivis.Initare経由で初期化される。(実体を握ってるのがExecutor)
-            _carrusCivis.Initare(idCivis);
-            _carrusCivis.Primum(idCivis);
+            // ResFluidaは_aurigaCivis.Initare経由で初期化される。(実体を握ってるのがExecutor)
+            _aurigaCivis.Initare(idCivis);
+            _aurigaCivis.Primum(idCivis);
             _milesCivisActionis.Initare(idCivis, _resFluidaLegibile);
             _milesCivisCustodiae.Initare(idCivis);
             _milesCivisVeletudinisMaxima.Initare(idCivis);
             _milesCivisPersonae.Initare(idCivis, idCivisPersonae);
-            _carrusCivis.ConfirmareIncipabilis(idCivis);
-            _carrusCivis.Activare(idCivis);
+            _aurigaCivis.ConfirmareIncipabilis(idCivis);
+            _aurigaCivis.Activare(idCivis);
         }
 
         private void AdIncarnare(int idCivis) {
-            _carrusCivis.Activare(idCivis);
+            _aurigaCivis.Activare(idCivis);
         }
 
         private void AdSpirituare(int idCivis) {
-            _carrusCivis.Deactivare(idCivis);
+            _aurigaCivis.Deactivare(idCivis);
         }
 
         private void AdDeleto(int idCivis) {
             _milesCivisPersonae.Purgare(idCivis);
-            _carrusCivis.Purgare(idCivis);
-            _carrusCivis.Deactivare(idCivis);
+            _aurigaCivis.Purgare(idCivis);
+            _aurigaCivis.Deactivare(idCivis);
         }
 
         public void Pulsus() {
@@ -83,7 +83,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 // ActiveでないCivisはスキップ
                 if (!_ostiumCivisLegibile.EstActivum(i)) continue;
 
-                _carrusCivis.Primum(i);
+                _aurigaCivis.Primum(i);
 
                 // VeletudinisMaxima計画
                 _milesCivisVeletudinisMaxima.Ordinare(i);
@@ -99,7 +99,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 _milesCivisCustodiae.OrdinareCustodiae(i, _resFluidaLegibile);
 
                 // Carrus適用(Ordinatio実行)
-                _carrusCivis.Confirmare(i);
+                _aurigaCivis.Confirmare(i);
             }
         }
 
@@ -114,11 +114,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public void PulsusTardus() {
             for (int i = 0; i < _ostiumCivisLegibile.Longitudo; i++) {
                 // 生成/消失の処理は全IDに対して行う。
-                _carrusCivis.ConfirmareMortis(i);
+                _aurigaCivis.ConfirmareMortis(i);
 
                 if (!_ostiumCivisLegibile.EstActivum(i)) continue;
 
-                _carrusCivis.ConfirmareTardus(i);
+                _aurigaCivis.ConfirmareTardus(i);
             }
 
             _carrusCivisManifestationis.Confirmare();

@@ -16,7 +16,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         private readonly IConfiguratioPuellaeStatuum _configuratioStatuum;
 
         private readonly IOstiumPuellaeAnimationisLegibile _animationis;
-        private readonly IOstiumCarrusPuellae _carrus;
         private readonly ResolutorPuellaeRamorumCorporis _resolutorRamorumCorporis;
 
         private PhasisMachinaPuellaeStatusCorporis _phasisActualis;
@@ -27,13 +26,11 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public MachinaPuellaeStatusCorporis(
             IConfiguratioPuellaeStatuum configuratioStatuum,
             IOstiumPuellaeAnimationisLegibile animationis,
-            IOstiumCarrusPuellae carrus,
             ContextusStatusPuellaeCorporis contextus,
             ContextusRamusPuellae contextusRamus
         ) {
             _configuratioStatuum = configuratioStatuum;
             _animationis = animationis;
-            _carrus = carrus;
 
             _tabulaPuellaeStatuum = new TabulaPuellaeStatuum(_configuratioStatuum, contextus);
 

@@ -2,11 +2,11 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class MilesPuellaeCrinis {
-        private readonly IOstiumCarrusPuellae _carrus;
+        private readonly IOstiumCarrusPuellaeCrinis _carrus;
 
         // VContainer注入
         public MilesPuellaeCrinis(
-            IOstiumCarrusPuellae carrus
+            IOstiumCarrusPuellaeCrinis carrus
         ) {
             _carrus = carrus;
         }

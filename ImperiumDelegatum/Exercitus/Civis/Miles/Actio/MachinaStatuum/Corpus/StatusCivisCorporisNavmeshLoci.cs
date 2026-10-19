@@ -33,7 +33,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _contextus.Carrus.PostulareAnimationis(
+            _contextus.CarrusAnimationis.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Corpus,
                 IdAnimationisIntrare
@@ -45,14 +45,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                     out IPunctumViaeLegibile punctumViae
                 )
             ) {
-                _contextus.Carrus.PostulareMortis(
+                _contextus.CarrusMortis.PostulareMortis(
                     idCivis,
                     SpeciesOrdinationisCivisMortis.Deleto
                 );
                 return;
             }
 
-            _contextus.Carrus.PostulareNavmesh(
+            _contextus.CarrusLoci.PostulareNavmesh(
                 idCivis,
                 punctumViae.Positio,
                 false,
@@ -67,7 +67,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _contextus.Carrus.PostulareAnimationis(
+            _contextus.CarrusAnimationis.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Corpus,
                 IdAnimationisTransere
@@ -78,7 +78,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             int idCivis,
             IResFluidaCivisLegibile resFluida
         ) {
-            _contextus.Carrus.PostulareAnimationis(
+            _contextus.CarrusAnimationis.PostulareAnimationis(
                 idCivis,
                 IDCivisAnimationisStratum.Corpus,
                 IdAnimationisExire
@@ -91,12 +91,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         ) {
             // 直近のTransporto失敗時はNPCを削除する。
             if (_contextus.Loci.EstErrans(idCivis)) {
-                _contextus.Carrus.PostulareMortis(
+                _contextus.CarrusMortis.PostulareMortis(
                     idCivis, SpeciesOrdinationisCivisMortis.Deleto
                 );
                 return;
             }
-            _contextus.Carrus.PostulareVeletudinisValoris(
+            _contextus.CarrusVeletudinis.PostulareVeletudinisValoris(
                 idCivis,
                 dtVitae: -_configuratio.ConsumptioVitae * _contextus.Temporis.Intervallum
             );

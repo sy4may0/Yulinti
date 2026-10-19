@@ -7,7 +7,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ResolutorCivisIctuumAuditae {
         private readonly IConfiguratioCivisCustodiaeIctuum _configuratioCivisCustodiae;
         private readonly IOstiumCivisLegibile _civis;
-        private readonly IOstiumCarrusCivis _carrus;
+        private readonly IOstiumCarrusCivisCustodiae _carrus;
         private readonly IResFluidaPuellaeLegibile _resFPuellae;
         private readonly AbacusDistantiae _abacusDistantiae;
 
@@ -16,7 +16,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public ResolutorCivisIctuumAuditae(
             IConfiguratioCivisCustodiaeIctuum configuratioCivisCustodiae,
             IOstiumCivisLegibile civis,
-            IOstiumCarrusCivis carrus,
+            IOstiumCarrusCivisCustodiae carrus,
             IResFluidaPuellaeLegibile resFPuellae,
             IResFluidaCivisCustodiaeLegibile resFCustodiae
         ) {
