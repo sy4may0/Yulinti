@@ -1,24 +1,22 @@
 using Yulinti.Nucleus.Instrumentarium;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using Cysharp.Threading.Tasks;
 using Yulinti.Officia.Contractus;
-using Yulinti.Nucleus;
-
 using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Nucleus.Contractus;
+
 namespace Yulinti.ImperiumMaius.Anchora {
-    public sealed class AnchoraPuellaeCrinis : MonoBehaviour, IAnchora, IPhantasma, IAnchoraPuellaeCrinis {
+    public sealed class AnchoraPuellaeCrinisAnterior : MonoBehaviour, IAnchora, IPhantasma, IAnchoraPuellaeCrinisAnterior {
         [SerializeField] private AssetReferenceGameObject _prefab;
-        [SerializeField] private IDPuellaeCrinis _idCrinis;
+        [SerializeField] private IDPuellaeCrinisAnterior _idCrinis;
 
         private GameObject _ens;
-        private AnchoraPuellaeCrinisInf _anchoraInf;
+        private AnchoraPuellaeCrinisAnteriorInf _anchoraInf;
         private bool _estEns;
         private bool _estManifestatum;
 
-        public IDPuellaeCrinis Typus => _idCrinis;
+        public IDPuellaeCrinisAnterior Typus => _idCrinis;
 
         public Vector3 Positio => transform.position;
         public Quaternion Rotatio => transform.rotation;
@@ -30,7 +28,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
             bool result = true;
 
             if (_prefab == null) {
-                Carnifex.Intermissio(LogTextus.AnchoraPuellaeCrinis_ANCHORAPUELLAE_CRINIS_PREFAB_INSTANCE_NULL);
+                Carnifex.Intermissio(LogTextus.AnchoraPuellaeCrinisAnterior_ANCHORAPUELLAE_CRINIS_ANTERIOR_PREFAB_INSTANCE_NULL);
                 result = false;
             }
             return result;
@@ -39,15 +37,15 @@ namespace Yulinti.ImperiumMaius.Anchora {
         public bool ValidareManifestatio() {
             bool result = true;
             if (_ens == null) {
-                Notarius.Memorare(LogTextus.AnchoraPuellaeCrinis_ANCHORAPUELLAE_CRINIS_INSTANCE_NULL);
+                Notarius.Memorare(LogTextus.AnchoraPuellaeCrinisAnterior_ANCHORAPUELLAE_CRINIS_ANTERIOR_INSTANCE_NULL);
                 result = false;
             }
             if (_anchoraInf == null) {
-                Notarius.Memorare(LogTextus.AnchoraPuellaeCrinis_ANCHORAPUELLAE_CRINIS_INFERIOR_ANCHOR_NULL);
+                Notarius.Memorare(LogTextus.AnchoraPuellaeCrinisAnterior_ANCHORAPUELLAE_CRINIS_ANTERIOR_INFERIOR_ANCHOR_NULL);
                 result = false;
             } else {
                 if (_anchoraInf.OsRadix == null) {
-                    Notarius.Memorare(LogTextus.AnchoraPuellaeCrinis_ANCHORAPUELLAE_CRINIS_RADIX_NULL);
+                    Notarius.Memorare(LogTextus.AnchoraPuellaeCrinisAnterior_ANCHORAPUELLAE_CRINIS_ANTERIOR_RADIX_NULL);
                     result = false;
                 }
             }
@@ -69,14 +67,14 @@ namespace Yulinti.ImperiumMaius.Anchora {
 
                 await UniTask.SwitchToMainThread();
 
-                _anchoraInf = _ens.GetComponent<AnchoraPuellaeCrinisInf>();
+                _anchoraInf = _ens.GetComponent<AnchoraPuellaeCrinisAnteriorInf>();
                 _ens.SetActive(false);
 
                 if (ValidareManifestatio()) {
                     _estEns = true;
                 } else {
                     Deleto();
-                    Notarius.Memorare(LogTextus.AnchoraPuellaeCrinis_ANCHORAPUELLAE_CRINIS_INSTANTIATE_FAILED);
+                    Notarius.Memorare(LogTextus.AnchoraPuellaeCrinisAnterior_ANCHORAPUELLAE_CRINIS_ANTERIOR_INSTANTIATE_FAILED);
                 }
             } finally {
                 _estManifestatum = false;
@@ -92,12 +90,20 @@ namespace Yulinti.ImperiumMaius.Anchora {
         }
 
         public void Incarnare() {
+            Activare();
+        }
+
+        public void Spirituare() {
+            Deactivare();
+        }
+
+        public void Activare() {
             if (!_estEns) return;
             if (_ens.activeSelf) return;
             _ens.SetActive(true);
         }
 
-        public void Spirituare() {
+        public void Deactivare() {
             if (!_estEns) return;
             if (!_ens.activeSelf) return;
             _ens.SetActive(false);

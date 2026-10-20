@@ -21,7 +21,9 @@ namespace Yulinti.ImperiumMaius.Augustus {
             Debug.Log("RexTestScene Configure");
             builder.RegisterInstance<IAnchoraCamera>(_anchora.AnchoraCamera);
             builder.RegisterInstance<IAnchoraPuellae>(_anchora.AnchoraPuellae);
-            builder.RegisterInstance<IAnchoraPuellaeCrinis[]>(_anchora.AnchoraPuellaeCrinis);
+            builder.RegisterInstance<IAnchoraPuellaeCrinisBasis[]>(_anchora.AnchoraPuellaeCrinisBasis);
+            builder.RegisterInstance<IAnchoraPuellaeCrinisPosterior[]>(_anchora.AnchoraPuellaeCrinisPosterior);
+            builder.RegisterInstance<IAnchoraPuellaeCrinisAnterior[]>(_anchora.AnchoraPuellaeCrinisAnterior);
             builder.RegisterInstance<IAnchoraPunctumViae[]>(_anchora.AnchoraPunctumViae);
             builder.RegisterInstance<IAnchoraCivis[]>(_anchora.AnchoraCivis);
             builder.RegisterInstance<IAnchoraVelumSpatiiPuellaeVeletudinis>(_anchoraVelumPuellaeVeletudinis.AnchoraVelumSpatiiPuellaeVeletudinis);

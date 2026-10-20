@@ -22,7 +22,9 @@ namespace Yulinti.ImperiumMaius.Augustus {
             Debug.Log("RexPortus Configure");
             builder.RegisterInstance<IAnchoraCamera>(_anchora.AnchoraCamera);
             builder.RegisterInstance<IAnchoraPuellae>(_anchora.AnchoraPuellae);
-            builder.RegisterInstance<IAnchoraPuellaeCrinis[]>(_anchora.AnchoraPuellaeCrinis);
+            builder.RegisterInstance<IAnchoraPuellaeCrinisBasis[]>(_anchora.AnchoraPuellaeCrinisBasis);
+            builder.RegisterInstance<IAnchoraPuellaeCrinisPosterior[]>(_anchora.AnchoraPuellaeCrinisPosterior);
+            builder.RegisterInstance<IAnchoraPuellaeCrinisAnterior[]>(_anchora.AnchoraPuellaeCrinisAnterior);
 
             builder.RegisterInstance<IAnchoraVelumPortus>(_anchoraVelumPortus);
             builder.RegisterInstance<IAnchoraVelumConstructionis>(_anchoraVelumConstructionis);

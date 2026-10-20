@@ -8,13 +8,17 @@ namespace Yulinti.ImperiumMaius.Anchora {
     public sealed class AnchoraTestScene {
         [SerializeField] private AnchoraCamera _anchoraCamera;
         [SerializeField] private AnchoraPuellae _anchoraPuellae;
-        [SerializeField] private AnchoraPuellaeCrinis[] _anchoraPuellaeCrinis;
+        [SerializeField] private AnchoraPuellaeCrinisBasis[] _anchoraPuellaeCrinisBasis;
+        [SerializeField] private AnchoraPuellaeCrinisPosterior[] _anchoraPuellaeCrinisPosterior;
+        [SerializeField] private AnchoraPuellaeCrinisAnterior[] _anchoraPuellaeCrinisAnterior;
         [SerializeField] private AnchoraPunctumViae[] _anchoraPunctumViae;
         [SerializeField] private AnchoraCivis[] _anchoraCivis;
 
         public AnchoraCamera AnchoraCamera => _anchoraCamera;
         public AnchoraPuellae AnchoraPuellae => _anchoraPuellae;
-        public AnchoraPuellaeCrinis[] AnchoraPuellaeCrinis => _anchoraPuellaeCrinis;
+        public AnchoraPuellaeCrinisBasis[] AnchoraPuellaeCrinisBasis => _anchoraPuellaeCrinisBasis;
+        public AnchoraPuellaeCrinisPosterior[] AnchoraPuellaeCrinisPosterior => _anchoraPuellaeCrinisPosterior;
+        public AnchoraPuellaeCrinisAnterior[] AnchoraPuellaeCrinisAnterior => _anchoraPuellaeCrinisAnterior;
         public AnchoraPunctumViae[] AnchoraPunctumViae => _anchoraPunctumViae;
         public AnchoraCivis[] AnchoraCivis => _anchoraCivis;
 
@@ -27,7 +31,15 @@ namespace Yulinti.ImperiumMaius.Anchora {
                 Notarius.Memorare(LogTextus.AnchoraTestScene_REX_ANCHORA_NOT_SET);
             }
 
-            if (_anchoraPuellaeCrinis == null) {
+            if (_anchoraPuellaeCrinisBasis == null) {
+                Notarius.Memorare(LogTextus.AnchoraTestScene_REX_ANCHORA_NOT_SET);
+            }
+
+            if (_anchoraPuellaeCrinisPosterior == null) {
+                Notarius.Memorare(LogTextus.AnchoraTestScene_REX_ANCHORA_NOT_SET);
+            }
+
+            if (_anchoraPuellaeCrinisAnterior == null) {
                 Notarius.Memorare(LogTextus.AnchoraTestScene_REX_ANCHORA_NOT_SET);
             }
 
@@ -43,7 +55,9 @@ namespace Yulinti.ImperiumMaius.Anchora {
         public void Validare() {
             if (_anchoraCamera == null ||
                 _anchoraPuellae == null ||
-                _anchoraPuellaeCrinis == null ||
+                _anchoraPuellaeCrinisBasis == null ||
+                _anchoraPuellaeCrinisPosterior == null ||
+                _anchoraPuellaeCrinisAnterior == null ||
                 _anchoraPunctumViae == null ||
                 _anchoraCivis == null) {
                 Carnifex.Intermissio(LogTextus.AnchoraTestScene_REX_ANCHORA_RESOLVE_FAILED);
@@ -53,12 +67,21 @@ namespace Yulinti.ImperiumMaius.Anchora {
             _anchoraCamera.Validare();
             _anchoraPuellae.Validare();
 
-            foreach (var item in _anchoraPuellaeCrinis) {
+            foreach (var item in _anchoraPuellaeCrinisBasis) {
                 if (item != null) {
                     item.Validare();
                 }
             }
-
+            foreach (var item in _anchoraPuellaeCrinisPosterior) {
+                if (item != null) {
+                    item.Validare();
+                }
+            }
+            foreach (var item in _anchoraPuellaeCrinisAnterior) {
+                if (item != null) {
+                    item.Validare();
+                }
+            }
             foreach (var item in _anchoraPunctumViae) {
                 if (item != null) {
                     item.Validare();

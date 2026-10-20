@@ -54,8 +54,10 @@ namespace Yulinti.Officia.Ministeria {
             builder.Register<IOstiumPuellaeFormaeMutabile, OstiumPuellaeFormaeMutabile>(Lifetime.Singleton);
 
             // PuellaeCrinis
-            builder.Register<MinisteriumPuellaeCrinisAdiunctionis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            builder.Register<IOstiumPuellaeCrinisAdiunctionisMutabile, OstiumPuellaeCrinisAdiunctionisMutabile>(Lifetime.Singleton);
+            builder.Register<MinisteriumPuellaeCrinisAnterior>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<MinisteriumPuellaeCrinisPosterior>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<MinisteriumPuellaeCrinisBasis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<IOstiumPuellaeCrinisMutabile, OstiumPuellaeCrinisMutabile>(Lifetime.Singleton);
 
             // Ministeria
             builder.Register<IMinisteria, Ministeria>(Lifetime.Singleton);

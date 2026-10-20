@@ -2,8 +2,16 @@ using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal interface IOstiumCarrusPuellaeCrinis {
-        void PostulareCrinis(
-            IDPuellaeCrinis idCrinis
+        void PostulareCrinisBasis(
+            IDPuellaeCrinisBasis idCrinisBasis
+        );
+
+        void PostulareCrinisAnterior(
+            IDPuellaeCrinisAnterior idCrinisAnterior
+        );
+
+        void PostulareCrinisPosterior(
+            IDPuellaeCrinisPosterior idCrinisPosterior
         );
     }
 }
