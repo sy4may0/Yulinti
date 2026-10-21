@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using Yulinti.ImperiumDelegatum.Contractus;
@@ -9,26 +10,55 @@ using Yulinti.Nucleus.Contractus;
 namespace Yulinti.Officia.Ministeria {
     internal sealed class MinisteriumPuellaeCrinisPosterior {
         private readonly TabulaPuellaeCrinisPosterior _tabulaCrinis;
+        private readonly ISignumCancellationisLegibile _signumCancellationis;
         private IAnchoraPuellaeCrinisPosterior _crinisActualis;
         private Transform _osCaputis;
 
-        public MinisteriumPuellaeCrinisPosterior(IAnchoraPuellaeCrinisPosterior[] anchora, IAnchoraPuellae anchoraPuellae) {
+        // 生成中に受けた要求は捨てず、最後の要求だけを生成完了後に反映する。
+        private bool _estMutans;
+        private IDPuellaeCrinisPosterior _idPetitum;
+
+        public MinisteriumPuellaeCrinisPosterior(
+            IAnchoraPuellaeCrinisPosterior[] anchora,
+            IAnchoraPuellae anchoraPuellae,
+            ISignumCancellationisLegibile signumCancellationis
+        ) {
             _tabulaCrinis = new TabulaPuellaeCrinisPosterior(anchora);
+            _signumCancellationis = signumCancellationis;
             _crinisActualis = null;
             _osCaputis = anchoraPuellae.OsHead;
+            _estMutans = false;
+            _idPetitum = IDPuellaeCrinisPosterior.Nihil;
         }
 
         public void Muto(IDPuellaeCrinisPosterior idCrinis) {
-            if (idCrinis == IDPuellaeCrinisPosterior.Nihil) {
-                Deleto();
-                return;
-            }
             MutoAsync(idCrinis).Forget(e => Notarius.Memorare(e));
         }
 
-        public async UniTask MutoAsync(IDPuellaeCrinisPosterior idCrinis) {
+        public void Deleto() {
+            Muto(IDPuellaeCrinisPosterior.Nihil);
+        }
+
+        private async UniTask MutoAsync(IDPuellaeCrinisPosterior idCrinis) {
+            _idPetitum = idCrinis;
+            if (_estMutans) return;
+            _estMutans = true;
+
+            try {
+                CancellationToken ct = _signumCancellationis.Signum;
+                IDPuellaeCrinisPosterior idTractatum;
+                do {
+                    idTractatum = _idPetitum;
+                    await MutoUnum(idTractatum, ct);
+                } while (!ct.IsCancellationRequested && _idPetitum != idTractatum);
+            } finally {
+                _estMutans = false;
+            }
+        }
+
+        private async UniTask MutoUnum(IDPuellaeCrinisPosterior idCrinis, CancellationToken ct) {
             if (idCrinis == IDPuellaeCrinisPosterior.Nihil) {
-                Deleto();
+                DeletoActualis();
                 return;
             }
             if (_crinisActualis != null && _crinisActualis.Typus == idCrinis) {
@@ -37,6 +67,13 @@ namespace Yulinti.Officia.Ministeria {
 
             IAnchoraPuellaeCrinisPosterior neo = _tabulaCrinis.Lego(idCrinis);
             await neo.Manifestatio();
+
+            // InstantiateAsyncは中断できないため、完了後にキャンセルを確認して破棄する。
+            if (ct.IsCancellationRequested) {
+                neo.Deleto();
+                return;
+            }
+
             bool result = neo.ValidareManifestatio();
 
             if (result) {
@@ -56,7 +93,7 @@ namespace Yulinti.Officia.Ministeria {
             }
         }
 
-        public void Deleto() {
+        private void DeletoActualis() {
             if (_crinisActualis != null) {
                 _crinisActualis.Spirituare();
                 _crinisActualis.Deleto();
