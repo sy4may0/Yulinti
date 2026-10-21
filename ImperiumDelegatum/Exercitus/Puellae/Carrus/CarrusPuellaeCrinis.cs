@@ -19,11 +19,29 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _lacusOrdinatio.ColligereOmnia();
         }
 
-        public void PostulareCrinis(
-            IDPuellaeCrinis idCrinis
+        public void PostulareCrinisBasis(
+            IDPuellaeCrinisBasis idCrinisBasis
         ){
-            if(_lacusOrdinatio.EmittareCrinis(out var ordinatio)) {
-                ordinatio.Pono(idCrinis);
+            if(_lacusOrdinatio.EmittareCrinisBasis(out var ordinatio)) {
+                ordinatio.Pono(idCrinisBasis);
+                _exCrinis.Executare(ordinatio);
+            }
+        }
+
+        public void PostulareCrinisAnterior(
+            IDPuellaeCrinisAnterior idCrinisAnterior
+        ){
+            if(_lacusOrdinatio.EmittareCrinisAnterior(out var ordinatio)) {
+                ordinatio.Pono(idCrinisAnterior);
+                _exCrinis.Executare(ordinatio);
+            }
+        }
+
+        public void PostulareCrinisPosterior(
+            IDPuellaeCrinisPosterior idCrinisPosterior
+        ){
+            if(_lacusOrdinatio.EmittareCrinisPosterior(out var ordinatio)) {
+                ordinatio.Pono(idCrinisPosterior);
                 _exCrinis.Executare(ordinatio);
             }
         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine.AddressableAssets;
 using Cysharp.Threading.Tasks;
 using Yulinti.Nucleus.Contractus;
@@ -12,16 +13,23 @@ namespace Yulinti.Officia.Ministeria {
         private readonly IAnchoraCivis[] _anchorae;
         private readonly IReadOnlyList<IOperatioAnchoraCivis> _operationumAnchorae;
         private readonly IReadOnlyList<IOperatioCivisGenerationis> _operationumCivisGenerationis;
+        private readonly ISignumCancellationisLegibile _signumCancellationis;
+
+        // 生成中にDeletoされたスロットは、生成完了後に破棄する。
+        private readonly bool[] _estDeletoPetitum;
 
         public LacusAnchorarumCivis(
             IAnchoraCivis[] anchorae,
             IReadOnlyList<IOperatioAnchoraCivis> operationumAnchorae,
-            IReadOnlyList<IOperatioCivisGenerationis> operationumCivisGenerationis
+            IReadOnlyList<IOperatioCivisGenerationis> operationumCivisGenerationis,
+            ISignumCancellationisLegibile signumCancellationis
         ) {
             _longitudo = anchorae.Length;
             ValidareAnchorae(anchorae);
             _operationumAnchorae = operationumAnchorae;
             _operationumCivisGenerationis = operationumCivisGenerationis;
+            _signumCancellationis = signumCancellationis;
+            _estDeletoPetitum = new bool[_longitudo];
             _anchorae = new IAnchoraCivis[_longitudo];
 
             for (int i = 0; i < _longitudo; i++) {
@@ -97,12 +105,22 @@ namespace Yulinti.Officia.Ministeria {
                 };
             }
             
+            CancellationToken ct = _signumCancellationis.Signum;
+            _estDeletoPetitum[idCivis] = false;
+
             // !!ここより前に絶対にawaitを入れるな。!!
             // idCivisの二重確保が起きうるようになる。Manifestatio()の先頭当たりまでUnityMainで動かすこと。
             await _anchorae[idCivis].Manifestatio();
 
             //メインスレッド
             await UniTask.SwitchToMainThread();
+
+            // InstantiateAsyncは中断できないため、完了後にキャンセルを確認して破棄する。
+            if (ct.IsCancellationRequested || _estDeletoPetitum[idCivis]) {
+                _estDeletoPetitum[idCivis] = false;
+                _anchorae[idCivis].Deleto();
+                return;
+            }
 
             if (!_anchorae[idCivis].EstEns) {
                 Notarius.Memorare(LogTextus.LacusAnchorarumCivis_LACUSANCHORARUMCIVIS_MANIFESTATIO_FAILED);
@@ -127,6 +145,10 @@ namespace Yulinti.Officia.Ministeria {
 
         public void Deleto(int idCivis) {
             if (idCivis < 0 || idCivis >= _longitudo) {
+                return;
+            }
+            if (_anchorae[idCivis].EstManifestatum) {
+                _estDeletoPetitum[idCivis] = true;
                 return;
             }
             if (!_anchorae[idCivis].EstEns) {

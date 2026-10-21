@@ -4,8 +4,10 @@ using Yulinti.Officia.Contractus;
 
 using Yulinti.ImperiumDelegatum.Contractus;
 namespace Yulinti.Officia.Contractus {
-    public interface IAnchoraPuellaeCrinis : IAnchora, IPhantasma {
-        IDPuellaeCrinis Typus { get; }
+    public interface IAnchoraPuellaeCrinisPosterior : IAnchora, IPhantasma {
+        IDPuellaeCrinisPosterior Typus { get; }
         Transform OsRadix { get; }
+        void Activare();
+        void Deactivare();
     }
 }

@@ -5,47 +5,88 @@ using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ExecutorPuellaeCrinis : IExecutorPuellae {
-        private readonly IOstiumPuellaeCrinisAdiunctionisMutabile _ostiumPuellaeCrinisAdiunctionisMutabile;
+        private readonly IOstiumPuellaeCrinisMutabile _ostiumPuellaeCrinisMutabile;
 
-        private Ordo<IOrdinatioPuellaeCrinis> _queueCrinis;
+        private Ordo<IOrdinatioPuellaeCrinisBasis> _queueCrinisBasis;
+        private Ordo<IOrdinatioPuellaeCrinisAnterior> _queueCrinisAnterior;
+        private Ordo<IOrdinatioPuellaeCrinisPosterior> _queueCrinisPosterior;
 
         public ExecutorPuellaeCrinis(
-            IOstiumPuellaeCrinisAdiunctionisMutabile ostiumPuellaeCrinisAdiunctionisMutabile
+            IOstiumPuellaeCrinisMutabile ostiumPuellaeCrinisMutabile
         ) {
-            _ostiumPuellaeCrinisAdiunctionisMutabile = ostiumPuellaeCrinisAdiunctionisMutabile;
-            _queueCrinis = new Ordo<IOrdinatioPuellaeCrinis>(
+            _ostiumPuellaeCrinisMutabile = ostiumPuellaeCrinisMutabile;
+            _queueCrinisBasis = new Ordo<IOrdinatioPuellaeCrinisBasis>(
+                ConstansPuellae.LongitudoOrdinatioCrinis
+            );
+            _queueCrinisAnterior = new Ordo<IOrdinatioPuellaeCrinisAnterior>(
+                ConstansPuellae.LongitudoOrdinatioCrinis
+            );
+            _queueCrinisPosterior = new Ordo<IOrdinatioPuellaeCrinisPosterior>(
                 ConstansPuellae.LongitudoOrdinatioCrinis
             );
         }
 
         public void Initare() {
-            _ostiumPuellaeCrinisAdiunctionisMutabile.Deleto();
-            _queueCrinis.Purgere();
+            _ostiumPuellaeCrinisMutabile.DeletoBasis();
+            _ostiumPuellaeCrinisMutabile.DeletoAnterior();
+            _ostiumPuellaeCrinisMutabile.DeletoPosterior();
+            _queueCrinisBasis.Purgere();
+            _queueCrinisAnterior.Purgere();
+            _queueCrinisPosterior.Purgere();
         }
 
         public void Primum() {
-            _queueCrinis.Purgere();
+            _queueCrinisBasis.Purgere();
+            _queueCrinisAnterior.Purgere();
+            _queueCrinisPosterior.Purgere();
         }
 
         public void Executare(
-            IOrdinatioPuellaeCrinis crinis
+            IOrdinatioPuellaeCrinisBasis crinisBasis
         ) {
-            if (!_queueCrinis.ConarePono(crinis)) {
-                Notarius.Memorare(LogTextus.ExecutorPuellaeCrinis_MINIATERIUMPUELLAECRINIS_ORDINATIO_QUEUE_FULL);
+            if (!_queueCrinisBasis.ConarePono(crinisBasis)) {
+                Notarius.Memorare(LogTextus.ExecutorPuellaeCrinis_MINIATERIUMPUELLAECRINIS_BASIS_ORDINATIO_QUEUE_FULL);
+                return;
+            }
+        }
+
+        public void Executare(
+            IOrdinatioPuellaeCrinisAnterior crinisAnterior
+        ) {
+            if (!_queueCrinisAnterior.ConarePono(crinisAnterior)) {
+                Notarius.Memorare(LogTextus.ExecutorPuellaeCrinis_MINIATERIUMPUELLAECRINIS_ANTERIOR_ORDINATIO_QUEUE_FULL);
+                return;
+            }
+        }
+
+        public void Executare(
+            IOrdinatioPuellaeCrinisPosterior crinisPosterior
+        ) {
+            if (!_queueCrinisPosterior.ConarePono(crinisPosterior)) {
+                Notarius.Memorare(LogTextus.ExecutorPuellaeCrinis_MINIATERIUMPUELLAECRINIS_POSTERIOR_ORDINATIO_QUEUE_FULL);
                 return;
             }
         }
 
         public void Confirmare() {
-            while (_queueCrinis.ConareLego(out IOrdinatioPuellaeCrinis crinis)) {
-                _ostiumPuellaeCrinisAdiunctionisMutabile.Muto(crinis.IdCrinis);
+            while (_queueCrinisBasis.ConareLego(out IOrdinatioPuellaeCrinisBasis crinisBasis)) {
+                _ostiumPuellaeCrinisMutabile.Muto(crinisBasis.IdCrinisBasis);
+            }
+            while (_queueCrinisAnterior.ConareLego(out IOrdinatioPuellaeCrinisAnterior crinisAnterior)) {
+                _ostiumPuellaeCrinisMutabile.Muto(crinisAnterior.IdCrinisAnterior);
+            }
+            while (_queueCrinisPosterior.ConareLego(out IOrdinatioPuellaeCrinisPosterior crinisPosterior)) {
+                _ostiumPuellaeCrinisMutabile.Muto(crinisPosterior.IdCrinisPosterior);
             }
         }
 
         public void Purgare() {
-            _ostiumPuellaeCrinisAdiunctionisMutabile.Deleto();
-            _queueCrinis.Purgere();
+            _ostiumPuellaeCrinisMutabile.DeletoBasis();
+            _ostiumPuellaeCrinisMutabile.DeletoAnterior();
+            _ostiumPuellaeCrinisMutabile.DeletoPosterior();
+            _queueCrinisBasis.Purgere();
+            _queueCrinisAnterior.Purgere();
+            _queueCrinisPosterior.Purgere();
         }
-
     }
 }
