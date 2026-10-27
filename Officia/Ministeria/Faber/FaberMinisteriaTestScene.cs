@@ -58,6 +58,7 @@ namespace Yulinti.Officia.Ministeria {
             builder.Register<MinisteriumPuellaeCrinisAnterior>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeCrinisPosterior>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<MinisteriumPuellaeCrinisBasis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<MinisteriumPuellaeCrinisCollectionis>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<IOstiumPuellaeCrinisMutabile, OstiumPuellaeCrinisMutabile>(Lifetime.Singleton);
 
             // PunctumViae

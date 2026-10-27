@@ -19,17 +19,8 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _lacusOrdinatio.ColligereOmnia();
         }
 
-        public void PostulareCrinisBasis(
-            IDPuellaeCrinisBasis idCrinisBasis
-        ){
-            if(_lacusOrdinatio.EmittareCrinisBasis(out var ordinatio)) {
-                ordinatio.Pono(idCrinisBasis);
-                _exCrinis.Executare(ordinatio);
-            }
-        }
-
         public void PostulareCrinisAnterior(
-            IDPuellaeCrinisAnterior idCrinisAnterior
+            IDPuellaeCrinisCollectionisAnterior idCrinisAnterior
         ){
             if(_lacusOrdinatio.EmittareCrinisAnterior(out var ordinatio)) {
                 ordinatio.Pono(idCrinisAnterior);
@@ -38,7 +29,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void PostulareCrinisPosterior(
-            IDPuellaeCrinisPosterior idCrinisPosterior
+            IDPuellaeCrinisCollectionisPosterior idCrinisPosterior
         ){
             if(_lacusOrdinatio.EmittareCrinisPosterior(out var ordinatio)) {
                 ordinatio.Pono(idCrinisPosterior);

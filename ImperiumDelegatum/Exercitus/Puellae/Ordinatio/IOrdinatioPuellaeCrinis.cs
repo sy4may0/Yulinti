@@ -1,15 +1,11 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal interface IOrdinatioPuellaeCrinisBasis : IOrdinatioPuellae {
-        IDPuellaeCrinisBasis IdCrinisBasis { get; }
+    internal interface IOrdinatioPuellaeCrinisCollectionisAnterior : IOrdinatioPuellae {
+        IDPuellaeCrinisCollectionisAnterior IdCrinisCollectionisAnterior { get; }
     }
 
-    internal interface IOrdinatioPuellaeCrinisAnterior : IOrdinatioPuellae {
-        IDPuellaeCrinisAnterior IdCrinisAnterior { get; }
-    }
-
-    internal interface IOrdinatioPuellaeCrinisPosterior : IOrdinatioPuellae {
-        IDPuellaeCrinisPosterior IdCrinisPosterior { get; }
+    internal interface IOrdinatioPuellaeCrinisCollectionisPosterior : IOrdinatioPuellae {
+        IDPuellaeCrinisCollectionisPosterior IdCrinisCollectionisPosterior { get; }
     }
 }

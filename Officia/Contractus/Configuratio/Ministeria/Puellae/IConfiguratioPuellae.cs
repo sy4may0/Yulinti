@@ -6,5 +6,6 @@ namespace Yulinti.Officia.Contractus {
         IConfiguratioPuellaeLoci Loci { get; }
         IConfiguratioPuellaeFormarum Formae { get; }
         IConfiguratioPuellaeReferensCapitis ReferensCapitis { get; }
+        IConfiguratioPuellaeCrinisCollectionis CrinisCollectionis { get; }
     }
 }

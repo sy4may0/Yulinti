@@ -1,71 +1,48 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
-    internal sealed class OrdinatioPuellaeCrinisBasis : OrdinatioPuellae, IOrdinatioPuellaeCrinisBasis {
-        private IDPuellaeCrinisBasis _idCrinisBasis;
+    internal sealed class OrdinatioPuellaeCrinisCollectionisAnterior : OrdinatioPuellae, IOrdinatioPuellaeCrinisCollectionisAnterior {
+        private IDPuellaeCrinisCollectionisAnterior _idCrinisCollectionisAnterior;
 
-        public OrdinatioPuellaeCrinisBasis()
+        public OrdinatioPuellaeCrinisCollectionisAnterior()
             : base(true, SpeciesOrdinatioPuellae.Apparatus) {
-            _idCrinisBasis = default;
+            _idCrinisCollectionisAnterior = default;
         }
 
-        public IDPuellaeCrinisBasis IdCrinisBasis => _idCrinisBasis;
+        public IDPuellaeCrinisCollectionisAnterior IdCrinisCollectionisAnterior => _idCrinisCollectionisAnterior;
 
         public override void Purgere() {
             _estApplicandum = false;
-            _idCrinisBasis = default;
+            _idCrinisCollectionisAnterior = default;
         }
 
         public void Pono(
-            IDPuellaeCrinisBasis idCrinisBasis
+            IDPuellaeCrinisCollectionisAnterior idCrinisCollectionisAnterior
         ) {
-            _idCrinisBasis = idCrinisBasis;
+            _idCrinisCollectionisAnterior = idCrinisCollectionisAnterior;
             _estApplicandum = true;
         }
     }
 
-    internal sealed class OrdinatioPuellaeCrinisAnterior : OrdinatioPuellae, IOrdinatioPuellaeCrinisAnterior {
-        private IDPuellaeCrinisAnterior _idCrinisAnterior;
+    internal sealed class OrdinatioPuellaeCrinisCollectionisPosterior : OrdinatioPuellae, IOrdinatioPuellaeCrinisCollectionisPosterior {
+        private IDPuellaeCrinisCollectionisPosterior _idCrinisCollectionisPosterior;
 
-        public OrdinatioPuellaeCrinisAnterior()
+        public OrdinatioPuellaeCrinisCollectionisPosterior()
             : base(true, SpeciesOrdinatioPuellae.Apparatus) {
-            _idCrinisAnterior = default;
+            _idCrinisCollectionisPosterior = default;
         }
 
-        public IDPuellaeCrinisAnterior IdCrinisAnterior => _idCrinisAnterior;
+        public IDPuellaeCrinisCollectionisPosterior IdCrinisCollectionisPosterior => _idCrinisCollectionisPosterior;
 
         public override void Purgere() {
             _estApplicandum = false;
-            _idCrinisAnterior = default;
+            _idCrinisCollectionisPosterior = default;
         }
 
         public void Pono(
-            IDPuellaeCrinisAnterior idCrinisAnterior
+            IDPuellaeCrinisCollectionisPosterior idCrinisCollectionisPosterior
         ) {
-            _idCrinisAnterior = idCrinisAnterior;
-            _estApplicandum = true;
-        }
-    }
-
-    internal sealed class OrdinatioPuellaeCrinisPosterior : OrdinatioPuellae, IOrdinatioPuellaeCrinisPosterior {
-        private IDPuellaeCrinisPosterior _idCrinisPosterior;
-
-        public OrdinatioPuellaeCrinisPosterior()
-            : base(true, SpeciesOrdinatioPuellae.Apparatus) {
-            _idCrinisPosterior = default;
-        }
-
-        public IDPuellaeCrinisPosterior IdCrinisPosterior => _idCrinisPosterior;
-
-        public override void Purgere() {
-            _estApplicandum = false;
-            _idCrinisPosterior = default;
-        }
-
-        public void Pono(
-            IDPuellaeCrinisPosterior idCrinisPosterior
-        ) {
-            _idCrinisPosterior = idCrinisPosterior;
+            _idCrinisCollectionisPosterior = idCrinisCollectionisPosterior;
             _estApplicandum = true;
         }
     }

@@ -66,3 +66,36 @@
 .constructio-button {
     width: 140px;
 }
+
+/* constructio-content は width 720 の border-box。
+   panel の padding 18*2 と border 1*2 を引いた内側は 682。
+   130 + 右余白 4 で 5 個 = 670。 */
+.elementum-lapsor-faciei-crinis-anterior-container,
+.elementum-lapsor-faciei-crinis-posterior-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    width: 100%;
+}
+
+.pars-portus-constructionis-lapsor-faciei-crinis {
+    width: 130px;
+    height: 130px;
+    flex-shrink: 0;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+.pars-portus-constructionis-lapsor-faciei-crinis-button {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+}
+
+.pars-portus-constructionis-lapsor-faciei-crinis-image {
+    width: 100%;
+    height: 100%;
+}

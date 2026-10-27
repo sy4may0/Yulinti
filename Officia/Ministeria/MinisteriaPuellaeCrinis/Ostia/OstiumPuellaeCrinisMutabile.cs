@@ -5,47 +5,31 @@ using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.Officia.Ministeria {
     internal sealed class OstiumPuellaeCrinisMutabile : IOstiumPuellaeCrinisMutabile {
-        private readonly MinisteriumPuellaeCrinisAnterior _miPuellaeCrinisAnterior;
-        private readonly MinisteriumPuellaeCrinisPosterior _miPuellaeCrinisPosterior;
-        private readonly MinisteriumPuellaeCrinisBasis _miPuellaeCrinisBasis;
+        private readonly MinisteriumPuellaeCrinisCollectionis _miPuellaeCrinisCollectionis;
 
         public OstiumPuellaeCrinisMutabile(
-            MinisteriumPuellaeCrinisAnterior miPuellaeCrinisAnterior,
-            MinisteriumPuellaeCrinisPosterior miPuellaeCrinisPosterior,
-            MinisteriumPuellaeCrinisBasis miPuellaeCrinisBasis
+            MinisteriumPuellaeCrinisCollectionis miPuellaeCrinisCollectionis
         ) {
-            if (miPuellaeCrinisAnterior == null
-                || miPuellaeCrinisPosterior == null
-                || miPuellaeCrinisBasis == null) {
+            if (miPuellaeCrinisCollectionis == null) {
                 Carnifex.Intermissio(LogTextus.OstiumPuellaeCrinisMutabile_OSTIUMPUELLAECRINISMUTABILE_INSTANCE_NULL);
             }
-            _miPuellaeCrinisAnterior = miPuellaeCrinisAnterior;
-            _miPuellaeCrinisPosterior = miPuellaeCrinisPosterior;
-            _miPuellaeCrinisBasis = miPuellaeCrinisBasis;
+            _miPuellaeCrinisCollectionis = miPuellaeCrinisCollectionis;
         }
 
-        public void Muto(IDPuellaeCrinisBasis idCrinisBasis) {
-            _miPuellaeCrinisBasis.Muto(idCrinisBasis);
+        public void Muto(IDPuellaeCrinisCollectionisAnterior idCrinisAnterior) {
+            _miPuellaeCrinisCollectionis.Muto(idCrinisAnterior);
         }
 
-        public void Muto(IDPuellaeCrinisPosterior idCrinisPosterior) {
-            _miPuellaeCrinisPosterior.Muto(idCrinisPosterior);
-        }
-
-        public void Muto(IDPuellaeCrinisAnterior idCrinisAnterior) {
-            _miPuellaeCrinisAnterior.Muto(idCrinisAnterior);
-        }
-
-        public void DeletoBasis() {
-            _miPuellaeCrinisBasis.Deleto();
+        public void Muto(IDPuellaeCrinisCollectionisPosterior idCrinisPosterior) {
+            _miPuellaeCrinisCollectionis.Muto(idCrinisPosterior);
         }
 
         public void DeletoPosterior() {
-            _miPuellaeCrinisPosterior.Deleto();
+            _miPuellaeCrinisCollectionis.DeletoPosterior();
         }
 
         public void DeletoAnterior() {
-            _miPuellaeCrinisAnterior.Deleto();
+            _miPuellaeCrinisCollectionis.DeletoAnterior();
         }
     }
 }

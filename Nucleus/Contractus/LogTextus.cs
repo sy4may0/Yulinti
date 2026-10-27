@@ -288,6 +288,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string TabulaPuellaeAnimationumContinuata_TABULAPUELLAEANIMATIONUMCONTINUATA_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationumContinuata - config not found";
         public const string TabulaPuellaeAnimationum_TABULAPUELLAEANIMATIONUM_CONFIG_NOT_FOUND = "TabulaPuellaeAnimationum - config not found";
         public const string TabulaPuellaeCrinis_TABULAPUELLAECRINIS_ID_NOT_FOUND = "TabulaPuellaeCrinis - id not found";
+        public const string TabulaPuellaeCrinisCollectionis_TABULAPUELLAECRINISCOLLECTIONIS_ID_NOT_FOUND = "TabulaPuellaeCrinisCollectionis - id not found";
         public const string TabulaPuellaeCrinisAnterior_TABULAPUELLAECRINISANTERIOR_ID_NOT_FOUND = "TabulaPuellaeCrinisAnterior - id not found";
         public const string TabulaPuellaeCrinisBasis_TABULAPUELLAECRINISBASIS_ID_NOT_FOUND = "TabulaPuellaeCrinisBasis - id not found";
         public const string TabulaPuellaeCrinisPosterior_TABULAPUELLAECRINISPOSTERIOR_ID_NOT_FOUND = "TabulaPuellaeCrinisPosterior - id not found";

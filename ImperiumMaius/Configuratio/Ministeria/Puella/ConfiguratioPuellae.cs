@@ -10,6 +10,7 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [SerializeField] ConfiguratioPuellaeLoci loci;
         [SerializeField] ConfiguratioPuellaeFormarum formae;
         [SerializeField] ConfiguratioPuellaeReferensCapitis referensCapitis;
+        [SerializeField] ConfiguratioPuellaeCrinisCollectionis crinisCollectionis;
 
         public IConfiguratioPuellaeRelationis Relatio => relatio;
         public IConfiguratioPuellaeFigurae Figura => figura;
@@ -17,5 +18,6 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         public IConfiguratioPuellaeLoci Loci => loci;
         public IConfiguratioPuellaeFormarum Formae => formae;
         public IConfiguratioPuellaeReferensCapitis ReferensCapitis => referensCapitis;
+        public IConfiguratioPuellaeCrinisCollectionis CrinisCollectionis => crinisCollectionis;
     }
 }

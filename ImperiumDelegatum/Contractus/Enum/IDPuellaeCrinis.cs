@@ -1,4 +1,14 @@
 namespace Yulinti.ImperiumDelegatum.Contractus {
+    public enum IDPuellaeCrinisCollectionisAnterior {
+        Nihil,
+        FimbriaLateralis,
+    }
+
+    public enum IDPuellaeCrinisCollectionisPosterior {
+        Nihil,
+        CaudaLateralis,
+    }
+
     public enum IDPuellaeCrinisBasis {
         Nihil,
         // サイドテールknot

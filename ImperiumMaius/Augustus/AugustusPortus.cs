@@ -17,6 +17,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
         [SerializeField] private AnchoraVelumPortus _anchoraVelumPortus;
         [SerializeField] private AnchoraVelumConstructionis _anchoraVelumConstructionis;
         [SerializeField] private ConfiguratioImperium _configuratio;
+        [SerializeField] private ConfiguratioVelumPortus _configuratioVelumPortus;
 
         protected override void Configure(IContainerBuilder builder) {
             Debug.Log("RexPortus Configure");
@@ -37,11 +38,15 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IConfiguratioPuellaeLoci>(_configuratio.Ministeria.Puellae.Loci);
             builder.RegisterInstance<IConfiguratioPuellaeFormarum>(_configuratio.Ministeria.Puellae.Formae);
             builder.RegisterInstance<IConfiguratioPuellaeReferensCapitis>(_configuratio.Ministeria.Puellae.ReferensCapitis);
+            builder.RegisterInstance<IConfiguratioPuellaeCrinisCollectionis>(_configuratio.Ministeria.Puellae.CrinisCollectionis);
 
             builder.RegisterInstance<IConfiguratioExercitusPuellae>(_configuratio.Exercitus.ExercitusPuellae);
             builder.RegisterInstance<IConfiguratioPuellaeStatuum>(_configuratio.Exercitus.ExercitusPuellae.Statuum);
             builder.RegisterInstance<IConfiguratioPuellaeActionisSecundarius>(_configuratio.Exercitus.ExercitusPuellae.ActionisSecundarius);
             builder.RegisterInstance<IConfiguratioPuellaeVeletudinis>(_configuratio.Exercitus.ExercitusPuellae.Veletudo);
+
+            builder.RegisterInstance<IConfiguratioVelumPuellaeCrinisAnterior[]>(_configuratioVelumPortus.PuellaeCrinisAnterior);
+            builder.RegisterInstance<IConfiguratioVelumPuellaeCrinisPosterior[]>(_configuratioVelumPortus.PuellaeCrinisPosterior);
 
             FaberVelumPortus.Initio(builder);
             FaberSenatusPortus.Initio(builder);

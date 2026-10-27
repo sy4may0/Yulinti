@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+  <ui:VisualElement
+    name="pars-portus-constructionis-lapsor-faciei-crinis"
+    class="pars-portus-constructionis-lapsor-faciei-crinis"
+  >
+    <ui:Button
+      name="pars-portus-constructionis-lapsor-faciei-crinis-button"
+      class="
+        pars-portus-constructionis-lapsor-faciei-crinis-button
+        button-ghost-image
+      "
+    >
+      <ui:Image
+        name="pars-portus-constructionis-lapsor-faciei-crinis-image"
+        class="pars-portus-constructionis-lapsor-faciei-crinis-image"
+      />
+      <!-- 画像はコードから挿入 (image.splite = <Splite>) -->
+    </ui:Button>
+  </ui:VisualElement>
+</ui:UXML>

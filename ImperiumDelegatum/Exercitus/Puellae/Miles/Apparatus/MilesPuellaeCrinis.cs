@@ -13,20 +13,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Initare() {
             // Default Hair
-            _carrus.PostulareCrinisBasis(IDPuellaeCrinisBasis.NodusLateralis);
-            _carrus.PostulareCrinisPosterior(IDPuellaeCrinisPosterior.CaudaLateralis);
-            _carrus.PostulareCrinisAnterior(IDPuellaeCrinisAnterior.FimbriaLateralis);
+            _carrus.PostulareCrinisAnterior(IDPuellaeCrinisCollectionisAnterior.FimbriaLateralis);
+            _carrus.PostulareCrinisPosterior(IDPuellaeCrinisCollectionisPosterior.CaudaLateralis);
         }
 
-        public void MutareComam(IDPuellaeCrinisBasis idCrinisBasis) {
-            _carrus.PostulareCrinisBasis(idCrinisBasis);
-        }
-
-        public void MutareComam(IDPuellaeCrinisAnterior idCrinisAnterior) {
+        public void MutareComam(IDPuellaeCrinisCollectionisAnterior idCrinisAnterior) {
             _carrus.PostulareCrinisAnterior(idCrinisAnterior);
         }
 
-        public void MutareComam(IDPuellaeCrinisPosterior idCrinisPosterior) {
+        public void MutareComam(IDPuellaeCrinisCollectionisPosterior idCrinisPosterior) {
             _carrus.PostulareCrinisPosterior(idCrinisPosterior);
         }
     }

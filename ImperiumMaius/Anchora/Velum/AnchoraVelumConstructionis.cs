@@ -12,6 +12,8 @@ namespace Yulinti.ImperiumMaius.Anchora {
         [SerializeField] private VisualTreeAsset _elementumOrnamenti;
         [SerializeField] private VisualTreeAsset _elementumSalsamenti;
 
+        [SerializeField] private VisualTreeAsset _parsPortusConstructionisLapsorFacieiCrinis;
+
         public UIDocument UIDocument => _uiDocument;
         public VisualTreeAsset ElementumLapsorCorporis => _elementumLapsorCorporis;
         public VisualTreeAsset ElementumLapsorFaciei => _elementumLapsorFaciei;
@@ -19,5 +21,7 @@ namespace Yulinti.ImperiumMaius.Anchora {
         public VisualTreeAsset ElementumTunicae => _elementumTunicae;
         public VisualTreeAsset ElementumOrnamenti => _elementumOrnamenti;
         public VisualTreeAsset ElementumSalsamenti => _elementumSalsamenti;
+
+        public VisualTreeAsset ParsPortusConstructionisLapsorFacieiCrinis => _parsPortusConstructionisLapsorFacieiCrinis;
     }
 }

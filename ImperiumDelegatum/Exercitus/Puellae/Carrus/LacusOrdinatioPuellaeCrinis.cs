@@ -4,52 +4,28 @@ using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class LacusOrdinatioPuellaeCrinis {
-        private readonly Lacus<OrdinatioPuellaeCrinisBasis> _lacusCrinisBasis;
-        private readonly Lacus<OrdinatioPuellaeCrinisAnterior> _lacusCrinisAnterior;
-        private readonly Lacus<OrdinatioPuellaeCrinisPosterior> _lacusCrinisPosterior;
+        private readonly Lacus<OrdinatioPuellaeCrinisCollectionisAnterior> _lacusCrinisAnterior;
+        private readonly Lacus<OrdinatioPuellaeCrinisCollectionisPosterior> _lacusCrinisPosterior;
 
-        private readonly Ordo<OrdinatioPuellaeCrinisBasis> _emissioCrinisBasis;
-        private readonly Ordo<OrdinatioPuellaeCrinisAnterior> _emissioCrinisAnterior;
-        private readonly Ordo<OrdinatioPuellaeCrinisPosterior> _emissioCrinisPosterior;
+        private readonly Ordo<OrdinatioPuellaeCrinisCollectionisAnterior> _emissioCrinisAnterior;
+        private readonly Ordo<OrdinatioPuellaeCrinisCollectionisPosterior> _emissioCrinisPosterior;
 
         public LacusOrdinatioPuellaeCrinis() {
-            _lacusCrinisBasis = new Lacus<OrdinatioPuellaeCrinisBasis>(
+            _lacusCrinisAnterior = new Lacus<OrdinatioPuellaeCrinisCollectionisAnterior>(
                 ConstansPuellae.LongitudoOrdinatioCrinis
             );
-            _lacusCrinisAnterior = new Lacus<OrdinatioPuellaeCrinisAnterior>(
+            _lacusCrinisPosterior = new Lacus<OrdinatioPuellaeCrinisCollectionisPosterior>(
                 ConstansPuellae.LongitudoOrdinatioCrinis
             );
-            _lacusCrinisPosterior = new Lacus<OrdinatioPuellaeCrinisPosterior>(
+            _emissioCrinisAnterior = new Ordo<OrdinatioPuellaeCrinisCollectionisAnterior>(
                 ConstansPuellae.LongitudoOrdinatioCrinis
             );
-            _emissioCrinisBasis = new Ordo<OrdinatioPuellaeCrinisBasis>(
-                ConstansPuellae.LongitudoOrdinatioCrinis
-            );
-            _emissioCrinisAnterior = new Ordo<OrdinatioPuellaeCrinisAnterior>(
-                ConstansPuellae.LongitudoOrdinatioCrinis
-            );
-            _emissioCrinisPosterior = new Ordo<OrdinatioPuellaeCrinisPosterior>(
+            _emissioCrinisPosterior = new Ordo<OrdinatioPuellaeCrinisCollectionisPosterior>(
                 ConstansPuellae.LongitudoOrdinatioCrinis
             );
         }
 
-        public bool EmittareCrinisBasis(out OrdinatioPuellaeCrinisBasis crinisBasis) {
-            if (_lacusCrinisBasis.ConareLego(out var r)) {
-                if(_emissioCrinisBasis.ConarePono(r)) {
-                    crinisBasis = r;
-                    crinisBasis.Initare();
-                    return true;
-                }
-                Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAECRINISBASIS_EMISSIO_QUEUE_FULL);
-                crinisBasis = null;
-                return false;
-            }
-            Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAECRINISBASIS_LACUS_EMPTY);
-            crinisBasis = null;
-            return false;
-        }
-
-        public bool EmittareCrinisAnterior(out OrdinatioPuellaeCrinisAnterior crinisAnterior) {
+        public bool EmittareCrinisAnterior(out OrdinatioPuellaeCrinisCollectionisAnterior crinisAnterior) {
             if (_lacusCrinisAnterior.ConareLego(out var r)) {
                 if(_emissioCrinisAnterior.ConarePono(r)) {
                     crinisAnterior = r;
@@ -65,7 +41,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             return false;
         }
 
-        public bool EmittareCrinisPosterior(out OrdinatioPuellaeCrinisPosterior crinisPosterior) {
+        public bool EmittareCrinisPosterior(out OrdinatioPuellaeCrinisCollectionisPosterior crinisPosterior) {
             if (_lacusCrinisPosterior.ConareLego(out var r)) {
                 if(_emissioCrinisPosterior.ConarePono(r)) {
                     crinisPosterior = r;
@@ -79,16 +55,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAECRINISPOSTERIOR_LACUS_EMPTY);
             crinisPosterior = null;
             return false;
-        }
-
-        public void ColligereCrinisBasis() {
-            while(_emissioCrinisBasis.ConareLego(out var r)) {
-                if(!_lacusCrinisBasis.ConarePono(r)) {
-                    r.Purgere();
-                    r.Liberare();
-                    Notarius.Memorare(LogTextus.LacusOrdinatioPuellae_ORDINATIOPUELLAECRINISBASIS_LACUS_FULL);
-                }
-            }
         }
 
         public void ColligereCrinisAnterior() {
@@ -112,7 +78,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         }
 
         public void ColligereOmnia() {
-            ColligereCrinisBasis();
             ColligereCrinisAnterior();
             ColligereCrinisPosterior();
         }

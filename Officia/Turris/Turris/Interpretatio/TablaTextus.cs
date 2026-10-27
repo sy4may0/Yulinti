@@ -80,7 +80,11 @@ namespace Yulinti.Officia.Turris {
                 { IDTextus.PUELLAEPERSONAE_SENSUS_AUSCULUM, "口感度" },
                 { IDTextus.PUELLAEPERSONAE_ANIMA_AUSCULUM, "口開発" },
                 { IDTextus.PUELLAEPERSONAE_SENSUS_CORPORIS, "全身感度" },
-                { IDTextus.PUELLAEPERSONAE_ANIMA_CORPORIS, "全身開発" }
+                { IDTextus.PUELLAEPERSONAE_ANIMA_CORPORIS, "全身開発" },
+
+                // Crinis
+                { IDTextus.CRINIS_FIMBRIA_LATERALIS_ANTERIOR, "サイドバング" },
+                { IDTextus.CRINIS_CAUDA_LATERALIS_POSTERIOR, "サイドテール" },
             };
         }
 

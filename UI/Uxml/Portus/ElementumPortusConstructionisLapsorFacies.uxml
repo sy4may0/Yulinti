@@ -8,9 +8,27 @@
     "
   >
     <ui:Label
-      name="elementum-lapsor-facies-title"
-      class="elementum-lapsor-facies-title"
-      text="Lapsor Facies"
+      name="elementum-lapsor-faciei-crinis-anterior-title"
+      class="label-h3 elementum-lapsor-faciei-crinis-anterior-title"
+      text="Crinis Anterior"
     />
+    <ui:VisualElement
+      name="elementum-lapsor-faciei-crinis-anterior-container"
+      class="elementum-lapsor-faciei-crinis-anterior-container"
+    >
+      <!-- ここにParsPortusConstructionisLapsorFacieiCrinisをCloneTreeして挿入 -->
+    </ui:VisualElement>
+
+    <ui:Label
+      name="elementum-lapsor-faciei-crinis-posterior-title"
+      class="label-h3 elementum-lapsor-faciei-crinis-posterior-title"
+      text="Crinis Posterior"
+    />
+    <ui:VisualElement
+      name="elementum-lapsor-faciei-crinis-posterior-container"
+      class="elementum-lapsor-faciei-crinis-posterior-container"
+    >
+      <!-- ここにParsPortusConstructionisLapsorFacieiCrinisをCloneTreeして挿入 -->
+    </ui:VisualElement>
   </ui:VisualElement>
 </ui:UXML>
