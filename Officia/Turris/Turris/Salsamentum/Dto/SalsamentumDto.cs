@@ -7,16 +7,20 @@ namespace Yulinti.Officia.Turris {
         public SalsamentumPuellaePersonaeDto PuellaePersonae { get; set; }
         [JsonProperty("puellae_formarum")]
         public SalsamentumPuellaeFormarumDto PuellaeFormarum { get; set; }
+        [JsonProperty("puellae_crinis")]
+        public SalsamentumPuellaeCrinisDto PuellaeCrinis { get; set; }
 
         public SalsamentumDto() {
             PuellaePersonae = new SalsamentumPuellaePersonaeDto();
             PuellaeFormarum = new SalsamentumPuellaeFormarumDto();
+            PuellaeCrinis = new SalsamentumPuellaeCrinisDto();
         }
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context) {
             PuellaePersonae ??= new SalsamentumPuellaePersonaeDto();
             PuellaeFormarum ??= new SalsamentumPuellaeFormarumDto();
+            PuellaeCrinis ??= new SalsamentumPuellaeCrinisDto();
         }
     }
 }

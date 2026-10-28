@@ -12,7 +12,7 @@ namespace Yulinti.Auctoritas.Senatus {
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ITurrisSoniVeli _turrisSoniVeli;
 
-        private readonly IResFluidaPuellaeFormaeLegibile _resFluidaPuellaeFormaeLegibile;
+        private readonly IPhantasmaPuellaeFormarumLegibile _phantasmaPuellaeFormarumLegibile;
         private readonly IScriniumPuellaeFormae _scriniumPuellaeFormae;
 
         private readonly OperatioPortusConstructionisLapsorCorporis _operatioPortusConstructionisLapsorCorporis;
@@ -27,7 +27,7 @@ namespace Yulinti.Auctoritas.Senatus {
             ITurrisSoniVeli turrisSoniVeli,
             OperatioPortusConstructionisLapsorCorporis operatioPortusConstructionisLapsorCorporis,
             CuratorVela curatorVela,
-            IResFluidaPuellaeFormaeLegibile resFluidaPuellaeFormaeLegibile,
+            IPhantasmaPuellaeFormarumLegibile phantasmaPuellaeFormarumLegibile,
             IScriniumPuellaeFormae scriniumPuellaeFormae
         ) {
             _velumPortusConstructionisLapsorCorporis = velumPortusConstructionisLapsorCorporis;
@@ -35,7 +35,7 @@ namespace Yulinti.Auctoritas.Senatus {
             _turrisSoniVeli = turrisSoniVeli;
             _operatioPortusConstructionisLapsorCorporis = operatioPortusConstructionisLapsorCorporis;
             _curatorVela = curatorVela;
-            _resFluidaPuellaeFormaeLegibile = resFluidaPuellaeFormaeLegibile;
+            _phantasmaPuellaeFormarumLegibile = phantasmaPuellaeFormarumLegibile;
             _scriniumPuellaeFormae = scriniumPuellaeFormae;
 
             _operatioPortusConstructionisLapsorCorporis.Initiare(Executare, ExecutareValoris);
@@ -84,7 +84,7 @@ namespace Yulinti.Auctoritas.Senatus {
                     return Task.CompletedTask;
                 }
 
-                float currens = _resFluidaPuellaeFormaeLegibile.RatioActualis(IDPuellaeFormae.Corpus);
+                float currens = _phantasmaPuellaeFormarumLegibile.RatioActualis(IDPuellaeFormae.Corpus);
                 if (MathF.Abs(currens - valor) < 0.01) {
                     return Task.CompletedTask;
                 }

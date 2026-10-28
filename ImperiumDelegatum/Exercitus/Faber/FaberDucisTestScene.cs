@@ -16,9 +16,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ResFluidaPuellaeSpectaculi>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
-            builder.Register<ResFluidaPuellaeFormae>(Lifetime.Singleton)
-                .AsSelf()
-                .AsImplementedInterfaces();
 
             builder.Register<ResFluidaPuellaeLegibile>(Lifetime.Singleton)
                 .AsSelf()
@@ -37,9 +34,6 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ResFluidaCivisLegibile>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
-
-            // ContextusSalsamenti
-            builder.Register<IContextusSalsamenti, ContextusSalsamenti>(Lifetime.Singleton);
 
             // Carrus
             builder.Register<CarrusPuellaeAnimationis>(Lifetime.Singleton)

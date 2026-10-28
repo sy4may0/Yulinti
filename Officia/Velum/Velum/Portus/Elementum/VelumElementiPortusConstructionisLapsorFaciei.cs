@@ -16,16 +16,44 @@ namespace Yulinti.Officia.Velum {
         private VisualElement _containerPortusConstructionis;
         private VisualElement _elementum;
 
+        private VisualElement _containerPortusConstructionisPulsabulumCrinisAnterior;
+        private VisualElement _containerPortusConstructionisPulsabulumCrinisPosterior;
+
+        private readonly VelumParsPortusConstructionisPulsabulumCrinisAnterior[] _parsPortusConstructionisPulsabulumCrinisAnterior;
+        private readonly VelumParsPortusConstructionisPulsabulumCrinisPosterior[] _parsPortusConstructionisPulsabulumCrinisPosterior;
+
         public VelumElementiPortusConstructionisLapsorFaciei(
             IAnchoraVelumConstructionis anchoraVelumConstructionis,
             ITurrisInterpretationis turrisInterpretationis,
             ApplicatorSoniVeli applicatorSoniVeli,
-            IOperatioPortusConstructionisLapsorFaciei operatioPortusConstructionisLapsorFaciei
+            IOperatioPortusConstructionisLapsorFaciei operatioPortusConstructionisLapsorFaciei,
+            IOperatioPortusConstructionisPulsabulumCrinisAnterior operatioPortusConstructionisPulsabulumCrinisAnterior,
+            IOperatioPortusConstructionisPulsabulumCrinisPosterior operatioPortusConstructionisPulsabulumCrinisPosterior,
+            IConfiguratioVelumPuellaeCrinisAnterior[] configuratioVelumPuellaeCrinisAnterior,
+            IConfiguratioVelumPuellaeCrinisPosterior[] configuratioVelumPuellaeCrinisPosterior
         ) {
             _anchoraVelumConstructionis = anchoraVelumConstructionis;
             _turrisInterpretationis = turrisInterpretationis;
             _applicatorSoniVeli = applicatorSoniVeli;
             _operatioPortusConstructionisLapsorFaciei = operatioPortusConstructionisLapsorFaciei;
+
+            _parsPortusConstructionisPulsabulumCrinisAnterior = new VelumParsPortusConstructionisPulsabulumCrinisAnterior[configuratioVelumPuellaeCrinisAnterior.Length];
+            _parsPortusConstructionisPulsabulumCrinisPosterior = new VelumParsPortusConstructionisPulsabulumCrinisPosterior[configuratioVelumPuellaeCrinisPosterior.Length];
+
+            for (int i = 0; i < configuratioVelumPuellaeCrinisAnterior.Length; i++) {
+                _parsPortusConstructionisPulsabulumCrinisAnterior[i] = new VelumParsPortusConstructionisPulsabulumCrinisAnterior(
+                    _anchoraVelumConstructionis,
+                    configuratioVelumPuellaeCrinisAnterior[i],
+                    operatioPortusConstructionisPulsabulumCrinisAnterior
+                );
+            }
+            for (int i = 0; i < configuratioVelumPuellaeCrinisPosterior.Length; i++) {
+                _parsPortusConstructionisPulsabulumCrinisPosterior[i] = new VelumParsPortusConstructionisPulsabulumCrinisPosterior(
+                    _anchoraVelumConstructionis,
+                    configuratioVelumPuellaeCrinisPosterior[i],
+                    operatioPortusConstructionisPulsabulumCrinisPosterior
+                );
+            }
         }
 
         public void Incipere() {
@@ -41,6 +69,19 @@ namespace Yulinti.Officia.Velum {
             _elementum.focusable = true;
             _elementum.tabIndex = 0;
             _elementum.pickingMode = PickingMode.Position;
+
+            // Crinisボタンを配置
+            _containerPortusConstructionisPulsabulumCrinisAnterior = _elementum.Q<VisualElement>("elementum-lapsor-faciei-crinis-anterior-container");
+            _containerPortusConstructionisPulsabulumCrinisPosterior = _elementum.Q<VisualElement>("elementum-lapsor-faciei-crinis-posterior-container");
+
+            for (int i = 0; i < _parsPortusConstructionisPulsabulumCrinisAnterior.Length; i++) {
+                _parsPortusConstructionisPulsabulumCrinisAnterior[i].Incipere(_containerPortusConstructionisPulsabulumCrinisAnterior);
+                _parsPortusConstructionisPulsabulumCrinisAnterior[i].Activare();
+            }
+            for (int i = 0; i < _parsPortusConstructionisPulsabulumCrinisPosterior.Length; i++) {
+                _parsPortusConstructionisPulsabulumCrinisPosterior[i].Incipere(_containerPortusConstructionisPulsabulumCrinisPosterior);
+                _parsPortusConstructionisPulsabulumCrinisPosterior[i].Activare();
+            }
 
             _containerPortusConstructionis.Add(_elementum);
 

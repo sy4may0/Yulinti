@@ -5,15 +5,20 @@ using Yulinti.Nucleus.Contractus;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ExecutorPuellaeCrinis : IExecutorPuellae {
+        //Unity側更新IF
         private readonly IOstiumPuellaeCrinisMutabile _ostiumPuellaeCrinisMutabile;
+        //セーブデータ更新IF
+        private readonly ITurrisPhantasmaPuellaeCrinis _turrisPhantasmaPuellaeCrinis;
 
         private Ordo<IOrdinatioPuellaeCrinisCollectionisAnterior> _queueCrinisAnterior;
         private Ordo<IOrdinatioPuellaeCrinisCollectionisPosterior> _queueCrinisPosterior;
 
         public ExecutorPuellaeCrinis(
-            IOstiumPuellaeCrinisMutabile ostiumPuellaeCrinisMutabile
+            IOstiumPuellaeCrinisMutabile ostiumPuellaeCrinisMutabile,
+            ITurrisPhantasmaPuellaeCrinis turrisPhantasmaPuellaeCrinis
         ) {
             _ostiumPuellaeCrinisMutabile = ostiumPuellaeCrinisMutabile;
+            _turrisPhantasmaPuellaeCrinis = turrisPhantasmaPuellaeCrinis;
             _queueCrinisAnterior = new Ordo<IOrdinatioPuellaeCrinisCollectionisAnterior>(
                 ConstansPuellae.LongitudoOrdinatioCrinis
             );
@@ -27,6 +32,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             _ostiumPuellaeCrinisMutabile.DeletoPosterior();
             _queueCrinisAnterior.Purgere();
             _queueCrinisPosterior.Purgere();
+            // Phantasmaはシーン跨ぎだから初期化で触らないこと。
         }
 
         public void Primum() {
@@ -55,9 +61,15 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
         public void Confirmare() {
             while (_queueCrinisAnterior.ConareLego(out IOrdinatioPuellaeCrinisCollectionisAnterior crinisAnterior)) {
                 _ostiumPuellaeCrinisMutabile.Muto(crinisAnterior.IdCrinisCollectionisAnterior);
+                _turrisPhantasmaPuellaeCrinis.PonoCrinisAnterior(
+                    crinisAnterior.IdCrinisCollectionisAnterior
+                );
             }
             while (_queueCrinisPosterior.ConareLego(out IOrdinatioPuellaeCrinisCollectionisPosterior crinisPosterior)) {
                 _ostiumPuellaeCrinisMutabile.Muto(crinisPosterior.IdCrinisCollectionisPosterior);
+                _turrisPhantasmaPuellaeCrinis.PonoCrinisPosterior(
+                    crinisPosterior.IdCrinisCollectionisPosterior
+                );
             }
         }
 

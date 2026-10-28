@@ -298,8 +298,7 @@ namespace Yulinti.Nucleus.Contractus {
         public const string TabulaSoniVeli_TABULASONIVELI_SONUS_NOT_FOUND = "TabulaSoniVeli - sonus not found";
         public const string SonusVeli_SONUSVELI_SONUS_NULL = "SonusVeli - sonus null";
         public const string Temporis_TEMPORIS_INSTANCE_NULL = "Temporis - instance null";
-        public const string ResFluidaPuellaeFormae_LEGERE_NIHIL = "ResFluidaPuellaeFormae - legere nihil";
-        public const string ResFluidaPuellaeFormae_SALSAMENTUM_ACTUALIS_NULL = "ResFluidaPuellaeFormae - salsamentum actualis null";
+        public const string PhantasmaPuellaeFormarum_LEGERE_NIHIL = "PhantasmaPuellaeFormarum - legere nihil";
         public const string PraecoSalsamenti_EXECUTARE_USUS_INVALID = "PraecoSalsamenti - executare usus invalid";
         public const string PraecoSalsamenti_EXECUTARE_USUS_INVALID_NEED_GUID = "PraecoSalsamenti - executare usus invalid need guid";
         public const string TabulaRedittorPuellaeFigurae_TABULAREDITTORPUELLAEFIGURAE_SKINNED_MESH_RENDERER_NOT_FOUND = "TabulaRedittorPuellaeFigurae - skinned mesh renderer not found";

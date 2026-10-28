@@ -30,17 +30,6 @@ namespace Yulinti.Officia.Turris {
             _estActivum = true;
         }
 
-        // 内部からのデータ更新
-        public void Renovare(
-            Guid id, 
-            IContextusSalsamenti contextusSalsamenti
-        ) {
-            _id = id;
-            _timestamp = DateTime.Now;
-            _puellaePersonaeNotitiae.Renovare(contextusSalsamenti.PhantasmaPuellaePersonae);
-            _estActivum = true;
-        }
-
         public void Purgare() {
             _id = Guid.Empty;
             _timestamp = DateTime.MinValue;

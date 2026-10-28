@@ -75,6 +75,7 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
     }
 
     // このExecutorはシーン開始時に初期化、シーン完了時のリザルト処理でConfirmareを実行する。
+    // Servare の直前には Confirmare が済んでいる必要がある。
     internal sealed class ExecutorPuellaePersonae : IExecutorPuellae {
         private readonly ITurrisPhantasmaPuellaePersonae _turrisPhantasmaPuellaePersonae;
         private readonly PhantasmaDtAnimae _phantasmaDtAnimae;

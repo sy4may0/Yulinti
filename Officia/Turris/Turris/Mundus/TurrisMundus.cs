@@ -2,7 +2,7 @@ using Yulinti.ImperiumDelegatum.Contractus;
 using UnityEngine.SceneManagement;
 namespace Yulinti.Officia.Turris {
     public sealed class TurrisMundus : ITurrisMundus, ITurrisIncipabilis {
-        public TurrisMundus() {
+        public TurrisMundus(ITurrisSalsamenti turrisSalsamenti) {
         }
 
         // メニューからの遷移はここで行う。

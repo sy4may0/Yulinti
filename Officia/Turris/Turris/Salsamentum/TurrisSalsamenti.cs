@@ -11,16 +11,19 @@ using System;
 namespace Yulinti.Officia.Turris {
     internal sealed class TurrisSalsamenti : ITurrisSalsamenti, ITurrisSalsamentiLegibile {
         private readonly ILuditorDataServanda<SalsamentumNotitiaeDto, SalsamentumDto> _luditorDataServanda;
-        private readonly OstiumSalsamenti _ostiumSalsamentiActualis;
-        private readonly OstiumSalsamentiNotitiae _ostiumSalsamentiNotitiaeActualis;
+        private readonly TabulaPhantasma _tabulaPhantasma;
+
+        private Guid _idActualis;
 
         // キャッシュ。
         private List<IOstiumSalsamentiNotitiae> _notitiaManualis = new List<IOstiumSalsamentiNotitiae>();
         private List<IOstiumSalsamentiNotitiae> _notitiaAutomaticus = new List<IOstiumSalsamentiNotitiae>();
 
-        public TurrisSalsamenti() {
-            _ostiumSalsamentiActualis = new OstiumSalsamenti();
-            _ostiumSalsamentiNotitiaeActualis = new OstiumSalsamentiNotitiae();
+        public TurrisSalsamenti(
+            TabulaPhantasma tabulaPhantasma
+        ) {
+            _tabulaPhantasma = tabulaPhantasma;
+            _idActualis = Guid.Empty;
 
             string dirPath = Path.Combine(Application.persistentDataPath, ConstansTurris.DirPathSalsamentum);
             _luditorDataServanda = FabricaLuditorDataServanda.Creare<SalsamentumNotitiaeDto, SalsamentumDto>(
@@ -114,34 +117,33 @@ namespace Yulinti.Officia.Turris {
             return _notitiaAutomaticus;
         }
 
-        // P2 Load セーブデータを取得してキャッシュ。
+        // P2 Load セーブデータを取得して Phantasma に反映。
         public async Task Arcessere(Guid id, CancellationToken ct = default) {
-            IDataNotitia<SalsamentumNotitiaeDto> notitia = await _luditorDataServanda.ArcessereNotitiam(id, ct);
             IDataServanda<SalsamentumDto> servanda = await _luditorDataServanda.Arcessere(id, ct);
-            if (notitia == null) throw new Exception("No Notitia");
             if (servanda == null) throw new Exception("No Servanda");
-            // Renovareはキャストが必要。
-            ((OstiumSalsamentiNotitiae)_ostiumSalsamentiNotitiaeActualis).Renovare(id, notitia.Timestamp, notitia.Notitia);
-            ((OstiumSalsamenti)_ostiumSalsamentiActualis).Renovare(id, servanda.Timestamp, servanda.Data);
+            _tabulaPhantasma.Renovare(servanda.Data);
+            _idActualis = id;
         }
 
         /// <summary> P3 削除したらリロードしないとNotitiaは更新されないよ。 </summary>
         public async Task Deleto(Guid id, CancellationToken ct = default) {
             await _luditorDataServanda.Deleto(id, ct);
+            if (_idActualis == id) {
+                _idActualis = Guid.Empty;
+            }
         }
 
         /// <summary> P2-Ex1 これを実行した時点で新セーブデータがロードされるよ。 </summary>
         public async Task<Guid> Creare(CancellationToken ct = default) {
-            OstiumSalsamentiNotitiae notitia = new OstiumSalsamentiNotitiae();
-            OstiumSalsamenti salsamenti = new OstiumSalsamenti();
+            _tabulaPhantasma.Purgare();
 
             Guid id = await _luditorDataServanda.CreareManualis(
-                notitia.SalsamentumNotitiaeDto,
-                salsamenti.SalsamentumDto,
+                _tabulaPhantasma.CreareNotitiaeDto(),
+                _tabulaPhantasma.CreareDto(),
                 ct
             );
 
-            await Arcessere(id, ct);
+            _idActualis = id;
             return id;
         }
 
@@ -154,68 +156,28 @@ namespace Yulinti.Officia.Turris {
         }
 
         // P5 セーブデータをセーブ。
-        public async Task<Guid> Servare(
-            Guid id,
-            IContextusSalsamenti contextusSalsamenti,
-            CancellationToken ct = default
-        ) {
-            _ostiumSalsamentiActualis.Renovare(id, contextusSalsamenti);
-            _ostiumSalsamentiNotitiaeActualis.Renovare(id, contextusSalsamenti);
+        public async Task<Guid> Servare(CancellationToken ct = default) {
+            if (_idActualis == Guid.Empty) throw new Exception("No Current Save Data");
             Guid idServanda = await _luditorDataServanda.Servare(
-                id,
-                _ostiumSalsamentiNotitiaeActualis.SalsamentumNotitiaeDto,
-                _ostiumSalsamentiActualis.SalsamentumDto,
+                _idActualis,
+                _tabulaPhantasma.CreareNotitiaeDto(),
+                _tabulaPhantasma.CreareDto(),
                 ct
             );
 
+            _idActualis = idServanda;
             return idServanda;
         }
 
         // P5-ex オートセーブデータをセーブ。
-        public async Task<Guid> ServareAutomaticus(
-            IContextusSalsamenti contextusSalsamenti,
-            CancellationToken ct = default
-        ) {
-            // この時点でidは取れていない。
-            _ostiumSalsamentiActualis.Renovare(
-                _ostiumSalsamentiActualis.Id,
-                contextusSalsamenti
-            );
-            _ostiumSalsamentiNotitiaeActualis.Renovare(
-                _ostiumSalsamentiNotitiaeActualis.Id,
-                contextusSalsamenti
-            );
+        public async Task<Guid> ServareAutomaticus(CancellationToken ct = default) {
             Guid idServanda = await _luditorDataServanda.CreareAutomaticus(
-                _ostiumSalsamentiNotitiaeActualis.SalsamentumNotitiaeDto,
-                _ostiumSalsamentiActualis.SalsamentumDto,
+                _tabulaPhantasma.CreareNotitiaeDto(),
+                _tabulaPhantasma.CreareDto(),
                 ct
             );
-            // この時点でidは取れている。
-            _ostiumSalsamentiActualis.Renovare(
-                idServanda,
-                contextusSalsamenti
-            );
-            _ostiumSalsamentiNotitiaeActualis.Renovare(
-                idServanda,
-                contextusSalsamenti
-            );
-
+            _idActualis = idServanda;
             return idServanda;
-        }
-
-        public IOstiumSalsamenti Actualis => _ostiumSalsamentiActualis;
-
-        /// <summary> セーブデータが存在するかどうかを確認する。 </summary>
-        /// <param name="actualis">セーブデータ</param>
-        /// <returns>セーブデータが存在するかどうか</returns>
-        /// <remarks>セーブデータが存在しない場合はデフォルトセーブデータを返す。</remarks>
-        public bool ConareActualis(out IOstiumSalsamenti actualis) {
-            if (_ostiumSalsamentiActualis.EstActivum) {
-                actualis = _ostiumSalsamentiActualis;
-                return true;
-            }
-            actualis = _ostiumSalsamentiActualis;
-            return false;
         }
     }
 }

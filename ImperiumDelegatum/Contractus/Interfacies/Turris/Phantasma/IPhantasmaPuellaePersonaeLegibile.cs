@@ -1,5 +1,5 @@
 namespace Yulinti.ImperiumDelegatum.Contractus {
-    public interface IPhantasmaPuellaePersonae {
+    public interface IPhantasmaPuellaePersonaeLegibile {
         public int GradusLuxuriosus { get; }
         public int AnimaLuxuriosus { get; }
         public int GradusExhibitus { get; }
@@ -8,7 +8,7 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         public int AnimaPerversus { get; }
         public int GradusQuaeritDolore { get; }
         public int AnimaQuaeritDolore { get; }
-        
+
         public int SensusPapillae { get; }
         public int AnimaPapillae { get; }
         public int SensusLandicae { get; }
@@ -21,11 +21,5 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         public int AnimaAusculum { get; }
         public int SensusCorporis { get; }
         public int AnimaCorporis { get; }
-
-        // AnimaからGradus/Sensusを決定する。セーブ前に実行する。
-        public void Normare();
-
-        // 正規化済みかどうか。
-        public bool EstNormalis();
     }
 }

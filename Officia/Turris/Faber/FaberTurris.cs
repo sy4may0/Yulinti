@@ -1,7 +1,6 @@
 using VContainer;
 using VContainer.Unity;
 using System;
-using Yulinti.ImperiumDelegatum.Contractus;
 using Yulinti.Officia.Contractus;
 
 namespace Yulinti.Officia.Turris {
@@ -26,6 +25,7 @@ namespace Yulinti.Officia.Turris {
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            builder.Register<TabulaPhantasma>(Lifetime.Singleton);
             builder.Register<TurrisSalsamenti>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
@@ -35,8 +35,22 @@ namespace Yulinti.Officia.Turris {
                 .AsImplementedInterfaces();
 
             builder.Register<ResolutorPuellaePersonae>(Lifetime.Singleton);
-            builder.Register<IPhantasmaPuellaePersonae, PhantasmaPuellaePersonae>(Lifetime.Singleton);
+            builder.Register<PhantasmaPuellaePersonae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
             builder.Register<TurrisPhantasmaPuellaePersonae>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<PhantasmaPuellaeFormarum>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<TurrisPhantasmaPuellaeFormarum>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<PhantasmaPuellaeCrinis>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+            builder.Register<TurrisPhantasmaPuellaeCrinis>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 

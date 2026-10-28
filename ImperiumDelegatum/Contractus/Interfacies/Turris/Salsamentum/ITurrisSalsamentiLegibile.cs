@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
-using System;
 
 namespace Yulinti.ImperiumDelegatum.Contractus {
     public interface ITurrisSalsamentiLegibile {
@@ -9,9 +8,6 @@ namespace Yulinti.ImperiumDelegatum.Contractus {
         int LongitudoManualisMaxima { get; }
         Task<int> LongitudoAutomaticus(CancellationToken ct = default);
         int LongitudoAutomaticusMaxima { get; }
-
-        IOstiumSalsamenti Actualis { get; }
-        bool ConareActualis(out IOstiumSalsamenti actualis);
 
         Task<bool> EstNovissimus(CancellationToken ct = default);
 

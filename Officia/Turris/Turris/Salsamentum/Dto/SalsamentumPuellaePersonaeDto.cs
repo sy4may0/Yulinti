@@ -1,6 +1,4 @@
-using System;
 using Newtonsoft.Json;
-using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.Officia.Turris {
     internal sealed class SalsamentumPuellaePersonaeDto {
@@ -66,29 +64,6 @@ namespace Yulinti.Officia.Turris {
             AnimaAusculum = 0;
             SensusCorporis = 1;
             AnimaCorporis = 0;
-        }
-
-        public void Renovare(IPhantasmaPuellaePersonae phantasmaPuellaePersonae) {
-            GradusLuxuriosus = phantasmaPuellaePersonae.GradusLuxuriosus;
-            AnimaLuxuriosus = phantasmaPuellaePersonae.AnimaLuxuriosus;
-            GradusExhibitus = phantasmaPuellaePersonae.GradusExhibitus;
-            AnimaExhibitus = phantasmaPuellaePersonae.AnimaExhibitus;
-            GradusPerversus = phantasmaPuellaePersonae.GradusPerversus;
-            AnimaPerversus = phantasmaPuellaePersonae.AnimaPerversus;
-            GradusQuaeritDolore = phantasmaPuellaePersonae.GradusQuaeritDolore;
-            AnimaQuaeritDolore = phantasmaPuellaePersonae.AnimaQuaeritDolore;
-            SensusPapillae = phantasmaPuellaePersonae.SensusPapillae;
-            AnimaPapillae = phantasmaPuellaePersonae.AnimaPapillae;
-            SensusLandicae = phantasmaPuellaePersonae.SensusLandicae;
-            AnimaLandicae = phantasmaPuellaePersonae.AnimaLandicae;
-            SensusVaginae = phantasmaPuellaePersonae.SensusVaginae;
-            AnimaVaginae = phantasmaPuellaePersonae.AnimaVaginae;
-            SensusAni = phantasmaPuellaePersonae.SensusAni;
-            AnimaAni = phantasmaPuellaePersonae.AnimaAni;
-            SensusAusculum = phantasmaPuellaePersonae.SensusAusculum;
-            AnimaAusculum = phantasmaPuellaePersonae.AnimaAusculum;
-            SensusCorporis = phantasmaPuellaePersonae.SensusCorporis;
-            AnimaCorporis = phantasmaPuellaePersonae.AnimaCorporis;
         }
     }
 }

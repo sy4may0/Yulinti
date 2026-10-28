@@ -1,39 +1,43 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Nucleus;
 using Yulinti.Nucleus.Instrumentarium;
 using Yulinti.Nucleus.Contractus;
 using System;
 
 namespace Yulinti.ImperiumDelegatum.Exercitus {
     internal sealed class ExecutorPuellaeFormae : IExecutorPuellae {
-        private ResFluidaPuellaeFormae _resFluidaFormae;
+        private readonly ITurrisPhantasmaPuellaeFormarum _turrisPhantasmaPuellaeFormarum;
+        private readonly IPhantasmaPuellaeFormarumLegibile _phantasmaPuellaeFormarumLegibile;
         private IOstiumPuellaeFormaeMutabile _ostiumPuellaeFormaeMutabile;
         // Enum.GetValuesのキャッシュ。
         private IDPuellaeFormae[] _idFormaeActualis;
 
         private Ordo<IOrdinatioPuellaeFormae> _queueFormae;
+        private bool _estApplicandum;
 
         public ExecutorPuellaeFormae(
-            ResFluidaPuellaeFormae resFluidaFormae,
+            ITurrisPhantasmaPuellaeFormarum turrisPhantasmaPuellaeFormarum,
+            IPhantasmaPuellaeFormarumLegibile phantasmaPuellaeFormarumLegibile,
             IOstiumPuellaeFormaeMutabile ostiumPuellaeFormaeMutabile
         ) {
-            _resFluidaFormae = resFluidaFormae;
+            _turrisPhantasmaPuellaeFormarum = turrisPhantasmaPuellaeFormarum;
+            _phantasmaPuellaeFormarumLegibile = phantasmaPuellaeFormarumLegibile;
             _queueFormae = new Ordo<IOrdinatioPuellaeFormae>(
                 ConstansPuellae.LongitudoOrdinatioFormae
             );
             _idFormaeActualis = Enum.GetValues(typeof(IDPuellaeFormae)) as IDPuellaeFormae[];
             _ostiumPuellaeFormaeMutabile = ostiumPuellaeFormaeMutabile;
+            _estApplicandum = false;
         }
 
         public void Initare() {
             _queueFormae.Purgere();
-            // 初回適用
+            // 初回適用。シーン開始時、Phantasma にはロード済みの値が入っている前提。
             ApplicareFormae();
         }
 
         public void Primum() {
             _queueFormae.Purgere();
-            _resFluidaFormae.ApplicatumEst();
+            _estApplicandum = false;
         }
 
         public void Executare(
@@ -47,13 +51,14 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
 
         public void Confirmare() {
             while (_queueFormae.ConareLego(out IOrdinatioPuellaeFormae formae)) {
-                _resFluidaFormae.RenovareRatioActualis(
+                _turrisPhantasmaPuellaeFormarum.PonoRationem(
                     formae.IdFormae, formae.RatioDesiderata
                 );
+                _estApplicandum = true;
             }
 
             // Dirtyフラグが立っている場合、Formaeを適用する。
-            if (_resFluidaFormae.EstApplicandum) {
+            if (_estApplicandum) {
                 ApplicareFormae();
             }
         }
@@ -67,10 +72,12 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
                 if (idFormae == IDPuellaeFormae.Nihil) {
                     continue;
                 }
-                _ostiumPuellaeFormaeMutabile.PonoRationem(idFormae, _resFluidaFormae.RatioActualis(idFormae));
+                _ostiumPuellaeFormaeMutabile.PonoRationem(
+                    idFormae,
+                    _phantasmaPuellaeFormarumLegibile.RatioActualis(idFormae)
+                );
             }
-            _resFluidaFormae.ApplicatumEst();
-
+            _estApplicandum = false;
         }
     }
 }

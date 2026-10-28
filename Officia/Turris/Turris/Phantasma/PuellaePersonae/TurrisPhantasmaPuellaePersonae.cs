@@ -1,21 +1,13 @@
 using Yulinti.ImperiumDelegatum.Contractus;
-using Yulinti.Officia.Contractus;
 
 namespace Yulinti.Officia.Turris {
-    // PuellaePersonae の Anima 加算窓口。
-    // Gradus/Sensus の算出自体は ResolutorPuellaePersonae が担当し、
-    // Legere() で取得した PhantasmaPuellaePersonae に対して Normare() を呼ぶと確定する。
-    public sealed class TurrisPhantasmaPuellaePersonae : ITurrisPhantasmaPuellaePersonae {
+    internal sealed class TurrisPhantasmaPuellaePersonae : ITurrisPhantasmaPuellaePersonae {
         private readonly PhantasmaPuellaePersonae _phantasmaPuellaePersonae;
 
         public TurrisPhantasmaPuellaePersonae(
-            IPhantasmaPuellaePersonae phantasmaPuellaePersonae
+            PhantasmaPuellaePersonae phantasmaPuellaePersonae
         ) {
-            _phantasmaPuellaePersonae = (PhantasmaPuellaePersonae)phantasmaPuellaePersonae;
-        }
-
-        public void Initare(IOstiumSalsamentiPuellaePersonae ostiumSalsamentiPuellae) {
-            _phantasmaPuellaePersonae.Initare(ostiumSalsamentiPuellae);
+            _phantasmaPuellaePersonae = phantasmaPuellaePersonae;
         }
 
         public void AddeAnimamGradus(IDGradusPuellaePersonae idGradusPuellaePersonae, int anima) {
@@ -43,6 +35,7 @@ namespace Yulinti.Officia.Turris {
                 default:
                     break;
             }
+            _phantasmaPuellaePersonae.Normare();
         }
 
         public void AddeAnimamSensus(IDSensusPuellaePersonae idSensusPuellaePersonae, int anima) {
@@ -80,10 +73,7 @@ namespace Yulinti.Officia.Turris {
                 default:
                     break;
             }
-        }
-
-        public IPhantasmaPuellaePersonae Legere() {
-            return _phantasmaPuellaePersonae;
+            _phantasmaPuellaePersonae.Normare();
         }
     }
 }

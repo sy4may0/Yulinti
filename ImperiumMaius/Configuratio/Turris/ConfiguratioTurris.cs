@@ -7,9 +7,11 @@ namespace Yulinti.ImperiumMaius.Configuratio {
         [SerializeField] private ConfiguratioTurrisPhantasma phantasma;
         [SerializeField] private ConfiguratioSonorumVeli sonorumVeli;
         [SerializeField] private ConfiguratioCorrectrix correctrix;
+        [SerializeField] private ConfiguratioTurrisPhantasmaeInitialis phantasmaeInitialis;
 
         public IConfiguratioTurrisPhantasma Phantasma => phantasma;
         public IConfiguratioSonorumVeli SonorumVeli => sonorumVeli;
         public IConfiguratioCorrectrix Correctrix => correctrix;
+        public IConfiguratioTurrisPhantasmaeInitialis PhantasmaeInitialis => phantasmaeInitialis;
     }
 }

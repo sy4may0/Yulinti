@@ -10,7 +10,7 @@ namespace Yulinti.Officia.Velum {
         private readonly ITurrisInterpretationis _turrisInterpretationis;
         private readonly ApplicatorSoniVeli _applicatorSoniVeli;
         private readonly IOperatioPortusConstructionisLapsorCorporis _operatioPortusConstructionisLapsorCorporis;
-        private readonly IResFluidaPuellaeFormaeLegibile _resFluidaPuellaeFormaeLegibile;
+        private readonly IPhantasmaPuellaeFormarumLegibile _phantasmaPuellaeFormarumLegibile;
 
         private UIDocument _uiPortusConstructionis;
         private VisualTreeAsset _elementumLapsorCorporis;
@@ -26,13 +26,13 @@ namespace Yulinti.Officia.Velum {
             ITurrisInterpretationis turrisInterpretationis,
             ApplicatorSoniVeli applicatorSoniVeli,
             IOperatioPortusConstructionisLapsorCorporis operatioPortusConstructionisLapsorCorporis,
-            IResFluidaPuellaeFormaeLegibile resFluidaPuellaeFormaeLegibile
+            IPhantasmaPuellaeFormarumLegibile phantasmaPuellaeFormarumLegibile
         ) {
             _anchoraVelumConstructionis = anchoraVelumConstructionis;
             _turrisInterpretationis = turrisInterpretationis;
             _applicatorSoniVeli = applicatorSoniVeli;
             _operatioPortusConstructionisLapsorCorporis = operatioPortusConstructionisLapsorCorporis;
-            _resFluidaPuellaeFormaeLegibile = resFluidaPuellaeFormaeLegibile;
+            _phantasmaPuellaeFormarumLegibile = phantasmaPuellaeFormarumLegibile;
         }
 
         public void Incipere() {
@@ -82,7 +82,7 @@ namespace Yulinti.Officia.Velum {
         }
 
         private void renovareLapsor() {
-            _sliderLapsorCorporis.value = _resFluidaPuellaeFormaeLegibile.RatioActualis(IDPuellaeFormae.Corpus);
+            _sliderLapsorCorporis.value = _phantasmaPuellaeFormarumLegibile.RatioActualis(IDPuellaeFormae.Corpus);
         }
 
         private void premereLapsorCorporis(ChangeEvent<float> evt) {

@@ -1,8 +1,7 @@
 using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.Officia.Turris {
-    // 更新データを保持するクラス。
-    internal sealed class PhantasmaPuellaePersonae : IPhantasmaPuellaePersonae {
+    internal sealed class PhantasmaPuellaePersonae : IPhantasmaPuellaePersonaeLegibile, IPhantasmaSalsamenti {
         private readonly ResolutorPuellaePersonae _resolutorPuellaePersonae;
 
         private int _gradusLuxuriosus;
@@ -27,33 +26,9 @@ namespace Yulinti.Officia.Turris {
         private int _sensusCorporis;
         private int _animaCorporis;
 
-        private bool _estNormalis;
-
         public PhantasmaPuellaePersonae(ResolutorPuellaePersonae resolutorPuellaePersonae) {
             _resolutorPuellaePersonae = resolutorPuellaePersonae;
-            _gradusLuxuriosus = 0;
-            _animaLuxuriosus = 0;
-            _gradusExhibitus = 0;
-            _animaExhibitus = 0;
-            _gradusPerversus = 0;
-            _animaPerversus = 0;
-            _gradusQuaeritDolore = 0;
-            _animaQuaeritDolore = 0;
-
-            _sensusPapillae = 0;
-            _animaPapillae = 0;
-            _sensusLandicae = 0;
-            _animaLandicae = 0;
-            _sensusVaginae = 0;
-            _animaVaginae = 0;
-            _sensusAni = 0;
-            _animaAni = 0;
-            _sensusAusculum = 0;
-            _animaAusculum = 0;
-            _sensusCorporis = 0;
-            _animaCorporis = 0;
-
-            _estNormalis = false;
+            Purgare();
         }
 
         public int GradusLuxuriosus => _gradusLuxuriosus;
@@ -77,33 +52,85 @@ namespace Yulinti.Officia.Turris {
         public int SensusCorporis => _sensusCorporis;
         public int AnimaCorporis => _animaCorporis;
 
-        public void Initare(IOstiumSalsamentiPuellaePersonae ostiumSalsamentiPuellae) {
-            _gradusLuxuriosus = ostiumSalsamentiPuellae.GradusLuxuriosus;
-            _animaLuxuriosus = ostiumSalsamentiPuellae.AnimaLuxuriosus;
-            _gradusExhibitus = ostiumSalsamentiPuellae.GradusExhibitus;
-            _animaExhibitus = ostiumSalsamentiPuellae.AnimaExhibitus;
-            _gradusPerversus = ostiumSalsamentiPuellae.GradusPerversus;
-            _animaPerversus = ostiumSalsamentiPuellae.AnimaPerversus;
-            _gradusQuaeritDolore = ostiumSalsamentiPuellae.GradusQuaeritDolore;
-            _animaQuaeritDolore = ostiumSalsamentiPuellae.AnimaQuaeritDolore;
+        public void Renovare(SalsamentumDto dto) {
+            _gradusLuxuriosus = dto.PuellaePersonae.GradusLuxuriosus;
+            _animaLuxuriosus = dto.PuellaePersonae.AnimaLuxuriosus;
+            _gradusExhibitus = dto.PuellaePersonae.GradusExhibitus;
+            _animaExhibitus = dto.PuellaePersonae.AnimaExhibitus;
+            _gradusPerversus = dto.PuellaePersonae.GradusPerversus;
+            _animaPerversus = dto.PuellaePersonae.AnimaPerversus;
+            _gradusQuaeritDolore = dto.PuellaePersonae.GradusQuaeritDolore;
+            _animaQuaeritDolore = dto.PuellaePersonae.AnimaQuaeritDolore;
 
-            _sensusPapillae = ostiumSalsamentiPuellae.SensusPapillae;
-            _animaPapillae = ostiumSalsamentiPuellae.AnimaPapillae;
-            _sensusLandicae = ostiumSalsamentiPuellae.SensusLandicae;
-            _animaLandicae = ostiumSalsamentiPuellae.AnimaLandicae;
-            _sensusVaginae = ostiumSalsamentiPuellae.SensusVaginae;
-            _animaVaginae = ostiumSalsamentiPuellae.AnimaVaginae;   
-            _sensusAni = ostiumSalsamentiPuellae.SensusAni;
-            _animaAni = ostiumSalsamentiPuellae.AnimaAni;
-            _sensusAusculum = ostiumSalsamentiPuellae.SensusAusculum;
-            _animaAusculum = ostiumSalsamentiPuellae.AnimaAusculum;
-            _sensusCorporis = ostiumSalsamentiPuellae.SensusCorporis;
-            _animaCorporis = ostiumSalsamentiPuellae.AnimaCorporis;
-
-            Normare();
+            _sensusPapillae = dto.PuellaePersonae.SensusPapillae;
+            _animaPapillae = dto.PuellaePersonae.AnimaPapillae;
+            _sensusLandicae = dto.PuellaePersonae.SensusLandicae;
+            _animaLandicae = dto.PuellaePersonae.AnimaLandicae;
+            _sensusVaginae = dto.PuellaePersonae.SensusVaginae;
+            _animaVaginae = dto.PuellaePersonae.AnimaVaginae;
+            _sensusAni = dto.PuellaePersonae.SensusAni;
+            _animaAni = dto.PuellaePersonae.AnimaAni;
+            _sensusAusculum = dto.PuellaePersonae.SensusAusculum;
+            _animaAusculum = dto.PuellaePersonae.AnimaAusculum;
+            _sensusCorporis = dto.PuellaePersonae.SensusCorporis;
+            _animaCorporis = dto.PuellaePersonae.AnimaCorporis;
         }
 
-        public void Normare() {
+        public void Imple(SalsamentumDto dto) {
+            dto.PuellaePersonae.GradusLuxuriosus = _gradusLuxuriosus;
+            dto.PuellaePersonae.AnimaLuxuriosus = _animaLuxuriosus;
+            dto.PuellaePersonae.GradusExhibitus = _gradusExhibitus;
+            dto.PuellaePersonae.AnimaExhibitus = _animaExhibitus;
+            dto.PuellaePersonae.GradusPerversus = _gradusPerversus;
+            dto.PuellaePersonae.AnimaPerversus = _animaPerversus;
+            dto.PuellaePersonae.GradusQuaeritDolore = _gradusQuaeritDolore;
+            dto.PuellaePersonae.AnimaQuaeritDolore = _animaQuaeritDolore;
+            dto.PuellaePersonae.SensusPapillae = _sensusPapillae;
+            dto.PuellaePersonae.AnimaPapillae = _animaPapillae;
+            dto.PuellaePersonae.SensusLandicae = _sensusLandicae;
+            dto.PuellaePersonae.AnimaLandicae = _animaLandicae;
+            dto.PuellaePersonae.SensusVaginae = _sensusVaginae;
+            dto.PuellaePersonae.AnimaVaginae = _animaVaginae;
+            dto.PuellaePersonae.SensusAni = _sensusAni;
+            dto.PuellaePersonae.AnimaAni = _animaAni;
+            dto.PuellaePersonae.SensusAusculum = _sensusAusculum;
+            dto.PuellaePersonae.AnimaAusculum = _animaAusculum;
+            dto.PuellaePersonae.SensusCorporis = _sensusCorporis;
+            dto.PuellaePersonae.AnimaCorporis = _animaCorporis;
+        }
+
+        internal void Imple(SalsamentumNotitiaeDto dto) {
+            dto.PuellaePersonaeNotitiae.GradusLuxuriosus = _gradusLuxuriosus;
+            dto.PuellaePersonaeNotitiae.GradusExhibitus = _gradusExhibitus;
+            dto.PuellaePersonaeNotitiae.GradusPerversus = _gradusPerversus;
+            dto.PuellaePersonaeNotitiae.GradusQuaeritDolore = _gradusQuaeritDolore;
+        }
+
+        public void Purgare() {
+            _gradusLuxuriosus = 1;
+            _animaLuxuriosus = 0;
+            _gradusExhibitus = 1;
+            _animaExhibitus = 0;
+            _gradusPerversus = 1;
+            _animaPerversus = 0;
+            _gradusQuaeritDolore = 1;
+            _animaQuaeritDolore = 0;
+
+            _sensusPapillae = 1;
+            _animaPapillae = 0;
+            _sensusLandicae = 1;
+            _animaLandicae = 0;
+            _sensusVaginae = 1;
+            _animaVaginae = 0;
+            _sensusAni = 1;
+            _animaAni = 0;
+            _sensusAusculum = 1;
+            _animaAusculum = 0;
+            _sensusCorporis = 1;
+            _animaCorporis = 0;
+        }
+
+        internal void Normare() {
             _gradusLuxuriosus = _resolutorPuellaePersonae.ResolvereGradum(_animaLuxuriosus);
             _gradusExhibitus = _resolutorPuellaePersonae.ResolvereGradum(_animaExhibitus);
             _gradusPerversus = _resolutorPuellaePersonae.ResolvereGradum(_animaPerversus);
@@ -115,61 +142,46 @@ namespace Yulinti.Officia.Turris {
             _sensusAni = _resolutorPuellaePersonae.ResolvereSensum(_animaAni);
             _sensusAusculum = _resolutorPuellaePersonae.ResolvereSensum(_animaAusculum);
             _sensusCorporis = _resolutorPuellaePersonae.ResolvereSensum(_animaCorporis);
-
-            _estNormalis = true;
         }
 
-        public bool EstNormalis() => _estNormalis;
-
-        public void RenovareAnimumGradusLuxuriosus(int animaLuxuriosus) {
+        internal void RenovareAnimumGradusLuxuriosus(int animaLuxuriosus) {
             _animaLuxuriosus = animaLuxuriosus;
-            _estNormalis = false;
         }
 
-        public void RenovareAnimumGradusExhibitus(int animaExhibitus) {
+        internal void RenovareAnimumGradusExhibitus(int animaExhibitus) {
             _animaExhibitus = animaExhibitus;
-            _estNormalis = false;
         }
 
-        public void RenovareAnimumGradusPerversus(int animaPerversus) {
+        internal void RenovareAnimumGradusPerversus(int animaPerversus) {
             _animaPerversus = animaPerversus;
-            _estNormalis = false;
         }
 
-        public void RenovareAnimumGradusQuaeritDolore(int animaQuaeritDolore) {
+        internal void RenovareAnimumGradusQuaeritDolore(int animaQuaeritDolore) {
             _animaQuaeritDolore = animaQuaeritDolore;
-            _estNormalis = false;
         }
 
-        public void RenovareAnimumSensusPapillae(int animaPapillae) {
+        internal void RenovareAnimumSensusPapillae(int animaPapillae) {
             _animaPapillae = animaPapillae;
-            _estNormalis = false;
         }
 
-        public void RenovareAnimumSensusLandicae(int animaLandicae) {
+        internal void RenovareAnimumSensusLandicae(int animaLandicae) {
             _animaLandicae = animaLandicae;
-            _estNormalis = false;
         }
 
-        public void RenovareAnimumSensusVaginae(int animaVaginae) {
+        internal void RenovareAnimumSensusVaginae(int animaVaginae) {
             _animaVaginae = animaVaginae;
-            _estNormalis = false;
         }
 
-        public void RenovareAnimumSensusAni(int animaAni) {
+        internal void RenovareAnimumSensusAni(int animaAni) {
             _animaAni = animaAni;
-            _estNormalis = false;
         }
 
-        public void RenovareAnimumSensusAusculum(int animaAusculum) {
+        internal void RenovareAnimumSensusAusculum(int animaAusculum) {
             _animaAusculum = animaAusculum;
-            _estNormalis = false;
         }
 
-        public void RenovareAnimumSensusCorporis(int animaCorporis) {
+        internal void RenovareAnimumSensusCorporis(int animaCorporis) {
             _animaCorporis = animaCorporis;
-            _estNormalis = false;
         }
-
     }
 }

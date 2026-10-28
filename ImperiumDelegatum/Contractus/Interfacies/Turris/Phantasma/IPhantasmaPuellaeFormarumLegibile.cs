@@ -1,7 +1,5 @@
-using System.Numerics;
-
 namespace Yulinti.ImperiumDelegatum.Contractus {
-    public interface IOstiumSalsamentiPuellaeFormarum {
+    public interface IPhantasmaPuellaeFormarumLegibile {
         float RatioActualis(IDPuellaeFormae idFormae);
     }
 }

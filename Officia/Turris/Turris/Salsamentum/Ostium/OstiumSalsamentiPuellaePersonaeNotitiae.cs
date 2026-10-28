@@ -17,10 +17,5 @@ namespace Yulinti.Officia.Turris {
         public void Renovare(SalsamentumPuellaePersonaeNotitiaeDto puellaeNotitiaeDto) {
             _puellaePersonaeNotitiaeDto = puellaeNotitiaeDto;
         }
-
-        // 内部からのデータ更新
-        public void Renovare(IPhantasmaPuellaePersonae phantasmaPuellaePersonae) {
-            _puellaePersonaeNotitiaeDto.Renovare(phantasmaPuellaePersonae);
-        }
     }
 }

@@ -41,6 +41,7 @@ namespace Yulinti.ImperiumMaius.Augustus {
             builder.RegisterInstance<IConfiguratioTurrisPhantasma>(_configuratioRadicis.Turris.Phantasma);
             builder.RegisterInstance<IConfiguratioSonorumVeli>(_configuratioRadicis.Turris.SonorumVeli);
             builder.RegisterInstance<IConfiguratioCorrectrix>(_configuratioRadicis.Turris.Correctrix);
+            builder.RegisterInstance<IConfiguratioTurrisPhantasmaeInitialis>(_configuratioRadicis.Turris.PhantasmaeInitialis);
             // Faber
             FaberVelumRadicis.Initio(builder);
             FaberSenatusRadicis.Initio(builder);

@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using Yulinti.ImperiumDelegatum.Contractus;
 
 namespace Yulinti.Officia.Turris {
     internal sealed class SalsamentumPuellaePersonaeNotitiaeDto {
@@ -17,13 +16,6 @@ namespace Yulinti.Officia.Turris {
             GradusExhibitus = 1;
             GradusPerversus = 1;
             GradusQuaeritDolore = 1;
-        }
-
-        public void Renovare(IPhantasmaPuellaePersonae phantasmaPuellaePersonae) {
-            GradusLuxuriosus = phantasmaPuellaePersonae.GradusLuxuriosus;
-            GradusExhibitus = phantasmaPuellaePersonae.GradusExhibitus;
-            GradusPerversus = phantasmaPuellaePersonae.GradusPerversus;
-            GradusQuaeritDolore = phantasmaPuellaePersonae.GradusQuaeritDolore;
         }
     }
 }

@@ -15,17 +15,10 @@ namespace Yulinti.ImperiumDelegatum.Exercitus {
             builder.Register<ResFluidaPuellaeSpectaculi>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
-            builder.Register<ResFluidaPuellaeFormae>(Lifetime.Singleton)
-                .AsSelf()
-                .AsImplementedInterfaces();
 
             builder.Register<ResFluidaPuellaeLegibile>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
-
-            // ContextusSalsamenti
-            builder.Register<IContextusSalsamenti, ContextusSalsamenti>(Lifetime.Singleton);
-            
 
             // Civis
             // このシーンにCivisは存在しないため、長さ0のCivisリストとなるのダミーを登録する。
