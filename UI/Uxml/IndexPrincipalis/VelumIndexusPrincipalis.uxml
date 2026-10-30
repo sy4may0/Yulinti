@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+
+    <Style src="../../Uss/Globalis.uss" />
+    <Style src="../../Uss/IndexPrincipalis/IndexPrincipalis.uss" />
+
+    <ui:VisualElement
+      name="indexprincipalis-root"
+      class="
+        container
+        indexprincipalis-root
+      "
+    >
+      <ui:VisualElement
+        name="indexprincipalis-panel"
+        class="
+          container
+          indexprincipalis-panel
+        "
+      >
+        <!-- ここにParsPulsabulumIndexusPrincipalisをCloneTreeして挿入 -->
+      </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

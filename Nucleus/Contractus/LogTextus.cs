@@ -136,6 +136,8 @@ namespace Yulinti.Nucleus.Contractus {
         public const string AnchoraPortus_ANCHORAPORTUS_VALIDARE_FAILED = "AnchoraPortus - anchora portus validare failed";
         public const string AnchoraVelumPortus_ANCHORAVELUMPORTUS_UIDOCUMENT_NULL = "AnchoraVelumPortus - uidocument null";
         public const string AnchoraVelumIndexusPrincipalis_ANCHORAVELUMINDEXUSPRINCIPALIS_UIDOCUMENT_NULL = "AnchoraVelumIndexusPrincipalis - uidocument null";
+        public const string AnchoraVelumIndexusPrincipalis_ANCHORAVELUMINDEXUSPRINCIPALIS_VELUMINDEXUSPRINCIPALIS_NULL = "AnchoraVelumIndexusPrincipalis - velum indexus principalis null";
+        public const string AnchoraVelumIndexusPrincipalis_ANCHORAVELUMINDEXUSPRINCIPALIS_PARSPULSABULUMINDEXUSPRINCIPALIS_NULL = "AnchoraVelumIndexusPrincipalis - pars pulsabulum indexus principalis null";
         public const string AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_UIDOCUMENT_NULL = "AnchoraVelumSalsamenti - uidocument null";
         public const string AnchoraVelumSalsamenti_ANCHORAVELUMSALSAMENTI_FORMAARTICULUSSALSAMENTI_NULL = "AnchoraVelumSalsamenti - forma articulus salsamenti null";
         public const string VelumSalsamenti_RENOVARETABEAMANUALIS_ARTICULUS_NULL = "VelumSalsamenti - renovare tablae manualis articulus null";

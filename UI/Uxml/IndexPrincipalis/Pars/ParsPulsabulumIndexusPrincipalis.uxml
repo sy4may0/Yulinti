@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEngine.UIElements">
+  <ui:VisualElement
+    name="pars-pulsabulum-indexus-principalis"
+    class="pars-pulsabulum-indexus-principalis"
+  >
+    <ui:Button 
+        name="pars-pulsabulum-indexus-principalis-button" 
+        class="
+          button
+          button-indicator
+          indexprincipalis-button
+          pars-pulsabulum-indexus-principalis-button
+        "
+    >
+        <ui:VisualElement
+          name="pars-pulsabulum-indexus-principalis-indicator"
+          class="
+            indicator
+            pars-pulsabulum-indexus-principalis-indicator
+          "
+        />
+        <ui:Label
+          name="pars-pulsabulum-indexus-principalis-label"
+          class="
+            label-h2
+            button-label
+            pars-pulsabulum-indexus-principalis-label
+          "
+          text="Pulsabulum Indexus Principalis"
+        />
+    </ui:Button>
+  </ui:VisualElement>
+</ui:UXML>
+
